@@ -132,10 +132,6 @@ The objectives of this project are:
 │  + AI Explanation                     │
 └───────────────────────────────────────┘
 
-
-Below is a **clean, professional `README.md`** version you can copy and paste directly. It is grounded in your registered project title, objectives, scope, planned ML + RAG + SHAP/LIME methodology, and research references.  
-
-````md
 # 🌿 AyuRAG-XAI
 
 ### An Explainable Retrieval-Augmented Personalized Ayurvedic Clinical Decision Support System
