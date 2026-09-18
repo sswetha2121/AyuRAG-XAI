@@ -1,0 +1,154 @@
+/* ==========================================================================
+   AyuRAG-XAI DESIGN TOKENS
+   Deep Forest Green + Sage + Warm Ivory + Soft Ayurvedic Gold
+   Healthcare AI / Clinical Decision Support System Foundation
+   ========================================================================== */
+
+:root {
+  /* --- Primary Color Palette (Deep Forest Green) --- */
+  --color-primary: #16382C;
+  --color-primary-hover: #0F271F;
+  --color-primary-active: #091913;
+  --color-primary-light: #EBF2EE;
+  --color-primary-subtle: #F2F7F4;
+  --color-primary-glow: rgba(22, 56, 44, 0.14);
+
+  /* --- Secondary Color Palette (Sage Green) --- */
+  --color-secondary: #5B8266;
+  --color-secondary-hover: #496B54;
+  --color-secondary-light: #F0F5F2;
+  --color-secondary-subtle: #F6FAF7;
+  --color-secondary-glow: rgba(91, 130, 102, 0.15);
+
+  /* --- Accent Color Palette (Ayurvedic Gold) --- */
+  --color-accent: #C5A059;
+  --color-accent-hover: #B28D44;
+  --color-accent-active: #9A7733;
+  --color-accent-light: #FAF4E8;
+  --color-accent-subtle: #FCF9F2;
+  --color-accent-glow: rgba(197, 160, 89, 0.20);
+
+  /* --- Neutral & Surface System (Warm Ivory & Soft Cream) --- */
+  --color-bg: #FBF9F5;
+  --color-bg-alt: #F4F0E6;
+  --color-bg-subtle: #F7F5EE;
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F6F4ED;
+  --color-surface-elevated: #FFFFFF;
+  --color-surface-active: #EFECE3;
+
+  /* --- Text & Typography Color Tokens --- */
+  --color-text-primary: #14201A;
+  --color-text-secondary: #3E4F47;
+  --color-text-muted: #71807A;
+  --color-text-placeholder: #9EABA5;
+  --color-text-inverse: #FFFFFF;
+  --color-text-inverse-muted: #D1DDD7;
+
+  /* --- Border & Divider Tokens --- */
+  --color-border: #E3DDD3;
+  --color-border-subtle: #ECE8E0;
+  --color-border-strong: #C9C2B6;
+  --color-border-focus: #16382C;
+  --color-border-focus-gold: #C5A059;
+
+  /* --- Clinical & Status Feedback Tokens --- */
+  --color-success: #1D7A4F;
+  --color-success-hover: #155E3D;
+  --color-success-light: #EAF5EE;
+  --color-success-border: #B7E2C9;
+
+  --color-warning: #C07D1E;
+  --color-warning-hover: #9F6413;
+  --color-warning-light: #FCF5E9;
+  --color-warning-border: #F3DCB4;
+
+  --color-error: #B93838;
+  --color-error-hover: #962A2A;
+  --color-error-light: #FDF1F1;
+  --color-error-border: #F3C4C4;
+
+  --color-info: #246EB9;
+  --color-info-hover: #1A5594;
+  --color-info-light: #EEF5FC;
+  --color-info-border: #BFDAF4;
+
+  /* --- Spacing System --- */
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* --- Border Radius System --- */
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+  --radius-pill: 9999px;
+  --radius-circle: 50%;
+
+  /* --- Shadows & Elevation --- */
+  --shadow-subtle: 0 1px 3px rgba(20, 32, 26, 0.04), 0 1px 2px rgba(20, 32, 26, 0.02);
+  --shadow-card: 0 4px 14px rgba(20, 32, 26, 0.05), 0 1px 3px rgba(20, 32, 26, 0.03);
+  --shadow-card-hover: 0 8px 24px rgba(20, 32, 26, 0.08), 0 2px 6px rgba(20, 32, 26, 0.04);
+  --shadow-elevated: 0 12px 30px -4px rgba(20, 32, 26, 0.08), 0 4px 8px -2px rgba(20, 32, 26, 0.03);
+  --shadow-dropdown: 0 18px 36px -6px rgba(20, 32, 26, 0.12), 0 6px 12px -4px rgba(20, 32, 26, 0.04);
+  --shadow-focus: 0 0 0 3px rgba(22, 56, 44, 0.16);
+  --shadow-focus-gold: 0 0 0 3px rgba(197, 160, 89, 0.24);
+  --shadow-focus-error: 0 0 0 3px rgba(185, 56, 56, 0.20);
+
+  /* --- Typography System --- */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Font Sizes */
+  --font-size-display: 2.25rem;   /* 36px */
+  --font-size-h1: 1.875rem;       /* 30px */
+  --font-size-h2: 1.5rem;         /* 24px */
+  --font-size-h3: 1.25rem;        /* 20px */
+  --font-size-h4: 1.125rem;       /* 18px */
+  --font-size-body-lg: 1.0625rem; /* 17px */
+  --font-size-body: 0.9375rem;    /* 15px */
+  --font-size-small: 0.8125rem;   /* 13px */
+  --font-size-caption: 0.75rem;   /* 12px */
+  --font-size-micro: 0.6875rem;   /* 11px */
+
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-snug: 1.35;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.65;
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* --- Transitions & Micro-Interactions --- */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 150ms var(--ease-in-out);
+  --transition-normal: 200ms var(--ease-in-out);
+  --transition-slow: 300ms var(--ease-in-out);
+
+  /* --- Layout Metrics --- */
+  --sidebar-width: 280px;
+  --sidebar-collapsed-width: 80px;
+  --header-height: 70px;
+  --container-max-width: 1360px;
+  --z-sidebar: 100;
+  --z-header: 90;
+  --z-modal-backdrop: 200;
+  --z-modal: 210;
+  --z-toast: 300;
+  --z-tooltip: 400;
+}

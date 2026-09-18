@@ -1,0 +1,31 @@
+/* ==========================================================================
+   AyuRAG-XAI APP-LEVEL STYLES
+   ========================================================================== */
+
+.ayur-placeholder-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-xl) 0;
+}
+
+.ayur-placeholder-card {
+  max-width: 720px;
+  width: 100%;
+}
+
+.ayur-placeholder-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl) var(--space-lg);
+  background-color: var(--color-surface-muted);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  gap: var(--space-md);
+}
+
+.max-width-md {
+  max-width: 520px;
+}

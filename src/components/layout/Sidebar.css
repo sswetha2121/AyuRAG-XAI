@@ -1,0 +1,388 @@
+/* ==========================================================================
+   AyuRAG-XAI SIDEBAR NAVIGATION STYLES
+   ========================================================================== */
+
+.ayur-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  background-color: #122820; /* Deepest Forest Dark */
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  z-index: var(--z-sidebar);
+  color: #FFFFFF;
+  transition: transform var(--transition-normal);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Brand Area */
+.ayur-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-lg) var(--space-md) var(--space-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ayur-brand-emblem {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+.ayur-brand-emblem svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ayur-brand-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.ayur-brand-title {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+  color: #FAF4E8;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ayur-brand-title__xai {
+  color: var(--color-accent);
+  background: rgba(197, 160, 89, 0.18);
+  padding: 1px 6px;
+  border-radius: var(--radius-xs);
+  font-size: 0.78rem;
+  font-weight: var(--font-weight-bold);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+}
+
+.ayur-brand-tagline {
+  font-size: var(--font-size-micro);
+  color: #8CA097;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-weight: var(--font-weight-medium);
+}
+
+.ayur-sidebar__close-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #A3B5AD;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--radius-xs);
+}
+
+/* Progress Card in Sidebar */
+.ayur-sidebar__progress-card {
+  margin: var(--space-md) var(--space-md) var(--space-xs) var(--space-md);
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.ayur-progress-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ayur-progress-card__title {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: #FAF4E8;
+}
+
+.ayur-progress-card__badge {
+  font-size: var(--font-size-micro);
+  background-color: rgba(197, 160, 89, 0.2);
+  color: #E2C78A;
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ayur-progress-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--font-size-micro);
+  color: #8CA097;
+  margin-top: 2px;
+}
+
+/* Nav Section */
+.ayur-sidebar__nav-section {
+  flex: 1;
+  padding: var(--space-md) var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.ayur-sidebar__section-label {
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6C8278;
+  padding: 0 var(--space-md) var(--space-xs) var(--space-md);
+}
+
+.ayur-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Nav Item */
+.ayur-nav-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 9px 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  color: #A4B7AF;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  outline: none;
+  position: relative;
+  gap: var(--space-sm);
+}
+
+.ayur-nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #FFFFFF;
+}
+
+.ayur-nav-item:focus-visible {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent-glow);
+}
+
+.ayur-nav-item__prefix {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ayur-nav-item__number {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-micro);
+  color: #6C8278;
+  width: 16px;
+  transition: color var(--transition-fast);
+}
+
+.ayur-nav-item__icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  color: #8EA198;
+  transition: all var(--transition-fast);
+}
+
+.ayur-nav-item__label-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ayur-nav-item__label {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+  color: inherit;
+}
+
+.ayur-nav-item__sublabel {
+  font-size: var(--font-size-micro);
+  color: #6C8278;
+}
+
+.ayur-nav-item__badge {
+  font-size: var(--font-size-micro);
+  background: rgba(197, 160, 89, 0.2);
+  color: var(--color-accent);
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ayur-nav-item__badge-done {
+  font-size: var(--font-size-micro);
+  background: rgba(29, 122, 79, 0.2);
+  color: #48BB78;
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ayur-nav-check {
+  font-weight: bold;
+  font-size: 14px;
+  color: #48BB78;
+}
+
+.ayur-nav-item__chevron {
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all var(--transition-fast);
+  color: #7B8F86;
+}
+
+.ayur-nav-item:hover .ayur-nav-item__chevron {
+  opacity: 0.6;
+  transform: translateX(0);
+}
+
+/* Active State */
+.ayur-nav-item--active {
+  background: linear-gradient(90deg, rgba(197, 160, 89, 0.15) 0%, rgba(22, 56, 44, 0.3) 100%);
+  color: #FFFFFF;
+  border-color: rgba(197, 160, 89, 0.4);
+  box-shadow: inset 3px 0 0 var(--color-accent);
+}
+
+.ayur-nav-item--active .ayur-nav-item__icon-wrapper {
+  background: var(--color-accent);
+  color: #16382C;
+}
+
+.ayur-nav-item--active .ayur-nav-item__number {
+  color: var(--color-accent);
+  font-weight: var(--font-weight-bold);
+}
+
+.ayur-nav-item--active .ayur-nav-item__sublabel {
+  color: #B4C6BE;
+}
+
+.ayur-nav-item--active .ayur-nav-item__chevron {
+  opacity: 1;
+  color: var(--color-accent);
+  transform: translateX(0);
+}
+
+/* Completed State Foundation */
+.ayur-nav-item--completed .ayur-nav-item__icon-wrapper {
+  background: rgba(29, 122, 79, 0.25);
+  color: #48BB78;
+}
+
+/* Sidebar Footer (Doctor / Researcher Profile) */
+.ayur-sidebar__footer {
+  padding: var(--space-md) var(--space-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.ayur-user-profile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.ayur-user-avatar {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-circle);
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+  border: 1.5px solid var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-bold);
+  color: #FAF4E8;
+  flex-shrink: 0;
+}
+
+.ayur-user-status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 9px;
+  height: 9px;
+  background-color: #22C55E;
+  border: 1.5px solid #122820;
+  border-radius: var(--radius-circle);
+}
+
+.ayur-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.ayur-user-name {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: #FAF4E8;
+}
+
+.ayur-user-role {
+  font-size: var(--font-size-micro);
+  color: #8CA097;
+}
+
+/* Mobile Drawer Overlay Styles */
+.ayur-sidebar-backdrop {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .ayur-sidebar {
+    transform: translateX(-100%);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .ayur-sidebar--open {
+    transform: translateX(0);
+  }
+
+  .ayur-sidebar__close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ayur-sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(18, 40, 32, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: calc(var(--z-sidebar) - 1);
+    animation: ayur-fade-in 200ms ease;
+  }
+}
+
+@keyframes ayur-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

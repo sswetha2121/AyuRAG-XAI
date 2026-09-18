@@ -1,0 +1,91 @@
+/* ==========================================================================
+   AyuRAG-XAI PRAKRITI COMPLETION CARD STYLES
+   ========================================================================== */
+
+.ayur-prakriti-completion {
+  width: 100%;
+  font-family: var(--font-sans);
+}
+
+.ayur-completion-card {
+  padding: var(--space-xl) !important;
+  background: linear-gradient(180deg, #FAF7F0 0%, #FFFFFF 100%) !important;
+}
+
+.ayur-completion-title {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-top: var(--space-xs);
+}
+
+.ayur-completion-accent {
+  color: var(--color-accent-hover);
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.ayur-completion-desc {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  max-width: 820px;
+}
+
+.ayur-completion-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin: var(--space-md) 0;
+}
+
+.ayur-completion-dosha-box {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-subtle);
+}
+
+.ayur-completion-pct {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  line-height: 1.1;
+  margin: var(--space-xs) 0;
+}
+
+/* Dosha Box Themes */
+.ayur-completion-dosha--vata {
+  border-top: 3px solid var(--color-secondary);
+}
+.ayur-completion-dosha--pitta {
+  border-top: 3px solid var(--color-accent);
+}
+.ayur-completion-dosha--kapha {
+  border-top: 3px solid var(--color-primary);
+}
+
+.ayur-completion-protocol-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background-color: var(--color-secondary-subtle);
+  border: 1px solid var(--color-secondary-light);
+  border-radius: var(--radius-md);
+}
+
+.ayur-completion-footer {
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--space-md);
+}
+
+@media (max-width: 768px) {
+  .ayur-completion-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}

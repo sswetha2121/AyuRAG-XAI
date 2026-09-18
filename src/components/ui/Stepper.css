@@ -1,0 +1,176 @@
+/* ==========================================================================
+   AyuRAG-XAI STEPPER STYLES
+   ========================================================================== */
+
+.ayur-stepper {
+  width: 100%;
+  font-family: var(--font-sans);
+}
+
+.ayur-stepper__list {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+/* Horizontal Orientation */
+.ayur-stepper--horizontal .ayur-stepper__list {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ayur-stepper--horizontal .ayur-step {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.ayur-stepper--horizontal .ayur-step:last-child {
+  flex: 0 0 auto;
+}
+
+.ayur-stepper--horizontal .ayur-step__button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: none;
+  border: none;
+  padding: var(--space-xs) 0;
+  cursor: default;
+  outline: none;
+}
+
+.ayur-stepper--horizontal .ayur-step__connector {
+  flex: 1;
+  height: 2px;
+  background-color: var(--color-border);
+  margin: 0 var(--space-md);
+  transition: background-color var(--transition-normal);
+}
+
+.ayur-stepper--horizontal .ayur-step__connector--completed {
+  background-color: var(--color-primary);
+}
+
+/* Vertical Orientation */
+.ayur-stepper--vertical .ayur-stepper__list {
+  flex-direction: column;
+  gap: 0;
+}
+
+.ayur-stepper--vertical .ayur-step {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.ayur-stepper--vertical .ayur-step__button {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+}
+
+.ayur-stepper--vertical .ayur-step__connector {
+  position: absolute;
+  top: 36px;
+  left: 15px;
+  bottom: -4px;
+  width: 2px;
+  background-color: var(--color-border);
+}
+
+.ayur-stepper--vertical .ayur-step__connector--completed {
+  background-color: var(--color-primary);
+}
+
+/* Clickable state */
+.ayur-step--clickable .ayur-step__button {
+  cursor: pointer;
+}
+
+.ayur-step--clickable:hover .ayur-step__title {
+  color: var(--color-primary);
+}
+
+/* Step Indicator Circle */
+.ayur-step__indicator {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-normal);
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.ayur-step__content {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.ayur-step__title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-snug);
+  transition: color var(--transition-fast);
+}
+
+.ayur-step__subtitle {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}
+
+/* State 1: Completed */
+.ayur-step--completed .ayur-step__indicator {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.ayur-step--completed .ayur-step__title {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ayur-step__check {
+  animation: ayur-pop-in 200ms ease;
+}
+
+/* State 2: Current */
+.ayur-step--current .ayur-step__indicator {
+  background-color: var(--color-surface);
+  border-color: var(--color-accent);
+  color: var(--color-accent-hover);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+  font-weight: var(--font-weight-bold);
+}
+
+.ayur-step--current .ayur-step__title {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* State 3: Upcoming */
+.ayur-step--upcoming .ayur-step__indicator {
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+/* State 4: Disabled */
+.ayur-step--disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}

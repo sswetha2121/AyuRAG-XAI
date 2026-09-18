@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <rect width="48" height="48" rx="12" fill="#16382C"/>
+  <!-- Subtle inner glow ring -->
+  <rect x="2" y="2" width="44" height="44" rx="10" stroke="#C5A059" stroke-opacity="0.3" stroke-width="1.5"/>
+  <!-- Leaf silhouette in sage & emerald -->
+  <path d="M24 8C17 12 12 19 12 28C12 34 16.5 38 24 38C31.5 38 36 34 36 28C36 19 31 12 24 8Z" fill="#5B8266" fill-opacity="0.35"/>
+  <path d="M24 10C18 14 14 20 14 27C14 32.5 18 36 24 36C30 36 34 32.5 34 27C34 20 30 14 24 10Z" stroke="#7D9D85" stroke-width="1.5"/>
+  <!-- Central spine & neural node branches (AI + Ayurveda) -->
+  <path d="M24 12V34" stroke="#C5A059" stroke-width="2" stroke-linecap="round"/>
+  <path d="M24 18L18 22" stroke="#C5A059" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M24 24L30 20" stroke="#C5A059" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M24 28L18 30" stroke="#C5A059" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Neural dots -->
+  <circle cx="18" cy="22" r="2" fill="#C5A059"/>
+  <circle cx="30" cy="20" r="2" fill="#C5A059"/>
+  <circle cx="18" cy="30" r="2" fill="#C5A059"/>
+  <circle cx="24" cy="12" r="2.5" fill="#E8D5A3"/>
+</svg>

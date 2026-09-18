@@ -1,0 +1,94 @@
+/* ==========================================================================
+   AyuRAG-XAI SEGMENTED CONTROL STYLES
+   ========================================================================== */
+
+.ayur-segmented-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  font-family: var(--font-sans);
+}
+
+.ayur-segmented-wrapper--full {
+  width: 100%;
+}
+
+.ayur-segmented {
+  display: inline-flex;
+  background-color: #ECE7DF;
+  padding: 3px;
+  border-radius: var(--radius-md);
+  user-select: none;
+  gap: 2px;
+  width: 100%;
+}
+
+.ayur-segmented--disabled {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.ayur-segmented__item {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  outline: none;
+}
+
+/* Sizes */
+.ayur-segmented--sm .ayur-segmented__item {
+  height: 28px;
+  padding: 0 var(--space-sm);
+  font-size: var(--font-size-small);
+}
+
+.ayur-segmented--md .ayur-segmented__item {
+  height: 36px;
+  padding: 0 var(--space-md);
+  font-size: var(--font-size-body);
+}
+
+.ayur-segmented--lg .ayur-segmented__item {
+  height: 44px;
+  padding: 0 var(--space-lg);
+  font-size: var(--font-size-body-lg);
+}
+
+.ayur-segmented__item:hover:not(:disabled):not(.ayur-segmented__item--selected) {
+  color: var(--color-primary);
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.ayur-segmented__item:focus-visible {
+  box-shadow: var(--shadow-focus);
+}
+
+/* Selected State */
+.ayur-segmented__item--selected {
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: 0 1px 3px rgba(20, 32, 26, 0.08), 0 1px 2px rgba(20, 32, 26, 0.04);
+}
+
+.ayur-segmented__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ayur-segmented__icon svg {
+  width: 1.1em;
+  height: 1.1em;
+}

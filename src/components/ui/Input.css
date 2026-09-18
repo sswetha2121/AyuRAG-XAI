@@ -1,0 +1,170 @@
+/* ==========================================================================
+   AyuRAG-XAI FORM INPUT & FIELD STYLES
+   ========================================================================== */
+
+.ayur-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  width: 100%;
+  font-family: var(--font-sans);
+}
+
+.ayur-form-label {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ayur-form-label__required {
+  color: var(--color-error);
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.ayur-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.ayur-input {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0 var(--space-md);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Sizes */
+.ayur-form-field--sm .ayur-input {
+  height: 34px;
+  font-size: var(--font-size-small);
+  border-radius: var(--radius-sm);
+}
+
+.ayur-form-field--md .ayur-input {
+  height: 42px;
+  font-size: var(--font-size-body);
+  border-radius: var(--radius-md);
+}
+
+.ayur-form-field--lg .ayur-input {
+  height: 50px;
+  font-size: var(--font-size-body-lg);
+  border-radius: var(--radius-lg);
+}
+
+.ayur-input::placeholder {
+  color: var(--color-text-placeholder);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Hover & Focus */
+.ayur-input:hover:not(:disabled) {
+  border-color: #BDB4A5;
+}
+
+.ayur-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+  background-color: #FFFFFF;
+}
+
+/* Icons within Input */
+.ayur-input__icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ayur-input__icon--left {
+  left: var(--space-md);
+}
+
+.ayur-input__icon--right {
+  right: var(--space-md);
+}
+
+.ayur-input--has-left-icon {
+  padding-left: calc(var(--space-md) + 24px) !important;
+}
+
+.ayur-input--has-right-icon {
+  padding-right: calc(var(--space-md) + 24px) !important;
+}
+
+/* Clear button */
+.ayur-input__clear-btn {
+  position: absolute;
+  right: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-circle);
+  background: var(--color-surface-muted);
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.ayur-input__clear-btn:hover {
+  background: #E2DDD4;
+  color: var(--color-text-primary);
+}
+
+/* Disabled State */
+.ayur-form-field--disabled .ayur-input {
+  background-color: var(--color-bg-alt);
+  color: var(--color-text-muted);
+  border-color: var(--color-border-subtle);
+  cursor: not-allowed;
+}
+
+.ayur-form-field--disabled .ayur-form-label {
+  color: var(--color-text-muted);
+}
+
+/* Error State */
+.ayur-form-field--error .ayur-input {
+  border-color: var(--color-error);
+  background-color: var(--color-error-light);
+}
+
+.ayur-form-field--error .ayur-input:focus {
+  box-shadow: var(--shadow-focus-error);
+}
+
+/* Helper & Error Messages */
+.ayur-form-message {
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-normal);
+  margin-top: 2px;
+}
+
+.ayur-form-message--helper {
+  color: var(--color-text-muted);
+}
+
+.ayur-form-message--error {
+  color: var(--color-error);
+  font-weight: var(--font-weight-medium);
+}

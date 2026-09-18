@@ -1,0 +1,180 @@
+/* ==========================================================================
+   AyuRAG-XAI PROFILE PREVIEW STYLES
+   ========================================================================== */
+
+.ayur-preview-wrapper {
+  width: 100%;
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-lg));
+  font-family: var(--font-sans);
+}
+
+.ayur-preview-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg) !important;
+  background: linear-gradient(180deg, #FAF7F0 0%, #FFFFFF 100%) !important;
+}
+
+.ayur-preview-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ayur-preview-step-badge {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-micro);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ayur-preview-greeting {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ayur-preview-greeting__title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  line-height: var(--line-height-snug);
+  margin: 0;
+}
+
+.ayur-preview-greeting__desc {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
+/* Patient ID Block */
+.ayur-preview-id-block {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.ayur-preview-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-circle);
+  background: linear-gradient(135deg, var(--color-primary), #2D5847);
+  border: 2px solid var(--color-accent);
+  color: #FAF4E8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  flex-shrink: 0;
+}
+
+.ayur-preview-id-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ayur-preview-name {
+  font-size: var(--font-size-body-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-snug);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.ayur-preview-sub {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}
+
+/* Vitals Summary Grid */
+.ayur-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+}
+
+.ayur-preview-metric {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ayur-metric-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size-micro);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ayur-metric-val {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: #A0ABA6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ayur-metric-val--active {
+  color: var(--color-primary);
+}
+
+/* Progress Box */
+.ayur-preview-progress-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.ayur-preview-progress-sub {
+  font-size: var(--font-size-micro);
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+/* Classical Insight */
+.ayur-preview-insight {
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-secondary-subtle);
+  border-left: 3px solid var(--color-secondary);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ayur-preview-insight__text {
+  font-size: var(--font-size-micro);
+  line-height: 1.45;
+  color: var(--color-text-secondary);
+  margin: 0;
+}

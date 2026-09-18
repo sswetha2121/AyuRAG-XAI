@@ -1,0 +1,49 @@
+/* ==========================================================================
+   AyuRAG-XAI UNIT TOGGLE STYLES
+   ========================================================================== */
+
+.ayur-unit-toggle {
+  display: inline-flex;
+  align-items: center;
+  background-color: #E8E2D8;
+  padding: 2px;
+  border-radius: var(--radius-sm);
+  user-select: none;
+  gap: 2px;
+}
+
+.ayur-unit-toggle--disabled {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.ayur-unit-toggle__btn {
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-xs);
+  padding: 3px 8px;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  line-height: 1;
+  outline: none;
+}
+
+.ayur-unit-toggle__btn:hover:not(:disabled):not(.ayur-unit-toggle__btn--active) {
+  color: var(--color-text-primary);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.ayur-unit-toggle__btn:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+.ayur-unit-toggle__btn--active {
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  box-shadow: 0 1px 2px rgba(20, 32, 26, 0.1);
+  font-weight: var(--font-weight-bold);
+}

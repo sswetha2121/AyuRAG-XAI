@@ -1,0 +1,88 @@
+/* ==========================================================================
+   AyuRAG-XAI CHECKBOX STYLES
+   ========================================================================== */
+
+.ayur-checkbox-wrapper {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--font-sans);
+}
+
+.ayur-checkbox--disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.ayur-checkbox-box {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-xs);
+  border: 1.5px solid #C5BCAD;
+  background-color: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+  margin-top: 1px;
+  outline: none;
+}
+
+.ayur-checkbox-wrapper:hover:not(.ayur-checkbox--disabled) .ayur-checkbox-box {
+  border-color: var(--color-primary);
+}
+
+.ayur-checkbox-box:focus-visible,
+input:focus-visible ~ .ayur-checkbox-box {
+  box-shadow: var(--shadow-focus);
+  border-color: var(--color-primary);
+}
+
+.ayur-checkbox-box--checked,
+.ayur-checkbox-box--indeterminate {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.ayur-checkbox-icon {
+  color: #FFFFFF;
+  animation: ayur-pop-in 150ms ease;
+}
+
+.ayur-checkbox-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ayur-checkbox-label {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-snug);
+}
+
+.ayur-checkbox-description {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+}
+
+/* Error */
+.ayur-checkbox--error .ayur-checkbox-box {
+  border-color: var(--color-error);
+  background-color: var(--color-error-light);
+}
+
+@keyframes ayur-pop-in {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,118 @@
+/* ==========================================================================
+   AyuRAG-XAI BADGE & TAG STYLES
+   ========================================================================== */
+
+.ayur-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-pill);
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+  vertical-align: middle;
+}
+
+/* Sizes */
+.ayur-badge--sm {
+  height: 22px;
+  padding: 0 8px;
+  font-size: var(--font-size-caption);
+}
+
+.ayur-badge--md {
+  height: 26px;
+  padding: 0 10px;
+  font-size: var(--font-size-small);
+}
+
+.ayur-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-circle);
+  background-color: currentColor;
+}
+
+.ayur-badge__icon svg {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+/* Subtle Variant */
+.ayur-badge--subtle.ayur-badge--primary {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.ayur-badge--subtle.ayur-badge--secondary {
+  background-color: var(--color-secondary-light);
+  color: var(--color-secondary-hover);
+}
+
+.ayur-badge--subtle.ayur-badge--accent {
+  background-color: var(--color-accent-light);
+  color: #936B1E;
+}
+
+.ayur-badge--subtle.ayur-badge--success {
+  background-color: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.ayur-badge--subtle.ayur-badge--warning {
+  background-color: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+.ayur-badge--subtle.ayur-badge--error {
+  background-color: var(--color-error-light);
+  color: var(--color-error);
+}
+
+.ayur-badge--subtle.ayur-badge--info {
+  background-color: var(--color-info-light);
+  color: var(--color-info);
+}
+
+.ayur-badge--subtle.ayur-badge--neutral {
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-secondary);
+}
+
+/* Solid Variant */
+.ayur-badge--solid.ayur-badge--primary {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.ayur-badge--solid.ayur-badge--accent {
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+}
+
+.ayur-badge--solid.ayur-badge--success {
+  background-color: var(--color-success);
+  color: #FFFFFF;
+}
+
+.ayur-badge--solid.ayur-badge--error {
+  background-color: var(--color-error);
+  color: #FFFFFF;
+}
+
+/* Outline Variant */
+.ayur-badge--outline {
+  background-color: transparent;
+  border: 1px solid currentColor;
+}
+
+.ayur-badge--outline.ayur-badge--primary { color: var(--color-primary); }
+.ayur-badge--outline.ayur-badge--accent { color: var(--color-accent-hover); }
+.ayur-badge--outline.ayur-badge--success { color: var(--color-success); }
+.ayur-badge--outline.ayur-badge--warning { color: var(--color-warning); }
+.ayur-badge--outline.ayur-badge--error { color: var(--color-error); }
+.ayur-badge--outline.ayur-badge--info { color: var(--color-info); }
+.ayur-badge--outline.ayur-badge--neutral { color: var(--color-text-muted); border-color: var(--color-border); }

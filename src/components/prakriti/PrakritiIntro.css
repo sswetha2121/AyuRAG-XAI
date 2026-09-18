@@ -1,0 +1,164 @@
+/* ==========================================================================
+   AyuRAG-XAI PRAKRITI INTRO VIEW STYLES
+   ========================================================================== */
+
+.ayur-prakriti-intro {
+  width: 100%;
+  font-family: var(--font-sans);
+}
+
+.ayur-intro-card {
+  padding: var(--space-xl) !important;
+  background: linear-gradient(180deg, #FAF7F0 0%, #FFFFFF 100%) !important;
+}
+
+.ayur-intro-title {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-top: var(--space-xs);
+}
+
+.ayur-intro-title-accent {
+  color: var(--color-accent-hover);
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.ayur-intro-desc {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  max-width: 820px;
+}
+
+.ayur-intro-dosha-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin: var(--space-md) 0;
+}
+
+.ayur-intro-dosha-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-subtle);
+}
+
+.ayur-intro-dosha-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+/* Vata card theme */
+.ayur-intro-dosha--vata {
+  border-top: 3px solid var(--color-secondary);
+}
+.ayur-intro-dosha--vata .ayur-intro-dosha-icon {
+  background-color: var(--color-secondary-light);
+  color: var(--color-secondary-hover);
+}
+
+/* Pitta card theme */
+.ayur-intro-dosha--pitta {
+  border-top: 3px solid var(--color-accent);
+}
+.ayur-intro-dosha--pitta .ayur-intro-dosha-icon {
+  background-color: var(--color-accent-light);
+  color: #936B1E;
+}
+
+/* Kapha card theme */
+.ayur-intro-dosha--kapha {
+  border-top: 3px solid var(--color-primary);
+}
+.ayur-intro-dosha--kapha .ayur-intro-dosha-icon {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.ayur-intro-dosha-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.ayur-intro-dosha-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ayur-intro-dosha-names {
+  display: flex;
+  flex-direction: column;
+}
+
+.ayur-intro-dosha-name {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.ayur-intro-dosha-elements {
+  font-size: var(--font-size-micro);
+  color: var(--color-text-muted);
+}
+
+.ayur-intro-dosha-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-normal);
+}
+
+.ayur-intro-dosha-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ayur-intro-label {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ayur-intro-val {
+  color: var(--color-text-secondary);
+}
+
+.ayur-intro-clinical-note {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-secondary-subtle);
+  border: 1px solid var(--color-secondary-light);
+  border-radius: var(--radius-md);
+}
+
+.ayur-intro-footer {
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--space-md);
+}
+
+@media (max-width: 900px) {
+  .ayur-intro-dosha-grid {
+    grid-template-columns: 1fr;
+  }
+}

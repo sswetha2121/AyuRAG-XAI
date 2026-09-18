@@ -1,0 +1,167 @@
+/* ==========================================================================
+   AyuRAG-XAI PRAKRITI ASSESSMENT PAGE STYLES
+   ========================================================================== */
+
+.ayur-prakriti-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  padding-bottom: var(--space-3xl);
+  font-family: var(--font-sans);
+}
+
+/* Header Banner */
+.ayur-prakriti-header {
+  background: linear-gradient(135deg, #FAF7F0 0%, #F5F0E4 100%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  box-shadow: var(--shadow-subtle);
+}
+
+.ayur-prakriti-header__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.ayur-help-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  padding: 4px 10px;
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.ayur-help-btn:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.ayur-prakriti-header__progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  min-width: 220px;
+}
+
+.ayur-prakriti-header__title {
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin: var(--space-xs) 0 0 0;
+}
+
+.ayur-prakriti-title-accent {
+  color: var(--color-accent-hover);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.ayur-prakriti-header__desc {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  max-width: 820px;
+  margin: 0;
+}
+
+/* 2-Column Layout */
+.ayur-prakriti-layout {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--space-xl);
+  align-items: flex-start;
+}
+
+.ayur-prakriti-main-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.ayur-prakriti-side-col {
+  position: relative;
+}
+
+/* Navigator container */
+.ayur-nav-container {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Validation error alert */
+.ayur-question-val-error {
+  background-color: var(--color-error-light);
+  border: 1px solid var(--color-error-border);
+  color: var(--color-error);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  animation: ayur-pop-in 150ms ease;
+}
+
+/* Bottom Actions Bar */
+.ayur-prakriti-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-subtle);
+  gap: var(--space-md);
+}
+
+@media (max-width: 1080px) {
+  .ayur-prakriti-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ayur-assessment-summary {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .ayur-prakriti-header {
+    padding: var(--space-md);
+  }
+
+  .ayur-prakriti-header__title {
+    font-size: var(--font-size-h1);
+  }
+
+  .ayur-prakriti-header__progress {
+    width: 100%;
+  }
+
+  .ayur-prakriti-actions {
+    flex-direction: column-reverse;
+    gap: var(--space-sm);
+  }
+
+  .ayur-prakriti-actions .ayur-btn {
+    width: 100%;
+  }
+}

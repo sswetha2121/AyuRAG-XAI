@@ -1,0 +1,76 @@
+/* ==========================================================================
+   AyuRAG-XAI QUESTION NAVIGATOR STYLES
+   ========================================================================== */
+
+.ayur-question-navigator {
+  width: 100%;
+  font-family: var(--font-sans);
+}
+
+.ayur-navigator-track {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px 0;
+}
+
+.ayur-nav-dot {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  outline: none;
+  flex-shrink: 0;
+}
+
+.ayur-nav-dot:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background-color: var(--color-primary-subtle);
+}
+
+.ayur-nav-dot:focus-visible {
+  box-shadow: var(--shadow-focus);
+}
+
+/* 1. Answered State */
+.ayur-nav-dot--answered {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.ayur-nav-dot__check {
+  animation: ayur-pop-in 150ms ease;
+}
+
+/* 2. Current Active State */
+.ayur-nav-dot--current {
+  background-color: var(--color-surface);
+  border-color: var(--color-accent);
+  color: var(--color-accent-hover);
+  box-shadow: 0 0 0 2px var(--color-accent-glow);
+  font-weight: var(--font-weight-bold);
+}
+
+.ayur-nav-dot--current.ayur-nav-dot--answered {
+  background-color: var(--color-primary-subtle);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* 3. Upcoming */
+.ayur-nav-dot--upcoming {
+  opacity: 0.8;
+}

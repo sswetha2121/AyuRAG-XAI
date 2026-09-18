@@ -1,0 +1,102 @@
+/* ==========================================================================
+   AyuRAG-XAI TOAST NOTIFICATION STYLES
+   ========================================================================== */
+
+.ayur-toast-container {
+  position: fixed;
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  max-width: 400px;
+  width: calc(100% - 32px);
+  pointer-events: none;
+}
+
+.ayur-toast-container--bottom-right {
+  bottom: var(--space-lg);
+  right: var(--space-lg);
+}
+
+.ayur-toast-container--top-right {
+  top: var(--space-lg);
+  right: var(--space-lg);
+}
+
+.ayur-toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-elevated);
+  font-family: var(--font-sans);
+  animation: ayur-toast-slide-in 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all var(--transition-fast);
+}
+
+.ayur-toast__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.ayur-toast__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ayur-toast__title {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.ayur-toast__message {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
+.ayur-toast__close {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ayur-toast__close:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-muted);
+}
+
+/* Toast Variants */
+.ayur-toast--success .ayur-toast__icon { color: var(--color-success); }
+.ayur-toast--warning .ayur-toast__icon { color: var(--color-warning); }
+.ayur-toast--error .ayur-toast__icon { color: var(--color-error); }
+.ayur-toast--info .ayur-toast__icon { color: var(--color-info); }
+
+@keyframes ayur-toast-slide-in {
+  from {
+    transform: translateY(12px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}

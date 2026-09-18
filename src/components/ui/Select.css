@@ -1,0 +1,92 @@
+/* ==========================================================================
+   AyuRAG-XAI SELECT DROPDOWN STYLES
+   ========================================================================== */
+
+.ayur-select-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  width: 100%;
+  font-family: var(--font-sans);
+}
+
+.ayur-select-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.ayur-select {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0 calc(var(--space-lg) + 16px) 0 var(--space-md);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Sizes */
+.ayur-select-field--sm .ayur-select {
+  height: 34px;
+  font-size: var(--font-size-small);
+  border-radius: var(--radius-sm);
+}
+
+.ayur-select-field--md .ayur-select {
+  height: 42px;
+  font-size: var(--font-size-body);
+  border-radius: var(--radius-md);
+}
+
+.ayur-select-field--lg .ayur-select {
+  height: 50px;
+  font-size: var(--font-size-body-lg);
+  border-radius: var(--radius-lg);
+}
+
+.ayur-select:hover:not(:disabled) {
+  border-color: #BDB4A5;
+}
+
+.ayur-select:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.ayur-select__chevron {
+  position: absolute;
+  right: var(--space-md);
+  color: var(--color-text-muted);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast);
+}
+
+/* Disabled State */
+.ayur-select-field--disabled .ayur-select {
+  background-color: var(--color-bg-alt);
+  color: var(--color-text-muted);
+  border-color: var(--color-border-subtle);
+  cursor: not-allowed;
+}
+
+/* Error State */
+.ayur-select-field--error .ayur-select {
+  border-color: var(--color-error);
+  background-color: var(--color-error-light);
+}
+
+.ayur-select-field--error .ayur-select:focus {
+  box-shadow: var(--shadow-focus-error);
+}

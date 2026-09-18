@@ -1,0 +1,89 @@
+/* ==========================================================================
+   AyuRAG-XAI PROGRESS BAR STYLES
+   ========================================================================== */
+
+.ayur-progress-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  width: 100%;
+  font-family: var(--font-sans);
+}
+
+.ayur-progress__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--font-size-small);
+}
+
+.ayur-progress__label {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.ayur-progress__value {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+}
+
+.ayur-progress-track {
+  width: 100%;
+  background-color: #E8E2D8;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Sizes */
+.ayur-progress--sm .ayur-progress-track {
+  height: 6px;
+}
+
+.ayur-progress--md .ayur-progress-track {
+  height: 10px;
+}
+
+.ayur-progress--lg .ayur-progress-track {
+  height: 16px;
+}
+
+.ayur-progress-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Colors */
+.ayur-progress-fill--primary {
+  background-color: var(--color-primary);
+}
+
+.ayur-progress-fill--accent {
+  background: linear-gradient(90deg, var(--color-accent), #DFBF77);
+}
+
+.ayur-progress-fill--gradient {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+}
+
+.ayur-progress-fill--success {
+  background-color: var(--color-success);
+}
+
+/* Indeterminate Animation */
+.ayur-progress-track--indeterminate .ayur-progress-fill {
+  width: 40% !important;
+  position: absolute;
+  animation: ayur-progress-indeterminate 1.5s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+}
+
+@keyframes ayur-progress-indeterminate {
+  0% {
+    left: -40%;
+  }
+  100% {
+    left: 100%;
+  }
+}
