@@ -715,5 +715,3 @@ AyuRAG-XAI is intended to provide personalized wellness guidance and educational
 Users should consult qualified healthcare professionals for medical concerns.
 
 ---
-
-s
