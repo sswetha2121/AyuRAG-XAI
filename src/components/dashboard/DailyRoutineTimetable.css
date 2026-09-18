@@ -1,0 +1,129 @@
+/* Daily Routine Timetable Styles */
+.ayur-routine-timetable-wrap {
+  width: 100%;
+}
+
+.ayur-routine-card {
+  box-shadow: var(--shadow-card);
+}
+
+.ayur-routine-title {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: var(--space-2xs) 0 0 0;
+}
+
+.ayur-routine-highlight {
+  color: var(--color-primary);
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.ayur-routine-desc {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-top: var(--space-xs);
+}
+
+.ayur-timetable-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.ayur-timetable-phase-card {
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  transition: all var(--transition-fast);
+}
+
+.ayur-timetable-phase-card:hover {
+  border-color: var(--color-secondary);
+  box-shadow: var(--shadow-subtle);
+}
+
+.ayur-timetable-phase-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ayur-timetable-icon-box {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ayur-timetable-phase-name {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.ayur-timetable-time-tag {
+  font-size: var(--font-size-micro);
+  font-family: var(--font-mono);
+  color: var(--color-accent-hover);
+}
+
+.ayur-timetable-focus-box {
+  background-color: var(--color-bg-subtle);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ayur-timetable-focus-label {
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.ayur-timetable-focus-val {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+}
+
+.ayur-timetable-steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ayur-timetable-step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+@media (max-width: 768px) {
+  .ayur-timetable-grid {
+    grid-template-columns: 1fr;
+  }
+}

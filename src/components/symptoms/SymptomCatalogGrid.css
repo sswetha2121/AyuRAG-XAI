@@ -1,0 +1,119 @@
+/* Symptom Catalog Grid Styles */
+.ayur-symptom-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.ayur-symptom-catalog-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-2xl);
+  background-color: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  width: 100%;
+}
+
+.ayur-symptom-catalog-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-md);
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  outline: none;
+  user-select: none;
+}
+
+.ayur-symptom-catalog-card:hover {
+  border-color: var(--color-secondary);
+  background-color: var(--color-surface-muted);
+  transform: translateY(-1px);
+}
+
+.ayur-symptom-catalog-card:focus-visible {
+  box-shadow: var(--shadow-focus);
+  border-color: var(--color-primary);
+}
+
+.ayur-symptom-catalog-card--selected {
+  background-color: var(--color-primary-subtle);
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(22, 56, 44, 0.08);
+}
+
+.ayur-symptom-catalog-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.ayur-sym-cat-tag {
+  font-size: var(--font-size-micro);
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ayur-sym-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-circle);
+  background-color: var(--color-bg-alt);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.ayur-symptom-catalog-card:hover .ayur-sym-toggle-btn {
+  background-color: var(--color-secondary-light);
+  color: var(--color-secondary);
+}
+
+.ayur-symptom-catalog-card--selected .ayur-sym-toggle-btn {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+.ayur-symptom-catalog-card__name {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.ayur-symptom-catalog-card--selected .ayur-symptom-catalog-card__name {
+  color: var(--color-primary);
+}
+
+.ayur-symptom-catalog-card__sanskrit {
+  font-size: var(--font-size-micro);
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--color-accent-hover);
+}
+
+.ayur-symptom-catalog-card__desc {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .ayur-symptom-catalog-grid {
+    grid-template-columns: 1fr;
+  }
+}

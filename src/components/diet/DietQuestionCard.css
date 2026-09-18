@@ -1,0 +1,71 @@
+/* Dietary Question Card Styles */
+.ayur-diet-q-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  animation: ayur-fade-slide-up 220ms ease-out;
+}
+
+.ayur-diet-q-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.ayur-diet-q-title {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-snug);
+  margin: var(--space-2xs) 0 0 0;
+}
+
+.ayur-diet-q-desc {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.ayur-diet-q-body {
+  width: 100%;
+}
+
+.ayur-diet-q-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  background-color: var(--color-bg-subtle);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+}
+
+.ayur-diet-hint-icon {
+  color: var(--color-accent-hover);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.ayur-diet-hint-text {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+@media (max-width: 768px) {
+  .ayur-diet-q-card {
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+    gap: var(--space-md);
+  }
+
+  .ayur-diet-q-title {
+    font-size: var(--font-size-h3);
+  }
+}

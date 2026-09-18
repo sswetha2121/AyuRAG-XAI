@@ -1,0 +1,94 @@
+/* Multi-Select Chips Component Styles */
+.ayur-multi-chips-container {
+  width: 100%;
+}
+
+.ayur-multi-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.ayur-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 10px 16px;
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+  outline: none;
+}
+
+.ayur-chip:hover {
+  background-color: var(--color-surface-muted);
+  border-color: var(--color-secondary);
+  transform: translateY(-1px);
+}
+
+.ayur-chip:focus-visible {
+  box-shadow: var(--shadow-focus);
+  border-color: var(--color-primary);
+}
+
+.ayur-chip--selected {
+  background-color: var(--color-primary-subtle);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: 0 2px 6px rgba(22, 56, 44, 0.08);
+}
+
+.ayur-chip--selected:hover {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+.ayur-chip--exclusive {
+  border-style: dashed;
+}
+
+.ayur-chip__indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-circle);
+  background-color: var(--color-bg-alt);
+  color: var(--color-text-muted);
+  transition: all var(--transition-fast);
+}
+
+.ayur-chip:hover .ayur-chip__indicator {
+  color: var(--color-secondary);
+}
+
+.ayur-chip--selected .ayur-chip__indicator {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+.ayur-chip__label {
+  line-height: var(--line-height-tight);
+}
+
+.ayur-multi-chips__footer {
+  margin-top: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.ayur-multi-chips-container--disabled .ayur-chip {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}

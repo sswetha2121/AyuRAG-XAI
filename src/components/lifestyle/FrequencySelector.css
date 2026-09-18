@@ -1,0 +1,117 @@
+/* Reusable Frequency Selector Styles */
+.ayur-freq-selector {
+  width: 100%;
+}
+
+.ayur-freq-selector__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+
+.ayur-freq-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  outline: none;
+  user-select: none;
+}
+
+.ayur-freq-card:hover {
+  border-color: var(--color-secondary);
+  background-color: var(--color-surface-muted);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-subtle);
+}
+
+.ayur-freq-card:focus-visible {
+  box-shadow: var(--shadow-focus);
+  border-color: var(--color-primary);
+}
+
+.ayur-freq-card--selected {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-subtle);
+  box-shadow: 0 2px 8px rgba(22, 56, 44, 0.08);
+}
+
+.ayur-freq-card--selected:hover {
+  background-color: var(--color-primary-subtle);
+  border-color: var(--color-primary);
+}
+
+.ayur-freq-card__indicator {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.ayur-freq-card__dot {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-circle);
+  border: 2px solid var(--color-border-strong);
+  background-color: var(--color-surface);
+  transition: all var(--transition-fast);
+}
+
+.ayur-freq-card:hover .ayur-freq-card__dot {
+  border-color: var(--color-secondary);
+}
+
+.ayur-freq-card__check {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-circle);
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: ayur-pop-in 180ms ease-out;
+}
+
+.ayur-freq-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ayur-freq-card__label {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.ayur-freq-card--selected .ayur-freq-card__label {
+  color: var(--color-primary);
+}
+
+.ayur-freq-card__desc {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
+.ayur-freq-selector--disabled .ayur-freq-card {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@keyframes ayur-pop-in {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

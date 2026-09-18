@@ -1,0 +1,98 @@
+/* Readiness Meter Styles */
+.ayur-readiness-meter {
+  width: 100%;
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-md));
+}
+
+.ayur-readiness-card {
+  box-shadow: var(--shadow-card);
+}
+
+.ayur-readiness-step-tag {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.ayur-readiness-title {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: var(--space-2xs) 0 0 0;
+}
+
+.ayur-readiness-pct-box {
+  background-color: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.ayur-readiness-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ayur-readiness-list-title {
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ayur-readiness-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ayur-readiness-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  font-size: var(--font-size-small);
+}
+
+.ayur-readiness-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-circle);
+  margin-right: 8px;
+}
+
+.ayur-readiness-item-icon--done {
+  background-color: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.ayur-readiness-item-icon--warn {
+  background-color: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+.ayur-readiness-item-name {
+  flex: 1;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.ayur-readiness-item-status {
+  font-size: var(--font-size-micro);
+  font-family: var(--font-mono);
+  font-weight: var(--font-weight-bold);
+}

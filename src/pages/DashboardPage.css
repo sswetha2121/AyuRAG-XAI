@@ -1,0 +1,29 @@
+/* ==========================================================================
+   AyuRAG-XAI AI Decision Support Dashboard Styles (Step 07)
+   ========================================================================== */
+
+.ayur-dashboard-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.ayur-dash-tab-content {
+  width: 100%;
+}
+
+.ayur-dash-overview-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.ayur-dash-tab-pane {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  animation: ayur-fade-slide-up 200ms ease-out;
+}

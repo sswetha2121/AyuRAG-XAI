@@ -1,0 +1,103 @@
+/* Review Section Card Styles */
+.ayur-review-section-card {
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-subtle);
+  transition: all var(--transition-fast);
+}
+
+.ayur-review-section-card:hover {
+  border-color: var(--color-secondary);
+}
+
+.ayur-review-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.ayur-review-step-num {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.ayur-review-sec-title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.ayur-review-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-circle);
+  background-color: transparent;
+  color: var(--color-text-muted);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.ayur-review-toggle-btn:hover {
+  background-color: var(--color-bg-alt);
+  color: var(--color-text-primary);
+}
+
+.ayur-review-section-body {
+  padding: var(--space-lg);
+  background-color: var(--color-bg-subtle);
+}
+
+.ayur-review-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.ayur-review-field-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ayur-review-field-label {
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.ayur-review-field-val {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.ayur-review-field-val--empty {
+  color: var(--color-text-placeholder);
+  font-weight: var(--font-weight-regular);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .ayur-review-fields-grid {
+    grid-template-columns: 1fr;
+  }
+}

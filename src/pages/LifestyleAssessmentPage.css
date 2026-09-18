@@ -1,0 +1,244 @@
+/* ==========================================================================
+   AyuRAG-XAI Lifestyle Assessment Page Styles (Phase 4)
+   ========================================================================== */
+
+.ayur-lifestyle-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Global Pipeline Track */
+.ayur-ls-global-pipeline {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 10px 16px;
+  box-shadow: var(--shadow-subtle);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ayur-ls-global-pipeline::-webkit-scrollbar {
+  display: none;
+}
+
+.ayur-ls-pipeline-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  min-width: max-content;
+}
+
+.ayur-ls-pipeline-step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-small);
+  color: var(--color-text-placeholder);
+  font-weight: var(--font-weight-medium);
+}
+
+.ayur-ls-pipeline-step--done {
+  color: var(--color-secondary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ayur-ls-pipeline-step--current {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.ayur-ls-pipeline-dot {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.ayur-ls-pipeline-step--done .ayur-ls-pipeline-dot {
+  color: var(--color-success);
+}
+
+.ayur-ls-pipeline-step--current .ayur-ls-pipeline-dot {
+  color: var(--color-accent);
+}
+
+.ayur-ls-pipeline-line {
+  height: 2px;
+  flex: 1;
+  min-width: 24px;
+  background-color: var(--color-border-subtle);
+}
+
+.ayur-ls-pipeline-line--done {
+  background-color: var(--color-secondary);
+}
+
+.ayur-ls-pipeline-line--active {
+  background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-accent) 100%);
+}
+
+/* Editorial Header */
+.ayur-lifestyle-header {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-card);
+}
+
+.ayur-lifestyle-header__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.ayur-lifestyle-header__progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  min-width: 200px;
+}
+
+.ayur-lifestyle-header__title {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: var(--space-2xs) 0 0 0;
+  line-height: var(--line-height-tight);
+}
+
+.ayur-ls-title-accent {
+  color: var(--color-accent-hover);
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.ayur-lifestyle-header__desc {
+  font-size: var(--font-size-body-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-top: var(--space-xs);
+  max-width: 820px;
+}
+
+/* 2-Column Responsive Layout */
+.ayur-lifestyle-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.ayur-lifestyle-main-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.ayur-lifestyle-side-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Local Question Navigation Container */
+.ayur-ls-nav-container {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-subtle);
+}
+
+.ayur-ls-local-progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-xs);
+}
+
+.ayur-ls-local-title {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  display: block;
+}
+
+.ayur-ls-local-sub {
+  font-size: var(--font-size-micro);
+  color: var(--color-text-muted);
+  display: block;
+}
+
+.ayur-ls-pct-tag {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-hover);
+}
+
+/* Validation Alert */
+.ayur-ls-val-error {
+  background-color: var(--color-error-light);
+  border: 1px solid var(--color-error-border);
+  color: var(--color-error);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  animation: ayur-shake 250ms ease-in-out;
+}
+
+/* Action Bar */
+.ayur-lifestyle-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-subtle);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+@keyframes ayur-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1080px) {
+  .ayur-lifestyle-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ayur-lifestyle-side-col {
+    order: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .ayur-lifestyle-header {
+    padding: var(--space-md);
+  }
+
+  .ayur-lifestyle-header__title {
+    font-size: var(--font-size-h2);
+  }
+
+  .ayur-lifestyle-header__desc {
+    font-size: var(--font-size-body);
+  }
+
+  .ayur-lifestyle-actions {
+    padding: var(--space-sm) var(--space-md);
+  }
+}

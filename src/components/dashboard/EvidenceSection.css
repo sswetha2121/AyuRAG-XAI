@@ -1,0 +1,174 @@
+/* Evidence Section Styles */
+.ayur-evidence-wrap {
+  width: 100%;
+}
+
+.ayur-evidence-card {
+  box-shadow: var(--shadow-card);
+}
+
+.ayur-evidence-title {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: var(--space-2xs) 0 0 0;
+}
+
+.ayur-evidence-highlight {
+  color: var(--color-primary);
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.ayur-evidence-desc {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-top: var(--space-xs);
+}
+
+.ayur-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.ayur-evidence-item-card {
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.ayur-evidence-item-card:hover {
+  border-color: var(--color-secondary);
+  box-shadow: var(--shadow-subtle);
+}
+
+.ayur-evidence-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ayur-evidence-ref-id {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-bold);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.ayur-evidence-domain-tag {
+  font-size: var(--font-size-micro);
+  color: var(--color-text-muted);
+}
+
+.ayur-evidence-item-title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.ayur-evidence-verse-box {
+  background-color: var(--color-bg-subtle);
+  border-left: 2px solid var(--color-accent);
+  padding: 4px 8px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.ayur-evidence-verse {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--font-size-micro);
+  color: var(--color-accent-hover);
+}
+
+.ayur-evidence-insight {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
+.ayur-evidence-footer {
+  margin-top: auto;
+  padding-top: var(--space-xs);
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Modal Backdrop */
+.ayur-evidence-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(20, 32, 26, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  padding: var(--space-md);
+  animation: ayur-fade-in 150ms ease-out;
+}
+
+.ayur-evidence-modal-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  max-width: 540px;
+  width: 100%;
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-dropdown);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.ayur-evidence-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: var(--space-sm);
+}
+
+.ayur-evidence-modal-title {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.ayur-evidence-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.ayur-evidence-modal-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ayur-evidence-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+  .ayur-evidence-grid {
+    grid-template-columns: 1fr;
+  }
+}

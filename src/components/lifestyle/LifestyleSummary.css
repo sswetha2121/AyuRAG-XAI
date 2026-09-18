@@ -1,0 +1,86 @@
+/* Lifestyle Summary Sidebar Styles */
+.ayur-lifestyle-summary {
+  width: 100%;
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-md));
+}
+
+.ayur-ls-summary-card {
+  box-shadow: var(--shadow-card);
+}
+
+.ayur-ls-step-badge {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.ayur-ls-title {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: var(--space-2xs) 0 0 0;
+}
+
+.ayur-ls-metric-box {
+  background-color: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.ayur-ls-params-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: var(--space-md);
+}
+
+.ayur-ls-param-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--color-border-subtle);
+  font-size: var(--font-size-small);
+}
+
+.ayur-ls-param-row:last-child {
+  border-bottom: none;
+}
+
+.ayur-ls-param-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.ayur-ls-param-val {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  text-align: right;
+  max-width: 55%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ayur-ls-param-val--empty {
+  color: var(--color-text-placeholder);
+  font-weight: var(--font-weight-regular);
+  font-style: italic;
+}
+
+.ayur-ls-classical-box {
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+}

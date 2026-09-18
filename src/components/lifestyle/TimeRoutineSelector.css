@@ -1,0 +1,220 @@
+/* Time Routine Selector & Daily Rhythm Styles */
+.ayur-time-routine-selector {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Daily Rhythm Quad Banner */
+.ayur-daily-rhythm-banner {
+  background: linear-gradient(135deg, rgba(22, 56, 44, 0.04) 0%, rgba(197, 160, 89, 0.08) 100%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.ayur-rhythm-quadrant {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xs);
+}
+
+.ayur-rhythm-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.ayur-rhythm-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-circle);
+  background-color: var(--color-bg-alt);
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.ayur-rhythm-item--morning .ayur-rhythm-icon-wrap {
+  color: #D97706;
+  background-color: #FEF3C7;
+}
+
+.ayur-rhythm-item--day .ayur-rhythm-icon-wrap {
+  color: var(--color-accent-hover);
+  background-color: var(--color-accent-light);
+}
+
+.ayur-rhythm-item--evening .ayur-rhythm-icon-wrap {
+  color: #9333EA;
+  background-color: #F3E8FF;
+}
+
+.ayur-rhythm-item--night .ayur-rhythm-icon-wrap {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+.ayur-rhythm-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ayur-rhythm-label {
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ayur-rhythm-time {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+}
+
+/* Time Sections Grid */
+.ayur-time-sections-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.ayur-time-section-card {
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.ayur-time-section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ayur-time-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ayur-time-icon--wake {
+  background-color: #FEF3C7;
+  color: #D97706;
+}
+
+.ayur-time-icon--bed {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.ayur-time-section-title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.ayur-time-section-sub {
+  font-size: var(--font-size-micro);
+  color: var(--color-text-muted);
+}
+
+/* Time Presets */
+.ayur-time-presets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ayur-time-preset-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background-color: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+  outline: none;
+}
+
+.ayur-time-preset-btn:hover {
+  background-color: var(--color-bg-subtle);
+  border-color: var(--color-secondary);
+  transform: translateY(-1px);
+}
+
+.ayur-time-preset-btn:focus-visible {
+  box-shadow: var(--shadow-focus);
+  border-color: var(--color-primary);
+}
+
+.ayur-time-preset-btn--selected {
+  background-color: var(--color-primary-subtle);
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 6px rgba(22, 56, 44, 0.08);
+}
+
+.ayur-time-preset-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.ayur-time-preset-val {
+  font-size: var(--font-size-body);
+  font-family: var(--font-mono);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.ayur-time-preset-btn--selected .ayur-time-preset-val {
+  color: var(--color-primary);
+}
+
+.ayur-time-preset-lbl {
+  font-size: var(--font-size-micro);
+  color: var(--color-text-muted);
+}
+
+.ayur-time-preset-check {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .ayur-rhythm-quadrant {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ayur-time-sections-grid {
+    grid-template-columns: 1fr;
+  }
+}

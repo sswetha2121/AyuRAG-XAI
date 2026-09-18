@@ -1,0 +1,120 @@
+/* Lifestyle Completion Card Styles */
+.ayur-ls-completion {
+  width: 100%;
+}
+
+.ayur-ls-completion-card {
+  box-shadow: var(--shadow-card);
+}
+
+.ayur-ls-completed-tag {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-small);
+  color: var(--color-success);
+  font-weight: var(--font-weight-semibold);
+  background-color: var(--color-success-light);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.ayur-ls-complete-title {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: var(--space-xs) 0 0 0;
+}
+
+.ayur-complete-highlight {
+  color: var(--color-primary);
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.ayur-ls-complete-desc {
+  font-size: var(--font-size-body-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-top: var(--space-xs);
+}
+
+/* Milestone Metrics Summary */
+.ayur-ls-metrics-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.ayur-ls-metric-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.ayur-ls-metric-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ayur-ls-metric-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.ayur-ls-metric-label {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+}
+
+.ayur-ls-metric-val {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.ayur-ls-complete-note {
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.ayur-ls-complete-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+@media (max-width: 1024px) {
+  .ayur-ls-metrics-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .ayur-ls-metrics-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .ayur-ls-complete-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ayur-ls-continue-btn {
+    width: 100%;
+  }
+}

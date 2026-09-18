@@ -18,62 +18,55 @@ export const WORKFLOW_STEPS = [
     number: '01',
     label: 'Personal Information',
     sublabel: 'Demographics & Vitals',
-    icon: User,
-    phase: 2
+    icon: User
   },
   {
     id: 'prakriti',
     number: '02',
     label: 'Prakriti Assessment',
     sublabel: 'Dosha Constitution (V-P-K)',
-    icon: Activity,
-    phase: 3
+    icon: Activity
   },
   {
     id: 'lifestyle',
     number: '03',
     label: 'Lifestyle Assessment',
     sublabel: 'Dinacharya & Routine',
-    icon: HeartPulse,
-    phase: 4
+    icon: HeartPulse
   },
   {
     id: 'diet',
     number: '04',
     label: 'Dietary Assessment',
     sublabel: 'Ahara Habits & Agni',
-    icon: Utensils,
-    phase: 4
+    icon: Utensils
   },
   {
     id: 'symptoms',
     number: '05',
-    label: 'Symptoms & Chief Complaint',
-    sublabel: 'Vikriti & Imbalance',
-    icon: Stethoscope,
-    phase: 5
+    label: 'Symptoms & Health Context',
+    sublabel: 'Manifestation Mapping',
+    icon: Stethoscope
   },
   {
     id: 'review',
     number: '06',
     label: 'Clinical Review',
-    sublabel: 'Input Verification',
-    icon: ClipboardCheck,
-    phase: 5
+    sublabel: 'Pre-Analysis Validation',
+    icon: ClipboardCheck
   },
   {
     id: 'dashboard',
     number: '07',
     label: 'AI Decision Dashboard',
-    sublabel: 'RAG + XAI Explanations',
-    icon: LayoutDashboard,
-    phase: 6
+    sublabel: 'XAI & RAG Grounding',
+    icon: LayoutDashboard
   },
   {
     id: 'design-system',
     number: 'DS',
     label: 'Design System Showcase',
-    sublabel: 'Phase 1 Token & UI Matrix',
+    sublabel: 'Component Token Matrix',
     icon: Layers,
     isDevelopment: true
   }

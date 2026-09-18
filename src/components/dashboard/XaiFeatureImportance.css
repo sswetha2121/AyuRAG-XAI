@@ -1,0 +1,120 @@
+/* Explainable AI Feature Importance Styles */
+.ayur-xai-card-wrap {
+  width: 100%;
+}
+
+.ayur-xai-card {
+  box-shadow: var(--shadow-card);
+}
+
+.ayur-xai-title {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: var(--space-2xs) 0 0 0;
+}
+
+.ayur-xai-highlight {
+  color: var(--color-accent-hover);
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.ayur-xai-desc {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-top: var(--space-xs);
+}
+
+.ayur-xai-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin: var(--space-md) 0 var(--space-lg) 0;
+}
+
+.ayur-xai-feature-row {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.ayur-xai-feature-row:hover {
+  border-color: var(--color-secondary);
+  background-color: var(--color-surface-muted);
+}
+
+.ayur-xai-feat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.ayur-xai-feat-name {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.ayur-xai-feat-cat {
+  font-size: var(--font-size-micro);
+  font-family: var(--font-mono);
+  background-color: var(--color-bg-alt);
+  color: var(--color-text-secondary);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.ayur-xai-impact-badge {
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-semibold);
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+}
+
+.ayur-xai-impact-badge--high {
+  background-color: var(--color-accent-light);
+  color: var(--color-accent-hover);
+}
+
+.ayur-xai-impact-badge--moderate {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.ayur-xai-impact-badge--low {
+  background-color: var(--color-secondary-light);
+  color: var(--color-secondary);
+}
+
+.ayur-xai-feat-pct {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+.ayur-xai-bar-wrap {
+  margin: 2px 0;
+}
+
+.ayur-xai-feat-explanation {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
+.ayur-xai-note {
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}

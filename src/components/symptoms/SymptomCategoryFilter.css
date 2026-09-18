@@ -1,0 +1,73 @@
+/* Symptom Category Filter Styles */
+.ayur-symptom-filter {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ayur-symptom-filter::-webkit-scrollbar {
+  display: none;
+}
+
+.ayur-symptom-filter__track {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-width: max-content;
+  padding: 2px 0;
+}
+
+.ayur-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  outline: none;
+}
+
+.ayur-filter-pill:hover {
+  background-color: var(--color-surface-muted);
+  border-color: var(--color-secondary);
+  color: var(--color-text-primary);
+}
+
+.ayur-filter-pill:focus-visible {
+  box-shadow: var(--shadow-focus);
+}
+
+.ayur-filter-pill--active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: 0 2px 6px rgba(22, 56, 44, 0.15);
+}
+
+.ayur-filter-pill--active:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  color: var(--color-text-inverse);
+}
+
+.ayur-filter-pill__count {
+  font-size: var(--font-size-micro);
+  font-family: var(--font-mono);
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+}
+
+.ayur-filter-pill--active .ayur-filter-pill__count {
+  background-color: var(--color-accent-hover);
+}

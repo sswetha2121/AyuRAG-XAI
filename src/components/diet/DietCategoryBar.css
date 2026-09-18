@@ -1,0 +1,114 @@
+/* Dietary Category Navigation Bar Styles */
+.ayur-diet-cat-bar {
+  width: 100%;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xs) var(--space-sm);
+  box-shadow: var(--shadow-subtle);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ayur-diet-cat-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.ayur-diet-cat-track {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-width: max-content;
+}
+
+.ayur-diet-cat-step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+}
+
+.ayur-diet-cat-step:hover {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+}
+
+.ayur-diet-cat-step--active {
+  background-color: var(--color-primary-subtle);
+  border-color: rgba(22, 56, 44, 0.2);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-medium);
+  box-shadow: 0 1px 3px rgba(22, 56, 44, 0.06);
+}
+
+.ayur-diet-cat-step--completed {
+  color: var(--color-secondary);
+}
+
+.ayur-diet-cat-step__badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--color-bg-alt);
+  padding: 3px 6px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-micro);
+  font-family: var(--font-mono);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.ayur-diet-cat-step--active .ayur-diet-cat-step__badge {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+.ayur-diet-cat-step--completed .ayur-diet-cat-step__badge {
+  background-color: var(--color-secondary-light);
+  color: var(--color-secondary);
+}
+
+.ayur-diet-cat-step__check {
+  color: var(--color-secondary);
+}
+
+.ayur-diet-cat-step__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ayur-diet-cat-step__name {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+.ayur-diet-cat-step__sanskrit {
+  font-size: var(--font-size-micro);
+  color: var(--color-accent-hover);
+  font-family: var(--font-serif);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  .ayur-diet-cat-bar {
+    padding: 6px 8px;
+  }
+
+  .ayur-diet-cat-step {
+    padding: 6px 8px;
+  }
+
+  .ayur-diet-cat-step__sanskrit {
+    display: none;
+  }
+}

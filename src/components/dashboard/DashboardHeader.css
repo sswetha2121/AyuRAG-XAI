@@ -1,0 +1,80 @@
+/* Dashboard Header Styles */
+.ayur-dashboard-header {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.ayur-dash-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ayur-dash-timestamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size-micro);
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+}
+
+.ayur-dash-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.ayur-dash-header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ayur-dash-title {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+  margin: 0;
+}
+
+.ayur-dash-patient {
+  color: var(--color-primary);
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.ayur-dash-desc {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  max-width: 900px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .ayur-dashboard-header {
+    padding: var(--space-md);
+  }
+
+  .ayur-dash-title {
+    font-size: var(--font-size-h2);
+  }
+
+  .ayur-dash-header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

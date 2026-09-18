@@ -1,0 +1,98 @@
+/* Lifestyle Question Card Styles */
+.ayur-lifestyle-q-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  animation: ayur-fade-slide-up 220ms ease-out;
+}
+
+.ayur-lifestyle-q-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.ayur-sanskrit-tag {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--font-size-small);
+  color: var(--color-accent-hover);
+  background-color: var(--color-accent-subtle);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(197, 160, 89, 0.25);
+}
+
+.ayur-lifestyle-q-title {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-snug);
+  margin: var(--space-2xs) 0 0 0;
+}
+
+.ayur-lifestyle-q-desc {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.ayur-lifestyle-q-body {
+  width: 100%;
+}
+
+.ayur-lifestyle-q-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  background-color: var(--color-bg-subtle);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+}
+
+.ayur-hint-icon-wrap {
+  color: var(--color-accent-hover);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.ayur-hint-text {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.ayur-hint-title {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+}
+
+@keyframes ayur-fade-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .ayur-lifestyle-q-card {
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+    gap: var(--space-md);
+  }
+
+  .ayur-lifestyle-q-title {
+    font-size: var(--font-size-h3);
+  }
+}

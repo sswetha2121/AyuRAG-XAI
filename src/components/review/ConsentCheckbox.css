@@ -1,0 +1,73 @@
+/* Consent Checkbox Styles */
+.ayur-consent-box {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+  outline: none;
+}
+
+.ayur-consent-box:hover {
+  border-color: var(--color-secondary);
+  background-color: var(--color-surface-muted);
+}
+
+.ayur-consent-box:focus-visible {
+  box-shadow: var(--shadow-focus);
+  border-color: var(--color-primary);
+}
+
+.ayur-consent-box--checked {
+  background-color: var(--color-primary-subtle);
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(22, 56, 44, 0.08);
+}
+
+.ayur-consent-check-indicator {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-border-strong);
+  background-color: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-inverse);
+  margin-top: 2px;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.ayur-consent-box--checked .ayur-consent-check-indicator {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.ayur-consent-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ayur-consent-title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.ayur-consent-box--checked .ayur-consent-title {
+  color: var(--color-primary);
+}
+
+.ayur-consent-text {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}

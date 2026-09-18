@@ -1,0 +1,188 @@
+/* Sleep Quality Selector Styles */
+.ayur-sleep-selector {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.ayur-sleep-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.ayur-sleep-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.ayur-sleep-subtitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.ayur-sleep-current-tag {
+  font-size: var(--font-size-small);
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+}
+
+/* Duration Segment Buttons */
+.ayur-sleep-duration-segments {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-xs);
+  background-color: var(--color-surface-muted);
+  padding: 6px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+}
+
+.ayur-sleep-duration-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 8px;
+  background-color: var(--color-surface);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.ayur-sleep-duration-btn:hover {
+  border-color: var(--color-secondary);
+  background-color: var(--color-bg-subtle);
+  transform: translateY(-1px);
+}
+
+.ayur-sleep-duration-btn:focus-visible {
+  box-shadow: var(--shadow-focus);
+  border-color: var(--color-primary);
+}
+
+.ayur-sleep-duration-btn--selected {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(22, 56, 44, 0.2);
+}
+
+.ayur-sleep-dur-label {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-mono);
+  color: var(--color-text-primary);
+}
+
+.ayur-sleep-duration-btn--selected .ayur-sleep-dur-label {
+  color: var(--color-text-inverse);
+}
+
+.ayur-sleep-dur-sub {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.ayur-sleep-duration-btn--selected .ayur-sleep-dur-sub {
+  color: var(--color-text-inverse-muted);
+}
+
+/* Quality Grid */
+.ayur-sleep-quality-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+}
+
+.ayur-quality-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--space-md);
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  outline: none;
+  user-select: none;
+}
+
+.ayur-quality-card:hover {
+  background-color: var(--color-surface-muted);
+  border-color: var(--color-secondary);
+  transform: translateY(-1px);
+}
+
+.ayur-quality-card:focus-visible {
+  box-shadow: var(--shadow-focus);
+  border-color: var(--color-primary);
+}
+
+.ayur-quality-card--selected {
+  background-color: var(--color-primary-subtle);
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(22, 56, 44, 0.08);
+}
+
+.ayur-quality-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ayur-quality-card__label {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.ayur-quality-card--selected .ayur-quality-card__label {
+  color: var(--color-primary);
+}
+
+.ayur-quality-card__check {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.ayur-quality-card--selected .ayur-quality-card__check {
+  opacity: 1;
+}
+
+.ayur-quality-card__desc {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .ayur-sleep-duration-segments {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .ayur-sleep-quality-grid {
+    grid-template-columns: 1fr;
+  }
+}

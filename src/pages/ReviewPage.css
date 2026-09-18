@@ -1,0 +1,194 @@
+/* ==========================================================================
+   AyuRAG-XAI Review & Validation Page Styles (Phase 6 / Step 06)
+   ========================================================================== */
+
+.ayur-review-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Global Pipeline Track */
+.ayur-rv-global-pipeline {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 10px 16px;
+  box-shadow: var(--shadow-subtle);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ayur-rv-global-pipeline::-webkit-scrollbar {
+  display: none;
+}
+
+.ayur-rv-pipeline-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  min-width: max-content;
+}
+
+.ayur-rv-pipeline-step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-small);
+  color: var(--color-text-placeholder);
+  font-weight: var(--font-weight-medium);
+}
+
+.ayur-rv-pipeline-step--done {
+  color: var(--color-secondary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ayur-rv-pipeline-step--current {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.ayur-rv-pipeline-dot {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.ayur-rv-pipeline-step--done .ayur-rv-pipeline-dot {
+  color: var(--color-success);
+}
+
+.ayur-rv-pipeline-step--current .ayur-rv-pipeline-dot {
+  color: var(--color-accent);
+}
+
+.ayur-rv-pipeline-line {
+  height: 2px;
+  flex: 1;
+  min-width: 24px;
+  background-color: var(--color-border-subtle);
+}
+
+.ayur-rv-pipeline-line--done {
+  background-color: var(--color-secondary);
+}
+
+.ayur-rv-pipeline-line--active {
+  background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-accent) 100%);
+}
+
+/* Header */
+.ayur-review-header {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-card);
+}
+
+.ayur-review-header__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.ayur-review-header__progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  min-width: 200px;
+}
+
+.ayur-review-header__title {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: var(--space-2xs) 0 0 0;
+  line-height: var(--line-height-tight);
+}
+
+.ayur-rv-title-accent {
+  color: var(--color-accent-hover);
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.ayur-review-header__desc {
+  font-size: var(--font-size-body-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-top: var(--space-xs);
+  max-width: 820px;
+}
+
+/* 2-Column Responsive Layout */
+.ayur-review-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.ayur-review-main-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.ayur-review-side-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Actions Bar */
+.ayur-review-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-subtle);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.ayur-review-analyze-btn {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary-hover) 100%);
+  box-shadow: 0 4px 14px rgba(22, 56, 44, 0.25);
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1080px) {
+  .ayur-review-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ayur-review-side-col {
+    order: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .ayur-review-header {
+    padding: var(--space-md);
+  }
+
+  .ayur-review-header__title {
+    font-size: var(--font-size-h2);
+  }
+
+  .ayur-review-actions {
+    padding: var(--space-sm) var(--space-md);
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
