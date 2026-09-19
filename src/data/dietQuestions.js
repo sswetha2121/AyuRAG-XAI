@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * AyuRAG-XAI Structured Dietary Assessment Question Data (Ahara & Agni)
  * Captures meal timings, Agni digestive capacity, rasa preferences,
  * mindful eating habits, and post-meal comfort.
@@ -61,15 +60,8 @@ export const DIET_CATEGORIES = [
     sanskritName: 'Koṣṭha & Pariṇāma',
     description: 'Post-meal lightness, transit comfort, and metabolic demonstration signals.',
     icon: 'HeartPulse'
-=======
- * AyuRAG-XAI Dietary Assessment (Ahara & Agni) Question Dataset
- * 
- * Scalable data model for Phase 04.
- * Integrates dynamic branching for vegetarian protein sources, late-night eating,
- * hydration substitutes, and conditional digestive context questions.
- * 
- * Non-diagnostic clinical terminology used throughout.
- */
+  }
+];
 
 export const DIET_SECTIONS = [
   {
@@ -131,12 +123,10 @@ export const DIET_SECTIONS = [
     title: 'Seasonal Adaptation',
     sanskrit: 'Ṛtucaryā Āhāra',
     description: 'Tendency to naturally shift diet according to seasonal weather.'
->>>>>>> 5b171fb (phase 3)
   }
 ];
 
 export const DIET_QUESTIONS = [
-<<<<<<< HEAD
   // 1. Meal Regularity
   {
     id: 'diet_q1_meal_regularity',
@@ -532,7 +522,10 @@ export const DIET_QUESTIONS = [
         badge: 'Kapha Signal'
       }
     ]
-=======
+  }
+];
+
+export const DIET_DETAILED_QUESTIONS = [
   // SECTION 1: MEAL TIMING
   {
     id: 'diet_meal_timing_regularity',
@@ -911,6 +904,5 @@ export const DIET_QUESTIONS = [
     description: 'E.g., warming soups and spices in winter; cooling melons and salads in summer.',
     required: true,
     tags: ['seasonal', 'ritucharya']
->>>>>>> 5b171fb (phase 3)
   }
 ];

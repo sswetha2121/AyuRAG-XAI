@@ -44,7 +44,7 @@ export const PersonalInfoForm = ({
         <div className="ayur-form-grid ayur-form-grid--2">
           <Input
             label="Full Name"
-            placeholder="e.g. Swetha Sundar"
+            placeholder="e.g. Swetha Chowdary"
             value={formData.fullName}
             onChange={(e) => onChange('fullName', e.target.value)}
             errorMessage={errors.fullName}

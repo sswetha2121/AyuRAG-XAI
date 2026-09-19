@@ -1,14 +1,10 @@
-<<<<<<< HEAD
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { generatePersonalizedAnalysis } from '../data/mockAnalysis';
-=======
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import { generatePersonalizedAnalysis } from '../data/mockAnalysis';
 import { deriveUserProfile } from '../utils/personalization';
 import { exportAssessmentPayload } from '../utils/assessmentDerivations';
->>>>>>> 5b171fb (phase 3)
 
-const STORAGE_KEY = 'ayurag_assessment_v1';
-const LEGACY_STORAGE_KEY = 'ayurag_assessment_state_v1';
+const STORAGE_KEY = 'ayurag_assessment_state_v1';
+const LEGACY_STORAGE_KEY = 'ayurag_assessment_v1';
 
 const initialPersonalInfo = {
   fullName: '',
@@ -31,69 +27,18 @@ const initialSymptomAnswers = {
 
 const AssessmentContext = createContext(null);
 
-/**
- * Loads stored data with schema version check and legacy fallback.
- */
-function loadInitialState() {
-  try {
-    // 1. Try modern versioned key
-    const modern = localStorage.getItem(STORAGE_KEY);
-    if (modern) {
-      const parsed = JSON.parse(modern);
-      if (parsed && parsed.data) {
-        return {
-          personalInfo: { ...initialPersonalInfo, ...(parsed.data.personalInfo || {}) },
-          prakritiAnswers: parsed.data.prakritiAnswers || {},
-          lifestyleAnswers: parsed.data.lifestyleAnswers || {},
-          dietAnswers: parsed.data.dietAnswers || {},
-          symptomAnswers: parsed.data.symptomAnswers || {},
-          primaryConcern: parsed.data.primaryConcern || null,
-          completedSteps: parsed.data.completedSteps || []
-        };
-      }
-    }
-
-    // 2. Legacy fallback migration
-    const legacy = localStorage.getItem(LEGACY_STORAGE_KEY);
-    if (legacy) {
-      const parsed = JSON.parse(legacy);
-      return {
-        personalInfo: { ...initialPersonalInfo, ...(parsed.personalInfo || {}) },
-        prakritiAnswers: parsed.prakritiAnswers || {},
-        lifestyleAnswers: {},
-        dietAnswers: {},
-        symptomAnswers: {},
-        primaryConcern: null,
-        completedSteps: parsed.completedSteps || []
-      };
-    }
-  } catch (e) {
-    console.warn('[AssessmentContext] Error reading saved state from localStorage:', e);
-  }
-
-  return {
-    personalInfo: initialPersonalInfo,
-    prakritiAnswers: {},
-    lifestyleAnswers: {},
-    dietAnswers: {},
-    symptomAnswers: {},
-    primaryConcern: null,
-    completedSteps: []
-  };
-}
-
 export const AssessmentProvider = ({ children }) => {
-<<<<<<< HEAD
   // 1. Personal Information State
   const [personalInfo, setPersonalInfo] = useState(() => {
     try {
-      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        return { ...initialPersonalInfo, ...(parsed.personalInfo || {}) };
+        const data = parsed.data || parsed;
+        return { ...initialPersonalInfo, ...(data.personalInfo || {}) };
       }
     } catch (e) {
-      console.warn('Failed to load assessment state from localStorage:', e);
+      console.warn('Failed to load personalInfo from localStorage:', e);
     }
     return initialPersonalInfo;
   });
@@ -101,10 +46,11 @@ export const AssessmentProvider = ({ children }) => {
   // 2. Prakriti Answers State
   const [prakritiAnswers, setPrakritiAnswers] = useState(() => {
     try {
-      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        return parsed.prakritiAnswers || {};
+        const data = parsed.data || parsed;
+        return data.prakritiAnswers || {};
       }
     } catch (e) {
       // ignore
@@ -115,10 +61,11 @@ export const AssessmentProvider = ({ children }) => {
   // 3. Lifestyle Answers State
   const [lifestyleAnswers, setLifestyleAnswers] = useState(() => {
     try {
-      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        return parsed.lifestyleAnswers || {};
+        const data = parsed.data || parsed;
+        return data.lifestyleAnswers || {};
       }
     } catch (e) {
       // ignore
@@ -129,10 +76,11 @@ export const AssessmentProvider = ({ children }) => {
   // 4. Dietary Answers State
   const [dietAnswers, setDietAnswers] = useState(() => {
     try {
-      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        return parsed.dietAnswers || {};
+        const data = parsed.data || parsed;
+        return data.dietAnswers || {};
       }
     } catch (e) {
       // ignore
@@ -143,10 +91,23 @@ export const AssessmentProvider = ({ children }) => {
   // 5. Symptom Answers State
   const [symptomAnswers, setSymptomAnswers] = useState(() => {
     try {
-      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        return { ...initialSymptomAnswers, ...(parsed.symptomAnswers || {}) };
+        const data = parsed.data || parsed;
+        if (data.symptomAnswers) {
+          if (Array.isArray(data.symptomAnswers.selectedSymptoms)) {
+            return { ...initialSymptomAnswers, ...data.symptomAnswers };
+          }
+          // If stored as an object { symId: details }
+          const keys = Object.keys(data.symptomAnswers);
+          const selected = keys.map((k) => ({ id: k, ...(data.symptomAnswers[k] || {}) }));
+          return {
+            selectedSymptoms: selected,
+            primaryConcern: data.primaryConcern || '',
+            additionalNotes: ''
+          };
+        }
       }
     } catch (e) {
       // ignore
@@ -157,10 +118,11 @@ export const AssessmentProvider = ({ children }) => {
   // 6. Review Consent State
   const [reviewConsent, setReviewConsent] = useState(() => {
     try {
-      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        return Boolean(parsed.reviewConsent);
+        const data = parsed.data || parsed;
+        return Boolean(data.reviewConsent);
       }
     } catch (e) {
       // ignore
@@ -171,10 +133,11 @@ export const AssessmentProvider = ({ children }) => {
   // 7. Analysis Result State
   const [analysisResult, setAnalysisResult] = useState(() => {
     try {
-      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        return parsed.analysisResult || null;
+        const data = parsed.data || parsed;
+        return data.analysisResult || null;
       }
     } catch (e) {
       // ignore
@@ -185,10 +148,11 @@ export const AssessmentProvider = ({ children }) => {
   // Current Active Workflow Step
   const [currentStep, setCurrentStep] = useState(() => {
     try {
-      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        return parsed.currentStep || 'personal-info';
+        const data = parsed.data || parsed;
+        return data.currentStep || 'personal-info';
       }
     } catch (e) {
       // ignore
@@ -199,10 +163,11 @@ export const AssessmentProvider = ({ children }) => {
   // Completed Steps Array
   const [completedSteps, setCompletedSteps] = useState(() => {
     try {
-      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        return parsed.completedSteps || [];
+        const data = parsed.data || parsed;
+        return data.completedSteps || [];
       }
     } catch (e) {
       // ignore
@@ -210,45 +175,26 @@ export const AssessmentProvider = ({ children }) => {
     return [];
   });
 
-  // Autosave to localStorage on any state change
-=======
-  const initial = useMemo(() => loadInitialState(), []);
-
-  const [personalInfo, setPersonalInfo] = useState(initial.personalInfo);
-  const [prakritiAnswers, setPrakritiAnswers] = useState(initial.prakritiAnswers);
-  const [lifestyleAnswers, setLifestyleAnswers] = useState(initial.lifestyleAnswers);
-  const [dietAnswers, setDietAnswers] = useState(initial.dietAnswers);
-  const [symptomAnswers, setSymptomAnswers] = useState(initial.symptomAnswers);
-  const [primaryConcern, setPrimaryConcern] = useState(initial.primaryConcern);
-  const [completedSteps, setCompletedSteps] = useState(initial.completedSteps);
-  const [currentStep, setCurrentStep] = useState('personal-info');
-
-  // Autosave to versioned localStorage
->>>>>>> 5b171fb (phase 3)
+  // Autosave to localStorage on state change
   useEffect(() => {
     try {
       const payload = {
         version: 1,
         updatedAt: new Date().toISOString(),
-        data: {
-          personalInfo,
-          prakritiAnswers,
-          lifestyleAnswers,
-          dietAnswers,
-          symptomAnswers,
-<<<<<<< HEAD
-          reviewConsent,
-          analysisResult,
-          currentStep,
-=======
-          primaryConcern,
->>>>>>> 5b171fb (phase 3)
-          completedSteps
-        }
+        personalInfo,
+        prakritiAnswers,
+        lifestyleAnswers,
+        dietAnswers,
+        symptomAnswers,
+        primaryConcern: symptomAnswers.primaryConcern,
+        reviewConsent,
+        analysisResult,
+        currentStep,
+        completedSteps
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
     } catch (e) {
-      console.warn('[AssessmentContext] Failed to persist assessment state:', e);
+      console.warn('[AssessmentContext] Failed to persist state:', e);
     }
   }, [
     personalInfo,
@@ -256,7 +202,6 @@ export const AssessmentProvider = ({ children }) => {
     lifestyleAnswers,
     dietAnswers,
     symptomAnswers,
-<<<<<<< HEAD
     reviewConsent,
     analysisResult,
     currentStep,
@@ -264,13 +209,6 @@ export const AssessmentProvider = ({ children }) => {
   ]);
 
   // Personal Info Helpers
-=======
-    primaryConcern,
-    completedSteps
-  ]);
-
-  // Personal Info handlers
->>>>>>> 5b171fb (phase 3)
   const updatePersonalInfo = (field, value) => {
     setPersonalInfo((prev) => ({ ...prev, [field]: value }));
   };
@@ -284,11 +222,7 @@ export const AssessmentProvider = ({ children }) => {
     setCompletedSteps((prev) => prev.filter((s) => s !== 'personal-info'));
   };
 
-<<<<<<< HEAD
   // Prakriti Helpers
-=======
-  // Prakriti handlers
->>>>>>> 5b171fb (phase 3)
   const setPrakritiAnswer = (questionId, optionId) => {
     setPrakritiAnswers((prev) => ({ ...prev, [questionId]: optionId }));
   };
@@ -298,58 +232,43 @@ export const AssessmentProvider = ({ children }) => {
     setCompletedSteps((prev) => prev.filter((s) => s !== 'prakriti'));
   };
 
-<<<<<<< HEAD
   // Lifestyle Helpers
-=======
-  // Lifestyle handlers (Phase 03)
->>>>>>> 5b171fb (phase 3)
   const setLifestyleAnswer = (questionId, value) => {
     setLifestyleAnswers((prev) => ({ ...prev, [questionId]: value }));
   };
 
-<<<<<<< HEAD
-=======
   const setMultipleLifestyleAnswers = (answersMap) => {
     setLifestyleAnswers((prev) => ({ ...prev, ...answersMap }));
   };
 
->>>>>>> 5b171fb (phase 3)
   const resetLifestyleAnswers = () => {
     setLifestyleAnswers({});
     setCompletedSteps((prev) => prev.filter((s) => s !== 'lifestyle'));
   };
 
-<<<<<<< HEAD
   // Diet Helpers
-=======
-  // Diet handlers (Phase 04)
->>>>>>> 5b171fb (phase 3)
   const setDietAnswer = (questionId, value) => {
     setDietAnswers((prev) => ({ ...prev, [questionId]: value }));
   };
 
-<<<<<<< HEAD
-=======
   const setMultipleDietAnswers = (answersMap) => {
     setDietAnswers((prev) => ({ ...prev, ...answersMap }));
   };
 
->>>>>>> 5b171fb (phase 3)
   const resetDietAnswers = () => {
     setDietAnswers({});
     setCompletedSteps((prev) => prev.filter((s) => s !== 'diet'));
   };
 
-<<<<<<< HEAD
   // Symptom Helpers
   const addSymptom = (symptom) => {
     setSymptomAnswers((prev) => {
-      const exists = prev.selectedSymptoms.some((s) => s.id === symptom.id);
+      const exists = (prev.selectedSymptoms || []).some((s) => s.id === symptom.id);
       if (exists) return prev;
       return {
         ...prev,
         selectedSymptoms: [
-          ...prev.selectedSymptoms,
+          ...(prev.selectedSymptoms || []),
           {
             ...symptom,
             severity: 'mild',
@@ -364,14 +283,14 @@ export const AssessmentProvider = ({ children }) => {
   const removeSymptom = (symptomId) => {
     setSymptomAnswers((prev) => ({
       ...prev,
-      selectedSymptoms: prev.selectedSymptoms.filter((s) => s.id !== symptomId)
+      selectedSymptoms: (prev.selectedSymptoms || []).filter((s) => s.id !== symptomId)
     }));
   };
 
   const updateSymptomDetail = (symptomId, field, value) => {
     setSymptomAnswers((prev) => ({
       ...prev,
-      selectedSymptoms: prev.selectedSymptoms.map((s) =>
+      selectedSymptoms: (prev.selectedSymptoms || []).map((s) =>
         s.id === symptomId ? { ...s, [field]: value } : s
       )
     }));
@@ -385,33 +304,34 @@ export const AssessmentProvider = ({ children }) => {
     setSymptomAnswers((prev) => ({ ...prev, additionalNotes: notes }));
   };
 
+  const setSymptomAnswer = (symptomId, details) => {
+    setSymptomAnswers((prev) => {
+      const existing = (prev.selectedSymptoms || []).find((s) => s.id === symptomId);
+      if (existing) {
+        return {
+          ...prev,
+          selectedSymptoms: prev.selectedSymptoms.map((s) =>
+            s.id === symptomId ? { ...s, ...details } : s
+          )
+        };
+      }
+      return {
+        ...prev,
+        selectedSymptoms: [...(prev.selectedSymptoms || []), { id: symptomId, ...details }]
+      };
+    });
+  };
+
+  const removeSymptomAnswer = (symptomId) => {
+    removeSymptom(symptomId);
+  };
+
   const resetSymptomAnswers = () => {
     setSymptomAnswers(initialSymptomAnswers);
     setCompletedSteps((prev) => prev.filter((s) => s !== 'symptoms'));
   };
 
-  // General Workflow Step Helpers
-=======
-  // Symptoms handlers (Phase 05)
-  const setSymptomAnswer = (symptomId, details) => {
-    setSymptomAnswers((prev) => ({ ...prev, [symptomId]: details }));
-  };
-
-  const removeSymptomAnswer = (symptomId) => {
-    setSymptomAnswers((prev) => {
-      const next = { ...prev };
-      delete next[symptomId];
-      return next;
-    });
-  };
-
-  const resetSymptomAnswers = () => {
-    setSymptomAnswers({});
-    setCompletedSteps((prev) => prev.filter((s) => s !== 'symptoms'));
-  };
-
-  // Step completion helper
->>>>>>> 5b171fb (phase 3)
+  // Step Completion
   const markStepCompleted = (stepId) => {
     setCompletedSteps((prev) => {
       if (!prev.includes(stepId)) {
@@ -421,8 +341,7 @@ export const AssessmentProvider = ({ children }) => {
     });
   };
 
-<<<<<<< HEAD
-  // Generate Real-Time Personalized Analysis Result
+  // Real-Time Analysis Generation
   const triggerAnalysisGeneration = () => {
     const computed = generatePersonalizedAnalysis({
       personalInfo,
@@ -437,39 +356,68 @@ export const AssessmentProvider = ({ children }) => {
     return computed;
   };
 
-  // Complete Assessment Reset
-  const resetAllAssessment = () => {
-=======
-  // Reset entire assessment across all phases with confirmation
+  // Reset entire assessment
   const resetAllAssessments = () => {
->>>>>>> 5b171fb (phase 3)
     setPersonalInfo(initialPersonalInfo);
     setPrakritiAnswers({});
     setLifestyleAnswers({});
     setDietAnswers({});
-<<<<<<< HEAD
     setSymptomAnswers(initialSymptomAnswers);
     setReviewConsent(false);
     setAnalysisResult(null);
     setCompletedSteps([]);
     setCurrentStep('personal-info');
     try {
-      localStorage.removeItem(LOCAL_STORAGE_KEY);
-=======
-    setSymptomAnswers({});
-    setPrimaryConcern(null);
-    setCompletedSteps([]);
-    setCurrentStep('personal-info');
-    try {
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem(LEGACY_STORAGE_KEY);
->>>>>>> 5b171fb (phase 3)
     } catch (e) {
       // ignore
     }
   };
 
-<<<<<<< HEAD
+  const resetAllAssessment = resetAllAssessments;
+
+  // Check saved progress
+  const hasSavedProgress =
+    Boolean(personalInfo.fullName) ||
+    Object.keys(prakritiAnswers).length > 0 ||
+    Object.keys(lifestyleAnswers).length > 0 ||
+    Object.keys(dietAnswers).length > 0 ||
+    (symptomAnswers.selectedSymptoms && symptomAnswers.selectedSymptoms.length > 0);
+
+  // Derived user profile
+  const derivedProfile = useMemo(() => {
+    try {
+      return deriveUserProfile({
+        personalInfo,
+        prakritiAnswers,
+        lifestyleAnswers,
+        dietAnswers,
+        symptomAnswers,
+        primaryConcern: symptomAnswers.primaryConcern
+      });
+    } catch (e) {
+      return null;
+    }
+  }, [personalInfo, prakritiAnswers, lifestyleAnswers, dietAnswers, symptomAnswers]);
+
+  // ML/RAG export payload
+  const getExportPayload = () => {
+    try {
+      return exportAssessmentPayload({
+        personalInfo,
+        prakritiAnswers,
+        lifestyleAnswers,
+        dietAnswers,
+        symptomAnswers,
+        primaryConcern: symptomAnswers.primaryConcern,
+        completedSteps
+      });
+    } catch (e) {
+      return null;
+    }
+  };
+
   // 1-Click Realistic Preset for Demonstration & Testing
   const loadDemoPreset = () => {
     setPersonalInfo({
@@ -572,46 +520,6 @@ export const AssessmentProvider = ({ children }) => {
     });
     setAnalysisResult(demoAnalysis);
     setCurrentStep('dashboard');
-=======
-  // Check if there is saved progress to resume
-  const hasSavedProgress =
-    Boolean(personalInfo.fullName) ||
-    Object.keys(prakritiAnswers).length > 0 ||
-    Object.keys(lifestyleAnswers).length > 0 ||
-    Object.keys(dietAnswers).length > 0 ||
-    Object.keys(symptomAnswers).length > 0;
-
-  // Derived user profile (non-diagnostic)
-  const derivedProfile = useMemo(() => {
-    return deriveUserProfile({
-      personalInfo,
-      prakritiAnswers,
-      lifestyleAnswers,
-      dietAnswers,
-      symptomAnswers,
-      primaryConcern
-    });
-  }, [
-    personalInfo,
-    prakritiAnswers,
-    lifestyleAnswers,
-    dietAnswers,
-    symptomAnswers,
-    primaryConcern
-  ]);
-
-  // Normalized ML/RAG export payload
-  const getExportPayload = () => {
-    return exportAssessmentPayload({
-      personalInfo,
-      prakritiAnswers,
-      lifestyleAnswers,
-      dietAnswers,
-      symptomAnswers,
-      primaryConcern,
-      completedSteps
-    });
->>>>>>> 5b171fb (phase 3)
   };
 
   return (
@@ -627,26 +535,6 @@ export const AssessmentProvider = ({ children }) => {
         prakritiAnswers,
         setPrakritiAnswer,
         resetPrakritiAnswers,
-<<<<<<< HEAD
-        lifestyleAnswers,
-        setLifestyleAnswer,
-        resetLifestyleAnswers,
-        dietAnswers,
-        setDietAnswer,
-        resetDietAnswers,
-        symptomAnswers,
-        addSymptom,
-        removeSymptom,
-        updateSymptomDetail,
-        setPrimaryConcern,
-        setAdditionalNotes,
-        resetSymptomAnswers,
-        reviewConsent,
-        setReviewConsent,
-        analysisResult,
-        setAnalysisResult,
-        triggerAnalysisGeneration,
-=======
 
         // Lifestyle
         lifestyleAnswers,
@@ -662,29 +550,36 @@ export const AssessmentProvider = ({ children }) => {
 
         // Symptoms
         symptomAnswers,
+        addSymptom,
+        removeSymptom,
+        updateSymptomDetail,
+        setPrimaryConcern,
+        setAdditionalNotes,
         setSymptomAnswer,
         removeSymptomAnswer,
         resetSymptomAnswers,
-        primaryConcern,
-        setPrimaryConcern,
+        primaryConcern: symptomAnswers.primaryConcern,
 
         // Flow & Navigation
->>>>>>> 5b171fb (phase 3)
         currentStep,
         setCurrentStep,
         completedSteps,
         markStepCompleted,
-<<<<<<< HEAD
-        resetAllAssessment,
-        loadDemoPreset
-=======
+
+        // Review & Analysis
+        reviewConsent,
+        setReviewConsent,
+        analysisResult,
+        setAnalysisResult,
+        triggerAnalysisGeneration,
 
         // Resilience & Derivations
+        resetAllAssessment,
         resetAllAssessments,
+        loadDemoPreset,
         hasSavedProgress,
         derivedProfile,
         getExportPayload
->>>>>>> 5b171fb (phase 3)
       }}
     >
       {children}

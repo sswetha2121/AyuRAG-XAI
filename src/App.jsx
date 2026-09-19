@@ -1,192 +1,461 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation, useParams } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { AssessmentProvider, useAssessment } from './context/AssessmentContext';
 import { AppShell } from './components/layout/AppShell';
+
+// Assessment & Patient Pages
 import { DesignSystemPage } from './pages/DesignSystemPage';
 import { PersonalInfoPage } from './pages/PersonalInfoPage';
 import { PrakritiAssessmentPage } from './pages/PrakritiAssessmentPage';
 import { LifestyleAssessmentPage } from './pages/LifestyleAssessmentPage';
 import { DietAssessmentPage } from './pages/DietAssessmentPage';
 import { SymptomsAssessmentPage } from './pages/SymptomsAssessmentPage';
-<<<<<<< HEAD
 import { ReviewPage } from './pages/ReviewPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { AnalysisLoadingModal } from './components/dashboard';
-=======
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, Button, Badge } from './components/ui';
-import {
-  Sparkles,
-  ArrowRight,
-  ShieldCheck,
-  Layers,
-  Brain,
-  Lock,
-  CheckCircle2,
-  User,
-  Activity,
-  HeartPulse,
-  Utensils,
-  Stethoscope,
-  RotateCcw
-} from 'lucide-react';
 
-/**
- * Workflow Placeholder for Remaining Phases (Review & Dashboard)
- */
-const WorkflowPlaceholder = ({
-  stepId,
-  onNavigateStep,
-  onOpenDesignSystem
-}) => {
-  const stepMeta = {
-    'review': {
-      title: '06. Clinical Input Review & Data Verification',
-      desc: 'Comprehensive multi-domain summary aggregating Personal Info, Prakriti, Lifestyle, Diet, and Symptoms before XAI inference.',
-      phase: 'Phase 5 Milestone',
-      readyMsg: 'All primary clinical intake modules (Phases 01–05) are recorded and persisted. Review aggregation will synthesize these features.'
-    },
-    'dashboard': {
-      title: '07. AI Decision Support & XAI Dashboard',
-      desc: 'Explainable AI predictions with SHAP constitutional feature rankings, LIME local factors, and RAG-grounded classical Ayurvedic literature citations.',
-      phase: 'Phase 6 Module',
-      readyMsg: 'Explainable AI inference dashboard is the final milestone in the AyuRAG pipeline.'
+// Doctor Pages
+import { DoctorDashboardPage } from './pages/DoctorDashboardPage';
+import { DoctorPatientsPage } from './pages/DoctorPatientsPage';
+import { DoctorPatientProfilePage } from './pages/DoctorPatientProfilePage';
+import { DoctorReviewsPage } from './pages/DoctorReviewsPage';
+import { DoctorReportsPage } from './pages/DoctorReportsPage';
+import { LoginPage } from './pages/LoginPage';
+
+// Protected Route Guard for Doctor
+function DoctorProtectedRoute({ children, onTriggerToast }) {
+  const { user, role, isAuthenticated, isLoading } = useAuth();
+  const location = useLocation();
+
+  if (isLoading) {
+    return (
+      <div className="ayur-loading-screen">
+        <div className="ayur-spinner-mini" />
+        <span>Verifying clinical authorization...</span>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  if (role !== 'DOCTOR') {
+    onTriggerToast?.({
+      type: 'warning',
+      title: 'Access Restricted',
+      message: 'Doctor Dashboard is accessible ONLY to authenticated DOCTOR accounts.',
+    });
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+}
+
+// Doctor Workspace Shell Wrapper
+function DoctorWorkspaceShell({ onTriggerToast, toasts, removeToast }) {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const path = location.pathname;
+
+  // Determine active doctor step from URL path
+  const getActiveStep = () => {
+    if (path.includes('/doctor/patients/')) return 'doctor-patients';
+    if (path.startsWith('/doctor/patients')) return 'doctor-patients';
+    if (path.startsWith('/doctor/reviews')) return 'doctor-reviews';
+    if (path.startsWith('/doctor/reports')) return 'doctor-reports';
+    if (path.startsWith('/doctor/ai-analysis')) return 'doctor-ai-analysis';
+    if (path.startsWith('/doctor/recommendations')) return 'doctor-recommendations';
+    if (path.startsWith('/doctor/knowledge-base')) return 'doctor-knowledge-base';
+    return 'doctor-dashboard';
+  };
+
+  const getHeaderInfo = () => {
+    if (path.includes('/doctor/patients/')) {
+      return {
+        title: 'Clinical Patient Profile & AI Attribution',
+        subtitle: 'Prakriti, multi-domain lifestyle, SHAP/LIME, and classical RAG knowledge',
+        breadcrumbs: ['Doctor Workspace', 'Patients', 'Profile'],
+      };
     }
-  }[stepId] || {
-    title: 'Clinical Assessment Pipeline',
-    desc: 'Assessment module in AyuRAG-XAI architecture.',
-    phase: 'Assessment Pipeline',
-    readyMsg: 'Clinical data intake pipeline.'
+    if (path.startsWith('/doctor/patients')) {
+      return {
+        title: 'Patient Intake & Assessment Cohort',
+        subtitle: 'Searchable registry of patient constitutional profiles & diagnostic records',
+        breadcrumbs: ['Doctor Workspace', 'Patients Cohort'],
+      };
+    }
+    if (path.startsWith('/doctor/reviews')) {
+      return {
+        title: 'Clinical Review & Validation Queue',
+        subtitle: 'Independent physician review of completed patient assessments',
+        breadcrumbs: ['Doctor Workspace', 'Clinical Reviews'],
+      };
+    }
+    if (path.startsWith('/doctor/reports')) {
+      return {
+        title: 'Clinical Assessment Reports & Audit Registry',
+        subtitle: 'Standardized multi-domain Ayurvedic dossiers & physician signatures',
+        breadcrumbs: ['Doctor Workspace', 'Reports & Audit'],
+      };
+    }
+    return {
+      title: 'Doctor Decision Support Dashboard',
+      subtitle: 'Clinical Overview, Diagnostic Queue & Cohort Metrics',
+      breadcrumbs: ['Doctor Workspace', 'Dashboard'],
+    };
+  };
+
+  const { title, subtitle, breadcrumbs } = getHeaderInfo();
+
+  const handleSelectDoctorStep = (stepId) => {
+    switch (stepId) {
+      case 'doctor-dashboard':
+        navigate('/doctor/dashboard');
+        break;
+      case 'doctor-patients':
+      case 'all-patients':
+      case 'active-assessments':
+      case 'completed-assessments':
+        navigate('/doctor/patients');
+        break;
+      case 'doctor-reviews':
+        navigate('/doctor/reviews');
+        break;
+      case 'doctor-reports':
+        navigate('/doctor/reports');
+        break;
+      case 'doctor-ai-analysis':
+      case 'ai-ml-analysis':
+      case 'ai-shap':
+      case 'ai-lime':
+      case 'ai-rag-evidence':
+        navigate('/doctor/patients/1'); // Open lead patient analysis
+        break;
+      case 'doctor-recommendations':
+      case 'doctor-knowledge-base':
+        navigate('/doctor/reports');
+        break;
+      case 'doctor-profile':
+      case 'doctor-settings':
+        onTriggerToast?.({
+          type: 'info',
+          title: 'Physician Profile',
+          message: `${user?.name || 'Dr. A. Sharma'} • Ayurvedic Clinical Lead`,
+        });
+        break;
+      default:
+        navigate('/doctor/dashboard');
+    }
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    onTriggerToast?.({
+      type: 'info',
+      title: 'Signed Out',
+      message: 'You have been safely signed out.',
+    });
+    navigate('/login');
   };
 
   return (
-    <div className="ayur-placeholder-view">
-      <Card variant="highlighted" className="ayur-placeholder-card">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <Badge color="accent" variant="solid" icon={<Lock size={12} />}>
-              {stepMeta.phase}
-            </Badge>
-            <Badge color="primary" variant="subtle">AyuRAG-XAI Pipeline</Badge>
-          </div>
-          <CardTitle as="h2">{stepMeta.title}</CardTitle>
-          <CardDescription>{stepMeta.desc}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="ayur-placeholder-box">
-            <Brain size={48} className="text-secondary opacity-75" />
-            <div className="flex flex-col items-center text-center gap-xs">
-              <h4 className="text-h4">Phases 01–05 Data Recorded</h4>
-              <p className="text-body text-muted max-width-md">
-                {stepMeta.readyMsg}
-              </p>
-            </div>
-          </div>
-        </CardContent>
-        <CardFooter>
-          <div className="flex items-center gap-sm flex-wrap">
-            <Button
-              variant="outline"
-              size="sm"
-              leftIcon={<Stethoscope size={15} />}
-              onClick={() => onNavigateStep('symptoms')}
-            >
-              Review Symptoms (Step 05)
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              leftIcon={<Utensils size={15} />}
-              onClick={() => onNavigateStep('diet')}
-            >
-              Review Diet (Step 04)
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              leftIcon={<HeartPulse size={15} />}
-              onClick={() => onNavigateStep('lifestyle')}
-            >
-              Review Lifestyle (Step 03)
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              leftIcon={<Activity size={15} />}
-              onClick={() => onNavigateStep('prakriti')}
-            >
-              Prakriti (Step 02)
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              leftIcon={<User size={15} />}
-              onClick={() => onNavigateStep('personal-info')}
-            >
-              Personal Info (Step 01)
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              leftIcon={<Layers size={15} />}
-              onClick={onOpenDesignSystem}
-            >
-              Design System Showcase
-            </Button>
-          </div>
-        </CardFooter>
-      </Card>
-    </div>
+    <AppShell
+      mode="doctor"
+      activeStep={getActiveStep()}
+      onSelectStep={handleSelectDoctorStep}
+      headerTitle={title}
+      headerSubtitle={subtitle}
+      breadcrumbs={breadcrumbs}
+      toasts={toasts}
+      onCloseToast={removeToast}
+      progressPercent={100}
+      user={user}
+      onLogout={handleLogout}
+    >
+      <Routes>
+        <Route
+          path="dashboard"
+          element={
+            <DoctorDashboardPage
+              user={user}
+              onNavigateToPatient={(id) => navigate(`/doctor/patients/${id}`)}
+              onNavigateToReviews={() => navigate('/doctor/reviews')}
+              onNavigateToReports={() => navigate('/doctor/reports')}
+              onTriggerToast={onTriggerToast}
+            />
+          }
+        />
+        <Route
+          path="patients"
+          element={
+            <DoctorPatientsPage
+              onNavigateToPatient={(id) => navigate(`/doctor/patients/${id}`)}
+              onTriggerToast={onTriggerToast}
+            />
+          }
+        />
+        <Route
+          path="patients/:patientId"
+          element={<DoctorPatientProfileWrapper onTriggerToast={onTriggerToast} />}
+        />
+        <Route
+          path="reviews"
+          element={
+            <DoctorReviewsPage
+              onNavigateToPatient={(id) => navigate(`/doctor/patients/${id}`)}
+              onTriggerToast={onTriggerToast}
+            />
+          }
+        />
+        <Route
+          path="reports"
+          element={
+            <DoctorReportsPage
+              onTriggerToast={onTriggerToast}
+              onNavigateToPatient={(id) => navigate(`/doctor/patients/${id}`)}
+            />
+          }
+        />
+        <Route path="*" element={<Navigate to="/doctor/dashboard" replace />} />
+      </Routes>
+    </AppShell>
   );
-};
->>>>>>> 5b171fb (phase 3)
+}
 
-/**
- * Resume Banner Component
- */
-const ResumeBanner = ({ onContinue, onStartOver }) => {
+function DoctorPatientProfileWrapper({ onTriggerToast }) {
+  const { patientId } = useParams();
+  const navigate = useNavigate();
+
   return (
-    <div className="ayur-resume-banner" role="status">
-      <div className="flex items-center gap-sm">
-        <Sparkles size={16} className="text-accent shrink-0" />
-        <div className="flex flex-col">
-          <span className="font-semibold text-primary text-sm">Welcome back</span>
-          <span className="text-xs text-muted">
-            Your previous assessment progress is saved securely on this device.
-          </span>
-        </div>
-      </div>
-      <div className="flex items-center gap-xs shrink-0">
-        <Button variant="ghost" size="sm" leftIcon={<RotateCcw size={13} />} onClick={onStartOver}>
-          Start Over
-        </Button>
-        <Button variant="primary" size="sm" rightIcon={<ArrowRight size={13} />} onClick={onContinue}>
-          Continue Assessment
-        </Button>
-      </div>
-    </div>
+    <DoctorPatientProfilePage
+      patientId={patientId}
+      onBack={() => navigate('/doctor/patients')}
+      onTriggerToast={onTriggerToast}
+    />
   );
-};
+}
 
-function MainApp() {
+// Patient Assessment Pipeline Flow
+function PatientAssessmentShell({ onTriggerToast, toasts, removeToast }) {
+  const { user, isDoctor, logout } = useAuth();
+  const navigate = useNavigate();
   const {
     currentStep,
     setCurrentStep,
     completedSteps,
-<<<<<<< HEAD
-    triggerAnalysisGeneration
+    triggerAnalysisGeneration,
   } = useAssessment();
 
-  const [toasts, setToasts] = useState([]);
   const [isGeneratingAnalysis, setIsGeneratingAnalysis] = useState(false);
-=======
-    hasSavedProgress,
-    resetAllAssessments,
-    personalInfo
-  } = useAssessment();
 
+  // Header Title & Subtitle Mapping
+  const getHeaderInfo = () => {
+    switch (currentStep) {
+      case 'design-system':
+        return {
+          title: 'Design System & Component Library',
+          subtitle: 'AyuRAG-XAI Production-Ready Frontend Tokens & Architecture',
+          breadcrumbs: ['Design System Showcase'],
+        };
+      case 'personal-info':
+        return {
+          title: 'Step 01: Personal Information',
+          subtitle: 'Baseline Demographics & Physiological Measurements',
+          breadcrumbs: ['Assessment Pipeline', '01 Personal Information'],
+        };
+      case 'prakriti':
+        return {
+          title: 'Step 02: Prakriti Assessment',
+          subtitle: 'Tridosha Constitutional Baseline Evaluation (Vāta • Pitta • Kapha)',
+          breadcrumbs: ['Assessment Pipeline', '02 Prakriti Assessment'],
+        };
+      case 'lifestyle':
+        return {
+          title: 'Step 03: Lifestyle Assessment',
+          subtitle: 'Dinacharya, Circadian Pacing, Physical Activity & Sleep Architecture',
+          breadcrumbs: ['Assessment Pipeline', '03 Lifestyle Assessment'],
+        };
+      case 'diet':
+        return {
+          title: 'Step 04: Dietary Assessment',
+          subtitle: 'Ahara Habits, Agni Digestive Capacity & Taste Profile',
+          breadcrumbs: ['Assessment Pipeline', '04 Dietary Assessment'],
+        };
+      case 'symptoms':
+        return {
+          title: 'Step 05: Symptoms & Health Context',
+          subtitle: 'Clinical Manifestation Mapping & Chief Concern Prioritization',
+          breadcrumbs: ['Assessment Pipeline', '05 Symptoms Context'],
+        };
+      case 'review':
+        return {
+          title: 'Step 06: Clinical Review & Validation',
+          subtitle: 'Pre-Inference Multi-Domain Data Verification & Consent',
+          breadcrumbs: ['Assessment Pipeline', '06 Clinical Review'],
+        };
+      case 'dashboard':
+        return {
+          title: 'Step 07: AI Decision Support & XAI Dashboard',
+          subtitle: 'Explainable AI Predictions, RAG Citations & Personalized Protocols',
+          breadcrumbs: ['Assessment Pipeline', '07 AI Decision Dashboard'],
+        };
+      default:
+        return {
+          title: 'AyuRAG-XAI Clinical Platform',
+          subtitle: 'Ayurvedic Clinical Decision Support System',
+          breadcrumbs: ['Assessment Pipeline', currentStep],
+        };
+    }
+  };
+
+  const { title, subtitle, breadcrumbs } = getHeaderInfo();
+
+  const progressPercent =
+    currentStep === 'design-system' || currentStep === 'dashboard'
+      ? 100
+      : completedSteps.length > 0
+      ? Math.round((completedSteps.length / 6) * 100)
+      : 16;
+
+  const handleStartAnalysisGeneration = () => {
+    setIsGeneratingAnalysis(true);
+  };
+
+  const handleAnalysisCompleted = () => {
+    setIsGeneratingAnalysis(false);
+    triggerAnalysisGeneration();
+    setCurrentStep('dashboard');
+    onTriggerToast({
+      type: 'success',
+      title: 'Inference Complete',
+      message: 'Personalized profile and explainable AI insights generated successfully.',
+    });
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+  };
+
+  return (
+    <AppShell
+      mode="patient"
+      activeStep={currentStep}
+      onSelectStep={setCurrentStep}
+      headerTitle={title}
+      headerSubtitle={subtitle}
+      breadcrumbs={breadcrumbs}
+      toasts={toasts}
+      onCloseToast={removeToast}
+      progressPercent={progressPercent}
+      user={user}
+      onLogout={handleLogout}
+    >
+      {/* If Doctor is visiting patient portal, show quick banner to return to Doctor CDS */}
+      {isDoctor && (
+        <div className="ayur-doctor-portal-banner">
+          <div className="flex items-center gap-xs">
+            <span className="ayur-portal-badge">Attending Physician Mode</span>
+            <span>You are viewing the Patient Assessment Intake Flow.</span>
+          </div>
+          <button
+            type="button"
+            className="ayur-portal-link"
+            onClick={() => navigate('/doctor/dashboard')}
+          >
+            Return to Doctor Dashboard →
+          </button>
+        </div>
+      )}
+
+      {/* Loading Modal for AI Analysis Generation */}
+      <AnalysisLoadingModal
+        isOpen={isGeneratingAnalysis}
+        onComplete={handleAnalysisCompleted}
+      />
+
+      {currentStep === 'design-system' ? (
+        <DesignSystemPage onTriggerToast={onTriggerToast} />
+      ) : currentStep === 'personal-info' ? (
+        <PersonalInfoPage
+          onContinue={() => setCurrentStep('prakriti')}
+          onTriggerToast={onTriggerToast}
+        />
+      ) : currentStep === 'prakriti' ? (
+        <PrakritiAssessmentPage
+          onContinueToNextPhase={() => {
+            onTriggerToast({
+              type: 'info',
+              title: 'Prakriti Assessment Saved',
+              message: 'Proceeding to Step 03: Lifestyle Assessment (Dinacharya).',
+            });
+            setCurrentStep('lifestyle');
+          }}
+          onTriggerToast={onTriggerToast}
+        />
+      ) : currentStep === 'lifestyle' ? (
+        <LifestyleAssessmentPage
+          onContinueToNextPhase={() => {
+            onTriggerToast({
+              type: 'info',
+              title: 'Lifestyle Assessment Saved',
+              message: 'Proceeding to Step 04: Dietary Assessment (Ahara & Agni).',
+            });
+            setCurrentStep('diet');
+          }}
+          onBackToPreviousPhase={() => setCurrentStep('prakriti')}
+          onTriggerToast={onTriggerToast}
+        />
+      ) : currentStep === 'diet' ? (
+        <DietAssessmentPage
+          onContinueToNextPhase={() => {
+            onTriggerToast({
+              type: 'info',
+              title: 'Dietary Assessment Saved',
+              message: 'Proceeding to Step 05: Symptoms & Health Context.',
+            });
+            setCurrentStep('symptoms');
+          }}
+          onBackToPreviousPhase={() => setCurrentStep('lifestyle')}
+          onTriggerToast={onTriggerToast}
+        />
+      ) : currentStep === 'symptoms' ? (
+        <SymptomsAssessmentPage
+          onContinueToNextPhase={() => {
+            onTriggerToast({
+              type: 'info',
+              title: 'Health Context Saved',
+              message: 'Proceeding to Step 06: Clinical Review & Validation.',
+            });
+            setCurrentStep('review');
+          }}
+          onBackToPreviousPhase={() => setCurrentStep('diet')}
+          onTriggerToast={onTriggerToast}
+        />
+      ) : currentStep === 'review' ? (
+        <ReviewPage
+          onEditStep={(stepId) => setCurrentStep(stepId)}
+          onGenerateAnalysis={handleStartAnalysisGeneration}
+          onTriggerToast={onTriggerToast}
+        />
+      ) : currentStep === 'dashboard' ? (
+        <DashboardPage
+          onStartAssessment={() => setCurrentStep('personal-info')}
+          onReevaluate={() => setCurrentStep('review')}
+          onTriggerToast={onTriggerToast}
+        />
+      ) : null}
+    </AppShell>
+  );
+}
+
+function MainApp() {
   const [toasts, setToasts] = useState([]);
-  const [showResumeBanner, setShowResumeBanner] = useState(() => hasSavedProgress && completedSteps.length > 0);
->>>>>>> 5b171fb (phase 3)
+  const navigate = useNavigate();
 
   const addToast = (toast) => {
     const id = `toast-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
@@ -201,292 +470,62 @@ function MainApp() {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
-  // Header Title & Subtitle Mapping
-  const getHeaderInfo = () => {
-    switch (currentStep) {
-      case 'design-system':
-        return {
-          title: 'Design System & Component Library',
-          subtitle: 'AyuRAG-XAI Production-Ready Frontend Tokens & Architecture',
-          breadcrumbs: ['Design System Showcase']
-        };
-      case 'personal-info':
-        return {
-          title: 'Step 01: Personal Information',
-          subtitle: 'Baseline Demographics & Physiological Measurements',
-          breadcrumbs: ['Assessment Pipeline', '01 Personal Information']
-        };
-      case 'prakriti':
-        return {
-          title: 'Step 02: Prakriti Assessment',
-          subtitle: 'Tridosha Constitutional Baseline Evaluation (Vāta • Pitta • Kapha)',
-          breadcrumbs: ['Assessment Pipeline', '02 Prakriti Assessment']
-        };
-      case 'lifestyle':
-        return {
-          title: 'Step 03: Lifestyle Assessment',
-<<<<<<< HEAD
-          subtitle: 'Dinacharya, Circadian Pacing, Physical Activity & Sleep Architecture',
-=======
-          subtitle: 'Dinacharya Circadian Discipline, Sleep Quality & Stress Load',
->>>>>>> 5b171fb (phase 3)
-          breadcrumbs: ['Assessment Pipeline', '03 Lifestyle Assessment']
-        };
-      case 'diet':
-        return {
-          title: 'Step 04: Dietary Assessment',
-<<<<<<< HEAD
-          subtitle: 'Ahara Habits, Agni Digestive Capacity & Taste Profile',
-=======
-          subtitle: 'Ahara Habits, Digestive Capacity (Agni) & Taste Preferences',
->>>>>>> 5b171fb (phase 3)
-          breadcrumbs: ['Assessment Pipeline', '04 Dietary Assessment']
-        };
-      case 'symptoms':
-        return {
-          title: 'Step 05: Symptoms & Health Context',
-<<<<<<< HEAD
-          subtitle: 'Clinical Manifestation Mapping & Chief Concern Prioritization',
-          breadcrumbs: ['Assessment Pipeline', '05 Symptoms Context']
-        };
-      case 'review':
-        return {
-          title: 'Step 06: Clinical Review & Validation',
-          subtitle: 'Pre-Inference Multi-Domain Data Verification & Consent',
-          breadcrumbs: ['Assessment Pipeline', '06 Clinical Review']
-        };
-      case 'dashboard':
-        return {
-          title: 'Step 07: AI Decision Support & XAI Dashboard',
-          subtitle: 'Explainable AI Predictions, RAG Citations & Personalized Protocols',
-          breadcrumbs: ['Assessment Pipeline', '07 AI Decision Dashboard']
-        };
-      default:
-        return {
-          title: 'AyuRAG-XAI Clinical Platform',
-          subtitle: 'Ayurvedic Clinical Decision Support System',
-          breadcrumbs: ['Assessment Pipeline', currentStep]
-=======
-          subtitle: 'Structured Chief Complaint Intake & Priority Wellness Focus',
-          breadcrumbs: ['Assessment Pipeline', '05 Symptoms Intake']
-        };
-      case 'review':
-        return {
-          title: 'Step 06: Clinical Input Review',
-          subtitle: 'Multi-Domain Clinical Synthesis & Pre-Inference Verification',
-          breadcrumbs: ['Assessment Pipeline', '06 Clinical Review']
-        };
-      default:
-        return {
-          title: `Workflow: ${currentStep.replace('-', ' ').toUpperCase()}`,
-          subtitle: 'Ayurvedic Clinical Decision Support Pipeline',
-          breadcrumbs: ['Assessment Pipeline', currentStep.replace('-', ' ')]
->>>>>>> 5b171fb (phase 3)
-        };
-    }
-  };
-
-  const { title, subtitle, breadcrumbs } = getHeaderInfo();
-
-<<<<<<< HEAD
-  // Calculate overall assessment progress percentage (0 - 100%)
-  const progressPercent = currentStep === 'design-system' || currentStep === 'dashboard'
-    ? 100
-    : completedSteps.length > 0
-    ? Math.round((completedSteps.length / 6) * 100)
-    : 16;
-
-  // Handle Triggering the Analysis Pipeline
-  const handleStartAnalysisGeneration = () => {
-    setIsGeneratingAnalysis(true);
-  };
-
-  const handleAnalysisCompleted = () => {
-    setIsGeneratingAnalysis(false);
-    triggerAnalysisGeneration();
-    setCurrentStep('dashboard');
-    addToast({
-      type: 'success',
-      title: 'Inference Complete',
-      message: 'Personalized profile and explainable AI insights generated successfully.'
-    });
-=======
-  // Dynamic pipeline progress across 6 core clinical steps
-  const totalPipelineSteps = 6;
-  const progressPercent =
-    currentStep === 'design-system'
-      ? 100
-      : Math.min(100, Math.round((completedSteps.length / totalPipelineSteps) * 100));
-
-  const handleStartOver = () => {
-    if (window.confirm('Are you sure you want to reset all saved assessment progress and start over?')) {
-      resetAllAssessments();
-      setShowResumeBanner(false);
-      addToast({
-        type: 'info',
-        title: 'Assessment Cleared',
-        message: 'All local assessment data has been reset.'
-      });
-    }
-  };
-
-  const handleResumeContinue = () => {
-    setShowResumeBanner(false);
-    // Jump to the latest incomplete step
-    const stepsInOrder = ['personal-info', 'prakriti', 'lifestyle', 'diet', 'symptoms', 'review'];
-    const nextStep = stepsInOrder.find((s) => !completedSteps.includes(s)) || 'review';
-    setCurrentStep(nextStep);
->>>>>>> 5b171fb (phase 3)
-  };
-
   return (
-    <AppShell
-      activeStep={currentStep}
-      onSelectStep={setCurrentStep}
-      headerTitle={title}
-      headerSubtitle={subtitle}
-      breadcrumbs={breadcrumbs}
-      toasts={toasts}
-      onCloseToast={removeToast}
-      progressPercent={progressPercent}
-    >
-<<<<<<< HEAD
-      {/* Loading Modal for AI Analysis Generation */}
-      <AnalysisLoadingModal
-        isOpen={isGeneratingAnalysis}
-        onComplete={handleAnalysisCompleted}
+    <Routes>
+      {/* Login Gateway */}
+      <Route
+        path="/login"
+        element={
+          <LoginPage
+            onLoginSuccess={(user) => {
+              if (user.role === 'DOCTOR') {
+                navigate('/doctor/dashboard');
+              } else {
+                navigate('/');
+              }
+            }}
+            onTriggerToast={addToast}
+          />
+        }
       />
-=======
-      {/* Resume Assessment Banner */}
-      {showResumeBanner && currentStep === 'personal-info' && (
-        <ResumeBanner
-          onContinue={handleResumeContinue}
-          onStartOver={handleStartOver}
-        />
-      )}
->>>>>>> 5b171fb (phase 3)
 
-      {currentStep === 'design-system' ? (
-        <DesignSystemPage onTriggerToast={addToast} />
-      ) : currentStep === 'personal-info' ? (
-        <PersonalInfoPage
-          onContinue={() => setCurrentStep('prakriti')}
-          onTriggerToast={addToast}
-        />
-      ) : currentStep === 'prakriti' ? (
-        <PrakritiAssessmentPage
-          onContinueToNextPhase={() => {
-            addToast({
-              type: 'info',
-              title: 'Prakriti Assessment Saved',
-<<<<<<< HEAD
-              message: 'Proceeding to Step 03: Lifestyle Assessment (Dinacharya).'
-=======
-              message: 'Phase 02 completed. Proceeding to Lifestyle Assessment (Phase 03).'
->>>>>>> 5b171fb (phase 3)
-            });
-            setCurrentStep('lifestyle');
-          }}
-          onTriggerToast={addToast}
-        />
-      ) : currentStep === 'lifestyle' ? (
-        <LifestyleAssessmentPage
-          onContinueToNextPhase={() => {
-            addToast({
-              type: 'info',
-              title: 'Lifestyle Assessment Saved',
-<<<<<<< HEAD
-              message: 'Proceeding to Step 04: Dietary Assessment (Ahara & Agni).'
-            });
-            setCurrentStep('diet');
-          }}
-          onTriggerToast={addToast}
-=======
-              message: 'Phase 03 completed. Proceeding to Dietary Assessment (Phase 04).'
-            });
-            setCurrentStep('diet');
-          }}
-          onBackToPreviousPhase={() => setCurrentStep('prakriti')}
-          onTriggerToast={addToast}
-        />
-      ) : currentStep === 'diet' ? (
-        <DietAssessmentPage
-          onContinueToNextPhase={() => {
-            addToast({
-              type: 'info',
-              title: 'Dietary Assessment Saved',
-              message: 'Phase 04 completed. Proceeding to Symptoms Intake (Phase 05).'
-            });
-            setCurrentStep('symptoms');
-          }}
-          onBackToPreviousPhase={() => setCurrentStep('lifestyle')}
-          onTriggerToast={addToast}
-        />
-      ) : currentStep === 'symptoms' ? (
-        <SymptomsAssessmentPage
-          onContinueToNextPhase={() => {
-            addToast({
-              type: 'success',
-              title: 'Health Context Recorded',
-              message: 'Phase 05 completed. Proceeding to Clinical Review.'
-            });
-            setCurrentStep('review');
-          }}
-          onBackToPreviousPhase={() => setCurrentStep('diet')}
-          onTriggerToast={addToast}
-        />
-      ) : (
-        <WorkflowPlaceholder
-          stepId={currentStep}
-          onNavigateStep={(step) => setCurrentStep(step)}
-          onOpenDesignSystem={() => setCurrentStep('design-system')}
->>>>>>> 5b171fb (phase 3)
-        />
-      ) : currentStep === 'diet' ? (
-        <DietAssessmentPage
-          onContinueToNextPhase={() => {
-            addToast({
-              type: 'info',
-              title: 'Dietary Assessment Saved',
-              message: 'Proceeding to Step 05: Symptoms & Health Context.'
-            });
-            setCurrentStep('symptoms');
-          }}
-          onTriggerToast={addToast}
-        />
-      ) : currentStep === 'symptoms' ? (
-        <SymptomsAssessmentPage
-          onContinueToNextPhase={() => {
-            addToast({
-              type: 'info',
-              title: 'Health Context Saved',
-              message: 'Proceeding to Step 06: Clinical Review & Validation.'
-            });
-            setCurrentStep('review');
-          }}
-          onTriggerToast={addToast}
-        />
-      ) : currentStep === 'review' ? (
-        <ReviewPage
-          onEditStep={(stepId) => setCurrentStep(stepId)}
-          onGenerateAnalysis={handleStartAnalysisGeneration}
-          onTriggerToast={addToast}
-        />
-      ) : currentStep === 'dashboard' ? (
-        <DashboardPage
-          onStartAssessment={() => setCurrentStep('personal-info')}
-          onReevaluate={() => setCurrentStep('review')}
-          onTriggerToast={addToast}
-        />
-      ) : null}
-    </AppShell>
+      {/* Protected Doctor Clinical Dashboard */}
+      <Route
+        path="/doctor/*"
+        element={
+          <DoctorProtectedRoute onTriggerToast={addToast}>
+            <DoctorWorkspaceShell
+              onTriggerToast={addToast}
+              toasts={toasts}
+              removeToast={removeToast}
+            />
+          </DoctorProtectedRoute>
+        }
+      />
+
+      {/* Patient Assessment & Workflow Routes */}
+      <Route
+        path="/*"
+        element={
+          <PatientAssessmentShell
+            onTriggerToast={addToast}
+            toasts={toasts}
+            removeToast={removeToast}
+          />
+        }
+      />
+    </Routes>
   );
 }
 
 export default function App() {
   return (
-    <AssessmentProvider>
-      <MainApp />
-    </AssessmentProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <AssessmentProvider>
+          <MainApp />
+        </AssessmentProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }

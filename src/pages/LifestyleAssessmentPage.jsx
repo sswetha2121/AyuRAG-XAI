@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import './LifestyleAssessmentPage.css';
 import { useAssessment } from '../context/AssessmentContext';
@@ -14,33 +13,13 @@ import { QuestionNavigator } from '../components/prakriti/QuestionNavigator';
 import { Button, Badge, ProgressBar } from '../components/ui';
 import { ArrowLeft, ArrowRight, Sparkles, RotateCcw, HelpCircle, CheckCircle2, ShieldCheck } from 'lucide-react';
 
-export const LifestyleAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }) => {
+export const LifestyleAssessmentPage = ({ onContinueToNextPhase, onBackToPreviousPhase, onTriggerToast }) => {
   const {
     personalInfo,
-=======
-import React from 'react';
-import { useAssessment } from '../context/AssessmentContext';
-import { AssessmentEngine } from '../components/assessment';
-import { LIFESTYLE_SECTIONS, LIFESTYLE_QUESTIONS } from '../data/lifestyleQuestions';
-import { calculateLifestyleIndicators } from '../utils/assessmentDerivations';
-import { getLifestyleMicrocopy } from '../utils/personalization';
-
-/**
- * AyuRAG-XAI Lifestyle Assessment Page (Phase 03)
- * Data-driven Dinacharya & Routine evaluation.
- */
-export const LifestyleAssessmentPage = ({
-  onContinueToNextPhase,
-  onBackToPreviousPhase,
-  onTriggerToast
-}) => {
-  const {
->>>>>>> 5b171fb (phase 3)
     lifestyleAnswers,
     setLifestyleAnswer,
     resetLifestyleAnswers,
     markStepCompleted,
-<<<<<<< HEAD
     completedSteps
   } = useAssessment();
 
@@ -180,7 +159,8 @@ export const LifestyleAssessmentPage = ({
   }).map((cat) => cat.id);
 
   const activeCategory = currentQuestion ? currentQuestion.categoryId : 'routine';
-  const localProgressPct = Math.round(((currentIndex + 1) / LIFESTYLE_QUESTIONS.length) * 100);
+  const answeredQuestionsCount = LIFESTYLE_QUESTIONS.filter((q) => isAnswerValid(q, lifestyleAnswers[q.id])).length;
+  const localProgressPct = Math.round((answeredQuestionsCount / LIFESTYLE_QUESTIONS.length) * 100);
 
   return (
     <div className="ayur-lifestyle-page">
@@ -232,8 +212,8 @@ export const LifestyleAssessmentPage = ({
           </div>
 
           <div className="ayur-lifestyle-header__progress">
-            <span className="text-caption text-muted font-medium">Pipeline Progress (Step 3/6)</span>
-            <ProgressBar value={50} color="accent" size="sm" showValue />
+            <span className="text-caption text-muted font-medium">Lifestyle Progress ({answeredQuestionsCount}/{LIFESTYLE_QUESTIONS.length})</span>
+            <ProgressBar value={localProgressPct} color="accent" size="sm" showValue />
           </div>
         </div>
 
@@ -357,53 +337,13 @@ export const LifestyleAssessmentPage = ({
           <div className="ayur-lifestyle-side-col">
             <LifestyleSummary
               totalQuestions={LIFESTYLE_QUESTIONS.length}
-              answeredCount={answeredCount}
+              answeredCount={answeredQuestionsCount}
               answers={lifestyleAnswers}
               patientName={personalInfo.fullName}
             />
           </div>
         </div>
       )}
-=======
-    prakritiAnswers,
-    personalInfo
-  } = useAssessment();
-
-  // 1. Personalized dynamic microcopy reacting to Prakriti and demographics
-  const microcopy = getLifestyleMicrocopy({ prakritiAnswers, personalInfo });
-
-  // 2. Real-time profile indicators
-  const indicators = calculateLifestyleIndicators(lifestyleAnswers);
-
-  const handleComplete = () => {
-    markStepCompleted('lifestyle');
-    onTriggerToast?.({
-      type: 'success',
-      title: 'Lifestyle Assessment Complete',
-      message: 'Dinacharya and routine profile indicators saved in session memory.'
-    });
-    onContinueToNextPhase?.();
-  };
-
-  return (
-    <div className="ayur-lifestyle-page-wrapper">
-      <AssessmentEngine
-        domainName="Lifestyle"
-        domainTitle="03. Lifestyle Assessment (Dinacharya)"
-        sections={LIFESTYLE_SECTIONS}
-        questions={LIFESTYLE_QUESTIONS}
-        answers={lifestyleAnswers}
-        onAnswerChange={setLifestyleAnswer}
-        onComplete={handleComplete}
-        onBack={onBackToPreviousPhase}
-        onReset={resetLifestyleAnswers}
-        headerMeta={microcopy}
-        indicators={indicators}
-        patientName={personalInfo.fullName}
-        guidanceMap={microcopy.sectionGuidance}
-        onTriggerToast={onTriggerToast}
-      />
->>>>>>> 5b171fb (phase 3)
     </div>
   );
 };

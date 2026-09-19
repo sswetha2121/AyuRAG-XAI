@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useMemo } from 'react';
 import './SymptomsAssessmentPage.css';
 import { useAssessment } from '../context/AssessmentContext';
@@ -14,7 +13,7 @@ import {
 import { Button, Badge, ProgressBar } from '../components/ui';
 import { ArrowLeft, ArrowRight, Sparkles, Plus, CheckCircle2, RotateCcw } from 'lucide-react';
 
-export const SymptomsAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }) => {
+export const SymptomsAssessmentPage = ({ onContinueToNextPhase, onBackToPreviousPhase, onTriggerToast }) => {
   const {
     personalInfo,
     symptomAnswers,
@@ -59,130 +58,20 @@ export const SymptomsAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }
         type: 'info',
         title: 'Symptom Added',
         message: `${sym.name} added to your health context.`
-=======
-import React, { useState } from 'react';
-import { useAssessment } from '../context/AssessmentContext';
-import {
-  MedicalDisclaimer,
-  PrimaryConcernSelector,
-  SymptomSearch,
-  SymptomChipList,
-  SymptomDetailModal
-} from '../components/symptoms';
-import { Button, Badge } from '../components/ui';
-import { SYMPTOM_TAXONOMY } from '../data/symptomQuestions';
-import { getSymptomsMicrocopy } from '../utils/personalization';
-import { ArrowLeft, ArrowRight, RotateCcw, CheckCircle2, Sparkles, Stethoscope, AlertCircle } from 'lucide-react';
-
-/**
- * AyuRAG-XAI Symptoms & Health Context Page (Phase 05)
- * Structured health-context intake with searchable taxonomy,
- * detail specification (severity, frequency, duration, impact), and primary concern selection.
- */
-export const SymptomsAssessmentPage = ({
-  onContinueToNextPhase,
-  onBackToPreviousPhase,
-  onTriggerToast
-}) => {
-  const {
-    symptomAnswers,
-    setSymptomAnswer,
-    removeSymptomAnswer,
-    resetSymptomAnswers,
-    primaryConcern,
-    setPrimaryConcern,
-    markStepCompleted,
-    dietAnswers,
-    lifestyleAnswers,
-    personalInfo
-  } = useAssessment();
-
-  const [activeModalSymptom, setActiveModalSymptom] = useState(null);
-  const [validationError, setValidationError] = useState('');
-
-  // 1. Personalized dynamic microcopy based on prior diet & lifestyle answers
-  const microcopy = getSymptomsMicrocopy({ dietAnswers, lifestyleAnswers });
-
-  // Selected symptom IDs
-  const selectedSymptomIds = Object.keys(symptomAnswers);
-
-  // Toggle symptom addition / removal or open detail modal
-  const handleToggleSymptom = (symptom) => {
-    setValidationError('');
-    if (selectedSymptomIds.includes(symptom.id)) {
-      // If already added, clicking opens detail editor
-      setActiveModalSymptom(symptom);
-    } else {
-      // Add with default details and open modal to let user configure
-      setSymptomAnswer(symptom.id, {
-        severity: 'mild',
-        frequency: 'sometimes',
-        duration: '1_4_weeks',
-        impact: 'minimal'
-      });
-      setActiveModalSymptom(symptom);
-    }
-  };
-
-  const handleEditSymptom = (symptomId) => {
-    const symptomDef = SYMPTOM_TAXONOMY.find((s) => s.id === symptomId);
-    if (symptomDef) {
-      setActiveModalSymptom(symptomDef);
-    }
-  };
-
-  const handleSaveDetails = (symptomId, details) => {
-    setSymptomAnswer(symptomId, details);
-    onTriggerToast?.({
-      type: 'info',
-      title: 'Details Saved',
-      message: 'Symptom severity and impact updated.'
-    });
-  };
-
-  const handleReset = () => {
-    if (window.confirm('Clear all reported symptoms and health concerns?')) {
-      resetSymptomAnswers();
-      setPrimaryConcern(null);
-      setValidationError('');
-      onTriggerToast?.({
-        type: 'info',
-        title: 'Intake Reset',
-        message: 'Reported symptoms cleared.'
->>>>>>> 5b171fb (phase 3)
       });
     }
   };
 
   const handleContinue = () => {
-<<<<<<< HEAD
     markStepCompleted('symptoms');
     onTriggerToast?.({
       type: 'success',
       title: 'Health Context Saved',
       message: `${selectedSymptoms.length} symptoms and primary focus registered for review.`
-=======
-    if (!primaryConcern && selectedSymptomIds.length === 0) {
-      setValidationError('Please select a primary area of focus or at least one symptom to complete the intake.');
-      onTriggerToast?.({
-        type: 'warning',
-        title: 'Selection Recommended',
-        message: 'Please choose your primary wellness goal or record any symptoms.'
-      });
-      return;
-    }
-
-    markStepCompleted('symptoms');
-    onTriggerToast?.({
-      type: 'success',
-      title: 'Symptoms Intake Complete',
-      message: 'Clinical context saved. Proceeding to Clinical Review.'
->>>>>>> 5b171fb (phase 3)
     });
     onContinueToNextPhase?.();
   };
 
-<<<<<<< HEAD
   const handleReset = () => {
     if (window.confirm('Clear all recorded symptoms and chief concerns?')) {
       resetSymptomAnswers();
@@ -326,7 +215,7 @@ export const SymptomsAssessmentPage = ({
             <Button
               variant="outline"
               leftIcon={<ArrowLeft size={16} />}
-              onClick={() => onTriggerToast?.({ type: 'info', title: 'Navigation', message: 'Use sidebar or review to move back' })}
+              onClick={onBackToPreviousPhase || (() => onTriggerToast?.({ type: 'info', title: 'Navigation', message: 'Use sidebar or review to move back' }))}
             >
               Back to Diet
             </Button>
@@ -360,110 +249,6 @@ export const SymptomsAssessmentPage = ({
             primaryConcern={symptomAnswers.primaryConcern}
             patientName={personalInfo.fullName}
           />
-=======
-  return (
-    <div className="ayur-symptoms-page">
-      {/* Detail Specification Modal */}
-      {activeModalSymptom && (
-        <SymptomDetailModal
-          isOpen={Boolean(activeModalSymptom)}
-          symptom={activeModalSymptom}
-          details={symptomAnswers[activeModalSymptom.id] || {}}
-          onSave={handleSaveDetails}
-          onClose={() => setActiveModalSymptom(null)}
-        />
-      )}
-
-      {/* Header Banner */}
-      <div className="ayur-symptoms-header">
-        <div className="ayur-symptoms-header__meta">
-          <Badge color="accent" variant="subtle" size="md" icon={<Stethoscope size={13} />}>
-            Step 05 of 06
-          </Badge>
-          <Badge color="primary" variant="subtle" size="md">
-            Vikriti & Chief Complaint
-          </Badge>
-        </div>
-
-        <h1 className="ayur-symptoms-header__title">
-          {microcopy.bannerTitle}
-        </h1>
-
-        <p className="ayur-symptoms-header__desc">
-          {microcopy.bannerSubtitle}
-        </p>
-
-        {microcopy.personalizedMessage && (
-          <div className="ayur-header-personal-note">
-            <span className="ayur-header-personal-note__dot" />
-            <span>{microcopy.personalizedMessage}</span>
-          </div>
-        )}
-      </div>
-
-      {/* 1. Clinical Safety Notice */}
-      <MedicalDisclaimer />
-
-      {/* 2. Primary Concern Selection (Chief Complaint) */}
-      <PrimaryConcernSelector
-        selectedConcern={primaryConcern}
-        onSelectConcern={(concernId) => {
-          setPrimaryConcern(concernId);
-          setValidationError('');
-        }}
-      />
-
-      {/* 3. Selected Symptoms Summary List */}
-      <SymptomChipList
-        symptomAnswers={symptomAnswers}
-        onRemoveSymptom={removeSymptomAnswer}
-        onSelectForEdit={handleEditSymptom}
-      />
-
-      {/* 4. Searchable Symptom Taxonomy */}
-      <SymptomSearch
-        selectedSymptomIds={selectedSymptomIds}
-        onToggleSymptom={handleToggleSymptom}
-      />
-
-      {/* Validation Message */}
-      {validationError && (
-        <div className="ayur-question-error-box mb-lg" role="alert">
-          <AlertCircle size={16} />
-          <span>{validationError}</span>
-        </div>
-      )}
-
-      {/* Bottom Action Bar */}
-      <div className="ayur-symptoms-actions">
-        <Button
-          variant="outline"
-          leftIcon={<ArrowLeft size={16} />}
-          onClick={onBackToPreviousPhase}
-        >
-          Back to Dietary Assessment (Step 04)
-        </Button>
-
-        <div className="flex items-center gap-sm">
-          <Button
-            variant="ghost"
-            size="sm"
-            leftIcon={<RotateCcw size={14} />}
-            onClick={handleReset}
-            title="Reset symptom responses"
-          >
-            Reset
-          </Button>
-
-          <Button
-            variant="primary"
-            size="lg"
-            rightIcon={<ArrowRight size={18} />}
-            onClick={handleContinue}
-          >
-            Continue to Clinical Review (Step 06)
-          </Button>
->>>>>>> 5b171fb (phase 3)
         </div>
       </div>
     </div>

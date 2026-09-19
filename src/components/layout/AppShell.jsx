@@ -17,27 +17,58 @@ export const AppShell = ({
   breadcrumbs = [],
   toasts = [],
   onCloseToast,
-  progressPercent = 15
+  progressPercent = 15,
+  mode = 'patient',
+  user = null,
+  onLogout,
 }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(() => {
+    try {
+      return localStorage.getItem('ayur_sidebar_collapsed') === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  const handleToggleCollapse = () => {
+    setIsCollapsed((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('ayur_sidebar_collapsed', next ? 'true' : 'false');
+      } catch {
+        // ignore localStorage errors
+      }
+      return next;
+    });
+  };
 
   return (
     <div className="ayur-app-shell">
       {/* Sidebar Navigation */}
       <Sidebar
+        mode={mode}
         activeStep={activeStep}
         onSelectStep={onSelectStep}
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
+        isCollapsed={isCollapsed}
+        onToggleCollapse={handleToggleCollapse}
         progressPercent={progressPercent}
+        user={user}
+        onLogout={onLogout}
       />
 
       {/* Main Layout Area */}
-      <div className="ayur-main-wrapper">
+      <div className={`ayur-main-wrapper ${isCollapsed ? 'ayur-main-wrapper--collapsed' : ''}`}>
         <Header
           title={headerTitle || 'Design System Showcase'}
           subtitle={headerSubtitle || 'Phase 1 Reusable Components & Design Tokens'}
           onMenuClick={() => setSidebarOpen(true)}
+          isCollapsed={isCollapsed}
+          onToggleCollapse={handleToggleCollapse}
+          user={user}
+          onLogout={onLogout}
         />
 
         {/* Optional Breadcrumb Navigation */}

@@ -5,10 +5,12 @@
 .ayur-symptoms-page {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
-  max-width: var(--container-max-width);
+  gap: var(--space-md);
+  max-width: 100%;
   margin: 0 auto;
   width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 /* Global Pipeline Track */
@@ -16,10 +18,12 @@
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: 10px 16px;
+  padding: 8px 14px;
   box-shadow: var(--shadow-subtle);
   overflow-x: auto;
   scrollbar-width: none;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .ayur-sym-global-pipeline::-webkit-scrollbar {
@@ -30,84 +34,67 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-xs);
-  min-width: max-content;
+  gap: 8px;
+  width: 100%;
+  min-width: 600px;
 }
 
-.ayur-sym-pipeline-step {
+.ayur-symptoms-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(280px, 25vw, 340px);
+  gap: var(--space-lg);
+  align-items: start;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.ayur-symptoms-main-col {
   display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: var(--font-size-small);
-  color: var(--color-text-placeholder);
-  font-weight: var(--font-weight-medium);
+  flex-direction: column;
+  gap: var(--space-md);
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.ayur-sym-pipeline-step--done {
-  color: var(--color-secondary);
-  font-weight: var(--font-weight-semibold);
+.ayur-symptoms-side-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.ayur-sym-pipeline-step--current {
-  color: var(--color-primary);
-  font-weight: var(--font-weight-bold);
-}
-
-.ayur-sym-pipeline-dot {
-  font-family: var(--font-mono);
-  font-size: 13px;
-}
-
-.ayur-sym-pipeline-step--done .ayur-sym-pipeline-dot {
-  color: var(--color-success);
-}
-
-.ayur-sym-pipeline-step--current .ayur-sym-pipeline-dot {
-  color: var(--color-accent);
-}
-
-.ayur-sym-pipeline-line {
-  height: 2px;
-  flex: 1;
-  min-width: 24px;
-  background-color: var(--color-border-subtle);
-}
-
-.ayur-sym-pipeline-line--done {
-  background-color: var(--color-secondary);
-}
-
-.ayur-sym-pipeline-line--active {
-  background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-accent) 100%);
-}
-
-/* Header */
 .ayur-symptoms-header {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
-  padding: var(--space-xl);
+  padding: var(--space-lg);
   box-shadow: var(--shadow-card);
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
 }
 
 .ayur-symptoms-header__meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-xs);
   flex-wrap: wrap;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
 }
 
 .ayur-symptoms-header__progress {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xs);
-  min-width: 200px;
+  gap: 2px;
+  min-width: 180px;
 }
 
 .ayur-symptoms-header__title {
-  font-size: var(--font-size-h1);
+  font-size: var(--font-size-h2);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
   margin: var(--space-2xs) 0 0 0;
@@ -121,55 +108,41 @@
 }
 
 .ayur-symptoms-header__desc {
-  font-size: var(--font-size-body-lg);
+  font-size: var(--font-size-body);
   color: var(--color-text-secondary);
   line-height: var(--line-height-relaxed);
   margin-top: var(--space-xs);
   max-width: 820px;
 }
 
-/* 2-Column Responsive Layout */
-.ayur-symptoms-layout {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: var(--space-xl);
-  align-items: start;
-}
-
-.ayur-symptoms-main-col {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-}
-
-.ayur-symptoms-side-col {
-  display: flex;
-  flex-direction: column;
-}
-
 /* Selected Symptoms Section */
 .ayur-selected-symptoms-section {
-  background-color: var(--color-surface-muted);
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-subtle);
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-sm);
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .ayur-selected-sym-sec-header {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: var(--space-xs);
   flex-wrap: wrap;
-  gap: var(--space-xs);
+  gap: 6px;
 }
 
 .ayur-selected-sym-sec-title {
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
+  color: var(--color-text-primary);
   margin: 0;
 }
 
@@ -183,30 +156,34 @@
 .ayur-symptom-catalog-section {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-xl);
-  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-subtle);
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-sm);
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .ayur-catalog-sec-header {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: var(--space-xs);
   flex-wrap: wrap;
-  gap: var(--space-xs);
+  gap: 6px;
 }
 
 .ayur-catalog-sec-title {
-  font-size: var(--font-size-h3);
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
   margin: 0;
 }
 
-/* Actions Bar */
+/* Actions */
 .ayur-symptoms-actions {
   display: flex;
   align-items: center;
@@ -218,16 +195,18 @@
   box-shadow: var(--shadow-subtle);
   flex-wrap: wrap;
   gap: var(--space-sm);
+  box-sizing: border-box;
+  width: 100%;
 }
 
-/* Responsive Media Queries */
-@media (max-width: 1080px) {
+@media (max-width: 1150px) {
   .ayur-symptoms-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .ayur-symptoms-side-col {
     order: 2;
+    margin-top: var(--space-sm);
   }
 }
 
@@ -237,7 +216,11 @@
   }
 
   .ayur-symptoms-header__title {
-    font-size: var(--font-size-h2);
+    font-size: var(--font-size-h3);
+  }
+
+  .ayur-symptoms-header__desc {
+    font-size: var(--font-size-small);
   }
 
   .ayur-symptoms-actions {

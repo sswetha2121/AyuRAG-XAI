@@ -1,14 +1,16 @@
 /* ==========================================================================
-   AyuRAG-XAI Lifestyle Assessment Page Styles (Phase 4)
+   AyuRAG-XAI Lifestyle Assessment Page Styles (Phase 4 / Step 03)
    ========================================================================== */
 
 .ayur-lifestyle-page {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
-  max-width: var(--container-max-width);
+  gap: var(--space-md);
+  max-width: 100%;
   margin: 0 auto;
   width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 /* Global Pipeline Track */
@@ -16,10 +18,12 @@
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: 10px 16px;
+  padding: 8px 14px;
   box-shadow: var(--shadow-subtle);
   overflow-x: auto;
   scrollbar-width: none;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .ayur-ls-global-pipeline::-webkit-scrollbar {
@@ -30,8 +34,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-xs);
-  min-width: max-content;
+  gap: 8px;
+  width: 100%;
+  min-width: 600px;
 }
 
 .ayur-ls-pipeline-step {
@@ -41,6 +46,7 @@
   font-size: var(--font-size-small);
   color: var(--color-text-placeholder);
   font-weight: var(--font-weight-medium);
+  white-space: nowrap;
 }
 
 .ayur-ls-pipeline-step--done {
@@ -69,7 +75,7 @@
 .ayur-ls-pipeline-line {
   height: 2px;
   flex: 1;
-  min-width: 24px;
+  min-width: 16px;
   background-color: var(--color-border-subtle);
 }
 
@@ -86,28 +92,31 @@
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
-  padding: var(--space-xl);
+  padding: var(--space-lg);
   box-shadow: var(--shadow-card);
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
 }
 
 .ayur-lifestyle-header__meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-xs);
   flex-wrap: wrap;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
 }
 
 .ayur-lifestyle-header__progress {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xs);
-  min-width: 200px;
+  gap: 2px;
+  min-width: 180px;
 }
 
 .ayur-lifestyle-header__title {
-  font-size: var(--font-size-h1);
+  font-size: var(--font-size-h2);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
   margin: var(--space-2xs) 0 0 0;
@@ -121,7 +130,7 @@
 }
 
 .ayur-lifestyle-header__desc {
-  font-size: var(--font-size-body-lg);
+  font-size: var(--font-size-body);
   color: var(--color-text-secondary);
   line-height: var(--line-height-relaxed);
   margin-top: var(--space-xs);
@@ -131,20 +140,29 @@
 /* 2-Column Responsive Layout */
 .ayur-lifestyle-layout {
   display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: var(--space-xl);
+  grid-template-columns: minmax(0, 1fr) clamp(280px, 25vw, 340px);
+  gap: var(--space-lg);
   align-items: start;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .ayur-lifestyle-main-col {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .ayur-lifestyle-side-col {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Local Question Navigation Container */
@@ -154,6 +172,9 @@
   border-radius: var(--radius-lg);
   padding: var(--space-md);
   box-shadow: var(--shadow-subtle);
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
 }
 
 .ayur-ls-local-progress-header {
@@ -206,6 +227,8 @@
   box-shadow: var(--shadow-subtle);
   flex-wrap: wrap;
   gap: var(--space-sm);
+  box-sizing: border-box;
+  width: 100%;
 }
 
 @keyframes ayur-shake {
@@ -215,13 +238,14 @@
 }
 
 /* Responsive Media Queries */
-@media (max-width: 1080px) {
+@media (max-width: 1150px) {
   .ayur-lifestyle-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .ayur-lifestyle-side-col {
     order: 2;
+    margin-top: var(--space-sm);
   }
 }
 
@@ -231,11 +255,11 @@
   }
 
   .ayur-lifestyle-header__title {
-    font-size: var(--font-size-h2);
+    font-size: var(--font-size-h3);
   }
 
   .ayur-lifestyle-header__desc {
-    font-size: var(--font-size-body);
+    font-size: var(--font-size-small);
   }
 
   .ayur-lifestyle-actions {

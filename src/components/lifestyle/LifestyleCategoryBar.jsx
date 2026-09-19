@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import './LifestyleCategoryBar.css';
-import { Sun, Activity, Moon, Briefcase, HeartPulse, GlassWater, Check } from 'lucide-react';
+import { Sun, Activity, Moon, Briefcase, HeartPulse, GlassWater, Check, ChevronLeft, ChevronRight } from 'lucide-react';
 import { LIFESTYLE_CATEGORIES } from '../../data/lifestyleQuestions';
 
 const ICON_MAP = {
@@ -18,38 +18,81 @@ export const LifestyleCategoryBar = ({
   onSelectCategory,
   className = ''
 }) => {
-  return (
-    <div className={`ayur-lifestyle-cat-bar ${className}`.trim()} role="navigation" aria-label="Lifestyle Categories">
-      <div className="ayur-lifestyle-cat-track">
-        {LIFESTYLE_CATEGORIES.map((cat, idx) => {
-          const Icon = ICON_MAP[cat.icon] || Sun;
-          const isActive = cat.id === activeCategoryId;
-          const isCompleted = completedCategoryIds.includes(cat.id);
+  const scrollContainerRef = useRef(null);
+  const activeBtnRef = useRef(null);
 
-          return (
-            <button
-              key={cat.id}
-              type="button"
-              className={`ayur-cat-step ${isActive ? 'ayur-cat-step--active' : ''} ${isCompleted ? 'ayur-cat-step--completed' : ''}`}
-              onClick={() => onSelectCategory?.(cat.id)}
-              aria-current={isActive ? 'step' : undefined}
-            >
-              <div className="ayur-cat-step__badge">
-                {isCompleted && !isActive ? (
-                  <Check size={12} strokeWidth={3} className="ayur-cat-step__check" />
-                ) : (
-                  <span className="ayur-cat-step__num">{cat.number}</span>
-                )}
-                <Icon size={14} className="ayur-cat-step__icon" />
-              </div>
-              <div className="ayur-cat-step__text">
-                <span className="ayur-cat-step__name">{cat.name}</span>
-                <span className="ayur-cat-step__sanskrit">{cat.sanskritName}</span>
-              </div>
-            </button>
-          );
-        })}
+  // Auto-scroll active item into view
+  useEffect(() => {
+    if (activeBtnRef.current && scrollContainerRef.current) {
+      activeBtnRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
+      });
+    }
+  }, [activeCategoryId]);
+
+  const handleScroll = (direction) => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = direction === 'left' ? -180 : 180;
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className={`ayur-lifestyle-cat-bar-wrapper ${className}`.trim()} role="navigation" aria-label="Lifestyle Categories">
+      <button
+        type="button"
+        className="ayur-cat-scroll-btn ayur-cat-scroll-btn--left"
+        onClick={() => handleScroll('left')}
+        aria-label="Scroll categories left"
+      >
+        <ChevronLeft size={16} />
+      </button>
+
+      <div className="ayur-lifestyle-cat-bar" ref={scrollContainerRef}>
+        <div className="ayur-lifestyle-cat-track">
+          {LIFESTYLE_CATEGORIES.map((cat) => {
+            const Icon = ICON_MAP[cat.icon] || Sun;
+            const isActive = cat.id === activeCategoryId;
+            const isCompleted = completedCategoryIds.includes(cat.id);
+
+            return (
+              <button
+                key={cat.id}
+                ref={isActive ? activeBtnRef : null}
+                type="button"
+                className={`ayur-cat-step ${isActive ? 'ayur-cat-step--active' : ''} ${isCompleted ? 'ayur-cat-step--completed' : ''}`}
+                onClick={() => onSelectCategory?.(cat.id)}
+                aria-current={isActive ? 'step' : undefined}
+                title={`${cat.name} (${cat.sanskritName})`}
+              >
+                <div className="ayur-cat-step__badge">
+                  {isCompleted && !isActive ? (
+                    <Check size={11} strokeWidth={3} className="ayur-cat-step__check" />
+                  ) : (
+                    <span className="ayur-cat-step__num">{cat.number}</span>
+                  )}
+                  <Icon size={13} className="ayur-cat-step__icon" />
+                </div>
+                <div className="ayur-cat-step__text">
+                  <span className="ayur-cat-step__name">{cat.name}</span>
+                  <span className="ayur-cat-step__sanskrit">{cat.sanskritName}</span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
       </div>
+
+      <button
+        type="button"
+        className="ayur-cat-scroll-btn ayur-cat-scroll-btn--right"
+        onClick={() => handleScroll('right')}
+        aria-label="Scroll categories right"
+      >
+        <ChevronRight size={16} />
+      </button>
     </div>
   );
 };

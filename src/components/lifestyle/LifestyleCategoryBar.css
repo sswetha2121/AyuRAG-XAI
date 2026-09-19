@@ -1,31 +1,54 @@
 /* Lifestyle Category Progression Bar */
+.ayur-lifestyle-cat-bar-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
 .ayur-lifestyle-cat-bar {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: var(--space-xs) var(--space-sm);
+  padding: 6px 8px;
   box-shadow: var(--shadow-subtle);
   overflow-x: auto;
-  scrollbar-width: none;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-subtle) transparent;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
 .ayur-lifestyle-cat-bar::-webkit-scrollbar {
-  display: none;
+  height: 4px;
+}
+
+.ayur-lifestyle-cat-bar::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 4px;
 }
 
 .ayur-lifestyle-cat-track {
   display: flex;
   align-items: center;
-  gap: var(--space-xs);
-  min-width: max-content;
+  gap: 6px;
+  width: max-content;
+  min-width: 100%;
 }
 
 .ayur-cat-step {
   display: flex;
   align-items: center;
-  gap: var(--space-xs);
-  padding: 8px 12px;
+  gap: 8px;
+  padding: 6px 10px;
   background: transparent;
   border: 1px solid transparent;
   border-radius: var(--radius-md);
@@ -33,6 +56,8 @@
   cursor: pointer;
   transition: all var(--transition-fast);
   text-align: left;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .ayur-cat-step:hover {
@@ -55,9 +80,9 @@
 .ayur-cat-step__badge {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   background-color: var(--color-bg-alt);
-  padding: 3px 6px;
+  padding: 2px 5px;
   border-radius: var(--radius-sm);
   font-size: var(--font-size-micro);
   font-family: var(--font-mono);
@@ -92,20 +117,35 @@
 }
 
 .ayur-cat-step__sanskrit {
-  font-size: var(--font-size-micro);
+  font-size: 0.65rem;
   color: var(--color-accent-hover);
   font-family: var(--font-serif);
   font-style: italic;
   letter-spacing: 0.02em;
 }
 
-@media (max-width: 768px) {
-  .ayur-lifestyle-cat-bar {
-    padding: 6px 8px;
+@media (max-width: 1400px) {
+  .ayur-cat-scroll-btn {
+    display: flex;
   }
 
   .ayur-cat-step {
-    padding: 6px 8px;
+    padding: 5px 8px;
+    gap: 6px;
+  }
+
+  .ayur-cat-step__name {
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .ayur-lifestyle-cat-bar {
+    padding: 4px 6px;
+  }
+
+  .ayur-cat-step {
+    padding: 5px 8px;
   }
 
   .ayur-cat-step__sanskrit {

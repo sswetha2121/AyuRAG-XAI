@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.css';
-import { Menu, Bell, Settings, ShieldCheck, Sparkles } from 'lucide-react';
+import { Menu, PanelLeft, PanelLeftClose, Bell, Settings, ShieldCheck, Sparkles } from 'lucide-react';
 import { Badge } from '../ui/Badge';
 
 /**
@@ -10,11 +10,28 @@ export const Header = ({
   title = 'Design System Showcase',
   subtitle = 'Production-grade component library & design tokens for AyuRAG-XAI',
   onMenuClick,
+  isCollapsed = false,
+  onToggleCollapse,
+  user = null,
+  onLogout,
   className = ''
 }) => {
+  const isDoctor = user?.role === 'DOCTOR';
+  const initials = user?.name
+    ? user.name
+        .split(' ')
+        .map((n) => n[0])
+        .join('')
+        .substring(0, 2)
+        .toUpperCase()
+    : isDoctor
+    ? 'DS'
+    : 'PT';
+
   return (
     <header className={`ayur-header ${className}`.trim()} aria-label="Page Header">
       <div className="ayur-header__left">
+        {/* Mobile Drawer Trigger (screens < 1024px) */}
         <button
           type="button"
           className="ayur-header__menu-btn"
@@ -23,6 +40,19 @@ export const Header = ({
         >
           <Menu size={20} />
         </button>
+
+        {/* Desktop Sidebar Collapse / Expand Trigger (screens >= 1024px) */}
+        {onToggleCollapse && (
+          <button
+            type="button"
+            className="ayur-header__collapse-btn"
+            onClick={onToggleCollapse}
+            aria-label={isCollapsed ? 'Expand navigation sidebar' : 'Collapse navigation sidebar'}
+            title={isCollapsed ? 'Expand navigation sidebar' : 'Collapse navigation sidebar'}
+          >
+            {isCollapsed ? <PanelLeft size={19} /> : <PanelLeftClose size={19} />}
+          </button>
+        )}
 
         <div className="ayur-header__title-group">
           <h1 className="ayur-header__title">{title}</h1>
@@ -33,9 +63,15 @@ export const Header = ({
       <div className="ayur-header__right">
         {/* Status Pill Badge */}
         <div className="ayur-header__status-badge">
-          <Badge color="accent" variant="subtle" size="md" dot>
-            Phase 1 • Foundation
-          </Badge>
+          {isDoctor ? (
+            <Badge color="accent" variant="subtle" size="md" dot>
+              Clinical Decision Support (CDS)
+            </Badge>
+          ) : (
+            <Badge color="secondary" variant="subtle" size="md" dot>
+              Patient Assessment Pipeline
+            </Badge>
+          )}
         </div>
 
         {/* Clinical Protocol Indicator */}
@@ -67,12 +103,17 @@ export const Header = ({
         </div>
 
         {/* Profile Avatar */}
-        <div className="ayur-header__profile" title="Lead Clinical Investigator">
+        <div
+          className="ayur-header__profile"
+          title={user ? `${user.name} (${user.role})` : 'Clinical User Profile'}
+          onClick={onLogout}
+        >
           <div className="ayur-header__avatar">
-            <span>DS</span>
+            <span>{initials}</span>
           </div>
         </div>
       </div>
     </header>
   );
 };
+

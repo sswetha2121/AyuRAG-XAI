@@ -1,0 +1,238 @@
+/* Doctor Reviews Page Styles */
+.ayur-doctor-reviews-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.ayur-reviews-header {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: 0 1px 3px rgba(22, 56, 44, 0.03);
+}
+
+.ayur-reviews-title {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin: 0 0 4px 0;
+}
+
+.ayur-reviews-desc {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.ayur-reviews-tabs-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-xs);
+}
+
+.ayur-reviews-tabs {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.ayur-reviews-tab {
+  padding: var(--space-sm) var(--space-md);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.ayur-reviews-tab:hover {
+  color: var(--color-primary);
+}
+
+.ayur-reviews-tab--active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-accent);
+  font-weight: var(--font-weight-bold);
+}
+
+.ayur-reviews-search {
+  position: relative;
+  min-width: 240px;
+}
+
+.ayur-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+}
+
+.ayur-search-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px 0 32px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-caption);
+  outline: none;
+}
+
+.ayur-search-input:focus {
+  border-color: var(--color-accent);
+}
+
+/* Reviews Grid */
+.ayur-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-md);
+}
+
+.ayur-review-item-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 1px 3px rgba(22, 56, 44, 0.03);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.ayur-review-item-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-border-strong);
+}
+
+.ayur-review-item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ayur-rev-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-circle);
+  background: rgba(22, 56, 44, 0.1);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: var(--font-weight-bold);
+  border: 1px solid rgba(22, 56, 44, 0.2);
+}
+
+.ayur-rev-patient-name {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.ayur-rev-asm-id {
+  font-size: var(--font-size-micro);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}
+
+.ayur-rev-badge {
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.ayur-rev-badge--success {
+  background: rgba(29, 122, 79, 0.12);
+  color: #14532D;
+  border: 1px solid rgba(29, 122, 79, 0.25);
+}
+
+.ayur-rev-badge--info {
+  background: rgba(2, 132, 199, 0.12);
+  color: #0369A1;
+  border: 1px solid rgba(2, 132, 199, 0.25);
+}
+
+.ayur-rev-badge--warning {
+  background: rgba(197, 160, 89, 0.2);
+  color: #85611B;
+  border: 1px solid rgba(197, 160, 89, 0.35);
+}
+
+.ayur-review-item__body {
+  flex: 1;
+  margin-bottom: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ayur-rev-summary-text {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: var(--line-height-normal);
+}
+
+.ayur-rev-summary-placeholder {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: 0;
+}
+
+.ayur-rev-sub-note {
+  font-size: 11.5px;
+  color: var(--color-text-secondary);
+  background: var(--color-surface-muted);
+  padding: 6px 8px;
+  border-radius: var(--radius-xs);
+}
+
+.ayur-review-item__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--space-sm);
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.ayur-rev-date {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.ayur-reviews-empty {
+  grid-column: 1 / -1;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+}

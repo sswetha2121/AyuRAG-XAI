@@ -42,6 +42,33 @@
   background-color: var(--color-surface-muted);
 }
 
+.ayur-header__collapse-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.ayur-header__collapse-btn:hover {
+  background-color: var(--color-surface-muted);
+  color: var(--color-primary);
+  border-color: var(--color-border-strong);
+}
+
+@media (min-width: 1024px) {
+  .ayur-header__collapse-btn {
+    display: flex;
+  }
+}
+
 .ayur-header__title-group {
   display: flex;
   flex-direction: column;

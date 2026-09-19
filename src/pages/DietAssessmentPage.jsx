@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import './DietAssessmentPage.css';
 import { useAssessment } from '../context/AssessmentContext';
@@ -14,33 +13,13 @@ import { QuestionNavigator } from '../components/prakriti/QuestionNavigator';
 import { Button, Badge, ProgressBar } from '../components/ui';
 import { ArrowLeft, ArrowRight, Sparkles, RotateCcw } from 'lucide-react';
 
-export const DietAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }) => {
+export const DietAssessmentPage = ({ onContinueToNextPhase, onBackToPreviousPhase, onTriggerToast }) => {
   const {
     personalInfo,
-=======
-import React from 'react';
-import { useAssessment } from '../context/AssessmentContext';
-import { AssessmentEngine } from '../components/assessment';
-import { DIET_SECTIONS, DIET_QUESTIONS } from '../data/dietQuestions';
-import { calculateDietIndicators } from '../utils/assessmentDerivations';
-import { getDietMicrocopy } from '../utils/personalization';
-
-/**
- * AyuRAG-XAI Dietary Assessment Page (Phase 04)
- * Data-driven Ahara Habits & Agni evaluation.
- */
-export const DietAssessmentPage = ({
-  onContinueToNextPhase,
-  onBackToPreviousPhase,
-  onTriggerToast
-}) => {
-  const {
->>>>>>> 5b171fb (phase 3)
     dietAnswers,
     setDietAnswer,
     resetDietAnswers,
     markStepCompleted,
-<<<<<<< HEAD
     completedSteps
   } = useAssessment();
 
@@ -161,7 +140,8 @@ export const DietAssessmentPage = ({
   }).map((cat) => cat.id);
 
   const activeCategory = currentQuestion ? currentQuestion.categoryId : 'meal_timing';
-  const localProgressPct = Math.round(((currentIndex + 1) / DIET_QUESTIONS.length) * 100);
+  const answeredQuestionsCount = DIET_QUESTIONS.filter((q) => isAnswerValid(q, dietAnswers[q.id])).length;
+  const localProgressPct = Math.round((answeredQuestionsCount / DIET_QUESTIONS.length) * 100);
 
   return (
     <div className="ayur-diet-page">
@@ -213,8 +193,8 @@ export const DietAssessmentPage = ({
           </div>
 
           <div className="ayur-diet-header__progress">
-            <span className="text-caption text-muted font-medium">Pipeline Progress (Step 4/6)</span>
-            <ProgressBar value={66} color="accent" size="sm" showValue />
+            <span className="text-caption text-muted font-medium">Dietary Progress ({answeredQuestionsCount}/{DIET_QUESTIONS.length})</span>
+            <ProgressBar value={localProgressPct} color="accent" size="sm" showValue />
           </div>
         </div>
 
@@ -329,56 +309,13 @@ export const DietAssessmentPage = ({
           <div className="ayur-diet-side-col">
             <DietSummary
               totalQuestions={DIET_QUESTIONS.length}
-              answeredCount={answeredCount}
+              answeredCount={answeredQuestionsCount}
               answers={dietAnswers}
               patientName={personalInfo.fullName}
             />
           </div>
         </div>
       )}
-=======
-    lifestyleAnswers,
-    prakritiAnswers,
-    personalInfo
-  } = useAssessment();
-
-  // 1. Personalized dynamic microcopy reacting to Lifestyle, Prakriti, and demographics
-  const microcopy = getDietMicrocopy({ prakritiAnswers, lifestyleAnswers, personalInfo });
-
-  // 2. Real-time profile indicators (Agni, Meal Timings, Hydration, Mindful Eating)
-  const indicators = calculateDietIndicators(dietAnswers);
-
-  const handleComplete = () => {
-    markStepCompleted('diet');
-    onTriggerToast?.({
-      type: 'success',
-      title: 'Dietary Assessment Complete',
-      message: 'Ahara patterns and Agni profile indicators saved in session memory.'
-    });
-    onContinueToNextPhase?.();
-  };
-
-  return (
-    <div className="ayur-diet-page-wrapper">
-      <AssessmentEngine
-        domainName="Dietary Habits"
-        domainTitle="04. Dietary Assessment (Ahara & Agni)"
-        sections={DIET_SECTIONS}
-        questions={DIET_QUESTIONS}
-        answers={dietAnswers}
-        onAnswerChange={setDietAnswer}
-        onComplete={handleComplete}
-        onBack={onBackToPreviousPhase}
-        onReset={resetDietAnswers}
-        headerMeta={microcopy}
-        indicators={indicators}
-        patientName={personalInfo.fullName}
-        guidanceMap={{
-          digestive: microcopy.digestiveNotice
-        }}
-        onTriggerToast={onTriggerToast}
-      />
->>>>>>> 5b171fb (phase 3)
     </div>
   );
 };

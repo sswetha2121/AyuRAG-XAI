@@ -1,5 +1,4 @@
 /**
-<<<<<<< HEAD
  * AyuRAG-XAI Structured Lifestyle Assessment Question Data (Dinacharya)
  * Data-driven parameters capturing daily routines, sleep architecture,
  * physical activity, workplace ergonomics, stress dynamics, and hydration.
@@ -53,12 +52,8 @@ export const LIFESTYLE_CATEGORIES = [
     sanskritName: 'Abhyāsa & Jala',
     description: 'Fluid intake habits, water temperature, and everyday micro-routines.',
     icon: 'GlassWater'
-=======
- * AyuRAG-XAI Lifestyle Assessment (Dinacharya) Question Dataset
- * 
- * Scalable data model for Phase 03.
- * Supports: single-select, multi-select, yes-no, slider, scale, frequency, time, chips, segmented-control.
- */
+  }
+];
 
 export const LIFESTYLE_SECTIONS = [
   {
@@ -114,12 +109,10 @@ export const LIFESTYLE_SECTIONS = [
     title: 'Rhythm Consistency',
     sanskrit: 'Niyama',
     description: 'Self-rated overall stability across weekdays and weekends.'
->>>>>>> 5b171fb (phase 3)
   }
 ];
 
 export const LIFESTYLE_QUESTIONS = [
-<<<<<<< HEAD
   // 1. Daily Routine: Consistency
   {
     id: 'lifestyle_q1_routine_consistency',
@@ -473,7 +466,10 @@ export const LIFESTYLE_QUESTIONS = [
         badge: 'Dryness Risk'
       }
     ]
-=======
+  }
+];
+
+export const LIFESTYLE_DETAILED_QUESTIONS = [
   // SECTION 1: DAILY ROUTINE
   {
     id: 'lifestyle_wake_time',
@@ -838,6 +834,5 @@ export const LIFESTYLE_QUESTIONS = [
     maxLabel: '10 — Clockwork Routine',
     defaultValue: 6,
     tags: ['consistency', 'dinacharya']
->>>>>>> 5b171fb (phase 3)
   }
 ];
