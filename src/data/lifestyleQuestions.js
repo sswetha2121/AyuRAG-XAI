@@ -1,4 +1,5 @@
 /**
+<<<<<<< HEAD
  * AyuRAG-XAI Structured Lifestyle Assessment Question Data (Dinacharya)
  * Data-driven parameters capturing daily routines, sleep architecture,
  * physical activity, workplace ergonomics, stress dynamics, and hydration.
@@ -52,10 +53,73 @@ export const LIFESTYLE_CATEGORIES = [
     sanskritName: 'Abhyāsa & Jala',
     description: 'Fluid intake habits, water temperature, and everyday micro-routines.',
     icon: 'GlassWater'
+=======
+ * AyuRAG-XAI Lifestyle Assessment (Dinacharya) Question Dataset
+ * 
+ * Scalable data model for Phase 03.
+ * Supports: single-select, multi-select, yes-no, slider, scale, frequency, time, chips, segmented-control.
+ */
+
+export const LIFESTYLE_SECTIONS = [
+  {
+    id: 'routine',
+    title: 'Daily Routine',
+    sanskrit: 'Dinacharya',
+    description: 'Circadian rhythm stability, morning habits, and waking schedule.'
+  },
+  {
+    id: 'sleep',
+    title: 'Sleep & Rest',
+    sanskrit: 'Nidrā',
+    description: 'Duration, sleep quality, nocturnal awakenings, and bedtime habits.'
+  },
+  {
+    id: 'activity',
+    title: 'Physical Activity',
+    sanskrit: 'Vyāyāma',
+    description: 'Movement frequency, exercise intensity, and sedentary counterbalance.'
+  },
+  {
+    id: 'work',
+    title: 'Work & Study Environment',
+    sanskrit: 'Kārya',
+    description: 'Daily mental exertion, sitting posture, and work hours structure.'
+  },
+  {
+    id: 'stress',
+    title: 'Stress & Mental Balance',
+    sanskrit: 'Mānasika',
+    description: 'Perceived stress levels, common triggers, and coping tendencies.'
+  },
+  {
+    id: 'screens',
+    title: 'Screen & Digital Exposure',
+    sanskrit: 'Indriya Saṅga',
+    description: 'Daily visual display exposure and evening wind-down boundaries.'
+  },
+  {
+    id: 'habits',
+    title: 'Daily Habits',
+    sanskrit: 'Sātmya',
+    description: 'Beverage preferences, caffeine timing, and afternoon rest habits.'
+  },
+  {
+    id: 'recovery',
+    title: 'Rest & Restoration',
+    sanskrit: 'Viśrāma',
+    description: 'Mental breaks, leisure engagement, and relaxation practices.'
+  },
+  {
+    id: 'consistency',
+    title: 'Rhythm Consistency',
+    sanskrit: 'Niyama',
+    description: 'Self-rated overall stability across weekdays and weekends.'
+>>>>>>> 5b171fb (phase 3)
   }
 ];
 
 export const LIFESTYLE_QUESTIONS = [
+<<<<<<< HEAD
   // 1. Daily Routine: Consistency
   {
     id: 'lifestyle_q1_routine_consistency',
@@ -409,5 +473,371 @@ export const LIFESTYLE_QUESTIONS = [
         badge: 'Dryness Risk'
       }
     ]
+=======
+  // SECTION 1: DAILY ROUTINE
+  {
+    id: 'lifestyle_wake_time',
+    section: 'routine',
+    category: 'Daily Routine',
+    type: 'time',
+    question: 'What time do you usually wake up on weekdays?',
+    description: 'Select the hour bracket that best describes your regular morning wake-up.',
+    required: true,
+    options: [
+      { id: 'before_6am', label: 'Before 6:00 AM', description: 'Early Brahma Muhurta / Vata dawn' },
+      { id: '6am_7am', label: '6:00 AM – 7:00 AM', description: 'Sunup window / Balanced wakefulness' },
+      { id: '7am_8am', label: '7:00 AM – 8:00 AM', description: 'Mid morning' },
+      { id: 'after_8am', label: 'After 8:00 AM', description: 'Late morning rise' }
+    ],
+    tags: ['circadian', 'routine', 'wake-up'],
+    relevance: { prakriti: ['vata', 'pitta', 'kapha'] }
+  },
+  {
+    id: 'lifestyle_wake_consistency',
+    section: 'routine',
+    category: 'Daily Routine',
+    type: 'segmented-control',
+    question: 'How consistent is your morning wake-up time?',
+    description: 'Comparing typical weekdays against weekends or free days.',
+    required: true,
+    options: [
+      { id: 'very_regular', label: 'Very Regular (±30 min)' },
+      { id: 'regular', label: 'Mostly Regular (±1 hr)' },
+      { id: 'variable', label: 'Variable (±2 hrs)' },
+      { id: 'irregular', label: 'Erratic / Shifts frequently' }
+    ],
+    tags: ['routine', 'consistency']
+  },
+  {
+    id: 'lifestyle_morning_routine_habits',
+    section: 'routine',
+    category: 'Daily Routine',
+    type: 'chips',
+    question: 'Which of the following are part of your regular morning routine?',
+    description: 'Select all practices you naturally do within your first hour awake.',
+    required: false,
+    options: [
+      { id: 'warm_water', label: 'Warm water or herbal tea' },
+      { id: 'tongue_cleaning', label: 'Tongue scraping / Oral hygiene' },
+      { id: 'movement_stretch', label: 'Gentle stretching / Yoga' },
+      { id: 'meditation', label: 'Meditation or quiet breathwork' },
+      { id: 'direct_phone', label: 'Checking phone / notifications immediately' },
+      { id: 'caffeine_first', label: 'Coffee or tea first thing' },
+      { id: 'outdoor_light', label: 'Stepping outside into sunlight' }
+    ],
+    tags: ['dinacharya', 'habits']
+  },
+
+  // SECTION 2: SLEEP
+  {
+    id: 'lifestyle_sleep_duration',
+    section: 'sleep',
+    category: 'Sleep',
+    type: 'slider',
+    question: 'How many hours of sleep do you typically get per night?',
+    description: 'Drag the slider to your average nightly sleep duration.',
+    required: true,
+    min: 4,
+    max: 11,
+    step: 0.5,
+    unit: 'hours',
+    defaultValue: 7,
+    ticks: [
+      { value: 4, label: '<5h' },
+      { value: 6, label: '6h' },
+      { value: 8, label: '8h' },
+      { value: 10, label: '10h+' }
+    ],
+    tags: ['sleep', 'duration']
+  },
+  {
+    id: 'lifestyle_bedtime_consistency',
+    section: 'sleep',
+    category: 'Sleep',
+    type: 'single-select',
+    question: 'What time do you usually go to bed?',
+    description: 'Your typical lights-out time on standard work/study days.',
+    required: true,
+    options: [
+      { id: 'before_10pm', label: 'Before 10:00 PM', description: 'Early Kapha window / Deep restoration' },
+      { id: '10pm_11pm', label: '10:00 PM – 11:00 PM', description: 'Optimal circadian wind-down' },
+      { id: '11pm_12am', label: '11:00 PM – Midnight', description: 'Late wind-down' },
+      { id: 'after_12am', label: 'Past Midnight', description: 'Pitta nocturnal activity phase' }
+    ],
+    tags: ['sleep', 'bedtime']
+  },
+  {
+    id: 'lifestyle_sleep_quality',
+    section: 'sleep',
+    category: 'Sleep',
+    type: 'single-select',
+    question: 'How would you describe your overall sleep quality?',
+    description: 'How restorative and continuous your sleep feels over a normal week.',
+    required: true,
+    options: [
+      { id: 'deep_restful', label: 'Deep & Restful', description: 'Wake up refreshed with clear mental energy' },
+      { id: 'good', label: 'Fairly Good', description: 'Occasional light nights but mostly sufficient' },
+      { id: 'light_restless', label: 'Light & Easily Disturbed', description: 'Sensitive to noise, temperature, or mild restlessness' },
+      { id: 'fragmented', label: 'Fragmented & Fatiguing', description: 'Frequent awakenings, wake up feeling unrefreshed' }
+    ],
+    tags: ['sleep', 'quality']
+  },
+  {
+    id: 'lifestyle_night_awakenings',
+    section: 'sleep',
+    category: 'Sleep',
+    type: 'frequency',
+    question: 'How often do you wake up during the middle of the night?',
+    description: 'Excluding waking up for an intentional morning alarm.',
+    required: true,
+    options: [
+      { id: 'rarely', label: 'Rarely / Never', description: 'Sleep through the night continuously' },
+      { id: '1_2_weekly', label: '1–2 times a week', description: 'Occasional awakenings' },
+      { id: 'sometimes', label: '3–4 times a week', description: 'Moderate interruption' },
+      { id: 'frequently', label: 'Almost every night', description: 'Consistent nocturnal disruptions' }
+    ],
+    tags: ['sleep', 'awakenings']
+  },
+
+  // SECTION 3: PHYSICAL ACTIVITY
+  {
+    id: 'lifestyle_activity_freq',
+    section: 'activity',
+    category: 'Physical Activity',
+    type: 'frequency',
+    question: 'How frequently do you engage in intentional exercise or brisk movement?',
+    description: 'Includes walking, running, gym workouts, yoga, cycling, sports, or heavy yard work.',
+    required: true,
+    options: [
+      { id: 'daily', label: 'Daily (6–7 days/wk)', description: 'Consistent daily physical discipline' },
+      { id: '3_4_weekly', label: '3–5 times per week', description: 'Moderate regular regimen' },
+      { id: '1_2_weekly', label: '1–2 times per week', description: 'Intermittent or weekend exercise' },
+      { id: 'rarely', label: 'Rarely or Never', description: 'Predominantly sedentary lifestyle' }
+    ],
+    tags: ['activity', 'exercise']
+  },
+  {
+    id: 'lifestyle_activity_intensity',
+    section: 'activity',
+    category: 'Physical Activity',
+    type: 'segmented-control',
+    question: 'What is the typical intensity of your physical movement?',
+    description: 'Ayurveda generally recommends exercising up to half of one’s capacity (Ardha Shakti).',
+    required: false,
+    conditions: [
+      { questionId: 'lifestyle_activity_freq', operator: 'notEquals', value: 'rarely' }
+    ],
+    options: [
+      { id: 'light', label: 'Light (Gentle strolls, easy stretching)' },
+      { id: 'moderate', label: 'Moderate (Brisk walk, steady yoga, light sweat)' },
+      { id: 'vigorous', label: 'High / Heavy (Cardio, HIIT, heavy weights)' }
+    ],
+    tags: ['activity', 'intensity']
+  },
+  {
+    id: 'lifestyle_sedentary_hours',
+    section: 'activity',
+    category: 'Physical Activity',
+    type: 'slider',
+    question: 'Approximately how many hours per day do you spend seated?',
+    description: 'Desk work, commuting, studying, and couch screen time combined.',
+    required: true,
+    min: 2,
+    max: 14,
+    step: 1,
+    unit: 'hours/day',
+    defaultValue: 7,
+    ticks: [
+      { value: 2, label: '2h' },
+      { value: 6, label: '6h' },
+      { value: 9, label: '9h' },
+      { value: 12, label: '12h+' }
+    ],
+    tags: ['sedentary', 'posture']
+  },
+
+  // SECTION 4: WORK / STUDY
+  {
+    id: 'lifestyle_work_type',
+    section: 'work',
+    category: 'Work / Study',
+    type: 'single-select',
+    question: 'Which environment best characterizes your primary daily occupation?',
+    description: 'Provides insight into physical posture and cognitive stamina requirements.',
+    required: true,
+    options: [
+      { id: 'desk_computer', label: 'Desk & Computer-Bound', description: 'Intensive digital screen work with continuous sitting' },
+      { id: 'standing_active', label: 'Standing / On Your Feet', description: 'Retail, healthcare, teaching, or continuous light mobility' },
+      { id: 'physical_labor', label: 'Manual or Field Work', description: 'High physical output throughout the workday' },
+      { id: 'flexible_hybrid', label: 'Hybrid / Mixed Movement', description: 'Alternating between desk work, walking, and diverse tasks' }
+    ],
+    tags: ['work', 'occupation']
+  },
+  {
+    id: 'lifestyle_work_breaks',
+    section: 'work',
+    category: 'Work / Study',
+    type: 'segmented-control',
+    question: 'Do you take regular brief pauses during your work/study day?',
+    description: 'Standing up, stepping away from tasks, stretching, or resting eyes.',
+    required: true,
+    options: [
+      { id: 'every_hour', label: 'Hourly pauses' },
+      { id: 'midday_only', label: 'Only at lunch' },
+      { id: 'rarely', label: 'Rarely / Long uninterrupted blocks' }
+    ],
+    tags: ['work', 'breaks']
+  },
+
+  // SECTION 5: STRESS
+  {
+    id: 'lifestyle_perceived_stress',
+    section: 'stress',
+    category: 'Stress & Mental Balance',
+    type: 'scale',
+    question: 'How would you rate your typical perceived stress level over the past month?',
+    description: 'Rate on a scale from 1 (Calm & unburdened) to 10 (Overwhelming / Chronic tension).',
+    required: true,
+    min: 1,
+    max: 10,
+    minLabel: '1 — Calm & Grounded',
+    maxLabel: '10 — Severe Tension',
+    defaultValue: 5,
+    tags: ['stress', 'manas']
+  },
+  {
+    id: 'lifestyle_stress_frequency',
+    section: 'stress',
+    category: 'Stress & Mental Balance',
+    type: 'single-select',
+    question: 'How frequently do you feel mentally overwhelmed or rushed?',
+    description: 'Helps characterize Vāta/Pitta nervous system acceleration.',
+    required: true,
+    options: [
+      { id: 'rarely', label: 'Rarely', description: 'Generally centered and at ease' },
+      { id: 'situational', label: 'Situationally', description: 'Only during specific deadlines or acute life events' },
+      { id: 'frequent', label: 'Frequent (Several days a week)', description: 'Recurrent rush or tension throughout normal days' },
+      { id: 'chronic_daily', label: 'Daily / Constant', description: 'Persistent feeling of tension or mental overload' }
+    ],
+    tags: ['stress', 'frequency']
+  },
+  {
+    id: 'lifestyle_stress_triggers',
+    section: 'stress',
+    category: 'Stress & Mental Balance',
+    type: 'chips',
+    question: 'What are your most common everyday stress contributors?',
+    description: 'Select any that apply to your current period.',
+    required: false,
+    options: [
+      { id: 'work_deadlines', label: 'Work / Academic deadlines' },
+      { id: 'irregular_hours', label: 'Irregular hours / Lack of time' },
+      { id: 'family_social', label: 'Family & social commitments' },
+      { id: 'sleep_deprivation', label: 'Sleep debt / Fatigue' },
+      { id: 'digital_overload', label: 'Constant emails / Notifications' },
+      { id: 'health_worries', label: 'Health or body concerns' }
+    ],
+    tags: ['stress', 'triggers']
+  },
+
+  // SECTION 6: SCREEN TIME
+  {
+    id: 'lifestyle_daily_screen_hours',
+    section: 'screens',
+    category: 'Screen & Digital Exposure',
+    type: 'slider',
+    question: 'What is your total daily digital screen exposure?',
+    description: 'Combining computers, smartphones, tablets, and television.',
+    required: true,
+    min: 2,
+    max: 16,
+    step: 1,
+    unit: 'hours/day',
+    defaultValue: 7,
+    ticks: [
+      { value: 2, label: '2h' },
+      { value: 6, label: '6h' },
+      { value: 10, label: '10h' },
+      { value: 14, label: '14h+' }
+    ],
+    tags: ['screens', 'digital']
+  },
+  {
+    id: 'lifestyle_late_night_screens',
+    section: 'screens',
+    category: 'Screen & Digital Exposure',
+    type: 'yes-no',
+    question: 'Do you routinely look at screens within 30–60 minutes of sleep?',
+    description: 'Night blue-spectrum exposure influences melatonin release and Pitta-ocular strain.',
+    required: true,
+    tags: ['screens', 'night']
+  },
+
+  // SECTION 7: HABITS
+  {
+    id: 'lifestyle_caffeine_cups',
+    section: 'habits',
+    category: 'Daily Habits',
+    type: 'single-select',
+    question: 'How many cups of caffeinated beverages (coffee, tea, energy drinks) do you drink daily?',
+    description: 'Helps evaluate digestive stimulation and central nervous system arousal.',
+    required: true,
+    options: [
+      { id: 'none', label: 'None / Decaffeinated', description: 'Zero caffeine consumption' },
+      { id: '1_cup', label: '1 cup per day', description: 'Light moderate intake, usually morning' },
+      { id: '2_3_cups', label: '2–3 cups per day', description: 'Daily reliance throughout morning/afternoon' },
+      { id: '4_plus', label: '4 or more cups', description: 'High daily stimulant consumption' }
+    ],
+    tags: ['habits', 'caffeine']
+  },
+  {
+    id: 'lifestyle_afternoon_naps',
+    section: 'habits',
+    category: 'Daily Habits',
+    type: 'single-select',
+    question: 'Do you take daytime naps (Divāsvapna)?',
+    description: 'Classical Ayurveda observes that daytime naps can increase Kapha and heaviness, except in summer or high exertion.',
+    required: true,
+    options: [
+      { id: 'never', label: 'Never / Rarely', description: 'Stay awake all day' },
+      { id: 'short_power_nap', label: 'Power nap (15–20 minutes)', description: 'Brief restorative pause' },
+      { id: 'long_nap', label: 'Long nap (45+ minutes)', description: 'Prolonged sleep in afternoon' }
+    ],
+    tags: ['habits', 'naps']
+  },
+
+  // SECTION 8: REST & RECOVERY
+  {
+    id: 'lifestyle_recovery_practice',
+    section: 'recovery',
+    category: 'Rest & Restoration',
+    type: 'single-select',
+    question: 'How regularly do you engage in intentional relaxation or mindfulness?',
+    description: 'E.g., nature walks, Pranayama, reading, creative hobbies, or restful solitude.',
+    required: true,
+    options: [
+      { id: 'regularly', label: 'Regularly (4+ days/week)', description: 'Dedicated daily or weekly renewal practice' },
+      { id: 'sometimes', label: 'Occasionally (1–2 days/week)', description: 'When schedule permits' },
+      { id: 'rarely', label: 'Rarely or Never', description: 'Downtime is usually occupied with screens or errands' }
+    ],
+    tags: ['recovery', 'rest']
+  },
+
+  // SECTION 9: ROUTINE CONSISTENCY
+  {
+    id: 'lifestyle_overall_routine_score',
+    section: 'consistency',
+    category: 'Rhythm Consistency',
+    type: 'scale',
+    question: 'On a scale of 1 to 10, how consistent is your overall lifestyle rhythm?',
+    description: '1 = Unpredictable daily timing, 10 = Predictable, disciplined routine (Sātmya).',
+    required: true,
+    min: 1,
+    max: 10,
+    minLabel: '1 — Highly Erratic',
+    maxLabel: '10 — Clockwork Routine',
+    defaultValue: 6,
+    tags: ['consistency', 'dinacharya']
+>>>>>>> 5b171fb (phase 3)
   }
 ];

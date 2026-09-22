@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import './LifestyleAssessmentPage.css';
 import { useAssessment } from '../context/AssessmentContext';
@@ -16,10 +17,30 @@ import { ArrowLeft, ArrowRight, Sparkles, RotateCcw, HelpCircle, CheckCircle2, S
 export const LifestyleAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }) => {
   const {
     personalInfo,
+=======
+import React from 'react';
+import { useAssessment } from '../context/AssessmentContext';
+import { AssessmentEngine } from '../components/assessment';
+import { LIFESTYLE_SECTIONS, LIFESTYLE_QUESTIONS } from '../data/lifestyleQuestions';
+import { calculateLifestyleIndicators } from '../utils/assessmentDerivations';
+import { getLifestyleMicrocopy } from '../utils/personalization';
+
+/**
+ * AyuRAG-XAI Lifestyle Assessment Page (Phase 03)
+ * Data-driven Dinacharya & Routine evaluation.
+ */
+export const LifestyleAssessmentPage = ({
+  onContinueToNextPhase,
+  onBackToPreviousPhase,
+  onTriggerToast
+}) => {
+  const {
+>>>>>>> 5b171fb (phase 3)
     lifestyleAnswers,
     setLifestyleAnswer,
     resetLifestyleAnswers,
     markStepCompleted,
+<<<<<<< HEAD
     completedSteps
   } = useAssessment();
 
@@ -343,6 +364,46 @@ export const LifestyleAssessmentPage = ({ onContinueToNextPhase, onTriggerToast 
           </div>
         </div>
       )}
+=======
+    prakritiAnswers,
+    personalInfo
+  } = useAssessment();
+
+  // 1. Personalized dynamic microcopy reacting to Prakriti and demographics
+  const microcopy = getLifestyleMicrocopy({ prakritiAnswers, personalInfo });
+
+  // 2. Real-time profile indicators
+  const indicators = calculateLifestyleIndicators(lifestyleAnswers);
+
+  const handleComplete = () => {
+    markStepCompleted('lifestyle');
+    onTriggerToast?.({
+      type: 'success',
+      title: 'Lifestyle Assessment Complete',
+      message: 'Dinacharya and routine profile indicators saved in session memory.'
+    });
+    onContinueToNextPhase?.();
+  };
+
+  return (
+    <div className="ayur-lifestyle-page-wrapper">
+      <AssessmentEngine
+        domainName="Lifestyle"
+        domainTitle="03. Lifestyle Assessment (Dinacharya)"
+        sections={LIFESTYLE_SECTIONS}
+        questions={LIFESTYLE_QUESTIONS}
+        answers={lifestyleAnswers}
+        onAnswerChange={setLifestyleAnswer}
+        onComplete={handleComplete}
+        onBack={onBackToPreviousPhase}
+        onReset={resetLifestyleAnswers}
+        headerMeta={microcopy}
+        indicators={indicators}
+        patientName={personalInfo.fullName}
+        guidanceMap={microcopy.sectionGuidance}
+        onTriggerToast={onTriggerToast}
+      />
+>>>>>>> 5b171fb (phase 3)
     </div>
   );
 };

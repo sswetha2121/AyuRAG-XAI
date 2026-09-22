@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import './DietAssessmentPage.css';
 import { useAssessment } from '../context/AssessmentContext';
@@ -16,10 +17,30 @@ import { ArrowLeft, ArrowRight, Sparkles, RotateCcw } from 'lucide-react';
 export const DietAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }) => {
   const {
     personalInfo,
+=======
+import React from 'react';
+import { useAssessment } from '../context/AssessmentContext';
+import { AssessmentEngine } from '../components/assessment';
+import { DIET_SECTIONS, DIET_QUESTIONS } from '../data/dietQuestions';
+import { calculateDietIndicators } from '../utils/assessmentDerivations';
+import { getDietMicrocopy } from '../utils/personalization';
+
+/**
+ * AyuRAG-XAI Dietary Assessment Page (Phase 04)
+ * Data-driven Ahara Habits & Agni evaluation.
+ */
+export const DietAssessmentPage = ({
+  onContinueToNextPhase,
+  onBackToPreviousPhase,
+  onTriggerToast
+}) => {
+  const {
+>>>>>>> 5b171fb (phase 3)
     dietAnswers,
     setDietAnswer,
     resetDietAnswers,
     markStepCompleted,
+<<<<<<< HEAD
     completedSteps
   } = useAssessment();
 
@@ -315,6 +336,49 @@ export const DietAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }) =>
           </div>
         </div>
       )}
+=======
+    lifestyleAnswers,
+    prakritiAnswers,
+    personalInfo
+  } = useAssessment();
+
+  // 1. Personalized dynamic microcopy reacting to Lifestyle, Prakriti, and demographics
+  const microcopy = getDietMicrocopy({ prakritiAnswers, lifestyleAnswers, personalInfo });
+
+  // 2. Real-time profile indicators (Agni, Meal Timings, Hydration, Mindful Eating)
+  const indicators = calculateDietIndicators(dietAnswers);
+
+  const handleComplete = () => {
+    markStepCompleted('diet');
+    onTriggerToast?.({
+      type: 'success',
+      title: 'Dietary Assessment Complete',
+      message: 'Ahara patterns and Agni profile indicators saved in session memory.'
+    });
+    onContinueToNextPhase?.();
+  };
+
+  return (
+    <div className="ayur-diet-page-wrapper">
+      <AssessmentEngine
+        domainName="Dietary Habits"
+        domainTitle="04. Dietary Assessment (Ahara & Agni)"
+        sections={DIET_SECTIONS}
+        questions={DIET_QUESTIONS}
+        answers={dietAnswers}
+        onAnswerChange={setDietAnswer}
+        onComplete={handleComplete}
+        onBack={onBackToPreviousPhase}
+        onReset={resetDietAnswers}
+        headerMeta={microcopy}
+        indicators={indicators}
+        patientName={personalInfo.fullName}
+        guidanceMap={{
+          digestive: microcopy.digestiveNotice
+        }}
+        onTriggerToast={onTriggerToast}
+      />
+>>>>>>> 5b171fb (phase 3)
     </div>
   );
 };
