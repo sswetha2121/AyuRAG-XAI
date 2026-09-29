@@ -415,4 +415,66 @@ class Command(BaseCommand):
                 }
             )
 
-        self.stdout.write(self.style.SUCCESS('Successfully seeded 2 doctors, 5 patient clinical assessments, and reviews!'))
+            # Initialize field verifications
+            from clinical.services.patient_data_resolver import initialize_verifications_for_assessment
+            from clinical.models import PatientVerification, VerificationStatus, DietPlan, DietPlanStatus, DietPlanGeneratedBy, DietPlanVersion, Notification, AuditLog, AuditAction
+            from django.utils import timezone
+            now = timezone.now()
+
+            initialize_verifications_for_assessment(user, asm, dr_sharma)
+
+            # For Swetha Chowdary (swetha.chowdary), create verified fields, one corrected field, and an approved active diet plan
+            if user.username == 'swetha.chowdary':
+                # Correct Sleep Duration field to match prompt example
+                sleep_verif = PatientVerification.objects.filter(patient=user, assessment=asm, field_name='sleep_duration').first()
+                if sleep_verif:
+                    sleep_verif.verification_status = VerificationStatus.CORRECTED
+                    sleep_verif.verified_value = '6 hours (with 1 hr afternoon rest)'
+                    sleep_verif.doctor_note = 'Adjusted during clinical interview: patient sleeps 5 hours night + 1 hour daytime rest.'
+                    sleep_verif.verified_at = now
+                    sleep_verif.doctor = dr_sharma
+                    sleep_verif.save()
+
+                # Verify other key fields
+                PatientVerification.objects.filter(
+                    patient=user,
+                    assessment=asm,
+                    field_name__in=['fullName', 'age', 'gender', 'primary_prakriti', 'appetite_pattern', 'chief_complaints']
+                ).update(
+                    verification_status=VerificationStatus.VERIFIED,
+                    verified_at=now,
+                    doctor=dr_sharma
+                )
+
+                # Seed an active approved diet plan for Swetha Chowdary
+                from clinical.services.personalization import generate_personalized_diet
+                existing_active = DietPlan.objects.filter(patient=user, status=DietPlanStatus.ACTIVE).first()
+                if not existing_active:
+                    plan = generate_personalized_diet(user.id, asm.id, dr_sharma)
+                    plan.status = DietPlanStatus.ACTIVE
+                    plan.approved_by = dr_sharma
+                    plan.approved_at = now
+                    plan.doctor_notes = 'Strictly avoid ice-cold water during meals. Take warm Takra with roasted jeera post-lunch.'
+                    plan.save()
+
+                    DietPlanVersion.objects.create(
+                        diet_plan=plan,
+                        version_number=plan.version,
+                        snapshot_data={'title': plan.title, 'version': plan.version},
+                        change_summary='Initial individualized regimen clinically verified and approved.',
+                        created_by=dr_sharma
+                    )
+
+                    Notification.objects.get_or_create(
+                        user=user,
+                        title='Personalized Diet Plan Approved',
+                        defaults={
+                            'type': 'DIET_PLAN_APPROVED',
+                            'message': f'Your personalized Ayurvedic diet plan (v{plan.version}) has been reviewed and approved by Dr. A. Sharma.',
+                            'related_object_type': 'DietPlan',
+                            'related_object_id': plan.id
+                        }
+                    )
+
+        self.stdout.write(self.style.SUCCESS('Successfully seeded doctors, patient assessments, verifications, reviews, and active diet plans!'))
+

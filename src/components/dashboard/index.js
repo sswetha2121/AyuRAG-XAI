@@ -8,3 +8,5 @@ export { DailyRoutineTimetable } from './DailyRoutineTimetable';
 export { DigestiveAgniCard } from './DigestiveAgniCard';
 export { AnalysisLoadingModal } from './AnalysisLoadingModal';
 export { EmptyAssessmentState } from './EmptyAssessmentState';
+export { PatientActiveDietCard } from './PatientActiveDietCard';
+

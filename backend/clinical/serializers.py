@@ -1,5 +1,8 @@
 from rest_framework import serializers
-from .models import PatientAssessment, ClinicalReview, ReviewStatus, AssessmentStatus
+from .models import (
+    PatientAssessment, ClinicalReview, ReviewStatus, AssessmentStatus,
+    PatientVerification, DietPlan, DietPlanVersion, Notification, AuditLog
+)
 from accounts.models import User, PatientProfile, DoctorProfile
 
 class ClinicalReviewSerializer(serializers.ModelSerializer):
@@ -110,3 +113,111 @@ class PatientAssessmentDetailSerializer(serializers.ModelSerializer):
         if hasattr(obj.patient, 'patient_profile') and obj.patient.patient_profile.gender:
             return obj.patient.patient_profile.gender
         return obj.demographics.get('gender', 'Unspecified')
+
+
+class PatientVerificationSerializer(serializers.ModelSerializer):
+    doctor_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = PatientVerification
+        fields = [
+            'id', 'patient', 'doctor', 'doctor_name', 'assessment',
+            'category', 'field_name', 'field_label',
+            'patient_value', 'verified_value', 'verification_status',
+            'doctor_note', 'verified_at', 'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'patient', 'doctor', 'doctor_name', 'created_at', 'updated_at']
+
+    def get_doctor_name(self, obj):
+        if hasattr(obj.doctor, 'doctor_profile') and obj.doctor.doctor_profile.professional_name:
+            return obj.doctor.doctor_profile.professional_name
+        return obj.doctor.get_full_name() or f"Dr. {obj.doctor.username}"
+
+
+class DietPlanVersionSerializer(serializers.ModelSerializer):
+    created_by_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = DietPlanVersion
+        fields = [
+            'id', 'diet_plan', 'version_number', 'snapshot_data',
+            'change_summary', 'created_by', 'created_by_name', 'created_at'
+        ]
+        read_only_fields = ['id', 'diet_plan', 'created_at']
+
+    def get_created_by_name(self, obj):
+        if not obj.created_by:
+            return "System / AI"
+        if hasattr(obj.created_by, 'doctor_profile'):
+            return obj.created_by.doctor_profile.professional_name
+        return obj.created_by.get_full_name() or obj.created_by.username
+
+
+class DietPlanSerializer(serializers.ModelSerializer):
+    doctor_name = serializers.SerializerMethodField()
+    approved_by_name = serializers.SerializerMethodField()
+    patient_name = serializers.SerializerMethodField()
+    version_history = DietPlanVersionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = DietPlan
+        fields = [
+            'id', 'patient', 'patient_name', 'doctor', 'doctor_name',
+            'assessment', 'version', 'title', 'duration', 'objective',
+            'generated_by', 'status',
+            'breakfast', 'mid_morning', 'lunch', 'evening', 'dinner',
+            'foods_to_include', 'foods_to_avoid',
+            'lifestyle_notes', 'precautions',
+            'doctor_notes', 'ai_reasoning', 'knowledge_references',
+            'approved_by', 'approved_by_name', 'approved_at',
+            'version_history', 'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'patient', 'doctor', 'approved_by', 'approved_at', 'created_at', 'updated_at']
+
+    def get_patient_name(self, obj):
+        if hasattr(obj.patient, 'patient_profile'):
+            return obj.patient.patient_profile.full_name
+        return obj.patient.get_full_name() or obj.patient.username
+
+    def get_doctor_name(self, obj):
+        if not obj.doctor:
+            return "AyuRAG Engine"
+        if hasattr(obj.doctor, 'doctor_profile'):
+            return obj.doctor.doctor_profile.professional_name
+        return obj.doctor.get_full_name() or f"Dr. {obj.doctor.username}"
+
+    def get_approved_by_name(self, obj):
+        if not obj.approved_by:
+            return None
+        if hasattr(obj.approved_by, 'doctor_profile'):
+            return obj.approved_by.doctor_profile.professional_name
+        return obj.approved_by.get_full_name() or f"Dr. {obj.approved_by.username}"
+
+
+class NotificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = [
+            'id', 'user', 'type', 'title', 'message',
+            'related_object_type', 'related_object_id',
+            'is_read', 'created_at'
+        ]
+        read_only_fields = ['id', 'user', 'created_at']
+
+
+class AuditLogSerializer(serializers.ModelSerializer):
+    actor_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = AuditLog
+        fields = [
+            'id', 'actor', 'actor_name', 'action', 'patient',
+            'object_type', 'object_id', 'metadata', 'timestamp'
+        ]
+        read_only_fields = ['id', 'timestamp']
+
+    def get_actor_name(self, obj):
+        if not obj.actor:
+            return "System"
+        return obj.actor.get_full_name() or obj.actor.username
+

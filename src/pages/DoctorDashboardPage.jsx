@@ -166,6 +166,128 @@ export const DoctorDashboardPage = ({
         </div>
       )}
 
+      {/* Clinical Workflow Section */}
+      <div className="ayur-workflow-queues-section">
+        <div className="ayur-section-header">
+          <div>
+            <h2 className="ayur-section-title">Clinical Action Queues</h2>
+            <p className="ayur-section-desc">
+              Assessments requiring verification, diet plans awaiting approval, and recently activated regimens
+            </p>
+          </div>
+        </div>
+
+        <div className="ayur-wqueues-grid">
+          {/* Queue 1: Patients Requiring Verification */}
+          <div className="ayur-wqueue-card">
+            <div className="ayur-wqueue-card__header">
+              <div className="flex items-center gap-xs">
+                <ShieldCheck size={18} className="text-warning" />
+                <h4 className="font-serif font-bold text-primary">Patients Requiring Verification</h4>
+              </div>
+              <span className="ayur-wqueue-badge">
+                {dashboardData?.patients_requiring_verification?.length || 0}
+              </span>
+            </div>
+
+            <div className="ayur-wqueue-list">
+              {(dashboardData?.patients_requiring_verification || []).map((pt) => (
+                <div key={pt.id} className="ayur-wqueue-item">
+                  <div className="ayur-witem-left">
+                    <span className="ayur-witem-name">{pt.patient_name}</span>
+                    <span className="ayur-witem-sub">
+                      {pt.primary_prakriti} • Age {pt.patient_age}
+                    </span>
+                  </div>
+                  <Button
+                    size="xs"
+                    variant="outline"
+                    onClick={() => onNavigateToPatient?.(pt.patient || pt.id)}
+                  >
+                    Verify
+                  </Button>
+                </div>
+              ))}
+              {(!dashboardData?.patients_requiring_verification || dashboardData.patients_requiring_verification.length === 0) && (
+                <p className="ayur-wqueue-empty">All submitted patient assessments are fully verified.</p>
+              )}
+            </div>
+          </div>
+
+          {/* Queue 2: Plans Awaiting Approval */}
+          <div className="ayur-wqueue-card">
+            <div className="ayur-wqueue-card__header">
+              <div className="flex items-center gap-xs">
+                <Utensils size={18} className="text-secondary" />
+                <h4 className="font-serif font-bold text-primary">Plans Awaiting Approval</h4>
+              </div>
+              <span className="ayur-wqueue-badge">
+                {dashboardData?.plans_awaiting_approval_queue?.length || 0}
+              </span>
+            </div>
+
+            <div className="ayur-wqueue-list">
+              {(dashboardData?.plans_awaiting_approval_queue || []).map((pl) => (
+                <div key={pl.id} className="ayur-wqueue-item">
+                  <div className="ayur-witem-left">
+                    <span className="ayur-witem-name">{pl.patient_name}</span>
+                    <span className="ayur-witem-sub">
+                      v{pl.version} • {pl.status} • {pl.generated_by}
+                    </span>
+                  </div>
+                  <Button
+                    size="xs"
+                    variant="primary"
+                    onClick={() => onNavigateToPatient?.(pl.patient)}
+                  >
+                    Review & Activate
+                  </Button>
+                </div>
+              ))}
+              {(!dashboardData?.plans_awaiting_approval_queue || dashboardData.plans_awaiting_approval_queue.length === 0) && (
+                <p className="ayur-wqueue-empty">No pending diet plans waiting for approval.</p>
+              )}
+            </div>
+          </div>
+
+          {/* Queue 3: Recently Activated Diet Plans */}
+          <div className="ayur-wqueue-card">
+            <div className="ayur-wqueue-card__header">
+              <div className="flex items-center gap-xs">
+                <CheckCircle2 size={18} className="text-success" />
+                <h4 className="font-serif font-bold text-primary">Recently Activated Regimens</h4>
+              </div>
+              <span className="ayur-wqueue-badge ayur-wqueue-badge--success">
+                {dashboardData?.recent_active_diet_plans?.length || 0}
+              </span>
+            </div>
+
+            <div className="ayur-wqueue-list">
+              {(dashboardData?.recent_active_diet_plans || []).map((pl) => (
+                <div key={pl.id} className="ayur-wqueue-item">
+                  <div className="ayur-witem-left">
+                    <span className="ayur-witem-name">{pl.patient_name}</span>
+                    <span className="ayur-witem-sub">
+                      v{pl.version} • Approved {new Date(pl.approved_at).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <Button
+                    size="xs"
+                    variant="ghost"
+                    onClick={() => onNavigateToPatient?.(pl.patient)}
+                  >
+                    Inspect
+                  </Button>
+                </div>
+              ))}
+              {(!dashboardData?.recent_active_diet_plans || dashboardData.recent_active_diet_plans.length === 0) && (
+                <p className="ayur-wqueue-empty">No active plans activated yet.</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Main Section Header */}
       <div className="ayur-section-header">
         <div>

@@ -6,11 +6,13 @@ import {
   Brain,
   Sparkles,
   Clock,
-  BookOpen
+  BookOpen,
+  Utensils
 } from 'lucide-react';
 
 export const DASHBOARD_TABS = [
   { id: 'overview', label: 'Overview', icon: LayoutDashboard },
+  { id: 'diet', label: 'My Diet Plan', icon: Utensils },
   { id: 'constitution', label: 'Tridosha Constitution', icon: Activity },
   { id: 'explainability', label: 'Explainable AI (XAI)', icon: Brain },
   { id: 'recommendations', label: 'Recommendations', icon: Sparkles },

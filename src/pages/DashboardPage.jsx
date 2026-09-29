@@ -10,7 +10,8 @@ import {
   EvidenceSection,
   DailyRoutineTimetable,
   DigestiveAgniCard,
-  EmptyAssessmentState
+  EmptyAssessmentState,
+  PatientActiveDietCard
 } from '../components/dashboard';
 
 export const DashboardPage = ({
@@ -78,11 +79,18 @@ export const DashboardPage = ({
         {activeTab === 'overview' && (
           <div className="ayur-dash-overview-stack">
             <TridoshaCard tridoshaProfile={tridoshaProfile} />
+            <PatientActiveDietCard />
             <XaiFeatureImportance features={xaiFeatures} />
             <RecommendationsGrid recommendations={recommendations} />
             <DigestiveAgniCard />
             <DailyRoutineTimetable timetable={dailyRoutineTimetable} />
             <EvidenceSection citations={evidenceCitations} />
+          </div>
+        )}
+
+        {activeTab === 'diet' && (
+          <div className="ayur-dash-tab-pane">
+            <PatientActiveDietCard />
           </div>
         )}
 

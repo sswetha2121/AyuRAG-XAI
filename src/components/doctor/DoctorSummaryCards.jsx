@@ -1,6 +1,16 @@
 import React from 'react';
 import './DoctorSummaryCards.css';
-import { Users, Clock, CheckCircle2, BrainCircuit, CalendarClock, AlertCircle } from 'lucide-react';
+import {
+  Users,
+  Clock,
+  CheckCircle2,
+  BrainCircuit,
+  CalendarClock,
+  ShieldAlert,
+  Utensils,
+  FileCheck2,
+  Sparkles
+} from 'lucide-react';
 
 export const DoctorSummaryCards = ({ metrics = {}, isLoading = false }) => {
   const cards = [
@@ -15,31 +25,51 @@ export const DoctorSummaryCards = ({ metrics = {}, isLoading = false }) => {
     },
     {
       id: 'pending_reviews',
-      title: 'Pending Clinical Reviews',
+      title: 'Pending Reviews',
       value: metrics.pending_clinical_reviews ?? 'Data unavailable',
-      subtitle: 'Awaiting physician sign-off',
+      subtitle: 'Awaiting clinical notes',
       icon: Clock,
       color: 'gold',
-      badge: metrics.pending_clinical_reviews > 0 ? 'Action Required' : 'Up to date',
+      badge: metrics.pending_clinical_reviews > 0 ? 'Review Needed' : 'Up to date',
       highlight: metrics.pending_clinical_reviews > 0,
     },
     {
-      id: 'completed_assessments',
-      title: 'Completed Assessments',
-      value: metrics.completed_assessments ?? 'Data unavailable',
-      subtitle: '5-phase multi-domain validated',
-      icon: CheckCircle2,
-      color: 'sage',
-      badge: '100% Ingested',
+      id: 'unverified_assessments',
+      title: 'Unverified Assessments',
+      value: metrics.unverified_assessments ?? 'Data unavailable',
+      subtitle: 'Patient reports pending check',
+      icon: ShieldAlert,
+      color: 'warm',
+      badge: metrics.unverified_assessments > 0 ? 'Verification Needed' : 'All Verified',
+      highlight: metrics.unverified_assessments > 0,
     },
     {
-      id: 'ai_assisted_analyses',
-      title: 'AI-Assisted Analyses',
-      value: metrics.ai_assisted_analyses ?? 'Data unavailable',
-      subtitle: 'ML + SHAP + RAG grounded',
-      icon: BrainCircuit,
+      id: 'plans_awaiting_approval',
+      title: 'Plans Awaiting Approval',
+      value: metrics.plans_awaiting_approval ?? 'Data unavailable',
+      subtitle: 'Doctor sign-off pending',
+      icon: FileCheck2,
       color: 'teal',
-      badge: 'XAI Ready',
+      badge: metrics.plans_awaiting_approval > 0 ? 'Action Required' : '0 Pending',
+      highlight: metrics.plans_awaiting_approval > 0,
+    },
+    {
+      id: 'draft_diet_plans',
+      title: 'Draft Diet Plans',
+      value: metrics.draft_diet_plans ?? 'Data unavailable',
+      subtitle: 'In synthesis or editing',
+      icon: Utensils,
+      color: 'sage',
+      badge: 'Work in Progress',
+    },
+    {
+      id: 'active_diet_plans',
+      title: 'Active Diet Plans',
+      value: metrics.active_diet_plans ?? 'Data unavailable',
+      subtitle: 'Live patient protocols',
+      icon: CheckCircle2,
+      color: 'forest',
+      badge: 'Doctor Approved',
     },
     {
       id: 'follow_ups_due',

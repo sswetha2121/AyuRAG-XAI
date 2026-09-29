@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './DoctorPatientProfilePage.css';
 import { DoctorAIExplainability } from '../components/doctor/DoctorAIExplainability';
 import { DoctorReviewNotesModal } from '../components/doctor/DoctorReviewNotesModal';
+import { DoctorPatientVerification } from '../components/doctor/DoctorPatientVerification';
+import { DoctorDietPlanEditor } from '../components/doctor/DoctorDietPlanEditor';
+import { DoctorPatientAuditTrail } from '../components/doctor/DoctorPatientAuditTrail';
 import { api } from '../services/api';
 import {
   User,
@@ -18,7 +21,9 @@ import {
   Activity,
   Droplets,
   Flame,
-  FileText
+  FileText,
+  History,
+  Layers
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 
@@ -28,6 +33,8 @@ export const DoctorPatientProfilePage = ({
   onTriggerToast,
 }) => {
   const [patientData, setPatientData] = useState(null);
+  const [effectiveProfile, setEffectiveProfile] = useState(null);
+  const [activeWorkflowTab, setActiveWorkflowTab] = useState('verification'); // 'verification' | 'diet' | 'xai' | 'assessment' | 'audit'
   const [isLoading, setIsLoading] = useState(true);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [isSavingReview, setIsSavingReview] = useState(false);
@@ -212,149 +219,230 @@ export const DoctorPatientProfilePage = ({
         </div>
       )}
 
-      {/* 2. Prakriti Baseline Section */}
-      <div className="ayur-clinical-section">
-        <div className="ayur-clinical-section__header">
-          <div className="flex items-center gap-xs">
-            <Activity size={18} className="text-secondary" />
-            <h3 className="ayur-clinical-section__title">Prakriti Constitutional Assessment</h3>
-          </div>
-          <span className="ayur-prakriti-chip">{pScores.primary || 'Vāta-Pitta'}</span>
-        </div>
+      {/* Workflow Navigation Tabs */}
+      <div className="ayur-workflow-nav">
+        <button
+          type="button"
+          className={`ayur-wnav-item ${activeWorkflowTab === 'verification' ? 'ayur-wnav-item--active' : ''}`}
+          onClick={() => setActiveWorkflowTab('verification')}
+        >
+          <ShieldCheck size={17} />
+          <span>1. Clinical Verification</span>
+        </button>
 
-        <div className="ayur-prakriti-bars-grid">
-          <div className="ayur-dosha-bar-card">
-            <div className="flex items-center justify-between mb-xs">
-              <span className="ayur-dosha-name">Vāta (Air + Ether)</span>
-              <span className="ayur-dosha-score">{pScores.vata || 40}%</span>
-            </div>
-            <div className="ayur-dosha-track">
-              <div className="ayur-dosha-fill ayur-dosha-fill--vata" style={{ width: `${pScores.vata || 40}%` }} />
-            </div>
-            <span className="ayur-dosha-desc">Governs mobility, respiration, catabolic processes</span>
-          </div>
+        <button
+          type="button"
+          className={`ayur-wnav-item ${activeWorkflowTab === 'diet' ? 'ayur-wnav-item--active' : ''}`}
+          onClick={() => setActiveWorkflowTab('diet')}
+        >
+          <Utensils size={17} />
+          <span>2. Personalized Diet Plan & Rx</span>
+        </button>
 
-          <div className="ayur-dosha-bar-card">
-            <div className="flex items-center justify-between mb-xs">
-              <span className="ayur-dosha-name">Pitta (Fire + Water)</span>
-              <span className="ayur-dosha-score">{pScores.pitta || 35}%</span>
-            </div>
-            <div className="ayur-dosha-track">
-              <div className="ayur-dosha-fill ayur-dosha-fill--pitta" style={{ width: `${pScores.pitta || 35}%` }} />
-            </div>
-            <span className="ayur-dosha-desc">Governs digestion, metabolism, body heat, transformation</span>
-          </div>
+        <button
+          type="button"
+          className={`ayur-wnav-item ${activeWorkflowTab === 'xai' ? 'ayur-wnav-item--active' : ''}`}
+          onClick={() => setActiveWorkflowTab('xai')}
+        >
+          <Sparkles size={17} />
+          <span>3. XAI & RAG Evidence</span>
+        </button>
 
-          <div className="ayur-dosha-bar-card">
-            <div className="flex items-center justify-between mb-xs">
-              <span className="ayur-dosha-name">Kapha (Water + Earth)</span>
-              <span className="ayur-dosha-score">{pScores.kapha || 25}%</span>
-            </div>
-            <div className="ayur-dosha-track">
-              <div className="ayur-dosha-fill ayur-dosha-fill--kapha" style={{ width: `${pScores.kapha || 25}%` }} />
-            </div>
-            <span className="ayur-dosha-desc">Governs stability, lubrication, anabolic structure</span>
-          </div>
-        </div>
+        <button
+          type="button"
+          className={`ayur-wnav-item ${activeWorkflowTab === 'assessment' ? 'ayur-wnav-item--active' : ''}`}
+          onClick={() => setActiveWorkflowTab('assessment')}
+        >
+          <Layers size={17} />
+          <span>4. Baseline Assessment Data</span>
+        </button>
+
+        <button
+          type="button"
+          className={`ayur-wnav-item ${activeWorkflowTab === 'audit' ? 'ayur-wnav-item--active' : ''}`}
+          onClick={() => setActiveWorkflowTab('audit')}
+        >
+          <History size={17} />
+          <span>5. Audit Trail</span>
+        </button>
       </div>
 
-      {/* 3. Lifestyle, Diet & Symptoms 3-Column Grid */}
-      <div className="ayur-clinical-grid-3">
-        {/* Lifestyle */}
-        <div className="ayur-clinical-card">
-          <div className="ayur-clinical-card__header">
-            <Moon size={16} className="text-secondary" />
-            <h4 className="ayur-clinical-card__title">Lifestyle & Dinacharya</h4>
-          </div>
-          <ul className="ayur-clinical-list">
-            <li>
-              <span>Sleep Duration:</span>
-              <strong>{patientData.lifestyle_data?.sleepDuration || '6-7 hours'}</strong>
-            </li>
-            <li>
-              <span>Sleep Quality:</span>
-              <strong>{patientData.lifestyle_data?.sleepQuality || 'Interrupted / Latency'}</strong>
-            </li>
-            <li>
-              <span>Activity Level:</span>
-              <strong>{patientData.lifestyle_data?.activityLevel || 'Moderate'}</strong>
-            </li>
-            <li>
-              <span>Stress Level:</span>
-              <strong>{patientData.lifestyle_data?.stressLevel || 'High (Chinta)'}</strong>
-            </li>
-            <li>
-              <span>Circadian Pacing:</span>
-              <strong>{patientData.lifestyle_data?.circadianAlignment || 'Irregular schedule'}</strong>
-            </li>
-          </ul>
-        </div>
+      {/* Tab 1: Clinical Verification Console */}
+      {activeWorkflowTab === 'verification' && (
+        <DoctorPatientVerification
+          patientId={patientId}
+          onProfileUpdated={setEffectiveProfile}
+          onTriggerToast={onTriggerToast}
+        />
+      )}
 
-        {/* Diet */}
-        <div className="ayur-clinical-card">
-          <div className="ayur-clinical-card__header">
-            <Utensils size={16} className="text-secondary" />
-            <h4 className="ayur-clinical-card__title">Dietary Patterns & Agni</h4>
-          </div>
-          <ul className="ayur-clinical-list">
-            <li>
-              <span>Appetite (Agni):</span>
-              <strong>{patientData.diet_data?.appetitePattern || 'Irregular (Vishama Agni)'}</strong>
-            </li>
-            <li>
-              <span>Meal Frequency:</span>
-              <strong>{patientData.diet_data?.mealFrequency || '2-3 meals daily'}</strong>
-            </li>
-            <li>
-              <span>Hydration:</span>
-              <strong>{patientData.diet_data?.hydration || '1.8L Daily'}</strong>
-            </li>
-            <li>
-              <span>Dominant Tastes:</span>
-              <strong>{patientData.diet_data?.predominantTaste || 'Katu (Pungent), Tikta (Bitter)'}</strong>
-            </li>
-          </ul>
-        </div>
+      {/* Tab 2: Diet Plan Generation & Clinical Editor */}
+      {activeWorkflowTab === 'diet' && (
+        <DoctorDietPlanEditor
+          patientId={patientId}
+          patientData={patientData}
+          effectiveProfile={effectiveProfile}
+          onTriggerToast={onTriggerToast}
+        />
+      )}
 
-        {/* Symptoms */}
-        <div className="ayur-clinical-card">
-          <div className="ayur-clinical-card__header">
-            <HeartPulse size={16} className="text-secondary" />
-            <h4 className="ayur-clinical-card__title">Symptoms & Clinical Context</h4>
+      {/* Tab 3: Explainable AI & Classical RAG Evidence */}
+      {activeWorkflowTab === 'xai' && (
+        <div className="ayur-xai-tab-wrapper">
+          <div className="ayur-section-header">
+            <div>
+              <h2 className="ayur-section-title">Explainable AI Analysis & Knowledge Retrieval</h2>
+              <p className="ayur-section-desc">
+                Transparent algorithmic attributions and classical knowledge grounding
+              </p>
+            </div>
           </div>
-          <div className="ayur-symptoms-list">
-            {(patientData.symptoms_data?.chiefComplaints || ['Agnimandya', 'Nidranasha', 'Adhmana']).map(
-              (sym, idx) => (
-                <div key={idx} className="ayur-symptom-item">
-                  <span className="ayur-symptom-item__name">{sym}</span>
+
+          <DoctorAIExplainability
+            aiAnalysis={patientData.ai_analysis}
+            shapExplanations={patientData.shap_explanations}
+            limeExplanations={patientData.lime_explanations}
+            ragEvidence={patientData.rag_evidence}
+            recommendations={patientData.recommendations}
+          />
+        </div>
+      )}
+
+      {/* Tab 4: Baseline Assessment Data */}
+      {activeWorkflowTab === 'assessment' && (
+        <div className="ayur-assessment-tab-wrapper">
+          {/* Prakriti Baseline Section */}
+          <div className="ayur-clinical-section">
+            <div className="ayur-clinical-section__header">
+              <div className="flex items-center gap-xs">
+                <Activity size={18} className="text-secondary" />
+                <h3 className="ayur-clinical-section__title">Prakriti Constitutional Assessment</h3>
+              </div>
+              <span className="ayur-prakriti-chip">{pScores.primary || 'Vāta-Pitta'}</span>
+            </div>
+
+            <div className="ayur-prakriti-bars-grid">
+              <div className="ayur-dosha-bar-card">
+                <div className="flex items-center justify-between mb-xs">
+                  <span className="ayur-dosha-name">Vāta (Air + Ether)</span>
+                  <span className="ayur-dosha-score">{pScores.vata || 40}%</span>
                 </div>
-              )
-            )}
+                <div className="ayur-dosha-track">
+                  <div className="ayur-dosha-fill ayur-dosha-fill--vata" style={{ width: `${pScores.vata || 40}%` }} />
+                </div>
+                <span className="ayur-dosha-desc">Governs mobility, respiration, catabolic processes</span>
+              </div>
+
+              <div className="ayur-dosha-bar-card">
+                <div className="flex items-center justify-between mb-xs">
+                  <span className="ayur-dosha-name">Pitta (Fire + Water)</span>
+                  <span className="ayur-dosha-score">{pScores.pitta || 35}%</span>
+                </div>
+                <div className="ayur-dosha-track">
+                  <div className="ayur-dosha-fill ayur-dosha-fill--pitta" style={{ width: `${pScores.pitta || 35}%` }} />
+                </div>
+                <span className="ayur-dosha-desc">Governs digestion, metabolism, body heat, transformation</span>
+              </div>
+
+              <div className="ayur-dosha-bar-card">
+                <div className="flex items-center justify-between mb-xs">
+                  <span className="ayur-dosha-name">Kapha (Water + Earth)</span>
+                  <span className="ayur-dosha-score">{pScores.kapha || 25}%</span>
+                </div>
+                <div className="ayur-dosha-track">
+                  <div className="ayur-dosha-fill ayur-dosha-fill--kapha" style={{ width: `${pScores.kapha || 25}%` }} />
+                </div>
+                <span className="ayur-dosha-desc">Governs stability, lubrication, anabolic structure</span>
+              </div>
+            </div>
           </div>
-          <div className="ayur-symptom-meta">
-            <span>Severity: <strong>{patientData.symptoms_data?.severity || 'Moderate'}</strong></span>
-            <span>Chronicity: <strong>{patientData.symptoms_data?.chronicity || '3 to 6 months'}</strong></span>
+
+          {/* Lifestyle, Diet & Symptoms 3-Column Grid */}
+          <div className="ayur-clinical-grid-3">
+            {/* Lifestyle */}
+            <div className="ayur-clinical-card">
+              <div className="ayur-clinical-card__header">
+                <Moon size={16} className="text-secondary" />
+                <h4 className="ayur-clinical-card__title">Lifestyle & Dinacharya</h4>
+              </div>
+              <ul className="ayur-clinical-list">
+                <li>
+                  <span>Sleep Duration:</span>
+                  <strong>{patientData.lifestyle_data?.sleepDuration || '6-7 hours'}</strong>
+                </li>
+                <li>
+                  <span>Sleep Quality:</span>
+                  <strong>{patientData.lifestyle_data?.sleepQuality || 'Interrupted / Latency'}</strong>
+                </li>
+                <li>
+                  <span>Activity Level:</span>
+                  <strong>{patientData.lifestyle_data?.activityLevel || 'Moderate'}</strong>
+                </li>
+                <li>
+                  <span>Stress Level:</span>
+                  <strong>{patientData.lifestyle_data?.stressLevel || 'High (Chinta)'}</strong>
+                </li>
+                <li>
+                  <span>Circadian Pacing:</span>
+                  <strong>{patientData.lifestyle_data?.circadianAlignment || 'Irregular schedule'}</strong>
+                </li>
+              </ul>
+            </div>
+
+            {/* Diet */}
+            <div className="ayur-clinical-card">
+              <div className="ayur-clinical-card__header">
+                <Utensils size={16} className="text-secondary" />
+                <h4 className="ayur-clinical-card__title">Dietary Patterns & Agni</h4>
+              </div>
+              <ul className="ayur-clinical-list">
+                <li>
+                  <span>Appetite (Agni):</span>
+                  <strong>{patientData.diet_data?.appetitePattern || 'Irregular (Vishama Agni)'}</strong>
+                </li>
+                <li>
+                  <span>Meal Frequency:</span>
+                  <strong>{patientData.diet_data?.mealFrequency || '2-3 meals daily'}</strong>
+                </li>
+                <li>
+                  <span>Hydration:</span>
+                  <strong>{patientData.diet_data?.hydration || '1.8L Daily'}</strong>
+                </li>
+                <li>
+                  <span>Dominant Tastes:</span>
+                  <strong>{patientData.diet_data?.predominantTaste || 'Katu (Pungent), Tikta (Bitter)'}</strong>
+                </li>
+              </ul>
+            </div>
+
+            {/* Symptoms */}
+            <div className="ayur-clinical-card">
+              <div className="ayur-clinical-card__header">
+                <HeartPulse size={16} className="text-secondary" />
+                <h4 className="ayur-clinical-card__title">Symptoms & Clinical Context</h4>
+              </div>
+              <div className="ayur-symptoms-list">
+                {(patientData.symptoms_data?.chiefComplaints || ['Agnimandya', 'Nidranasha', 'Adhmana']).map(
+                  (sym, idx) => (
+                    <div key={idx} className="ayur-symptom-item">
+                      <span className="ayur-symptom-item__name">{sym}</span>
+                    </div>
+                  )
+                )}
+              </div>
+              <div className="ayur-symptom-meta">
+                <span>Severity: <strong>{patientData.symptoms_data?.severity || 'Moderate'}</strong></span>
+                <span>Chronicity: <strong>{patientData.symptoms_data?.chronicity || '3 to 6 months'}</strong></span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* 4. AI Analysis, Explainability (SHAP/LIME), and RAG Evidence */}
-      <div className="ayur-section-header">
-        <div>
-          <h2 className="ayur-section-title">Explainable AI Analysis & Knowledge Retrieval</h2>
-          <p className="ayur-section-desc">
-            Transparent algorithmic attributions and classical knowledge grounding
-          </p>
-        </div>
-      </div>
-
-      <DoctorAIExplainability
-        aiAnalysis={patientData.ai_analysis}
-        shapExplanations={patientData.shap_explanations}
-        limeExplanations={patientData.lime_explanations}
-        ragEvidence={patientData.rag_evidence}
-        recommendations={patientData.recommendations}
-      />
+      {/* Tab 5: Clinical Audit Trail */}
+      {activeWorkflowTab === 'audit' && (
+        <DoctorPatientAuditTrail patientId={patientId} />
+      )}
 
       {/* Review Notes Modal */}
       <DoctorReviewNotesModal

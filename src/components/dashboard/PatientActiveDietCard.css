@@ -1,0 +1,384 @@
+/* PatientActiveDietCard.css - Patient Personalized Diet Styling */
+
+.ayur-patient-diet-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.ayur-patient-diet-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: var(--space-2xl);
+  color: var(--color-text-secondary);
+}
+
+/* Pending State */
+.ayur-patient-diet-pending {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  background: linear-gradient(135deg, rgba(22, 56, 44, 0.03) 0%, rgba(91, 130, 102, 0.06) 100%);
+  border: 1px dashed var(--color-secondary);
+}
+
+.ayur-pstatus-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: rgba(91, 130, 102, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ayur-pstatus-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.ayur-pstatus-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-secondary);
+}
+
+.ayur-pstatus-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.ayur-pstatus-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.ayur-pstatus-steps {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  flex-wrap: wrap;
+}
+
+.step-item {
+  color: var(--color-text-muted);
+}
+
+.step-done {
+  color: var(--color-success);
+}
+
+.step-active {
+  color: var(--color-secondary);
+}
+
+/* Active Diet Hero */
+.ayur-pdiet-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.ayur-pdiet-hero__left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 650px;
+}
+
+.ayur-doctor-approved-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(46, 125, 50, 0.12);
+  color: #2e7d32;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.ayur-pversion-chip {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.ayur-pdiet-hero__title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 2px 0;
+  letter-spacing: -0.01em;
+}
+
+.ayur-pdiet-hero__subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  margin: 0;
+}
+
+.ayur-pdiet-objective {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.ayur-approval-stamp-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  background: rgba(46, 125, 50, 0.06);
+  border: 1px solid rgba(46, 125, 50, 0.2);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  min-width: 260px;
+}
+
+.ayur-stamp-label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.ayur-stamp-doctor {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--color-primary);
+}
+
+.ayur-stamp-date {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+/* Doctor Notes Box */
+.ayur-pdiet-doctor-notes {
+  background: rgba(197, 160, 89, 0.1);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--space-md);
+}
+
+.ayur-pdoctor-notes-text {
+  font-size: 0.9rem;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Section Titles */
+.ayur-pdiet-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.ayur-pdiet-section__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+/* Meals Grid */
+.ayur-pmeals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.ayur-pmeal-box {
+  background: rgba(0, 0, 0, 0.015);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.ayur-pmeal-box__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.ayur-pmeal-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ayur-pmeal-time {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: rgba(22, 56, 44, 0.08);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.ayur-pmeal-title {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 2px 0 6px 0;
+}
+
+.ayur-pmeal-items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+}
+
+.ayur-pmeal-items-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--color-text-primary);
+  line-height: 1.35;
+}
+
+.ayur-pbullet {
+  color: var(--color-secondary);
+  font-weight: bold;
+}
+
+.ayur-pmeal-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--color-border);
+  flex-wrap: wrap;
+}
+
+.ayur-pcalorie-tag,
+.ayur-pproperties-tag {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--color-text-secondary);
+}
+
+/* Guidelines Split */
+.ayur-pguidelines-split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-md);
+}
+
+.ayur-pguide-card {
+  background: rgba(0, 0, 0, 0.015);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.ayur-pguide-card--include {
+  border-top: 3px solid var(--color-success);
+}
+
+.ayur-pguide-card--avoid {
+  border-top: 3px solid #ef4444;
+}
+
+.ayur-pguide-title {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.ayur-pguide-list {
+  margin: 0;
+  padding-left: var(--space-lg);
+  font-size: 0.85rem;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Classical RAG References */
+.ayur-prag-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.ayur-prag-item {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.ayur-prag-source {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  margin-bottom: 2px;
+}
+
+.ayur-prag-trans {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+  margin: 0;
+}

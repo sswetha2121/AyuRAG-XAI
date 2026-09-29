@@ -140,3 +140,94 @@
 @keyframes ayur-spin {
   to { transform: rotate(360deg); }
 }
+
+/* Workflow Action Queues */
+.ayur-workflow-queues-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.ayur-wqueues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-md);
+}
+
+.ayur-wqueue-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.ayur-wqueue-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.ayur-wqueue-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(234, 88, 12, 0.12);
+  color: #c2410c;
+}
+
+.ayur-wqueue-badge--success {
+  background: rgba(46, 125, 50, 0.12);
+  color: #2e7d32;
+}
+
+.ayur-wqueue-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 120px;
+}
+
+.ayur-wqueue-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  gap: var(--space-xs);
+}
+
+.ayur-witem-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ayur-witem-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.ayur-witem-sub {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+.ayur-wqueue-empty {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: auto;
+  text-align: center;
+  padding: var(--space-md);
+}
+

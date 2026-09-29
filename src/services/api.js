@@ -111,4 +111,85 @@ export const api = {
   async getDoctorReports() {
     return fetchJson('/doctor/reports/');
   },
+
+  // Clinical Verification Workflow
+  async getPatientVerifications(patientId) {
+    return fetchJson(`/doctor/patients/${patientId}/verification/`);
+  },
+
+  async verifyPatientField(patientId, { field_name, action, verified_value, doctor_note }) {
+    return fetchJson(`/doctor/patients/${patientId}/verify-field/`, {
+      method: 'POST',
+      body: JSON.stringify({ field_name, action, verified_value, doctor_note }),
+    });
+  },
+
+  async verifyAllFields(patientId) {
+    return fetchJson(`/doctor/patients/${patientId}/verify-all/`, {
+      method: 'POST',
+    });
+  },
+
+  // Diet Plan Generation & Management
+  async generateDietPlan(patientId) {
+    return fetchJson(`/doctor/patients/${patientId}/diet/generate/`, {
+      method: 'POST',
+    });
+  },
+
+  async getPatientDietPlans(patientId) {
+    return fetchJson(`/doctor/patients/${patientId}/diet-plans/`);
+  },
+
+  async getDietPlanDetail(planId) {
+    return fetchJson(`/doctor/diet-plans/${planId}/`);
+  },
+
+  async updateDietPlan(planId, planData) {
+    return fetchJson(`/doctor/diet-plans/${planId}/`, {
+      method: 'PATCH',
+      body: JSON.stringify(planData),
+    });
+  },
+
+  async approveDietPlan(planId, approvalData = {}) {
+    return fetchJson(`/doctor/diet-plans/${planId}/approve/`, {
+      method: 'POST',
+      body: JSON.stringify(approvalData),
+    });
+  },
+
+  async rejectDietPlan(planId, reason = '') {
+    return fetchJson(`/doctor/diet-plans/${planId}/reject/`, {
+      method: 'POST',
+      body: JSON.stringify({ reason }),
+    });
+  },
+
+  async getPatientAuditLogs(patientId) {
+    return fetchJson(`/doctor/patients/${patientId}/audit-logs/`);
+  },
+
+  // Patient Isolated Diet Plan
+  async getPatientCurrentDiet() {
+    return fetchJson('/patient/diet/current/');
+  },
+
+  // Notifications
+  async getNotifications() {
+    return fetchJson('/notifications/');
+  },
+
+  async markNotificationRead(notificationId) {
+    return fetchJson(`/notifications/${notificationId}/read/`, {
+      method: 'PATCH',
+    });
+  },
+
+  async markAllNotificationsRead() {
+    return fetchJson('/notifications/mark-all-read/', {
+      method: 'POST',
+    });
+  },
 };
+
