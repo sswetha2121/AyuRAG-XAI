@@ -41,6 +41,36 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const doctorLogin = async (username, password) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await api.doctorLogin(username, password);
+      setUser(response.user);
+      return response.user;
+    } catch (err) {
+      setError(err.message || 'Physician login failed.');
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const register = async (patientData) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await api.register(patientData);
+      setUser(response.user);
+      return response.user;
+    } catch (err) {
+      setError(err.message || 'Registration failed.');
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const logout = async () => {
     try {
       await api.logout();
@@ -79,6 +109,8 @@ export const AuthProvider = ({ children }) => {
         isLoading,
         error,
         login,
+        doctorLogin,
+        register,
         logout,
         switchDemoPersona,
         checkAuth,

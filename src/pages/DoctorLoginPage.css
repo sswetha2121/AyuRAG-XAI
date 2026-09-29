@@ -1,0 +1,217 @@
+/* DoctorLoginPage.css - Dedicated Clinical Portal Login */
+
+.ayur-doctor-login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, rgba(22, 56, 44, 0.08) 0%, var(--color-bg) 70%);
+  padding: var(--space-md);
+}
+
+.ayur-dlogin-card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: 0 16px 40px rgba(22, 56, 44, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.ayur-dlogin-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+}
+
+.ayur-dlogin-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.ayur-dlogin-emblem {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-circle);
+  background: rgba(22, 56, 44, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-xs);
+  border: 1px solid rgba(22, 56, 44, 0.15);
+}
+
+.ayur-dlogin-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: var(--color-secondary);
+  background: rgba(91, 130, 102, 0.12);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+}
+
+.ayur-dlogin-title {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 4px 0 2px 0;
+  letter-spacing: -0.02em;
+}
+
+.ayur-dlogin-subtitle {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.ayur-dlogin-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  color: #DC2626;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.ayur-dlogin-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Quick Select Cards */
+.ayur-dlogin-quick-section {
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.ayur-dquick-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ayur-dquick-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xs);
+}
+
+.ayur-dquick-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.ayur-dquick-btn:hover {
+  background: rgba(22, 56, 44, 0.04);
+  border-color: var(--color-secondary);
+}
+
+.ayur-dquick-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ayur-dquick-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow: hidden;
+}
+
+.ayur-dquick-info strong {
+  font-size: 0.8rem;
+  color: var(--color-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ayur-dquick-info span {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Patient Link */
+.ayur-dlogin-patient-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  padding: 6px 0;
+}
+
+.ayur-dlink {
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.ayur-dlink:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.ayur-dlogin-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  text-align: center;
+  justify-content: center;
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-xs);
+}

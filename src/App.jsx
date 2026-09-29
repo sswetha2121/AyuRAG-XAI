@@ -23,6 +23,7 @@ import { DoctorPatientProfilePage } from './pages/DoctorPatientProfilePage';
 import { DoctorReviewsPage } from './pages/DoctorReviewsPage';
 import { DoctorReportsPage } from './pages/DoctorReportsPage';
 import { LoginPage } from './pages/LoginPage';
+import { DoctorLoginPage } from './pages/DoctorLoginPage';
 
 // Protected Route Guard for Doctor
 function DoctorProtectedRoute({ children, onTriggerToast }) {
@@ -39,16 +40,16 @@ function DoctorProtectedRoute({ children, onTriggerToast }) {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/doctor-login" state={{ from: location }} replace />;
   }
 
   if (role !== 'DOCTOR') {
     onTriggerToast?.({
       type: 'warning',
-      title: 'Access Restricted',
-      message: 'Doctor Dashboard is accessible ONLY to authenticated DOCTOR accounts.',
+      title: 'Physician Access Required',
+      message: 'This area is restricted to licensed doctors and clinical staff. Please authenticate via the Doctor Portal.',
     });
-    return <Navigate to="/" replace />;
+    return <Navigate to="/doctor-login" replace />;
   }
 
   return children;
@@ -487,6 +488,16 @@ function MainApp() {
             onTriggerToast={addToast}
           />
         }
+      />
+
+      {/* Dedicated Doctor Clinical Portal Login */}
+      <Route
+        path="/doctor-login"
+        element={<DoctorLoginPage onTriggerToast={addToast} />}
+      />
+      <Route
+        path="/doctor/login"
+        element={<DoctorLoginPage onTriggerToast={addToast} />}
       />
 
       {/* Protected Doctor Clinical Dashboard */}

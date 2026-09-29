@@ -49,6 +49,20 @@ export const api = {
     });
   },
 
+  async doctorLogin(username, password) {
+    return fetchJson('/auth/doctor-login/', {
+      method: 'POST',
+      body: JSON.stringify({ username, password }),
+    });
+  },
+
+  async register(patientData) {
+    return fetchJson('/auth/register/', {
+      method: 'POST',
+      body: JSON.stringify(patientData),
+    });
+  },
+
   async logout() {
     return fetchJson('/auth/logout/', {
       method: 'POST',
