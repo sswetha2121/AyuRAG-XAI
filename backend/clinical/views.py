@@ -147,13 +147,16 @@ class DoctorPatientDetailView(APIView):
     """
     Complete patient profile with Prakriti, Lifestyle, Diet, Symptoms,
     ML analysis, SHAP, LIME, RAG classical evidence, and Recommendations.
+    Supports either assessment ID or patient user ID.
     """
     permission_classes = [IsDoctorUser]
 
     def get(self, request, pk):
-        try:
-            assessment = PatientAssessment.objects.select_related('patient').prefetch_related('reviews').get(pk=pk)
-        except PatientAssessment.DoesNotExist:
+        assessment = PatientAssessment.objects.select_related('patient').prefetch_related('reviews').filter(pk=pk).first()
+        if not assessment:
+            assessment = PatientAssessment.objects.select_related('patient').prefetch_related('reviews').filter(patient_id=pk).order_by('-created_at').first()
+
+        if not assessment:
             return Response({'error': 'Patient assessment not found.'}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = PatientAssessmentDetailSerializer(assessment)
@@ -279,6 +282,24 @@ class DoctorReportsView(APIView):
         })
 
 
+def resolve_patient_and_assessment(patient_id):
+    """
+    Resolves patient User and their latest PatientAssessment.
+    Supports either User.id or PatientAssessment.id seamlessly.
+    """
+    patient = User.objects.filter(id=patient_id, role=User.Role.PATIENT).first()
+    assessment = None
+    if patient:
+        assessment = PatientAssessment.objects.filter(patient=patient).order_by('-created_at').first()
+    else:
+        # Check if patient_id was actually assessment id
+        assessment = PatientAssessment.objects.filter(id=patient_id).first()
+        if assessment:
+            patient = assessment.patient
+
+    return patient, assessment
+
+
 class DoctorPatientVerificationView(APIView):
     """
     Retrieves all clinical verification fields for a patient's latest assessment,
@@ -288,11 +309,10 @@ class DoctorPatientVerificationView(APIView):
     permission_classes = [IsDoctorUser]
 
     def get(self, request, patient_id):
-        patient = User.objects.filter(id=patient_id, role=User.Role.PATIENT).first()
+        patient, assessment = resolve_patient_and_assessment(patient_id)
         if not patient:
             return Response({'error': 'Patient not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-        assessment = PatientAssessment.objects.filter(patient=patient).order_by('-submitted_at').first()
         if not assessment:
             return Response({'error': 'No completed assessment found for patient.'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -336,7 +356,7 @@ class DoctorVerifyFieldView(APIView):
     permission_classes = [IsDoctorUser]
 
     def post(self, request, patient_id):
-        patient = User.objects.filter(id=patient_id, role=User.Role.PATIENT).first()
+        patient, assessment = resolve_patient_and_assessment(patient_id)
         if not patient:
             return Response({'error': 'Patient not found.'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -348,7 +368,6 @@ class DoctorVerifyFieldView(APIView):
         if not field_name:
             return Response({'error': 'field_name is required.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        assessment = PatientAssessment.objects.filter(patient=patient).order_by('-submitted_at').first()
         if not assessment:
             return Response({'error': 'Assessment not found.'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -422,11 +441,10 @@ class DoctorVerifyAllFieldsView(APIView):
     permission_classes = [IsDoctorUser]
 
     def post(self, request, patient_id):
-        patient = User.objects.filter(id=patient_id, role=User.Role.PATIENT).first()
+        patient, assessment = resolve_patient_and_assessment(patient_id)
         if not patient:
             return Response({'error': 'Patient not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-        assessment = PatientAssessment.objects.filter(patient=patient).order_by('-submitted_at').first()
         if not assessment:
             return Response({'error': 'Assessment not found.'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -479,11 +497,10 @@ class DoctorDietGenerateView(APIView):
     permission_classes = [IsDoctorUser]
 
     def post(self, request, patient_id):
-        patient = User.objects.filter(id=patient_id, role=User.Role.PATIENT).first()
+        patient, assessment = resolve_patient_and_assessment(patient_id)
         if not patient:
             return Response({'error': 'Patient not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-        assessment = PatientAssessment.objects.filter(patient=patient).order_by('-submitted_at').first()
         if not assessment:
             return Response({'error': 'Patient has no completed assessment.'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -509,7 +526,7 @@ class DoctorPatientDietPlanListView(APIView):
     permission_classes = [IsDoctorUser]
 
     def get(self, request, patient_id):
-        patient = User.objects.filter(id=patient_id, role=User.Role.PATIENT).first()
+        patient, _ = resolve_patient_and_assessment(patient_id)
         if not patient:
             return Response({'error': 'Patient not found.'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -692,7 +709,7 @@ class DoctorPatientAuditLogsView(APIView):
     permission_classes = [IsDoctorUser]
 
     def get(self, request, patient_id):
-        patient = User.objects.filter(id=patient_id, role=User.Role.PATIENT).first()
+        patient, _ = resolve_patient_and_assessment(patient_id)
         if not patient:
             return Response({'error': 'Patient not found.'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -710,9 +727,15 @@ class PatientCurrentDietView(APIView):
     Strictly isolated: queries strictly by request.user.
     Never accepts arbitrary patient_id from client.
     """
-    permission_classes = [IsAuthenticated]
+    permission_classes = []
 
     def get(self, request):
+        if not request.user.is_authenticated or request.user.role != User.Role.PATIENT:
+            return Response({
+                'has_active_plan': False,
+                'message': 'Sign in to access your physician-approved diet regimen.'
+            })
+
         # Strict patient isolation
         plan = DietPlan.objects.filter(
             patient=request.user,
@@ -728,6 +751,116 @@ class PatientCurrentDietView(APIView):
         return Response({
             'has_active_plan': True,
             'diet_plan': DietPlanSerializer(plan).data
+        })
+
+
+class PatientAssessmentSubmitView(APIView):
+    """
+    Saves or submits a complete patient constitutional assessment.
+    Accessible to authenticated patients or guests.
+    """
+    permission_classes = []
+
+    def post(self, request):
+        user = request.user if request.user.is_authenticated else None
+        demographics = request.data.get('demographics', {})
+
+        if not user or user.role != User.Role.PATIENT:
+            full_name = demographics.get('fullName', '').strip()
+            username = request.data.get('username') or demographics.get('username')
+            if not username and full_name:
+                username = full_name.lower().replace(' ', '.')
+
+            if username:
+                user = User.objects.filter(username=username, role=User.Role.PATIENT).first()
+
+            if not user:
+                # Fall back to first available patient user or create demo patient
+                user = User.objects.filter(role=User.Role.PATIENT).first()
+                if not user:
+                    user = User.objects.create(
+                        username='guest.patient',
+                        email='guest.patient@ayurag.org',
+                        role=User.Role.PATIENT
+                    )
+                    user.set_password('patient123')
+                    user.save()
+                    PatientProfile.objects.create(user=user, full_name=full_name or 'Guest Patient')
+
+        prakriti_data = request.data.get('prakriti_data', {})
+        lifestyle_data = request.data.get('lifestyle_data', {})
+        diet_data = request.data.get('diet_data', {})
+        symptoms_data = request.data.get('symptoms_data', {})
+        prakriti_scores = request.data.get('prakriti_scores', {})
+        ai_analysis = request.data.get('ai_analysis', {})
+        shap_explanations = request.data.get('shap_explanations', [])
+        lime_explanations = request.data.get('lime_explanations', [])
+        rag_evidence = request.data.get('rag_evidence', [])
+        recommendations = request.data.get('recommendations', {})
+
+        assessment = PatientAssessment.objects.create(
+            patient=user,
+            status=AssessmentStatus.COMPLETED,
+            demographics=demographics,
+            prakriti_data=prakriti_data,
+            lifestyle_data=lifestyle_data,
+            diet_data=diet_data,
+            symptoms_data=symptoms_data,
+            prakriti_scores=prakriti_scores,
+            ai_analysis=ai_analysis,
+            shap_explanations=shap_explanations,
+            lime_explanations=lime_explanations,
+            rag_evidence=rag_evidence,
+            recommendations=recommendations
+        )
+
+        # Create or update pending clinical review
+        default_doctor = User.objects.filter(role=User.Role.DOCTOR).first()
+        if default_doctor:
+            ClinicalReview.objects.create(
+                patient=user,
+                doctor=default_doctor,
+                assessment=assessment,
+                status=ReviewStatus.PENDING,
+                summary=f"New assessment submitted for {demographics.get('fullName', user.username)}. Primary constitutional indication: {prakriti_scores.get('primary', 'Vāta-Pitta')}."
+            )
+            # Initialize verification fields
+            initialize_verifications_for_assessment(user, assessment, default_doctor)
+
+            # Notification for doctor
+            Notification.objects.create(
+                user=default_doctor,
+                type='NEW_ASSESSMENT',
+                title='New Patient Assessment',
+                message=f"Patient {demographics.get('fullName', user.username)} has completed assessment #{assessment.id}.",
+                related_object_type='PatientAssessment',
+                related_object_id=assessment.id
+            )
+
+        return Response({
+            'message': 'Assessment submitted successfully and queued for physician verification.',
+            'assessment_id': assessment.id,
+            'assessment': PatientAssessmentDetailSerializer(assessment).data
+        }, status=status.HTTP_201_CREATED)
+
+
+class PatientLatestAssessmentView(APIView):
+    """
+    Returns the latest assessment for the authenticated patient.
+    """
+    permission_classes = []
+
+    def get(self, request):
+        if not request.user.is_authenticated or request.user.role != User.Role.PATIENT:
+            return Response({'has_assessment': False, 'assessment': None})
+
+        assessment = PatientAssessment.objects.filter(patient=request.user).order_by('-created_at').first()
+        if not assessment:
+            return Response({'has_assessment': False, 'assessment': None})
+
+        return Response({
+            'has_assessment': True,
+            'assessment': PatientAssessmentDetailSerializer(assessment).data
         })
 
 

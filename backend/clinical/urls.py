@@ -16,6 +16,8 @@ from .views import (
     DoctorDietPlanRejectView,
     DoctorPatientAuditLogsView,
     PatientCurrentDietView,
+    PatientAssessmentSubmitView,
+    PatientLatestAssessmentView,
     NotificationListView,
     NotificationMarkReadView
 )
@@ -44,6 +46,8 @@ urlpatterns = [
 
     # Patient Isolated Endpoints
     path('patient/diet/current/', PatientCurrentDietView.as_view(), name='patient-current-diet'),
+    path('patient/assessment/submit/', PatientAssessmentSubmitView.as_view(), name='patient-assessment-submit'),
+    path('patient/assessment/latest/', PatientLatestAssessmentView.as_view(), name='patient-assessment-latest'),
 
     # Notifications
     path('notifications/', NotificationListView.as_view(), name='notifications-list'),

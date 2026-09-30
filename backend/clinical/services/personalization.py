@@ -362,7 +362,7 @@ def generate_personalized_diet(
     if assessment_id:
         assessment = PatientAssessment.objects.filter(id=assessment_id, patient=patient).first()
     else:
-        assessment = PatientAssessment.objects.filter(patient=patient).order_by('-submitted_at').first()
+        assessment = PatientAssessment.objects.filter(patient=patient).order_by('-created_at').first()
 
     # 2. Resolve Verified Clinical Profile
     profile = get_effective_patient_profile(patient_id, assessment.id if assessment else None)

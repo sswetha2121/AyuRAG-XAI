@@ -117,7 +117,7 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
             variant="primary"
             type="submit"
             className="w-full mt-xs"
-            isLoading={isLoading}
+            loading={isLoading}
             rightIcon={<ArrowRight size={16} />}
           >
             Authenticate & Open Clinical Dashboard

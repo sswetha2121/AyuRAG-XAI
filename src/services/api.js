@@ -184,9 +184,20 @@ export const api = {
     return fetchJson(`/doctor/patients/${patientId}/audit-logs/`);
   },
 
-  // Patient Isolated Diet Plan
+  // Patient Isolated Diet Plan & Assessment
   async getPatientCurrentDiet() {
     return fetchJson('/patient/diet/current/');
+  },
+
+  async submitPatientAssessment(payload) {
+    return fetchJson('/patient/assessment/submit/', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  },
+
+  async getPatientLatestAssessment() {
+    return fetchJson('/patient/assessment/latest/');
   },
 
   // Notifications

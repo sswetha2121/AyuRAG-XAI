@@ -47,7 +47,7 @@ export const Sidebar = ({
     }));
   };
 
-  const isDoctor = mode === 'doctor' || user?.role === 'DOCTOR';
+  const isDoctor = mode === 'doctor';
 
   return (
     <>
