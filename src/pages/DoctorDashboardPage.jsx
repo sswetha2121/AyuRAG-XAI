@@ -14,7 +14,8 @@ import {
   Sparkles,
   ArrowRight,
   ShieldCheck,
-  RefreshCw
+  RefreshCw,
+  Utensils
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 

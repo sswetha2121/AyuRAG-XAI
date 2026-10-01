@@ -15,7 +15,14 @@ async function fetchJson(endpoint, options = {}) {
     ...options,
   };
 
-  const response = await fetch(`${BASE_URL}${endpoint}`, config);
+  let response;
+  try {
+    response = await fetch(`${BASE_URL}${endpoint}`, config);
+  } catch (netErr) {
+    const error = new Error('Cannot connect to backend server. Please ensure the Django API server is running on port 8000.');
+    error.status = 503;
+    throw error;
+  }
 
   if (response.status === 401 || response.status === 403) {
     const errorData = await response.json().catch(() => ({ detail: 'Authentication error' }));
@@ -26,7 +33,11 @@ async function fetchJson(endpoint, options = {}) {
   }
 
   if (!response.ok) {
-    const errorData = await response.json().catch(() => ({ detail: 'Server error' }));
+    const errorData = await response.json().catch(() => ({
+      detail: response.status >= 500
+        ? 'Backend service error. Please verify the Django server is active on port 8000.'
+        : `HTTP error ${response.status}`
+    }));
     const error = new Error(errorData.detail || errorData.error || `HTTP error ${response.status}`);
     error.status = response.status;
     error.data = errorData;
