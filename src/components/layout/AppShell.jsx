@@ -4,6 +4,7 @@ import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { ToastContainer } from '../ui/Toast';
 import { ChevronRight, Home } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 /**
  * AyuRAG-XAI Reusable Application Shell Layout
@@ -78,10 +79,12 @@ export const AppShell = ({
               <nav aria-label="Breadcrumb" className="ayur-breadcrumbs">
                 <ol className="ayur-breadcrumbs__list">
                   <li className="ayur-breadcrumbs__item">
-                    <span className="ayur-breadcrumbs__home">
-                      <Home size={13} />
-                    </span>
-                    <span className="ayur-breadcrumbs__text">AyuRAG-XAI</span>
+                    <Link to="/" className="ayur-breadcrumbs__home-link flex items-center gap-xs">
+                      <span className="ayur-breadcrumbs__home">
+                        <Home size={13} />
+                      </span>
+                      <span className="ayur-breadcrumbs__text">AyuRAG-XAI</span>
+                    </Link>
                   </li>
                   {breadcrumbs.map((crumb, idx) => (
                     <li key={idx} className="ayur-breadcrumbs__item">

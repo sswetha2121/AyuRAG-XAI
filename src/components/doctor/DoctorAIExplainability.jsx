@@ -79,6 +79,7 @@ export const DoctorAIExplainability = ({
       </div>
 
       {/* Transparent Inspection Tabs */}
+      
       <div className="ayur-xai-tabs">
         <button
           type="button"

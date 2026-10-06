@@ -19,8 +19,9 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
   const { doctorLogin, switchDemoPersona, isLoading } = useAuth();
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState('dr.sharma');
-  const [password, setPassword] = useState('doctor123');
+  // No hardcoded default credentials
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleDoctorSubmit = async (e) => {
@@ -92,7 +93,7 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
                 className="ayur-input ayur-input--icon"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="e.g. dr.sharma or dr.sharma@ayurag.org"
+                placeholder="Enter clinical ID or medical email"
                 required
               />
             </div>
@@ -126,7 +127,7 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
 
         {/* Quick Access for Verified Staff */}
         <div className="ayur-dlogin-quick-section">
-          <span className="ayur-dquick-label">Authorized Attending Physicians:</span>
+          <span className="ayur-dquick-label">Authorized Clinical Roles (Demo Profiles):</span>
 
           <div className="ayur-dquick-grid">
             <button
@@ -135,10 +136,10 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
               onClick={() => handleDoctorQuickSelect('dr.sharma')}
               disabled={isLoading}
             >
-              <div className="ayur-dquick-avatar">AS</div>
+              <div className="ayur-dquick-avatar">KC</div>
               <div className="ayur-dquick-info">
-                <strong>Dr. A. Sharma</strong>
-                <span>MD (Ayurveda - Kayachikitsa Lead)</span>
+                <strong>Kayachikitsa Lead</strong>
+                <span>Internal Medicine & Agni Specialist</span>
               </div>
             </button>
 
@@ -148,20 +149,26 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
               onClick={() => handleDoctorQuickSelect('dr.menon')}
               disabled={isLoading}
             >
-              <div className="ayur-dquick-avatar">VM</div>
+              <div className="ayur-dquick-avatar">PK</div>
               <div className="ayur-dquick-info">
-                <strong>Dr. V. Menon</strong>
-                <span>Panchakarma & Constitutional Lead</span>
+                <strong>Panchakarma Lead</strong>
+                <span>Detoxification & Constitutional Specialist</span>
               </div>
             </button>
           </div>
         </div>
 
-        {/* Return to Patient Portal */}
+        {/* Return to Patient Portal & Landing */}
         <div className="ayur-dlogin-patient-link">
           <span>Are you a patient seeking consultation?</span>
           <Link to="/login" className="ayur-dlink">
             Go to Patient Sign In / Registration →
+          </Link>
+        </div>
+
+        <div className="text-center mt-sm">
+          <Link to="/" className="text-xs text-secondary hover:underline font-medium">
+            ← Return to AyuRAG-XAI Landing Page
           </Link>
         </div>
 

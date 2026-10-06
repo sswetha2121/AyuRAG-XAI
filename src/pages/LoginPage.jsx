@@ -17,16 +17,16 @@ import {
 import { Button } from '../components/ui/Button';
 import { Link, useNavigate } from 'react-router-dom';
 
-export const LoginPage = ({ onLoginSuccess, onTriggerToast }) => {
+export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToast }) => {
   const { login, register, switchDemoPersona, isLoading } = useAuth();
   const navigate = useNavigate();
 
   // Mode: 'signin' or 'signup'
-  const [authMode, setAuthMode] = useState('signin');
+  const [authMode, setAuthMode] = useState(initialMode);
 
-  // Sign In Fields
-  const [username, setUsername] = useState('swetha.chowdary');
-  const [password, setPassword] = useState('patient123');
+  // Sign In Fields (No hardcoded default prefill)
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   // Sign Up Fields
   const [signUpForm, setSignUpForm] = useState({
@@ -187,7 +187,7 @@ export const LoginPage = ({ onLoginSuccess, onTriggerToast }) => {
                   className="ayur-input ayur-input--icon"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="e.g. swetha.chowdary or patient email"
+                  placeholder="Enter your username or email"
                   required
                 />
               </div>
@@ -233,7 +233,7 @@ export const LoginPage = ({ onLoginSuccess, onTriggerToast }) => {
                     className="ayur-input ayur-input--icon"
                     value={signUpForm.fullName}
                     onChange={(e) => setSignUpForm({ ...signUpForm, fullName: e.target.value })}
-                    placeholder="e.g. Swetha Chowdary"
+                    placeholder="Enter your full name"
                     required
                   />
                 </div>
@@ -248,7 +248,7 @@ export const LoginPage = ({ onLoginSuccess, onTriggerToast }) => {
                     className="ayur-input ayur-input--icon"
                     value={signUpForm.email}
                     onChange={(e) => setSignUpForm({ ...signUpForm, email: e.target.value })}
-                    placeholder="patient@example.com"
+                    placeholder="name@example.com"
                     required
                   />
                 </div>
@@ -265,7 +265,7 @@ export const LoginPage = ({ onLoginSuccess, onTriggerToast }) => {
                     className="ayur-input ayur-input--icon"
                     value={signUpForm.username}
                     onChange={(e) => setSignUpForm({ ...signUpForm, username: e.target.value })}
-                    placeholder="e.g. swetha.chowdary"
+                    placeholder="Choose a username"
                   />
                 </div>
               </div>
@@ -398,15 +398,22 @@ export const LoginPage = ({ onLoginSuccess, onTriggerToast }) => {
             </div>
             <div className="ayur-demo-btn__text">
               <strong>Login as Patient</strong>
-              <span>Swetha Chowdary (Prakriti Intake)</span>
+              <span>Verified Patient Persona (Constitutional Intake)</span>
             </div>
           </button>
         </div>
 
-        {/* Security Notice */}
+        {/* Security Notice & Back to Home */}
         <div className="ayur-login-footer">
-          <ShieldCheck size={14} className="text-secondary" />
-          <span>Clinical data secured with end-to-end patient isolation & Django authorization.</span>
+          <div className="flex items-center gap-xs justify-center mb-xs">
+            <ShieldCheck size={14} className="text-secondary" />
+            <span>Clinical data secured with patient isolation & Django authorization.</span>
+          </div>
+          <div className="text-center mt-xs">
+            <Link to="/" className="text-xs text-secondary hover:underline font-medium">
+              ← Return to AyuRAG-XAI Landing Page
+            </Link>
+          </div>
         </div>
       </div>
     </div>

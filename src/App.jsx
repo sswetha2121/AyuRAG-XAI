@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation, useParams } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation, useParams, Link } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { AssessmentProvider, useAssessment } from './context/AssessmentContext';
 import { AppShell } from './components/layout/AppShell';
@@ -25,6 +25,7 @@ import { DoctorReviewsPage } from './pages/DoctorReviewsPage';
 import { DoctorReportsPage } from './pages/DoctorReportsPage';
 import { LoginPage } from './pages/LoginPage';
 import { DoctorLoginPage } from './pages/DoctorLoginPage';
+import { LandingPage } from './pages/LandingPage';
 
 // Protected Route Guard for Doctor
 function DoctorProtectedRoute({ children, onTriggerToast }) {
@@ -146,7 +147,7 @@ function DoctorWorkspaceShell({ onTriggerToast, toasts, removeToast }) {
         onTriggerToast?.({
           type: 'info',
           title: 'Physician Profile',
-          message: `${user?.name || 'Dr. A. Sharma'} • Ayurvedic Clinical Lead`,
+          message: `${user?.name || 'Attending Physician'} • Ayurvedic Clinical Lead`,
         });
         break;
       default:
@@ -426,6 +427,21 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast }) {
         onComplete={handleAnalysisCompleted}
       />
 
+      {/* Patient Assessment Top Navigation & Auth Status Bar */}
+      <div className="ayur-assessment-nav-bar flex items-center justify-between mb-md px-xs">
+        <Link to="/" className="text-xs text-secondary hover:underline flex items-center gap-xs font-semibold">
+          ← Return to AyuRAG-XAI Landing Page
+        </Link>
+        {!user && (
+          <div className="flex items-center gap-sm text-xs text-muted">
+            <span>Want to link your assessment to a profile?</span>
+            <Link to="/login" className="text-secondary font-semibold hover:underline">
+              Sign In or Register →
+            </Link>
+          </div>
+        )}
+      </div>
+
       {currentStep === 'design-system' ? (
         <DesignSystemPage onTriggerToast={onTriggerToast} />
       ) : currentStep === 'personal-info' ? (
@@ -520,16 +536,55 @@ function MainApp() {
 
   return (
     <Routes>
-      {/* Login Gateway */}
+      {/* 1. Landing Page (First page opened by user at root /) */}
+      <Route
+        path="/"
+        element={<LandingPage onTriggerToast={addToast} />}
+      />
+
+      {/* 2. Patient Assessment Flow */}
+      <Route
+        path="/assessment/*"
+        element={
+          <PatientAssessmentShell
+            onTriggerToast={addToast}
+            toasts={toasts}
+            removeToast={removeToast}
+          />
+        }
+      />
+      <Route
+        path="/intake"
+        element={<Navigate to="/assessment" replace />}
+      />
+
+      {/* 3. Patient Authentication */}
       <Route
         path="/login"
         element={
           <LoginPage
+            initialMode="signin"
             onLoginSuccess={(user) => {
               if (user.role === 'DOCTOR') {
                 navigate('/doctor/dashboard');
               } else {
-                navigate('/');
+                navigate('/assessment');
+              }
+            }}
+            onTriggerToast={addToast}
+          />
+        }
+      />
+      <Route
+        path="/signup"
+        element={
+          <LoginPage
+            initialMode="signup"
+            onLoginSuccess={(user) => {
+              if (user.role === 'DOCTOR') {
+                navigate('/doctor/dashboard');
+              } else {
+                navigate('/assessment');
               }
             }}
             onTriggerToast={addToast}
@@ -537,7 +592,7 @@ function MainApp() {
         }
       />
 
-      {/* Dedicated Doctor Clinical Portal Login */}
+      {/* 4. Dedicated Doctor Clinical Portal Login */}
       <Route
         path="/doctor-login"
         element={<DoctorLoginPage onTriggerToast={addToast} />}
@@ -547,7 +602,7 @@ function MainApp() {
         element={<DoctorLoginPage onTriggerToast={addToast} />}
       />
 
-      {/* Protected Doctor Clinical Dashboard */}
+      {/* 5. Protected Doctor Clinical Dashboard */}
       <Route
         path="/doctor/*"
         element={
@@ -561,17 +616,8 @@ function MainApp() {
         }
       />
 
-      {/* Patient Assessment & Workflow Routes */}
-      <Route
-        path="/*"
-        element={
-          <PatientAssessmentShell
-            onTriggerToast={addToast}
-            toasts={toasts}
-            removeToast={removeToast}
-          />
-        }
-      />
+      {/* Fallback to Landing Page */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

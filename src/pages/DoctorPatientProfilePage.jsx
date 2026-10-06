@@ -193,7 +193,7 @@ export const DoctorPatientProfilePage = ({
             <div className="flex items-center gap-xs">
               <FileCheck size={16} className="text-success" />
               <h4 className="ayur-review-banner__title">
-                Physician Evaluation by {latestReview.doctor_name || 'Dr. A. Sharma'} [{latestReview.status}]
+                Physician Evaluation by {latestReview.doctor_name || 'Attending Physician'} [{latestReview.status}]
               </h4>
             </div>
             <span className="ayur-review-banner__date">

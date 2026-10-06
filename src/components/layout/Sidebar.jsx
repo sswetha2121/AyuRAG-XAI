@@ -12,9 +12,11 @@ import {
   Stethoscope,
   Activity
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { ProgressBar } from '../ui/ProgressBar';
 import { WORKFLOW_STEPS } from '../../constants/workflow';
 import { DOCTOR_NAV_ITEMS, DOCTOR_UTILITY_ITEMS } from '../../constants/doctorNav';
+import { useAssessment } from '../../context/AssessmentContext';
 
 /**
  * AyuRAG-XAI Reusable Sidebar Navigation
@@ -39,6 +41,15 @@ export const Sidebar = ({
     'doctor-ai-analysis': true,
   });
 
+  const navigate = useNavigate();
+  let assessmentContext = null;
+  try {
+    assessmentContext = useAssessment();
+  } catch (e) {
+    // Outside assessment provider
+  }
+  const patientFullName = assessmentContext?.personalInfo?.fullName;
+
   const toggleSubmenu = (menuId, e) => {
     e.stopPropagation();
     setExpandedMenus((prev) => ({
@@ -48,6 +59,12 @@ export const Sidebar = ({
   };
 
   const isDoctor = mode === 'doctor';
+  const displayName = isDoctor
+    ? user?.name || 'Attending Physician'
+    : user?.name || patientFullName || 'Active Patient';
+  const displayRole = isDoctor
+    ? 'Ayurvedic Clinical Lead'
+    : (user ? 'Registered Patient' : 'Constitutional Intake');
 
   return (
     <>
@@ -65,7 +82,11 @@ export const Sidebar = ({
         aria-label="Application Navigation"
       >
         {/* Brand Area */}
-        <div className="ayur-sidebar__brand">
+        <div
+          className="ayur-sidebar__brand cursor-pointer"
+          onClick={() => navigate('/')}
+          title="Return to AyuRAG-XAI Landing Page"
+        >
           <div className="ayur-brand-emblem" title="AyuRAG-XAI Decision Support">
             <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="36" height="36" rx="9" fill="#16382C" />
@@ -325,9 +346,7 @@ export const Sidebar = ({
             className="ayur-user-profile"
             title={
               isCollapsed
-                ? isDoctor
-                  ? `${user?.name || 'Dr. A. Sharma'} (Ayurvedic Clinical Lead)`
-                  : 'Patient Session'
+                ? `${displayName} (${displayRole})`
                 : undefined
             }
           >
@@ -337,10 +356,10 @@ export const Sidebar = ({
             </div>
             <div className="ayur-user-info">
               <span className="ayur-user-name">
-                {isDoctor ? user?.name || 'Dr. A. Sharma' : user?.name || 'Swetha Chowdary'}
+                {displayName}
               </span>
               <span className="ayur-user-role">
-                {isDoctor ? 'Ayurvedic Clinical Lead' : 'Registered Patient'}
+                {displayRole}
               </span>
             </div>
           </div>

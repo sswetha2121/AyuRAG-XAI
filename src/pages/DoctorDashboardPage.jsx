@@ -54,7 +54,7 @@ export const DoctorDashboardPage = ({
     fetchDashboard();
   }, []);
 
-  const doctorName = dashboardData?.doctor?.name || user?.name || 'Dr. A. Sharma';
+  const doctorName = dashboardData?.doctor?.name || user?.name || 'Attending Physician';
   const currentDate = new Date().toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'short',
