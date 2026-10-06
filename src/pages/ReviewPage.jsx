@@ -37,9 +37,9 @@ export const ReviewPage = ({
 
   const domainStatuses = [
     { name: '01 Personal Demographics', isComplete: isPersonalComplete },
-    { name: '02 Prakriti Constitution', isComplete: isPrakritiComplete },
-    { name: '03 Dinacharya & Routine', isComplete: isLifestyleComplete },
-    { name: '04 Ahara & Digestive Rhythm', isComplete: isDietComplete },
+    { name: '02 Body Constitution', isComplete: isPrakritiComplete },
+    { name: '03 Daily Routine & Sleep', isComplete: isLifestyleComplete },
+    { name: '04 Dietary Habits & Digestion', isComplete: isDietComplete },
     { name: '05 Symptoms & Health Focus', isComplete: isSymptomsComplete }
   ];
 
@@ -72,7 +72,7 @@ export const ReviewPage = ({
           <div className="ayur-rv-pipeline-line ayur-rv-pipeline-line--done" />
           <div className="ayur-rv-pipeline-step ayur-rv-pipeline-step--done">
             <span className="ayur-rv-pipeline-dot">✓</span>
-            <span className="ayur-rv-pipeline-text">Prakriti</span>
+            <span className="ayur-rv-pipeline-text">Constitution</span>
           </div>
           <div className="ayur-rv-pipeline-line ayur-rv-pipeline-line--done" />
           <div className="ayur-rv-pipeline-step ayur-rv-pipeline-step--done">
@@ -124,7 +124,7 @@ export const ReviewPage = ({
         </p>
       </div>
 
-      {/* 3. Main 2-Column Grid */}
+      {/* 3. Modern Grid Layout */}
       <div className="ayur-review-layout">
         {/* Left Column: 5 Review Section Cards */}
         <div className="ayur-review-main-col">
@@ -143,15 +143,15 @@ export const ReviewPage = ({
             onEdit={() => onEditStep?.('personal-info')}
           />
 
-          {/* 02 Prakriti */}
+          {/* 02 Constitution */}
           <ReviewSectionCard
             stepNumber="02"
-            title="Prakriti Constitutional Assessment"
+            title="Body Constitution Assessment"
             status={isPrakritiComplete ? 'complete' : 'needs-attention'}
             summaryItems={[
               { label: 'Constitutional Scope', value: 'Physical Frame, Digestion, Sleep & Mind' },
               { label: 'Questions Answered', value: `${prakritiCount} of 10 Parameters Recorded` },
-              { label: 'Assessment Mode', value: 'Tridosha Tri-Factor Evaluation (V-P-K)' }
+              { label: 'Assessment Mode', value: 'Multi-Factor Energy Evaluation' }
             ]}
             onEdit={() => onEditStep?.('prakriti')}
           />
@@ -159,7 +159,7 @@ export const ReviewPage = ({
           {/* 03 Lifestyle */}
           <ReviewSectionCard
             stepNumber="03"
-            title="Lifestyle Assessment (Dinacharya)"
+            title="Lifestyle Assessment (Daily Routine)"
             status={isLifestyleComplete ? 'complete' : 'needs-attention'}
             summaryItems={[
               { label: 'Daily Schedule', value: lifestyleAnswers.lifestyle_q1_routine_consistency || 'Not recorded' },
@@ -174,12 +174,12 @@ export const ReviewPage = ({
           {/* 04 Dietary */}
           <ReviewSectionCard
             stepNumber="04"
-            title="Dietary Assessment (Ahara & Agni)"
+            title="Dietary Assessment (Eating Habits & Digestion)"
             status={isDietComplete ? 'complete' : 'needs-attention'}
             summaryItems={[
               { label: 'Meal Regularity', value: dietAnswers.diet_q1_meal_regularity || 'Not recorded' },
               { label: 'Peak Meal Time', value: dietAnswers.diet_q2_meal_timings || 'Not recorded' },
-              { label: 'Agni Rhythm', value: dietAnswers.diet_q3_appetite_nature || 'Not recorded' },
+              { label: 'Digestive Rhythm', value: dietAnswers.diet_q3_appetite_nature || 'Not recorded' },
               { label: 'Dietary Style', value: dietAnswers.diet_q4_dietary_pattern || 'Not recorded' },
               { label: 'Post-Meal Comfort', value: dietAnswers.diet_q10_digestive_comfort || 'Not recorded' }
             ]}

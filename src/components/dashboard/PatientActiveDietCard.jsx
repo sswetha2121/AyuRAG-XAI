@@ -63,8 +63,8 @@ export const PatientActiveDietCard = () => {
           <span className="ayur-pstatus-badge">Clinical Review In Progress</span>
           <h3 className="ayur-pstatus-title">Personalized Diet Plan Under Physician Review</h3>
           <p className="ayur-pstatus-desc">
-            Your constitutional assessment is currently undergoing clinical verification by our Ayurvedic medical staff. 
-            Once your attending physician reviews and approves your individualized Ahara (Diet) regimen, 
+            Your constitutional assessment is currently undergoing clinical verification by our medical staff. 
+            Once your attending physician reviews and approves your individualized dietary regimen, 
             it will be activated right here on your dashboard.
           </p>
           <div className="ayur-pstatus-steps">
@@ -140,7 +140,7 @@ export const PatientActiveDietCard = () => {
       <div className="ayur-pdiet-section">
         <h3 className="ayur-pdiet-section__title">
           <Utensils size={18} className="text-secondary" />
-          <span>Daily Ahara Schedule (Meals & Timings)</span>
+          <span>Daily Meal Schedule (Meals & Timings)</span>
         </h3>
 
         <div className="ayur-pmeals-grid">
@@ -188,13 +188,13 @@ export const PatientActiveDietCard = () => {
         </div>
       </div>
 
-      {/* 4. Foods to Include vs Avoid (Pathya & Apathya) */}
+      {/* 4. Foods to Include vs Avoid */}
       <div className="ayur-pdiet-section">
         <div className="ayur-pguidelines-split">
           {/* Foods to Include */}
           <div className="ayur-pguide-card ayur-pguide-card--include">
             <h4 className="ayur-pguide-title text-success font-serif font-bold">
-              ✓ Foods to Favor (Pathya Ahara)
+              ✓ Foods to Favor (Wholesome Options)
             </h4>
             <ul className="ayur-pguide-list">
               {(plan.foods_to_include || []).map((food, idx) => (
@@ -206,7 +206,7 @@ export const PatientActiveDietCard = () => {
           {/* Foods to Avoid */}
           <div className="ayur-pguide-card ayur-pguide-card--avoid">
             <h4 className="ayur-pguide-title text-danger font-serif font-bold">
-              ✕ Foods to Avoid (Apathya / Contraindications)
+              ✕ Foods to Avoid (Contraindications)
             </h4>
             <ul className="ayur-pguide-list">
               {(plan.foods_to_avoid || []).map((food, idx) => (
@@ -223,7 +223,7 @@ export const PatientActiveDietCard = () => {
           {/* Lifestyle */}
           <div className="ayur-pguide-card">
             <h4 className="ayur-pguide-title text-primary font-serif font-bold">
-              Lifestyle & Dinacharya Guidance
+              Lifestyle & Daily Routine Guidance
             </h4>
             <ul className="ayur-pguide-list">
               {(plan.lifestyle_notes || []).map((note, idx) => (

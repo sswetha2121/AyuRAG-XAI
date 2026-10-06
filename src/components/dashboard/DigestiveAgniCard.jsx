@@ -17,18 +17,18 @@ export const DigestiveAgniCard = ({
                 Metabolic Intelligence
               </Badge>
               <Badge color="primary" variant="subtle" size="sm">
-                Agni Evaluation
+                Digestive Metabolism
               </Badge>
             </div>
-            <span className="ayur-demo-badge">Demonstration Agni Signal</span>
+            <span className="ayur-demo-badge">Metabolic Signal</span>
           </div>
 
           <CardTitle as="h2" className="ayur-agni-title">
-            Digestive Capacity & <span className="ayur-agni-highlight">Agni Equilibrium</span>
+            Digestive Capacity & <span className="ayur-agni-highlight">Metabolic Balance</span>
           </CardTitle>
 
           <CardDescription className="ayur-agni-desc">
-            Evaluating the metabolic fire responsible for nutrient assimilation, bio-transformation, and toxic accumulation (Ama) prevention.
+            Evaluating the metabolic capacity responsible for nutrient assimilation, bio-transformation, and digestive waste prevention.
           </CardDescription>
         </CardHeader>
 
@@ -37,7 +37,7 @@ export const DigestiveAgniCard = ({
             <div className="ayur-agni-status-box">
               <div className="flex items-center gap-xs mb-xs">
                 <Flame size={18} className="text-accent" />
-                <span className="font-semibold text-body text-primary">Assessed Agni State:</span>
+                <span className="font-semibold text-body text-primary">Assessed Digestive State:</span>
               </div>
               <h3 className="ayur-agni-status-val">{agniPattern}</h3>
               <p className="text-small text-muted mt-2xs mb-0">
@@ -46,12 +46,12 @@ export const DigestiveAgniCard = ({
             </div>
 
             <div className="ayur-agni-protocols-box">
-              <h4 className="ayur-agni-protocol-title">Core Agni Optimization Rules:</h4>
+              <h4 className="ayur-agni-protocol-title">Core Digestive Optimization Rules:</h4>
               <ul className="ayur-agni-rules-list">
                 <li>Eat in a calm, seated environment without emotional distress or digital distractions</li>
-                <li>Leave one-third of the stomach capacity empty for enzymatic churning (Mitāhāra)</li>
-                <li>Favor warm water (Uṣṇodaka) seasoned with fresh ginger slices before heavy meals</li>
-                <li>Avoid cold yogurt, heavy fried items, or iced desserts late in the evening</li>
+                <li>Leave one-third of stomach capacity empty for optimal digestive circulation</li>
+                <li>Favor warm water infused with fresh ginger slices before heavy meals</li>
+                <li>Avoid cold dairy, heavy fried items, or iced desserts late in the evening</li>
               </ul>
             </div>
           </div>

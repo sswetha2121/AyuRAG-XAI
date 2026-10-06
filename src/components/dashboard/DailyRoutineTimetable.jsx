@@ -24,14 +24,14 @@ export const DailyRoutineTimetable = ({
                 Circadian Architecture
               </Badge>
               <Badge color="primary" variant="subtle" size="sm">
-                Dinacharya Protocol
+                Daily Routine Protocol
               </Badge>
             </div>
             <span className="ayur-demo-badge">4-Phase Circadian Guidance</span>
           </div>
 
           <CardTitle as="h2" className="ayur-routine-title">
-            Personalized Daily Routine <span className="ayur-routine-highlight">(Dinacaryā)</span>
+            Personalized Daily Routine <span className="ayur-routine-highlight">(Schedule)</span>
           </CardTitle>
 
           <CardDescription className="ayur-routine-desc">
@@ -52,7 +52,7 @@ export const DailyRoutineTimetable = ({
                     </div>
                     <div>
                       <h3 className="ayur-timetable-phase-name">{phase.phase}</h3>
-                      <span className="ayur-timetable-time-tag">{phase.sanskrit}</span>
+                      <span className="ayur-timetable-time-tag">{phase.timeWindow || phase.sanskrit}</span>
                     </div>
                   </div>
 

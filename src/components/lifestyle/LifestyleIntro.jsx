@@ -37,7 +37,7 @@ export const LifestyleIntro = ({ onStart, className = '' }) => {
                 Step 03 of 06
               </Badge>
               <Badge color="primary" variant="subtle" size="md">
-                Dinacharya & Lifestyle Analysis
+                Daily Routine & Lifestyle Analysis
               </Badge>
             </div>
             <span className="ayur-ls-est-badge">
@@ -51,7 +51,7 @@ export const LifestyleIntro = ({ onStart, className = '' }) => {
           </CardTitle>
 
           <CardDescription className="ayur-ls-intro-desc">
-            Your routine, activity, sleep and everyday habits provide essential physiological context for accurate Ayurvedic personalization and explainable intelligence.
+            Your routine, activity, sleep and everyday habits provide essential physiological context for accurate personalization and explainable intelligence.
           </CardDescription>
         </CardHeader>
 
@@ -71,7 +71,6 @@ export const LifestyleIntro = ({ onStart, className = '' }) => {
                   </div>
 
                   <h3 className="ayur-ls-cat-preview-name">{cat.name}</h3>
-                  <span className="ayur-ls-cat-preview-sanskrit">{cat.sanskritName}</span>
                   <p className="ayur-ls-cat-preview-desc">{cat.description}</p>
                 </div>
               );
@@ -82,10 +81,10 @@ export const LifestyleIntro = ({ onStart, className = '' }) => {
           <div className="ayur-ls-intro-note">
             <div className="flex items-center gap-xs text-secondary font-semibold text-small mb-2xs">
               <ShieldCheck size={16} />
-              <span>Ayurvedic Clinical Rationale</span>
+              <span>Holistic Health Rationale</span>
             </div>
             <p className="text-small text-muted mb-0">
-              In classical Ayurveda, <em>Dinacharya</em> (daily regimen) directly modulates the constitutional doshas (Vāta, Pitta, and Kapha). Understanding your circadian rhythms enables AyuRAG-XAI to calibrate precise, non-prescriptive behavioral insights.
+              Daily habits, sleep schedules, and physical activity directly modulate energy balance and metabolic rhythm. Understanding your routines enables the AI to calibrate personalized, evidence-grounded lifestyle recommendations.
             </p>
           </div>
         </CardContent>

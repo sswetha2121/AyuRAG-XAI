@@ -47,7 +47,7 @@ export const PrakritiCompletionCard = ({
           </div>
 
           <CardTitle as="h2" className="ayur-completion-title">
-            Prakriti Assessment <span className="ayur-completion-accent">Baseline Recorded</span>
+            Body Constitution Assessment <span className="ayur-completion-accent">Baseline Recorded</span>
           </CardTitle>
 
           <CardDescription className="ayur-completion-desc">
@@ -58,33 +58,33 @@ export const PrakritiCompletionCard = ({
 
         <CardContent>
           <div className="ayur-completion-summary-grid">
-            {/* Vata Distribution Box */}
+            {/* Movement Distribution Box */}
             <div className="ayur-completion-dosha-box ayur-completion-dosha--vata">
               <div className="flex items-center gap-xs mb-xs">
                 <Wind size={16} className="text-secondary" />
-                <span className="font-semibold text-body">Vāta Energy</span>
+                <span className="font-semibold text-body">Movement Energy</span>
               </div>
               <span className="ayur-completion-pct">{vataPct}%</span>
               <span className="text-caption text-muted">Movement & Variability</span>
               <ProgressBar value={vataPct} color="primary" size="sm" className="mt-xs" />
             </div>
 
-            {/* Pitta Distribution Box */}
+            {/* Metabolic Distribution Box */}
             <div className="ayur-completion-dosha-box ayur-completion-dosha--pitta">
               <div className="flex items-center gap-xs mb-xs">
                 <Flame size={16} className="text-accent" />
-                <span className="font-semibold text-body">Pitta Energy</span>
+                <span className="font-semibold text-body">Metabolic Energy</span>
               </div>
               <span className="ayur-completion-pct">{pittaPct}%</span>
               <span className="text-caption text-muted">Metabolism & Transformation</span>
               <ProgressBar value={pittaPct} color="accent" size="sm" className="mt-xs" />
             </div>
 
-            {/* Kapha Distribution Box */}
+            {/* Structural Distribution Box */}
             <div className="ayur-completion-dosha-box ayur-completion-dosha--kapha">
               <div className="flex items-center gap-xs mb-xs">
                 <Mountain size={16} className="text-primary" />
-                <span className="font-semibold text-body">Kapha Energy</span>
+                <span className="font-semibold text-body">Structural Energy</span>
               </div>
               <span className="ayur-completion-pct">{kaphaPct}%</span>
               <span className="text-caption text-muted">Structure & Cohesion</span>
@@ -97,7 +97,7 @@ export const PrakritiCompletionCard = ({
             <div className="flex flex-col gap-2xs">
               <span className="font-semibold text-small text-primary">Next Phase Preparation</span>
               <p className="text-caption text-secondary">
-                Prakriti represents biological baseline tendencies. In <strong>Phase 4</strong>, the system evaluates current lifestyle habits (<em>Dinacharya</em>) and dietary patterns (<em>Ahara</em>) to distinguish natural balance from active symptoms.
+                Body constitution represents biological baseline tendencies. In the next phases, the system evaluates current daily lifestyle habits and dietary patterns to distinguish natural baseline from active symptoms.
               </p>
             </div>
           </div>

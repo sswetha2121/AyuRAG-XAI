@@ -68,9 +68,6 @@ export const DietQuestionCard = ({
           <Badge color="accent" variant="subtle" size="sm" icon={<Utensils size={11} />}>
             {questionData.category}
           </Badge>
-          {questionData.sanskritTerm && (
-            <span className="ayur-sanskrit-tag">{questionData.sanskritTerm}</span>
-          )}
         </div>
 
         <h2 className="ayur-diet-q-title">{questionData.question}</h2>
@@ -92,7 +89,7 @@ export const DietQuestionCard = ({
             <Lightbulb size={14} />
           </div>
           <div className="ayur-diet-hint-text">
-            <span className="font-semibold text-primary">Ayurvedic Ahara Principle:</span> {questionData.hint}
+            <span className="font-semibold text-primary">Dietary Health Principle:</span> {questionData.hint}
           </div>
         </div>
       )}

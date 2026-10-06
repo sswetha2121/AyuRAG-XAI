@@ -54,7 +54,7 @@ export const DoctorAIExplainability = ({
                 <span className="ayur-badge-tag ayur-badge-tag--model">Model Output</span>
                 <span className="ayur-badge-tag ayur-badge-tag--review">Clinical Review Required</span>
               </div>
-              <h3 className="ayur-model-prediction">{aiAnalysis.prediction || 'Vāta-Pitta Agnimandya (Metabolic Imbalance)'}</h3>
+              <h3 className="ayur-model-prediction">{aiAnalysis.prediction || 'Movement-Metabolism Imbalance (Digestive Sluggishness)'}</h3>
             </div>
           </div>
 
@@ -203,7 +203,7 @@ export const DoctorAIExplainability = ({
               <div>
                 <h4 className="ayur-panel-title">Retrieved Classical Ayurvedic Knowledge</h4>
                 <p className="ayur-panel-desc">
-                  Vector semantic search citations grounding the personalized protocol in peer-recognized Samhita treatises.
+                  Vector semantic search citations grounding the personalized protocol in peer-recognized medical treatises.
                 </p>
               </div>
               <span className="ayur-rag-badge">CCRAS Grounded</span>
@@ -250,7 +250,7 @@ export const DoctorAIExplainability = ({
                 <div className="ayur-rec-grid">
                   {recommendations.ahara && (
                     <div className="ayur-rec-block">
-                      <span className="ayur-rec-label">Āhāra (Dietary Guidelines)</span>
+                      <span className="ayur-rec-label">Dietary Guidelines</span>
                       <ul className="ayur-rec-list">
                         {recommendations.ahara.map((item, i) => (
                           <li key={i}>{item}</li>
@@ -261,7 +261,7 @@ export const DoctorAIExplainability = ({
 
                   {recommendations.vihara && (
                     <div className="ayur-rec-block">
-                      <span className="ayur-rec-label">Vihāra (Lifestyle & Dinacharya)</span>
+                      <span className="ayur-rec-label">Lifestyle & Daily Routine Guidelines</span>
                       <ul className="ayur-rec-list">
                         {recommendations.vihara.map((item, i) => (
                           <li key={i}>{item}</li>
@@ -272,7 +272,7 @@ export const DoctorAIExplainability = ({
 
                   {recommendations.classical_formulations && (
                     <div className="ayur-rec-block">
-                      <span className="ayur-rec-label">Aushadha (Supportive Formulations)</span>
+                      <span className="ayur-rec-label">Supportive Herbal Formulations</span>
                       <ul className="ayur-rec-list">
                         {recommendations.classical_formulations.map((item, i) => (
                           <li key={i}>{item}</li>

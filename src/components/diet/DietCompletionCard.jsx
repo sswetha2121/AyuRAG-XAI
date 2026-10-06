@@ -29,7 +29,7 @@ export const DietCompletionCard = ({
                 Step 04 Complete
               </Badge>
               <Badge color="accent" variant="subtle" size="md">
-                Ahara & Agni Profile Recorded
+                Dietary & Digestive Profile Recorded
               </Badge>
             </div>
             <span className="ayur-dt-completed-tag">
@@ -42,7 +42,7 @@ export const DietCompletionCard = ({
           </CardTitle>
 
           <CardDescription className="ayur-dt-complete-desc">
-            {patientName ? `Digestive fire (Agni) and meal rhythm documented for ${patientName}.` : 'Your dietary preferences and digestive tendencies are now registered.'}
+            {patientName ? `Digestive capacity and meal rhythm documented for ${patientName}.` : 'Your dietary preferences and digestive tendencies are now registered.'}
           </CardDescription>
         </CardHeader>
 
@@ -63,7 +63,7 @@ export const DietCompletionCard = ({
                 <Flame size={20} className="text-accent" />
               </div>
               <div className="ayur-dt-metric-info">
-                <span className="ayur-dt-metric-label">Agni Rhythm</span>
+                <span className="ayur-dt-metric-label">Digestive Metabolism</span>
                 <span className="ayur-dt-metric-val">Evaluated</span>
               </div>
             </div>
@@ -83,7 +83,7 @@ export const DietCompletionCard = ({
                 <Utensils size={20} className="text-primary" />
               </div>
               <div className="ayur-dt-metric-info">
-                <span className="ayur-dt-metric-label">Rasa Preferences</span>
+                <span className="ayur-dt-metric-label">Taste Preferences</span>
                 <span className="ayur-dt-metric-val">Recorded</span>
               </div>
             </div>
@@ -95,7 +95,7 @@ export const DietCompletionCard = ({
               <span>Next Milestone: Symptoms & Health Context</span>
             </div>
             <p className="text-small text-muted mb-0">
-              Personal Information, Prakriti, Lifestyle, and Dietary profiles are securely saved. Step 5 will gather any active symptoms or specific concerns to contextualize explainable AI predictions.
+              Personal Information, Body Constitution, Lifestyle, and Dietary profiles are securely saved. Step 5 will gather any active symptoms or specific concerns to contextualize explainable AI predictions.
             </p>
           </div>
         </CardContent>

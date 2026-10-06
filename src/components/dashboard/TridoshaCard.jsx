@@ -25,10 +25,10 @@ export const TridoshaCard = ({
           <div className="flex items-center justify-between flex-wrap gap-xs">
             <div className="flex items-center gap-xs">
               <Badge color="accent" variant="solid" size="sm" icon={<Sparkles size={11} />}>
-                Constitutional Prakriti
+                Constitutional Profile
               </Badge>
               <Badge color="primary" variant="subtle" size="sm">
-                Tri-Dosha Assessment
+                Bio-Energy Distribution
               </Badge>
             </div>
             <span className="ayur-demo-badge">Illustrative assessment visualization</span>
@@ -46,7 +46,7 @@ export const TridoshaCard = ({
         <CardContent>
           {/* 3 Horizontal Distribution Bars */}
           <div className="ayur-dosha-visualizer-grid">
-            {/* Vata Bar */}
+            {/* Movement Bar */}
             <div className="ayur-dosha-bar-card ayur-dosha-bar-card--vata">
               <div className="ayur-dosha-bar-head">
                 <div className="flex items-center gap-xs">
@@ -54,8 +54,8 @@ export const TridoshaCard = ({
                     <Wind size={16} />
                   </div>
                   <div>
-                    <h4 className="ayur-dosha-name">Vāta (Movement & Space)</h4>
-                    <span className="ayur-dosha-elements">Air + Ether • Light, Mobile, Cool</span>
+                    <h4 className="ayur-dosha-name">Movement & Circulation (Air & Space)</h4>
+                    <span className="ayur-dosha-elements">Air + Space • Light, Mobile, Cool</span>
                   </div>
                 </div>
                 <span className="ayur-dosha-pct-val font-mono">{vataPct}%</span>
@@ -68,7 +68,7 @@ export const TridoshaCard = ({
               </ul>
             </div>
 
-            {/* Pitta Bar */}
+            {/* Metabolism Bar */}
             <div className="ayur-dosha-bar-card ayur-dosha-bar-card--pitta">
               <div className="ayur-dosha-bar-head">
                 <div className="flex items-center gap-xs">
@@ -76,21 +76,21 @@ export const TridoshaCard = ({
                     <Flame size={16} />
                   </div>
                   <div>
-                    <h4 className="ayur-dosha-name">Pitta (Metabolism & Transformation)</h4>
-                    <span className="ayur-dosha-elements">Fire + Water • Warm, Sharp, Oily</span>
+                    <h4 className="ayur-dosha-name">Metabolism & Digestion (Fire & Water)</h4>
+                    <span className="ayur-dosha-elements">Fire + Water • Warm, Sharp, Transformative</span>
                   </div>
                 </div>
                 <span className="ayur-dosha-pct-val font-mono">{pittaPct}%</span>
               </div>
               <ProgressBar value={pittaPct} color="accent" size="md" />
               <ul className="ayur-dosha-traits-list">
-                {(qualities.pitta || ['Sharp enzymatic Agni', 'Goal-driven focus', 'Warm skin temperature']).map((trait, i) => (
+                {(qualities.pitta || ['Strong digestive capacity', 'Goal-driven focus', 'Warm skin temperature']).map((trait, i) => (
                   <li key={i}>{trait}</li>
                 ))}
               </ul>
             </div>
 
-            {/* Kapha Bar */}
+            {/* Structure Bar */}
             <div className="ayur-dosha-bar-card ayur-dosha-bar-card--kapha">
               <div className="ayur-dosha-bar-head">
                 <div className="flex items-center gap-xs">
@@ -98,8 +98,8 @@ export const TridoshaCard = ({
                     <Mountain size={16} />
                   </div>
                   <div>
-                    <h4 className="ayur-dosha-name">Kapha (Structure & Lubrication)</h4>
-                    <span className="ayur-dosha-elements">Earth + Water • Dense, Stable, Cool</span>
+                    <h4 className="ayur-dosha-name">Structure & Nourishment (Earth & Water)</h4>
+                    <span className="ayur-dosha-elements">Earth + Water • Dense, Stable, Grounding</span>
                   </div>
                 </div>
                 <span className="ayur-dosha-pct-val font-mono">{kaphaPct}%</span>
@@ -117,10 +117,10 @@ export const TridoshaCard = ({
           <div className="ayur-tridosha-footer-note">
             <div className="flex items-center gap-xs text-secondary font-semibold text-small mb-2xs">
               <ShieldCheck size={16} />
-              <span>Classical Ayurvedic Grounding (Ashtanga Hridaya Sutrasthana 1.7)</span>
+              <span>Evidence-Based Constitutional Principles</span>
             </div>
             <p className="text-small text-muted mb-0">
-              <em>"Vāyuḥ pittaṁ kaphaśceti trayo doṣāḥ samāsataḥ..."</em> — Vāta, Pitta, and Kapha maintain somatic equilibrium when balanced. Your predominant baseline guides nutritional choices (Ahara) and daily lifestyle pacing (Dinacharya).
+              Movement, metabolic fire, and physical stability maintain holistic equilibrium when harmonized. Your predominant baseline guides nutritional choices and personalized daily pacing.
             </p>
           </div>
         </CardContent>

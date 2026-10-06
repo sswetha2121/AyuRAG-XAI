@@ -57,7 +57,7 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
         navigate('/doctor/dashboard');
       } else {
         onLoginSuccess?.(user);
-        navigate('/');
+        navigate('/assessment-overview');
       }
     } catch (err) {
       setErrorMessage(err.message || 'Invalid username or password.');
@@ -97,7 +97,7 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
       });
 
       onLoginSuccess?.(user);
-      navigate('/');
+      navigate('/assessment-overview');
     } catch (err) {
       setErrorMessage(err.message || 'Registration failed. Please check your details.');
     }
@@ -116,7 +116,7 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
         navigate('/doctor/dashboard');
       } else {
         onLoginSuccess?.(user);
-        navigate('/');
+        navigate('/assessment-overview');
       }
     } catch (err) {
       setErrorMessage(err.message || `Failed to switch to ${role} demo.`);

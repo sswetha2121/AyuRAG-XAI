@@ -57,11 +57,6 @@ export const SymptomDetailModal = ({
           <div>
             <div className="flex items-center gap-xs">
               <span className="ayur-detail-cat-badge">{symptom.category}</span>
-              {symptom.sanskritName && (
-                <span className="font-serif text-accent italic text-xs">
-                  {symptom.sanskritName}
-                </span>
-              )}
             </div>
             <h3 id="symptom-detail-title" className="ayur-symptom-detail__title">
               {symptom.name}

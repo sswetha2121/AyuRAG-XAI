@@ -156,9 +156,9 @@ export const DoctorPatientVerification = ({
   const categories = [
     { id: 'all', label: 'All Fields', icon: ShieldCheck, count: stats.total_fields },
     { id: 'personal', label: 'Personal Information', icon: User },
-    { id: 'prakriti', label: 'Prakriti Constitution', icon: Activity },
-    { id: 'lifestyle', label: 'Lifestyle & Dinacharya', icon: Moon },
-    { id: 'diet', label: 'Diet & Agni', icon: Utensils },
+    { id: 'prakriti', label: 'Body Constitution', icon: Activity },
+    { id: 'lifestyle', label: 'Lifestyle & Daily Routine', icon: Moon },
+    { id: 'diet', label: 'Diet & Digestion', icon: Utensils },
     { id: 'symptoms', label: 'Symptoms & Chronicity', icon: HeartPulse },
   ];
 

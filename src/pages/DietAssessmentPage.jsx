@@ -86,7 +86,7 @@ export const DietAssessmentPage = ({ onContinueToNextPhase, onBackToPreviousPhas
       onTriggerToast?.({
         type: 'success',
         title: 'Dietary Assessment Complete',
-        message: '10 of 10 Ahara parameters saved in session storage.'
+        message: '10 of 10 dietary parameters saved in session storage.'
       });
     }
   };
@@ -155,7 +155,7 @@ export const DietAssessmentPage = ({ onContinueToNextPhase, onBackToPreviousPhas
           <div className="ayur-dt-pipeline-line ayur-dt-pipeline-line--done" />
           <div className="ayur-dt-pipeline-step ayur-dt-pipeline-step--done">
             <span className="ayur-dt-pipeline-dot">✓</span>
-            <span className="ayur-dt-pipeline-text">Prakriti</span>
+            <span className="ayur-dt-pipeline-text">Constitution</span>
           </div>
           <div className="ayur-dt-pipeline-line ayur-dt-pipeline-line--done" />
           <div className="ayur-dt-pipeline-step ayur-dt-pipeline-step--done">

@@ -253,7 +253,7 @@ export const DoctorDietPlanEditor = ({
         <div className="ayur-diet-header__left">
           <div className="flex items-center gap-xs">
             <Utensils size={20} className="text-primary" />
-            <h2 className="ayur-diet-title">Personalized Ahara (Diet) Clinical Protocol</h2>
+            <h2 className="ayur-diet-title">Personalized Dietary Clinical Protocol</h2>
           </div>
 
           {plans.length > 0 && (
@@ -326,8 +326,8 @@ export const DoctorDietPlanEditor = ({
           </div>
           <h3>No Diet Plan Generated Yet</h3>
           <p>
-            Synthesize an individualized Ayurvedic Ahara regimen informed by doctor-verified
-            Prakriti, metabolic Agni status, and classical RAG textual citations.
+            Synthesize an individualized dietary regimen informed by doctor-verified
+            body constitution, metabolic digestive status, and evidence citations.
           </p>
           <Button
             variant="primary"
@@ -402,7 +402,7 @@ export const DoctorDietPlanEditor = ({
               onClick={() => setActiveTab('meals')}
             >
               <Utensils size={15} />
-              <span>Meal Regimes (Ahara)</span>
+              <span>Meal Regimes (Diet)</span>
             </button>
             <button
               type="button"
@@ -410,7 +410,7 @@ export const DoctorDietPlanEditor = ({
               onClick={() => setActiveTab('guidelines')}
             >
               <FileCheck size={15} />
-              <span>Pathya / Apathya Guidelines</span>
+              <span>Dietary Guidelines</span>
             </button>
             <button
               type="button"
@@ -537,7 +537,7 @@ export const DoctorDietPlanEditor = ({
               {/* Foods to Include */}
               <div className="ayur-guide-card ayur-guide-card--include">
                 <div className="ayur-guide-card__header">
-                  <h4 className="text-success font-serif font-bold">Foods to Include (Pathya Ahara)</h4>
+                  <h4 className="text-success font-serif font-bold">Foods to Include (Wholesome Options)</h4>
                   <button
                     type="button"
                     className="ayur-mini-add-btn"
@@ -570,7 +570,7 @@ export const DoctorDietPlanEditor = ({
               {/* Foods to Avoid */}
               <div className="ayur-guide-card ayur-guide-card--avoid">
                 <div className="ayur-guide-card__header">
-                  <h4 className="text-danger font-serif font-bold">Foods to Avoid (Apathya / Contraindications)</h4>
+                  <h4 className="text-danger font-serif font-bold">Foods to Avoid (Contraindications)</h4>
                   <button
                     type="button"
                     className="ayur-mini-add-btn"
@@ -603,7 +603,7 @@ export const DoctorDietPlanEditor = ({
               {/* Lifestyle Guidance */}
               <div className="ayur-guide-card">
                 <div className="ayur-guide-card__header">
-                  <h4 className="text-primary font-serif font-bold">Lifestyle Guidance (Dinacharya & Vihara)</h4>
+                  <h4 className="text-primary font-serif font-bold">Lifestyle Guidance (Daily Routine & Activity)</h4>
                   <button
                     type="button"
                     className="ayur-mini-add-btn"

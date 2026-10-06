@@ -46,10 +46,10 @@ export const DietSummary = ({
   const formatAgni = () => {
     const q3 = answers.diet_q3_appetite_nature;
     if (!q3) return 'Not answered yet';
-    if (q3 === 'sama-agni') return 'Steady (Sama Agni)';
-    if (q3 === 'tikshna-agni') return 'Sharp (Tīkṣṇa Agni)';
-    if (q3 === 'vishama-agni') return 'Variable (Viṣama Agni)';
-    if (q3 === 'manda-agni') return 'Sluggish (Manda Agni)';
+    if (q3 === 'sama-agni') return 'Steady (Balanced)';
+    if (q3 === 'tikshna-agni') return 'Sharp (Fast Metabolism)';
+    if (q3 === 'vishama-agni') return 'Variable (Fluctuating)';
+    if (q3 === 'manda-agni') return 'Sluggish (Slow Metabolism)';
     return 'Recorded';
   };
 
@@ -94,7 +94,7 @@ export const DietSummary = ({
             Your Dietary Profile
           </CardTitle>
           <CardDescription>
-            {patientName ? `Ahara & Agni baseline for ${patientName}` : 'Real-time digestive and nutritional patterns'}
+            {patientName ? `Dietary & digestive baseline for ${patientName}` : 'Real-time digestive and nutritional patterns'}
           </CardDescription>
         </CardHeader>
 
@@ -118,7 +118,7 @@ export const DietSummary = ({
                 {answeredCount === 0
                   ? 'Your dietary habits will appear here.'
                   : answeredCount <= 4
-                  ? 'Capturing meal rhythm and Agni pattern.'
+                  ? 'Capturing meal rhythm and digestive pattern.'
                   : 'Dietary habits comprehensively mapped.'}
               </span>
               <div className="flex items-center gap-2xs">
@@ -153,7 +153,7 @@ export const DietSummary = ({
             <div className="ayur-dt-param-row">
               <div className="ayur-dt-param-label">
                 <Flame size={13} className="text-accent" />
-                <span>Agni Rhythm</span>
+                <span>Digestive Rhythm</span>
               </div>
               <span className={`ayur-dt-param-val ${formatAgni() === 'Not answered yet' ? 'ayur-dt-param-val--empty' : ''}`}>
                 {formatAgni()}
@@ -198,7 +198,7 @@ export const DietSummary = ({
               <ShieldCheck size={13} className="text-secondary" />
             </div>
             <p className="text-micro text-muted mb-0">
-              In classical Ayurveda, <em>Ahara</em> (food) is considered supreme medicine (Mahābhaiṣajya). Inputs provide educational context for decision-support and do not establish a formal clinical diagnosis.
+              Wholesome nutrition is fundamental to vitality and wellness. Inputs provide educational context for decision-support and do not establish a formal clinical diagnosis.
             </p>
           </div>
         </CardContent>

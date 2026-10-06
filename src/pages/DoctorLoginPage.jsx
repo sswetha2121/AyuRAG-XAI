@@ -136,10 +136,10 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
               onClick={() => handleDoctorQuickSelect('dr.sharma')}
               disabled={isLoading}
             >
-              <div className="ayur-dquick-avatar">KC</div>
+              <div className="ayur-dquick-avatar">IM</div>
               <div className="ayur-dquick-info">
-                <strong>Kayachikitsa Lead</strong>
-                <span>Internal Medicine & Agni Specialist</span>
+                <strong>Internal Medicine Lead</strong>
+                <span>Internal Medicine & Digestive Health Specialist</span>
               </div>
             </button>
 
@@ -149,9 +149,9 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
               onClick={() => handleDoctorQuickSelect('dr.menon')}
               disabled={isLoading}
             >
-              <div className="ayur-dquick-avatar">PK</div>
+              <div className="ayur-dquick-avatar">CT</div>
               <div className="ayur-dquick-info">
-                <strong>Panchakarma Lead</strong>
+                <strong>Clinical Therapies Lead</strong>
                 <span>Detoxification & Constitutional Specialist</span>
               </div>
             </button>

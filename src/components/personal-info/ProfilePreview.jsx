@@ -32,7 +32,7 @@ export const ProfilePreview = ({ formData, className = '' }) => {
     if (fullName && age && gender) {
       return {
         title: `Profile active for ${fullName.trim().split(' ')[0]}.`,
-        desc: 'Baseline parameters ready for constitutional Prakriti analysis.'
+        desc: 'Baseline parameters ready for constitutional body analysis.'
       };
     }
     return {
@@ -45,10 +45,10 @@ export const ProfilePreview = ({ formData, className = '' }) => {
 
   // Climate zone display label
   const climateMap = {
-    'tropical-coastal': 'Ānūpa (Tropical/Coastal)',
-    'arid-dry': 'Jāṅgala (Arid/Dry)',
-    'temperate': 'Sādhāraṇa (Temperate)',
-    'cold-mountainous': 'Hima (Mountainous)'
+    'tropical-coastal': 'Tropical / Coastal',
+    'arid-dry': 'Arid / Dry',
+    'temperate': 'Temperate / Plains',
+    'cold-mountainous': 'Cold / Mountainous'
   };
 
   // Gender display label

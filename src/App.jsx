@@ -26,6 +26,7 @@ import { DoctorReportsPage } from './pages/DoctorReportsPage';
 import { LoginPage } from './pages/LoginPage';
 import { DoctorLoginPage } from './pages/DoctorLoginPage';
 import { LandingPage } from './pages/LandingPage';
+import { AssessmentOverviewPage } from './pages/AssessmentOverviewPage';
 
 // Protected Route Guard for Doctor
 function DoctorProtectedRoute({ children, onTriggerToast }) {
@@ -277,20 +278,20 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast }) {
         };
       case 'prakriti':
         return {
-          title: 'Step 02: Prakriti Assessment',
-          subtitle: 'Tridosha Constitutional Baseline Evaluation (Vāta • Pitta • Kapha)',
-          breadcrumbs: ['Assessment Pipeline', '02 Prakriti Assessment'],
+          title: 'Step 02: Body Constitution Assessment',
+          subtitle: 'Baseline Physiological Evaluation (Movement, Metabolism & Structure Types)',
+          breadcrumbs: ['Assessment Pipeline', '02 Body Constitution Assessment'],
         };
       case 'lifestyle':
         return {
           title: 'Step 03: Lifestyle Assessment',
-          subtitle: 'Dinacharya, Circadian Pacing, Physical Activity & Sleep Architecture',
+          subtitle: 'Daily Routines, Circadian Pacing, Physical Activity & Sleep Architecture',
           breadcrumbs: ['Assessment Pipeline', '03 Lifestyle Assessment'],
         };
       case 'diet':
         return {
           title: 'Step 04: Dietary Assessment',
-          subtitle: 'Ahara Habits, Agni Digestive Capacity & Taste Profile',
+          subtitle: 'Eating Habits, Digestive Metabolism & Taste Preferences',
           breadcrumbs: ['Assessment Pipeline', '04 Dietary Assessment'],
         };
       case 'symptoms':
@@ -454,8 +455,8 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast }) {
           onContinueToNextPhase={() => {
             onTriggerToast({
               type: 'info',
-              title: 'Prakriti Assessment Saved',
-              message: 'Proceeding to Step 03: Lifestyle Assessment (Dinacharya).',
+              title: 'Constitution Assessment Saved',
+              message: 'Proceeding to Step 03: Lifestyle Assessment (Daily Routine).',
             });
             setCurrentStep('lifestyle');
           }}
@@ -467,7 +468,7 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast }) {
             onTriggerToast({
               type: 'info',
               title: 'Lifestyle Assessment Saved',
-              message: 'Proceeding to Step 04: Dietary Assessment (Ahara & Agni).',
+              message: 'Proceeding to Step 04: Dietary Assessment (Eating Habits & Digestion).',
             });
             setCurrentStep('diet');
           }}
@@ -542,7 +543,11 @@ function MainApp() {
         element={<LandingPage onTriggerToast={addToast} />}
       />
 
-      {/* 2. Patient Assessment Flow */}
+      {/* 2. Patient Assessment Overview & Flow */}
+      <Route
+        path="/assessment-overview"
+        element={<AssessmentOverviewPage onTriggerToast={addToast} />}
+      />
       <Route
         path="/assessment/*"
         element={
@@ -568,7 +573,7 @@ function MainApp() {
               if (user.role === 'DOCTOR') {
                 navigate('/doctor/dashboard');
               } else {
-                navigate('/assessment');
+                navigate('/assessment-overview');
               }
             }}
             onTriggerToast={addToast}
@@ -584,7 +589,7 @@ function MainApp() {
               if (user.role === 'DOCTOR') {
                 navigate('/doctor/dashboard');
               } else {
-                navigate('/assessment');
+                navigate('/assessment-overview');
               }
             }}
             onTriggerToast={addToast}

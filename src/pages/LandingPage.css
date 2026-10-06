@@ -174,38 +174,58 @@
 .ayur-landing-nav__actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .ayur-landing-doc-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  border-radius: var(--radius-md);
+  justify-content: center;
+  gap: 7px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 9999px;
   border: 1px solid rgba(91, 130, 102, 0.35);
   background: rgba(91, 130, 102, 0.08);
-  color: var(--color-secondary-hover);
+  color: var(--color-primary);
   font-size: var(--font-size-small);
-  font-weight: var(--font-weight-semibold);
+  font-weight: 600;
   text-decoration: none;
-  transition: var(--transition-fast);
+  transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
 .ayur-landing-doc-btn:hover {
-  background: rgba(91, 130, 102, 0.16);
+  background: rgba(91, 130, 102, 0.18);
   border-color: var(--color-secondary);
-  color: var(--color-primary);
+  color: #16382C;
+  transform: translateY(-1px);
 }
 
-.ayur-landing-login-btn {
-  color: var(--color-text-secondary) !important;
+.ayur-landing-signin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 9999px;
+  border: 1px solid rgba(197, 160, 89, 0.45);
+  background: linear-gradient(135deg, #16382C 0%, #1E4D3C 100%);
+  color: #FAF4E8;
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(22, 56, 44, 0.16);
+  transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
-.ayur-landing-cta-btn {
-  background: linear-gradient(135deg, #16382C 0%, #1E4D3C 100%) !important;
-  box-shadow: 0 4px 12px rgba(22, 56, 44, 0.22) !important;
-  color: #FAF4E8 !important;
+.ayur-landing-signin-btn:hover {
+  background: linear-gradient(135deg, #1E4D3C 0%, #29634F 100%);
+  border-color: #C5A059;
+  box-shadow: 0 5px 14px rgba(22, 56, 44, 0.24);
+  transform: translateY(-1px);
 }
 
 /* --- 3. Hero Section --- */

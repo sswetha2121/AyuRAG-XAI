@@ -265,50 +265,50 @@ export const generatePersonalizedAnalysis = (state = {}) => {
     // 5. Personalized 4-Phase Daily Routine Timetable
     dailyRoutineTimetable: [
       {
-        phase: 'Morning Routine (Prātahkāla)',
-        sanskrit: '05:30 – 08:30 (Brahma / Kapha Window)',
+        phase: 'Morning Routine',
+        timeWindow: '05:30 – 08:30 (Morning Awakening)',
         icon: 'Sunrise',
         focus: 'Gentle Awakening & Metabolic Kindling',
         steps: [
-          'Wake naturally near sunrise; drink 1–2 glasses of warm water (Uṣṇodaka)',
-          'Oral hygiene: Tongue scraping (Jihvā Nirlekhana) and gentle warm water gargle',
-          '15–20 minutes of restorative movement: Surya Namaskar or brisk outdoor walk',
-          'Warm, freshly prepared breakfast (e.g. spiced oatmeal, warm poha, or stewed apples)'
+          'Wake naturally near sunrise; drink 1–2 glasses of warm water',
+          'Oral hygiene: Tongue scraping and gentle warm water gargle',
+          '15–20 minutes of restorative movement: Gentle stretches or brisk outdoor walk',
+          'Warm, freshly prepared breakfast (e.g. spiced oatmeal, warm grains, or stewed fruit)'
         ]
       },
       {
-        phase: 'Midday Peak (Madhyāhna)',
-        sanskrit: '11:30 – 14:00 (Pitta Solar Peak)',
+        phase: 'Midday Peak',
+        timeWindow: '11:30 – 14:00 (Midday Digestion Window)',
         icon: 'Sun',
         focus: 'Optimal Digestion & Peak Cognitive Output',
         steps: [
-          'Eat your most substantial meal of the day when solar Agni is at its zenith',
-          'Include all 6 tastes with emphasis on cooked grains, vegetables, and warm dahl',
+          'Eat your most substantial meal of the day when digestive fire is at its peak',
+          'Include all primary tastes with emphasis on cooked grains, vegetables, and warm soup',
           'Sip small amounts of warm digestive tea; avoid ice-cold drinks',
-          'Take a calm 100-step stroll (Śatapada) after lunch before resuming desk work'
+          'Take a calm 100-step stroll after lunch before resuming desk work'
         ]
       },
       {
-        phase: 'Evening Wind-Down (Sāyankāla)',
-        sanskrit: '17:30 – 20:00 (Vāta Transition)',
+        phase: 'Evening Wind-Down',
+        timeWindow: '17:30 – 20:00 (Early Evening Window)',
         icon: 'Sunset',
         focus: 'Decompression & Light Nourishment',
         steps: [
           'Transition away from intense mental tasks; take a 5-minute movement break',
           'Eat a light, easily digestible dinner at least 2.5 hours before bedtime',
-          'Avoid heavy fried foods, cold yogurt, or large raw salads at night',
-          'Gentle family or leisure time in warm, softened lighting'
+          'Avoid heavy fried foods, cold dairy, or large raw salads at night',
+          'Gentle relaxation in warm, softened lighting'
         ]
       },
       {
-        phase: 'Night Rest (Rātricaryā)',
-        sanskrit: '21:30 – 23:00 (Kapha Nidrā Phase)',
+        phase: 'Night Rest & Recovery',
+        timeWindow: '21:30 – 23:00 (Deep Sleep Phase)',
         icon: 'Moon',
-        focus: 'Cellular Repair & Ojas Replenishment',
+        focus: 'Cellular Repair & Natural Recovery',
         steps: [
           'Power down laptops, phones, and intense blue light screens by 22:00',
-          'Optional: Gentle foot massage with warm sesame oil (Pādābhyaṅga)',
-          '5 minutes of slow abdominal breathing (Prāṇāyāma) to calm heart rate',
+          'Optional: Gentle foot massage with warm sesame oil',
+          '5 minutes of slow abdominal breathing exercises to calm heart rate',
           'Asleep before 23:00 to maximize deep reparative sleep cycles'
         ]
       }

@@ -65,7 +65,7 @@ export const LifestyleCategoryBar = ({
                 className={`ayur-cat-step ${isActive ? 'ayur-cat-step--active' : ''} ${isCompleted ? 'ayur-cat-step--completed' : ''}`}
                 onClick={() => onSelectCategory?.(cat.id)}
                 aria-current={isActive ? 'step' : undefined}
-                title={`${cat.name} (${cat.sanskritName})`}
+                title={cat.name}
               >
                 <div className="ayur-cat-step__badge">
                   {isCompleted && !isActive ? (
@@ -77,7 +77,6 @@ export const LifestyleCategoryBar = ({
                 </div>
                 <div className="ayur-cat-step__text">
                   <span className="ayur-cat-step__name">{cat.name}</span>
-                  <span className="ayur-cat-step__sanskrit">{cat.sanskritName}</span>
                 </div>
               </button>
             );

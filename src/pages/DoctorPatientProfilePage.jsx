@@ -316,43 +316,43 @@ export const DoctorPatientProfilePage = ({
             <div className="ayur-clinical-section__header">
               <div className="flex items-center gap-xs">
                 <Activity size={18} className="text-secondary" />
-                <h3 className="ayur-clinical-section__title">Prakriti Constitutional Assessment</h3>
+                <h3 className="ayur-clinical-section__title">Body Constitution Assessment</h3>
               </div>
-              <span className="ayur-prakriti-chip">{pScores.primary || 'Vāta-Pitta'}</span>
+              <span className="ayur-prakriti-chip">{pScores.primary || 'Movement-Metabolism Dominant'}</span>
             </div>
 
             <div className="ayur-prakriti-bars-grid">
               <div className="ayur-dosha-bar-card">
                 <div className="flex items-center justify-between mb-xs">
-                  <span className="ayur-dosha-name">Vāta (Air + Ether)</span>
+                  <span className="ayur-dosha-name">Movement (Air + Space)</span>
                   <span className="ayur-dosha-score">{pScores.vata || 40}%</span>
                 </div>
                 <div className="ayur-dosha-track">
                   <div className="ayur-dosha-fill ayur-dosha-fill--vata" style={{ width: `${pScores.vata || 40}%` }} />
                 </div>
-                <span className="ayur-dosha-desc">Governs mobility, respiration, catabolic processes</span>
+                <span className="ayur-dosha-desc">Governs mobility, circulation, nervous signals</span>
               </div>
 
               <div className="ayur-dosha-bar-card">
                 <div className="flex items-center justify-between mb-xs">
-                  <span className="ayur-dosha-name">Pitta (Fire + Water)</span>
+                  <span className="ayur-dosha-name">Metabolism (Fire + Water)</span>
                   <span className="ayur-dosha-score">{pScores.pitta || 35}%</span>
                 </div>
                 <div className="ayur-dosha-track">
                   <div className="ayur-dosha-fill ayur-dosha-fill--pitta" style={{ width: `${pScores.pitta || 35}%` }} />
                 </div>
-                <span className="ayur-dosha-desc">Governs digestion, metabolism, body heat, transformation</span>
+                <span className="ayur-dosha-desc">Governs digestion, enzymatic activity, body heat</span>
               </div>
 
               <div className="ayur-dosha-bar-card">
                 <div className="flex items-center justify-between mb-xs">
-                  <span className="ayur-dosha-name">Kapha (Water + Earth)</span>
+                  <span className="ayur-dosha-name">Structure (Earth + Water)</span>
                   <span className="ayur-dosha-score">{pScores.kapha || 25}%</span>
                 </div>
                 <div className="ayur-dosha-track">
                   <div className="ayur-dosha-fill ayur-dosha-fill--kapha" style={{ width: `${pScores.kapha || 25}%` }} />
                 </div>
-                <span className="ayur-dosha-desc">Governs stability, lubrication, anabolic structure</span>
+                <span className="ayur-dosha-desc">Governs physical stability, lubrication, stamina</span>
               </div>
             </div>
           </div>
@@ -363,7 +363,7 @@ export const DoctorPatientProfilePage = ({
             <div className="ayur-clinical-card">
               <div className="ayur-clinical-card__header">
                 <Moon size={16} className="text-secondary" />
-                <h4 className="ayur-clinical-card__title">Lifestyle & Dinacharya</h4>
+                <h4 className="ayur-clinical-card__title">Lifestyle & Daily Routine</h4>
               </div>
               <ul className="ayur-clinical-list">
                 <li>
@@ -393,12 +393,12 @@ export const DoctorPatientProfilePage = ({
             <div className="ayur-clinical-card">
               <div className="ayur-clinical-card__header">
                 <Utensils size={16} className="text-secondary" />
-                <h4 className="ayur-clinical-card__title">Dietary Patterns & Agni</h4>
+                <h4 className="ayur-clinical-card__title">Dietary Patterns & Digestion</h4>
               </div>
               <ul className="ayur-clinical-list">
                 <li>
-                  <span>Appetite (Agni):</span>
-                  <strong>{patientData.diet_data?.appetitePattern || 'Irregular (Vishama Agni)'}</strong>
+                  <span>Appetite (Digestion):</span>
+                  <strong>{patientData.diet_data?.appetitePattern || 'Irregular (Variable Digestion)'}</strong>
                 </li>
                 <li>
                   <span>Meal Frequency:</span>
@@ -410,7 +410,7 @@ export const DoctorPatientProfilePage = ({
                 </li>
                 <li>
                   <span>Dominant Tastes:</span>
-                  <strong>{patientData.diet_data?.predominantTaste || 'Katu (Pungent), Tikta (Bitter)'}</strong>
+                  <strong>{patientData.diet_data?.predominantTaste || 'Pungent, Bitter'}</strong>
                 </li>
               </ul>
             </div>
@@ -422,7 +422,7 @@ export const DoctorPatientProfilePage = ({
                 <h4 className="ayur-clinical-card__title">Symptoms & Clinical Context</h4>
               </div>
               <div className="ayur-symptoms-list">
-                {(patientData.symptoms_data?.chiefComplaints || ['Agnimandya', 'Nidranasha', 'Adhmana']).map(
+                {(patientData.symptoms_data?.chiefComplaints || ['Digestive sluggishness', 'Disturbed sleep', 'Abdominal bloating']).map(
                   (sym, idx) => (
                     <div key={idx} className="ayur-symptom-item">
                       <span className="ayur-symptom-item__name">{sym}</span>

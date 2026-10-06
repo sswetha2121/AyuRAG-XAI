@@ -23,22 +23,22 @@ export const WORKFLOW_STEPS = [
   {
     id: 'prakriti',
     number: '02',
-    label: 'Prakriti Assessment',
-    sublabel: 'Dosha Constitution (V-P-K)',
+    label: 'Body Constitution Assessment',
+    sublabel: 'Physical & Metabolic Type',
     icon: Activity
   },
   {
     id: 'lifestyle',
     number: '03',
     label: 'Lifestyle Assessment',
-    sublabel: 'Dinacharya & Routine',
+    sublabel: 'Daily Routine & Sleep',
     icon: HeartPulse
   },
   {
     id: 'diet',
     number: '04',
     label: 'Dietary Assessment',
-    sublabel: 'Ahara Habits & Agni',
+    sublabel: 'Eating Habits & Digestion',
     icon: Utensils
   },
   {

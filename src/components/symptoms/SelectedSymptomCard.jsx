@@ -15,9 +15,6 @@ export const SelectedSymptomCard = ({
         <div className="flex items-center gap-xs flex-wrap">
           <span className="ayur-selected-sym-cat">{symptom.category}</span>
           <h4 className="ayur-selected-sym-name">{symptom.name}</h4>
-          {symptom.sanskritName && (
-            <span className="ayur-selected-sym-sanskrit">({symptom.sanskritName})</span>
-          )}
         </div>
 
         <button

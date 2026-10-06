@@ -35,7 +35,7 @@ export const LifestyleCompletionCard = ({
                 Step 03 Complete
               </Badge>
               <Badge color="accent" variant="subtle" size="md">
-                Dinacharya Profile Recorded
+                Daily Routine Profile Recorded
               </Badge>
             </div>
             <span className="ayur-ls-completed-tag">
@@ -70,7 +70,7 @@ export const LifestyleCompletionCard = ({
                 <Activity size={20} className="text-secondary" />
               </div>
               <div className="ayur-ls-metric-info">
-                <span className="ayur-ls-metric-label">Vyāyāma Load</span>
+                <span className="ayur-ls-metric-label">Physical Activity Load</span>
                 <span className="ayur-ls-metric-val">Indexed</span>
               </div>
             </div>
@@ -80,7 +80,7 @@ export const LifestyleCompletionCard = ({
                 <Moon size={20} className="text-primary" />
               </div>
               <div className="ayur-ls-metric-info">
-                <span className="ayur-ls-metric-label">Nidrā Quality</span>
+                <span className="ayur-ls-metric-label">Sleep Quality</span>
                 <span className="ayur-ls-metric-val">Evaluated</span>
               </div>
             </div>
@@ -103,7 +103,7 @@ export const LifestyleCompletionCard = ({
               <span>Integration with Clinical Knowledge Graph</span>
             </div>
             <p className="text-small text-muted mb-0">
-              Personal Information (Step 1), Prakriti Baseline (Step 2), and Lifestyle Assessment (Step 3) are now synchronized in session storage. In the upcoming phases, dietary digestion (Agni) and current symptoms (Vikriti) will complete your clinical dossier.
+              Personal Information (Step 1), Baseline Constitution (Step 2), and Lifestyle Assessment (Step 3) are now synchronized in session storage. In the upcoming phases, dietary digestion and active symptom imbalances will complete your clinical dossier.
             </p>
           </div>
         </CardContent>

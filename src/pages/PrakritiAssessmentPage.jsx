@@ -66,7 +66,7 @@ export const PrakritiAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }
       setShowCompletion(true);
       onTriggerToast?.({
         type: 'success',
-        title: 'Prakriti Assessment Complete',
+        title: 'Body Constitution Assessment Complete',
         message: '10 of 10 constitutional parameters saved in session memory.'
       });
     }
@@ -95,7 +95,7 @@ export const PrakritiAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }
   };
 
   const handleReset = () => {
-    if (window.confirm('Reset all Prakriti assessment responses?')) {
+    if (window.confirm('Reset all body constitution assessment responses?')) {
       resetPrakritiAnswers();
       setCurrentIndex(0);
       setHasStarted(false);
@@ -103,7 +103,7 @@ export const PrakritiAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }
       onTriggerToast?.({
         type: 'info',
         title: 'Assessment Reset',
-        message: 'All Prakriti question responses cleared.'
+        message: 'All constitution question responses cleared.'
       });
     }
   };
@@ -123,16 +123,16 @@ export const PrakritiAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }
               Step 02 of 06
             </Badge>
             <Badge color="primary" variant="subtle" size="md">
-              Prakriti Assessment
+              Body Constitution Assessment
             </Badge>
             <button
               type="button"
               className="ayur-help-btn"
               onClick={() => setShowInfoModal(true)}
-              aria-label="What is Prakriti?"
+              aria-label="What is Body Constitution?"
             >
               <HelpCircle size={14} />
-              <span>What is Prakriti?</span>
+              <span>What is Body Constitution?</span>
             </button>
           </div>
 

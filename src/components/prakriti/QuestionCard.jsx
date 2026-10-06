@@ -26,9 +26,6 @@ export const QuestionCard = ({
           <Badge color="accent" variant="subtle" size="sm" icon={<Compass size={11} />}>
             {questionData.category}
           </Badge>
-          {questionData.sanskritTerm && (
-            <span className="ayur-sanskrit-tag">{questionData.sanskritTerm}</span>
-          )}
         </div>
 
         <h2 className="ayur-question-title">{questionData.question}</h2>

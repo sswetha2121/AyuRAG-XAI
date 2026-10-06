@@ -106,11 +106,6 @@ export const SymptomSearch = ({
                   <span className="ayur-symptom-category-label">
                     {symptom.category}
                   </span>
-                  {symptom.sanskritName && (
-                    <span className="font-serif text-accent italic text-xs">
-                      {symptom.sanskritName}
-                    </span>
-                  )}
                 </div>
 
                 <h4 className="ayur-symptom-card__title">{symptom.name}</h4>

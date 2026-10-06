@@ -5,24 +5,24 @@ import { Wind, Flame, Mountain, Sparkles, ArrowRight, ShieldCheck, HelpCircle } 
 
 const DOSHA_CARDS = [
   {
-    name: 'Vāta',
-    elements: 'Air + Ether (Vāyu + Ākāśa)',
+    name: 'Movement Energy',
+    elements: 'Air + Space Elements',
     principles: 'Movement, Respiration, Circulation & Variability',
     qualities: 'Dry, Light, Cool, Rough, Mobile & Clear',
     icon: Wind,
     colorClass: 'ayur-intro-dosha--vata'
   },
   {
-    name: 'Pitta',
-    elements: 'Fire + Water (Agni + Jala)',
+    name: 'Metabolic Energy',
+    elements: 'Fire + Water Elements',
     principles: 'Transformation, Digestion, Metabolism & Intellect',
     qualities: 'Hot, Sharp, Light, Liquid, Oily & Penetrating',
     icon: Flame,
     colorClass: 'ayur-intro-dosha--pitta'
   },
   {
-    name: 'Kapha',
-    elements: 'Water + Earth (Jala + Pṛthvī)',
+    name: 'Structural Energy',
+    elements: 'Water + Earth Elements',
     principles: 'Structure, Cohesion, Lubrication & Stability',
     qualities: 'Heavy, Slow, Cool, Oily, Smooth, Dense & Stable',
     icon: Mountain,
@@ -41,7 +41,7 @@ export const PrakritiIntro = ({ onStart, onOpenInfo, className = '' }) => {
                 Step 02 of 06
               </Badge>
               <Badge color="primary" variant="subtle">
-                Prakriti Assessment
+                Body Constitution Assessment
               </Badge>
             </div>
             {onOpenInfo && (
@@ -51,7 +51,7 @@ export const PrakritiIntro = ({ onStart, onOpenInfo, className = '' }) => {
                 leftIcon={<HelpCircle size={14} />}
                 onClick={onOpenInfo}
               >
-                What is Prakriti?
+                What is Body Constitution?
               </Button>
             )}
           </div>
@@ -61,7 +61,7 @@ export const PrakritiIntro = ({ onStart, onOpenInfo, className = '' }) => {
           </CardTitle>
 
           <CardDescription className="ayur-intro-desc">
-            In Ayurvedic science, <strong>Prakriti</strong> represents your unique baseline genetic and physiological constitution determined at conception. It comprises three dynamic biological energies (Tridoshas) that govern mind and body.
+            Your <strong>Body Constitution</strong> represents your unique baseline genetic and physiological profile. It comprises three dynamic biological energies that govern mind and body.
           </CardDescription>
         </CardHeader>
 

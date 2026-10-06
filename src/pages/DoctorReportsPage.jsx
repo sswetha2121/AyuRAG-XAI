@@ -164,7 +164,7 @@ export const DoctorReportsPage = ({
                   </div>
 
                   <div className="ayur-report-block">
-                    <span className="ayur-report-label">Classical Samhita Citations</span>
+                    <span className="ayur-report-label">Classical Medical Citations</span>
                     <ul className="ayur-report-citations">
                       {rep.evidence_citations?.map((cit, cIdx) => (
                         <li key={cIdx}>{cit}</li>

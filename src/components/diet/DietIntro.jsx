@@ -36,7 +36,7 @@ export const DietIntro = ({ onStart, className = '' }) => {
                 Step 04 of 06
               </Badge>
               <Badge color="primary" variant="subtle" size="md">
-                Ahara & Agni Evaluation
+                Dietary & Digestive Evaluation
               </Badge>
             </div>
             <span className="ayur-dt-est-badge">
@@ -69,7 +69,6 @@ export const DietIntro = ({ onStart, className = '' }) => {
                   </div>
 
                   <h3 className="ayur-dt-cat-preview-name">{cat.name}</h3>
-                  <span className="ayur-dt-cat-preview-sanskrit">{cat.sanskritName}</span>
                   <p className="ayur-dt-cat-preview-desc">{cat.description}</p>
                 </div>
               );
@@ -79,10 +78,10 @@ export const DietIntro = ({ onStart, className = '' }) => {
           <div className="ayur-dt-intro-note">
             <div className="flex items-center gap-xs text-secondary font-semibold text-small mb-2xs">
               <ShieldCheck size={16} />
-              <span>Digestive Context & Agni Principle</span>
+              <span>Digestive Metabolism & Vitality Principle</span>
             </div>
             <p className="text-small text-muted mb-0">
-              In Ayurvedic science, digestion (Agni) determines how effectively bodily tissues (Dhatus) are nourished and vital essence (Ojas) is produced. Responses are calibrated as educational baseline signals.
+              Digestive capacity determines how effectively cellular tissues are nourished and sustained. Responses are calibrated as educational baseline signals.
             </p>
           </div>
         </CardContent>

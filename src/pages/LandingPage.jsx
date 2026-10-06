@@ -50,11 +50,11 @@ export const LandingPage = ({ onTriggerToast }) => {
   // Dosha Data for Live Explorer
   const doshaData = {
     vata: {
-      name: 'Vāta (vāyu + ākāsha)',
-      element: 'Air & Ether',
+      name: 'Movement Energy (Air & Space)',
+      element: 'Air & Space',
       principle: 'Kinetic Principle • Movement & Neural Transmission',
-      qualities: ['Light (Laghu)', 'Cold (Śīta)', 'Dry (Rūkṣa)', 'Subtle (Sūkṣma)', 'Mobile (Cala)'],
-      agniType: 'Viṣama Agni (Variable, Erratic Digestion)',
+      qualities: ['Light', 'Cool', 'Dry', 'Subtle', 'Mobile'],
+      agniType: 'Variable & Erratic Digestion',
       color: '#3B82F6',
       badgeBg: 'rgba(59, 130, 246, 0.12)',
       badgeBorder: 'rgba(59, 130, 246, 0.28)',
@@ -62,18 +62,18 @@ export const LandingPage = ({ onTriggerToast }) => {
       topFeatures: [
         { label: 'Irregular Meal & Sleep Timing', impact: '+34%', type: 'primary' },
         { label: 'Dry Skin & Cold Sensitivity', impact: '+28%', type: 'secondary' },
-        { label: 'Variable Agni & Bloating Tendency', impact: '+22%', type: 'tertiary' }
+        { label: 'Variable Digestion & Bloating Tendency', impact: '+22%', type: 'tertiary' }
       ],
-      samhitaQuote: 'तत्र रूक्षो लघुः शीतो खरः सूक्ष्मश्चलोऽनिलः । (Caraka Saṃhitā, Sūtrasthāna 1.59)',
-      samhitaRef: 'Caraka Saṃhitā • Sūtrasthāna Ch. 1, Verse 59',
-      pacifying: 'Warm, unctuous (Snigdha), grounding foods with sweet, sour, and salty rasas; regular Dinacharya routine.'
+      samhitaQuote: 'Movement energy is naturally dry, light, cooling, rough, subtle, and active, directing all biological motility and impulse flow.',
+      samhitaRef: 'Classical Medical Treatise • Fundamental Principles Chapter 1',
+      pacifying: 'Warm, nourishing, grounding foods with sweet, sour, and salty tastes; consistent daily routines.'
     },
     pitta: {
-      name: 'Pitta (tejas + jala)',
+      name: 'Metabolic Energy (Fire & Water)',
       element: 'Fire & Water',
       principle: 'Transformative Principle • Digestion, Heat & Cognition',
-      qualities: ['Hot (Uṣṇa)', 'Sharp (Tīkṣṇa)', 'Light (Laghu)', 'Slightly Oily (Sasneha)', 'Spreading (Sara)'],
-      agniType: 'Tīkṣṇa Agni (Intense, Hyperactive Digestion)',
+      qualities: ['Hot', 'Sharp', 'Light', 'Slightly Oily', 'Spreading'],
+      agniType: 'Intense & Rapid Digestion',
       color: '#EA580C',
       badgeBg: 'rgba(234, 88, 12, 0.12)',
       badgeBorder: 'rgba(234, 88, 12, 0.28)',
@@ -83,16 +83,16 @@ export const LandingPage = ({ onTriggerToast }) => {
         { label: 'Intense Appetite & Rapid Digestion', impact: '+29%', type: 'secondary' },
         { label: 'Spicy/Acidic Diet Affinity', impact: '+21%', type: 'tertiary' }
       ],
-      samhitaQuote: 'पित्तं सस्नेहमुष्णं च तीक्ष्णं द्रवमम्लं सरं कटु । (Aṣṭāṅga Hṛdayam, Sūtrasthāna 1.11)',
-      samhitaRef: 'Aṣṭāṅga Hṛdayam • Sūtrasthāna Ch. 1, Verse 11',
-      pacifying: 'Cooling, moderately dry foods with sweet, bitter, and astringent rasas; hydration, mind relaxation.'
+      samhitaQuote: 'Metabolic energy is unctuous, hot, sharp, fluid, acidic, and penetrating, driving enzymatic digestion and temperature regulation.',
+      samhitaRef: 'Classical Medical Treatise • Primary Physiology Chapter 1',
+      pacifying: 'Cooling, moderately dry foods with sweet, bitter, and astringent tastes; hydration, mind relaxation.'
     },
     kapha: {
-      name: 'Kapha (jala + pṛthvī)',
+      name: 'Structural Energy (Water & Earth)',
       element: 'Water & Earth',
       principle: 'Cohesive Principle • Biological Structure, Stability & Immunity',
-      qualities: ['Heavy (Guru)', 'Cold (Śīta)', 'Soft (Mṛdu)', 'Oily (Snigdha)', 'Stable (Sthira)'],
-      agniType: 'Manda Agni (Slow, Sluggish Digestion)',
+      qualities: ['Heavy', 'Cool', 'Soft', 'Nourishing', 'Stable'],
+      agniType: 'Slow & Sluggish Digestion',
       color: '#059669',
       badgeBg: 'rgba(5, 150, 105, 0.12)',
       badgeBorder: 'rgba(5, 150, 105, 0.28)',
@@ -102,9 +102,9 @@ export const LandingPage = ({ onTriggerToast }) => {
         { label: 'Deep Extended Sleep (> 8 hrs)', impact: '+27%', type: 'secondary' },
         { label: 'Dense Musculoskeletal Frame', impact: '+24%', type: 'tertiary' }
       ],
-      samhitaQuote: 'स्निग्धः शीतो गुरुर्मन्दः श्लक्ष्णो मृत्स्नः स्थिरः कफः । (Caraka Saṃhitā, Sūtrasthāna 1.61)',
-      samhitaRef: 'Caraka Saṃhitā • Sūtrasthāna Ch. 1, Verse 61',
-      pacifying: 'Warm, light, invigorating foods with pungent, bitter, and astringent rasas; vigorous daily physical activity.'
+      samhitaQuote: 'Structural energy is unctuous, cooling, heavy, gentle, smooth, and firm, conferring anatomical integrity and enduring resilience.',
+      samhitaRef: 'Classical Medical Treatise • Structural Foundations Chapter 1',
+      pacifying: 'Warm, light, invigorating foods with pungent, bitter, and astringent tastes; vigorous daily physical activity.'
     }
   };
 
@@ -114,8 +114,8 @@ export const LandingPage = ({ onTriggerToast }) => {
   // FAQ Items
   const faqItems = [
     {
-      q: 'What is AyuRAG-XAI and how does it combine Ayurveda with AI?',
-      a: 'AyuRAG-XAI is an Explainable Retrieval-Augmented Clinical Decision Support System. It blends classical Ayurvedic diagnostic frameworks (Prakriti constitutional analysis, Dinacharya circadian rhythms, Ahara dietary factors, and Agni metabolic states) with modern transparent machine learning. Predictions are explained mathematically through SHAP and LIME feature attributions and grounded in classical Ayurvedic literature (Caraka Saṃhitā, Suśruta Saṃhitā, Aṣṭāṅga Hṛdayam).'
+      q: 'What is AyuRAG-XAI and how does it combine clinical medicine with AI?',
+      a: 'AyuRAG-XAI is an Explainable Retrieval-Augmented Clinical Decision Support System. It blends classical constitutional diagnostic frameworks (body constitution analysis, daily circadian rhythms, nutritional factors, and digestive metabolic states) with modern transparent machine learning. Predictions are explained mathematically through SHAP and LIME feature attributions and grounded in classical medical literature.'
     },
     {
       q: 'How does Explainable AI (XAI) eliminate the "black-box" dilemma?',
@@ -123,15 +123,15 @@ export const LandingPage = ({ onTriggerToast }) => {
     },
     {
       q: 'What classical texts are indexed in the RAG knowledge retrieval engine?',
-      a: 'Our semantic vector retrieval engine indexes peer-verified verses and commentaries from the Brihat Trayi: Caraka Saṃhitā (Internal Medicine & Kayachikitsa), Suśruta Saṃhitā (Anatomical & Surgical Insights), and Aṣṭāṅga Hṛdayam. Every recommended herbal formulation, dietary recommendation, or lifestyle intervention includes verifiable classical citations.'
+      a: 'Our semantic vector retrieval engine indexes peer-verified verses and commentaries from authoritative foundational medical treatises on internal medicine, anatomical insights, and therapeutic syntheses. Every recommended lifestyle intervention includes verifiable classical citations.'
     },
     {
       q: 'Can licensed doctors review and modify patient assessments?',
-      a: 'Yes. AyuRAG-XAI includes a dedicated Physician CDS Workspace. Doctors can access patient profiles, verify or correct individual reported symptoms, adjust constitutional weights, create customized dietary protocols with calorie and rasa targets, and sign standardized clinical reports.'
+      a: 'Yes. AyuRAG-XAI includes a dedicated Physician CDS Workspace. Doctors can access patient profiles, verify or correct individual reported symptoms, adjust constitutional weights, create customized dietary protocols with calorie and taste targets, and sign standardized clinical reports.'
     },
     {
       q: 'Do I need a prior medical diagnosis to start the assessment?',
-      a: 'No prior diagnosis is required. The assessment begins with basic physiological demographics, moves through constitutional body signs, daily habits, and current health concerns. Anyone looking to optimize their lifestyle or explore their Ayurvedic baseline can complete it in approximately 8 to 12 minutes.'
+      a: 'No prior diagnosis is required. The assessment begins with basic physiological demographics, moves through constitutional body signs, daily habits, and current health concerns. Anyone looking to optimize their lifestyle or explore their constitutional baseline can complete it in approximately 8 to 10 minutes.'
     },
     {
       q: 'How is patient personal and health data protected?',
@@ -140,7 +140,7 @@ export const LandingPage = ({ onTriggerToast }) => {
   ];
 
   const handleStartAssessment = () => {
-    navigate('/assessment');
+    navigate('/assessment-overview');
   };
 
   const handleGoToAuth = (mode = 'signin') => {
@@ -159,7 +159,7 @@ export const LandingPage = ({ onTriggerToast }) => {
           <div className="flex items-center gap-xs">
             <span className="ayur-announcement-pill">CCRAS & AYUSH Compliant</span>
             <span className="ayur-announcement-text">
-              AyuRAG-XAI v2.1 • Explainable Clinical Decision Support & Classical Samhitā RAG
+              AyuRAG-XAI v2.1 • Explainable Clinical Decision Support & Classical Medical Literature RAG
             </span>
           </div>
           <div className="ayur-announcement-links">
@@ -207,7 +207,7 @@ export const LandingPage = ({ onTriggerToast }) => {
           {/* Center Navigation Links */}
           <nav className="ayur-landing-nav__links">
             <a href="#features" className="ayur-landing-nav__link">Pillars</a>
-            <a href="#dosha-explorer" className="ayur-landing-nav__link">Dosha Explorer</a>
+            <a href="#dosha-explorer" className="ayur-landing-nav__link">Constitution Explorer</a>
             <a href="#pipeline" className="ayur-landing-nav__link">Clinical Journey</a>
             <a href="#xai-engine" className="ayur-landing-nav__link">Explainable AI</a>
             <a href="#physician-cds" className="ayur-landing-nav__link">Doctor Workspace</a>
@@ -221,9 +221,10 @@ export const LandingPage = ({ onTriggerToast }) => {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => navigate(isDoctor ? '/doctor/dashboard' : '/assessment')}
+                  onClick={() => navigate(isDoctor ? '/doctor/dashboard' : '/assessment-overview')}
+                  className="ayur-landing-doc-btn"
                 >
-                  {isDoctor ? 'Doctor Workspace' : 'Continue Intake'}
+                  {isDoctor ? 'Doctor Workspace' : 'Patient Assessment'}
                 </Button>
               </div>
             ) : (
@@ -232,24 +233,14 @@ export const LandingPage = ({ onTriggerToast }) => {
                   <Stethoscope size={15} />
                   <span>Doctor Portal</span>
                 </Link>
-                <Button
-                  variant="ghost"
-                  size="sm"
+                <button
+                  type="button"
                   onClick={() => handleGoToAuth('signin')}
-                  className="ayur-landing-login-btn"
+                  className="ayur-landing-signin-btn"
                 >
                   <LogIn size={15} />
                   <span>Sign In</span>
-                </Button>
-                <Button
-                  variant="primary"
-                  size="sm"
-                  onClick={handleStartAssessment}
-                  className="ayur-landing-cta-btn"
-                >
-                  <span>Start Assessment</span>
-                  <ArrowRight size={15} />
-                </Button>
+                </button>
               </>
             )}
           </div>
@@ -274,9 +265,9 @@ export const LandingPage = ({ onTriggerToast }) => {
               </h1>
 
               <p className="ayur-landing-hero__subtitle">
-                Discover your baseline Prakriti (Vāta • Pitta • Kapha), pinpoint metabolic Agni imbalances,
+                Discover your baseline Body Constitution (Air-Space, Fire-Water, Earth-Water types), pinpoint metabolic and digestive imbalances,
                 and receive doctor-validated lifestyle and dietary protocols backed by mathematical feature
-                attributions (SHAP/LIME) and classical Samhitā literature citations.
+                attributions (SHAP/LIME) and classical medical literature citations.
               </p>
 
               {/* Action Buttons */}
@@ -284,7 +275,7 @@ export const LandingPage = ({ onTriggerToast }) => {
                 <Button
                   variant="primary"
                   size="lg"
-                  onClick={handleStartAssessment}
+                  onClick={() => navigate(isAuthenticated ? '/assessment-overview' : '/assessment-overview')}
                   className="ayur-hero-primary-btn"
                   rightIcon={<ArrowRight size={18} />}
                 >
@@ -320,7 +311,7 @@ export const LandingPage = ({ onTriggerToast }) => {
                 </div>
                 <div className="ayur-hero-trust-item">
                   <CheckCircle2 size={16} className="text-secondary" />
-                  <span>Grounded in Caraka, Suśruta & Vagbhata</span>
+                  <span>Grounded in Classical Clinical Medical Texts</span>
                 </div>
                 <div className="ayur-hero-trust-item">
                   <CheckCircle2 size={16} className="text-secondary" />
@@ -337,9 +328,6 @@ export const LandingPage = ({ onTriggerToast }) => {
                     <span className="ayur-hero-card__dot" />
                     <span className="ayur-hero-card__badge-title">Interactive AI Inference Engine</span>
                   </div>
-                  <Badge color="accent" variant="subtle" size="sm">
-                    Live Demo
-                  </Badge>
                 </div>
 
                 {/* Dosha Selector Tabs */}
@@ -350,7 +338,7 @@ export const LandingPage = ({ onTriggerToast }) => {
                     onClick={() => setActiveDosha('vata')}
                   >
                     <Wind size={15} />
-                    <span>Vāta</span>
+                    <span>Movement</span>
                   </button>
                   <button
                     type="button"
@@ -358,7 +346,7 @@ export const LandingPage = ({ onTriggerToast }) => {
                     onClick={() => setActiveDosha('pitta')}
                   >
                     <Flame size={15} />
-                    <span>Pitta</span>
+                    <span>Metabolism</span>
                   </button>
                   <button
                     type="button"
@@ -366,7 +354,7 @@ export const LandingPage = ({ onTriggerToast }) => {
                     onClick={() => setActiveDosha('kapha')}
                   >
                     <Droplets size={15} />
-                    <span>Kapha</span>
+                    <span>Structure</span>
                   </button>
                 </div>
 
@@ -385,7 +373,7 @@ export const LandingPage = ({ onTriggerToast }) => {
                   </div>
 
                   <div className="ayur-active-dosha-qualities">
-                    <span className="ayur-active-dosha-label">Constitutional Gunas:</span>
+                    <span className="ayur-active-dosha-label">Constitutional Attributes:</span>
                     <div className="ayur-active-dosha-tags">
                       {currentDosha.qualities.map((q, idx) => (
                         <span key={idx} className="ayur-dosha-guna-tag">{q}</span>
@@ -464,13 +452,13 @@ export const LandingPage = ({ onTriggerToast }) => {
             </div>
             <div className="ayur-metric-card">
               <span className="ayur-metric-number">1,200+</span>
-              <span className="ayur-metric-label">Classical Shlokas Grounded</span>
-              <p className="ayur-metric-desc">Indexed Sanskrit verses from Caraka, Suśruta, and Aṣṭāṅga Hṛdayam</p>
+              <span className="ayur-metric-label">Classical Medical Verses Grounded</span>
+              <p className="ayur-metric-desc">Indexed classical literature from foundational internal medicine treatises</p>
             </div>
             <div className="ayur-metric-card">
               <span className="ayur-metric-number">7-Phase</span>
               <span className="ayur-metric-label">Comprehensive Pipeline</span>
-              <p className="ayur-metric-desc">Demographics, Prakriti, Dinacharya, Ahara, Symptoms, and Physician Validation</p>
+              <p className="ayur-metric-desc">Demographics, Body Constitution, Daily Lifestyle, Nutrition, Symptoms, and Physician Review</p>
             </div>
             <div className="ayur-metric-card">
               <span className="ayur-metric-number">Zero</span>
@@ -504,12 +492,12 @@ export const LandingPage = ({ onTriggerToast }) => {
               </div>
               <h3 className="ayur-pillar-title">Multi-Domain Constitutional Intake</h3>
               <p className="ayur-pillar-desc">
-                Evaluates baseline constitutional genetics (Prakriti), daily circadian rhythm pacing (Dinacharya),
-                digestive fire stability (Agni), and prioritized clinical manifestations.
+                Evaluates baseline constitutional genetics, daily circadian rhythm pacing,
+                digestive fire stability, and prioritized clinical manifestations.
               </p>
               <ul className="ayur-pillar-bullets">
-                <li>Vāta, Pitta, Kapha constitutional proportions</li>
-                <li>Meal timing & Ahara digestive habits</li>
+                <li>Movement, Metabolism & Structure constitutional proportions</li>
+                <li>Meal timing & daily digestive habits</li>
                 <li>Sleep architecture & stress exposure</li>
               </ul>
             </div>
@@ -538,13 +526,13 @@ export const LandingPage = ({ onTriggerToast }) => {
               </div>
               <h3 className="ayur-pillar-title">Retrieval-Augmented Classical RAG</h3>
               <p className="ayur-pillar-desc">
-                Vectorized Sanskrit literature embedding with instant semantic retrieval across
-                authoritative Samhitā treatises. Every health recommendation cites its original stanza.
+                Vectorized medical literature embedding with instant semantic retrieval across
+                authoritative medical treatises. Every health recommendation cites its original stanza.
               </p>
               <ul className="ayur-pillar-bullets">
-                <li>Caraka Saṃhitā (Internal Medicine)</li>
-                <li>Suśruta Saṃhitā (Constitutional Anatomy)</li>
-                <li>Aṣṭāṅga Hṛdayam (Therapeutic Syntheses)</li>
+                <li>Foundational Internal Medicine Treatises</li>
+                <li>Constitutional Anatomy & Physiology</li>
+                <li>Integrated Clinical Therapeutics</li>
               </ul>
             </div>
 
@@ -556,7 +544,7 @@ export const LandingPage = ({ onTriggerToast }) => {
               <h3 className="ayur-pillar-title">Doctor-in-the-Loop Oversight (CDS)</h3>
               <p className="ayur-pillar-desc">
                 Dedicated physician workspace where licensed practitioners verify patient reported symptoms,
-                adjust dosha weights, and digitally sign therapeutic assessment dossiers.
+                adjust constitutional weights, and digitally sign therapeutic assessment dossiers.
               </p>
               <ul className="ayur-pillar-bullets">
                 <li>Review queue with symptom verification</li>
@@ -570,13 +558,13 @@ export const LandingPage = ({ onTriggerToast }) => {
               <div className="ayur-pillar-icon-box">
                 <Utensils size={24} />
               </div>
-              <h3 className="ayur-pillar-title">Algorithmic Ahara & Dinacharya Plans</h3>
+              <h3 className="ayur-pillar-title">Algorithmic Nutrition & Daily Routine Plans</h3>
               <p className="ayur-pillar-desc">
-                Precision dietary protocols structured around individual Agni capacity, the six Ayurvedic
-                tastes (Shad Rasa), and seasonal circadian rhythm balancing (Ritucharya).
+                Precision dietary protocols structured around individual digestive capacity, the six primary
+                tastes, and seasonal circadian rhythm balancing.
               </p>
               <ul className="ayur-pillar-bullets">
-                <li>Contraindicated food pairing alerts (Viruddha Ahara)</li>
+                <li>Contraindicated food pairing alerts</li>
                 <li>Targeted metabolic herbs & kitchen spices</li>
                 <li>Structured 4-week clinical diet planner</li>
               </ul>
@@ -602,46 +590,46 @@ export const LandingPage = ({ onTriggerToast }) => {
         </div>
       </section>
 
-      {/* 6. Interactive Dosha Diagnostic Explorer */}
+      {/* 6. Interactive Constitution Diagnostic Explorer */}
       <section id="dosha-explorer" className="ayur-explorer-section">
         <div className="ayur-landing-container">
           <div className="ayur-section-header text-center">
             <div className="ayur-section-tag">
               <Wind size={14} className="text-secondary" />
-              <span>TRIDOSHA ARCHETYPES</span>
+              <span>CONSTITUTIONAL TYPES</span>
             </div>
-            <h2 className="ayur-section-title">The Three Pillars of Ayurvedic Physiology</h2>
+            <h2 className="ayur-section-title">The Three Primary Body Constitutions</h2>
             <p className="ayur-section-subtitle">
-              Ayurveda identifies three fundamental energetic principles governing all physiological,
+              Traditional healthcare identifies three fundamental energetic principles governing all physiological,
               psychological, and metabolic processes in the human organism.
             </p>
           </div>
 
           <div className="ayur-dosha-cards-grid">
-            {/* Vata Card */}
+            {/* Movement Card */}
             <div className="ayur-dosha-detail-card vata">
               <div className="ayur-dosha-card-icon-wrap vata">
                 <Wind size={28} />
               </div>
               <div className="ayur-dosha-card-tag">Kinetic Principle</div>
-              <h3 className="ayur-dosha-card-title">Vāta Dosha</h3>
-              <span className="ayur-dosha-card-elements">Ether (Ākāsha) + Air (Vāyu)</span>
+              <h3 className="ayur-dosha-card-title">Movement Constitution</h3>
+              <span className="ayur-dosha-card-elements">Air & Space Elements</span>
               <p className="ayur-dosha-card-desc">
-                The master dosha regulating bodily motion, nerve impulse propagation, respiratory pacing,
+                The master principle regulating bodily motion, nerve impulse propagation, respiratory pacing,
                 circulatory flow, and sensory perception.
               </p>
 
               <div className="ayur-dosha-card-section">
                 <span className="ayur-dosha-card-label">Signs of Imbalance:</span>
                 <span className="ayur-dosha-card-value">
-                  Dry skin, variable digestion (Vishama Agni), irregular sleep, cold hands/feet, nervous fatigue.
+                  Dry skin, variable digestion, irregular sleep, cold hands/feet, nervous fatigue.
                 </span>
               </div>
 
               <div className="ayur-dosha-card-section">
                 <span className="ayur-dosha-card-label">Nutritional Strategy:</span>
                 <span className="ayur-dosha-card-value">
-                  Warm, oily (Snigdha), grounding foods; sweet, sour, salty rasas; ginger, ghee, sesame oil.
+                  Warm, nourishing, grounding foods; sweet, sour, salty tastes; ginger, healthy oils.
                 </span>
               </div>
 
@@ -651,18 +639,18 @@ export const LandingPage = ({ onTriggerToast }) => {
                 className="w-full mt-sm"
                 onClick={handleStartAssessment}
               >
-                Assess Vāta Tendency →
+                Assess Movement Tendency →
               </Button>
             </div>
 
-            {/* Pitta Card */}
+            {/* Metabolism Card */}
             <div className="ayur-dosha-detail-card pitta">
               <div className="ayur-dosha-card-icon-wrap pitta">
                 <Flame size={28} />
               </div>
               <div className="ayur-dosha-card-tag">Transformative Principle</div>
-              <h3 className="ayur-dosha-card-title">Pitta Dosha</h3>
-              <span className="ayur-dosha-card-elements">Fire (Tejas) + Water (Jala)</span>
+              <h3 className="ayur-dosha-card-title">Metabolic Constitution</h3>
+              <span className="ayur-dosha-card-elements">Fire & Water Elements</span>
               <p className="ayur-dosha-card-desc">
                 Governs enzymatic transformation, thermogenesis, cellular metabolism, visual acuity,
                 intellectual discrimination, and body temperature.
@@ -678,7 +666,7 @@ export const LandingPage = ({ onTriggerToast }) => {
               <div className="ayur-dosha-card-section">
                 <span className="ayur-dosha-card-label">Nutritional Strategy:</span>
                 <span className="ayur-dosha-card-value">
-                  Cooling, moderately dry foods; sweet, bitter, astringent rasas; coriander, coconut, cucumber.
+                  Cooling, moderately dry foods; sweet, bitter, astringent tastes; coriander, coconut, cucumber.
                 </span>
               </div>
 
@@ -688,34 +676,34 @@ export const LandingPage = ({ onTriggerToast }) => {
                 className="w-full mt-sm"
                 onClick={handleStartAssessment}
               >
-                Assess Pitta Tendency →
+                Assess Metabolic Tendency →
               </Button>
             </div>
 
-            {/* Kapha Card */}
+            {/* Structure Card */}
             <div className="ayur-dosha-detail-card kapha">
               <div className="ayur-dosha-card-icon-wrap kapha">
                 <Droplets size={28} />
               </div>
               <div className="ayur-dosha-card-tag">Cohesive Principle</div>
-              <h3 className="ayur-dosha-card-title">Kapha Dosha</h3>
-              <span className="ayur-dosha-card-elements">Water (Jala) + Earth (Pṛthvī)</span>
+              <h3 className="ayur-dosha-card-title">Structural Constitution</h3>
+              <span className="ayur-dosha-card-elements">Water & Earth Elements</span>
               <p className="ayur-dosha-card-desc">
                 Provides anatomical structural stability, biological lubrication of joints and tissues,
-                immune resilience (Ojas), and psychological calm.
+                immune resilience, and psychological calm.
               </p>
 
               <div className="ayur-dosha-card-section">
                 <span className="ayur-dosha-card-label">Signs of Imbalance:</span>
                 <span className="ayur-dosha-card-value">
-                  Sluggish digestion (Manda Agni), morning lethargy, fluid retention, weight gain, congestion.
+                  Sluggish digestion, morning lethargy, fluid retention, weight gain, congestion.
                 </span>
               </div>
 
               <div className="ayur-dosha-card-section">
                 <span className="ayur-dosha-card-label">Nutritional Strategy:</span>
                 <span className="ayur-dosha-card-value">
-                  Warm, light, stimulating foods; pungent, bitter, astringent rasas; black pepper, barley, honey.
+                  Warm, light, stimulating foods; pungent, bitter, astringent tastes; black pepper, barley, honey.
                 </span>
               </div>
 
@@ -725,7 +713,7 @@ export const LandingPage = ({ onTriggerToast }) => {
                 className="w-full mt-sm"
                 onClick={handleStartAssessment}
               >
-                Assess Kapha Tendency →
+                Assess Structural Tendency →
               </Button>
             </div>
           </div>
@@ -754,7 +742,7 @@ export const LandingPage = ({ onTriggerToast }) => {
               <div className="ayur-pipe-step__content">
                 <h4 className="ayur-pipe-step__title">Demographics & Physiology</h4>
                 <p className="ayur-pipe-step__desc">
-                  Input foundational age, sex, BMI, and geographical climate zone (Desha), which
+                  Input foundational age, sex, BMI, and geographical climate zone, which
                   strongly influence metabolic tendencies.
                 </p>
               </div>
@@ -766,7 +754,7 @@ export const LandingPage = ({ onTriggerToast }) => {
               <div className="ayur-pipe-step__content">
                 <h4 className="ayur-pipe-step__title">Multi-Domain Intake</h4>
                 <p className="ayur-pipe-step__desc">
-                  Complete questions evaluating physical build, sleep depth, digestive fire (Agni),
+                  Complete questions evaluating physical build, sleep depth, digestive strength,
                   eating habits, and current clinical concerns.
                 </p>
               </div>
@@ -779,7 +767,7 @@ export const LandingPage = ({ onTriggerToast }) => {
                 <h4 className="ayur-pipe-step__title">XAI Inference & Literature RAG</h4>
                 <p className="ayur-pipe-step__desc">
                   Multi-task machine learning calculates constitutional distributions, attributes SHAP weights,
-                  and retrieves relevant Samhitā citations.
+                  and retrieves relevant classical medical citations.
                 </p>
               </div>
             </div>
@@ -790,7 +778,7 @@ export const LandingPage = ({ onTriggerToast }) => {
               <div className="ayur-pipe-step__content">
                 <h4 className="ayur-pipe-step__title">Doctor Validation & Protocol</h4>
                 <p className="ayur-pipe-step__desc">
-                  Attending physicians verify findings, calibrate dosha balance, and release a customized
+                  Attending physicians verify findings, calibrate constitutional balance, and release a customized
                   dietary dossier and clinical audit record.
                 </p>
               </div>
@@ -820,7 +808,7 @@ export const LandingPage = ({ onTriggerToast }) => {
                 <span>PHYSICIAN WORKSPACE</span>
               </div>
               <h2 className="ayur-section-title">
-                Clinical Decision Support for Ayurvedic Practitioners
+                Clinical Decision Support for Medical Practitioners
               </h2>
               <p className="ayur-doctor-showcase__text">
                 AyuRAG-XAI is built not to replace physician judgment, but to empower clinical practitioners
@@ -833,7 +821,7 @@ export const LandingPage = ({ onTriggerToast }) => {
                   <FileCheck size={18} className="text-secondary" />
                   <div>
                     <strong>Patient Cohort Registry</strong>
-                    <span>Searchable patient records, prakriti breakdown & intake dates.</span>
+                    <span>Searchable patient records, constitution breakdown & intake dates.</span>
                   </div>
                 </div>
                 <div className="ayur-df-item">
@@ -888,14 +876,14 @@ export const LandingPage = ({ onTriggerToast }) => {
                     <strong className="ayur-mdd-pname">Constitutional Candidate</strong>
                   </div>
                   <Badge color="accent" variant="subtle" size="sm">
-                    Vāta-Pitta (78% Primary)
+                    Air & Fire Dominant (78% Primary)
                   </Badge>
                 </div>
 
                 <div className="ayur-mdd-metrics">
                   <div className="ayur-mdd-metric">
-                    <span>Agni State</span>
-                    <strong>Viṣama Agni</strong>
+                    <span>Digestive State</span>
+                    <strong>Variable & Erratic</strong>
                   </div>
                   <div className="ayur-mdd-metric">
                     <span>Attribution Concordance</span>
@@ -903,7 +891,7 @@ export const LandingPage = ({ onTriggerToast }) => {
                   </div>
                   <div className="ayur-mdd-metric">
                     <span>Literature Grounding</span>
-                    <strong>Caraka Sūtra 1.59</strong>
+                    <strong>Classical Medical Treatise Ch. 1</strong>
                   </div>
                 </div>
 
@@ -1034,7 +1022,7 @@ export const LandingPage = ({ onTriggerToast }) => {
                 </div>
               </div>
               <p className="ayur-footer-mission">
-                Grounded Ayurvedic artificial intelligence combining classical Samhitā literature
+                Grounded clinical artificial intelligence combining classical medical literature
                 retrieval with explainable machine learning feature attributions and physician decision support.
               </p>
             </div>
@@ -1052,19 +1040,19 @@ export const LandingPage = ({ onTriggerToast }) => {
             <div className="ayur-footer-links-col">
               <h5 className="ayur-footer-col-title">Constitutional Focus</h5>
               <ul className="ayur-footer-links">
-                <li><a href="#dosha-explorer">Vāta Movement Principle</a></li>
-                <li><a href="#dosha-explorer">Pitta Metabolic Principle</a></li>
-                <li><a href="#dosha-explorer">Kapha Structural Principle</a></li>
-                <li><a href="#features">Agni Digestive Evaluation</a></li>
+                <li><a href="#dosha-explorer">Movement Principle (Air & Space)</a></li>
+                <li><a href="#dosha-explorer">Metabolic Principle (Fire & Water)</a></li>
+                <li><a href="#dosha-explorer">Structural Principle (Water & Earth)</a></li>
+                <li><a href="#features">Digestive Fire Evaluation</a></li>
               </ul>
             </div>
 
             <div className="ayur-footer-links-col">
               <h5 className="ayur-footer-col-title">Classical Corpus</h5>
               <ul className="ayur-footer-links">
-                <li><a href="#features">Caraka Saṃhitā Sūtra</a></li>
-                <li><a href="#features">Suśruta Saṃhitā Śarīra</a></li>
-                <li><a href="#features">Aṣṭāṅga Hṛdayam</a></li>
+                <li><a href="#features">Internal Medicine Treatises</a></li>
+                <li><a href="#features">Anatomical & Physiological Compendia</a></li>
+                <li><a href="#features">Therapeutic Syntheses</a></li>
                 <li><a href="#features">SHAP & LIME Attributions</a></li>
               </ul>
             </div>

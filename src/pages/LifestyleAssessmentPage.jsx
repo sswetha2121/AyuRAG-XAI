@@ -104,7 +104,7 @@ export const LifestyleAssessmentPage = ({ onContinueToNextPhase, onBackToPreviou
       onTriggerToast?.({
         type: 'success',
         title: 'Lifestyle Assessment Complete',
-        message: '10 of 10 Dinacharya parameters saved in session storage.'
+        message: '10 of 10 lifestyle parameters saved in session storage.'
       });
     }
   };
@@ -174,7 +174,7 @@ export const LifestyleAssessmentPage = ({ onContinueToNextPhase, onBackToPreviou
           <div className="ayur-ls-pipeline-line ayur-ls-pipeline-line--done" />
           <div className="ayur-ls-pipeline-step ayur-ls-pipeline-step--done">
             <span className="ayur-ls-pipeline-dot">✓</span>
-            <span className="ayur-ls-pipeline-text">Prakriti</span>
+            <span className="ayur-ls-pipeline-text">Constitution</span>
           </div>
           <div className="ayur-ls-pipeline-line ayur-ls-pipeline-line--active" />
           <div className="ayur-ls-pipeline-step ayur-ls-pipeline-step--current">

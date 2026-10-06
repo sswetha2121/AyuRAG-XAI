@@ -6,18 +6,18 @@ import { UnitToggle } from './UnitToggle';
 import { User, MapPin, Compass, Sparkles, Scale, Ruler, HeartPulse } from 'lucide-react';
 
 const CLIMATE_ZONES = [
-  { value: 'tropical-coastal', label: 'Tropical & Coastal (Ānūpa Desha — Humid, Kapha/Pitta)' },
-  { value: 'arid-dry', label: 'Arid & Semi-Dry (Jāṅgala Desha — Dry, Vata dominant)' },
-  { value: 'temperate', label: 'Temperate & Plains (Sādhāraṇa Desha — Balanced elements)' },
-  { value: 'cold-mountainous', label: 'Cold & Mountainous (Hima Desha — Cold, Vata/Kapha)' }
+  { value: 'tropical-coastal', label: 'Tropical & Coastal (Humid Climate)' },
+  { value: 'arid-dry', label: 'Arid & Semi-Dry (Dry Climate)' },
+  { value: 'temperate', label: 'Temperate & Plains (Moderate Climate)' },
+  { value: 'cold-mountainous', label: 'Cold & Mountainous (Cold Climate)' }
 ];
 
 const HEALTH_GOALS = [
-  { id: 'digestion-agni', label: 'Digestive Health & Agni', icon: '🔥' },
-  { id: 'stress-sleep', label: 'Stress Relief & Sleep (Nidrā)', icon: '🌙' },
-  { id: 'energy-vitality', label: 'Vital Energy (Prāṇa)', icon: '⚡' },
-  { id: 'immunity-ojas', label: 'Immunity & Resilience (Ojas)', icon: '🛡️' },
-  { id: 'general', label: 'General Prakriti Discovery', icon: '🌿' }
+  { id: 'digestion-agni', label: 'Digestive Health & Metabolism', icon: '🔥' },
+  { id: 'stress-sleep', label: 'Stress Relief & Restful Sleep', icon: '🌙' },
+  { id: 'energy-vitality', label: 'Vital Energy & Stamina', icon: '⚡' },
+  { id: 'immunity-ojas', label: 'Immunity & Resilience', icon: '🛡️' },
+  { id: 'general', label: 'General Constitution Discovery', icon: '🌿' }
 ];
 
 export const PersonalInfoForm = ({
@@ -64,7 +64,7 @@ export const PersonalInfoForm = ({
             onChange={(e) => onChange('age', e.target.value)}
             errorMessage={errors.age}
             error={Boolean(errors.age)}
-            helperText="Age stage (Vaya) informs metabolic Kapha/Pitta/Vata transitions"
+            helperText="Age stage informs natural metabolic life stages"
             required
             disabled={disabled}
           />

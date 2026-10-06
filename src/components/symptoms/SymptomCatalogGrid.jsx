@@ -50,9 +50,6 @@ export const SymptomCatalogGrid = ({
             </div>
 
             <h4 className="ayur-symptom-catalog-card__name">{sym.name}</h4>
-            {sym.sanskritName && (
-              <span className="ayur-symptom-catalog-card__sanskrit">{sym.sanskritName}</span>
-            )}
             <p className="ayur-symptom-catalog-card__desc">{sym.description}</p>
           </div>
         );

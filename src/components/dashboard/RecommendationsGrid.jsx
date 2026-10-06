@@ -21,7 +21,7 @@ export const RecommendationsGrid = ({
 
   const categories = [
     { id: 'all', label: 'All Recommendations' },
-    { id: 'diet', label: 'Diet & Agni' },
+    { id: 'diet', label: 'Diet & Digestion' },
     { id: 'sleep', label: 'Sleep & Circadian' },
     { id: 'activity', label: 'Movement' },
     { id: 'stress', label: 'Stress & Mind' }

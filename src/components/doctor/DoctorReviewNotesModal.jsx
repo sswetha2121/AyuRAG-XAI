@@ -125,7 +125,7 @@ export const DoctorReviewNotesModal = ({
               id="review-summary"
               rows={2}
               className="ayur-textarea"
-              placeholder="Concise clinical assessment overview (e.g. Concordant with Vāta-Pitta Agnimandya inference...)"
+              placeholder="Concise clinical assessment overview (e.g. Concordant with metabolic sluggishness inference...)"
               value={formData.summary}
               onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
               required
@@ -156,7 +156,7 @@ export const DoctorReviewNotesModal = ({
               id="review-recs"
               rows={3}
               className="ayur-textarea"
-              placeholder="Prescribed classical pathya/apathya dietary adjustments, specific herbs, and Dinacharya modifications..."
+              placeholder="Prescribed wholesome dietary adjustments, supportive herbs, and daily routine modifications..."
               value={formData.recommendations}
               onChange={(e) => setFormData({ ...formData, recommendations: e.target.value })}
             />
@@ -171,7 +171,7 @@ export const DoctorReviewNotesModal = ({
               id="review-followup"
               type="text"
               className="ayur-input"
-              placeholder="e.g. Follow-up consultation in 14 days for Agni reassessment."
+              placeholder="e.g. Follow-up consultation in 14 days for digestive reassessment."
               value={formData.follow_up_notes}
               onChange={(e) => setFormData({ ...formData, follow_up_notes: e.target.value })}
             />

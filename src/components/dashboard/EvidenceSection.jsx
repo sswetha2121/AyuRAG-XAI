@@ -30,7 +30,7 @@ export const EvidenceSection = ({
           </CardTitle>
 
           <CardDescription className="ayur-evidence-desc">
-            All AI recommendations and constitutional patterns are grounded in classical Sanskrit Ayurvedic Samhitas and peer-reviewed circadian biology.
+            All AI recommendations and constitutional patterns are grounded in classical medical treatises and peer-reviewed circadian biology.
           </CardDescription>
         </CardHeader>
 

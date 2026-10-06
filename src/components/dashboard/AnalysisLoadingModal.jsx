@@ -5,9 +5,9 @@ import { ProgressBar } from '../ui';
 
 const LOADING_STAGES = [
   { id: 1, label: 'Ingesting multi-domain physiological & demographic parameters' },
-  { id: 2, label: 'Calibrating Tridosha baseline (Vāta-Pitta-Kapha) & metabolic Agni' },
+  { id: 2, label: 'Calibrating constitutional energy baseline & metabolic digestion' },
   { id: 3, label: 'Computing explainable AI feature importances & SHAP attributions' },
-  { id: 4, label: 'Grounding personalized protocols in classical Samhita RAG citations' }
+  { id: 4, label: 'Grounding personalized protocols in classical literature RAG citations' }
 ];
 
 export const AnalysisLoadingModal = ({

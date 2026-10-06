@@ -243,19 +243,19 @@ export function getLifestyleMicrocopy({ prakritiAnswers = {}, personalInfo = {} 
   const dosha = deriveDoshaSummary(prakritiAnswers);
   const name = personalInfo.fullName ? personalInfo.fullName.split(' ')[0] : null;
 
-  let bannerTitle = name ? `Welcome to your Lifestyle Intake, ${name}` : 'Lifestyle Assessment (Dinacharya)';
+  let bannerTitle = name ? `Welcome to your Lifestyle Intake, ${name}` : 'Lifestyle Assessment (Daily Routine)';
   let bannerSubtitle = "Let's understand how your daily routine, sleep rhythm, and activity shape your physiological baseline.";
   let contextualNote = null;
 
   if (dosha.dominantDosha === 'vata') {
-    bannerSubtitle = "Vāta baseline observed: Routine consistency, grounding sleep habits, and paced activity are central to your daily rhythm.";
-    contextualNote = "Your responses in Prakriti showed light, mobile qualities. Tracking daily sleep and schedule regularity helps capture your stability signals.";
+    bannerSubtitle = "Movement baseline observed: Routine consistency, grounding sleep habits, and paced activity are central to your daily rhythm.";
+    contextualNote = "Your responses in the Body Constitution assessment showed light, mobile qualities. Tracking daily sleep and schedule regularity helps capture your stability signals.";
   } else if (dosha.dominantDosha === 'pitta') {
-    bannerSubtitle = "Pitta baseline observed: Work intensity, midday rhythm, and balanced stress coping play key roles in your constitutional equilibrium.";
-    contextualNote = "Your Prakriti responses indicated purposeful, warm dynamics. Observing rest intervals and work pace helps contextualize heat and stress management.";
+    bannerSubtitle = "Metabolic baseline observed: Work intensity, midday rhythm, and balanced stress coping play key roles in your constitutional equilibrium.";
+    contextualNote = "Your Body Constitution responses indicated purposeful, warm dynamics. Observing rest intervals and work pace helps contextualize heat and stress management.";
   } else if (dosha.dominantDosha === 'kapha') {
-    bannerSubtitle = "Kapha baseline observed: Stimulating morning wake times, steady physical movement, and active habits foster optimal vitality.";
-    contextualNote = "Your Prakriti responses highlighted sturdy, grounded traits. Morning wake times and movement patterns are particularly informative here.";
+    bannerSubtitle = "Structural baseline observed: Stimulating morning wake times, steady physical movement, and active habits foster optimal vitality.";
+    contextualNote = "Your Body Constitution responses highlighted sturdy, grounded traits. Morning wake times and movement patterns are particularly informative here.";
   }
 
   return {

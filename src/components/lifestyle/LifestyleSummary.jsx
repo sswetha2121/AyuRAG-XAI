@@ -116,7 +116,7 @@ export const LifestyleSummary = ({
       return 'Your lifestyle profile is taking shape.';
     }
     if (answeredCount <= 7) {
-      return 'Capturing detailed Dinacharya habits and circadian pacing.';
+      return 'Capturing detailed routine habits and circadian pacing.';
     }
     return 'Your lifestyle rhythm has been comprehensively profiled.';
   };
@@ -136,7 +136,7 @@ export const LifestyleSummary = ({
             Your Lifestyle Profile
           </CardTitle>
           <CardDescription>
-            {patientName ? `Dinacharya profile for ${patientName}` : 'Real-time circadian and routine parameters'}
+            {patientName ? `Daily routine profile for ${patientName}` : 'Real-time circadian and routine parameters'}
           </CardDescription>
         </CardHeader>
 
@@ -244,14 +244,14 @@ export const LifestyleSummary = ({
             </div>
           </div>
 
-          {/* Classical Grounding Footer */}
+          {/* Lifestyle Grounding Footer */}
           <div className="ayur-ls-classical-box">
             <div className="flex items-center gap-xs text-secondary font-semibold text-micro mb-2xs">
               <ShieldCheck size={13} />
-              <span>Classical Dinacharya Foundation</span>
+              <span>Circadian Rhythm & Vitality Principles</span>
             </div>
             <p className="text-micro text-muted">
-              <em>"Dinacaryāṁ sadā vartet..."</em> — Regular adherence to daily rhythm, proper exercise (Vyāyāma), and adequate sleep (Nidrā) sustains tissue vitality and prevents dosha vitiation (Charaka Samhita Sutrasthana 5).
+              Regular adherence to daily rhythms, balanced physical movement, and restful sleep sustains tissue vitality and prevents metabolic strain.
             </p>
           </div>
         </CardContent>

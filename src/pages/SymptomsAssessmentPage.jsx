@@ -95,7 +95,7 @@ export const SymptomsAssessmentPage = ({ onContinueToNextPhase, onBackToPrevious
           <div className="ayur-sym-pipeline-line ayur-sym-pipeline-line--done" />
           <div className="ayur-sym-pipeline-step ayur-sym-pipeline-step--done">
             <span className="ayur-sym-pipeline-dot">✓</span>
-            <span className="ayur-sym-pipeline-text">Prakriti</span>
+            <span className="ayur-sym-pipeline-text">Constitution</span>
           </div>
           <div className="ayur-sym-pipeline-line ayur-sym-pipeline-line--done" />
           <div className="ayur-sym-pipeline-step ayur-sym-pipeline-step--done">

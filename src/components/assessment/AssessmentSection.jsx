@@ -22,13 +22,6 @@ export const AssessmentSection = ({
     <div className="ayur-assessment-section" id={`section-${section.id}`}>
       {/* Section Header */}
       <div className="ayur-assessment-section__header">
-        <div className="flex items-center gap-xs flex-wrap">
-          {section.sanskrit && (
-            <span className="ayur-sanskrit-tag font-serif italic text-accent">
-              {section.sanskrit}
-            </span>
-          )}
-        </div>
         <h2 className="ayur-assessment-section__title">{section.title}</h2>
         {section.description && (
           <p className="ayur-assessment-section__desc">{section.description}</p>

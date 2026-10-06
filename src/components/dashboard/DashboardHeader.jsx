@@ -85,7 +85,7 @@ export const DashboardHeader = ({
         </h1>
 
         <p className="ayur-dash-desc">
-          An explainable, multi-domain clinical intelligence summary integrating baseline constitution (Prakṛti), circadian lifestyle (Dinacaryā), dietary fire (Agni), and active symptom manifestations.
+          An explainable, multi-domain clinical intelligence summary integrating baseline constitution, circadian lifestyle, dietary digestion, and active symptom manifestations.
         </p>
       </div>
     </div>
