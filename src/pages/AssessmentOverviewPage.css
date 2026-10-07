@@ -231,6 +231,20 @@
 
 .ayur-overview-back-btn {
   border-radius: 12px !important;
+  padding: 14px 22px !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  border: 1px solid rgba(22, 56, 44, 0.22) !important;
+  color: #16382C !important;
+  background: #FFFFFF !important;
+  transition: all 0.2s ease !important;
+}
+
+.ayur-overview-back-btn:hover {
+  background: #F4F0E6 !important;
+  border-color: #16382C !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(22, 56, 44, 0.08) !important;
 }
 
 /* Phases Section */

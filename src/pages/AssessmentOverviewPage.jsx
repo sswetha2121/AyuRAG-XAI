@@ -19,7 +19,8 @@ import {
   FileText,
   HelpCircle,
   LogIn,
-  RotateCcw
+  RotateCcw,
+  ArrowLeft
 } from 'lucide-react';
 
 export const AssessmentOverviewPage = ({ onTriggerToast }) => {
@@ -211,10 +212,11 @@ export const AssessmentOverviewPage = ({ onTriggerToast }) => {
               )}
 
               <Button
-                variant="ghost"
+                variant="outline"
                 size="lg"
                 onClick={() => navigate('/')}
                 className="ayur-overview-back-btn"
+                leftIcon={<ArrowLeft size={16} />}
               >
                 Back to Home
               </Button>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation, useParams, Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { AssessmentProvider, useAssessment } from './context/AssessmentContext';
 import { AppShell } from './components/layout/AppShell';
@@ -430,8 +431,8 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast }) {
 
       {/* Patient Assessment Top Navigation & Auth Status Bar */}
       <div className="ayur-assessment-nav-bar flex items-center justify-between mb-md px-xs">
-        <Link to="/" className="text-xs text-secondary hover:underline flex items-center gap-xs font-semibold">
-          ← Return to AyuRAG-XAI Landing Page
+        <Link to="/" className="ayur-assessment-back-btn" title="Back to Home" aria-label="Back to Home">
+          <ArrowLeft size={18} />
         </Link>
         {!user && (
           <div className="flex items-center gap-sm text-xs text-muted">

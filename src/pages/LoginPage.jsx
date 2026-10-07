@@ -6,13 +6,15 @@ import {
   Lock,
   Mail,
   ArrowRight,
+  ArrowLeft,
   ShieldCheck,
   Stethoscope,
   Phone,
   MapPin,
   Calendar,
   CheckCircle2,
-  Sparkles
+  Sparkles,
+  Users
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Link, useNavigate } from 'react-router-dom';
@@ -112,7 +114,7 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
         title: `${role} Session Active`,
         message: `Logged in as demo ${role.toLowerCase()}: ${user.name}.`,
       });
-      if (user.role === 'DOCTOR') {
+      if (role === 'DOCTOR') {
         navigate('/doctor/dashboard');
       } else {
         onLoginSuccess?.(user);
@@ -126,12 +128,17 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
   return (
     <div className="ayur-login-page">
       <div className={`ayur-login-card ${authMode === 'signup' ? 'ayur-login-card--wide' : ''}`}>
-        {/* Brand Header */}
+        {/* Top Back Arrow Navigation */}
+        <Link to="/" className="ayur-card-back-arrow" aria-label="Back to Landing Page" title="Back">
+          <ArrowLeft size={18} />
+        </Link>
+
+        {/* Brand Header with Clean Logo & Heading Separation */}
         <div className="ayur-login-brand">
           <div className="ayur-login-emblem">
             <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="36" height="36" rx="9" fill="#16382C" />
-              <rect x="1.5" y="1.5" width="33" height="33" rx="7.5" stroke="#C5A059" strokeOpacity="0.4" />
+              <rect x="1.5" y="1.5" width="33" height="33" rx="7.5" stroke="#C5A059" strokeOpacity="0.45" />
               <path
                 d="M18 6C13 9 9 14.5 9 21C9 25.5 12.5 29 18 29C23.5 29 27 25.5 27 21C27 14.5 23 9 18 6Z"
                 fill="#5B8266"
@@ -143,7 +150,15 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
               <circle cx="18" cy="9" r="2" fill="#FAF4E8" />
             </svg>
           </div>
-          <h1 className="ayur-login-title">AyuRAG<span className="text-accent">XAI</span></h1>
+
+          <div className="ayur-login-brand-chip">
+            <span>AyuRAG<span className="text-accent">XAI</span></span>
+          </div>
+
+          <h1 className="ayur-login-title">
+            {authMode === 'signin' ? 'Sign In' : 'Create Account'}
+          </h1>
+
           <p className="ayur-login-tagline">
             {authMode === 'signin'
               ? 'Patient Assessment & Clinical Gateway'
@@ -211,7 +226,7 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
             <Button
               variant="primary"
               type="submit"
-              className="w-full mt-sm"
+              className="w-full mt-xs ayur-login-submit-btn"
               isLoading={isLoading}
               rightIcon={<ArrowRight size={16} />}
             >
@@ -288,41 +303,50 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
             <div className="ayur-form-row-3">
               <div className="ayur-form-group">
                 <label className="ayur-label">Age (Years) *</label>
-                <input
-                  type="number"
-                  className="ayur-input"
-                  min="1"
-                  max="120"
-                  value={signUpForm.age}
-                  onChange={(e) => setSignUpForm({ ...signUpForm, age: e.target.value })}
-                  placeholder="28"
-                  required
-                />
+                <div className="ayur-input-icon-box">
+                  <Calendar size={16} className="ayur-input-icon" />
+                  <input
+                    type="number"
+                    className="ayur-input ayur-input--icon"
+                    min="1"
+                    max="120"
+                    value={signUpForm.age}
+                    onChange={(e) => setSignUpForm({ ...signUpForm, age: e.target.value })}
+                    placeholder="28"
+                    required
+                  />
+                </div>
               </div>
 
               <div className="ayur-form-group">
                 <label className="ayur-label">Gender *</label>
-                <select
-                  className="ayur-input"
-                  value={signUpForm.gender}
-                  onChange={(e) => setSignUpForm({ ...signUpForm, gender: e.target.value })}
-                >
-                  <option value="Female">Female</option>
-                  <option value="Male">Male</option>
-                  <option value="Other">Other</option>
-                  <option value="Prefer not to say">Prefer not to say</option>
-                </select>
+                <div className="ayur-input-icon-box">
+                  <Users size={16} className="ayur-input-icon" />
+                  <select
+                    className="ayur-input ayur-input--icon ayur-select"
+                    value={signUpForm.gender}
+                    onChange={(e) => setSignUpForm({ ...signUpForm, gender: e.target.value })}
+                  >
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Other">Other</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                  </select>
+                </div>
               </div>
 
               <div className="ayur-form-group">
                 <label className="ayur-label">City / Location</label>
-                <input
-                  type="text"
-                  className="ayur-input"
-                  value={signUpForm.location}
-                  onChange={(e) => setSignUpForm({ ...signUpForm, location: e.target.value })}
-                  placeholder="Bangalore, India"
-                />
+                <div className="ayur-input-icon-box">
+                  <MapPin size={16} className="ayur-input-icon" />
+                  <input
+                    type="text"
+                    className="ayur-input ayur-input--icon"
+                    value={signUpForm.location}
+                    onChange={(e) => setSignUpForm({ ...signUpForm, location: e.target.value })}
+                    placeholder="Bangalore, India"
+                  />
+                </div>
               </div>
             </div>
 
@@ -361,7 +385,7 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
             <Button
               variant="primary"
               type="submit"
-              className="w-full mt-sm"
+              className="w-full mt-xs ayur-login-submit-btn"
               isLoading={isLoading}
               rightIcon={<ArrowRight size={16} />}
             >
@@ -372,11 +396,11 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
 
         {/* Dedicated Link to Doctor Portal */}
         <div className="ayur-doctor-portal-callout">
-          <div className="flex items-center gap-xs">
+          <div className="ayur-doc-callout-content">
             <Stethoscope size={18} className="text-secondary shrink-0" />
-            <div>
-              <span className="font-semibold text-xs text-primary block">Are you a Licensed Ayurvedic Doctor?</span>
-              <span className="text-xs text-muted block">Access the clinical review workspace & diet plan console</span>
+            <div className="ayur-doc-callout-text">
+              <span className="font-semibold text-xs text-primary">Are you a Licensed Ayurvedic Doctor?</span>
+              <span className="text-xs text-muted">Access the clinical review workspace & diet plan console</span>
             </div>
           </div>
           <Link to="/doctor-login" className="ayur-doc-link-btn">
@@ -403,15 +427,15 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
           </button>
         </div>
 
-        {/* Security Notice & Back to Home */}
+        {/* Security Notice & Clean Back Arrow Navigation */}
         <div className="ayur-login-footer">
           <div className="flex items-center gap-xs justify-center mb-xs">
-            <ShieldCheck size={14} className="text-secondary" />
+            <ShieldCheck size={14} className="text-secondary shrink-0" />
             <span>Clinical data secured with patient isolation & Django authorization.</span>
           </div>
-          <div className="text-center mt-xs">
-            <Link to="/" className="text-xs text-secondary hover:underline font-medium">
-              ← Return to AyuRAG-XAI Landing Page
+          <div className="ayur-auth-back-row">
+            <Link to="/" className="ayur-auth-back-btn" aria-label="Back to Landing Page" title="Back to Landing Page">
+              <ArrowLeft size={18} />
             </Link>
           </div>
         </div>
@@ -419,3 +443,4 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
     </div>
   );
 };
+

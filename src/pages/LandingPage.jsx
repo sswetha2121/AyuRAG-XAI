@@ -162,11 +162,6 @@ export const LandingPage = ({ onTriggerToast }) => {
               AyuRAG-XAI v2.1 • Explainable Clinical Decision Support & Classical Medical Literature RAG
             </span>
           </div>
-          <div className="ayur-announcement-links">
-            <Link to="/doctor-login" className="ayur-announcement-link">
-              Physician Gateway →
-            </Link>
-          </div>
         </div>
       </div>
 
@@ -228,20 +223,14 @@ export const LandingPage = ({ onTriggerToast }) => {
                 </Button>
               </div>
             ) : (
-              <>
-                <Link to="/doctor-login" className="ayur-landing-doc-btn">
-                  <Stethoscope size={15} />
-                  <span>Doctor Portal</span>
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => handleGoToAuth('signin')}
-                  className="ayur-landing-signin-btn"
-                >
-                  <LogIn size={15} />
-                  <span>Sign In</span>
-                </button>
-              </>
+              <button
+                type="button"
+                onClick={() => handleGoToAuth('signin')}
+                className="ayur-landing-signin-btn"
+              >
+                <LogIn size={15} />
+                <span>Sign In</span>
+              </button>
             )}
           </div>
         </div>
@@ -290,16 +279,6 @@ export const LandingPage = ({ onTriggerToast }) => {
                   leftIcon={<UserPlus size={18} />}
                 >
                   Create Patient Account
-                </Button>
-
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={() => navigate('/doctor-login')}
-                  className="ayur-hero-doctor-btn"
-                  leftIcon={<Stethoscope size={18} />}
-                >
-                  Doctor CDS Portal
                 </Button>
               </div>
 
@@ -977,16 +956,7 @@ export const LandingPage = ({ onTriggerToast }) => {
                 leftIcon={<LogIn size={18} />}
                 className="ayur-bottom-secondary-btn"
               >
-                Patient Sign In
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => navigate('/doctor-login')}
-                leftIcon={<Stethoscope size={18} />}
-                className="ayur-bottom-doctor-btn"
-              >
-                Doctor Portal
+                Sign In
               </Button>
             </div>
           </div>

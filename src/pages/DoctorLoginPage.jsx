@@ -6,6 +6,7 @@ import {
   Lock,
   User,
   ArrowRight,
+  ArrowLeft,
   ShieldCheck,
   CheckCircle2,
   Sparkles,
@@ -60,6 +61,11 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
   return (
     <div className="ayur-doctor-login-page">
       <div className="ayur-dlogin-card">
+        {/* Top Back Arrow Navigation */}
+        <Link to="/" className="ayur-card-back-arrow" aria-label="Back to Landing Page" title="Back">
+          <ArrowLeft size={18} />
+        </Link>
+
         {/* Medical Badge Header */}
         <div className="ayur-dlogin-header">
           <div className="ayur-dlogin-emblem">
@@ -125,9 +131,9 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
           </Button>
         </form>
 
-        {/* Quick Access for Verified Staff */}
+        {/* Quick Access for Verified Staff (Single Demo Profile) */}
         <div className="ayur-dlogin-quick-section">
-          <span className="ayur-dquick-label">Authorized Clinical Roles (Demo Profiles):</span>
+          <span className="ayur-dquick-label">Authorized Clinical Role (Demo Profile):</span>
 
           <div className="ayur-dquick-grid">
             <button
@@ -142,19 +148,6 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
                 <span>Internal Medicine & Digestive Health Specialist</span>
               </div>
             </button>
-
-            <button
-              type="button"
-              className="ayur-dquick-btn"
-              onClick={() => handleDoctorQuickSelect('dr.menon')}
-              disabled={isLoading}
-            >
-              <div className="ayur-dquick-avatar">CT</div>
-              <div className="ayur-dquick-info">
-                <strong>Clinical Therapies Lead</strong>
-                <span>Detoxification & Constitutional Specialist</span>
-              </div>
-            </button>
           </div>
         </div>
 
@@ -166,9 +159,10 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
           </Link>
         </div>
 
-        <div className="text-center mt-sm">
-          <Link to="/" className="text-xs text-secondary hover:underline font-medium">
-            ← Return to AyuRAG-XAI Landing Page
+        {/* Simple Back Arrow Navigation */}
+        <div className="ayur-auth-back-row">
+          <Link to="/" className="ayur-auth-back-btn" aria-label="Back to Landing Page" title="Back to Landing Page">
+            <ArrowLeft size={18} />
           </Link>
         </div>
 
