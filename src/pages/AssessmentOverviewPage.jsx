@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useAssessment } from '../context/AssessmentContext';
 import { Button } from '../components/ui/Button';
+import { DoshasPrinciplesGuide } from '../components/prakriti';
 import {
   User,
   Activity,
@@ -257,6 +258,12 @@ export const AssessmentOverviewPage = ({ onTriggerToast }) => {
           </div>
         </div>
       </section>
+
+      {/* Educational Guide: The 3 Doshas and Principles Explained for Beginners */}
+      <DoshasPrinciplesGuide
+        showAction={true}
+        onStartAssessment={handleStartAssessment}
+      />
 
       {/* Clinical Preparation Guidelines */}
       <section className="ayur-overview-guidelines">

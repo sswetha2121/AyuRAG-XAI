@@ -1,36 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './PrakritiIntro.css';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, Button, Badge } from '../ui';
-import { Wind, Flame, Mountain, Sparkles, ArrowRight, ShieldCheck, HelpCircle } from 'lucide-react';
+import { Wind, Flame, Mountain, Sparkles, ArrowRight, ShieldCheck, HelpCircle, BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
+import { DoshasPrinciplesGuide } from './DoshasPrinciplesGuide';
 
 const DOSHA_CARDS = [
   {
-    name: 'Movement Energy',
-    elements: 'Air + Space Elements',
-    principles: 'Movement, Respiration, Circulation & Variability',
-    qualities: 'Dry, Light, Cool, Rough, Mobile & Clear',
+    name: 'Vāta • Movement Energy',
+    sanskrit: 'Vāta (वात)',
+    elements: 'Air + Space (Ether)',
+    principles: 'Breathing, Heartbeat, Nerve Signals, Circulation & Motion',
+    qualities: 'Dry, Light, Cool, Mobile, Nimble & Quick',
     icon: Wind,
-    colorClass: 'ayur-intro-dosha--vata'
+    colorClass: 'ayur-intro-dosha--vata',
+    balanceTip: 'Thrives on warm cooked foods, routine, and grounding rest.'
   },
   {
-    name: 'Metabolic Energy',
-    elements: 'Fire + Water Elements',
-    principles: 'Transformation, Digestion, Metabolism & Intellect',
-    qualities: 'Hot, Sharp, Light, Liquid, Oily & Penetrating',
+    name: 'Pitta • Metabolic Energy',
+    sanskrit: 'Pitta (पित्त)',
+    elements: 'Fire + Water',
+    principles: 'Digestion, Metabolism, Body Heat, Vision & Sharp Intellect',
+    qualities: 'Hot, Sharp, Light, Penetrating & Focused',
     icon: Flame,
-    colorClass: 'ayur-intro-dosha--pitta'
+    colorClass: 'ayur-intro-dosha--pitta',
+    balanceTip: 'Thrives on cooling foods, hydration, and moderate pacing.'
   },
   {
-    name: 'Structural Energy',
-    elements: 'Water + Earth Elements',
-    principles: 'Structure, Cohesion, Lubrication & Stability',
-    qualities: 'Heavy, Slow, Cool, Oily, Smooth, Dense & Stable',
+    name: 'Kapha • Structural Energy',
+    sanskrit: 'Kapha (कफ)',
+    elements: 'Water + Earth',
+    principles: 'Body Frame, Joint Lubrication, Tissues & Immune Resilience',
+    qualities: 'Heavy, Solid, Steady, Cool, Calm & Enduring',
     icon: Mountain,
-    colorClass: 'ayur-intro-dosha--kapha'
+    colorClass: 'ayur-intro-dosha--kapha',
+    balanceTip: 'Thrives on light spicy foods, morning waking, and daily exercise.'
   }
 ];
 
 export const PrakritiIntro = ({ onStart, onOpenInfo, className = '' }) => {
+  const [showFullGuide, setShowFullGuide] = useState(false);
+
   return (
     <div className={`ayur-prakriti-intro ${className}`.trim()}>
       <Card variant="highlighted" className="ayur-intro-card">
@@ -44,16 +53,28 @@ export const PrakritiIntro = ({ onStart, onOpenInfo, className = '' }) => {
                 Body Constitution Assessment
               </Badge>
             </div>
-            {onOpenInfo && (
+            <div className="flex items-center gap-xs">
               <Button
-                variant="ghost"
+                variant={showFullGuide ? 'secondary' : 'outline'}
                 size="sm"
-                leftIcon={<HelpCircle size={14} />}
-                onClick={onOpenInfo}
+                leftIcon={<BookOpen size={14} />}
+                rightIcon={showFullGuide ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                onClick={() => setShowFullGuide(!showFullGuide)}
               >
-                What is Body Constitution?
+                {showFullGuide ? 'Hide Doshas Guide' : 'Beginner Guide to 3 Doshas'}
               </Button>
-            )}
+
+              {onOpenInfo && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  leftIcon={<HelpCircle size={14} />}
+                  onClick={onOpenInfo}
+                >
+                  Quick FAQ
+                </Button>
+              )}
+            </div>
           </div>
 
           <CardTitle as="h2" className="ayur-intro-title">
@@ -61,11 +82,12 @@ export const PrakritiIntro = ({ onStart, onOpenInfo, className = '' }) => {
           </CardTitle>
 
           <CardDescription className="ayur-intro-desc">
-            Your <strong>Body Constitution</strong> represents your unique baseline genetic and physiological profile. It comprises three dynamic biological energies that govern mind and body.
+            In Ayurvedic medicine, your <strong>Body Constitution (Prakriti)</strong> is your lifelong biological fingerprint. It is shaped by three foundational energies known as <strong>Doshas (Principles)</strong>: <strong>Vāta</strong> (Movement), <strong>Pitta</strong> (Metabolism), and <strong>Kapha</strong> (Structure). Everyone is born with all three in a unique ratio!
           </CardDescription>
         </CardHeader>
 
         <CardContent>
+          {/* Quick Summary Dosha Cards */}
           <div className="ayur-intro-dosha-grid">
             {DOSHA_CARDS.map((dosha) => {
               const Icon = dosha.icon;
@@ -90,16 +112,27 @@ export const PrakritiIntro = ({ onStart, onOpenInfo, className = '' }) => {
                       <span className="ayur-intro-label">Key Traits:</span>
                       <span className="ayur-intro-val">{dosha.qualities}</span>
                     </div>
+                    <div className="ayur-intro-dosha-row">
+                      <span className="ayur-intro-label">Simple Balance:</span>
+                      <span className="ayur-intro-val text-accent font-medium">{dosha.balanceTip}</span>
+                    </div>
                   </div>
                 </div>
               );
             })}
           </div>
 
-          <div className="ayur-intro-clinical-note">
+          {/* Optional Expandable Deep-Dive Section for Beginners */}
+          {showFullGuide && (
+            <div className="ayur-intro-expanded-guide mt-lg pt-md" style={{ borderTop: '1px solid var(--color-border)' }}>
+              <DoshasPrinciplesGuide mode="compact" />
+            </div>
+          )}
+
+          <div className="ayur-intro-clinical-note mt-md">
             <ShieldCheck size={16} className="text-secondary flex-shrink-0" />
             <p className="text-caption text-secondary">
-              This interactive assessment consists of <strong>10 structured questions</strong> exploring your physical build, digestion, sleep, and emotional patterns.
+              This assessment consists of <strong>10 structured questions</strong> exploring your physical build, digestion, sleep, and natural tendencies over the long term. Choose whichever option reflects your natural self best.
             </p>
           </div>
         </CardContent>

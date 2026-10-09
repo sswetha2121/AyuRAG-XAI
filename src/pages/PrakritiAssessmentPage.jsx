@@ -129,10 +129,10 @@ export const PrakritiAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }
               type="button"
               className="ayur-help-btn"
               onClick={() => setShowInfoModal(true)}
-              aria-label="What is Body Constitution?"
+              aria-label="3 Doshas (Principles) Guide"
             >
               <HelpCircle size={14} />
-              <span>What is Body Constitution?</span>
+              <span>3 Doshas Guide & Principles</span>
             </button>
           </div>
 
@@ -248,6 +248,7 @@ export const PrakritiAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }
               answers={prakritiAnswers}
               questions={PRAKRITI_QUESTIONS}
               patientName={personalInfo.fullName}
+              onOpenInfo={() => setShowInfoModal(true)}
             />
           </div>
         </div>

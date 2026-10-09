@@ -6,3 +6,4 @@ export { QuestionNavigator } from './QuestionNavigator';
 export { AssessmentSummary } from './AssessmentSummary';
 export { PrakritiCompletionCard } from './PrakritiCompletionCard';
 export { InfoModal } from './InfoModal';
+export { DoshasPrinciplesGuide } from './DoshasPrinciplesGuide';

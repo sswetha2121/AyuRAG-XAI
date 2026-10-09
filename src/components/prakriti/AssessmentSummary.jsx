@@ -1,7 +1,7 @@
 import React from 'react';
 import './AssessmentSummary.css';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, Badge, ProgressBar } from '../ui';
-import { Sparkles, ShieldCheck, CheckCircle2, User, Activity, Wind, Flame, Mountain } from 'lucide-react';
+import { Sparkles, ShieldCheck, CheckCircle2, User, Activity, Wind, Flame, Mountain, HelpCircle } from 'lucide-react';
 
 export const AssessmentSummary = ({
   totalQuestions = 10,
@@ -9,6 +9,7 @@ export const AssessmentSummary = ({
   answers = {},
   questions = [],
   patientName = '',
+  onOpenInfo,
   className = ''
 }) => {
   const percentage = Math.round((answeredCount / totalQuestions) * 100);
@@ -118,6 +119,18 @@ export const AssessmentSummary = ({
                 <ProgressBar value={kaphaPct} color="gradient" size="sm" />
               </div>
             </div>
+
+            {onOpenInfo && (
+              <button
+                type="button"
+                className="flex items-center gap-xs text-micro text-secondary font-semibold hover:underline mt-xs"
+                onClick={onOpenInfo}
+                style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+              >
+                <HelpCircle size={12} />
+                <span>New to this? Read 3 Doshas Guide →</span>
+              </button>
+            )}
           </div>
 
           {/* Classical Grounding Note */}

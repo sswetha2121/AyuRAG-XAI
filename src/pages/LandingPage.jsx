@@ -36,6 +36,7 @@ import {
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
+import { DoshasPrinciplesGuide } from '../components/prakriti';
 
 export const LandingPage = ({ onTriggerToast }) => {
   const navigate = useNavigate();
@@ -202,7 +203,7 @@ export const LandingPage = ({ onTriggerToast }) => {
           {/* Center Navigation Links */}
           <nav className="ayur-landing-nav__links">
             <a href="#features" className="ayur-landing-nav__link">Pillars</a>
-            <a href="#dosha-explorer" className="ayur-landing-nav__link">Constitution Explorer</a>
+            <a href="#dosha-explorer" className="ayur-landing-nav__link">3 Doshas Guide</a>
             <a href="#pipeline" className="ayur-landing-nav__link">Clinical Journey</a>
             <a href="#xai-engine" className="ayur-landing-nav__link">Explainable AI</a>
             <a href="#physician-cds" className="ayur-landing-nav__link">Doctor Workspace</a>
@@ -569,135 +570,15 @@ export const LandingPage = ({ onTriggerToast }) => {
         </div>
       </section>
 
-      {/* 6. Interactive Constitution Diagnostic Explorer */}
-      <section id="dosha-explorer" className="ayur-explorer-section">
-        <div className="ayur-landing-container">
-          <div className="ayur-section-header text-center">
-            <div className="ayur-section-tag">
-              <Wind size={14} className="text-secondary" />
-              <span>CONSTITUTIONAL TYPES</span>
-            </div>
-            <h2 className="ayur-section-title">The Three Primary Body Constitutions</h2>
-            <p className="ayur-section-subtitle">
-              Traditional healthcare identifies three fundamental energetic principles governing all physiological,
-              psychological, and metabolic processes in the human organism.
-            </p>
-          </div>
-
-          <div className="ayur-dosha-cards-grid">
-            {/* Movement Card */}
-            <div className="ayur-dosha-detail-card vata">
-              <div className="ayur-dosha-card-icon-wrap vata">
-                <Wind size={28} />
-              </div>
-              <div className="ayur-dosha-card-tag">Kinetic Principle</div>
-              <h3 className="ayur-dosha-card-title">Movement Constitution</h3>
-              <span className="ayur-dosha-card-elements">Air & Space Elements</span>
-              <p className="ayur-dosha-card-desc">
-                The master principle regulating bodily motion, nerve impulse propagation, respiratory pacing,
-                circulatory flow, and sensory perception.
-              </p>
-
-              <div className="ayur-dosha-card-section">
-                <span className="ayur-dosha-card-label">Signs of Imbalance:</span>
-                <span className="ayur-dosha-card-value">
-                  Dry skin, variable digestion, irregular sleep, cold hands/feet, nervous fatigue.
-                </span>
-              </div>
-
-              <div className="ayur-dosha-card-section">
-                <span className="ayur-dosha-card-label">Nutritional Strategy:</span>
-                <span className="ayur-dosha-card-value">
-                  Warm, nourishing, grounding foods; sweet, sour, salty tastes; ginger, healthy oils.
-                </span>
-              </div>
-
-              <Button
-                variant="outline"
-                size="sm"
-                className="w-full mt-sm"
-                onClick={handleStartAssessment}
-              >
-                Assess Movement Tendency →
-              </Button>
-            </div>
-
-            {/* Metabolism Card */}
-            <div className="ayur-dosha-detail-card pitta">
-              <div className="ayur-dosha-card-icon-wrap pitta">
-                <Flame size={28} />
-              </div>
-              <div className="ayur-dosha-card-tag">Transformative Principle</div>
-              <h3 className="ayur-dosha-card-title">Metabolic Constitution</h3>
-              <span className="ayur-dosha-card-elements">Fire & Water Elements</span>
-              <p className="ayur-dosha-card-desc">
-                Governs enzymatic transformation, thermogenesis, cellular metabolism, visual acuity,
-                intellectual discrimination, and body temperature.
-              </p>
-
-              <div className="ayur-dosha-card-section">
-                <span className="ayur-dosha-card-label">Signs of Imbalance:</span>
-                <span className="ayur-dosha-card-value">
-                  Acid reflux, inflammatory heat, intense irritability, skin sensitivity, hyper-metabolism.
-                </span>
-              </div>
-
-              <div className="ayur-dosha-card-section">
-                <span className="ayur-dosha-card-label">Nutritional Strategy:</span>
-                <span className="ayur-dosha-card-value">
-                  Cooling, moderately dry foods; sweet, bitter, astringent tastes; coriander, coconut, cucumber.
-                </span>
-              </div>
-
-              <Button
-                variant="outline"
-                size="sm"
-                className="w-full mt-sm"
-                onClick={handleStartAssessment}
-              >
-                Assess Metabolic Tendency →
-              </Button>
-            </div>
-
-            {/* Structure Card */}
-            <div className="ayur-dosha-detail-card kapha">
-              <div className="ayur-dosha-card-icon-wrap kapha">
-                <Droplets size={28} />
-              </div>
-              <div className="ayur-dosha-card-tag">Cohesive Principle</div>
-              <h3 className="ayur-dosha-card-title">Structural Constitution</h3>
-              <span className="ayur-dosha-card-elements">Water & Earth Elements</span>
-              <p className="ayur-dosha-card-desc">
-                Provides anatomical structural stability, biological lubrication of joints and tissues,
-                immune resilience, and psychological calm.
-              </p>
-
-              <div className="ayur-dosha-card-section">
-                <span className="ayur-dosha-card-label">Signs of Imbalance:</span>
-                <span className="ayur-dosha-card-value">
-                  Sluggish digestion, morning lethargy, fluid retention, weight gain, congestion.
-                </span>
-              </div>
-
-              <div className="ayur-dosha-card-section">
-                <span className="ayur-dosha-card-label">Nutritional Strategy:</span>
-                <span className="ayur-dosha-card-value">
-                  Warm, light, stimulating foods; pungent, bitter, astringent tastes; black pepper, barley, honey.
-                </span>
-              </div>
-
-              <Button
-                variant="outline"
-                size="sm"
-                className="w-full mt-sm"
-                onClick={handleStartAssessment}
-              >
-                Assess Structural Tendency →
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 6. Comprehensive Educational Section: The 3 Doshas and Principles Explained */}
+      <div id="dosha-explorer">
+        <DoshasPrinciplesGuide
+          title="Understanding the 3 Doshas (Principles)"
+          subtitle="New to Ayurveda? Here is everything you need to know about the three biological forces (Vāta, Pitta, and Kapha) that govern your body, digestion, and mindset."
+          showAction={true}
+          onStartAssessment={handleStartAssessment}
+        />
+      </div>
 
       {/* 7. Clinical Pipeline Workflow */}
       <section id="pipeline" className="ayur-pipeline-section">
