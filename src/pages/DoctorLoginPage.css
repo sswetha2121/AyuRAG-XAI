@@ -7,6 +7,7 @@
   justify-content: center;
   background: radial-gradient(circle at top, rgba(22, 56, 44, 0.08) 0%, var(--color-bg) 70%);
   padding: var(--space-md);
+  box-sizing: border-box;
 }
 
 .ayur-dlogin-card {
@@ -15,13 +16,14 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
-  padding: var(--space-2xl);
-  box-shadow: 0 16px 40px rgba(22, 56, 44, 0.12);
+  padding: 32px 36px;
+  box-shadow: 0 16px 40px rgba(22, 56, 44, 0.10);
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: 20px;
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .ayur-dlogin-card::before {
@@ -30,181 +32,273 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 5px;
+  height: 4px;
   background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent));
 }
 
+/* Top Bar */
+.ayur-dlogin-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.ayur-dlogin-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition: all 0.2s ease;
+}
+
+.ayur-dlogin-back-link:hover {
+  background: rgba(22, 56, 44, 0.06);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateX(-2px);
+}
+
+.ayur-dlogin-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--color-primary);
+  background: rgba(22, 56, 44, 0.08);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(22, 56, 44, 0.15);
+}
+
+/* Header */
 .ayur-dlogin-header {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .ayur-dlogin-emblem {
-  width: 54px;
-  height: 54px;
-  border-radius: var(--radius-circle);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
   background: rgba(22, 56, 44, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: var(--space-xs);
   border: 1px solid rgba(22, 56, 44, 0.15);
-}
-
-.ayur-dlogin-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.8px;
-  color: var(--color-secondary);
-  background: rgba(91, 130, 102, 0.12);
-  padding: 3px 8px;
-  border-radius: var(--radius-sm);
-  text-transform: uppercase;
+  margin-bottom: 4px;
 }
 
 .ayur-dlogin-title {
-  font-family: var(--font-serif);
-  font-size: 1.55rem;
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--color-primary);
-  margin: 4px 0 2px 0;
+  margin: 0;
   letter-spacing: -0.02em;
 }
 
 .ayur-dlogin-subtitle {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   color: var(--color-text-secondary);
-  line-height: 1.4;
+  line-height: 1.45;
   margin: 0;
+  max-width: 360px;
 }
 
+/* Error message */
 .ayur-dlogin-error {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(239, 68, 68, 0.08);
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  gap: 10px;
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.25);
   border-radius: var(--radius-md);
   padding: 10px 14px;
   color: #DC2626;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   line-height: 1.4;
+  animation: fadeIn 0.2s ease;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Form & Input Field Alignment */
 .ayur-dlogin-form {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: 18px;
+  width: 100%;
 }
 
-/* Quick Select Cards */
+.ayur-dlogin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ayur-dlogin-label {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  display: block;
+  text-align: left;
+}
+
+.ayur-dlogin-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.ayur-dlogin-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ayur-dlogin-input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #71807A;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.ayur-dlogin-input {
+  width: 100%;
+  height: 46px;
+  box-sizing: border-box;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--color-text-primary);
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0 14px 0 44px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.ayur-dlogin-input--has-toggle {
+  padding-right: 44px;
+}
+
+.ayur-dlogin-input:hover:not(:disabled) {
+  border-color: #B4A99A;
+}
+
+.ayur-dlogin-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(22, 56, 44, 0.12);
+  background-color: #FFFFFF;
+}
+
+.ayur-dlogin-input::placeholder {
+  color: var(--color-text-placeholder);
+  font-size: 0.875rem;
+}
+
+/* Password Toggle Eye Button */
+.ayur-dlogin-toggle-pw {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #71807A;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+  z-index: 2;
+}
+
+.ayur-dlogin-toggle-pw:hover {
+  color: var(--color-primary);
+}
+
+.ayur-dlogin-submit-btn {
+  height: 46px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.2px;
+  border-radius: var(--radius-md);
+  margin-top: 4px;
+}
+
+/* Quick Access Box */
 .ayur-dlogin-quick-section {
-  padding-top: var(--space-sm);
+  padding-top: 14px;
   border-top: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: 8px;
 }
 
 .ayur-dquick-label {
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-.ayur-dquick-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-xs);
-}
-
-.ayur-card-back-arrow {
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  color: var(--color-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  z-index: 10;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-}
-
-.ayur-card-back-arrow:hover {
-  background: rgba(22, 56, 44, 0.08);
-  border-color: var(--color-primary);
-  transform: translateX(-2px);
-}
-
-.ayur-auth-back-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 4px 0;
-}
-
-.ayur-auth-back-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-}
-
-.ayur-auth-back-btn:hover {
-  background: rgba(22, 56, 44, 0.08);
-  border-color: var(--color-primary);
-  transform: translateX(-2px);
-}
-
 .ayur-dquick-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  background: rgba(0, 0, 0, 0.02);
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(22, 56, 44, 0.03);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   cursor: pointer;
   text-align: left;
   transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .ayur-dquick-btn:hover {
-  background: rgba(22, 56, 44, 0.04);
+  background: rgba(22, 56, 44, 0.08);
   border-color: var(--color-secondary);
+  transform: translateY(-1px);
 }
 
 .ayur-dquick-avatar {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: var(--color-primary);
   color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: 0.8rem;
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -214,12 +308,13 @@
 .ayur-dquick-info {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
+  flex: 1;
   overflow: hidden;
 }
 
 .ayur-dquick-info strong {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--color-primary);
   white-space: nowrap;
   overflow: hidden;
@@ -227,44 +322,61 @@
 }
 
 .ayur-dquick-info span {
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   color: var(--color-text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Patient Link */
+.ayur-dquick-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+  flex-shrink: 0;
+}
+
+/* Patient Redirection */
 .ayur-dlogin-patient-link {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 2px;
-  font-size: 0.8rem;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.825rem;
   color: var(--color-text-secondary);
-  padding: 6px 0;
+  padding: 4px 0;
 }
 
 .ayur-dlink {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-primary);
   text-decoration: none;
 }
 
 .ayur-dlink:hover {
   text-decoration: underline;
+  color: var(--color-secondary);
 }
 
-/* Footer */
+/* Footer disclaimer */
 .ayur-dlogin-footer {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.7rem;
+  gap: 8px;
+  font-size: 0.72rem;
   color: var(--color-text-muted);
   line-height: 1.4;
-  text-align: center;
-  justify-content: center;
   border-top: 1px solid var(--color-border);
-  padding-top: var(--space-xs);
+  padding-top: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .ayur-dlogin-card {
+    padding: 24px 20px;
+  }
+
+  .ayur-dlogin-title {
+    font-size: 1.35rem;
+  }
 }

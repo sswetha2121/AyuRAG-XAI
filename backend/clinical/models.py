@@ -234,3 +234,92 @@ class AuditLog(models.Model):
 
     def __str__(self):
         return f"[{self.timestamp}] {self.actor} - {self.action} on patient {self.patient_id}"
+
+
+class MealType(models.TextChoices):
+    BREAKFAST = 'BREAKFAST', 'Breakfast'
+    MID_MORNING = 'MID_MORNING', 'Mid-Morning Snack'
+    LUNCH = 'LUNCH', 'Lunch'
+    EVENING = 'EVENING', 'Evening Snack'
+    DINNER = 'DINNER', 'Dinner'
+
+
+class MealLogStatus(models.TextChoices):
+    PENDING = 'PENDING', 'Pending'
+    COMPLETED = 'COMPLETED', 'Completed'
+    SKIPPED = 'SKIPPED', 'Skipped'
+
+
+class MealLog(models.Model):
+    """
+    Daily meal tracking record for a patient.
+    Tracks whether scheduled meals were completed, skipped, or pending.
+    """
+    patient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='meal_logs')
+    diet_plan = models.ForeignKey(DietPlan, on_delete=models.SET_NULL, null=True, blank=True, related_name='logged_meals')
+    date = models.DateField()
+    meal_type = models.CharField(max_length=30, choices=MealType.choices)
+    meal_name = models.CharField(max_length=255)
+    scheduled_time = models.CharField(max_length=50, default='08:00 AM')
+    status = models.CharField(max_length=20, choices=MealLogStatus.choices, default=MealLogStatus.PENDING)
+    completed_at = models.DateTimeField(null=True, blank=True)
+    notes = models.TextField(blank=True)
+    energy_rating = models.IntegerField(null=True, blank=True) # 1 to 5
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['date', 'scheduled_time']
+        unique_together = ('patient', 'date', 'meal_type')
+
+    def __str__(self):
+        return f"{self.patient.username} - {self.date} {self.meal_type} [{self.status}]"
+
+
+class MealReminderPreference(models.Model):
+    """
+    Patient-configured notification and reminder schedule for meals and hydration.
+    """
+    patient = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reminder_preferences')
+    reminders_enabled = models.BooleanField(default=True)
+    breakfast_reminder = models.BooleanField(default=True)
+    breakfast_time = models.CharField(max_length=20, default='07:45 AM')
+    mid_morning_reminder = models.BooleanField(default=True)
+    mid_morning_time = models.CharField(max_length=20, default='10:45 AM')
+    lunch_reminder = models.BooleanField(default=True)
+    lunch_time = models.CharField(max_length=20, default='01:15 PM')
+    evening_reminder = models.BooleanField(default=True)
+    evening_time = models.CharField(max_length=20, default='04:45 PM')
+    dinner_reminder = models.BooleanField(default=True)
+    dinner_time = models.CharField(max_length=20, default='07:30 PM')
+    water_reminders = models.BooleanField(default=True)
+    water_interval_hours = models.IntegerField(default=2)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Reminders for {self.patient.username} (enabled={self.reminders_enabled})"
+
+
+class ProgressRecord(models.Model):
+    """
+    Daily aggregated adherence, water intake, and wellness summary for a patient.
+    """
+    patient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='progress_records')
+    date = models.DateField()
+    meals_planned = models.IntegerField(default=5)
+    meals_completed = models.IntegerField(default=0)
+    meals_skipped = models.IntegerField(default=0)
+    water_intake_ml = models.IntegerField(default=0)
+    water_goal_ml = models.IntegerField(default=2500)
+    adherence_rate = models.FloatField(default=0.0) # Percentage 0-100
+    energy_rating = models.IntegerField(null=True, blank=True) # 1 to 5
+    wellness_note = models.TextField(blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-date']
+        unique_together = ('patient', 'date')
+
+    def __str__(self):
+        return f"{self.patient.username} - {self.date} Progress ({self.adherence_rate}%)"
+

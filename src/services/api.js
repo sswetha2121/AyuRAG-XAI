@@ -200,6 +200,10 @@ export const api = {
     return fetchJson('/patient/diet/current/');
   },
 
+  async getPatientDietHistory() {
+    return fetchJson('/patient/diet/history/');
+  },
+
   async submitPatientAssessment(payload) {
     return fetchJson('/patient/assessment/submit/', {
       method: 'POST',
@@ -209,6 +213,44 @@ export const api = {
 
   async getPatientLatestAssessment() {
     return fetchJson('/patient/assessment/latest/');
+  },
+
+  // Daily Meal Schedule & Tracking
+  async getPatientMealSchedule(date = '') {
+    const qs = date ? `?date=${date}` : '';
+    return fetchJson(`/patient/meal-schedule/${qs}`);
+  },
+
+  async logPatientMeal(payload) {
+    return fetchJson('/patient/meal-schedule/log/', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  },
+
+  // Reminder Preferences
+  async getPatientReminders() {
+    return fetchJson('/patient/reminders/');
+  },
+
+  async updatePatientReminders(preferences) {
+    return fetchJson('/patient/reminders/', {
+      method: 'PATCH',
+      body: JSON.stringify(preferences),
+    });
+  },
+
+  // Water Intake Tracking
+  async logPatientWater(amountMl = 250, action = 'add') {
+    return fetchJson('/patient/water/log/', {
+      method: 'POST',
+      body: JSON.stringify({ amount_ml: amountMl, action }),
+    });
+  },
+
+  // Progress Metrics
+  async getPatientProgress() {
+    return fetchJson('/patient/progress/');
   },
 
   // Notifications
@@ -228,4 +270,5 @@ export const api = {
     });
   },
 };
+
 

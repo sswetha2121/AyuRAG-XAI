@@ -51,9 +51,9 @@ function DoctorProtectedRoute({ children, onTriggerToast }) {
     onTriggerToast?.({
       type: 'warning',
       title: 'Physician Access Required',
-      message: 'This area is restricted to licensed doctors and clinical staff. Please authenticate via the Doctor Portal.',
+      message: 'Doctor portal is restricted to authorized clinical staff. Redirected to your patient dashboard.',
     });
-    return <Navigate to="/doctor-login" replace />;
+    return <Navigate to="/dashboard" replace />;
   }
 
   return children;
@@ -245,9 +245,10 @@ function DoctorPatientProfileWrapper({ onTriggerToast }) {
 }
 
 // Patient Assessment Pipeline Flow
-function PatientAssessmentShell({ onTriggerToast, toasts, removeToast }) {
+function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialStep }) {
   const { user, isDoctor, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const {
     currentStep,
     setCurrentStep,
@@ -261,6 +262,14 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast }) {
   } = useAssessment();
 
   const [isGeneratingAnalysis, setIsGeneratingAnalysis] = useState(false);
+
+  React.useEffect(() => {
+    if (initialStep) {
+      setCurrentStep(initialStep);
+    } else if (location.pathname === '/dashboard') {
+      setCurrentStep('dashboard');
+    }
+  }, [initialStep, location.pathname, setCurrentStep]);
 
   // Header Title & Subtitle Mapping
   const getHeaderInfo = () => {
@@ -280,44 +289,44 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast }) {
       case 'prakriti':
         return {
           title: 'Step 02: Body Constitution Assessment',
-          subtitle: 'Baseline Physiological Evaluation (Movement, Metabolism & Structure Types)',
-          breadcrumbs: ['Assessment Pipeline', '02 Body Constitution Assessment'],
+          subtitle: 'Baseline Physiological Evaluation (Movement, Metabolism & Structure Factors)',
+          breadcrumbs: ['Assessment Pipeline', '02 Body Constitution'],
         };
       case 'lifestyle':
         return {
           title: 'Step 03: Lifestyle Assessment',
-          subtitle: 'Daily Routines, Circadian Pacing, Physical Activity & Sleep Architecture',
-          breadcrumbs: ['Assessment Pipeline', '03 Lifestyle Assessment'],
+          subtitle: 'Daily Routines, Physical Activity, Work Schedule & Sleep Habits',
+          breadcrumbs: ['Assessment Pipeline', '03 Lifestyle Habits'],
         };
       case 'diet':
         return {
           title: 'Step 04: Dietary Assessment',
-          subtitle: 'Eating Habits, Digestive Metabolism & Taste Preferences',
-          breadcrumbs: ['Assessment Pipeline', '04 Dietary Assessment'],
+          subtitle: 'Eating Habits, Meal Timings, Digestion & Taste Preferences',
+          breadcrumbs: ['Assessment Pipeline', '04 Dietary Habits'],
         };
       case 'symptoms':
         return {
           title: 'Step 05: Symptoms & Health Context',
-          subtitle: 'Clinical Manifestation Mapping & Chief Concern Prioritization',
+          subtitle: 'Health Goals, Digestive Manifestations & Chief Concerns',
           breadcrumbs: ['Assessment Pipeline', '05 Symptoms Context'],
         };
       case 'review':
         return {
-          title: 'Step 06: Clinical Review & Validation',
-          subtitle: 'Pre-Inference Multi-Domain Data Verification & Consent',
-          breadcrumbs: ['Assessment Pipeline', '06 Clinical Review'],
+          title: 'Step 06: Clinical Review & Verification',
+          subtitle: 'Pre-Inference Multi-Domain Data Verification & Patient Consent',
+          breadcrumbs: ['Assessment Pipeline', '06 Review & Verification'],
         };
       case 'dashboard':
         return {
-          title: 'Step 07: AI Decision Support & XAI Dashboard',
-          subtitle: 'Explainable AI Predictions, RAG Citations & Personalized Protocols',
-          breadcrumbs: ['Assessment Pipeline', '07 AI Decision Dashboard'],
+          title: 'Patient Diet & Wellness Dashboard',
+          subtitle: 'Daily Meal Schedule, Personalized Nutrition, Hydration & Habit Tracking',
+          breadcrumbs: ['Patient Portal', 'My Dashboard'],
         };
       default:
         return {
-          title: 'AyuRAG-XAI Clinical Platform',
-          subtitle: 'Ayurvedic Clinical Decision Support System',
-          breadcrumbs: ['Assessment Pipeline', currentStep],
+          title: 'AyuRAG-XAI Personalized Health Platform',
+          subtitle: 'Personalized Nutrition & Wellness Platform',
+          breadcrumbs: ['Patient Portal', currentStep],
         };
     }
   };
@@ -544,7 +553,20 @@ function MainApp() {
         element={<LandingPage onTriggerToast={addToast} />}
       />
 
-      {/* 2. Patient Assessment Overview & Flow */}
+      {/* 2. Patient Dashboard (Direct Access) */}
+      <Route
+        path="/dashboard"
+        element={
+          <PatientAssessmentShell
+            onTriggerToast={addToast}
+            toasts={toasts}
+            removeToast={removeToast}
+            initialStep="dashboard"
+          />
+        }
+      />
+
+      {/* 3. Patient Assessment Overview & Flow */}
       <Route
         path="/assessment-overview"
         element={<AssessmentOverviewPage onTriggerToast={addToast} />}
@@ -561,10 +583,10 @@ function MainApp() {
       />
       <Route
         path="/intake"
-        element={<Navigate to="/assessment" replace />}
+        element={<Navigate to="/assessment-overview" replace />}
       />
 
-      {/* 3. Patient Authentication */}
+      {/* 4. Patient Authentication */}
       <Route
         path="/login"
         element={
@@ -574,7 +596,7 @@ function MainApp() {
               if (user.role === 'DOCTOR') {
                 navigate('/doctor/dashboard');
               } else {
-                navigate('/assessment-overview');
+                navigate('/dashboard');
               }
             }}
             onTriggerToast={addToast}

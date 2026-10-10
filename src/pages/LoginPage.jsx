@@ -14,7 +14,9 @@ import {
   Calendar,
   CheckCircle2,
   Sparkles,
-  Users
+  Users,
+  Eye,
+  EyeOff
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Link, useNavigate } from 'react-router-dom';
@@ -25,6 +27,7 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
 
   // Mode: 'signin' or 'signup'
   const [authMode, setAuthMode] = useState(initialMode);
+  const [showPassword, setShowPassword] = useState(false);
 
   // Sign In Fields (No hardcoded default prefill)
   const [username, setUsername] = useState('');
@@ -59,7 +62,7 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
         navigate('/doctor/dashboard');
       } else {
         onLoginSuccess?.(user);
-        navigate('/assessment-overview');
+        navigate('/dashboard');
       }
     } catch (err) {
       setErrorMessage(err.message || 'Invalid username or password.');
@@ -118,7 +121,7 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
         navigate('/doctor/dashboard');
       } else {
         onLoginSuccess?.(user);
-        navigate('/assessment-overview');
+        navigate('/dashboard');
       }
     } catch (err) {
       setErrorMessage(err.message || `Failed to switch to ${role} demo.`);
@@ -210,16 +213,37 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
 
             <div className="ayur-form-group">
               <label className="ayur-label">Password</label>
-              <div className="ayur-input-icon-box">
+              <div className="ayur-input-icon-box" style={{ position: 'relative' }}>
                 <Lock size={16} className="ayur-input-icon" />
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   className="ayur-input ayur-input--icon"
+                  style={{ paddingRight: '40px' }}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   required
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  style={{
+                    position: 'absolute',
+                    right: '12px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'none',
+                    border: 'none',
+                    color: '#5B8266',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: 0
+                  }}
+                >
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
               </div>
             </div>
 
@@ -353,31 +377,73 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
             <div className="ayur-form-row-2">
               <div className="ayur-form-group">
                 <label className="ayur-label">Password * (Min 4 chars)</label>
-                <div className="ayur-input-icon-box">
+                <div className="ayur-input-icon-box" style={{ position: 'relative' }}>
                   <Lock size={16} className="ayur-input-icon" />
                   <input
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     className="ayur-input ayur-input--icon"
+                    style={{ paddingRight: '40px' }}
                     value={signUpForm.password}
                     onChange={(e) => setSignUpForm({ ...signUpForm, password: e.target.value })}
                     placeholder="••••••••"
                     required
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    style={{
+                      position: 'absolute',
+                      right: '12px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      background: 'none',
+                      border: 'none',
+                      color: '#5B8266',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      padding: 0
+                    }}
+                  >
+                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  </button>
                 </div>
               </div>
 
               <div className="ayur-form-group">
                 <label className="ayur-label">Confirm Password *</label>
-                <div className="ayur-input-icon-box">
+                <div className="ayur-input-icon-box" style={{ position: 'relative' }}>
                   <Lock size={16} className="ayur-input-icon" />
                   <input
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     className="ayur-input ayur-input--icon"
+                    style={{ paddingRight: '40px' }}
                     value={signUpForm.confirmPassword}
                     onChange={(e) => setSignUpForm({ ...signUpForm, confirmPassword: e.target.value })}
                     placeholder="••••••••"
                     required
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    style={{
+                      position: 'absolute',
+                      right: '12px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      background: 'none',
+                      border: 'none',
+                      color: '#5B8266',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      padding: 0
+                    }}
+                  >
+                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  </button>
                 </div>
               </div>
             </div>
@@ -399,7 +465,7 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
           <div className="ayur-doc-callout-content">
             <Stethoscope size={18} className="text-secondary shrink-0" />
             <div className="ayur-doc-callout-text">
-              <span className="font-semibold text-xs text-primary">Are you a Licensed Ayurvedic Doctor?</span>
+              <span className="font-semibold text-xs text-primary">Are you a Licensed Medical Doctor?</span>
               <span className="text-xs text-muted">Access the clinical review workspace & diet plan console</span>
             </div>
           </div>

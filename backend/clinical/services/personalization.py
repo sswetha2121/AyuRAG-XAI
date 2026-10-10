@@ -41,125 +41,125 @@ def _determine_dosha_diet_template(prakriti_str: str, symptoms: list, agni_patte
         objective = "Pacify volatile Vata and cooling moderate Pitta; stabilize Vishamagni and hydrate bodily tissues."
         breakfast = {
             'time': '08:00 - 08:30 AM',
-            'title': 'Warm Stewed Oats or Spiced Ragi Porridge',
+            'title': 'Warm Stewed Oats or Spiced Whole Grain Porridge',
             'items': [
                 'Warm whole-grain rolled oats cooked with almond milk and a pinch of ground cardamom and cinnamon.',
-                'Stewed organic sweet apple or pear with 2-3 soaked almonds (peeled).',
-                'Cup of warm water with half tsp cow ghee on an empty stomach.'
+                'Stewed sweet apple or pear with 2-3 soaked almonds (peeled).',
+                'Cup of warm water with half tsp clarified butter on an empty stomach.'
             ],
             'calories_approx': '380 - 420 kcal',
-            'ayurvedic_properties': 'Snigdha (unctuous), Guru (grounding), Madhura (sweet vipaka)'
+            'digestive_properties': 'Nourishing, grounding, easy on the stomach'
         }
         mid_morning = {
             'time': '10:30 - 11:00 AM',
             'title': 'Herbal Hydration & Mineral Rehydration',
             'items': [
-                'Fresh tender coconut water or cumin-coriander-fennel (CCF) lukewarm tea.',
-                '4 soaked black raisins (Munakka).'
+                'Fresh tender coconut water or cumin-coriander-fennel lukewarm tea.',
+                '4 soaked black raisins.'
             ],
             'calories_approx': '90 - 120 kcal',
-            'ayurvedic_properties': 'Sheeta virya (cooling), Deepana (digestive stimulant)'
+            'digestive_properties': 'Cooling, digestive support'
         }
         lunch = {
             'time': '12:30 - 01:15 PM',
-            'title': 'Wholesome Kitchari or Warm Grain & Dal Platter',
+            'title': 'Wholesome Lentil Bowl & Warm Grain Platter',
             'items': [
-                'Moong dal and organic brown basmati rice cooked with fresh ginger, cumin, turmeric, and 1 tsp A2 cow ghee.',
-                'Steamed zucchini and peeled bottle gourd (lauki) sautéed with coriander seeds.',
-                'Small cup of fresh probiotic buttermilk (Takra) tempered with roasted jeera powder and rock salt.'
+                'Yellow lentil and brown basmati rice cooked with fresh ginger, cumin, turmeric, and 1 tsp clarified butter.',
+                'Steamed zucchini and peeled squash sautéed with coriander seeds.',
+                'Small cup of fresh probiotic yogurt drink tempered with roasted cumin powder and rock salt.'
             ],
             'calories_approx': '550 - 620 kcal',
-            'ayurvedic_properties': 'Laghu (light), Agni-deepana, Pitta-shāmaka'
+            'digestive_properties': 'Light, balanced, supports steady metabolism'
         }
         evening = {
             'time': '04:30 - 05:00 PM',
-            'title': 'Gentle Nourishment & Pitta Soother',
+            'title': 'Gentle Afternoon Nourishment',
             'items': [
-                'Roasted makhana (fox nuts) tossed in half-tsp cow ghee with rock salt.',
+                'Roasted water lily seeds (fox nuts) tossed in half-tsp clarified butter with rock salt.',
                 'Warm herbal infusion of fresh mint or licorice root.'
             ],
             'calories_approx': '130 - 160 kcal',
-            'ayurvedic_properties': 'Grahi (stabilizing), Hridya'
+            'digestive_properties': 'Stabilizing, calms evening hunger'
         }
         dinner = {
             'time': '07:30 - 08:15 PM',
-            'title': 'Light Vegetable Clear Soup & Soft Chapati',
+            'title': 'Light Vegetable Clear Soup & Soft Whole Wheat Flatbread',
             'items': [
-                'Pumpkin and carrot soup prepared with mild cumin and rock salt (strictly non-pungent).',
-                '1-2 soft whole wheat phulkas lightly smeared with ghee.',
-                'Warm spiced golden turmeric-nutmeg milk (half cup) 45 mins before bedtime.'
+                'Pumpkin and carrot soup prepared with mild cumin and rock salt (strictly non-spicy).',
+                '1-2 soft whole wheat flatbreads lightly glazed with clarified butter.',
+                'Warm spiced turmeric-nutmeg warm almond milk (half cup) 45 mins before bedtime.'
             ],
             'calories_approx': '350 - 400 kcal',
-            'ayurvedic_properties': 'Laghu (easy to digest), Nidra-janaka (sleep-inducing)'
+            'digestive_properties': 'Light, easy to digest, supports restful sleep'
         }
         foods_to_include = [
-            'A2 Cow Ghee, cold-pressed sesame oil, virgin coconut oil in moderation',
-            'Split yellow moong dal, red lentils (masoor), soaked almonds',
-            'Sweet well-ripened fruits: apples (cooked), pomegranates, sweet grapes, figs',
-            'Well-cooked squashes, carrots, zucchini, asparagus, spinach in moderation',
-            'Spices: Turmeric, cumin, fresh ginger (in small quantity), coriander, fennel, cardamom, cinnamon'
+            'Clarified butter (ghee), cold-pressed sesame oil, virgin coconut oil in moderation',
+            'Yellow split lentils, red lentils, soaked and peeled almonds',
+            'Sweet well-ripened fruits: stewed apples, pomegranates, sweet grapes, figs',
+            'Well-cooked squash, carrots, zucchini, asparagus, baby spinach in moderation',
+            'Mild spices: Turmeric, cumin, fresh ginger (in small quantity), coriander, fennel, cardamom, cinnamon'
         ]
         foods_to_avoid = [
-            'Deep fried, heavily salted, and packaged junk foods',
-            'Extremely sour, fermented pickles and vinegar',
-            'Excessive red chilies, mustard seeds, and raw garlic',
-            'Chilled beverages, iced water, and aerated drinks',
-            'Dry, cold salads and raw cruciferous vegetables (raw cabbage, cauliflower, kale) at dinner'
+            'Deep fried, heavily salted, and packaged processed foods',
+            'Extremely sour sauces, pickled vegetables and excess vinegar',
+            'Excessive red chilies, mustard seeds, and raw pungent garlic',
+            'Chilled beverages, iced water, and carbonated soft drinks',
+            'Dry, cold raw salads and raw broccoli/cauliflower at dinner'
         ]
 
     elif 'kapha' in p_lower:
-        target_dosha = "Kapha Pacification & Agni Stimulation"
-        objective = "Kindle sluggish digestion (Mandagni), clear lymphatic stagnation, and eliminate excess moisture."
+        target_dosha = "Structure Balance & Metabolism Support"
+        objective = "Stimulate sluggish metabolism, clear congestion, and eliminate excess moisture."
         breakfast = {
             'time': '08:00 - 08:30 AM',
-            'title': 'Light Roasted Barley (Yava) or Spiced Millet Upma',
+            'title': 'Light Roasted Whole Barley or Spiced Millet Bowl',
             'items': [
                 'Roasted barley porridge with a touch of grated ginger and black pepper.',
-                'Cup of warm ginger-tulsi infusion with half tsp raw unprocessed honey (added lukewarm).'
+                'Cup of warm ginger-tulsi herbal infusion with half tsp raw honey (added lukewarm).'
             ],
             'calories_approx': '280 - 320 kcal',
-            'ayurvedic_properties': 'Ruksha (dry), Laghu (light), Ushna (warm)'
+            'digestive_properties': 'Light, warming, energizing'
         }
         mid_morning = {
             'time': '10:30 - 11:00 AM',
             'title': 'Metabolic Digestive Stimulant',
             'items': [
-                'Warm water with 2-3 drops of lemon and roasted jeera.',
+                'Warm water with 2-3 drops of lemon and roasted cumin.',
                 'Handful of roasted pumpkin seeds.'
             ],
             'calories_approx': '70 - 100 kcal',
-            'ayurvedic_properties': 'Deepana-Pachana'
+            'digestive_properties': 'Supports digestive enzymes and alertness'
         }
         lunch = {
             'time': '12:30 - 01:15 PM',
-            'title': 'Spiced Kulattha (Horsegram) Dal & Bajra / Jowar Roti',
+            'title': 'Spiced Green Lentil Soup & Millet Flatbread',
             'items': [
-                'Astringent horsegram or whole green moong dal soup tempered with mustard seeds, hing, and ginger.',
-                '1 multigrain or millet (jowar) roti.',
-                'Steamed bitter gourd (karela) or fenugreek leaves (methi) vegetable.'
+                'Warm whole green lentil soup tempered with cumin seeds, ginger, and lemon.',
+                '1 multigrain or millet flatbread.',
+                'Steamed greens or sautéed zucchini with mild herbs.'
             ],
             'calories_approx': '460 - 520 kcal',
-            'ayurvedic_properties': 'Tikta (bitter), Kashaya (astringent), Kaphahara'
+            'digestive_properties': 'Light, nutrient-dense, metabolism-boosting'
         }
         evening = {
             'time': '04:30 - 05:00 PM',
-            'title': 'Herbal Metabolism Booster',
+            'title': 'Herbal Energy Tea & Roasted Chickpeas',
             'items': [
-                'Herbal trikatu or cinnamon infusion.',
-                'Small bowl of roasted chana (Bengal gram).'
+                'Warm herbal cinnamon infusion.',
+                'Small bowl of dry roasted chickpeas.'
             ],
             'calories_approx': '100 - 130 kcal',
-            'ayurvedic_properties': 'Lekhana (scraping), Laghu'
+            'digestive_properties': 'Light, satisfying snack'
         }
         dinner = {
             'time': '07:00 - 07:45 PM',
             'title': 'Ultra-Light Clear Vegetable Broth',
             'items': [
-                'Clear drumstick (moringa) and bottle gourd broth with crushed black pepper and rock salt.',
+                'Clear vegetable and leafy broth with crushed black pepper and rock salt.',
                 'Strictly finish dinner at least 3 hours before sleep.'
             ],
             'calories_approx': '220 - 270 kcal',
-            'ayurvedic_properties': 'Deepana, Ama-nashana'
+            'digestive_properties': 'Light, cleanses digestive tract overnight'
         }
         foods_to_include = [
             'Millets: Jowar, Bajra, Ragi, Roasted Barley (Yava)',
@@ -175,65 +175,65 @@ def _determine_dosha_diet_template(prakriti_str: str, symptoms: list, agni_patte
         ]
 
     elif 'pitta' in p_lower:
-        target_dosha = "Pitta Pacification & Cooling Balance"
-        objective = "Alleviate metabolic heat, soothe Tikshnagni, prevent acid peptic irritation, and protect liver health."
+        target_dosha = "Metabolic Heat Balance & Cooling Nutrition"
+        objective = "Alleviate metabolic heat, soothe digestive irritation, prevent acid acidity, and protect liver health."
         breakfast = {
             'time': '08:00 - 08:30 AM',
             'title': 'Cooling Coconut Rice Flakes or Soaked Grain Bowl',
             'items': [
-                'Poha cooked with coconut shavings, coriander, and sweet curry leaves.',
+                'Flattened rice cooked with coconut shavings, fresh coriander, and sweet curry leaves.',
                 'Sweet seasonal fruit (fresh pomegranate or sweet red apple).',
                 'Lukewarm fennel-coriander infusion.'
             ],
             'calories_approx': '340 - 390 kcal',
-            'ayurvedic_properties': 'Madhura, Sheeta (cooling), Pittahara'
+            'digestive_properties': 'Naturally cooling, soothing to stomach lining'
         }
         mid_morning = {
             'time': '10:30 - 11:00 AM',
-            'title': 'Pitta Quencher',
+            'title': 'Cooling Mineral Refresher',
             'items': [
                 'Fresh tender coconut water or soaked chia seed cooler with mint leaves.',
                 '5 soaked almonds (skin removed).'
             ],
             'calories_approx': '100 - 130 kcal',
-            'ayurvedic_properties': 'Daha-shamaka, Pitta-shodhana'
+            'digestive_properties': 'Hydrating, pacifies excess body heat'
         }
         lunch = {
             'time': '12:30 - 01:15 PM',
-            'title': 'Cooling Basmati Rice, Moong Dal & Gourd Curry',
+            'title': 'Cooling Basmati Rice, Yellow Lentil & Summer Gourd Platter',
             'items': [
-                'Steamed aged basmati rice with washed yellow moong dal and fresh ghee.',
-                'Ridge gourd (turai) or ash gourd (petha) sabzi prepared with fennel and cumin.',
-                'Cooling cucumber raita prepared with fresh homemade sweet curd (diluted with mint and roasted cumin).'
+                'Steamed aged basmati rice with washed yellow lentils and fresh clarified butter.',
+                'Zucchini or white gourd curry prepared with fennel and cumin.',
+                'Cooling cucumber bowl prepared with fresh homemade sweet yogurt (diluted with mint and roasted cumin).'
             ],
             'calories_approx': '520 - 580 kcal',
-            'ayurvedic_properties': 'Madhura-tikta rasa, Sheeta virya'
+            'digestive_properties': 'Mild, cooling, non-acidic nourishment'
         }
         evening = {
             'time': '04:30 - 05:00 PM',
-            'title': 'Mild Refreshment',
+            'title': 'Gentle Afternoon Hydration',
             'items': [
-                'Rose petal tea (lukewarm) or organic coriander seed tea.',
+                'Rose petal lukewarm tea or organic coriander seed tea.',
                 '2 sweet dates or fresh sweet figs.'
             ],
             'calories_approx': '100 - 120 kcal',
-            'ayurvedic_properties': 'Vayasthapana, Balya'
+            'digestive_properties': 'Sweet, restorative, calms nervous system'
         }
         dinner = {
             'time': '07:30 - 08:15 PM',
-            'title': 'Soothing Moong Khichdi with Ash Gourd',
+            'title': 'Soothing Yellow Lentil Bowl with Mild Gourd',
             'items': [
-                'Semi-liquid moong dal khichdi with mild turmeric, rock salt, and 1 tsp ghee.',
+                'Semi-liquid yellow lentil and rice pot with mild turmeric, rock salt, and 1 tsp clarified butter.',
                 'Avoid all sour or tomato-based curries at night.'
             ],
             'calories_approx': '360 - 410 kcal',
-            'ayurvedic_properties': 'Sukhapachaka, Pitta-prasada'
+            'digestive_properties': 'Soothing, easy to digest, prevents nighttime acid reflux'
         }
         foods_to_include = [
-            'A2 Cow Ghee, virgin coconut oil',
+            'Clarified butter (ghee), virgin coconut oil',
             'Aged Basmati Rice, barley, rolled oats',
-            'Moong dal, split pigeon pea (toor dal in moderation)',
-            'Vegetables: Ash gourd, bottle gourd, pumpkin, cucumber, zucchini, cilantro',
+            'Yellow split lentils, soaked almonds',
+            'Vegetables: White gourd, cucumber, zucchini, sweet pumpkin, cilantro',
             'Spices: Coriander seeds, fennel, cardamom, saffron, fresh turmeric'
         ]
         foods_to_avoid = [
@@ -244,88 +244,88 @@ def _determine_dosha_diet_template(prakriti_str: str, symptoms: list, agni_patte
         ]
 
     else:
-        # Classical Vata Pacification default
-        target_dosha = "Vāta Balancing Regime"
-        objective = "Stabilize kinetic energy (Vata), nourish nervous system, and ground irregular digestive rhythm."
+        # Movement / Kinetic energy balancing default
+        target_dosha = "Movement Energy (Air & Space) Balancing"
+        objective = "Stabilize movement energy, nourish nervous system, and ground irregular digestive rhythm."
         breakfast = {
             'time': '08:00 - 08:30 AM',
-            'title': 'Warm Spiced Semolina or Oats Upma with Ghee',
+            'title': 'Warm Spiced Whole Grain Porridge with Clarified Butter',
             'items': [
-                'Warm suji or rolled oats upma prepared with grated ginger, cumin, carrots, and 1 tsp cow ghee.',
+                'Warm whole grain porridge prepared with grated ginger, cumin, carrots, and 1 tsp clarified butter.',
                 '4 soaked almonds and 2 walnuts.',
-                'Cup of warm water with a pinch of dry ginger powder.'
+                'Cup of warm water with a pinch of dry ginger.'
             ],
             'calories_approx': '370 - 410 kcal',
-            'ayurvedic_properties': 'Snigdha, Ushna, Vata-hara'
+            'digestive_properties': 'Warm, grounding, calms irregular digestion'
         }
         mid_morning = {
             'time': '10:30 - 11:00 AM',
-            'title': 'Warm Digestive Infusion',
+            'title': 'Warm Digestive Herb Tea',
             'items': [
-                'Warm CCF (Cumin, Coriander, Fennel) tea.',
-                '1-2 soft Medjool dates.'
+                'Warm cumin, coriander, fennel tea.',
+                '1-2 soft sweet dates.'
             ],
             'calories_approx': '90 - 110 kcal',
-            'ayurvedic_properties': 'Deepana, Vatanulomana'
+            'digestive_properties': 'Gentle digestive stimulant'
         }
         lunch = {
             'time': '12:30 - 01:15 PM',
-            'title': 'Nutritious Khichdi or Warm Rice-Dal Platter',
+            'title': 'Nutritious Lentil & Rice Bowl with Warm Vegetables',
             'items': [
-                'Split moong dal and rice khichdi cooked soft with cumin, rock salt, and cow ghee.',
+                'Split yellow lentil and rice cooked soft with cumin, rock salt, and clarified butter.',
                 'Stewed carrots and peeled pumpkin with fresh coriander leaves.',
-                'Cup of fresh warm takra (buttermilk) with roasted cumin.'
+                'Cup of fresh warm probiotic buttermilk with roasted cumin.'
             ],
             'calories_approx': '540 - 600 kcal',
-            'ayurvedic_properties': 'Brimhana, Agni-vardhaka'
+            'digestive_properties': 'Deeply nourishing, builds physical stamina'
         }
         evening = {
             'time': '04:30 - 05:00 PM',
             'title': 'Warm Nourishing Snack',
             'items': [
-                'Warm chamomile or licorice tea.',
-                'Small bowl of roasted makhanas with pinch of rock salt.'
+                'Warm chamomile or herbal mint tea.',
+                'Small bowl of roasted water lily seeds with pinch of rock salt.'
             ],
             'calories_approx': '120 - 140 kcal',
-            'ayurvedic_properties': 'Manasa-shanti'
+            'digestive_properties': 'Calming, supports mental relaxation'
         }
         dinner = {
             'time': '07:30 - 08:15 PM',
-            'title': 'Gentle Vegetable Stew & Phulka',
+            'title': 'Gentle Vegetable Stew & Soft Whole Wheat Flatbread',
             'items': [
-                'Warm bottle gourd and carrot stew seasoned with hing and cumin.',
-                '1-2 soft phulkas with cow ghee.',
-                'Warm turmeric-nutmeg milk at bedtime.'
+                'Warm squash and carrot stew seasoned with cumin and ginger.',
+                '1-2 soft whole wheat flatbreads with clarified butter.',
+                'Warm turmeric-spiced almond milk at bedtime.'
             ],
             'calories_approx': '350 - 390 kcal',
-            'ayurvedic_properties': 'Nidra-karaka, Vata-shamaka'
+            'digestive_properties': 'Easy to assimilate, promotes restful sleep'
         }
         foods_to_include = [
-            'Warm, cooked, unctuous whole foods cooked with cow ghee or sesame oil',
-            'Sweet, sour, and mildly salty tastes in balanced harmony',
-            'Moong dal, masoor dal, soaked nuts',
+            'Warm, cooked, nourishing whole foods cooked with clarified butter or sesame oil',
+            'Naturally sweet, mildly sour, and mildly salty flavors in balanced harmony',
+            'Yellow split lentils, soaked and peeled almonds, walnuts',
             'Cooked root vegetables, squashes, sweet potato',
-            'Ginger, cumin, coriander, hing (asafoetida), cardamom'
+            'Ginger, cumin, coriander, cardamom'
         ]
         foods_to_avoid = [
             'Cold drinks, ice, iced water',
-            'Dry, crisp crackers, raw salads, cold leftovers',
-            'Bitter, pungent, and astringent tastes in excessive amounts',
-            'Irregular skipping of meals (Vishama-asana)'
+            'Dry, crisp crackers, raw salads, cold refrigerated leftovers',
+            'Excessively bitter or astringent raw vegetables in large amounts',
+            'Irregular skipping or postponing of meals'
         ]
 
     lifestyle_notes = [
-        'Dinacharya (Daily Routine): Wake up before 06:30 AM; scrape tongue and drink 1 glass warm water.',
-        'Abhyanga (Self-Oil Massage): Apply warm sesame or coconut oil for 10 minutes before warm bath 3 times weekly.',
-        'Pranayama & Movement: 15-20 minutes of gentle Anulom Vilom and restorative yoga postures in morning.',
-        'Circadian Sleep Hygiene: Discontinue blue-light screens by 21:45; aim for restful sleep by 22:30.'
+        'Daily Routine: Wake up before 06:30 AM; clean tongue and drink 1 glass of warm water.',
+        'Self-Care Routine: Apply warm sesame or coconut oil for 10 minutes before a warm bath 3 times weekly.',
+        'Breathing & Movement: 15-20 minutes of gentle rhythmic breathing and restorative yoga in the morning.',
+        'Evening Routine: Discontinue blue-light screens by 09:45 PM; aim for restful sleep by 10:30 PM.'
     ]
 
     precautions = [
-        'Avoid consuming cold water or heavy liquids immediately before or during meals to prevent Agnimandya (dampening of digestive fire).',
-        'Maintain a minimum 3 to 4 hour gap between dinner and retiring to sleep.',
-        'Never force consumption when not hungry, nor excessively postpone hunger when naturally stimulated.',
-        'If experiencing acute acid regurgitation or fever, shift to warm moong dal broth (Yusha) and consult doctor immediately.'
+        'Avoid consuming ice-cold water or heavy beverages immediately before or during meals to prevent dampening digestive capacity.',
+        'Maintain a minimum 3 to 4 hour gap between dinner and going to bed.',
+        'Never force yourself to eat when not hungry, and avoid skipping meals when hunger is present.',
+        'If experiencing acute acid discomfort or indigestion, shift to warm clear lentil soup and consult your doctor.'
     ]
 
     return {
@@ -396,17 +396,17 @@ def generate_personalized_diet(
     patient_name = personal.get('fullName') or patient.get_full_name() or patient.username
     ai_reasoning = (
         f"Dietary formulation individualized for {patient_name} based on verified constitution "
-        f"({dominant_prakriti}) and digestive fire rhythm ({appetite_pattern or 'Variable Agni'}). "
-        f"Targeted to pacify aggravated dosha, eliminate metabolic toxins (Ama), and address "
-        f"reported symptoms ({', '.join(chief_complaints) if chief_complaints else 'General vitality'}). "
-        f"Grounded in classical Ahara-vidhi-visheshayatana guidelines."
+        f"({dominant_prakriti}) and digestive rhythm ({appetite_pattern or 'Steady Digestion'}). "
+        f"Targeted to balance natural bodily factors, eliminate metabolic sluggishness, and support "
+        f"reported goals ({', '.join(chief_complaints) if chief_complaints else 'General vitality'}). "
+        f"Grounded in verified evidence-based dietary guidelines."
     )
 
     # 6. Calculate next version number
     highest_version_plan = DietPlan.objects.filter(patient=patient).order_by('-version').first()
     next_version = (highest_version_plan.version + 1) if highest_version_plan else 1
 
-    plan_title = f"Ayurvedic Ahara Plan (v{next_version}) — {dominant_prakriti} Balance"
+    plan_title = f"Personalized Daily Diet Plan (v{next_version}) — {dominant_prakriti} Support"
 
     # 7. Create DietPlan instance in DRAFT status
     diet_plan = DietPlan.objects.create(

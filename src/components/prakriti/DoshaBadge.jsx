@@ -4,17 +4,17 @@ import { Wind, Flame, Mountain } from 'lucide-react';
 
 const DOSHA_CONFIG = {
   Vata: {
-    label: 'Vāta (Air + Ether)',
+    label: 'Movement Energy (Air & Space)',
     icon: Wind,
     className: 'ayur-dosha-badge--vata'
   },
   Pitta: {
-    label: 'Pitta (Fire + Water)',
+    label: 'Metabolic Energy (Fire & Water)',
     icon: Flame,
     className: 'ayur-dosha-badge--pitta'
   },
   Kapha: {
-    label: 'Kapha (Water + Earth)',
+    label: 'Structural Energy (Earth & Water)',
     icon: Mountain,
     className: 'ayur-dosha-badge--kapha'
   }

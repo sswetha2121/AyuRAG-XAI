@@ -6,9 +6,9 @@ import { DoshasPrinciplesGuide } from './DoshasPrinciplesGuide';
 
 const DOSHA_CARDS = [
   {
-    name: 'Vāta • Movement Energy',
-    sanskrit: 'Vāta (वात)',
-    elements: 'Air + Space (Ether)',
+    name: 'Movement Energy (Air & Space)',
+    english: 'Movement',
+    elements: 'Air + Space',
     principles: 'Breathing, Heartbeat, Nerve Signals, Circulation & Motion',
     qualities: 'Dry, Light, Cool, Mobile, Nimble & Quick',
     icon: Wind,
@@ -16,8 +16,8 @@ const DOSHA_CARDS = [
     balanceTip: 'Thrives on warm cooked foods, routine, and grounding rest.'
   },
   {
-    name: 'Pitta • Metabolic Energy',
-    sanskrit: 'Pitta (पित्त)',
+    name: 'Metabolic Energy (Fire & Water)',
+    english: 'Metabolism',
     elements: 'Fire + Water',
     principles: 'Digestion, Metabolism, Body Heat, Vision & Sharp Intellect',
     qualities: 'Hot, Sharp, Light, Penetrating & Focused',
@@ -26,8 +26,8 @@ const DOSHA_CARDS = [
     balanceTip: 'Thrives on cooling foods, hydration, and moderate pacing.'
   },
   {
-    name: 'Kapha • Structural Energy',
-    sanskrit: 'Kapha (कफ)',
+    name: 'Structural Energy (Earth & Water)',
+    english: 'Structure',
     elements: 'Water + Earth',
     principles: 'Body Frame, Joint Lubrication, Tissues & Immune Resilience',
     qualities: 'Heavy, Solid, Steady, Cool, Calm & Enduring',
@@ -61,7 +61,7 @@ export const PrakritiIntro = ({ onStart, onOpenInfo, className = '' }) => {
                 rightIcon={showFullGuide ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                 onClick={() => setShowFullGuide(!showFullGuide)}
               >
-                {showFullGuide ? 'Hide Doshas Guide' : 'Beginner Guide to 3 Doshas'}
+                {showFullGuide ? 'Hide Energy Guide' : 'Guide to Body Energy Factors'}
               </Button>
 
               {onOpenInfo && (
@@ -82,7 +82,7 @@ export const PrakritiIntro = ({ onStart, onOpenInfo, className = '' }) => {
           </CardTitle>
 
           <CardDescription className="ayur-intro-desc">
-            In Ayurvedic medicine, your <strong>Body Constitution (Prakriti)</strong> is your lifelong biological fingerprint. It is shaped by three foundational energies known as <strong>Doshas (Principles)</strong>: <strong>Vāta</strong> (Movement), <strong>Pitta</strong> (Metabolism), and <strong>Kapha</strong> (Structure). Everyone is born with all three in a unique ratio!
+            Your <strong>Body Constitution</strong> is your lifelong natural biological blueprint. It is shaped by three foundational energy factors: <strong>Movement Energy</strong> (regulating nerve signals, circulation, and breathing), <strong>Metabolic Energy</strong> (regulating digestion, metabolism, and body heat), and <strong>Structural Energy</strong> (regulating stability, tissues, and stamina). Everyone has all three in a unique individual balance!
           </CardDescription>
         </CardHeader>
 
@@ -148,7 +148,7 @@ export const PrakritiIntro = ({ onStart, onOpenInfo, className = '' }) => {
               rightIcon={<ArrowRight size={18} />}
               onClick={onStart}
             >
-              Begin Prakriti Assessment
+              Begin Body Constitution Assessment
             </Button>
           </div>
         </CardFooter>

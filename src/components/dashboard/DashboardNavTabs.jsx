@@ -7,17 +7,18 @@ import {
   Sparkles,
   Clock,
   BookOpen,
-  Utensils
+  Utensils,
+  TrendingUp
 } from 'lucide-react';
 
 export const DASHBOARD_TABS = [
-  { id: 'overview', label: 'Overview', icon: LayoutDashboard },
-  { id: 'diet', label: 'My Diet Plan', icon: Utensils },
-  { id: 'constitution', label: 'Tridosha Constitution', icon: Activity },
-  { id: 'explainability', label: 'Explainable AI (XAI)', icon: Brain },
-  { id: 'recommendations', label: 'Recommendations', icon: Sparkles },
+  { id: 'overview', label: 'Dashboard Overview', icon: LayoutDashboard },
+  { id: 'schedule', label: "Today's Meal Schedule", icon: Utensils },
+  { id: 'diet', label: 'My Approved Diet Plan', icon: Sparkles },
+  { id: 'progress', label: 'Progress Tracking', icon: TrendingUp },
+  { id: 'constitution', label: 'Body Constitution', icon: Activity },
   { id: 'routine', label: 'Daily Timetable', icon: Clock },
-  { id: 'evidence', label: 'Evidence & RAG', icon: BookOpen }
+  { id: 'evidence', label: 'Evidence & Guidelines', icon: BookOpen }
 ];
 
 export const DashboardNavTabs = ({

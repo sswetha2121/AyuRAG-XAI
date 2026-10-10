@@ -4,13 +4,15 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Q
 from django.utils import timezone
+from datetime import datetime, timedelta
 from accounts.models import User, DoctorProfile, PatientProfile
 from accounts.permissions import IsDoctorUser
 from .models import (
     PatientAssessment, ClinicalReview, ReviewStatus, AssessmentStatus,
     PatientVerification, VerificationStatus,
     DietPlan, DietPlanStatus, DietPlanGeneratedBy, DietPlanVersion,
-    Notification, AuditLog, AuditAction
+    Notification, AuditLog, AuditAction,
+    MealLog, MealReminderPreference, ProgressRecord, MealType, MealLogStatus
 )
 from .serializers import (
     PatientAssessmentSummarySerializer,
@@ -20,7 +22,10 @@ from .serializers import (
     DietPlanSerializer,
     DietPlanVersionSerializer,
     NotificationSerializer,
-    AuditLogSerializer
+    AuditLogSerializer,
+    MealLogSerializer,
+    MealReminderPreferenceSerializer,
+    ProgressRecordSerializer
 )
 from .services.patient_data_resolver import (
     get_effective_patient_profile,
@@ -897,4 +902,467 @@ class NotificationMarkReadView(APIView):
     def post(self, request):
         Notification.objects.filter(user=request.user, is_read=False).update(is_read=True)
         return Response({'message': 'All notifications marked as read.'})
+
+
+def get_or_create_default_patient_schedule(patient, target_date, active_plan=None):
+    """
+    Ensures 5 meal logs exist for target_date.
+    Uses active_plan if available, or a wholesome balanced default protocol.
+    """
+    meal_configs = [
+        {
+            'type': MealType.BREAKFAST,
+            'label': 'Breakfast',
+            'time': (active_plan.breakfast.get('time') if active_plan and active_plan.breakfast else None) or '08:00 AM',
+            'name': (active_plan.breakfast.get('title') if active_plan and active_plan.breakfast else None) or 'Warm Whole Grain Porridge & Stewed Fruit',
+            'items': (active_plan.breakfast.get('items') if active_plan and active_plan.breakfast else None) or [
+                'Warm oatmeal or spiced grain porridge with almond milk',
+                'Stewed sweet apple or pear with peeled soaked almonds',
+                'Cup of warm water with half tsp clarified butter on an empty stomach'
+            ],
+        },
+        {
+            'type': MealType.MID_MORNING,
+            'label': 'Mid-Morning Snack',
+            'time': (active_plan.mid_morning.get('time') if active_plan and active_plan.mid_morning else None) or '11:00 AM',
+            'name': (active_plan.mid_morning.get('title') if active_plan and active_plan.mid_morning else None) or 'Hydration & Soaked Fruit',
+            'items': (active_plan.mid_morning.get('items') if active_plan and active_plan.mid_morning else None) or [
+                'Fresh tender coconut water or cumin-coriander herbal tea',
+                '4 soaked black raisins'
+            ],
+        },
+        {
+            'type': MealType.LUNCH,
+            'label': 'Lunch (Main Meal)',
+            'time': (active_plan.lunch.get('time') if active_plan and active_plan.lunch else None) or '01:30 PM',
+            'name': (active_plan.lunch.get('title') if active_plan and active_plan.lunch else None) or 'Wholesome Lentil Bowl & Warm Vegetables',
+            'items': (active_plan.lunch.get('items') if active_plan and active_plan.lunch else None) or [
+                'Steamed basmati rice or whole grain flatbread',
+                'Yellow lentil dal tempered with cumin and ginger',
+                'Steamed zucchini and peeled squash with coriander seeds',
+                'Small cup of fresh probiotic yogurt drink'
+            ],
+        },
+        {
+            'type': MealType.EVENING,
+            'label': 'Evening Snack',
+            'time': (active_plan.evening.get('time') if active_plan and active_plan.evening else None) or '05:00 PM',
+            'name': (active_plan.evening.get('title') if active_plan and active_plan.evening else None) or 'Gentle Herbal Tea & Roasted Seeds',
+            'items': (active_plan.evening.get('items') if active_plan and active_plan.evening else None) or [
+                'Warm mint or chamomile herbal infusion',
+                'Roasted water lily seeds (fox nuts) with rock salt'
+            ],
+        },
+        {
+            'type': MealType.DINNER,
+            'label': 'Dinner (Light Meal)',
+            'time': (active_plan.dinner.get('time') if active_plan and active_plan.dinner else None) or '08:00 PM',
+            'name': (active_plan.dinner.get('title') if active_plan and active_plan.dinner else None) or 'Light Vegetable Soup & Warm Flatbread',
+            'items': (active_plan.dinner.get('items') if active_plan and active_plan.dinner else None) or [
+                'Pumpkin and carrot soup prepared with mild cumin',
+                '1-2 soft whole wheat flatbreads with clarified butter',
+                'Finish at least 3 hours before sleep'
+            ],
+        },
+    ]
+
+    meals_list = []
+    for cfg in meal_configs:
+        log, _ = MealLog.objects.get_or_create(
+            patient=patient,
+            date=target_date,
+            meal_type=cfg['type'],
+            defaults={
+                'diet_plan': active_plan,
+                'meal_name': cfg['name'],
+                'scheduled_time': cfg['time'],
+                'status': MealLogStatus.PENDING,
+            }
+        )
+        # Update name and time if active plan is now available
+        if active_plan and log.diet_plan != active_plan:
+            log.diet_plan = active_plan
+            log.meal_name = cfg['name']
+            log.scheduled_time = cfg['time']
+            log.save(update_fields=['diet_plan', 'meal_name', 'scheduled_time'])
+
+        meals_list.append({
+            'id': log.id,
+            'meal_type': log.meal_type,
+            'label': cfg['label'],
+            'meal_name': log.meal_name,
+            'scheduled_time': log.scheduled_time,
+            'items': cfg['items'],
+            'status': log.status,
+            'completed_at': log.completed_at.isoformat() if log.completed_at else None,
+            'notes': log.notes,
+            'energy_rating': log.energy_rating,
+        })
+
+    return meals_list
+
+
+class PatientMealScheduleView(APIView):
+    """
+    Returns today's daily meal schedule, meal statuses, next meal, and logs meals.
+    Supports authenticated patients or demo visitors.
+    """
+    permission_classes = []
+
+    def get_patient(self, request):
+        if request.user.is_authenticated and request.user.role == User.Role.PATIENT:
+            return request.user
+        # Fall back to demo patient
+        return User.objects.filter(role=User.Role.PATIENT).first()
+
+    def get(self, request):
+        patient = self.get_patient(request)
+        if not patient:
+            return Response({'error': 'No patient profile found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        date_str = request.query_params.get('date')
+        if date_str:
+            try:
+                target_date = datetime.strptime(date_str, '%Y-%m-%d').date()
+            except ValueError:
+                target_date = timezone.localdate()
+        else:
+            target_date = timezone.localdate()
+
+        # Find active diet plan for patient
+        active_plan = DietPlan.objects.filter(
+            patient=patient,
+            status=DietPlanStatus.ACTIVE
+        ).order_by('-approved_at', '-version').first()
+
+        meals = get_or_create_default_patient_schedule(patient, target_date, active_plan)
+
+        # Calculate next scheduled meal
+        next_meal = None
+        for m in meals:
+            if m['status'] == 'PENDING':
+                next_meal = m
+                break
+        if not next_meal and len(meals) > 0:
+            next_meal = meals[0]
+
+        # Calculate progress record
+        completed_count = sum(1 for m in meals if m['status'] == 'COMPLETED')
+        skipped_count = sum(1 for m in meals if m['status'] == 'SKIPPED')
+        total_count = len(meals)
+        adherence_rate = round((completed_count / total_count * 100), 1) if total_count > 0 else 0.0
+
+        progress_record, _ = ProgressRecord.objects.get_or_create(
+            patient=patient,
+            date=target_date,
+            defaults={
+                'meals_planned': total_count,
+                'meals_completed': completed_count,
+                'meals_skipped': skipped_count,
+                'adherence_rate': adherence_rate,
+                'water_intake_ml': 1250,
+                'water_goal_ml': 2500,
+            }
+        )
+
+        return Response({
+            'date': target_date.isoformat(),
+            'patient_name': patient.get_full_name() or getattr(getattr(patient, 'patient_profile', None), 'full_name', patient.username),
+            'has_active_plan': bool(active_plan),
+            'active_plan': DietPlanSerializer(active_plan).data if active_plan else None,
+            'plan_title': active_plan.title if active_plan else 'Personalized Nutrition & Diet Intake Regimen',
+            'plan_version': active_plan.version if active_plan else 1,
+            'is_doctor_approved': bool(active_plan and active_plan.approved_by),
+            'approved_by_name': active_plan.approved_by.get_full_name() if (active_plan and active_plan.approved_by) else 'Pending Doctor Approval',
+            'next_meal': next_meal,
+            'meals': meals,
+            'progress': {
+                'meals_planned': progress_record.meals_planned,
+                'meals_completed': completed_count,
+                'meals_skipped': skipped_count,
+                'adherence_rate': adherence_rate,
+                'water_intake_ml': progress_record.water_intake_ml,
+                'water_goal_ml': progress_record.water_goal_ml,
+                'energy_rating': progress_record.energy_rating,
+                'wellness_note': progress_record.wellness_note,
+            }
+        })
+
+    def post(self, request):
+        """
+        Log or toggle a meal status:
+        Payload: { meal_type: 'BREAKFAST', status: 'COMPLETED' | 'SKIPPED' | 'PENDING', date: 'YYYY-MM-DD', notes: '', energy_rating: 4 }
+        """
+        patient = self.get_patient(request)
+        if not patient:
+            return Response({'error': 'Please authenticate to log meals.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        meal_type = request.data.get('meal_type')
+        status_val = request.data.get('status', 'COMPLETED')
+        date_str = request.data.get('date')
+        notes = request.data.get('notes', '')
+        energy_rating = request.data.get('energy_rating')
+
+        if not meal_type:
+            return Response({'error': 'meal_type is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if date_str:
+            try:
+                target_date = datetime.strptime(date_str, '%Y-%m-%d').date()
+            except ValueError:
+                target_date = timezone.localdate()
+        else:
+            target_date = timezone.localdate()
+
+        log = MealLog.objects.filter(patient=patient, date=target_date, meal_type=meal_type).first()
+        if not log:
+            # Create if missing
+            active_plan = DietPlan.objects.filter(patient=patient, status=DietPlanStatus.ACTIVE).first()
+            get_or_create_default_patient_schedule(patient, target_date, active_plan)
+            log = MealLog.objects.filter(patient=patient, date=target_date, meal_type=meal_type).first()
+
+        if log:
+            log.status = status_val
+            log.completed_at = timezone.now() if status_val == 'COMPLETED' else None
+            if notes:
+                log.notes = notes
+            if energy_rating is not None:
+                log.energy_rating = int(energy_rating)
+            log.save()
+
+        # Update DailyProgressRecord
+        day_logs = MealLog.objects.filter(patient=patient, date=target_date)
+        completed_count = day_logs.filter(status='COMPLETED').count()
+        skipped_count = day_logs.filter(status='SKIPPED').count()
+        total_count = day_logs.count()
+        adherence_rate = round((completed_count / total_count * 100), 1) if total_count > 0 else 0.0
+
+        progress_record, _ = ProgressRecord.objects.get_or_create(patient=patient, date=target_date)
+        progress_record.meals_planned = total_count
+        progress_record.meals_completed = completed_count
+        progress_record.meals_skipped = skipped_count
+        progress_record.adherence_rate = adherence_rate
+        if energy_rating is not None:
+            progress_record.energy_rating = int(energy_rating)
+        progress_record.save()
+
+        # Create confirmation in-app notification if meal completed
+        if status_val == 'COMPLETED':
+            Notification.objects.create(
+                user=patient,
+                type='MEAL_LOGGED',
+                title='Meal Logged',
+                message=f"You completed your {log.meal_name if log else meal_type}. Daily meal adherence is now {adherence_rate}%.",
+                related_object_type='MealLog',
+                related_object_id=log.id if log else None
+            )
+
+        return Response({
+            'message': f"Meal {meal_type} marked as {status_val}.",
+            'meal_log': MealLogSerializer(log).data if log else None,
+            'progress': {
+                'meals_completed': completed_count,
+                'meals_skipped': skipped_count,
+                'meals_planned': total_count,
+                'adherence_rate': adherence_rate,
+                'water_intake_ml': progress_record.water_intake_ml,
+                'water_goal_ml': progress_record.water_goal_ml,
+            }
+        })
+
+
+class PatientMealReminderPreferenceView(APIView):
+    """
+    Manages meal notification schedules and reminder toggles for the patient.
+    """
+    permission_classes = []
+
+    def get_patient(self, request):
+        if request.user.is_authenticated and request.user.role == User.Role.PATIENT:
+            return request.user
+        return User.objects.filter(role=User.Role.PATIENT).first()
+
+    def get(self, request):
+        patient = self.get_patient(request)
+        if not patient:
+            return Response({'error': 'Patient not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        prefs, _ = MealReminderPreference.objects.get_or_create(patient=patient)
+        return Response(MealReminderPreferenceSerializer(prefs).data)
+
+    def patch(self, request):
+        patient = self.get_patient(request)
+        if not patient:
+            return Response({'error': 'Please authenticate to save reminder preferences.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        prefs, _ = MealReminderPreference.objects.get_or_create(patient=patient)
+
+        fields = [
+            'reminders_enabled', 'breakfast_reminder', 'breakfast_time',
+            'mid_morning_reminder', 'mid_morning_time',
+            'lunch_reminder', 'lunch_time',
+            'evening_reminder', 'evening_time',
+            'dinner_reminder', 'dinner_time',
+            'water_reminders', 'water_interval_hours'
+        ]
+        for f in fields:
+            if f in request.data:
+                setattr(prefs, f, request.data[f])
+
+        prefs.save()
+        return Response({
+            'message': 'Meal reminders and notification schedule updated successfully.',
+            'preferences': MealReminderPreferenceSerializer(prefs).data
+        })
+
+    def post(self, request):
+        return self.patch(request)
+
+
+class PatientWaterLogView(APIView):
+    """
+    Logs water intake increments (e.g. +250ml) for the day.
+    """
+    permission_classes = []
+
+    def get_patient(self, request):
+        if request.user.is_authenticated and request.user.role == User.Role.PATIENT:
+            return request.user
+        return User.objects.filter(role=User.Role.PATIENT).first()
+
+    def post(self, request):
+        patient = self.get_patient(request)
+        if not patient:
+            return Response({'error': 'Patient profile not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        target_date = timezone.localdate()
+        amount_ml = int(request.data.get('amount_ml', 250))
+        action = request.data.get('action', 'add')
+
+        progress, _ = ProgressRecord.objects.get_or_create(patient=patient, date=target_date)
+
+        if action == 'reset':
+            progress.water_intake_ml = 0
+        else:
+            progress.water_intake_ml = max(0, progress.water_intake_ml + amount_ml)
+
+        progress.save(update_fields=['water_intake_ml', 'updated_at'])
+
+        return Response({
+            'water_intake_ml': progress.water_intake_ml,
+            'water_goal_ml': progress.water_goal_ml,
+            'message': f"Water intake updated to {progress.water_intake_ml} ml."
+        })
+
+
+class PatientProgressView(APIView):
+    """
+    Provides 7-day and 30-day historical meal adherence, consistency streaks, and wellness trends.
+    Calculated purely from persisted records.
+    """
+    permission_classes = []
+
+    def get_patient(self, request):
+        if request.user.is_authenticated and request.user.role == User.Role.PATIENT:
+            return request.user
+        return User.objects.filter(role=User.Role.PATIENT).first()
+
+    def get(self, request):
+        patient = self.get_patient(request)
+        if not patient:
+            return Response({'error': 'Patient not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        today = timezone.localdate()
+        past_7_days = [today - timedelta(days=i) for i in range(6, -1, -1)]
+
+        # Fetch records
+        records_qs = ProgressRecord.objects.filter(
+            patient=patient,
+            date__gte=past_7_days[0],
+            date__lte=today
+        ).order_by('date')
+        records_map = {r.date: r for r in records_qs}
+
+        weekly_points = []
+        total_completed_meals = 0
+        total_planned_meals = 0
+
+        for d in past_7_days:
+            rec = records_map.get(d)
+            if rec:
+                planned = rec.meals_planned
+                completed = rec.meals_completed
+                adherence = rec.adherence_rate
+                water = rec.water_intake_ml
+            else:
+                planned = 5
+                completed = 0
+                adherence = 0.0
+                water = 0
+
+            total_planned_meals += planned
+            total_completed_meals += completed
+
+            weekly_points.append({
+                'date': d.isoformat(),
+                'day_label': d.strftime('%a'),
+                'meals_planned': planned,
+                'meals_completed': completed,
+                'adherence_rate': adherence,
+                'water_intake_ml': water,
+            })
+
+        avg_adherence = round((total_completed_meals / total_planned_meals * 100), 1) if total_planned_meals > 0 else 0.0
+
+        # Calculate streak: consecutive days from today backwards where meals_completed > 0
+        streak = 0
+        curr_date = today
+        for i in range(30):
+            day_log_completed = MealLog.objects.filter(
+                patient=patient,
+                date=curr_date,
+                status=MealLogStatus.COMPLETED
+            ).exists()
+            if day_log_completed:
+                streak += 1
+                curr_date -= timedelta(days=1)
+            else:
+                # If checking today and no meal yet, check if yesterday had meals
+                if curr_date == today:
+                    curr_date -= timedelta(days=1)
+                    continue
+                break
+
+        return Response({
+            'today': today.isoformat(),
+            'streak_days': streak,
+            'weekly_adherence_rate': avg_adherence,
+            'total_meals_completed': total_completed_meals,
+            'weekly_points': weekly_points,
+            'total_logged_days': ProgressRecord.objects.filter(patient=patient, meals_completed__gt=0).count(),
+        })
+
+
+class PatientDietHistoryView(APIView):
+    """
+    Returns previous diet plan versions and audit iterations for the authenticated patient.
+    """
+    permission_classes = []
+
+    def get_patient(self, request):
+        if request.user.is_authenticated and request.user.role == User.Role.PATIENT:
+            return request.user
+        return User.objects.filter(role=User.Role.PATIENT).first()
+
+    def get(self, request):
+        patient = self.get_patient(request)
+        if not patient:
+            return Response({'error': 'Patient not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        plans = DietPlan.objects.filter(patient=patient).order_by('-version', '-created_at')
+        return Response({
+            'count': plans.count(),
+            'plans': DietPlanSerializer(plans, many=True).data
+        })
+
 

@@ -1,6 +1,4 @@
-/* ==========================================================================
-   AyuRAG-XAI AI Decision Support Dashboard Styles (Step 07)
-   ========================================================================== */
+/* DashboardPage.css - AI Decision Support & Patient Health Portal */
 
 .ayur-dashboard-page {
   display: flex;
@@ -9,6 +7,63 @@
   max-width: var(--container-max-width);
   margin: 0 auto;
   width: 100%;
+}
+
+.ayur-dash-welcome-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 24px 28px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  flex-wrap: wrap;
+}
+
+.ayur-dash-welcome-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.ayur-dash-date-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.775rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+  background: rgba(91, 130, 102, 0.12);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  width: fit-content;
+}
+
+.ayur-dash-welcome-title {
+  font-family: var(--font-sans);
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.ayur-dash-welcome-subtitle {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.ayur-dash-welcome-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
 .ayur-dash-tab-content {
@@ -25,5 +80,23 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-xl);
-  animation: ayur-fade-slide-up 200ms ease-out;
+  animation: fadeIn 200ms ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .ayur-dash-welcome-banner {
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ayur-dash-welcome-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
 }

@@ -1,0 +1,240 @@
+/* PatientRemindersModal.css - Meal Notification Schedule Preferences */
+
+.ayur-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 32, 26, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: var(--z-modal-backdrop, 200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  box-sizing: border-box;
+}
+
+.ayur-reminders-modal {
+  width: 100%;
+  max-width: 520px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-dropdown);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: modalEnter 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalEnter {
+  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.ayur-rmodal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.ayur-rmodal-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(22, 56, 44, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ayur-rmodal-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.ayur-rmodal-subtitle {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  margin: 2px 0 0 0;
+}
+
+.ayur-rmodal-close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  transition: all 0.2s ease;
+}
+
+.ayur-rmodal-close-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--color-primary);
+}
+
+.ayur-rmodal-body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+/* Master Toggle */
+.ayur-rmaster-toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(22, 56, 44, 0.03);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+/* Browser Perm Box */
+.ayur-browser-perm-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(91, 130, 102, 0.08);
+  border: 1px solid rgba(91, 130, 102, 0.2);
+  border-radius: var(--radius-md);
+}
+
+.ayur-perm-btn {
+  padding: 5px 12px;
+  font-size: 0.775rem;
+  font-weight: 700;
+  background: var(--color-secondary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.ayur-perm-btn:hover {
+  opacity: 0.9;
+}
+
+/* Switch UI */
+.ayur-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.ayur-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.ayur-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #CBD5E1;
+  transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 24px;
+}
+
+.ayur-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+input:checked + .ayur-slider {
+  background-color: var(--color-primary);
+}
+
+input:checked + .ayur-slider:before {
+  transform: translateX(20px);
+}
+
+/* Time rows */
+.ayur-meal-times-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ayur-rtime-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  transition: background-color 0.2s ease;
+}
+
+.ayur-rtime-row:hover {
+  background: rgba(22, 56, 44, 0.02);
+}
+
+.ayur-rtime-input {
+  width: 95px;
+  height: 32px;
+  padding: 0 8px;
+  font-size: 0.825rem;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  color: var(--color-primary);
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  outline: none;
+}
+
+.ayur-rtime-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(22, 56, 44, 0.1);
+}
+
+.ayur-rtime-select {
+  height: 32px;
+  padding: 0 8px;
+  font-size: 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: #FFFFFF;
+  color: var(--color-primary);
+  outline: none;
+}
+
+.ayur-rmodal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+}

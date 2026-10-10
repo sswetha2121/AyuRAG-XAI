@@ -1,0 +1,302 @@
+/* PatientProgressTracker.css - 7-Day Adherence, Consistency Streak & Charts */
+
+.ayur-progress-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  width: 100%;
+}
+
+.ayur-progress-loading,
+.ayur-progress-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: var(--space-2xl);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-secondary);
+}
+
+/* 1. Header Overview Cards */
+.ayur-progress-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-md);
+}
+
+.ayur-pstat-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ayur-pstat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.ayur-pstat-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ayur-pstat-icon--fire {
+  background: rgba(234, 88, 12, 0.12);
+  color: #EA580C;
+}
+
+.ayur-pstat-icon--chart {
+  background: rgba(22, 56, 44, 0.1);
+  color: var(--color-primary);
+}
+
+.ayur-pstat-icon--meals {
+  background: rgba(29, 122, 79, 0.12);
+  color: var(--color-success);
+}
+
+.ayur-pstat-icon--days {
+  background: rgba(197, 160, 89, 0.15);
+  color: #B28D44;
+}
+
+.ayur-pstat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ayur-pstat-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--color-text-muted);
+}
+
+.ayur-pstat-value {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.ayur-pstat-desc {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+/* 2. Chart Card */
+.ayur-chart-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ayur-chart-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ayur-chart-heading {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.ayur-chart-subheading {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin: 2px 0 0 0;
+}
+
+.ayur-chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.ayur-bars-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+  align-items: flex-end;
+  height: 200px;
+  padding: 10px 0 20px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ayur-bar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.ayur-bar-val {
+  font-size: 0.725rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.ayur-bar-track {
+  width: 100%;
+  max-width: 42px;
+  height: 130px;
+  background: rgba(22, 56, 44, 0.05);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.ayur-bar-fill {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  transition: height 0.4s ease;
+}
+
+.ayur-bar-fill.bar-high {
+  background: linear-gradient(180deg, var(--color-secondary), var(--color-primary));
+}
+
+.ayur-bar-fill.bar-mid {
+  background: linear-gradient(180deg, var(--color-accent), #B28D44);
+}
+
+.ayur-bar-fill.bar-low {
+  background: rgba(100, 116, 139, 0.3);
+}
+
+.ayur-bar-day {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.ayur-bar-detail {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+/* 3. Detailed History Table */
+.ayur-history-table-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ayur-table-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.ayur-table-responsive {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.ayur-htable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+.ayur-htable th {
+  padding: 10px 14px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--color-border);
+  font-size: 0.775rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.ayur-htable td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  color: var(--color-text-secondary);
+}
+
+.ayur-htable tr:last-child td {
+  border-bottom: none;
+}
+
+.ayur-tag-success {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(29, 122, 79, 0.12);
+  color: var(--color-success);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.ayur-tag-warning {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(192, 125, 30, 0.12);
+  color: var(--color-warning);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.ayur-tag-low {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(36, 110, 185, 0.12);
+  color: #246EB9;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.ayur-tag-muted {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: rgba(100, 116, 139, 0.08);
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}

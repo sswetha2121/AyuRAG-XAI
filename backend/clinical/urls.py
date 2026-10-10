@@ -19,7 +19,12 @@ from .views import (
     PatientAssessmentSubmitView,
     PatientLatestAssessmentView,
     NotificationListView,
-    NotificationMarkReadView
+    NotificationMarkReadView,
+    PatientMealScheduleView,
+    PatientMealReminderPreferenceView,
+    PatientWaterLogView,
+    PatientProgressView,
+    PatientDietHistoryView
 )
 
 urlpatterns = [
@@ -46,12 +51,19 @@ urlpatterns = [
 
     # Patient Isolated Endpoints
     path('patient/diet/current/', PatientCurrentDietView.as_view(), name='patient-current-diet'),
+    path('patient/diet/history/', PatientDietHistoryView.as_view(), name='patient-diet-history'),
     path('patient/assessment/submit/', PatientAssessmentSubmitView.as_view(), name='patient-assessment-submit'),
     path('patient/assessment/latest/', PatientLatestAssessmentView.as_view(), name='patient-assessment-latest'),
+    path('patient/meal-schedule/', PatientMealScheduleView.as_view(), name='patient-meal-schedule'),
+    path('patient/meal-schedule/log/', PatientMealScheduleView.as_view(), name='patient-meal-schedule-log'),
+    path('patient/reminders/', PatientMealReminderPreferenceView.as_view(), name='patient-meal-reminders'),
+    path('patient/water/log/', PatientWaterLogView.as_view(), name='patient-water-log'),
+    path('patient/progress/', PatientProgressView.as_view(), name='patient-progress'),
 
     # Notifications
     path('notifications/', NotificationListView.as_view(), name='notifications-list'),
     path('notifications/<int:notification_id>/read/', NotificationMarkReadView.as_view(), name='notification-mark-read'),
     path('notifications/mark-all-read/', NotificationMarkReadView.as_view(), name='notifications-mark-all-read'),
 ]
+
 

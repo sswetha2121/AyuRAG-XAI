@@ -79,11 +79,11 @@ export const PatientActiveDietCard = () => {
 
   const plan = dietData.diet_plan;
   const meals = [
-    { key: 'breakfast', label: 'Breakfast (Prātaḥ-āśā)', data: plan.breakfast, icon: Flame },
-    { key: 'mid_morning', label: 'Mid-Morning (Madhya-āśā)', data: plan.mid_morning, icon: Droplets },
-    { key: 'lunch', label: 'Lunch - Main Meal (Madhyāhna)', data: plan.lunch, icon: Utensils },
-    { key: 'evening', label: 'Evening Nourishment (Sāyaṁ-āśā)', data: plan.evening, icon: HeartPulse },
-    { key: 'dinner', label: 'Dinner - Light Pathya (Rātri)', data: plan.dinner, icon: Clock },
+    { key: 'breakfast', label: 'Breakfast', data: plan.breakfast, icon: Flame },
+    { key: 'mid_morning', label: 'Mid-Morning Snack', data: plan.mid_morning, icon: Droplets },
+    { key: 'lunch', label: 'Lunch (Main Meal)', data: plan.lunch, icon: Utensils },
+    { key: 'evening', label: 'Evening Snack', data: plan.evening, icon: HeartPulse },
+    { key: 'dinner', label: 'Dinner (Light Meal)', data: plan.dinner, icon: Clock },
   ];
 
   return (
@@ -172,13 +172,13 @@ export const PatientActiveDietCard = () => {
                   ))}
                 </ul>
 
-                {(m.data?.calories_approx || m.data?.ayurvedic_properties) && (
+                {(m.data?.calories_approx || m.data?.digestive_properties || m.data?.ayurvedic_properties) && (
                   <div className="ayur-pmeal-footer">
                     {m.data.calories_approx && (
                       <span className="ayur-pcalorie-tag">{m.data.calories_approx}</span>
                     )}
-                    {m.data.ayurvedic_properties && (
-                      <span className="ayur-pproperties-tag">{m.data.ayurvedic_properties}</span>
+                    {(m.data.digestive_properties || m.data.ayurvedic_properties) && (
+                      <span className="ayur-pproperties-tag">{m.data.digestive_properties || m.data.ayurvedic_properties}</span>
                     )}
                   </div>
                 )}

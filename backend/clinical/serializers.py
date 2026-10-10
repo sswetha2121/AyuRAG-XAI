@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from .models import (
     PatientAssessment, ClinicalReview, ReviewStatus, AssessmentStatus,
-    PatientVerification, DietPlan, DietPlanVersion, Notification, AuditLog
+    PatientVerification, DietPlan, DietPlanVersion, Notification, AuditLog,
+    MealLog, MealReminderPreference, ProgressRecord
 )
 from accounts.models import User, PatientProfile, DoctorProfile
 
@@ -220,4 +221,44 @@ class AuditLogSerializer(serializers.ModelSerializer):
         if not obj.actor:
             return "System"
         return obj.actor.get_full_name() or obj.actor.username
+
+
+class MealLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MealLog
+        fields = [
+            'id', 'patient', 'diet_plan', 'date', 'meal_type',
+            'meal_name', 'scheduled_time', 'status', 'completed_at',
+            'notes', 'energy_rating', 'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'patient', 'created_at', 'updated_at']
+
+
+class MealReminderPreferenceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MealReminderPreference
+        fields = [
+            'id', 'patient', 'reminders_enabled',
+            'breakfast_reminder', 'breakfast_time',
+            'mid_morning_reminder', 'mid_morning_time',
+            'lunch_reminder', 'lunch_time',
+            'evening_reminder', 'evening_time',
+            'dinner_reminder', 'dinner_time',
+            'water_reminders', 'water_interval_hours',
+            'updated_at'
+        ]
+        read_only_fields = ['id', 'patient', 'updated_at']
+
+
+class ProgressRecordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProgressRecord
+        fields = [
+            'id', 'patient', 'date', 'meals_planned',
+            'meals_completed', 'meals_skipped', 'water_intake_ml',
+            'water_goal_ml', 'adherence_rate', 'energy_rating',
+            'wellness_note', 'updated_at'
+        ]
+        read_only_fields = ['id', 'patient', 'updated_at']
+
 

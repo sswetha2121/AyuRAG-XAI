@@ -1,14 +1,13 @@
 /**
- * AyuRAG-XAI Structured Prakriti Question Data
- * Data-driven constitutional assessment parameters based on canonical Ayurvedic domains.
- * Note: Weights are frontend demonstration parameters for interactive preview.
+ * AyuRAG-XAI Body Constitution Questions Data
+ * Data-driven constitutional assessment parameters capturing physical frame,
+ * skin texture, hair, appetite rhythm, digestion, stamina, sleep, and weather preferences.
  */
 
 export const PRAKRITI_QUESTIONS = [
   {
     id: 'prakriti_q1',
     category: 'Physical Frame & Body Build',
-    sanskritTerm: 'Śarīra Pramāṇa',
     question: 'How would you describe your natural physical frame and bone structure?',
     description: 'Consider your baseline frame throughout adult life, independent of temporary weight shifts.',
     options: [
@@ -38,7 +37,6 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 'prakriti_q2',
     category: 'Skin Texture & Temperature',
-    sanskritTerm: 'Sparśa & Tvak',
     question: 'What is the natural tendency of your skin texture and temperature?',
     description: 'Observe your skin without artificial moisturizers or seasonal extremes.',
     options: [
@@ -68,7 +66,6 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 'prakriti_q3',
     category: 'Hair Quality & Texture',
-    sanskritTerm: 'Keśa Guṇa',
     question: 'How would you characterize your natural hair texture and scalp?',
     description: 'Focus on natural tendencies before styling or chemical treatments.',
     options: [
@@ -98,27 +95,26 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 'prakriti_q4',
     category: 'Appetite & Hunger Pattern',
-    sanskritTerm: 'Kṣudhā',
     question: 'How consistent is your natural appetite and hunger rhythm?',
     description: 'Consider how you feel if a meal is delayed or skipped.',
     options: [
       {
         id: 'opt_4_1',
-        label: 'Irregular & Variable (Viṣama)',
+        label: 'Irregular & Variable',
         description: 'Sometimes very hungry, other times forgets to eat; snacks unpredictably',
         dosha: 'Vata',
         weights: { vata: 3, pitta: 0, kapha: 0 }
       },
       {
         id: 'opt_4_2',
-        label: 'Intense & Sharp (Tīkṣṇa)',
+        label: 'Intense & Sharp',
         description: 'Cannot tolerate skipping meals; becomes irritable or dizzy if food is delayed',
         dosha: 'Pitta',
         weights: { vata: 0, pitta: 3, kapha: 0 }
       },
       {
         id: 'opt_4_3',
-        label: 'Steady & Moderate (Manda)',
+        label: 'Steady & Moderate',
         description: 'Can comfortably skip a meal; prefers light breakfast; steady appetite',
         dosha: 'Kapha',
         weights: { vata: 0, pitta: 0, kapha: 3 }
@@ -128,27 +124,26 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 'prakriti_q5',
     category: 'Digestion & Bowel Tendency',
-    sanskritTerm: 'Koṣṭha & Agni',
     question: 'How does your digestive system typically respond to varied foods?',
-    description: 'Reflects the metabolic fire (Agni) and intestinal tract tendencies.',
+    description: 'Reflects your natural digestive speed and intestinal tendencies.',
     options: [
       {
         id: 'opt_5_1',
-        label: 'Variable Digestion (Viṣama Agni)',
+        label: 'Variable & Sensitive Digestion',
         description: 'Prone to gas, bloating, constipation, or dryness with changes in diet',
         dosha: 'Vata',
         weights: { vata: 3, pitta: 0, kapha: 0 }
       },
       {
         id: 'opt_5_2',
-        label: 'Fast & High-Metabolism (Tīkṣṇa Agni)',
+        label: 'Fast & High-Metabolism Digestion',
         description: 'Quick transit time; prone to loose stools, heartburn, or acidity with spice',
         dosha: 'Pitta',
         weights: { vata: 0, pitta: 3, kapha: 0 }
       },
       {
         id: 'opt_5_3',
-        label: 'Slow & Steady (Manda Agni)',
+        label: 'Slow & Steady Digestion',
         description: 'Slow digestive transit; feels heavy or sluggish after rich meals',
         dosha: 'Kapha',
         weights: { vata: 0, pitta: 0, kapha: 3 }
@@ -158,7 +153,6 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 'prakriti_q6',
     category: 'Physical Energy & Activity Style',
-    sanskritTerm: 'Vyāyāma & Bala',
     question: 'How do you describe your typical energy rhythm and exercise pace?',
     description: 'How your body handles sustained physical movement and stamina.',
     options: [
@@ -188,7 +182,6 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 'prakriti_q7',
     category: 'Sleep Pattern & Dreams',
-    sanskritTerm: 'Nidrā',
     question: 'What is your typical sleep duration and quality?',
     description: 'Observe your natural sleep tendencies during restful, non-stressful periods.',
     options: [
@@ -209,7 +202,7 @@ export const PRAKRITI_QUESTIONS = [
       {
         id: 'opt_7_3',
         label: 'Deep, Heavy & Long (8+ Hours)',
-        description: 'Hard to wake up in the morning; calm, slow, romantic, or watery dreams',
+        description: 'Hard to wake up in the morning; calm, slow, or peaceful dreams',
         dosha: 'Kapha',
         weights: { vata: 0, pitta: 0, kapha: 3 }
       }
@@ -218,9 +211,8 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 'prakriti_q8',
     category: 'Climate & Temperature Preference',
-    sanskritTerm: 'Śīta / Uṣṇa Sātmyatā',
     question: 'Which weather or climate conditions do you find most uncomfortable?',
-    description: 'Indicates how your biological humors respond to temperature and humidity.',
+    description: 'Indicates how your body responds to temperature and humidity.',
     options: [
       {
         id: 'opt_8_1',
@@ -232,7 +224,7 @@ export const PRAKRITI_QUESTIONS = [
       {
         id: 'opt_8_2',
         label: 'Dislikes Hot, Humid & Sunny Weather',
-        description: 'Prefers cool breeze, air conditioning, shade, and cold drinks',
+        description: 'Prefers cool breeze, air conditioning, shade, and cool drinks',
         dosha: 'Pitta',
         weights: { vata: 0, pitta: 3, kapha: 0 }
       },
@@ -248,9 +240,8 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 'prakriti_q9',
     category: 'Cognitive Style & Learning Pace',
-    sanskritTerm: 'Medhā & Smṛti',
     question: 'How do you naturally grasp new concepts and recall information?',
-    description: 'Ayurveda categorizes mental processing speed and memory retention styles.',
+    description: 'Considers mental processing speed and memory retention styles.',
     options: [
       {
         id: 'opt_9_1',
@@ -278,7 +269,6 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 'prakriti_q10',
     category: 'Stress & Emotional Tendency',
-    sanskritTerm: 'Mānasika Prakṛti',
     question: 'Under sudden stress or pressure, what is your initial emotional tendency?',
     description: 'The primary psychological response pattern to unexpected life changes.',
     options: [
