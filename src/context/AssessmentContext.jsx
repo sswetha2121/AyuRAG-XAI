@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import { api } from '../services/api';
 import { generatePersonalizedAnalysis } from '../data/mockAnalysis';
 import { deriveUserProfile } from '../utils/personalization';
 import { exportAssessmentPayload } from '../utils/assessmentDerivations';
@@ -342,7 +343,26 @@ export const AssessmentProvider = ({ children }) => {
   };
 
   // Real-Time Analysis Generation
-  const triggerAnalysisGeneration = () => {
+  const triggerAnalysisGeneration = async () => {
+    try {
+      const payload = {
+        demographics: personalInfo,
+        prakriti_data: prakritiAnswers,
+        lifestyle_data: lifestyleAnswers,
+        diet_data: dietAnswers,
+        symptoms_data: symptomAnswers
+      };
+      const aiResponse = await api.runAiInference(payload);
+      if (aiResponse && aiResponse.tridoshaProfile) {
+        setAnalysisResult(aiResponse);
+        markStepCompleted('review');
+        markStepCompleted('dashboard');
+        return aiResponse;
+      }
+    } catch (e) {
+      console.log('Using local baseline inference:', e);
+    }
+
     const computed = generatePersonalizedAnalysis({
       personalInfo,
       prakritiAnswers,

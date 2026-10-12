@@ -24,10 +24,13 @@ from .views import (
     PatientMealReminderPreferenceView,
     PatientWaterLogView,
     PatientProgressView,
-    PatientDietHistoryView
+    PatientDietHistoryView,
+    ClinicalAiInferenceView
 )
 
 urlpatterns = [
+    # Dedicated AI Model Inference Pipeline
+    path('clinical/ai/infer/', ClinicalAiInferenceView.as_view(), name='clinical-ai-infer'),
     # Doctor Dashboard & Patient Directory
     path('doctor/dashboard/', DoctorDashboardView.as_view(), name='doctor-dashboard'),
     path('doctor/patients/', DoctorPatientListView.as_view(), name='doctor-patients'),

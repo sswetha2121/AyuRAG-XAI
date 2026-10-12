@@ -346,7 +346,7 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
 
   const handleAnalysisCompleted = async () => {
     setIsGeneratingAnalysis(false);
-    const computed = triggerAnalysisGeneration();
+    const computed = await triggerAnalysisGeneration();
     setCurrentStep('dashboard');
 
     try {

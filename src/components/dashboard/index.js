@@ -12,4 +12,5 @@ export { PatientActiveDietCard } from './PatientActiveDietCard';
 export { PatientMealTracker } from './PatientMealTracker';
 export { PatientRemindersModal } from './PatientRemindersModal';
 export { PatientProgressTracker } from './PatientProgressTracker';
+export { PatientTodayScheduleCard } from './PatientTodayScheduleCard';
 

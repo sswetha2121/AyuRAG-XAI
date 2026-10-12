@@ -417,6 +417,140 @@
   border-radius: var(--radius-sm);
 }
 
+/* Clinical Intelligence Hero Showcase */
+.ayur-hero-clinical-card {
+  gap: 13px;
+}
+
+.ayur-hcard-care-block {
+  padding: 10px 13px;
+  background: rgba(22, 56, 44, 0.03);
+  border: 1px solid rgba(22, 56, 44, 0.09);
+  border-radius: var(--radius-md);
+}
+
+.ayur-tridosha-pill {
+  font-size: 0.675rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: rgba(22, 56, 44, 0.08);
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+}
+
+.ayur-dosha-strip {
+  display: flex;
+  height: 22px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  line-height: 22px;
+}
+
+.ayur-dstrip-seg.vata {
+  background: #3B82F6;
+}
+
+.ayur-dstrip-seg.pitta {
+  background: #EA580C;
+}
+
+.ayur-dstrip-seg.kapha {
+  background: #10B981;
+}
+
+.ayur-hcard-xai-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ayur-hcard-xai-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.775rem;
+}
+
+.ayur-xai-score-pill {
+  font-size: 0.675rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+  background: rgba(91, 130, 102, 0.12);
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+}
+
+.ayur-hcard-doctor-seal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 13px;
+  background: linear-gradient(135deg, rgba(29, 122, 79, 0.08) 0%, rgba(22, 56, 44, 0.04) 100%);
+  border: 1px solid rgba(29, 122, 79, 0.2);
+  border-left: 3px solid var(--color-success);
+  border-radius: var(--radius-md);
+}
+
+.ayur-hcard-seal-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(29, 122, 79, 0.15);
+  color: var(--color-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ayur-hcard-seal-title {
+  font-size: 0.825rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0 0 2px 0;
+}
+
+.ayur-hcard-seal-desc {
+  font-size: 0.725rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.ayur-hcard-start-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px;
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  font-size: 0.825rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(22, 56, 44, 0.18);
+  margin-top: 2px;
+}
+
+.ayur-hcard-start-btn:hover {
+  background: #112c22;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(22, 56, 44, 0.25);
+}
+
+
 /* 3. Section Commons */
 .ayur-landing-section {
   padding: 72px 0;

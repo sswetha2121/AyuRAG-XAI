@@ -28,8 +28,6 @@ export const LandingPage = ({ onTriggerToast }) => {
   const navigate = useNavigate();
   const { user, isAuthenticated, isDoctor } = useAuth();
 
-  // Interactive Live Preview State on Hero
-  const [heroMealEaten, setHeroMealEaten] = useState(false);
   const [activeConstitutionTab, setActiveConstitutionTab] = useState('movement');
 
   // Constitution Profiles in Simple English
@@ -197,80 +195,82 @@ export const LandingPage = ({ onTriggerToast }) => {
               </div>
             </div>
 
-            {/* Right Interactive Hero Card Visual */}
+            {/* Right Clinical Intelligence Showcase Visual */}
             <div className="ayur-landing-hero__visual">
-              <div className="ayur-hero-preview-card">
+              <div className="ayur-hero-preview-card ayur-hero-clinical-card">
                 {/* Header Badge */}
                 <div className="ayur-hcard-header">
                   <div className="flex items-center gap-xs">
                     <span className="ayur-doctor-badge">
-                      <ShieldCheck size={14} /> Doctor Approved
+                      <ShieldCheck size={14} /> Clinical Intelligence
                     </span>
-                    <span className="ayur-version-badge">Active Plan v1.2</span>
+                    <span className="ayur-version-badge">Evidence-Based</span>
                   </div>
                   <span className="text-xs text-muted flex items-center gap-2xs">
-                    <Clock size={12} /> Today's Schedule
+                    <Sparkles size={12} className="text-secondary" /> Care Model
                   </span>
                 </div>
 
-                {/* Next Meal Highlight */}
-                <div className="ayur-hcard-meal-spotlight">
-                  <div className="ayur-hcard-icon-box">
-                    <Utensils size={22} className="text-primary" />
+                {/* 1. Constitution Analysis Preview */}
+                <div className="ayur-hcard-care-block">
+                  <div className="flex items-center justify-between mb-xs">
+                    <div className="flex items-center gap-xs">
+                      <Activity size={16} className="text-primary" />
+                      <span className="text-xs font-bold text-primary">Individual Constitution (Prakriti)</span>
+                    </div>
+                    <span className="ayur-tridosha-pill">Vāta-Pitta Profile</span>
+                  </div>
+                  <div className="ayur-dosha-strip">
+                    <div className="ayur-dstrip-seg vata" style={{ width: '40%' }}>Vāta 40%</div>
+                    <div className="ayur-dstrip-seg pitta" style={{ width: '35%' }}>Pitta 35%</div>
+                    <div className="ayur-dstrip-seg kapha" style={{ width: '25%' }}>Kapha 25%</div>
+                  </div>
+                </div>
+
+                {/* 2. Explainable AI Feature Drivers */}
+                <div className="ayur-hcard-care-block">
+                  <div className="flex items-center justify-between mb-xs">
+                    <div className="flex items-center gap-xs">
+                      <Sparkles size={15} className="text-secondary" />
+                      <span className="text-xs font-bold text-primary">Explainable AI Attribution (SHAP)</span>
+                    </div>
+                    <span className="text-2xs text-muted font-semibold">Top Positive Drivers</span>
+                  </div>
+
+                  <div className="ayur-hcard-xai-list">
+                    <div className="ayur-hcard-xai-item">
+                      <span className="text-xs text-text-primary">Meal Regularity & Timings</span>
+                      <span className="ayur-xai-score-pill">+38% Impact</span>
+                    </div>
+                    <div className="ayur-hcard-xai-item">
+                      <span className="text-xs text-text-primary">Warm, Digestible Nourishment</span>
+                      <span className="ayur-xai-score-pill">+29% Impact</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Doctor Verification Guarantee */}
+                <div className="ayur-hcard-doctor-seal">
+                  <div className="ayur-hcard-seal-icon">
+                    <Stethoscope size={18} />
                   </div>
                   <div className="flex-1">
-                    <span className="ayur-hcard-spotlight-tag">NEXT SCHEDULED MEAL</span>
-                    <h3 className="ayur-hcard-meal-title">Lunch (Main Meal) • 01:30 PM</h3>
-                    <p className="ayur-hcard-meal-text">
-                      Yellow Lentils, Steamed Basmati Rice, Squash & Probiotic Yogurt
+                    <h4 className="ayur-hcard-seal-title">Doctor-in-the-Loop Validation</h4>
+                    <p className="ayur-hcard-seal-desc">
+                      Every regimen is independently reviewed & authorized by a licensed physician before activation.
                     </p>
                   </div>
                 </div>
 
-                {/* Checklist Preview */}
-                <div className="ayur-hcard-checklist">
-                  <div className="ayur-hcard-check-item item-done">
-                    <CheckCircle2 size={16} className="text-success" />
-                    <span className="text-xs">08:00 AM • Warm Whole Grain Porridge</span>
-                    <span className="ayur-check-done-tag">Eaten</span>
-                  </div>
-                  <div className="ayur-hcard-check-item item-active">
-                    <Clock size={16} className="text-warning" />
-                    <span className="text-xs font-semibold">01:30 PM • Wholesome Lentil Platter</span>
-                    <button
-                      type="button"
-                      className={`ayur-hcard-eat-btn ${heroMealEaten ? 'eaten' : ''}`}
-                      onClick={() => setHeroMealEaten(!heroMealEaten)}
-                    >
-                      {heroMealEaten ? '✓ Completed' : 'Mark Eaten'}
-                    </button>
-                  </div>
-                  <div className="ayur-hcard-check-item">
-                    <Clock size={16} className="text-muted" />
-                    <span className="text-xs text-muted">08:00 PM • Light Vegetable Soup</span>
-                    <span className="ayur-check-pending-tag">Scheduled</span>
-                  </div>
-                </div>
-
-                {/* Daily Adherence Progress */}
-                <div className="ayur-hcard-progress">
-                  <div className="flex justify-between text-xs font-semibold text-primary mb-2xs">
-                    <span>Daily Meal Adherence</span>
-                    <span>{heroMealEaten ? '60% (3/5)' : '40% (2/5)'}</span>
-                  </div>
-                  <div className="ayur-hcard-pbar">
-                    <div
-                      className="ayur-hcard-pfill"
-                      style={{ width: heroMealEaten ? '60%' : '40%' }}
-                    />
-                  </div>
-                </div>
-
-                {/* Reminders banner */}
-                <div className="ayur-hcard-reminder-note">
-                  <Clock size={13} className="text-secondary" />
-                  <span>Meal Reminder scheduled for 01:15 PM (15 mins before eating)</span>
-                </div>
+                {/* 4. Action Link */}
+                <button
+                  type="button"
+                  className="ayur-hcard-start-btn"
+                  onClick={() => navigate('/assessment-overview')}
+                >
+                  <span>Start 10-Min Assessment</span>
+                  <ArrowRight size={14} />
+                </button>
               </div>
             </div>
           </div>

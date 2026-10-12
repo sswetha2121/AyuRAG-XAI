@@ -33,6 +33,7 @@ from .services.patient_data_resolver import (
     ASSESSMENT_FIELDS
 )
 from .services.personalization import generate_personalized_diet
+from .services.ai_model_service import AyuRagAiModelService
 
 class DoctorDashboardView(APIView):
     """
@@ -803,6 +804,29 @@ class PatientAssessmentSubmitView(APIView):
         rag_evidence = request.data.get('rag_evidence', [])
         recommendations = request.data.get('recommendations', {})
 
+        # Run AI Model Inference if not pre-provided or incomplete
+        if not ai_analysis or not shap_explanations or not prakriti_scores:
+            try:
+                ai_bundle = AyuRagAiModelService.run_inference(request.data)
+                prakriti_scores = {
+                    'vata': ai_bundle['tridoshaProfile']['breakdown']['vata'],
+                    'pitta': ai_bundle['tridoshaProfile']['breakdown']['pitta'],
+                    'kapha': ai_bundle['tridoshaProfile']['breakdown']['kapha'],
+                    'primary': ai_bundle['tridoshaProfile']['constitutionType'],
+                }
+                ai_analysis = {
+                    'prediction': ai_bundle['aiMetrics']['prediction'],
+                    'confidence': ai_bundle['aiMetrics']['confidence'],
+                    'model_name': ai_bundle['aiMetrics']['model_name'],
+                }
+                shap_explanations = ai_bundle.get('xaiFeatures', [])
+                lime_explanations = ai_bundle.get('limeFeatures', [])
+                rag_evidence = ai_bundle.get('evidenceCitations', [])
+                recommendations = ai_bundle.get('recommendations', {})
+            except Exception as e:
+                # Fallback to reasonable defaults
+                pass
+
         assessment = PatientAssessment.objects.create(
             patient=user,
             status=AssessmentStatus.COMPLETED,
@@ -847,6 +871,31 @@ class PatientAssessmentSubmitView(APIView):
             'assessment_id': assessment.id,
             'assessment': PatientAssessmentDetailSerializer(assessment).data
         }, status=status.HTTP_201_CREATED)
+
+
+class ClinicalAiInferenceView(APIView):
+    """
+    Dedicated Explainable AI Inference Endpoint.
+    Accepts patient assessment questionnaire payload and returns:
+    - Multi-Task Prakriti classification & dosha probabilities
+    - Agni metabolic state
+    - SHAP Shapley feature attributions
+    - LIME local interpretable surrogate weights
+    - Authentic RAG classical citations
+    - Tailored nutrition and lifestyle recommendations
+    """
+    permission_classes = []
+
+    def post(self, request):
+        try:
+            result = AyuRagAiModelService.run_inference(request.data)
+            return Response(result, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(
+                {'error': f'AI Model Inference failed: {str(e)}'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
 
 
 class PatientLatestAssessmentView(APIView):

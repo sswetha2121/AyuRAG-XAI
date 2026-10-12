@@ -204,6 +204,14 @@ export const api = {
     return fetchJson('/patient/diet/history/');
   },
 
+  // AI Inference & Explainability Engine
+  async runAiInference(payload) {
+    return fetchJson('/clinical/ai/infer/', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  },
+
   async submitPatientAssessment(payload) {
     return fetchJson('/patient/assessment/submit/', {
       method: 'POST',

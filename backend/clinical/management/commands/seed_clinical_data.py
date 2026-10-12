@@ -329,55 +329,59 @@ class Command(BaseCommand):
                 }
             )
 
-            # Create Assessment
-            asm, _ = PatientAssessment.objects.update_or_create(
-                patient=user,
-                defaults={
-                    'status': AssessmentStatus.COMPLETED,
-                    'demographics': {
-                        'fullName': p_data['name'],
-                        'age': p_data['age'],
-                        'gender': p_data['gender'],
-                        'height': 168 if p_data['gender'] == 'Female' else 176,
-                        'weight': 58 if p_data['gender'] == 'Female' else 74,
-                        'climate': 'tropical-coastal',
-                        'location': 'Bangalore, India'
-                    },
-                    'prakriti_scores': p_data['prakriti_scores'],
-                    'prakriti_data': {
-                        'primary': p_data['prakriti_primary'],
-                        'vata': p_data['prakriti_scores']['vata'],
-                        'pitta': p_data['prakriti_scores']['pitta'],
-                        'kapha': p_data['prakriti_scores']['kapha'],
-                    },
-                    'lifestyle_data': {
-                        'sleepDuration': '6-7 hours',
-                        'sleepQuality': 'Interrupted',
-                        'activityLevel': 'Moderate',
-                        'stressLevel': 'High',
-                        'circadianAlignment': 'Moderate'
-                    },
-                    'diet_data': {
-                        'appetitePattern': 'Irregular (Vishama Agni)',
-                        'mealFrequency': '2-3 meals daily',
-                        'hydration': '1.8L daily',
-                        'predominantTaste': 'Katu (Pungent) & Tikta (Bitter)'
-                    },
-                    'symptoms_data': {
-                        'chiefComplaints': p_data['chief_symptoms'],
-                        'severity': 'Moderate to High',
-                        'chronicity': '3 to 6 months',
-                        'aggravatingFactors': 'Mental stress, irregular dining hours'
-                    },
-                    'ai_analysis': p_data['ai_analysis'],
-                    'shap_explanations': p_data['shap_explanations'],
-                    'lime_explanations': p_data['lime_explanations'],
-                    'rag_evidence': p_data['rag_evidence'],
-                    'recommendations': p_data['recommendations'],
-                }
-            )
+            # Create or Update Assessment safely
+            asm = PatientAssessment.objects.filter(patient=user).order_by('-created_at').first()
+            assessment_defaults = {
+                'status': AssessmentStatus.COMPLETED,
+                'demographics': {
+                    'fullName': p_data['name'],
+                    'age': p_data['age'],
+                    'gender': p_data['gender'],
+                    'height': 168 if p_data['gender'] == 'Female' else 176,
+                    'weight': 58 if p_data['gender'] == 'Female' else 74,
+                    'climate': 'tropical-coastal',
+                    'location': 'Bangalore, India'
+                },
+                'prakriti_scores': p_data['prakriti_scores'],
+                'prakriti_data': {
+                    'primary': p_data['prakriti_primary'],
+                    'vata': p_data['prakriti_scores']['vata'],
+                    'pitta': p_data['prakriti_scores']['pitta'],
+                    'kapha': p_data['prakriti_scores']['kapha'],
+                },
+                'lifestyle_data': {
+                    'sleepDuration': '6-7 hours',
+                    'sleepQuality': 'Interrupted',
+                    'activityLevel': 'Moderate',
+                    'stressLevel': 'High',
+                    'circadianAlignment': 'Moderate'
+                },
+                'diet_data': {
+                    'appetitePattern': 'Irregular (Vishama Agni)',
+                    'mealFrequency': '2-3 meals daily',
+                    'hydration': '1.8L daily',
+                    'predominantTaste': 'Katu (Pungent) & Tikta (Bitter)'
+                },
+                'symptoms_data': {
+                    'chiefComplaints': p_data['chief_symptoms'],
+                    'severity': 'Moderate to High',
+                    'chronicity': '3 to 6 months',
+                    'aggravatingFactors': 'Mental stress, irregular dining hours'
+                },
+                'ai_analysis': p_data['ai_analysis'],
+                'shap_explanations': p_data['shap_explanations'],
+                'lime_explanations': p_data['lime_explanations'],
+                'rag_evidence': p_data['rag_evidence'],
+                'recommendations': p_data['recommendations']
+            }
+            if asm:
+                for k, v in assessment_defaults.items():
+                    setattr(asm, k, v)
+                asm.save()
+            else:
+                asm = PatientAssessment.objects.create(patient=user, **assessment_defaults)
 
-            # Create Clinical Review
+            # Create Clinical Review safely
             review_notes = {
                 ReviewStatus.PENDING: {
                     'summary': '',
@@ -402,18 +406,22 @@ class Command(BaseCommand):
             status_val = p_data['review_status']
             note = review_notes[status_val]
 
-            ClinicalReview.objects.update_or_create(
-                assessment=asm,
-                patient=user,
-                defaults={
-                    'doctor': dr_sharma,
-                    'status': status_val,
-                    'summary': note['summary'],
-                    'observations': note['observations'],
-                    'recommendations': note['recommendations'],
-                    'follow_up_notes': note['follow_up']
-                }
-            )
+            review = ClinicalReview.objects.filter(assessment=asm, patient=user).first()
+            review_defaults = {
+                'doctor': dr_sharma,
+                'status': status_val,
+                'summary': note['summary'],
+                'observations': note['observations'],
+                'recommendations': note['recommendations'],
+                'follow_up_notes': note['follow_up']
+            }
+            if review:
+                for k, v in review_defaults.items():
+                    setattr(review, k, v)
+                review.save()
+            else:
+                ClinicalReview.objects.create(assessment=asm, patient=user, **review_defaults)
+
 
             # Initialize field verifications
             from clinical.services.patient_data_resolver import initialize_verifications_for_assessment
