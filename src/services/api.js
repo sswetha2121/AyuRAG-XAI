@@ -3,16 +3,51 @@
  * Handles communication with Django Clinical Backend with role-based authentication.
  */
 
-const BASE_URL = '/api';
+const BASE_URL = (import.meta.env?.VITE_API_BASE_URL || '/api').replace(/\/+$/, '');
+
+function getCsrfToken() {
+  if (typeof document === 'undefined') return null;
+  const match = document.cookie.match(/(?:^|;\s*)csrftoken=([^;]+)/);
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
+function extractErrorMessage(data, defaultMsg) {
+  if (!data) return defaultMsg;
+  if (typeof data.error === 'string') return data.error;
+  if (typeof data.detail === 'string') return data.detail;
+  if (typeof data === 'object') {
+    const messages = [];
+    for (const key of Object.keys(data)) {
+      const val = data[key];
+      if (Array.isArray(val)) {
+        messages.push(`${key}: ${val.join(' ')}`);
+      } else if (typeof val === 'string') {
+        messages.push(`${key}: ${val}`);
+      }
+    }
+    if (messages.length > 0) return messages.join(' | ');
+  }
+  return defaultMsg;
+}
 
 async function fetchJson(endpoint, options = {}) {
+  const method = (options.method || 'GET').toUpperCase();
+  const headers = {
+    'Content-Type': 'application/json',
+    ...options.headers,
+  };
+
+  if (!['GET', 'HEAD', 'OPTIONS'].includes(method)) {
+    const csrfToken = getCsrfToken();
+    if (csrfToken && !headers['X-CSRFToken']) {
+      headers['X-CSRFToken'] = csrfToken;
+    }
+  }
+
   const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-    credentials: 'include', // Important: sends Django session cookies
     ...options,
+    headers,
+    credentials: 'include', // Sends Django session cookies
   };
 
   let response;
@@ -26,7 +61,7 @@ async function fetchJson(endpoint, options = {}) {
 
   if (response.status === 401 || response.status === 403) {
     const errorData = await response.json().catch(() => ({ detail: 'Authentication error' }));
-    const error = new Error(errorData.detail || errorData.error || 'Unauthorized');
+    const error = new Error(extractErrorMessage(errorData, response.status === 401 ? 'Authentication required' : 'Access denied'));
     error.status = response.status;
     error.data = errorData;
     throw error;
@@ -35,10 +70,10 @@ async function fetchJson(endpoint, options = {}) {
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({
       detail: response.status >= 500
-        ? 'Backend service error. Please verify the Django server is active on port 8000.'
+        ? 'Backend service error. Please verify the Django server is active.'
         : `HTTP error ${response.status}`
     }));
-    const error = new Error(errorData.detail || errorData.error || `HTTP error ${response.status}`);
+    const error = new Error(extractErrorMessage(errorData, `HTTP error ${response.status}`));
     error.status = response.status;
     error.data = errorData;
     throw error;
@@ -221,6 +256,10 @@ export const api = {
 
   async getPatientLatestAssessment() {
     return fetchJson('/patient/assessment/latest/');
+  },
+
+  async getPatientAssessmentHistory() {
+    return fetchJson('/patient/assessment/history/');
   },
 
   // Daily Meal Schedule & Tracking

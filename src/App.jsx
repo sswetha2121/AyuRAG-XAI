@@ -138,7 +138,7 @@ function DoctorWorkspaceShell({ onTriggerToast, toasts, removeToast }) {
       case 'ai-shap':
       case 'ai-lime':
       case 'ai-rag-evidence':
-        navigate('/doctor/patients/1'); // Open lead patient analysis
+        navigate('/doctor/patients');
         break;
       case 'doctor-recommendations':
       case 'doctor-knowledge-base':
@@ -164,7 +164,7 @@ function DoctorWorkspaceShell({ onTriggerToast, toasts, removeToast }) {
       title: 'Signed Out',
       message: 'You have been safely signed out.',
     });
-    navigate('/login');
+    navigate('/doctor-login');
   };
 
   return (
@@ -254,6 +254,12 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
     setCurrentStep,
     completedSteps,
     triggerAnalysisGeneration,
+    retryAnalysisGeneration,
+    clearInferenceError,
+    inferenceStatus,
+    inferenceError,
+    submittedAssessmentId,
+    setSubmittedAssessmentId,
     personalInfo,
     prakritiAnswers,
     lifestyleAnswers,
@@ -340,60 +346,79 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
       ? Math.round((completedSteps.length / 6) * 100)
       : 16;
 
-  const handleStartAnalysisGeneration = () => {
+  const handleStartAnalysisGeneration = async () => {
     setIsGeneratingAnalysis(true);
-  };
-
-  const handleAnalysisCompleted = async () => {
-    setIsGeneratingAnalysis(false);
-    const computed = await triggerAnalysisGeneration();
-    setCurrentStep('dashboard');
-
     try {
-      await api.submitPatientAssessment({
-        username: user?.username,
-        demographics: {
-          fullName: personalInfo.fullName || user?.name || user?.username,
-          age: personalInfo.age,
-          gender: personalInfo.gender,
-          height: `${personalInfo.height} ${personalInfo.heightUnit}`,
-          weight: `${personalInfo.weight} ${personalInfo.weightUnit}`,
-          location: personalInfo.location,
-          climate: personalInfo.climateZone,
-          primaryGoal: personalInfo.primaryGoal,
-        },
-        prakriti_data: prakritiAnswers,
-        lifestyle_data: lifestyleAnswers,
-        diet_data: dietAnswers,
-        symptoms_data: symptomAnswers,
-        prakriti_scores: {
-          vata: computed?.tridoshaProfile?.breakdown?.vata || 40,
-          pitta: computed?.tridoshaProfile?.breakdown?.pitta || 35,
-          kapha: computed?.tridoshaProfile?.breakdown?.kapha || 25,
-          primary: computed?.tridoshaProfile?.constitutionType || 'Vāta-Pitta',
-        },
-        ai_analysis: {
-          prediction: `${computed?.tridoshaProfile?.constitutionType || 'Vāta-Pitta'} Assessment`,
-          confidence: computed?.aiMetrics?.confidence || 0.89,
-          model_name: 'AyuRAG Clinical Multi-Task Classifier v2.1',
-        },
-        shap_explanations: computed?.xaiFeatures || [],
-        rag_evidence: computed?.evidenceCitations || [],
-        recommendations: computed?.recommendations || {},
-      });
+      const computed = await triggerAnalysisGeneration();
 
-      onTriggerToast({
-        type: 'success',
-        title: 'Assessment Synchronized',
-        message: 'Personalized profile and explainable AI insights generated and recorded.',
-      });
+      if (user) {
+        try {
+          const submitRes = await api.submitPatientAssessment({
+            assessment_id: submittedAssessmentId || undefined,
+            username: user?.username,
+            demographics: {
+              fullName: personalInfo.fullName || user?.name || user?.username,
+              age: personalInfo.age,
+              gender: personalInfo.gender,
+              height: `${personalInfo.height} ${personalInfo.heightUnit}`,
+              weight: `${personalInfo.weight} ${personalInfo.weightUnit}`,
+              location: personalInfo.location,
+              climate: personalInfo.climateZone,
+              primaryGoal: personalInfo.primaryGoal,
+            },
+            prakriti_data: prakritiAnswers,
+            lifestyle_data: lifestyleAnswers,
+            diet_data: dietAnswers,
+            symptoms_data: symptomAnswers,
+            prakriti_scores: {
+              vata: computed?.tridoshaProfile?.breakdown?.vata || 40,
+              pitta: computed?.tridoshaProfile?.breakdown?.pitta || 35,
+              kapha: computed?.tridoshaProfile?.breakdown?.kapha || 25,
+              primary: computed?.tridoshaProfile?.constitutionType || 'Vāta-Pitta',
+            },
+            ai_analysis: {
+              prediction: `${computed?.tridoshaProfile?.constitutionType || 'Vāta-Pitta'} Assessment`,
+              confidence: computed?.aiMetrics?.confidence || 0.89,
+              model_name: 'AyuRAG Clinical Multi-Task Classifier v2.1',
+            },
+            shap_explanations: computed?.xaiFeatures || [],
+            rag_evidence: computed?.evidenceCitations || [],
+            recommendations: computed?.recommendations || {},
+          });
+          if (submitRes?.assessment_id) {
+            setSubmittedAssessmentId(submitRes.assessment_id);
+          }
+          onTriggerToast?.({
+            type: 'success',
+            title: 'Assessment Synchronized',
+            message: 'Personalized constitutional profile and explainable AI insights recorded.',
+          });
+        } catch (submitErr) {
+          console.warn('Patient assessment submission sync warning:', submitErr);
+        }
+      }
+
+      setTimeout(() => {
+        setIsGeneratingAnalysis(false);
+        setCurrentStep('dashboard');
+      }, 500);
     } catch (err) {
-      onTriggerToast({
-        type: 'success',
-        title: 'Inference Complete',
-        message: 'Personalized profile and explainable AI insights generated successfully.',
+      console.error('Inference pipeline error:', err);
+      onTriggerToast?.({
+        type: 'danger',
+        title: 'Inference Failed',
+        message: err.message || 'Clinical decision support backend could not complete analysis.',
       });
     }
+  };
+
+  const handleRetryAnalysis = () => {
+    handleStartAnalysisGeneration();
+  };
+
+  const handleCloseAnalysisModal = () => {
+    setIsGeneratingAnalysis(false);
+    clearInferenceError();
   };
 
   const handleLogout = async () => {
@@ -435,7 +460,10 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
       {/* Loading Modal for AI Analysis Generation */}
       <AnalysisLoadingModal
         isOpen={isGeneratingAnalysis}
-        onComplete={handleAnalysisCompleted}
+        status={inferenceStatus === 'idle' ? 'loading' : inferenceStatus}
+        error={inferenceError}
+        onRetry={handleRetryAnalysis}
+        onClose={handleCloseAnalysisModal}
       />
 
       {/* Patient Assessment Top Navigation & Auth Status Bar */}
@@ -470,6 +498,7 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
             });
             setCurrentStep('lifestyle');
           }}
+          onBackToPreviousPhase={() => setCurrentStep('personal-info')}
           onTriggerToast={onTriggerToast}
         />
       ) : currentStep === 'lifestyle' ? (

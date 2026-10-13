@@ -146,6 +146,13 @@ export const AssessmentProvider = ({ children }) => {
     return null;
   });
 
+  // Explicit AI Inference State Machine: 'idle' | 'loading' | 'success' | 'failure'
+  const [inferenceStatus, setInferenceStatus] = useState('idle');
+  const [inferenceError, setInferenceError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submittedAssessmentId, setSubmittedAssessmentId] = useState(null);
+  const [isDemoAnalysis, setIsDemoAnalysis] = useState(() => Boolean(analysisResult?.isDemo));
+
   // Current Active Workflow Step
   const [currentStep, setCurrentStep] = useState(() => {
     try {
@@ -342,38 +349,49 @@ export const AssessmentProvider = ({ children }) => {
     });
   };
 
-  // Real-Time Analysis Generation
+  // Real-Time Backend AI Analysis Generation
+  // Displays results ONLY when the backend operation actually succeeds.
+  // Never falls back silently to locally generated mock results.
   const triggerAnalysisGeneration = async () => {
+    setInferenceStatus('loading');
+    setInferenceError(null);
+
+    const payload = {
+      demographics: personalInfo,
+      prakriti_data: prakritiAnswers,
+      lifestyle_data: lifestyleAnswers,
+      diet_data: dietAnswers,
+      symptoms_data: symptomAnswers
+    };
+
     try {
-      const payload = {
-        demographics: personalInfo,
-        prakriti_data: prakritiAnswers,
-        lifestyle_data: lifestyleAnswers,
-        diet_data: dietAnswers,
-        symptoms_data: symptomAnswers
-      };
       const aiResponse = await api.runAiInference(payload);
       if (aiResponse && aiResponse.tridoshaProfile) {
+        aiResponse.isDemo = false;
         setAnalysisResult(aiResponse);
+        setIsDemoAnalysis(false);
+        setInferenceStatus('success');
+        setInferenceError(null);
         markStepCompleted('review');
-        markStepCompleted('dashboard');
         return aiResponse;
       }
-    } catch (e) {
-      console.log('Using local baseline inference:', e);
+      throw new Error('AI inference response did not return a valid constitutional profile.');
+    } catch (err) {
+      const errorMsg = err.message || 'AI inference request failed. Please ensure the clinical backend server is running.';
+      setInferenceStatus('failure');
+      setInferenceError(errorMsg);
+      // PRESERVE ANSWERS: Do NOT wipe answers and do NOT set fake analysisResult!
+      throw err;
     }
+  };
 
-    const computed = generatePersonalizedAnalysis({
-      personalInfo,
-      prakritiAnswers,
-      lifestyleAnswers,
-      dietAnswers,
-      symptomAnswers
-    });
-    setAnalysisResult(computed);
-    markStepCompleted('review');
-    markStepCompleted('dashboard');
-    return computed;
+  const retryAnalysisGeneration = async () => {
+    return triggerAnalysisGeneration();
+  };
+
+  const clearInferenceError = () => {
+    setInferenceStatus('idle');
+    setInferenceError(null);
   };
 
   // Reset entire assessment
@@ -385,6 +403,11 @@ export const AssessmentProvider = ({ children }) => {
     setSymptomAnswers(initialSymptomAnswers);
     setReviewConsent(false);
     setAnalysisResult(null);
+    setInferenceStatus('idle');
+    setInferenceError(null);
+    setIsSubmitting(false);
+    setSubmittedAssessmentId(null);
+    setIsDemoAnalysis(false);
     setCompletedSteps([]);
     setCurrentStep('personal-info');
     try {
@@ -538,7 +561,13 @@ export const AssessmentProvider = ({ children }) => {
       dietAnswers: { diet_q1_meal_regularity: 'sometimes' },
       symptomAnswers: { selectedSymptoms: [{ id: 'sym_bloating' }] }
     });
+    // Explicitly label as demonstration data so it cannot masquerade as real backend output
+    demoAnalysis.isDemo = true;
+    demoAnalysis.demoNotice = 'Demonstration Profile (Aarav Mehta) — Offline Synthesized Example';
     setAnalysisResult(demoAnalysis);
+    setIsDemoAnalysis(true);
+    setInferenceStatus('success');
+    setInferenceError(null);
     setCurrentStep('dashboard');
   };
 
@@ -592,6 +621,15 @@ export const AssessmentProvider = ({ children }) => {
         analysisResult,
         setAnalysisResult,
         triggerAnalysisGeneration,
+        retryAnalysisGeneration,
+        clearInferenceError,
+        inferenceStatus,
+        inferenceError,
+        isSubmitting,
+        setIsSubmitting,
+        submittedAssessmentId,
+        setSubmittedAssessmentId,
+        isDemoAnalysis,
 
         // Resilience & Derivations
         resetAllAssessment,

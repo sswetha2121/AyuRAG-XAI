@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './PrakritiIntro.css';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, Button, Badge } from '../ui';
-import { Wind, Flame, Mountain, Sparkles, ArrowRight, ShieldCheck, HelpCircle, BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
+import { Wind, Flame, Mountain, Sparkles, ArrowRight, ArrowLeft, ShieldCheck, HelpCircle, BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
 import { DoshasPrinciplesGuide } from './DoshasPrinciplesGuide';
 
 const DOSHA_CARDS = [
@@ -37,7 +37,7 @@ const DOSHA_CARDS = [
   }
 ];
 
-export const PrakritiIntro = ({ onStart, onOpenInfo, className = '' }) => {
+export const PrakritiIntro = ({ onStart, onBack, onOpenInfo, className = '' }) => {
   const [showFullGuide, setShowFullGuide] = useState(false);
 
   return (
@@ -139,9 +139,21 @@ export const PrakritiIntro = ({ onStart, onOpenInfo, className = '' }) => {
 
         <CardFooter className="ayur-intro-footer">
           <div className="flex items-center justify-between w-full flex-wrap gap-md">
-            <span className="text-small text-muted">
-              Estimated duration: ~3 minutes • Progress is saved automatically
-            </span>
+            <div className="flex items-center gap-sm">
+              {onBack && (
+                <Button
+                  variant="outline"
+                  size="md"
+                  leftIcon={<ArrowLeft size={16} />}
+                  onClick={onBack}
+                >
+                  Back to Personal Information
+                </Button>
+              )}
+              <span className="text-small text-muted">
+                Estimated duration: ~3 minutes • Progress is saved automatically
+              </span>
+            </div>
             <Button
               variant="primary"
               size="lg"

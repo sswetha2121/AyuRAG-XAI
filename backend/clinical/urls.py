@@ -25,7 +25,8 @@ from .views import (
     PatientWaterLogView,
     PatientProgressView,
     PatientDietHistoryView,
-    ClinicalAiInferenceView
+    ClinicalAiInferenceView,
+    PatientAssessmentHistoryView
 )
 
 urlpatterns = [
@@ -57,6 +58,7 @@ urlpatterns = [
     path('patient/diet/history/', PatientDietHistoryView.as_view(), name='patient-diet-history'),
     path('patient/assessment/submit/', PatientAssessmentSubmitView.as_view(), name='patient-assessment-submit'),
     path('patient/assessment/latest/', PatientLatestAssessmentView.as_view(), name='patient-assessment-latest'),
+    path('patient/assessment/history/', PatientAssessmentHistoryView.as_view(), name='patient-assessment-history'),
     path('patient/meal-schedule/', PatientMealScheduleView.as_view(), name='patient-meal-schedule'),
     path('patient/meal-schedule/log/', PatientMealScheduleView.as_view(), name='patient-meal-schedule-log'),
     path('patient/reminders/', PatientMealReminderPreferenceView.as_view(), name='patient-meal-reminders'),

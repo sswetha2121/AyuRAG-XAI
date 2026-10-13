@@ -78,30 +78,27 @@ export const DashboardPage = ({
     year: 'numeric'
   });
 
-  // Effective constitutional profile from analysisResult, or latestAssessment, or default
+  const hasAssessmentData = Boolean(analysisResult || latestAssessment);
+
+  // Effective constitutional profile from analysisResult, or latestAssessment
   const constitutionType =
     analysisResult?.tridoshaProfile?.constitutionType ||
     latestAssessment?.prakriti_scores?.primary ||
     'Balanced';
 
-  const tridoshaProfile = analysisResult?.tridoshaProfile || {
+  const tridoshaProfile = analysisResult?.tridoshaProfile || (latestAssessment?.prakriti_scores ? {
     constitutionType: constitutionType,
     breakdown: {
-      vata: latestAssessment?.prakriti_scores?.vata || 38,
-      pitta: latestAssessment?.prakriti_scores?.pitta || 36,
-      kapha: latestAssessment?.prakriti_scores?.kapha || 26,
+      vata: latestAssessment.prakriti_scores.vata || 33,
+      pitta: latestAssessment.prakriti_scores.pitta || 33,
+      kapha: latestAssessment.prakriti_scores.kapha || 34,
     },
     primaryDosha: constitutionType,
-    secondaryDosha: 'Metabolic & Movement Factors',
-    summary: 'Your body constitution assessment reflects individual metabolic and movement tendencies.',
-  };
+    secondaryDosha: 'Clinical Assessment Record',
+    summary: 'Your body constitution assessment reflects individual metabolic and movement tendencies recorded in your clinical chart.',
+  } : null);
 
-  const xaiFeatures = analysisResult?.xaiFeatures || latestAssessment?.shap_explanations || [
-    { feature: 'Meal Timing Regularity', importance: 0.38, direction: 'positive', description: 'Consistent meal hours stabilize digestive metabolism.' },
-    { feature: 'Warm Food Preference', importance: 0.29, direction: 'positive', description: 'Nourishing warm foods support comfortable digestion.' },
-    { feature: 'Sleep Duration & Timing', importance: 0.22, direction: 'positive', description: 'Regular rest schedule supports metabolic rhythm.' }
-  ];
-
+  const xaiFeatures = analysisResult?.xaiFeatures || latestAssessment?.shap_explanations || [];
   const evidenceCitations = analysisResult?.evidenceCitations || latestAssessment?.rag_evidence || [];
   const recommendations = analysisResult?.recommendations || latestAssessment?.recommendations || {
     diet: ['Eat freshly prepared, warm meals', 'Include whole grains and yellow lentils', 'Avoid iced cold drinks with meals'],
@@ -153,83 +150,117 @@ export const DashboardPage = ({
         </div>
       </div>
 
-      {/* 2. Navigation Tabs */}
-      <DashboardNavTabs
-        activeTab={activeTab}
-        onSelectTab={setActiveTab}
-      />
-
-      {/* 3. Tab Contents */}
-      <div className="ayur-dash-tab-content">
-        {activeTab === 'overview' && (
-          <div className="ayur-dash-overview-stack">
-            {/* Daily Meal Tracker: Next meal, today's schedule, what to eat, water */}
-            <PatientMealTracker
-              onTriggerToast={onTriggerToast}
-              onOpenReminders={() => setIsRemindersModalOpen(true)}
-            />
-
-            {/* Active Approved Diet Plan */}
-            <PatientActiveDietCard />
-
-            {/* Weekly Progress Overview */}
-            <PatientProgressTracker onTriggerToast={onTriggerToast} />
-
-            {/* Body Constitution Overview */}
-            <TridoshaCard tridoshaProfile={tridoshaProfile} />
-
-            {/* Digestive Metabolism */}
-            <DigestiveAgniCard />
-
-            {/* Explainable AI Factors */}
-            <XaiFeatureImportance features={xaiFeatures} />
-
-            {/* Daily Timetable */}
-            <DailyRoutineTimetable timetable={dailyRoutineTimetable} />
+      {/* Demo Warning Banner */}
+      {analysisResult?.isDemo && (
+        <div
+          className="ayur-demo-banner"
+          style={{
+            backgroundColor: '#FEF3C7',
+            border: '1px solid #F59E0B',
+            borderRadius: '8px',
+            padding: '0.75rem 1rem',
+            marginBottom: '1.25rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.65rem',
+            color: '#92400E',
+            fontSize: '0.875rem'
+          }}
+        >
+          <AlertCircle size={20} style={{ color: '#D97706', flexShrink: 0 }} />
+          <div>
+            <strong>Demonstration Profile Active:</strong> {analysisResult.demoNotice || 'This is an offline synthesized demonstration profile. It is isolated from live clinical records.'}
           </div>
-        )}
+        </div>
+      )}
 
-        {activeTab === 'schedule' && (
-          <div className="ayur-dash-tab-pane">
-            <PatientMealTracker
-              onTriggerToast={onTriggerToast}
-              onOpenReminders={() => setIsRemindersModalOpen(true)}
-            />
-          </div>
-        )}
+      {/* When no assessment exists and loading is finished, present explicit Empty State */}
+      {!hasAssessmentData && hasFetchedAssessment ? (
+        <EmptyAssessmentState
+          onStartAssessment={onStartAssessment || (() => window.location.href = '/assessment-overview')}
+          onLoadDemo={loadDemoPreset}
+        />
+      ) : (
+        <>
+          {/* 2. Navigation Tabs */}
+          <DashboardNavTabs
+            activeTab={activeTab}
+            onSelectTab={setActiveTab}
+          />
 
-        {activeTab === 'diet' && (
-          <div className="ayur-dash-tab-pane">
-            <PatientActiveDietCard />
-          </div>
-        )}
+          {/* 3. Tab Contents */}
+          <div className="ayur-dash-tab-content">
+            {activeTab === 'overview' && (
+              <div className="ayur-dash-overview-stack">
+                {/* Daily Meal Tracker: Next meal, today's schedule, what to eat, water */}
+                <PatientMealTracker
+                  onTriggerToast={onTriggerToast}
+                  onOpenReminders={() => setIsRemindersModalOpen(true)}
+                />
 
-        {activeTab === 'progress' && (
-          <div className="ayur-dash-tab-pane">
-            <PatientProgressTracker onTriggerToast={onTriggerToast} />
-          </div>
-        )}
+                {/* Active Approved Diet Plan */}
+                <PatientActiveDietCard />
 
-        {activeTab === 'constitution' && (
-          <div className="ayur-dash-tab-pane">
-            <TridoshaCard tridoshaProfile={tridoshaProfile} />
-            <DigestiveAgniCard />
-            <XaiFeatureImportance features={xaiFeatures} />
-          </div>
-        )}
+                {/* Weekly Progress Overview */}
+                <PatientProgressTracker onTriggerToast={onTriggerToast} />
 
-        {activeTab === 'routine' && (
-          <div className="ayur-dash-tab-pane">
-            <DailyRoutineTimetable timetable={dailyRoutineTimetable} />
-          </div>
-        )}
+                {/* Body Constitution Overview */}
+                {tridoshaProfile && <TridoshaCard tridoshaProfile={tridoshaProfile} />}
 
-        {activeTab === 'evidence' && (
-          <div className="ayur-dash-tab-pane">
-            <EvidenceSection citations={evidenceCitations} />
+                {/* Digestive Metabolism */}
+                <DigestiveAgniCard />
+
+                {/* Explainable AI Factors */}
+                {xaiFeatures.length > 0 && <XaiFeatureImportance features={xaiFeatures} />}
+
+                {/* Daily Timetable */}
+                <DailyRoutineTimetable timetable={dailyRoutineTimetable} />
+              </div>
+            )}
+
+            {activeTab === 'schedule' && (
+              <div className="ayur-dash-tab-pane">
+                <PatientMealTracker
+                  onTriggerToast={onTriggerToast}
+                  onOpenReminders={() => setIsRemindersModalOpen(true)}
+                />
+              </div>
+            )}
+
+            {activeTab === 'diet' && (
+              <div className="ayur-dash-tab-pane">
+                <PatientActiveDietCard />
+              </div>
+            )}
+
+            {activeTab === 'progress' && (
+              <div className="ayur-dash-tab-pane">
+                <PatientProgressTracker onTriggerToast={onTriggerToast} />
+              </div>
+            )}
+
+            {activeTab === 'constitution' && (
+              <div className="ayur-dash-tab-pane">
+                {tridoshaProfile && <TridoshaCard tridoshaProfile={tridoshaProfile} />}
+                <DigestiveAgniCard />
+                {xaiFeatures.length > 0 && <XaiFeatureImportance features={xaiFeatures} />}
+              </div>
+            )}
+
+            {activeTab === 'routine' && (
+              <div className="ayur-dash-tab-pane">
+                <DailyRoutineTimetable timetable={dailyRoutineTimetable} />
+              </div>
+            )}
+
+            {activeTab === 'evidence' && (
+              <div className="ayur-dash-tab-pane">
+                <EvidenceSection citations={evidenceCitations} />
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </>
+      )}
 
       {/* Reminders Modal */}
       <PatientRemindersModal

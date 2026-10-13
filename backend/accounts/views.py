@@ -1,4 +1,5 @@
-from django.contrib.auth import authenticate, login, logout
+from django.conf import settings
+from django.contrib.auth import authenticate, login, logout, password_validation
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
@@ -108,8 +109,8 @@ class RegisterView(APIView):
         if not email or not password:
             return Response({'error': 'Email and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        if len(password) < 4:
-            return Response({'error': 'Password must be at least 4 characters long.'}, status=status.HTTP_400_BAD_REQUEST)
+        if len(password) < 8:
+            return Response({'error': 'Password must be at least 8 characters long.'}, status=status.HTTP_400_BAD_REQUEST)
 
         if not username:
             username = email.split('@')[0]
@@ -157,23 +158,57 @@ class LogoutView(APIView):
 
 class DemoSwitchView(APIView):
     """
-    Convenience endpoint for clinical research testing.
-    Switches session between Doctor and Patient personas.
+    Development-only convenience endpoint for clinical research testing.
+    Strictly disabled in production configuration.
+    Operates ONLY on designated isolated demo accounts, never on real patient records.
     """
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
+        if not getattr(settings, 'DEMO_MODE', False) or not getattr(settings, 'DEBUG', False):
+            return Response(
+                {'error': 'Demo persona switching is strictly disabled in production configuration.'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
         target_role = request.data.get('role', 'DOCTOR').upper()
         if target_role not in ['DOCTOR', 'PATIENT']:
-            return Response({'error': 'Invalid role.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Invalid role specified.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        user = User.objects.filter(role=target_role).first()
+        # Isolated demo personas
+        target_username = 'demo.doctor' if target_role == 'DOCTOR' else 'demo.patient'
+        user = User.objects.filter(username=target_username).first()
+
         if not user:
-            return Response({'error': f'No demo user found with role {target_role}.'}, status=status.HTTP_404_NOT_FOUND)
+            # Create the dedicated demo persona
+            user = User.objects.create(
+                username=target_username,
+                email=f"{target_username}@ayurag.example",
+                role=target_role
+            )
+            user.set_password('demoPersona2026!')
+            user.save()
+            if target_role == 'DOCTOR':
+                DoctorProfile.objects.create(
+                    user=user,
+                    professional_name='Dr. Demo Attending Physician',
+                    qualification='BAMS, MD (Kayachikitsa)',
+                    specialization='Ayurvedic Internal Medicine',
+                    clinical_license='AYUSH-DEMO-2026'
+                )
+            else:
+                PatientProfile.objects.create(
+                    user=user,
+                    full_name='Demo Patient (Aarav Mehta)',
+                    age=28,
+                    gender='Male',
+                    contact_phone='+91 98765 43210'
+                )
 
         login(request, user)
         serializer = UserSerializer(user)
         return Response({
-            'message': f'Switched to {target_role} persona.',
+            'message': f'Switched to dedicated {target_role} demo persona.',
             'user': serializer.data
         })
+

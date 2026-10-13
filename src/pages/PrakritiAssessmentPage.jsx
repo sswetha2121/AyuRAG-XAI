@@ -13,7 +13,7 @@ import {
 import { Button, Badge, ProgressBar } from '../components/ui';
 import { ArrowLeft, ArrowRight, Sparkles, RotateCcw, HelpCircle, CheckCircle2 } from 'lucide-react';
 
-export const PrakritiAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }) => {
+export const PrakritiAssessmentPage = ({ onContinueToNextPhase, onBackToPreviousPhase, onTriggerToast }) => {
   const { personalInfo, prakritiAnswers, setPrakritiAnswer, resetPrakritiAnswers, markStepCompleted, completedSteps } = useAssessment();
   
   const answeredCount = Object.keys(prakritiAnswers).length;
@@ -82,8 +82,10 @@ export const PrakritiAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }
     if (currentIndex > 0) {
       setCurrentIndex((prev) => prev - 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
+    } else if (hasStarted) {
       setHasStarted(false);
+    } else if (onBackToPreviousPhase) {
+      onBackToPreviousPhase();
     }
   };
 
@@ -156,6 +158,7 @@ export const PrakritiAssessmentPage = ({ onContinueToNextPhase, onTriggerToast }
         /* 1. Introduction Screen */
         <PrakritiIntro
           onStart={handleStart}
+          onBack={onBackToPreviousPhase}
           onOpenInfo={() => setShowInfoModal(true)}
         />
       ) : showCompletion ? (

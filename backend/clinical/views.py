@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.utils import timezone
 from datetime import datetime, timedelta
 from accounts.models import User, DoctorProfile, PatientProfile
-from accounts.permissions import IsDoctorUser
+from accounts.permissions import IsDoctorUser, IsPatientUser
 from .models import (
     PatientAssessment, ClinicalReview, ReviewStatus, AssessmentStatus,
     PatientVerification, VerificationStatus,
@@ -191,12 +191,35 @@ class DoctorReviewListView(APIView):
     def post(self, request):
         assessment_id = request.data.get('assessment_id')
         if not assessment_id:
+            patient_id = request.data.get('patient_id')
+            if patient_id:
+                asm = PatientAssessment.objects.filter(patient_id=patient_id).order_by('-created_at').first()
+                if asm:
+                    assessment_id = asm.id
+
+        if not assessment_id:
             return Response({'error': 'assessment_id is required.'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             assessment = PatientAssessment.objects.get(pk=assessment_id)
         except PatientAssessment.DoesNotExist:
             return Response({'error': 'Assessment not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Update existing review if already present to prevent duplicate records
+        review = ClinicalReview.objects.filter(assessment=assessment).first()
+        if review:
+            review.doctor = request.user
+            review.status = request.data.get('status', review.status)
+            if 'summary' in request.data:
+                review.summary = request.data['summary']
+            if 'observations' in request.data:
+                review.observations = request.data['observations']
+            if 'recommendations' in request.data:
+                review.recommendations = request.data['recommendations']
+            if 'follow_up_notes' in request.data:
+                review.follow_up_notes = request.data['follow_up_notes']
+            review.save()
+            return Response(ClinicalReviewSerializer(review).data, status=status.HTTP_200_OK)
 
         review = ClinicalReview.objects.create(
             patient=assessment.patient,
@@ -243,8 +266,12 @@ class DoctorReviewDetailView(APIView):
         review.save()
         return Response({
             'message': 'Clinical review notes updated successfully.',
-            'review': ClinicalReviewSerializer(review).data
+            'review': ClinicalReviewSerializer(review).data,
+            'status': review.status
         })
+
+    def put(self, request, pk):
+        return self.patch(request, pk)
 
 
 class DoctorReportsView(APIView):
@@ -733,15 +760,9 @@ class PatientCurrentDietView(APIView):
     Strictly isolated: queries strictly by request.user.
     Never accepts arbitrary patient_id from client.
     """
-    permission_classes = []
+    permission_classes = [IsPatientUser]
 
     def get(self, request):
-        if not request.user.is_authenticated or request.user.role != User.Role.PATIENT:
-            return Response({
-                'has_active_plan': False,
-                'message': 'Sign in to access your physician-approved diet regimen.'
-            })
-
         # Strict patient isolation
         plan = DietPlan.objects.filter(
             patient=request.user,
@@ -763,36 +784,14 @@ class PatientCurrentDietView(APIView):
 class PatientAssessmentSubmitView(APIView):
     """
     Saves or submits a complete patient constitutional assessment.
-    Accessible to authenticated patients or guests.
+    Accessible ONLY to authenticated patients.
+    Idempotent on retries when assessment_id is provided.
     """
-    permission_classes = []
+    permission_classes = [IsPatientUser]
 
     def post(self, request):
-        user = request.user if request.user.is_authenticated else None
+        user = request.user
         demographics = request.data.get('demographics', {})
-
-        if not user or user.role != User.Role.PATIENT:
-            full_name = demographics.get('fullName', '').strip()
-            username = request.data.get('username') or demographics.get('username')
-            if not username and full_name:
-                username = full_name.lower().replace(' ', '.')
-
-            if username:
-                user = User.objects.filter(username=username, role=User.Role.PATIENT).first()
-
-            if not user:
-                # Fall back to first available patient user or create demo patient
-                user = User.objects.filter(role=User.Role.PATIENT).first()
-                if not user:
-                    user = User.objects.create(
-                        username='guest.patient',
-                        email='guest.patient@ayurag.org',
-                        role=User.Role.PATIENT
-                    )
-                    user.set_password('patient123')
-                    user.save()
-                    PatientProfile.objects.create(user=user, full_name=full_name or 'Guest Patient')
-
         prakriti_data = request.data.get('prakriti_data', {})
         lifestyle_data = request.data.get('lifestyle_data', {})
         diet_data = request.data.get('diet_data', {})
@@ -824,53 +823,78 @@ class PatientAssessmentSubmitView(APIView):
                 rag_evidence = ai_bundle.get('evidenceCitations', [])
                 recommendations = ai_bundle.get('recommendations', {})
             except Exception as e:
-                # Fallback to reasonable defaults
-                pass
+                return Response(
+                    {'error': f'Failed to generate AI clinical analysis for assessment: {str(e)}'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
 
-        assessment = PatientAssessment.objects.create(
-            patient=user,
-            status=AssessmentStatus.COMPLETED,
-            demographics=demographics,
-            prakriti_data=prakriti_data,
-            lifestyle_data=lifestyle_data,
-            diet_data=diet_data,
-            symptoms_data=symptoms_data,
-            prakriti_scores=prakriti_scores,
-            ai_analysis=ai_analysis,
-            shap_explanations=shap_explanations,
-            lime_explanations=lime_explanations,
-            rag_evidence=rag_evidence,
-            recommendations=recommendations
-        )
+        assessment_id = request.data.get('assessment_id')
+        assessment = None
+        if assessment_id:
+            assessment = PatientAssessment.objects.filter(id=assessment_id, patient=user).first()
+
+        if assessment:
+            assessment.demographics = demographics
+            assessment.prakriti_data = prakriti_data
+            assessment.lifestyle_data = lifestyle_data
+            assessment.diet_data = diet_data
+            assessment.symptoms_data = symptoms_data
+            assessment.prakriti_scores = prakriti_scores
+            assessment.ai_analysis = ai_analysis
+            assessment.shap_explanations = shap_explanations
+            assessment.lime_explanations = lime_explanations
+            assessment.rag_evidence = rag_evidence
+            assessment.recommendations = recommendations
+            assessment.status = AssessmentStatus.COMPLETED
+            assessment.save()
+        else:
+            assessment = PatientAssessment.objects.create(
+                patient=user,
+                status=AssessmentStatus.COMPLETED,
+                demographics=demographics,
+                prakriti_data=prakriti_data,
+                lifestyle_data=lifestyle_data,
+                diet_data=diet_data,
+                symptoms_data=symptoms_data,
+                prakriti_scores=prakriti_scores,
+                ai_analysis=ai_analysis,
+                shap_explanations=shap_explanations,
+                lime_explanations=lime_explanations,
+                rag_evidence=rag_evidence,
+                recommendations=recommendations
+            )
 
         # Create or update pending clinical review
         default_doctor = User.objects.filter(role=User.Role.DOCTOR).first()
         if default_doctor:
-            ClinicalReview.objects.create(
+            review, created = ClinicalReview.objects.get_or_create(
                 patient=user,
-                doctor=default_doctor,
                 assessment=assessment,
-                status=ReviewStatus.PENDING,
-                summary=f"New assessment submitted for {demographics.get('fullName', user.username)}. Primary constitutional indication: {prakriti_scores.get('primary', 'Vāta-Pitta')}."
+                defaults={
+                    'doctor': default_doctor,
+                    'status': ReviewStatus.PENDING,
+                    'summary': f"New assessment submitted for {demographics.get('fullName', user.username)}. Primary constitutional indication: {prakriti_scores.get('primary', 'Vāta-Pitta')}."
+                }
             )
             # Initialize verification fields
             initialize_verifications_for_assessment(user, assessment, default_doctor)
 
-            # Notification for doctor
-            Notification.objects.create(
-                user=default_doctor,
-                type='NEW_ASSESSMENT',
-                title='New Patient Assessment',
-                message=f"Patient {demographics.get('fullName', user.username)} has completed assessment #{assessment.id}.",
-                related_object_type='PatientAssessment',
-                related_object_id=assessment.id
-            )
+            if created:
+                # Notification for doctor
+                Notification.objects.create(
+                    user=default_doctor,
+                    type='NEW_ASSESSMENT',
+                    title='New Patient Assessment',
+                    message=f"Patient {demographics.get('fullName', user.username)} has completed assessment #{assessment.id}.",
+                    related_object_type='PatientAssessment',
+                    related_object_id=assessment.id
+                )
 
         return Response({
             'message': 'Assessment submitted successfully and queued for physician verification.',
             'assessment_id': assessment.id,
             'assessment': PatientAssessmentDetailSerializer(assessment).data
-        }, status=status.HTTP_201_CREATED)
+        }, status=status.HTTP_201_CREATED if not assessment_id else status.HTTP_200_OK)
 
 
 class ClinicalAiInferenceView(APIView):
@@ -902,12 +926,9 @@ class PatientLatestAssessmentView(APIView):
     """
     Returns the latest assessment for the authenticated patient.
     """
-    permission_classes = []
+    permission_classes = [IsPatientUser]
 
     def get(self, request):
-        if not request.user.is_authenticated or request.user.role != User.Role.PATIENT:
-            return Response({'has_assessment': False, 'assessment': None})
-
         assessment = PatientAssessment.objects.filter(patient=request.user).order_by('-created_at').first()
         if not assessment:
             return Response({'has_assessment': False, 'assessment': None})
@@ -915,6 +936,20 @@ class PatientLatestAssessmentView(APIView):
         return Response({
             'has_assessment': True,
             'assessment': PatientAssessmentDetailSerializer(assessment).data
+        })
+
+
+class PatientAssessmentHistoryView(APIView):
+    """
+    Returns historical assessments for the authenticated patient.
+    """
+    permission_classes = [IsPatientUser]
+
+    def get(self, request):
+        assessments = PatientAssessment.objects.filter(patient=request.user).order_by('-created_at')
+        return Response({
+            'count': assessments.count(),
+            'assessments': PatientAssessmentSummarySerializer(assessments, many=True).data
         })
 
 
@@ -1054,20 +1089,15 @@ def get_or_create_default_patient_schedule(patient, target_date, active_plan=Non
 class PatientMealScheduleView(APIView):
     """
     Returns today's daily meal schedule, meal statuses, next meal, and logs meals.
-    Supports authenticated patients or demo visitors.
+    Strictly isolated to authenticated patients.
     """
-    permission_classes = []
+    permission_classes = [IsPatientUser]
 
     def get_patient(self, request):
-        if request.user.is_authenticated and request.user.role == User.Role.PATIENT:
-            return request.user
-        # Fall back to demo patient
-        return User.objects.filter(role=User.Role.PATIENT).first()
+        return request.user
 
     def get(self, request):
         patient = self.get_patient(request)
-        if not patient:
-            return Response({'error': 'No patient profile found.'}, status=status.HTTP_404_NOT_FOUND)
 
         date_str = request.query_params.get('date')
         if date_str:
@@ -1224,17 +1254,13 @@ class PatientMealReminderPreferenceView(APIView):
     """
     Manages meal notification schedules and reminder toggles for the patient.
     """
-    permission_classes = []
+    permission_classes = [IsPatientUser]
 
     def get_patient(self, request):
-        if request.user.is_authenticated and request.user.role == User.Role.PATIENT:
-            return request.user
-        return User.objects.filter(role=User.Role.PATIENT).first()
+        return request.user
 
     def get(self, request):
         patient = self.get_patient(request)
-        if not patient:
-            return Response({'error': 'Patient not found.'}, status=status.HTTP_404_NOT_FOUND)
 
         prefs, _ = MealReminderPreference.objects.get_or_create(patient=patient)
         return Response(MealReminderPreferenceSerializer(prefs).data)
@@ -1272,17 +1298,13 @@ class PatientWaterLogView(APIView):
     """
     Logs water intake increments (e.g. +250ml) for the day.
     """
-    permission_classes = []
+    permission_classes = [IsPatientUser]
 
     def get_patient(self, request):
-        if request.user.is_authenticated and request.user.role == User.Role.PATIENT:
-            return request.user
-        return User.objects.filter(role=User.Role.PATIENT).first()
+        return request.user
 
     def post(self, request):
         patient = self.get_patient(request)
-        if not patient:
-            return Response({'error': 'Patient profile not found.'}, status=status.HTTP_404_NOT_FOUND)
 
         target_date = timezone.localdate()
         amount_ml = int(request.data.get('amount_ml', 250))
@@ -1309,17 +1331,13 @@ class PatientProgressView(APIView):
     Provides 7-day and 30-day historical meal adherence, consistency streaks, and wellness trends.
     Calculated purely from persisted records.
     """
-    permission_classes = []
+    permission_classes = [IsPatientUser]
 
     def get_patient(self, request):
-        if request.user.is_authenticated and request.user.role == User.Role.PATIENT:
-            return request.user
-        return User.objects.filter(role=User.Role.PATIENT).first()
+        return request.user
 
     def get(self, request):
         patient = self.get_patient(request)
-        if not patient:
-            return Response({'error': 'Patient not found.'}, status=status.HTTP_404_NOT_FOUND)
 
         today = timezone.localdate()
         past_7_days = [today - timedelta(days=i) for i in range(6, -1, -1)]
@@ -1396,17 +1414,13 @@ class PatientDietHistoryView(APIView):
     """
     Returns previous diet plan versions and audit iterations for the authenticated patient.
     """
-    permission_classes = []
+    permission_classes = [IsPatientUser]
 
     def get_patient(self, request):
-        if request.user.is_authenticated and request.user.role == User.Role.PATIENT:
-            return request.user
-        return User.objects.filter(role=User.Role.PATIENT).first()
+        return request.user
 
     def get(self, request):
         patient = self.get_patient(request)
-        if not patient:
-            return Response({'error': 'Patient not found.'}, status=status.HTTP_404_NOT_FOUND)
 
         plans = DietPlan.objects.filter(patient=patient).order_by('-version', '-created_at')
         return Response({
