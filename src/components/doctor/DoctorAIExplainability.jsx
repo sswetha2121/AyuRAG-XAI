@@ -87,7 +87,7 @@ export const DoctorAIExplainability = ({
           onClick={() => setActiveTab('shap')}
         >
           <BarChart3 size={15} />
-          <span>SHAP Feature Contributions</span>
+          <span>Rule Feature Attributions</span>
         </button>
 
         <button
@@ -96,7 +96,7 @@ export const DoctorAIExplainability = ({
           onClick={() => setActiveTab('lime')}
         >
           <SlidersHorizontal size={15} />
-          <span>LIME Local Explanation</span>
+          <span>Local Decision Rules</span>
         </button>
 
         <button
@@ -105,20 +105,20 @@ export const DoctorAIExplainability = ({
           onClick={() => setActiveTab('rag')}
         >
           <BookOpen size={15} />
-          <span>RAG Classical Evidence ({ragEvidence.length})</span>
+          <span>Classical Evidence ({ragEvidence.length})</span>
         </button>
       </div>
 
       {/* Tab Panels */}
       <div className="ayur-xai-panel">
-        {/* SHAP VISUALIZATION */}
+        {/* RULE ATTRIBUTION VISUALIZATION */}
         {activeTab === 'shap' && (
           <div className="ayur-shap-container">
             <div className="ayur-panel-intro">
               <div>
-                <h4 className="ayur-panel-title">SHAP (SHapley Additive exPlanations)</h4>
+                <h4 className="ayur-panel-title">Deterministic Clinical Rule Attribution</h4>
                 <p className="ayur-panel-desc">
-                  Game-theoretic feature attributions quantifying each clinical finding's push toward the predicted constitutional state.
+                  Questionnaire factor attributions quantifying each clinical finding's point allocation toward the predicted constitutional state.
                 </p>
               </div>
               <div className="ayur-shap-legend">
@@ -129,14 +129,14 @@ export const DoctorAIExplainability = ({
 
             <div className="ayur-shap-chart">
               {shapExplanations.map((item, idx) => {
-                const isPos = item.contribution >= 0;
-                const absVal = Math.min(Math.abs(item.contribution), 1);
+                const isPos = (item.contribution || item.importance || 0) >= 0;
+                const absVal = Math.min(Math.abs(item.contribution || item.importance || 0.1), 1);
                 const barWidth = Math.round(absVal * 100);
 
                 return (
                   <div key={idx} className="ayur-shap-row">
-                    <div className="ayur-shap-label" title={item.feature}>
-                      {item.feature}
+                    <div className="ayur-shap-label" title={item.feature || item.name}>
+                      {item.feature || item.name}
                     </div>
 
                     <div className="ayur-shap-bar-track">
@@ -146,7 +146,7 @@ export const DoctorAIExplainability = ({
                         style={{ width: `${barWidth}%` }}
                       >
                         <span className="ayur-shap-bar-text">
-                          {isPos ? `+${item.contribution.toFixed(2)}` : item.contribution.toFixed(2)}
+                          {isPos ? `+${(item.contribution || item.importance || 0).toFixed(2)}` : (item.contribution || item.importance || 0).toFixed(2)}
                         </span>
                       </div>
                     </div>
@@ -157,14 +157,14 @@ export const DoctorAIExplainability = ({
           </div>
         )}
 
-        {/* LIME VISUALIZATION */}
+        {/* DECISION RULES VISUALIZATION */}
         {activeTab === 'lime' && (
           <div className="ayur-lime-container">
             <div className="ayur-panel-intro">
               <div>
-                <h4 className="ayur-panel-title">LIME (Local Interpretable Model-agnostic Explanations)</h4>
+                <h4 className="ayur-panel-title">Questionnaire Decision Rules</h4>
                 <p className="ayur-panel-desc">
-                  Perturbation-based local surrogate model explaining why the classifier arrived at this specific patient's assessment.
+                  Deterministic local rule deductions explaining why the scoring matrix arrived at this specific patient's assessment.
                 </p>
               </div>
             </div>

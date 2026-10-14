@@ -164,25 +164,25 @@ def retrieve_relevant_knowledge(
 
         if matched:
             results.append({
+                'id': entry['id'],
+                'referenceId': entry['id'],
                 'source': entry['source'],
                 'title': f"{entry['compendium']} ({entry['section']})",
                 'section_chapter': f"{entry['chapter']}, {entry['sloka']}",
+                'classicalVerse': entry['text'],
                 'retrieved_text': entry['text'],
+                'insight': entry['translation'],
                 'translation': entry['translation'],
+                'passage': entry['translation'],
+                'domain': entry['tags'][0].replace('_', ' ').title() if entry.get('tags') else 'Clinical Ahara & Vihara',
                 'relevance_score': round(min(relevance, 0.99), 3),
                 'verified_classical_compendium': True
             })
 
     if not results:
-        # Explicit status when no authentic matching reference is available in vector space
-        return [{
-            'source': 'AyuRAG Clinical Knowledge Base',
-            'title': 'Classical Retrieval Status',
-            'section_chapter': 'N/A',
-            'retrieved_text': 'Specific classical shloka retrieval unavailable for current parameter combination. Standard classical principles applied.',
-            'relevance_score': 0.0,
-            'verified_classical_compendium': False
-        }]
+        # Return empty list when no authentic matching reference is available in vector space
+        return []
 
     # Return top 3 most relevant classical citations
     return sorted(results, key=lambda x: x['relevance_score'], reverse=True)[:3]
+

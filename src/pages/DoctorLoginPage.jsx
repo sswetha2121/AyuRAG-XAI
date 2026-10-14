@@ -13,6 +13,7 @@ import {
   EyeOff
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
+import { FormField } from '../components/ui/FormField';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const DoctorLoginPage = ({ onTriggerToast }) => {
@@ -29,7 +30,7 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
     setErrorMessage('');
 
     if (!username.trim() || !password) {
-      setErrorMessage('Please enter both physician username and password.');
+      setErrorMessage('Please enter your physician username and password.');
       return;
     }
 
@@ -37,29 +38,12 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
       const user = await doctorLogin(username.trim(), password);
       onTriggerToast?.({
         type: 'success',
-        title: 'Doctor Signed In',
+        title: 'Doctor Authorized',
         message: `Welcome, ${user.name || 'Doctor'}. Clinical workspace unlocked.`,
       });
       navigate('/doctor/dashboard');
     } catch (err) {
-      setErrorMessage(err.message || 'Invalid physician credentials or unauthorized account.');
-    }
-  };
-
-  const handleDoctorQuickSelect = async (doctorUsername) => {
-    setErrorMessage('');
-    setUsername(doctorUsername);
-    setPassword('doctor123');
-    try {
-      const user = await doctorLogin(doctorUsername, 'doctor123');
-      onTriggerToast?.({
-        type: 'success',
-        title: 'Doctor Authorized',
-        message: `Welcome, ${user.name || doctorUsername}. Clinical dashboard opened.`,
-      });
-      navigate('/doctor/dashboard');
-    } catch (err) {
-      setErrorMessage(err.message || 'Quick login failed.');
+      setErrorMessage(err.message || 'Invalid physician credentials or unauthorized clinical account.');
     }
   };
 
@@ -70,7 +54,7 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
         <div className="ayur-dlogin-top-bar">
           <Link to="/" className="ayur-dlogin-back-link" title="Return to Home">
             <ArrowLeft size={16} />
-            <span>Back to Home</span>
+            <span>Home</span>
           </Link>
           <span className="ayur-dlogin-tag">DOCTOR PORTAL</span>
         </div>
@@ -80,9 +64,9 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
           <div className="ayur-dlogin-emblem">
             <Stethoscope size={28} className="text-secondary" />
           </div>
-          <h1 className="ayur-dlogin-title">Doctor Portal Login</h1>
+          <h1 className="ayur-dlogin-title">Doctor Workspace Login</h1>
           <p className="ayur-dlogin-subtitle">
-            Secure clinical workspace for patient verification and diet plan approval
+            Secure clinical decision support portal for patient evaluation, symptom verification, and diet plan approval.
           </p>
         </div>
 
@@ -94,47 +78,43 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
           </div>
         )}
 
-        {/* Doctor Login Form with Perfectly Aligned Fields */}
+        {/* Doctor Login Form */}
         <form onSubmit={handleDoctorSubmit} className="ayur-dlogin-form" noValidate>
-          {/* Username Field */}
-          <div className="ayur-dlogin-field">
-            <label htmlFor="doctor-username" className="ayur-dlogin-label">
-              Doctor Username or Email
-            </label>
+          <FormField label="Physician Username or Email" htmlFor="doctor-username" required>
             <div className="ayur-dlogin-input-wrap">
               <span className="ayur-dlogin-input-icon">
-                <User size={18} />
+                <User size={17} />
               </span>
               <input
                 id="doctor-username"
                 type="text"
                 className="ayur-dlogin-input"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  if (errorMessage) setErrorMessage('');
+                }}
                 placeholder="e.g. dr.sharma"
                 autoComplete="username"
                 required
               />
             </div>
-          </div>
+          </FormField>
 
-          {/* Password Field with Show/Hide Toggle */}
-          <div className="ayur-dlogin-field">
-            <div className="ayur-dlogin-label-row">
-              <label htmlFor="doctor-password" className="ayur-dlogin-label">
-                Doctor Password
-              </label>
-            </div>
+          <FormField label="Physician Password" htmlFor="doctor-password" required>
             <div className="ayur-dlogin-input-wrap">
               <span className="ayur-dlogin-input-icon">
-                <Lock size={18} />
+                <Lock size={17} />
               </span>
               <input
                 id="doctor-password"
                 type={showPassword ? 'text' : 'password'}
                 className="ayur-dlogin-input ayur-dlogin-input--has-toggle"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  if (errorMessage) setErrorMessage('');
+                }}
                 placeholder="••••••••"
                 autoComplete="current-password"
                 required
@@ -146,46 +126,29 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
                 title={showPassword ? 'Hide password' : 'Show password'}
               >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
             </div>
-          </div>
+          </FormField>
 
-          {/* Submit Button */}
           <Button
             variant="primary"
+            size="md"
             type="submit"
-            className="w-full ayur-dlogin-submit-btn"
-            loading={isLoading}
+            fullWidth
+            isLoading={isLoading}
             rightIcon={<ArrowRight size={16} />}
+            className="ayur-dlogin-submit-btn"
           >
-            Sign In to Doctor Dashboard
+            Sign In to Doctor Workspace
           </Button>
         </form>
-
-        {/* Demo Quick Access */}
-        <div className="ayur-dlogin-quick-section">
-          <span className="ayur-dquick-label">Sample Doctor Profile (Click to Fill & Sign In):</span>
-          <button
-            type="button"
-            className="ayur-dquick-btn"
-            onClick={() => handleDoctorQuickSelect('dr.sharma')}
-            disabled={isLoading}
-          >
-            <div className="ayur-dquick-avatar">DR</div>
-            <div className="ayur-dquick-info">
-              <strong>Dr. Sharma, MD</strong>
-              <span>Clinical Medicine & Personalized Diet Specialist</span>
-            </div>
-            <span className="ayur-dquick-badge">Sign In →</span>
-          </button>
-        </div>
 
         {/* Patient Redirection */}
         <div className="ayur-dlogin-patient-link">
           <span>Are you a patient?</span>
           <Link to="/login" className="ayur-dlink">
-            Go to Patient Login / Sign Up →
+            Go to Patient Sign In →
           </Link>
         </div>
 
@@ -193,11 +156,10 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
         <div className="ayur-dlogin-footer">
           <ShieldCheck size={14} className="text-secondary shrink-0" />
           <span>
-            Authorized doctor access only. All patient evaluations and approved diet plans are securely logged.
+            Authorized physician credentials required. All clinical reviews, symptom verifications, and approved regimens are audit-logged.
           </span>
         </div>
       </div>
     </div>
   );
 };
-

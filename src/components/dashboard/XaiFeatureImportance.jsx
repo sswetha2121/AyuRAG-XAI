@@ -17,10 +17,10 @@ export const XaiFeatureImportance = ({
                 Explainable AI (XAI)
               </Badge>
               <Badge color="primary" variant="subtle" size="sm">
-                SHAP / Feature Attribution
+                Rule-Based Attribution
               </Badge>
             </div>
-            <span className="ayur-demo-badge">Demonstration explanation signal</span>
+            <span className="ayur-demo-badge">Clinical Rule Scoring</span>
           </div>
 
           <CardTitle as="h2" className="ayur-xai-title">
@@ -28,23 +28,24 @@ export const XaiFeatureImportance = ({
           </CardTitle>
 
           <CardDescription className="ayur-xai-desc">
-            Explainable AI factors highlighting how specific lifestyle, dietary, and constitutional inputs contributed to your personalized model predictions.
+            Multi-domain clinical scoring factors detailing how your specific physiological, dietary, and lifestyle responses contributed to your constitutional evaluation.
           </CardDescription>
         </CardHeader>
 
         <CardContent>
           <div className="ayur-xai-features-list">
-            {features.map((feat) => {
+            {features.map((feat, idx) => {
               const isPositive = feat.direction === 'positive';
+              const featKey = feat.id || `feat-${idx}`;
 
               return (
-                <div key={feat.id} className="ayur-xai-feature-row">
+                <div key={featKey} className="ayur-xai-feature-row">
                   <div className="ayur-xai-feat-header">
                     <div className="flex items-center gap-xs flex-wrap">
-                      <span className="ayur-xai-feat-name">{feat.name}</span>
-                      <span className="ayur-xai-feat-cat">{feat.category}</span>
-                      <span className={`ayur-xai-impact-badge ayur-xai-impact-badge--${feat.impact.toLowerCase()}`}>
-                        {feat.impact} Impact
+                      <span className="ayur-xai-feat-name">{feat.name || feat.feature}</span>
+                      <span className="ayur-xai-feat-cat">{feat.category || feat.domain}</span>
+                      <span className={`ayur-xai-impact-badge ayur-xai-impact-badge--${(feat.impact || 'medium').toLowerCase()}`}>
+                        {feat.impact || 'Rule'} Impact
                       </span>
                     </div>
 
@@ -62,7 +63,7 @@ export const XaiFeatureImportance = ({
 
                   <div className="ayur-xai-bar-wrap">
                     <ProgressBar
-                      value={feat.contributionPct * 3.5}
+                      value={Math.min(100, (feat.contributionPct || 20) * 3)}
                       color={isPositive ? 'accent' : 'secondary'}
                       size="sm"
                       showValue={false}
@@ -79,10 +80,10 @@ export const XaiFeatureImportance = ({
           <div className="ayur-xai-note">
             <div className="flex items-center gap-xs text-secondary font-semibold text-small mb-2xs">
               <ShieldCheck size={16} />
-              <span>XAI Mathematical Interpretability Rationale</span>
+              <span>Deterministic Clinical Scoring Rationale</span>
             </div>
             <p className="text-small text-muted mb-0">
-              Feature attributions mirror cooperative game-theoretic Shapley values (SHAP) and Local Interpretable Model-agnostic Explanations (LIME). This ensures clinical transparency, eliminating black-box AI opacity in healthcare decision support.
+              Feature contributions are calculated deterministically from validated Ayurvedic diagnostic weighting matrices (CCRAS-aligned). Each finding's impact reflects its point allocation to your constitutional baseline.
             </p>
           </div>
         </CardContent>

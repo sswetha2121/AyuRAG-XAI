@@ -4,60 +4,49 @@ import { useAuth } from '../context/AuthContext';
 import {
   User,
   Lock,
-  Mail,
   ArrowRight,
   ArrowLeft,
   ShieldCheck,
   Stethoscope,
-  Phone,
-  MapPin,
-  Calendar,
-  CheckCircle2,
-  Sparkles,
-  Users,
   Eye,
-  EyeOff
+  EyeOff,
+  AlertCircle
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
+import { FormField } from '../components/ui/FormField';
 import { Link, useNavigate } from 'react-router-dom';
 
-export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToast }) => {
-  const { login, register, switchDemoPersona, isLoading } = useAuth();
+export const LoginPage = ({ onLoginSuccess, onTriggerToast }) => {
+  const { login, isLoading } = useAuth();
   const navigate = useNavigate();
 
-  // Mode: 'signin' or 'signup'
-  const [authMode, setAuthMode] = useState(initialMode);
-  const [showPassword, setShowPassword] = useState(false);
-
-  // Sign In Fields (No hardcoded default prefill)
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
-  // Sign Up Fields
-  const [signUpForm, setSignUpForm] = useState({
-    fullName: '',
-    email: '',
-    username: '',
-    password: '',
-    confirmPassword: '',
-    age: '',
-    gender: 'Female',
-    contactPhone: '',
-    location: '',
-  });
-
+  const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSignInSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
+
+    if (!username.trim()) {
+      setErrorMessage('Please enter your username or email address.');
+      return;
+    }
+
+    if (!password) {
+      setErrorMessage('Please enter your password.');
+      return;
+    }
+
     try {
-      const user = await login(username, password);
+      const user = await login(username.trim(), password);
       onTriggerToast?.({
         type: 'success',
-        title: 'Authenticated',
+        title: 'Signed In',
         message: `Welcome back, ${user.name || user.username}.`,
       });
+
       if (user.role === 'DOCTOR') {
         navigate('/doctor/dashboard');
       } else {
@@ -65,87 +54,32 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
         navigate('/dashboard');
       }
     } catch (err) {
-      setErrorMessage(err.message || 'Invalid username or password.');
-    }
-  };
-
-  const handleSignUpSubmit = async (e) => {
-    e.preventDefault();
-    setErrorMessage('');
-
-    if (signUpForm.password !== signUpForm.confirmPassword) {
-      setErrorMessage('Passwords do not match. Please re-enter.');
-      return;
-    }
-
-    if (signUpForm.password.length < 4) {
-      setErrorMessage('Password must be at least 4 characters long.');
-      return;
-    }
-
-    try {
-      const user = await register({
-        fullName: signUpForm.fullName,
-        email: signUpForm.email,
-        username: signUpForm.username || signUpForm.email.split('@')[0],
-        password: signUpForm.password,
-        age: signUpForm.age,
-        gender: signUpForm.gender,
-        contactPhone: signUpForm.contactPhone,
-        location: signUpForm.location,
-      });
-
-      onTriggerToast?.({
-        type: 'success',
-        title: 'Account Created',
-        message: `Welcome to AyuRAG-XAI, ${user.name || user.username}!`,
-      });
-
-      onLoginSuccess?.(user);
-      navigate('/assessment-overview');
-    } catch (err) {
-      setErrorMessage(err.message || 'Registration failed. Please check your details.');
-    }
-  };
-
-  const handleQuickDemo = async (role) => {
-    setErrorMessage('');
-    try {
-      const user = await switchDemoPersona(role);
-      onTriggerToast?.({
-        type: 'info',
-        title: `${role} Session Active`,
-        message: `Logged in as demo ${role.toLowerCase()}: ${user.name}.`,
-      });
-      if (role === 'DOCTOR') {
-        navigate('/doctor/dashboard');
-      } else {
-        onLoginSuccess?.(user);
-        navigate('/dashboard');
-      }
-    } catch (err) {
-      setErrorMessage(err.message || `Failed to switch to ${role} demo.`);
+      setErrorMessage(err.message || 'Invalid username or password. Please verify your credentials.');
     }
   };
 
   return (
-    <div className="ayur-login-page">
-      <div className={`ayur-login-card ${authMode === 'signup' ? 'ayur-login-card--wide' : ''}`}>
-        {/* Top Back Arrow Navigation */}
-        <Link to="/" className="ayur-card-back-arrow" aria-label="Back to Landing Page" title="Back">
-          <ArrowLeft size={18} />
-        </Link>
+    <div className="ayur-auth-page">
+      <div className="ayur-auth-card">
+        {/* Back Link */}
+        <div className="ayur-auth-top-bar">
+          <Link to="/" className="ayur-auth-back-link" title="Return to Home">
+            <ArrowLeft size={16} />
+            <span>Home</span>
+          </Link>
+          <span className="ayur-auth-tag">PATIENT PORTAL</span>
+        </div>
 
-        {/* Brand Header with Clean Logo & Heading Separation */}
-        <div className="ayur-login-brand">
-          <div className="ayur-login-emblem">
+        {/* Brand Header */}
+        <div className="ayur-auth-header">
+          <div className="ayur-auth-emblem">
             <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="36" height="36" rx="9" fill="#16382C" />
               <rect x="1.5" y="1.5" width="33" height="33" rx="7.5" stroke="#C5A059" strokeOpacity="0.45" />
               <path
                 d="M18 6C13 9 9 14.5 9 21C9 25.5 12.5 29 18 29C23.5 29 27 25.5 27 21C27 14.5 23 9 18 6Z"
                 fill="#5B8266"
-                fillOpacity="0.4"
+                fillOpacity="0.45"
               />
               <path d="M18 9V26" stroke="#C5A059" strokeWidth="1.6" strokeLinecap="round" />
               <circle cx="14" cy="16" r="1.5" fill="#C5A059" />
@@ -154,359 +88,112 @@ export const LoginPage = ({ initialMode = 'signin', onLoginSuccess, onTriggerToa
             </svg>
           </div>
 
-          <div className="ayur-login-brand-chip">
-            <span>AyuRAG<span className="text-accent">XAI</span></span>
-          </div>
-
-          <h1 className="ayur-login-title">
-            {authMode === 'signin' ? 'Sign In' : 'Create Account'}
-          </h1>
-
-          <p className="ayur-login-tagline">
-            {authMode === 'signin'
-              ? 'Patient Assessment & Clinical Gateway'
-              : 'New Patient Intake Registration'}
+          <h1 className="ayur-auth-title">Patient Sign In</h1>
+          <p className="ayur-auth-subtitle">
+            Access your personalized meal timetable, wellness recommendations, and progress records.
           </p>
         </div>
 
-        {/* Tab Toggle between Sign In and Sign Up */}
-        <div className="ayur-auth-mode-tabs">
-          <button
-            type="button"
-            className={`ayur-amode-tab ${authMode === 'signin' ? 'ayur-amode-tab--active' : ''}`}
-            onClick={() => { setAuthMode('signin'); setErrorMessage(''); }}
-          >
-            Sign In
-          </button>
-          <button
-            type="button"
-            className={`ayur-amode-tab ${authMode === 'signup' ? 'ayur-amode-tab--active' : ''}`}
-            onClick={() => { setAuthMode('signup'); setErrorMessage(''); }}
-          >
-            Create Account (Sign Up)
-          </button>
-        </div>
-
+        {/* Error Alert */}
         {errorMessage && (
-          <div className="ayur-login-error">
+          <div className="ayur-auth-error-alert" role="alert">
+            <AlertCircle size={17} className="shrink-0 text-error" />
             <span>{errorMessage}</span>
           </div>
         )}
 
-        {/* MODE 1: SIGN IN FORM */}
-        {authMode === 'signin' && (
-          <form onSubmit={handleSignInSubmit} className="ayur-login-form">
-            <div className="ayur-form-group">
-              <label className="ayur-label">Username or Registered Email</label>
-              <div className="ayur-input-icon-box">
-                <User size={16} className="ayur-input-icon" />
-                <input
-                  type="text"
-                  className="ayur-input ayur-input--icon"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Enter your username or email"
-                  required
-                />
-              </div>
+        {/* Sign In Form */}
+        <form onSubmit={handleSubmit} className="ayur-auth-form" noValidate>
+          <FormField label="Username or Email" htmlFor="auth-username" required>
+            <div className="ayur-input-wrap">
+              <span className="ayur-input-icon">
+                <User size={17} />
+              </span>
+              <input
+                id="auth-username"
+                type="text"
+                className="ayur-input ayur-input--has-icon"
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  if (errorMessage) setErrorMessage('');
+                }}
+                placeholder="Enter username or email"
+                autoComplete="username"
+                required
+              />
             </div>
+          </FormField>
 
-            <div className="ayur-form-group">
-              <label className="ayur-label">Password</label>
-              <div className="ayur-input-icon-box" style={{ position: 'relative' }}>
-                <Lock size={16} className="ayur-input-icon" />
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  className="ayur-input ayur-input--icon"
-                  style={{ paddingRight: '40px' }}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
-                  style={{
-                    position: 'absolute',
-                    right: '12px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    background: 'none',
-                    border: 'none',
-                    color: '#5B8266',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    padding: 0
-                  }}
-                >
-                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                </button>
-              </div>
+          <FormField label="Password" htmlFor="auth-password" required>
+            <div className="ayur-input-wrap">
+              <span className="ayur-input-icon">
+                <Lock size={17} />
+              </span>
+              <input
+                id="auth-password"
+                type={showPassword ? 'text' : 'password'}
+                className="ayur-input ayur-input--has-icon ayur-input--has-action"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  if (errorMessage) setErrorMessage('');
+                }}
+                placeholder="••••••••"
+                autoComplete="current-password"
+                required
+              />
+              <button
+                type="button"
+                className="ayur-input-action-btn"
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                title={showPassword ? 'Hide password' : 'Show password'}
+              >
+                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+              </button>
             </div>
+          </FormField>
 
-            <Button
-              variant="primary"
-              type="submit"
-              className="w-full mt-xs ayur-login-submit-btn"
-              isLoading={isLoading}
-              rightIcon={<ArrowRight size={16} />}
-            >
-              Sign In to Patient Portal
-            </Button>
-          </form>
-        )}
+          <Button
+            variant="primary"
+            size="md"
+            type="submit"
+            fullWidth
+            isLoading={isLoading}
+            rightIcon={<ArrowRight size={16} />}
+            className="mt-xs"
+          >
+            Sign In to Patient Portal
+          </Button>
+        </form>
 
-        {/* MODE 2: SIGN UP FORM WITH ALL INTAKE FIELDS */}
-        {authMode === 'signup' && (
-          <form onSubmit={handleSignUpSubmit} className="ayur-login-form">
-            <div className="ayur-form-row-2">
-              <div className="ayur-form-group">
-                <label className="ayur-label">Full Name *</label>
-                <div className="ayur-input-icon-box">
-                  <User size={16} className="ayur-input-icon" />
-                  <input
-                    type="text"
-                    className="ayur-input ayur-input--icon"
-                    value={signUpForm.fullName}
-                    onChange={(e) => setSignUpForm({ ...signUpForm, fullName: e.target.value })}
-                    placeholder="Enter your full name"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="ayur-form-group">
-                <label className="ayur-label">Email Address *</label>
-                <div className="ayur-input-icon-box">
-                  <Mail size={16} className="ayur-input-icon" />
-                  <input
-                    type="email"
-                    className="ayur-input ayur-input--icon"
-                    value={signUpForm.email}
-                    onChange={(e) => setSignUpForm({ ...signUpForm, email: e.target.value })}
-                    placeholder="name@example.com"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="ayur-form-row-2">
-              <div className="ayur-form-group">
-                <label className="ayur-label">Preferred Username (Optional)</label>
-                <div className="ayur-input-icon-box">
-                  <User size={16} className="ayur-input-icon" />
-                  <input
-                    type="text"
-                    className="ayur-input ayur-input--icon"
-                    value={signUpForm.username}
-                    onChange={(e) => setSignUpForm({ ...signUpForm, username: e.target.value })}
-                    placeholder="Choose a username"
-                  />
-                </div>
-              </div>
-
-              <div className="ayur-form-group">
-                <label className="ayur-label">Contact Phone</label>
-                <div className="ayur-input-icon-box">
-                  <Phone size={16} className="ayur-input-icon" />
-                  <input
-                    type="tel"
-                    className="ayur-input ayur-input--icon"
-                    value={signUpForm.contactPhone}
-                    onChange={(e) => setSignUpForm({ ...signUpForm, contactPhone: e.target.value })}
-                    placeholder="+91 98765 43210"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="ayur-form-row-3">
-              <div className="ayur-form-group">
-                <label className="ayur-label">Age (Years) *</label>
-                <div className="ayur-input-icon-box">
-                  <Calendar size={16} className="ayur-input-icon" />
-                  <input
-                    type="number"
-                    className="ayur-input ayur-input--icon"
-                    min="1"
-                    max="120"
-                    value={signUpForm.age}
-                    onChange={(e) => setSignUpForm({ ...signUpForm, age: e.target.value })}
-                    placeholder="28"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="ayur-form-group">
-                <label className="ayur-label">Gender *</label>
-                <div className="ayur-input-icon-box">
-                  <Users size={16} className="ayur-input-icon" />
-                  <select
-                    className="ayur-input ayur-input--icon ayur-select"
-                    value={signUpForm.gender}
-                    onChange={(e) => setSignUpForm({ ...signUpForm, gender: e.target.value })}
-                  >
-                    <option value="Female">Female</option>
-                    <option value="Male">Male</option>
-                    <option value="Other">Other</option>
-                    <option value="Prefer not to say">Prefer not to say</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="ayur-form-group">
-                <label className="ayur-label">City / Location</label>
-                <div className="ayur-input-icon-box">
-                  <MapPin size={16} className="ayur-input-icon" />
-                  <input
-                    type="text"
-                    className="ayur-input ayur-input--icon"
-                    value={signUpForm.location}
-                    onChange={(e) => setSignUpForm({ ...signUpForm, location: e.target.value })}
-                    placeholder="Bangalore, India"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="ayur-form-row-2">
-              <div className="ayur-form-group">
-                <label className="ayur-label">Password * (Min 4 chars)</label>
-                <div className="ayur-input-icon-box" style={{ position: 'relative' }}>
-                  <Lock size={16} className="ayur-input-icon" />
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    className="ayur-input ayur-input--icon"
-                    style={{ paddingRight: '40px' }}
-                    value={signUpForm.password}
-                    onChange={(e) => setSignUpForm({ ...signUpForm, password: e.target.value })}
-                    placeholder="••••••••"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    aria-label={showPassword ? 'Hide password' : 'Show password'}
-                    style={{
-                      position: 'absolute',
-                      right: '12px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'none',
-                      border: 'none',
-                      color: '#5B8266',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      padding: 0
-                    }}
-                  >
-                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                  </button>
-                </div>
-              </div>
-
-              <div className="ayur-form-group">
-                <label className="ayur-label">Confirm Password *</label>
-                <div className="ayur-input-icon-box" style={{ position: 'relative' }}>
-                  <Lock size={16} className="ayur-input-icon" />
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    className="ayur-input ayur-input--icon"
-                    style={{ paddingRight: '40px' }}
-                    value={signUpForm.confirmPassword}
-                    onChange={(e) => setSignUpForm({ ...signUpForm, confirmPassword: e.target.value })}
-                    placeholder="••••••••"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    aria-label={showPassword ? 'Hide password' : 'Show password'}
-                    style={{
-                      position: 'absolute',
-                      right: '12px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'none',
-                      border: 'none',
-                      color: '#5B8266',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      padding: 0
-                    }}
-                  >
-                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <Button
-              variant="primary"
-              type="submit"
-              className="w-full mt-xs ayur-login-submit-btn"
-              isLoading={isLoading}
-              rightIcon={<ArrowRight size={16} />}
-            >
-              Register & Start Intake Assessment
-            </Button>
-          </form>
-        )}
-
-        {/* Dedicated Link to Doctor Portal */}
-        <div className="ayur-doctor-portal-callout">
-          <div className="ayur-doc-callout-content">
-            <Stethoscope size={18} className="text-secondary shrink-0" />
-            <div className="ayur-doc-callout-text">
-              <span className="font-semibold text-xs text-primary">Are you a Licensed Medical Doctor?</span>
-              <span className="text-xs text-muted">Access the clinical review workspace & diet plan console</span>
-            </div>
-          </div>
-          <Link to="/doctor-login" className="ayur-doc-link-btn">
-            Doctor Portal Login →
+        {/* Registration Redirection */}
+        <div className="ayur-auth-switch">
+          <span>New to AyuRAG-XAI?</span>
+          <Link to="/signup" className="ayur-auth-switch-link">
+            Create an Account →
           </Link>
         </div>
 
-        {/* Quick Demo Login Option */}
-        <div className="ayur-demo-personas">
-          <span className="ayur-demo-label">Quick Patient Testing Access:</span>
-          <button
-            type="button"
-            className="ayur-demo-btn ayur-demo-btn--patient"
-            onClick={() => handleQuickDemo('PATIENT')}
-            disabled={isLoading}
-          >
-            <div className="ayur-demo-btn__icon">
-              <User size={16} />
-            </div>
-            <div className="ayur-demo-btn__text">
-              <strong>Login as Patient</strong>
-              <span>Verified Patient Persona (Constitutional Intake)</span>
-            </div>
-          </button>
+        {/* Doctor Portal Callout */}
+        <div className="ayur-auth-doc-box">
+          <Stethoscope size={18} className="text-secondary shrink-0" />
+          <div className="flex-1 text-left">
+            <span className="font-semibold text-xs text-primary block">Are you a Medical Doctor?</span>
+            <span className="text-xs text-muted block">Access the clinical review workspace</span>
+          </div>
+          <Link to="/doctor-login" className="ayur-auth-doc-link">
+            Doctor Login →
+          </Link>
         </div>
 
-        {/* Security Notice & Clean Back Arrow Navigation */}
-        <div className="ayur-login-footer">
-          <div className="flex items-center gap-xs justify-center mb-xs">
-            <ShieldCheck size={14} className="text-secondary shrink-0" />
-            <span>Clinical data secured with patient isolation & Django authorization.</span>
-          </div>
-          <div className="ayur-auth-back-row">
-            <Link to="/" className="ayur-auth-back-btn" aria-label="Back to Landing Page" title="Back to Landing Page">
-              <ArrowLeft size={18} />
-            </Link>
-          </div>
+        {/* Security Footer */}
+        <div className="ayur-auth-footer">
+          <ShieldCheck size={14} className="text-secondary shrink-0" />
+          <span>Patient data is isolated and protected under role-based authorization.</span>
         </div>
       </div>
     </div>
   );
 };
-

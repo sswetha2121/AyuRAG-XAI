@@ -25,6 +25,7 @@ import { DoctorPatientProfilePage } from './pages/DoctorPatientProfilePage';
 import { DoctorReviewsPage } from './pages/DoctorReviewsPage';
 import { DoctorReportsPage } from './pages/DoctorReportsPage';
 import { LoginPage } from './pages/LoginPage';
+import { RegisterPage } from './pages/RegisterPage';
 import { DoctorLoginPage } from './pages/DoctorLoginPage';
 import { LandingPage } from './pages/LandingPage';
 import { AssessmentOverviewPage } from './pages/AssessmentOverviewPage';
@@ -72,9 +73,6 @@ function DoctorWorkspaceShell({ onTriggerToast, toasts, removeToast }) {
     if (path.startsWith('/doctor/patients')) return 'doctor-patients';
     if (path.startsWith('/doctor/reviews')) return 'doctor-reviews';
     if (path.startsWith('/doctor/reports')) return 'doctor-reports';
-    if (path.startsWith('/doctor/ai-analysis')) return 'doctor-ai-analysis';
-    if (path.startsWith('/doctor/recommendations')) return 'doctor-recommendations';
-    if (path.startsWith('/doctor/knowledge-base')) return 'doctor-knowledge-base';
     return 'doctor-dashboard';
   };
 
@@ -122,9 +120,6 @@ function DoctorWorkspaceShell({ onTriggerToast, toasts, removeToast }) {
         navigate('/doctor/dashboard');
         break;
       case 'doctor-patients':
-      case 'all-patients':
-      case 'active-assessments':
-      case 'completed-assessments':
         navigate('/doctor/patients');
         break;
       case 'doctor-reviews':
@@ -133,24 +128,15 @@ function DoctorWorkspaceShell({ onTriggerToast, toasts, removeToast }) {
       case 'doctor-reports':
         navigate('/doctor/reports');
         break;
-      case 'doctor-ai-analysis':
-      case 'ai-ml-analysis':
-      case 'ai-shap':
-      case 'ai-lime':
-      case 'ai-rag-evidence':
-        navigate('/doctor/patients');
-        break;
-      case 'doctor-recommendations':
-      case 'doctor-knowledge-base':
-        navigate('/doctor/reports');
-        break;
       case 'doctor-profile':
-      case 'doctor-settings':
         onTriggerToast?.({
           type: 'info',
           title: 'Physician Profile',
           message: `${user?.name || 'Attending Physician'} • Ayurvedic Clinical Lead`,
         });
+        break;
+      case 'logout':
+        handleLogout();
         break;
       default:
         navigate('/doctor/dashboard');
@@ -268,6 +254,7 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
   } = useAssessment();
 
   const [isGeneratingAnalysis, setIsGeneratingAnalysis] = useState(false);
+  const [dashboardTab, setDashboardTab] = useState('overview');
 
   React.useEffect(() => {
     if (initialStep) {
@@ -346,6 +333,34 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
       ? Math.round((completedSteps.length / 6) * 100)
       : 16;
 
+  const handleSelectPatientStep = (stepId, tab) => {
+    if (['dashboard-overview', 'overview'].includes(stepId)) {
+      setCurrentStep('dashboard');
+      setDashboardTab(tab || 'overview');
+      navigate('/dashboard');
+    } else if (['wellness-plan'].includes(stepId)) {
+      setCurrentStep('dashboard');
+      setDashboardTab(tab || 'schedule');
+      navigate('/dashboard');
+    } else if (['progress'].includes(stepId)) {
+      setCurrentStep('dashboard');
+      setDashboardTab(tab || 'progress');
+      navigate('/dashboard');
+    } else if (stepId === 'my-assessment') {
+      navigate('/assessment-overview');
+    } else if (stepId === 'patient-profile') {
+      onTriggerToast?.({
+        type: 'info',
+        title: 'Patient Profile',
+        message: `${user?.name || personalInfo?.fullName || 'Patient'} • Active Intake Profile`,
+      });
+    } else if (stepId === 'logout') {
+      handleLogout();
+    } else {
+      setCurrentStep(stepId);
+    }
+  };
+
   const handleStartAnalysisGeneration = async () => {
     setIsGeneratingAnalysis(true);
     try {
@@ -390,12 +405,23 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
           }
           onTriggerToast?.({
             type: 'success',
-            title: 'Assessment Synchronized',
-            message: 'Personalized constitutional profile and explainable AI insights recorded.',
+            title: 'Assessment Recorded',
+            message: 'Your constitutional profile has been saved to your clinical chart and queued for physician review.',
           });
         } catch (submitErr) {
-          console.warn('Patient assessment submission sync warning:', submitErr);
+          console.error('Patient assessment submission sync error:', submitErr);
+          onTriggerToast?.({
+            type: 'warning',
+            title: 'Assessment Synchronization Pending',
+            message: submitErr.message || 'Analysis preview generated, but saving to patient chart failed. You can retry from your dashboard.',
+          });
         }
+      } else {
+        onTriggerToast?.({
+          type: 'info',
+          title: 'Guest Preview Mode',
+          message: 'Analysis generated as a preview. Please Sign In or Register to permanently link this assessment to your patient medical chart.',
+        });
       }
 
       setTimeout(() => {
@@ -430,7 +456,7 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
     <AppShell
       mode="patient"
       activeStep={currentStep}
-      onSelectStep={setCurrentStep}
+      onSelectStep={handleSelectPatientStep}
       headerTitle={title}
       headerSubtitle={subtitle}
       breadcrumbs={breadcrumbs}
@@ -467,19 +493,21 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
       />
 
       {/* Patient Assessment Top Navigation & Auth Status Bar */}
-      <div className="ayur-assessment-nav-bar flex items-center justify-between mb-md px-xs">
-        <Link to="/" className="ayur-assessment-back-btn" title="Back to Home" aria-label="Back to Home">
-          <ArrowLeft size={18} />
-        </Link>
-        {!user && (
-          <div className="flex items-center gap-sm text-xs text-muted">
-            <span>Want to link your assessment to a profile?</span>
-            <Link to="/login" className="text-secondary font-semibold hover:underline">
-              Sign In or Register →
-            </Link>
-          </div>
-        )}
-      </div>
+      {currentStep !== 'dashboard' && currentStep !== 'design-system' && (
+        <div className="ayur-assessment-nav-bar flex items-center justify-between mb-md px-xs">
+          <Link to="/" className="ayur-assessment-back-btn" title="Back to Home" aria-label="Back to Home">
+            <ArrowLeft size={18} />
+          </Link>
+          {!user && (
+            <div className="flex items-center gap-sm text-xs text-muted">
+              <span>Want to link your assessment to a profile?</span>
+              <Link to="/login" className="text-secondary font-semibold hover:underline">
+                Sign In or Register →
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
 
       {currentStep === 'design-system' ? (
         <DesignSystemPage onTriggerToast={onTriggerToast} />
@@ -548,6 +576,8 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
         />
       ) : currentStep === 'dashboard' ? (
         <DashboardPage
+          activeTab={dashboardTab}
+          onTabChange={setDashboardTab}
           onStartAssessment={() => setCurrentStep('personal-info')}
           onReevaluate={() => setCurrentStep('review')}
           onTriggerToast={onTriggerToast}
@@ -615,12 +645,11 @@ function MainApp() {
         element={<Navigate to="/assessment-overview" replace />}
       />
 
-      {/* 4. Patient Authentication */}
+      {/* 4. Patient Authentication - Separate dedicated Login and Register pages */}
       <Route
         path="/login"
         element={
           <LoginPage
-            initialMode="signin"
             onLoginSuccess={(user) => {
               if (user.role === 'DOCTOR') {
                 navigate('/doctor/dashboard');
@@ -635,8 +664,7 @@ function MainApp() {
       <Route
         path="/signup"
         element={
-          <LoginPage
-            initialMode="signup"
+          <RegisterPage
             onLoginSuccess={(user) => {
               if (user.role === 'DOCTOR') {
                 navigate('/doctor/dashboard');
@@ -649,7 +677,7 @@ function MainApp() {
         }
       />
 
-      {/* 4. Dedicated Doctor Clinical Portal Login */}
+      {/* 5. Dedicated Doctor Clinical Portal Login */}
       <Route
         path="/doctor-login"
         element={<DoctorLoginPage onTriggerToast={addToast} />}
@@ -659,7 +687,7 @@ function MainApp() {
         element={<DoctorLoginPage onTriggerToast={addToast} />}
       />
 
-      {/* 5. Protected Doctor Clinical Dashboard */}
+      {/* 6. Protected Doctor Clinical Dashboard */}
       <Route
         path="/doctor/*"
         element={

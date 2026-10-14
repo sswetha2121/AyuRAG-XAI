@@ -158,15 +158,21 @@ class AyuRagAiModelService:
             },
             'digestiveAgni': agni_result,
             'aiMetrics': {
-                'model_name': 'AyuRAG Clinical Multi-Task Classifier v2.1',
+                'model_name': 'AyuRAG Clinical Rule-Based Decision Support Engine v2.1',
                 'confidence': prakriti_result['confidence'],
                 'prediction': f"{prakriti_result['constitution_type']} Constitutional Balance",
-                'inference_engine': 'PyTorch / Scikit-XAI Heterogeneous Ensemble',
+                'inference_engine': 'Deterministic Ayurvedic Constitutional Scoring (CCRAS Aligned Rules)',
+                'methodology': 'Deterministic Multi-Domain Weighted Scoring',
+                'is_rule_based': True,
+                'explainability_method': 'Deterministic Rule Attribution Matrix',
+                'clinical_disclaimer': 'Algorithmic decision support tool based on classical Ayurvedic scoring heuristics. Not a certified medical diagnosis.',
                 'xai_verified': True,
                 'rag_verified': True,
             },
             'xaiFeatures': shap_explanations,
             'limeFeatures': lime_explanations,
+            'ruleAttributions': shap_explanations,
+            'decisionRules': lime_explanations,
             'evidenceCitations': rag_citations,
             'recommendations': recommendations,
             'dailyRoutineTimetable': timetable,
@@ -321,52 +327,122 @@ class AyuRagAiModelService:
         symptoms: Dict[str, Any]
     ) -> List[Dict[str, Any]]:
         """
-        Computes SHAP feature attribution scores linking patient characteristics to model prediction.
+        Computes dynamic rule-based feature attributions from the patient's actual questionnaire responses.
+        Calculates individual question point contributions and percentage impact on the dominant constitutional baseline.
         """
-        features = [
-            {
+        primary_dosha = (prakriti_res.get('primary_dosha') or 'Vata').lower()
+        secondary_dosha = (prakriti_res.get('secondary_dosha') or 'Pitta').lower()
+
+        question_domains = {
+            'prakriti_q1': ('Physical Build & Frame', 'Anatomy'),
+            'prakriti_q2': ('Skin Texture & Temperature', 'Thermoregulation'),
+            'prakriti_q3': ('Hair & Nail Characteristics', 'Tissue Health'),
+            'prakriti_q4': ('Appetite & Hunger Pattern', 'Metabolism'),
+            'prakriti_q5': ('Digestion & Elimination Comfort', 'Gastrointestinal'),
+            'prakriti_q6': ('Physical Energy & Stamina', 'Vitality'),
+            'prakriti_q7': ('Sleep Quality & Architecture', 'Circadian'),
+            'prakriti_q8': ('Climate & Weather Sensitivity', 'Environment'),
+            'prakriti_q9': ('Cognitive Grasp & Memory', 'Mental Faculty'),
+            'prakriti_q10': ('Stress & Emotional Adaptation', 'Psychological'),
+        }
+
+        features = []
+        feat_idx = 1
+
+        # 1. Evaluate answered constitutional questions
+        for q_key, (domain_title, category_name) in question_domains.items():
+            ans = prakriti_answers.get(q_key)
+            if ans and q_key in PRAKRITI_QUESTION_WEIGHTS and ans in PRAKRITI_QUESTION_WEIGHTS[q_key]:
+                weights = PRAKRITI_QUESTION_WEIGHTS[q_key][ans]
+                trait = weights['trait']
+                pts_primary = weights.get(primary_dosha, 0)
+                pts_competing = max([weights.get(d, 0) for d in ['vata', 'pitta', 'kapha'] if d != primary_dosha] or [0])
+
+                if pts_primary > 0:
+                    importance = round(pts_primary / 10.0, 2)
+                    contribution_pct = int(round(importance * 100))
+                    direction = 'positive'
+                    explanation = f"Your response '{trait}' awarded +{pts_primary} points directly elevating your primary {primary_dosha.capitalize()} baseline."
+                else:
+                    importance = round(pts_competing / 15.0, 2)
+                    contribution_pct = int(round(importance * 100))
+                    direction = 'negative'
+                    explanation = f"Your response '{trait}' contributed to secondary/balancing factors, moderating {primary_dosha.capitalize()} elevation."
+
+                features.append({
+                    'id': f'feat_{feat_idx}',
+                    'feature': domain_title,
+                    'name': domain_title,
+                    'domain': domain_title,
+                    'category': category_name,
+                    'trait': trait,
+                    'contribution': importance if direction == 'positive' else -importance,
+                    'contributionPct': max(5, contribution_pct),
+                    'importance': importance,
+                    'direction': direction,
+                    'impact': 'High' if importance >= 0.25 else ('Medium' if importance >= 0.15 else 'Low'),
+                    'rule_triggered': f"{q_key}: {trait}",
+                    'explanation': explanation,
+                })
+                feat_idx += 1
+
+        # 2. Evaluate active dietary habits
+        meal_regularity = diet.get('diet_q1_meal_regularity')
+        if meal_regularity:
+            is_erratic = str(meal_regularity).lower() in ['sometimes', 'erratic', 'rarely']
+            features.append({
+                'id': f'feat_{feat_idx}',
                 'feature': 'Meal Timing Regularity',
+                'name': 'Meal Timing Regularity',
                 'domain': 'Dietary Behavior',
-                'importance': 0.38,
+                'category': 'Nutrition',
+                'trait': f'Meal consistency: {meal_regularity}',
+                'contribution': 0.22 if is_erratic else -0.15,
+                'contributionPct': 22 if is_erratic else 15,
+                'importance': 0.22 if is_erratic else 0.15,
+                'direction': 'positive' if is_erratic else 'negative',
+                'impact': 'Medium',
+                'rule_triggered': f"diet_q1: {meal_regularity}",
+                'explanation': 'Inconsistent meal intervals elevate digestive fire volatility (Vishama Agni).' if is_erratic else 'Predictable meal schedule stabilizes metabolic pace.',
+            })
+            feat_idx += 1
+
+        # 3. Evaluate digestive agni correlation
+        features.append({
+            'id': f'feat_{feat_idx}',
+            'feature': 'Digestive Fire (Agni) Profile',
+            'name': 'Digestive Fire (Agni) Profile',
+            'domain': 'Metabolism',
+            'category': 'Physiology',
+            'trait': agni_res.get('state', 'Samāgni'),
+            'contribution': 0.20,
+            'contributionPct': 20,
+            'importance': 0.20,
+            'direction': 'positive',
+            'impact': 'Medium',
+            'rule_triggered': f"Agni: {agni_res.get('state', 'Balanced')}",
+            'explanation': f"Clinical indication of {agni_res.get('state')} corresponds with {agni_res.get('dosha_link', 'metabolic')} tendencies.",
+        })
+        feat_idx += 1
+
+        # 4. Fallback if few questions were answered
+        if len(features) < 4:
+            features.append({
+                'id': f'feat_{feat_idx}',
+                'feature': 'Baseline Constitutional Calibration',
+                'name': 'Baseline Constitutional Calibration',
+                'domain': 'Constitutional Assessment',
+                'category': 'Foundations',
+                'trait': f"{primary_dosha.capitalize()} baseline balance",
+                'contribution': 0.18,
+                'contributionPct': 18,
+                'importance': 0.18,
                 'direction': 'positive',
-                'description': 'Inconsistent meal intervals strongly exacerbate Vishama Agni, elevating Vata volatility.',
-            },
-            {
-                'feature': 'Warm Food Preference',
-                'domain': 'Dietary Preference',
-                'importance': 0.29,
-                'direction': 'positive',
-                'description': 'Preference for warm, comforting dishes protects digestive fire from cold-aggravated Vata stagnation.',
-            },
-            {
-                'feature': 'Sleep Architecture & Timing',
-                'domain': 'Circadian Rhythm',
-                'importance': 0.24,
-                'direction': 'positive',
-                'description': 'Night-time sleep continuity directly stabilizes nerve tissue (Majja Dhatu) and parasympathetic rest.',
-            },
-            {
-                'feature': 'Digestive Fire Variability',
-                'domain': 'Metabolism',
-                'importance': 0.21,
-                'direction': 'positive',
-                'description': f"Clinical indication of {agni_res['state']} accounts for 21% of constitutional classification weight.",
-            },
-            {
-                'feature': 'Hydration Volume & Temperature',
-                'domain': 'Lifestyle Habits',
-                'importance': 0.15,
-                'direction': 'negative',
-                'description': 'Insufficient warm water intake increases dryness and limits comfortable bowel elimination.',
-            },
-            {
-                'feature': 'Screen Exposure Before Sleep',
-                'domain': 'Circadian Rhythm',
-                'importance': 0.12,
-                'direction': 'negative',
-                'description': 'Evening blue light delays melatonin and elevates evening mental restlessness (Raja Guna).',
-            },
-        ]
+                'impact': 'Medium',
+                'rule_triggered': 'Baseline physiological mapping',
+                'explanation': f"Standard CCRAS constitutional weight distribution calibrated for {primary_dosha.capitalize()} predominance.",
+            })
+
         return sorted(features, key=lambda x: x['importance'], reverse=True)
 
     @classmethod
@@ -379,35 +455,65 @@ class AyuRagAiModelService:
         symptoms: Dict[str, Any]
     ) -> List[Dict[str, Any]]:
         """
-        Computes LIME local interpretable surrogate model feature weights.
+        Computes local interpretable decision rules derived from questionnaire mapping.
+        Identifies the specific physiological responses that shifted the classification boundary.
         """
-        c_type = prakriti_res['constitution_type']
-        return [
-            {
-                'rule': 'Slender Body Frame + Dry Skin Tendency',
-                'weight': 0.42,
-                'impact': 'Strongly shifts local decision boundary toward Vata classification',
-                'confidence_lift': '+22%',
-            },
-            {
-                'rule': 'Variable Appetite (Vishamāgni)',
-                'weight': 0.35,
-                'impact': 'Distinguishes volatile digestion from hyper-acidic Pitta patterns',
-                'confidence_lift': '+18%',
-            },
-            {
-                'rule': 'Interrupted Sleep Architecture <= 6.5 hrs',
-                'weight': 0.28,
-                'impact': 'Correlates with mental agitation and Vata-induced waking',
-                'confidence_lift': '+14%',
-            },
-            {
-                'rule': 'Heat Sensitivity & Moderate Flushing',
-                'weight': 0.24,
-                'impact': 'Confirms secondary Pitta component in constitutional baseline',
-                'confidence_lift': '+12%',
-            },
-        ]
+        primary = (prakriti_res.get('primary_dosha') or 'Vata').capitalize()
+        secondary = (prakriti_res.get('secondary_dosha') or 'Pitta').capitalize()
+
+        rules = []
+
+        # Find top answered questions driving primary dosha
+        for q_key, weight_map in PRAKRITI_QUESTION_WEIGHTS.items():
+            ans = prakriti_answers.get(q_key)
+            if ans and ans in weight_map:
+                w = weight_map[ans]
+                if w.get(primary.lower(), 0) >= 2:
+                    pts = w[primary.lower()]
+                    rules.append({
+                        'rule': f"{w['trait']} (Rule {q_key})",
+                        'feature': w['trait'],
+                        'weight': round(pts / 8.0, 2),
+                        'type': 'positive',
+                        'impact': f"Strongly shifts decision boundary toward {primary} classification (+{pts} pts)",
+                        'confidence_lift': f"+{round((pts / 10.0) * 100)}%",
+                    })
+
+        # Check digestion / symptom input
+        selected_symps = symptoms.get('selectedSymptoms') or symptoms.get('chiefComplaints') or []
+        for symp in selected_symps:
+            symp_str = str(symp).replace('_', ' ').title()
+            rules.append({
+                'rule': f"Reported Symptom: {symp_str}",
+                'feature': symp_str,
+                'weight': 0.25,
+                'type': 'positive',
+                'impact': f"Symptom profile correlates with {primary} physiological modulation",
+                'confidence_lift': '+16%',
+            })
+
+        if not rules:
+            rules = [
+                {
+                    'rule': f'Constitutional Frame Scoring: {primary} Tendency',
+                    'feature': f'{primary} Constitutional Baseline',
+                    'weight': 0.35,
+                    'type': 'positive',
+                    'impact': f'Multi-domain scoring yields primary {primary} classification',
+                    'confidence_lift': '+20%',
+                },
+                {
+                    'rule': f'Secondary Constitutional Factor: {secondary} Modulation',
+                    'feature': f'{secondary} Modulation',
+                    'weight': 0.22,
+                    'type': 'positive',
+                    'impact': f'Secondary physiological tendencies confirm dual-dosha balance',
+                    'confidence_lift': '+14%',
+                }
+            ]
+
+        return rules[:5]
+
 
     @classmethod
     def _synthesize_recommendations(

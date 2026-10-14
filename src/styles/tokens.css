@@ -1,7 +1,7 @@
 /* ==========================================================================
    AyuRAG-XAI DESIGN TOKENS
-   Deep Forest Green + Sage + Warm Ivory + Soft Ayurvedic Gold
-   Healthcare AI / Clinical Decision Support System Foundation
+   Unified Healthcare & Wellness Design System
+   Deep Forest Green + Sage + Warm Ivory + Restrained Botanical Gold
    ========================================================================== */
 
 :root {
@@ -11,36 +11,36 @@
   --color-primary-active: #091913;
   --color-primary-light: #EBF2EE;
   --color-primary-subtle: #F2F7F4;
-  --color-primary-glow: rgba(22, 56, 44, 0.14);
+  --color-primary-glow: rgba(22, 56, 44, 0.12);
 
-  /* --- Secondary Color Palette (Sage Green) --- */
+  /* --- Secondary Color Palette (Sage Botanical) --- */
   --color-secondary: #5B8266;
   --color-secondary-hover: #496B54;
   --color-secondary-light: #F0F5F2;
   --color-secondary-subtle: #F6FAF7;
-  --color-secondary-glow: rgba(91, 130, 102, 0.15);
+  --color-secondary-glow: rgba(91, 130, 102, 0.14);
 
-  /* --- Accent Color Palette (Ayurvedic Gold) --- */
+  /* --- Accent Color Palette (Ayurvedic Gold / Warm Honey) --- */
   --color-accent: #C5A059;
   --color-accent-hover: #B28D44;
   --color-accent-active: #9A7733;
   --color-accent-light: #FAF4E8;
   --color-accent-subtle: #FCF9F2;
-  --color-accent-glow: rgba(197, 160, 89, 0.20);
+  --color-accent-glow: rgba(197, 160, 89, 0.18);
 
   /* --- Neutral & Surface System (Warm Ivory & Soft Cream) --- */
   --color-bg: #FBF9F5;
   --color-bg-alt: #F4F0E6;
   --color-bg-subtle: #F7F5EE;
   --color-surface: #FFFFFF;
-  --color-surface-muted: #F6F4ED;
+  --color-surface-muted: #F8F6F0;
   --color-surface-elevated: #FFFFFF;
   --color-surface-active: #EFECE3;
 
   /* --- Text & Typography Color Tokens --- */
   --color-text-primary: #14201A;
   --color-text-secondary: #3E4F47;
-  --color-text-muted: #71807A;
+  --color-text-muted: #6B7B75;
   --color-text-placeholder: #9EABA5;
   --color-text-inverse: #FFFFFF;
   --color-text-inverse-muted: #D1DDD7;
@@ -57,21 +57,36 @@
   --color-success-hover: #155E3D;
   --color-success-light: #EAF5EE;
   --color-success-border: #B7E2C9;
+  --color-success-text: #0E482E;
 
-  --color-warning: #C07D1E;
-  --color-warning-hover: #9F6413;
+  --color-warning: #B87314;
+  --color-warning-hover: #965B0A;
   --color-warning-light: #FCF5E9;
   --color-warning-border: #F3DCB4;
+  --color-warning-text: #784503;
 
   --color-error: #B93838;
   --color-error-hover: #962A2A;
   --color-error-light: #FDF1F1;
   --color-error-border: #F3C4C4;
+  --color-error-text: #7E1C1C;
 
-  --color-info: #246EB9;
-  --color-info-hover: #1A5594;
+  --color-info: #2267AB;
+  --color-info-hover: #194F85;
   --color-info-light: #EEF5FC;
   --color-info-border: #BFDAF4;
+  --color-info-text: #133D67;
+
+  /* --- Constitutional Energies (Tridosha) Tokens --- */
+  --color-vata: #2563EB;
+  --color-vata-light: #EFF6FF;
+  --color-vata-border: #BFDBFE;
+  --color-pitta: #D97706;
+  --color-pitta-light: #FEF3C7;
+  --color-pitta-border: #FDE68A;
+  --color-kapha: #059669;
+  --color-kapha-light: #ECFDF5;
+  --color-kapha-border: #A7F3D0;
 
   /* --- Spacing System --- */
   --space-2xs: 2px;
@@ -84,7 +99,7 @@
   --space-3xl: 64px;
 
   /* --- Border Radius System --- */
-  --radius-xs: 3px;
+  --radius-xs: 4px;
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
@@ -95,9 +110,9 @@
 
   /* --- Shadows & Elevation --- */
   --shadow-subtle: 0 1px 3px rgba(20, 32, 26, 0.04), 0 1px 2px rgba(20, 32, 26, 0.02);
-  --shadow-card: 0 4px 14px rgba(20, 32, 26, 0.05), 0 1px 3px rgba(20, 32, 26, 0.03);
+  --shadow-card: 0 2px 8px rgba(20, 32, 26, 0.05), 0 1px 2px rgba(20, 32, 26, 0.03);
   --shadow-card-hover: 0 8px 24px rgba(20, 32, 26, 0.08), 0 2px 6px rgba(20, 32, 26, 0.04);
-  --shadow-elevated: 0 12px 30px -4px rgba(20, 32, 26, 0.08), 0 4px 8px -2px rgba(20, 32, 26, 0.03);
+  --shadow-elevated: 0 12px 30px -4px rgba(20, 32, 26, 0.09), 0 4px 8px -2px rgba(20, 32, 26, 0.03);
   --shadow-dropdown: 0 18px 36px -6px rgba(20, 32, 26, 0.12), 0 6px 12px -4px rgba(20, 32, 26, 0.04);
   --shadow-focus: 0 0 0 3px rgba(22, 56, 44, 0.16);
   --shadow-focus-gold: 0 0 0 3px rgba(197, 160, 89, 0.24);
@@ -140,15 +155,36 @@
   --transition-normal: 200ms var(--ease-in-out);
   --transition-slow: 300ms var(--ease-in-out);
 
-  /* --- Layout Metrics --- */
+  /* --- Layout & Dimensions --- */
   --sidebar-width: 280px;
   --sidebar-collapsed-width: 80px;
-  --header-height: 70px;
-  --container-max-width: 1360px;
+  --header-height: 68px;
+  --container-max-width: 1240px;
+  --container-narrow-width: 960px;
+  --form-max-width: 680px;
+  --auth-card-max-width: 480px;
+  --auth-wide-card-max-width: 760px;
+
+  /* --- Form Dimensions --- */
+  --input-height: 44px;
+  --input-height-sm: 36px;
+  --input-height-lg: 50px;
+  --touch-target-min: 44px;
+
+  /* --- Layer Stacking (z-index) --- */
   --z-sidebar: 100;
   --z-header: 90;
+  --z-dropdown: 150;
   --z-modal-backdrop: 200;
   --z-modal: 210;
   --z-toast: 300;
   --z-tooltip: 400;
+
+  /* --- Breakpoints (Reference for media queries) --- */
+  --breakpoint-xs: 360px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1440px;
 }

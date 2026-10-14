@@ -2,91 +2,65 @@ import {
   LayoutDashboard,
   Users,
   ClipboardCheck,
-  BrainCircuit,
-  Sparkles,
   FileBarChart,
-  BookOpen,
+  Bell,
   User,
   Settings,
   LogOut,
   Stethoscope
 } from 'lucide-react';
 
+/**
+ * Doctor Decision Support Workspace Navigation
+ * Only displays routes and workflows actually implemented in the platform.
+ */
 export const DOCTOR_NAV_ITEMS = [
   {
     id: 'doctor-dashboard',
-    label: 'Dashboard',
-    sublabel: 'Clinical Overview',
+    label: 'Overview',
+    sublabel: 'Clinical Decision Support',
     icon: LayoutDashboard,
     badge: null,
   },
   {
     id: 'doctor-patients',
     label: 'Patients',
-    sublabel: 'Cohort & Intake',
+    sublabel: 'Cohort & Intake Records',
     icon: Users,
-    badge: '5',
-    subItems: [
-      { id: 'all-patients', label: 'All Patients', filter: 'all' },
-      { id: 'active-assessments', label: 'Active Assessments', filter: 'IN_PROGRESS' },
-      { id: 'completed-assessments', label: 'Completed Assessments', filter: 'COMPLETED' },
-    ],
+    badge: null,
   },
   {
     id: 'doctor-reviews',
-    label: 'Clinical Reviews',
-    sublabel: 'Validation Queue',
+    label: 'Reviews',
+    sublabel: 'Clinical Validation Queue',
     icon: ClipboardCheck,
-    badge: '2 Pending',
-    badgeVariant: 'warning',
-  },
-  {
-    id: 'doctor-ai-analysis',
-    label: 'AI Analysis',
-    sublabel: 'ML, XAI & Grounding',
-    icon: BrainCircuit,
-    badge: 'XAI',
-    subItems: [
-      { id: 'ai-ml-analysis', label: 'ML Analysis' },
-      { id: 'ai-shap', label: 'SHAP Feature Weights' },
-      { id: 'ai-lime', label: 'LIME Local Explanations' },
-      { id: 'ai-rag-evidence', label: 'RAG Classical Evidence' },
-    ],
-  },
-  {
-    id: 'doctor-recommendations',
-    label: 'Recommendations',
-    sublabel: 'Ahara, Vihara & Formulations',
-    icon: Sparkles,
+    badge: null,
   },
   {
     id: 'doctor-reports',
-    label: 'Reports',
-    sublabel: 'Clinical Audit & Export',
+    label: 'Care Plans & Reports',
+    sublabel: 'Dossiers & Audit Registry',
     icon: FileBarChart,
+    badge: null,
   },
   {
-    id: 'doctor-knowledge-base',
-    label: 'Knowledge Base',
-    sublabel: 'Samhitas & Corpus',
-    icon: BookOpen,
+    id: 'doctor-notifications',
+    label: 'Notifications',
+    sublabel: 'Clinical Alerts',
+    icon: Bell,
+    badge: null,
   },
 ];
 
 export const DOCTOR_UTILITY_ITEMS = [
   {
     id: 'doctor-profile',
-    label: 'Profile',
+    label: 'Physician Profile',
     icon: User,
   },
   {
-    id: 'doctor-settings',
-    label: 'Settings',
-    icon: Settings,
-  },
-  {
     id: 'logout',
-    label: 'Logout',
+    label: 'Sign Out',
     icon: LogOut,
     isDanger: true,
   },

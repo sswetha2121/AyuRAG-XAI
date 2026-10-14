@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from django.db import transaction
 from django.db.models import Q
 from django.utils import timezone
 from datetime import datetime, timedelta
@@ -832,63 +833,69 @@ class PatientAssessmentSubmitView(APIView):
         assessment = None
         if assessment_id:
             assessment = PatientAssessment.objects.filter(id=assessment_id, patient=user).first()
-
-        if assessment:
-            assessment.demographics = demographics
-            assessment.prakriti_data = prakriti_data
-            assessment.lifestyle_data = lifestyle_data
-            assessment.diet_data = diet_data
-            assessment.symptoms_data = symptoms_data
-            assessment.prakriti_scores = prakriti_scores
-            assessment.ai_analysis = ai_analysis
-            assessment.shap_explanations = shap_explanations
-            assessment.lime_explanations = lime_explanations
-            assessment.rag_evidence = rag_evidence
-            assessment.recommendations = recommendations
-            assessment.status = AssessmentStatus.COMPLETED
-            assessment.save()
-        else:
-            assessment = PatientAssessment.objects.create(
-                patient=user,
-                status=AssessmentStatus.COMPLETED,
-                demographics=demographics,
-                prakriti_data=prakriti_data,
-                lifestyle_data=lifestyle_data,
-                diet_data=diet_data,
-                symptoms_data=symptoms_data,
-                prakriti_scores=prakriti_scores,
-                ai_analysis=ai_analysis,
-                shap_explanations=shap_explanations,
-                lime_explanations=lime_explanations,
-                rag_evidence=rag_evidence,
-                recommendations=recommendations
-            )
-
-        # Create or update pending clinical review
-        default_doctor = User.objects.filter(role=User.Role.DOCTOR).first()
-        if default_doctor:
-            review, created = ClinicalReview.objects.get_or_create(
-                patient=user,
-                assessment=assessment,
-                defaults={
-                    'doctor': default_doctor,
-                    'status': ReviewStatus.PENDING,
-                    'summary': f"New assessment submitted for {demographics.get('fullName', user.username)}. Primary constitutional indication: {prakriti_scores.get('primary', 'Vāta-Pitta')}."
-                }
-            )
-            # Initialize verification fields
-            initialize_verifications_for_assessment(user, assessment, default_doctor)
-
-            if created:
-                # Notification for doctor
-                Notification.objects.create(
-                    user=default_doctor,
-                    type='NEW_ASSESSMENT',
-                    title='New Patient Assessment',
-                    message=f"Patient {demographics.get('fullName', user.username)} has completed assessment #{assessment.id}.",
-                    related_object_type='PatientAssessment',
-                    related_object_id=assessment.id
+            if not assessment and PatientAssessment.objects.filter(id=assessment_id).exists():
+                return Response(
+                    {'error': 'Permission denied: Cannot modify another patient\'s assessment record.'},
+                    status=status.HTTP_403_FORBIDDEN
                 )
+
+        with transaction.atomic():
+            if assessment:
+                assessment.demographics = demographics
+                assessment.prakriti_data = prakriti_data
+                assessment.lifestyle_data = lifestyle_data
+                assessment.diet_data = diet_data
+                assessment.symptoms_data = symptoms_data
+                assessment.prakriti_scores = prakriti_scores
+                assessment.ai_analysis = ai_analysis
+                assessment.shap_explanations = shap_explanations
+                assessment.lime_explanations = lime_explanations
+                assessment.rag_evidence = rag_evidence
+                assessment.recommendations = recommendations
+                assessment.status = AssessmentStatus.COMPLETED
+                assessment.save()
+            else:
+                assessment = PatientAssessment.objects.create(
+                    patient=user,
+                    status=AssessmentStatus.COMPLETED,
+                    demographics=demographics,
+                    prakriti_data=prakriti_data,
+                    lifestyle_data=lifestyle_data,
+                    diet_data=diet_data,
+                    symptoms_data=symptoms_data,
+                    prakriti_scores=prakriti_scores,
+                    ai_analysis=ai_analysis,
+                    shap_explanations=shap_explanations,
+                    lime_explanations=lime_explanations,
+                    rag_evidence=rag_evidence,
+                    recommendations=recommendations
+                )
+
+            # Create or update pending clinical review
+            default_doctor = User.objects.filter(role=User.Role.DOCTOR).first()
+            if default_doctor:
+                review, created = ClinicalReview.objects.get_or_create(
+                    patient=user,
+                    assessment=assessment,
+                    defaults={
+                        'doctor': default_doctor,
+                        'status': ReviewStatus.PENDING,
+                        'summary': f"New assessment submitted for {demographics.get('fullName', user.username)}. Primary constitutional indication: {prakriti_scores.get('primary', 'Vāta-Pitta')}."
+                    }
+                )
+                # Initialize verification fields
+                initialize_verifications_for_assessment(user, assessment, default_doctor)
+
+                if created:
+                    # Notification for doctor
+                    Notification.objects.create(
+                        user=default_doctor,
+                        type='NEW_ASSESSMENT',
+                        title='New Patient Assessment',
+                        message=f"Patient {demographics.get('fullName', user.username)} has completed assessment #{assessment.id}.",
+                        related_object_type='PatientAssessment',
+                        related_object_id=assessment.id
+                    )
 
         return Response({
             'message': 'Assessment submitted successfully and queued for physician verification.',

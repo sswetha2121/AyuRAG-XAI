@@ -4,11 +4,9 @@ import { useAssessment } from '../context/AssessmentContext';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../services/api';
 import {
-  DashboardHeader,
   DashboardNavTabs,
   TridoshaCard,
   XaiFeatureImportance,
-  RecommendationsGrid,
   EvidenceSection,
   DailyRoutineTimetable,
   DigestiveAgniCard,
@@ -20,34 +18,46 @@ import {
 } from '../components/dashboard';
 import {
   Bell,
-  Clock,
   Calendar,
-  Utensils,
   Sparkles,
-  TrendingUp,
   AlertCircle,
+  Activity,
   CheckCircle2,
-  ChevronRight
+  Clock,
+  ArrowRight
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 
 export const DashboardPage = ({
+  initialTab = 'overview',
+  activeTab: propActiveTab,
+  onTabChange,
   onStartAssessment,
   onReevaluate,
   onTriggerToast
 }) => {
   const {
     analysisResult,
-    triggerAnalysisGeneration,
     loadDemoPreset,
     personalInfo
   } = useAssessment();
   const { user } = useAuth();
 
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState(propActiveTab || initialTab);
   const [isRemindersModalOpen, setIsRemindersModalOpen] = useState(false);
   const [latestAssessment, setLatestAssessment] = useState(null);
   const [hasFetchedAssessment, setHasFetchedAssessment] = useState(false);
+
+  useEffect(() => {
+    if (propActiveTab) {
+      setActiveTab(propActiveTab);
+    }
+  }, [propActiveTab]);
+
+  const handleSelectTab = (tabId) => {
+    setActiveTab(tabId);
+    onTabChange?.(tabId);
+  };
 
   // Fetch persisted assessment if user is logged in
   useEffect(() => {
@@ -80,11 +90,14 @@ export const DashboardPage = ({
 
   const hasAssessmentData = Boolean(analysisResult || latestAssessment);
 
-  // Effective constitutional profile from analysisResult, or latestAssessment
   const constitutionType =
     analysisResult?.tridoshaProfile?.constitutionType ||
     latestAssessment?.prakriti_scores?.primary ||
     'Balanced';
+
+  const agniPattern =
+    analysisResult?.digestiveAgni?.state ||
+    'Viṣamāgni (Variable Digestive Fire)';
 
   const tridoshaProfile = analysisResult?.tridoshaProfile || (latestAssessment?.prakriti_scores ? {
     constitutionType: constitutionType,
@@ -100,10 +113,6 @@ export const DashboardPage = ({
 
   const xaiFeatures = analysisResult?.xaiFeatures || latestAssessment?.shap_explanations || [];
   const evidenceCitations = analysisResult?.evidenceCitations || latestAssessment?.rag_evidence || [];
-  const recommendations = analysisResult?.recommendations || latestAssessment?.recommendations || {
-    diet: ['Eat freshly prepared, warm meals', 'Include whole grains and yellow lentils', 'Avoid iced cold drinks with meals'],
-    lifestyle: ['Maintain regular waking hours by 06:30 AM', 'Practice 15 minutes of calm breathing', 'Finish dinner 3 hours before sleep']
-  };
 
   const dailyRoutineTimetable = analysisResult?.dailyRoutineTimetable || [
     { time: '06:30 AM', activity: 'Wake Up & Warm Water', category: 'Morning Cleansing' },
@@ -126,7 +135,9 @@ export const DashboardPage = ({
           </div>
           <h2 className="ayur-dash-welcome-title">Welcome back, {patientName}</h2>
           <p className="ayur-dash-welcome-subtitle">
-            Track your meals, what you should eat, and stay on schedule with doctor-approved nutrition
+            {hasAssessmentData
+              ? `Your personalized nutrition and daily routine is calibrated for your ${constitutionType} profile.`
+              : 'Complete your initial 10-minute assessment to unlock personalized doctor-reviewed wellness recommendations.'}
           </p>
         </div>
 
@@ -145,29 +156,15 @@ export const DashboardPage = ({
             onClick={onStartAssessment || (() => window.location.href = '/assessment-overview')}
             leftIcon={<Sparkles size={16} />}
           >
-            Update Assessment
+            {hasAssessmentData ? 'Update Assessment' : 'Start Assessment'}
           </Button>
         </div>
       </div>
 
       {/* Demo Warning Banner */}
       {analysisResult?.isDemo && (
-        <div
-          className="ayur-demo-banner"
-          style={{
-            backgroundColor: '#FEF3C7',
-            border: '1px solid #F59E0B',
-            borderRadius: '8px',
-            padding: '0.75rem 1rem',
-            marginBottom: '1.25rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.65rem',
-            color: '#92400E',
-            fontSize: '0.875rem'
-          }}
-        >
-          <AlertCircle size={20} style={{ color: '#D97706', flexShrink: 0 }} />
+        <div className="ayur-demo-banner">
+          <AlertCircle size={20} className="shrink-0 text-warning" />
           <div>
             <strong>Demonstration Profile Active:</strong> {analysisResult.demoNotice || 'This is an offline synthesized demonstration profile. It is isolated from live clinical records.'}
           </div>
@@ -185,7 +182,7 @@ export const DashboardPage = ({
           {/* 2. Navigation Tabs */}
           <DashboardNavTabs
             activeTab={activeTab}
-            onSelectTab={setActiveTab}
+            onSelectTab={handleSelectTab}
           />
 
           {/* 3. Tab Contents */}
@@ -208,7 +205,7 @@ export const DashboardPage = ({
                 {tridoshaProfile && <TridoshaCard tridoshaProfile={tridoshaProfile} />}
 
                 {/* Digestive Metabolism */}
-                <DigestiveAgniCard />
+                <DigestiveAgniCard agniPattern={agniPattern} />
 
                 {/* Explainable AI Factors */}
                 {xaiFeatures.length > 0 && <XaiFeatureImportance features={xaiFeatures} />}
@@ -242,7 +239,7 @@ export const DashboardPage = ({
             {activeTab === 'constitution' && (
               <div className="ayur-dash-tab-pane">
                 {tridoshaProfile && <TridoshaCard tridoshaProfile={tridoshaProfile} />}
-                <DigestiveAgniCard />
+                <DigestiveAgniCard agniPattern={agniPattern} />
                 {xaiFeatures.length > 0 && <XaiFeatureImportance features={xaiFeatures} />}
               </div>
             )}

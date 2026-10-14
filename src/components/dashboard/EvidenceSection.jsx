@@ -35,37 +35,46 @@ export const EvidenceSection = ({
         </CardHeader>
 
         <CardContent>
-          <div className="ayur-evidence-grid">
-            {citations.map((cite) => (
-              <div key={cite.id} className="ayur-evidence-item-card">
-                <div className="ayur-evidence-item-top">
-                  <span className="ayur-evidence-ref-id">{cite.referenceId}</span>
-                  <span className="ayur-evidence-domain-tag">{cite.domain}</span>
-                </div>
-
-                <h3 className="ayur-evidence-item-title">{cite.title}</h3>
-
-                {cite.classicalVerse && (
-                  <div className="ayur-evidence-verse-box">
-                    <span className="ayur-evidence-verse">"{cite.classicalVerse}"</span>
+          {citations.length === 0 ? (
+            <div className="ayur-evidence-empty text-center py-lg">
+              <FileText size={28} className="text-muted mx-auto mb-xs" />
+              <p className="text-small text-muted max-w-md mx-auto">
+                No specific classical compendium citations matched your current parameters. General Ayurvedic constitutional principles apply.
+              </p>
+            </div>
+          ) : (
+            <div className="ayur-evidence-grid">
+              {citations.map((cite, idx) => (
+                <div key={cite.id || cite.referenceId || idx} className="ayur-evidence-item-card">
+                  <div className="ayur-evidence-item-top">
+                    <span className="ayur-evidence-ref-id">{cite.referenceId || cite.source || `REF-${idx + 1}`}</span>
+                    <span className="ayur-evidence-domain-tag">{cite.domain || 'Classical Principle'}</span>
                   </div>
-                )}
 
-                <p className="ayur-evidence-insight">{cite.insight}</p>
+                  <h3 className="ayur-evidence-item-title">{cite.title || cite.source}</h3>
 
-                <div className="ayur-evidence-footer">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    leftIcon={<FileText size={13} />}
-                    onClick={() => setSelectedCitation(cite)}
-                  >
-                    View Citation Context
-                  </Button>
+                  {(cite.classicalVerse || cite.retrieved_text) && (
+                    <div className="ayur-evidence-verse-box">
+                      <span className="ayur-evidence-verse">"{cite.classicalVerse || cite.retrieved_text}"</span>
+                    </div>
+                  )}
+
+                  <p className="ayur-evidence-insight">{cite.insight || cite.translation || cite.passage}</p>
+
+                  <div className="ayur-evidence-footer">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      leftIcon={<FileText size={13} />}
+                      onClick={() => setSelectedCitation(cite)}
+                    >
+                      View Citation Context
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
 
           {/* Modal / Detailed Evidence Drawer */}
           {selectedCitation && (

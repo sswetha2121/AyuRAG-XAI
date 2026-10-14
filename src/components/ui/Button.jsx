@@ -15,6 +15,7 @@ export const Button = ({
   fullWidth = false,
   disabled = false,
   loading = false,
+  isLoading = false,
   leftIcon = null,
   rightIcon = null,
   type = 'button',
@@ -23,22 +24,22 @@ export const Button = ({
   ariaLabel,
   ...props
 }) => {
-  const isIconButton = variant === 'icon';
+  const isBusy = loading || isLoading;
 
   return (
     <button
       type={type}
-      className={`ayur-btn ayur-btn--${variant} ayur-btn--${size} ${fullWidth ? 'ayur-btn--full' : ''} ${loading ? 'ayur-btn--loading' : ''} ${className}`.trim()}
-      disabled={disabled || loading}
+      className={`ayur-btn ayur-btn--${variant} ayur-btn--${size} ${fullWidth ? 'ayur-btn--full' : ''} ${isBusy ? 'ayur-btn--loading' : ''} ${className}`.trim()}
+      disabled={disabled || isBusy}
       onClick={onClick}
       aria-label={ariaLabel || (typeof children === 'string' ? children : undefined)}
-      aria-busy={loading}
+      aria-busy={isBusy}
       {...props}
     >
-      {loading ? (
+      {isBusy ? (
         <>
           <Spinner
-            size={size === 'sm' ? 'sm' : 'sm'}
+            size="sm"
             color={variant === 'primary' || variant === 'danger' ? 'white' : 'primary'}
             className="ayur-btn__spinner"
           />

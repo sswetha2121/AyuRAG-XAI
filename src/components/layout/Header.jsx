@@ -1,19 +1,22 @@
 import React from 'react';
 import './Header.css';
-import { Menu, PanelLeft, PanelLeftClose, Bell, Settings, ShieldCheck, Sparkles } from 'lucide-react';
+import { Menu, PanelLeft, PanelLeftClose, Bell, ShieldCheck, User } from 'lucide-react';
 import { Badge } from '../ui/Badge';
 
 /**
  * AyuRAG-XAI Reusable Top Header
  */
 export const Header = ({
-  title = 'Design System Showcase',
-  subtitle = 'Production-grade component library & design tokens for AyuRAG-XAI',
+  title = 'AyuRAG-XAI',
+  subtitle = 'Personalized Healthcare & Wellness Platform',
   onMenuClick,
   isCollapsed = false,
   onToggleCollapse,
   user = null,
   onLogout,
+  unreadCount = 0,
+  onOpenNotifications,
+  onOpenProfile,
   className = ''
 }) => {
   const isDoctor = user?.role === 'DOCTOR';
@@ -25,7 +28,7 @@ export const Header = ({
         .substring(0, 2)
         .toUpperCase()
     : isDoctor
-    ? 'DS'
+    ? 'DR'
     : 'PT';
 
   return (
@@ -65,19 +68,19 @@ export const Header = ({
         <div className="ayur-header__status-badge">
           {isDoctor ? (
             <Badge color="accent" variant="subtle" size="md" dot>
-              Clinical Decision Support (CDS)
+              Clinical Decision Support
             </Badge>
           ) : (
             <Badge color="secondary" variant="subtle" size="md" dot>
-              Patient Assessment Pipeline
+              Patient Portal
             </Badge>
           )}
         </div>
 
-        {/* Clinical Protocol Indicator */}
+        {/* Evidence Indicator */}
         <div className="ayur-header__protocol">
-          <ShieldCheck size={16} className="text-secondary" />
-          <span className="ayur-header__protocol-text">CCRAS / Classical Protocol</span>
+          <ShieldCheck size={16} className="text-secondary shrink-0" />
+          <span className="ayur-header__protocol-text">Evidence-Informed</span>
         </div>
 
         {/* Action Foundations */}
@@ -85,28 +88,29 @@ export const Header = ({
           <button
             type="button"
             className="ayur-header__icon-btn"
-            aria-label="Notifications"
-            title="System Notifications"
+            aria-label={`Notifications${unreadCount > 0 ? ` (${unreadCount} unread)` : ''}`}
+            title="Notifications & Alerts"
+            onClick={onOpenNotifications}
           >
             <Bell size={18} />
-            <span className="ayur-header__badge-dot" />
-          </button>
-
-          <button
-            type="button"
-            className="ayur-header__icon-btn"
-            aria-label="Settings"
-            title="Application Settings"
-          >
-            <Settings size={18} />
+            {unreadCount > 0 && <span className="ayur-header__badge-dot" />}
           </button>
         </div>
 
         {/* Profile Avatar */}
         <div
           className="ayur-header__profile"
-          title={user ? `${user.name} (${user.role})` : 'Clinical User Profile'}
-          onClick={onLogout}
+          title={user ? `${user.name} (${user.role})` : 'User Profile'}
+          onClick={onOpenProfile || onLogout}
+          tabIndex={0}
+          role="button"
+          aria-label="User Profile"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              (onOpenProfile || onLogout)?.();
+            }
+          }}
         >
           <div className="ayur-header__avatar">
             <span>{initials}</span>
@@ -116,4 +120,3 @@ export const Header = ({
     </header>
   );
 };
-

@@ -1,0 +1,60 @@
+/* ==========================================================================
+   AyuRAG-XAI PAGINATION STYLES
+   ========================================================================== */
+
+.ayur-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.ayur-pagination__info {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}
+
+.ayur-pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ayur-pagination__btn,
+.ayur-pagination__page-btn {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.ayur-pagination__btn:hover:not(:disabled),
+.ayur-pagination__page-btn:hover:not(.ayur-pagination__page-btn--active) {
+  background: var(--color-bg-subtle);
+  border-color: var(--color-border-strong);
+  color: var(--color-text-primary);
+}
+
+.ayur-pagination__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ayur-pagination__page-btn--active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #FFFFFF;
+  font-weight: var(--font-weight-bold);
+}
