@@ -114,7 +114,7 @@ export const DashboardPage = ({
   const xaiFeatures = analysisResult?.xaiFeatures || latestAssessment?.shap_explanations || [];
   const evidenceCitations = analysisResult?.evidenceCitations || latestAssessment?.rag_evidence || [];
 
-  const dailyRoutineTimetable = analysisResult?.dailyRoutineTimetable || [
+  const dailyRoutineTimetable = analysisResult?.dailyRoutineTimetable || latestAssessment?.recommendations?.daily_routine_timetable || [
     { time: '06:30 AM', activity: 'Wake Up & Warm Water', category: 'Morning Cleansing' },
     { time: '08:00 AM', activity: 'Wholesome Warm Breakfast', category: 'Meal Schedule' },
     { time: '11:00 AM', activity: 'Mid-Morning Hydration', category: 'Hydration' },

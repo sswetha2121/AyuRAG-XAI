@@ -143,6 +143,8 @@ class AyuRagAiModelService:
 
         # 7. Circadian Daily Routine Timetable
         timetable = cls._build_daily_timetable(prakriti_result['constitution_type'])
+        if isinstance(recommendations, dict):
+            recommendations['daily_routine_timetable'] = timetable
 
         return {
             'tridoshaProfile': {
@@ -239,10 +241,25 @@ class AyuRagAiModelService:
 
         vata_pct = round((vata_pts / total_pts) * 100)
         pitta_pct = round((pitta_pts / total_pts) * 100)
-        kapha_pct = 100 - (vata_pct + pitta_pct)
+        kapha_pct = max(0, 100 - (vata_pct + pitta_pct))
+        
+        # Ensure exact 100% sum and strictly positive bounds
+        remainder = 100 - (vata_pct + pitta_pct + kapha_pct)
+        if remainder != 0:
+            if vata_pct >= pitta_pct and vata_pct >= kapha_pct:
+                vata_pct += remainder
+            elif pitta_pct >= kapha_pct:
+                pitta_pct += remainder
+            else:
+                kapha_pct += remainder
 
         # Ensure realistic bounded percentages
-        scores = {'vata': vata_pct, 'pitta': pitta_pct, 'kapha': kapha_pct}
+        scores = {'vata': max(5, vata_pct), 'pitta': max(5, pitta_pct), 'kapha': max(5, kapha_pct)}
+        total_adj = scores['vata'] + scores['pitta'] + scores['kapha']
+        if total_adj != 100:
+            scores['vata'] = round((scores['vata'] / total_adj) * 100)
+            scores['pitta'] = round((scores['pitta'] / total_adj) * 100)
+            scores['kapha'] = 100 - (scores['vata'] + scores['pitta'])
         sorted_doshas = sorted(scores.items(), key=lambda x: x[1], reverse=True)
         top1, top2, top3 = sorted_doshas[0], sorted_doshas[1], sorted_doshas[2]
 

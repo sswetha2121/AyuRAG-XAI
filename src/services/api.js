@@ -262,6 +262,16 @@ export const api = {
     return fetchJson('/patient/assessment/history/');
   },
 
+  async getPatientAssessmentDetail(assessmentId) {
+    return fetchJson(`/patient/assessment/${assessmentId}/`);
+  },
+
+  async retryPatientAssessmentAnalysis(assessmentId) {
+    return fetchJson(`/patient/assessment/${assessmentId}/retry-analysis/`, {
+      method: 'POST',
+    });
+  },
+
   // Daily Meal Schedule & Tracking
   async getPatientMealSchedule(date = '') {
     const qs = date ? `?date=${date}` : '';

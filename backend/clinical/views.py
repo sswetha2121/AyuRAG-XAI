@@ -208,38 +208,61 @@ class DoctorReviewListView(APIView):
 
         # Update existing review if already present to prevent duplicate records
         review = ClinicalReview.objects.filter(assessment=assessment).first()
-        if review:
-            review.doctor = request.user
-            review.status = request.data.get('status', review.status)
-            if 'summary' in request.data:
-                review.summary = request.data['summary']
-            if 'observations' in request.data:
-                review.observations = request.data['observations']
-            if 'recommendations' in request.data:
-                review.recommendations = request.data['recommendations']
-            if 'follow_up_notes' in request.data:
-                review.follow_up_notes = request.data['follow_up_notes']
-            review.save()
-            return Response(ClinicalReviewSerializer(review).data, status=status.HTTP_200_OK)
+        is_new_review = review is None
+        requested_status = request.data.get('status')
+        if requested_status and requested_status not in ReviewStatus.values:
+            return Response({'error': f"Invalid review status: '{requested_status}'."}, status=status.HTTP_400_BAD_REQUEST)
 
-        review = ClinicalReview.objects.create(
-            patient=assessment.patient,
-            doctor=request.user,
-            assessment=assessment,
-            status=request.data.get('status', ReviewStatus.IN_REVIEW),
-            summary=request.data.get('summary', ''),
-            observations=request.data.get('observations', ''),
-            recommendations=request.data.get('recommendations', ''),
-            follow_up_notes=request.data.get('follow_up_notes', '')
-        )
+        with transaction.atomic():
+            if review:
+                if review.status == ReviewStatus.COMPLETED and requested_status == ReviewStatus.PENDING:
+                    return Response({'error': 'Invalid state transition: Cannot revert a completed review to pending.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        return Response(ClinicalReviewSerializer(review).data, status=status.HTTP_201_CREATED)
+                review.doctor = request.user
+                if requested_status:
+                    review.status = requested_status
+                if 'summary' in request.data:
+                    review.summary = request.data['summary']
+                if 'observations' in request.data:
+                    review.observations = request.data['observations']
+                if 'recommendations' in request.data:
+                    review.recommendations = request.data['recommendations']
+                if 'follow_up_notes' in request.data:
+                    review.follow_up_notes = request.data['follow_up_notes']
+                review.save()
+            else:
+                review = ClinicalReview.objects.create(
+                    patient=assessment.patient,
+                    doctor=request.user,
+                    assessment=assessment,
+                    status=requested_status or ReviewStatus.IN_REVIEW,
+                    summary=request.data.get('summary', ''),
+                    observations=request.data.get('observations', ''),
+                    recommendations=request.data.get('recommendations', ''),
+                    follow_up_notes=request.data.get('follow_up_notes', '')
+                )
+
+            if review.status == ReviewStatus.COMPLETED:
+                assessment.status = AssessmentStatus.VALIDATED
+                assessment.save(update_fields=['status', 'updated_at'])
+                doctor_name = request.user.doctor_profile.professional_name if hasattr(request.user, 'doctor_profile') else f"Dr. {request.user.username}"
+                Notification.objects.create(
+                    user=review.patient,
+                    type='CLINICAL_REVIEW_COMPLETED',
+                    title='Clinical Assessment Validated',
+                    message=f"{doctor_name} has completed the clinical review and validated your assessment #{assessment.id}.",
+                    related_object_type='ClinicalReview',
+                    related_object_id=review.id
+                )
+
+        return Response(ClinicalReviewSerializer(review).data, status=status.HTTP_201_CREATED if is_new_review else status.HTTP_200_OK)
 
 
 class DoctorReviewDetailView(APIView):
     """
     Get or update doctor review notes.
     Doctor notes are strictly isolated and stored separately from ML/SHAP/LIME outputs.
+    Enforces valid workflow state transitions.
     """
     permission_classes = [IsDoctorUser]
 
@@ -253,18 +276,44 @@ class DoctorReviewDetailView(APIView):
 
     def patch(self, request, pk):
         try:
-            review = ClinicalReview.objects.get(pk=pk)
+            review = ClinicalReview.objects.select_related('assessment', 'patient').get(pk=pk)
         except ClinicalReview.DoesNotExist:
             return Response({'error': 'Clinical review not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-        # Allow updating ONLY structured doctor notes and review status
-        # NEVER allow editing ML predictions, SHAP values, LIME, or RAG evidence!
-        allowed_fields = ['summary', 'observations', 'recommendations', 'follow_up_notes', 'status']
-        for field in allowed_fields:
-            if field in request.data:
-                setattr(review, field, request.data[field])
+        new_status = request.data.get('status')
+        if new_status and new_status not in ReviewStatus.values:
+            return Response({'error': f"Invalid review status: '{new_status}'."}, status=status.HTTP_400_BAD_REQUEST)
 
-        review.save()
+        if review.status == ReviewStatus.COMPLETED and new_status == ReviewStatus.PENDING:
+            return Response({'error': 'Invalid state transition: Cannot revert a completed review to pending.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        was_completed = review.status == ReviewStatus.COMPLETED
+
+        with transaction.atomic():
+            allowed_fields = ['summary', 'observations', 'recommendations', 'follow_up_notes', 'status']
+            for field in allowed_fields:
+                if field in request.data:
+                    setattr(review, field, request.data[field])
+
+            review.doctor = request.user
+            review.save()
+
+            if review.status == ReviewStatus.COMPLETED:
+                if review.assessment:
+                    review.assessment.status = AssessmentStatus.VALIDATED
+                    review.assessment.save(update_fields=['status', 'updated_at'])
+
+                if not was_completed:
+                    doctor_name = request.user.doctor_profile.professional_name if hasattr(request.user, 'doctor_profile') else f"Dr. {request.user.username}"
+                    Notification.objects.create(
+                        user=review.patient,
+                        type='CLINICAL_REVIEW_COMPLETED',
+                        title='Clinical Assessment Validated',
+                        message=f"{doctor_name} has completed the clinical review and validated your assessment #{review.assessment_id}.",
+                        related_object_type='ClinicalReview',
+                        related_object_id=review.id
+                    )
+
         return Response({
             'message': 'Clinical review notes updated successfully.',
             'review': ClinicalReviewSerializer(review).data,
@@ -634,6 +683,7 @@ class DoctorDietPlanApproveView(APIView):
     - Captures a DietPlanVersion snapshot
     - Creates a Notification for the patient
     - Records an AuditLog entry
+    Enforces valid state transitions and atomic consistency.
     Accessible ONLY to authenticated users with role DOCTOR.
     """
     permission_classes = [IsDoctorUser]
@@ -643,61 +693,68 @@ class DoctorDietPlanApproveView(APIView):
         if not diet_plan:
             return Response({'error': 'Diet plan not found.'}, status=status.HTTP_404_NOT_FOUND)
 
+        if diet_plan.status == DietPlanStatus.ACTIVE:
+            return Response({'error': 'Diet plan is already active.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if diet_plan.status in [DietPlanStatus.ARCHIVED, DietPlanStatus.REJECTED]:
+            return Response({'error': f"Cannot activate an {diet_plan.status.lower()} diet plan."}, status=status.HTTP_400_BAD_REQUEST)
+
         now = timezone.now()
 
-        # 1. Archive previously active diet plans for this patient
-        previous_actives = DietPlan.objects.filter(
-            patient=diet_plan.patient,
-            status=DietPlanStatus.ACTIVE
-        ).exclude(id=diet_plan.id)
-
-        for prev in previous_actives:
-            prev.status = DietPlanStatus.ARCHIVED
-            prev.save()
-            AuditLog.objects.create(
-                actor=request.user,
-                action=AuditAction.DIET_ARCHIVED,
+        with transaction.atomic():
+            # 1. Archive previously active diet plans for this patient
+            previous_actives = DietPlan.objects.filter(
                 patient=diet_plan.patient,
-                object_type='DietPlan',
-                object_id=str(prev.id),
-                metadata={'archived_version': prev.version}
+                status=DietPlanStatus.ACTIVE
+            ).exclude(id=diet_plan.id)
+
+            for prev in previous_actives:
+                prev.status = DietPlanStatus.ARCHIVED
+                prev.save()
+                AuditLog.objects.create(
+                    actor=request.user,
+                    action=AuditAction.DIET_ARCHIVED,
+                    patient=diet_plan.patient,
+                    object_type='DietPlan',
+                    object_id=str(prev.id),
+                    metadata={'archived_version': prev.version}
+                )
+
+            # 2. Mark this plan ACTIVE
+            diet_plan.status = DietPlanStatus.ACTIVE
+            diet_plan.approved_by = request.user
+            diet_plan.approved_at = now
+            diet_plan.save()
+
+            # 3. Create DietPlanVersion snapshot
+            DietPlanVersion.objects.create(
+                diet_plan=diet_plan,
+                version_number=diet_plan.version,
+                snapshot_data=DietPlanSerializer(diet_plan).data,
+                change_summary=request.data.get('notes', 'Clinically reviewed, individualized, and approved by doctor.'),
+                created_by=request.user
             )
 
-        # 2. Mark this plan ACTIVE
-        diet_plan.status = DietPlanStatus.ACTIVE
-        diet_plan.approved_by = request.user
-        diet_plan.approved_at = now
-        diet_plan.save()
+            # 4. Notify Patient
+            doctor_name = request.user.doctor_profile.professional_name if hasattr(request.user, 'doctor_profile') else request.user.get_full_name() or f"Dr. {request.user.username}"
+            Notification.objects.create(
+                user=diet_plan.patient,
+                type='DIET_PLAN_APPROVED',
+                title='Personalized Diet Plan Approved',
+                message=f"Your personalized Ayurvedic diet plan (v{diet_plan.version}) has been reviewed and approved by {doctor_name}.",
+                related_object_type='DietPlan',
+                related_object_id=diet_plan.id
+            )
 
-        # 3. Create DietPlanVersion snapshot
-        DietPlanVersion.objects.create(
-            diet_plan=diet_plan,
-            version_number=diet_plan.version,
-            snapshot_data=DietPlanSerializer(diet_plan).data,
-            change_summary=request.data.get('notes', 'Clinically reviewed, individualized, and approved by doctor.'),
-            created_by=request.user
-        )
-
-        # 4. Notify Patient
-        doctor_name = request.user.doctor_profile.professional_name if hasattr(request.user, 'doctor_profile') else request.user.get_full_name() or f"Dr. {request.user.username}"
-        Notification.objects.create(
-            user=diet_plan.patient,
-            type='DIET_PLAN_APPROVED',
-            title='Personalized Diet Plan Approved',
-            message=f"Your personalized Ayurvedic diet plan (v{diet_plan.version}) has been reviewed and approved by {doctor_name}.",
-            related_object_type='DietPlan',
-            related_object_id=diet_plan.id
-        )
-
-        # 5. Audit Log
-        AuditLog.objects.create(
-            actor=request.user,
-            action=AuditAction.DIET_APPROVED,
-            patient=diet_plan.patient,
-            object_type='DietPlan',
-            object_id=str(diet_plan.id),
-            metadata={'version': diet_plan.version, 'approved_at': str(now)}
-        )
+            # 5. Audit Log
+            AuditLog.objects.create(
+                actor=request.user,
+                action=AuditAction.DIET_APPROVED,
+                patient=diet_plan.patient,
+                object_type='DietPlan',
+                object_id=str(diet_plan.id),
+                metadata={'version': diet_plan.version, 'approved_at': str(now)}
+            )
 
         return Response({
             'message': 'Diet plan clinically approved and activated successfully.',
@@ -717,17 +774,21 @@ class DoctorDietPlanRejectView(APIView):
         if not diet_plan:
             return Response({'error': 'Diet plan not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-        diet_plan.status = DietPlanStatus.REJECTED
-        diet_plan.save()
+        if diet_plan.status in [DietPlanStatus.ACTIVE, DietPlanStatus.ARCHIVED]:
+            return Response({'error': f"Cannot reject an {diet_plan.status.lower()} diet plan."}, status=status.HTTP_400_BAD_REQUEST)
 
-        AuditLog.objects.create(
-            actor=request.user,
-            action=AuditAction.DIET_REJECTED,
-            patient=diet_plan.patient,
-            object_type='DietPlan',
-            object_id=str(diet_plan.id),
-            metadata={'reason': request.data.get('reason', 'Rejected during clinical review')}
-        )
+        with transaction.atomic():
+            diet_plan.status = DietPlanStatus.REJECTED
+            diet_plan.save()
+
+            AuditLog.objects.create(
+                actor=request.user,
+                action=AuditAction.DIET_REJECTED,
+                patient=diet_plan.patient,
+                object_type='DietPlan',
+                object_id=str(diet_plan.id),
+                metadata={'reason': request.data.get('reason', 'Rejected during clinical review')}
+            )
 
         return Response({
             'message': 'Diet plan rejected.',
@@ -786,7 +847,7 @@ class PatientAssessmentSubmitView(APIView):
     """
     Saves or submits a complete patient constitutional assessment.
     Accessible ONLY to authenticated patients.
-    Idempotent on retries when assessment_id is provided.
+    Supports drafts, atomic saves, and safe inference failure handling.
     """
     permission_classes = [IsPatientUser]
 
@@ -798,36 +859,9 @@ class PatientAssessmentSubmitView(APIView):
         diet_data = request.data.get('diet_data', {})
         symptoms_data = request.data.get('symptoms_data', {})
         prakriti_scores = request.data.get('prakriti_scores', {})
-        ai_analysis = request.data.get('ai_analysis', {})
-        shap_explanations = request.data.get('shap_explanations', [])
-        lime_explanations = request.data.get('lime_explanations', [])
         rag_evidence = request.data.get('rag_evidence', [])
-        recommendations = request.data.get('recommendations', {})
 
-        # Run AI Model Inference if not pre-provided or incomplete
-        if not ai_analysis or not shap_explanations or not prakriti_scores:
-            try:
-                ai_bundle = AyuRagAiModelService.run_inference(request.data)
-                prakriti_scores = {
-                    'vata': ai_bundle['tridoshaProfile']['breakdown']['vata'],
-                    'pitta': ai_bundle['tridoshaProfile']['breakdown']['pitta'],
-                    'kapha': ai_bundle['tridoshaProfile']['breakdown']['kapha'],
-                    'primary': ai_bundle['tridoshaProfile']['constitutionType'],
-                }
-                ai_analysis = {
-                    'prediction': ai_bundle['aiMetrics']['prediction'],
-                    'confidence': ai_bundle['aiMetrics']['confidence'],
-                    'model_name': ai_bundle['aiMetrics']['model_name'],
-                }
-                shap_explanations = ai_bundle.get('xaiFeatures', [])
-                lime_explanations = ai_bundle.get('limeFeatures', [])
-                rag_evidence = ai_bundle.get('evidenceCitations', [])
-                recommendations = ai_bundle.get('recommendations', {})
-            except Exception as e:
-                return Response(
-                    {'error': f'Failed to generate AI clinical analysis for assessment: {str(e)}'},
-                    status=status.HTTP_400_BAD_REQUEST
-                )
+        is_draft = bool(request.data.get('is_draft', False) or request.data.get('status') == AssessmentStatus.IN_PROGRESS)
 
         assessment_id = request.data.get('assessment_id')
         assessment = None
@@ -835,10 +869,39 @@ class PatientAssessmentSubmitView(APIView):
             assessment = PatientAssessment.objects.filter(id=assessment_id, patient=user).first()
             if not assessment and PatientAssessment.objects.filter(id=assessment_id).exists():
                 return Response(
-                    {'error': 'Permission denied: Cannot modify another patient\'s assessment record.'},
+                    {'error': "Permission denied: Cannot modify another patient's assessment record."},
                     status=status.HTTP_403_FORBIDDEN
                 )
 
+        # Draft flow: save inputs with IN_PROGRESS status without running inference or notifying doctor
+        if is_draft:
+            with transaction.atomic():
+                if assessment:
+                    assessment.demographics = demographics
+                    assessment.prakriti_data = prakriti_data
+                    assessment.lifestyle_data = lifestyle_data
+                    assessment.diet_data = diet_data
+                    assessment.symptoms_data = symptoms_data
+                    assessment.status = AssessmentStatus.IN_PROGRESS
+                    assessment.save()
+                else:
+                    assessment = PatientAssessment.objects.create(
+                        patient=user,
+                        status=AssessmentStatus.IN_PROGRESS,
+                        demographics=demographics,
+                        prakriti_data=prakriti_data,
+                        lifestyle_data=lifestyle_data,
+                        diet_data=diet_data,
+                        symptoms_data=symptoms_data,
+                    )
+            return Response({
+                'message': 'Draft assessment saved successfully.',
+                'assessment_id': assessment.id,
+                'assessment': PatientAssessmentDetailSerializer(assessment).data
+            }, status=status.HTTP_201_CREATED if not assessment_id else status.HTTP_200_OK)
+
+        # Submission flow:
+        # Step 1: Atomic persist of raw patient input data with IN_PROGRESS status
         with transaction.atomic():
             if assessment:
                 assessment.demographics = demographics
@@ -846,32 +909,83 @@ class PatientAssessmentSubmitView(APIView):
                 assessment.lifestyle_data = lifestyle_data
                 assessment.diet_data = diet_data
                 assessment.symptoms_data = symptoms_data
-                assessment.prakriti_scores = prakriti_scores
-                assessment.ai_analysis = ai_analysis
-                assessment.shap_explanations = shap_explanations
-                assessment.lime_explanations = lime_explanations
-                assessment.rag_evidence = rag_evidence
-                assessment.recommendations = recommendations
-                assessment.status = AssessmentStatus.COMPLETED
+                assessment.status = AssessmentStatus.IN_PROGRESS
                 assessment.save()
             else:
                 assessment = PatientAssessment.objects.create(
                     patient=user,
-                    status=AssessmentStatus.COMPLETED,
+                    status=AssessmentStatus.IN_PROGRESS,
                     demographics=demographics,
                     prakriti_data=prakriti_data,
                     lifestyle_data=lifestyle_data,
                     diet_data=diet_data,
                     symptoms_data=symptoms_data,
-                    prakriti_scores=prakriti_scores,
-                    ai_analysis=ai_analysis,
-                    shap_explanations=shap_explanations,
-                    lime_explanations=lime_explanations,
-                    rag_evidence=rag_evidence,
-                    recommendations=recommendations
                 )
 
-            # Create or update pending clinical review
+        # Step 2: Execute AI Model Service inference
+        inference_input = {
+            'demographics': demographics,
+            'prakriti_data': prakriti_data,
+            'lifestyle_data': lifestyle_data,
+            'diet_data': diet_data,
+            'symptoms_data': symptoms_data,
+            'rag_evidence': rag_evidence,
+        }
+
+        try:
+            inference_result = AyuRagAiModelService.run_inference(inference_input)
+            inference_failed = False
+        except Exception as exc:
+            inference_failed = True
+            inference_error = str(exc)
+
+        # Step 3: Handle inference failure gracefully (preserve assessment, return 202)
+        if inference_failed:
+            assessment.ai_analysis = {
+                'inference_status': 'FAILED',
+                'error': inference_error,
+            }
+            assessment.status = AssessmentStatus.IN_PROGRESS
+            assessment.save(update_fields=['ai_analysis', 'status', 'updated_at'])
+            return Response({
+                'status': 'INFERENCE_FAILED',
+                'message': 'Assessment received and preserved, but automated inference encountered an error.',
+                'error': inference_error,
+                'can_retry': True,
+                'assessment_id': assessment.id,
+                'assessment': PatientAssessmentDetailSerializer(assessment).data
+            }, status=status.HTTP_202_ACCEPTED)
+
+        # Step 4: Extract scores and analysis
+        tridosha = inference_result.get('tridoshaProfile', {})
+        breakdown = tridosha.get('breakdown', {})
+        scores = {
+            'primary': tridosha.get('primaryDosha', 'Vāta'),
+            'secondary': tridosha.get('secondaryDosha', 'Pitta'),
+            'constitution': tridosha.get('constitutionType', 'Vāta-Pitta'),
+            'breakdown': breakdown,
+            'vata': breakdown.get('vata', 0),
+            'pitta': breakdown.get('pitta', 0),
+            'kapha': breakdown.get('kapha', 0),
+        }
+        analysis_payload = {
+            'prediction': inference_result.get('aiMetrics', {}).get('prediction', f"{scores['constitution']} Constitutional Balance"),
+            'confidence': inference_result.get('aiMetrics', {}).get('confidence', 0.85),
+            'digestiveAgni': inference_result.get('digestiveAgni', {}),
+            'aiMetrics': inference_result.get('aiMetrics', {}),
+            'tridoshaProfile': tridosha,
+        }
+
+        with transaction.atomic():
+            assessment.prakriti_scores = scores
+            assessment.ai_analysis = analysis_payload
+            assessment.shap_explanations = inference_result.get('shapExplanations', [])
+            assessment.lime_explanations = inference_result.get('limeExplanations', [])
+            assessment.rag_evidence = inference_result.get('ragEvidence', [])
+            assessment.recommendations = inference_result.get('recommendations', {})
+            assessment.status = AssessmentStatus.COMPLETED
+            assessment.save()
+
             default_doctor = User.objects.filter(role=User.Role.DOCTOR).first()
             if default_doctor:
                 review, created = ClinicalReview.objects.get_or_create(
@@ -880,14 +994,11 @@ class PatientAssessmentSubmitView(APIView):
                     defaults={
                         'doctor': default_doctor,
                         'status': ReviewStatus.PENDING,
-                        'summary': f"New assessment submitted for {demographics.get('fullName', user.username)}. Primary constitutional indication: {prakriti_scores.get('primary', 'Vāta-Pitta')}."
+                        'summary': f"New assessment submitted for {demographics.get('fullName', user.username)}. Primary constitutional indication: {scores.get('primary', 'Vāta-Pitta')}."
                     }
                 )
-                # Initialize verification fields
                 initialize_verifications_for_assessment(user, assessment, default_doctor)
-
                 if created:
-                    # Notification for doctor
                     Notification.objects.create(
                         user=default_doctor,
                         type='NEW_ASSESSMENT',
@@ -902,6 +1013,142 @@ class PatientAssessmentSubmitView(APIView):
             'assessment_id': assessment.id,
             'assessment': PatientAssessmentDetailSerializer(assessment).data
         }, status=status.HTTP_201_CREATED if not assessment_id else status.HTTP_200_OK)
+
+
+class PatientAssessmentDetailView(APIView):
+    """
+    Retrieve an individual patient assessment by primary key.
+    Enforces authorization:
+    - Patients may only access their own assessment.
+    - Doctors may access patient assessments.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        try:
+            assessment = PatientAssessment.objects.select_related('patient').get(pk=pk)
+        except PatientAssessment.DoesNotExist:
+            return Response({'error': 'Assessment not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        user = request.user
+        if user.role == User.Role.PATIENT and assessment.patient != user:
+            return Response(
+                {'error': "Permission denied: Cannot view another patient's assessment."},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        return Response(PatientAssessmentDetailSerializer(assessment).data)
+
+
+class PatientAssessmentRetryView(APIView):
+    """
+    Retries AI inference for an existing assessment where inference previously failed or was incomplete.
+    Idempotent: updates the existing record without creating duplicate assessments.
+    """
+    permission_classes = [IsPatientUser]
+
+    def post(self, request, pk):
+        user = request.user
+        try:
+            assessment = PatientAssessment.objects.get(pk=pk)
+        except PatientAssessment.DoesNotExist:
+            return Response({'error': 'Assessment not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        if assessment.patient != user:
+            return Response(
+                {'error': "Permission denied: Cannot retry analysis for another patient's assessment."},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        if assessment.status == AssessmentStatus.VALIDATED:
+            return Response(
+                {'error': 'Assessment has already been clinically validated by physician.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        inference_input = {
+            'demographics': assessment.demographics or {},
+            'prakriti_data': assessment.prakriti_data or {},
+            'lifestyle_data': assessment.lifestyle_data or {},
+            'diet_data': assessment.diet_data or {},
+            'symptoms_data': assessment.symptoms_data or {},
+            'rag_evidence': assessment.rag_evidence or [],
+        }
+
+        try:
+            inference_result = AyuRagAiModelService.run_inference(inference_input)
+        except Exception as exc:
+            assessment.ai_analysis = {
+                'inference_status': 'FAILED',
+                'error': str(exc),
+            }
+            assessment.save(update_fields=['ai_analysis', 'updated_at'])
+            return Response({
+                'status': 'INFERENCE_FAILED',
+                'message': 'AI inference retry failed.',
+                'error': str(exc),
+                'can_retry': True,
+                'assessment_id': assessment.id,
+                'assessment': PatientAssessmentDetailSerializer(assessment).data
+            }, status=status.HTTP_202_ACCEPTED)
+
+        # On success
+        tridosha = inference_result.get('tridoshaProfile', {})
+        breakdown = tridosha.get('breakdown', {})
+        scores = {
+            'primary': tridosha.get('primaryDosha', 'Vāta'),
+            'secondary': tridosha.get('secondaryDosha', 'Pitta'),
+            'constitution': tridosha.get('constitutionType', 'Vāta-Pitta'),
+            'breakdown': breakdown,
+            'vata': breakdown.get('vata', 0),
+            'pitta': breakdown.get('pitta', 0),
+            'kapha': breakdown.get('kapha', 0),
+        }
+        analysis_payload = {
+            'prediction': inference_result.get('aiMetrics', {}).get('prediction', f"{scores['constitution']} Constitutional Balance"),
+            'confidence': inference_result.get('aiMetrics', {}).get('confidence', 0.85),
+            'digestiveAgni': inference_result.get('digestiveAgni', {}),
+            'aiMetrics': inference_result.get('aiMetrics', {}),
+            'tridoshaProfile': tridosha,
+        }
+
+        with transaction.atomic():
+            assessment.prakriti_scores = scores
+            assessment.ai_analysis = analysis_payload
+            assessment.shap_explanations = inference_result.get('shapExplanations', [])
+            assessment.lime_explanations = inference_result.get('limeExplanations', [])
+            assessment.rag_evidence = inference_result.get('ragEvidence', [])
+            assessment.recommendations = inference_result.get('recommendations', {})
+            assessment.status = AssessmentStatus.COMPLETED
+            assessment.save()
+
+            default_doctor = User.objects.filter(role=User.Role.DOCTOR).first()
+            if default_doctor:
+                review, created = ClinicalReview.objects.get_or_create(
+                    patient=user,
+                    assessment=assessment,
+                    defaults={
+                        'doctor': default_doctor,
+                        'status': ReviewStatus.PENDING,
+                        'summary': f"Assessment #{assessment.id} analyzed on retry for {assessment.demographics.get('fullName', user.username)}."
+                    }
+                )
+                initialize_verifications_for_assessment(user, assessment, default_doctor)
+                if created:
+                    Notification.objects.create(
+                        user=default_doctor,
+                        type='NEW_ASSESSMENT',
+                        title='New Patient Assessment',
+                        message=f"Patient {assessment.demographics.get('fullName', user.username)} has completed assessment #{assessment.id}.",
+                        related_object_type='PatientAssessment',
+                        related_object_id=assessment.id
+                    )
+
+        return Response({
+            'message': 'AI inference succeeded and assessment updated successfully.',
+            'assessment_id': assessment.id,
+            'assessment': PatientAssessmentDetailSerializer(assessment).data
+        }, status=status.HTTP_200_OK)
 
 
 class ClinicalAiInferenceView(APIView):

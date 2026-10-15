@@ -322,3 +322,214 @@ class ClinicalWorkflowsAndDataIsolationTests(TestCase):
         notif.refresh_from_db()
         self.assertTrue(notif.is_read)
 
+
+    def test_scenario_a_patient_full_lifecycle(self):
+        """
+        Scenario A (Patient): Complete assessment submission -> backend rule inference ->
+        persisted results -> retrieval upon page refresh matches DB source of truth.
+        """
+        self.client.force_authenticate(user=self.patient_2)
+        payload = {
+            'demographics': {
+                'fullName': 'Patient Two',
+                'age': 32,
+                'gender': 'female',
+                'height': '165 cm',
+                'weight': '58 kg'
+            },
+            'prakriti_data': {
+                'prakriti_q1': 'opt_1_2', # Athletic (Pitta)
+                'prakriti_q2': 'opt_2_2', # Warm skin (Pitta)
+                'prakriti_q4': 'opt_4_2', # Sharp appetite (Pitta)
+                'prakriti_q5': 'opt_5_2'  # Rapid digestion (Pitta)
+            },
+            'lifestyle_data': {},
+            'diet_data': {},
+            'symptoms_data': {'selectedSymptoms': ['hyperacidity']}
+        }
+        submit_res = self.client.post('/api/patient/assessment/submit/', payload, format='json')
+        self.assertEqual(submit_res.status_code, status.HTTP_201_CREATED)
+        asm_id = submit_res.data['assessment_id']
+        self.assertIsNotNone(asm_id)
+
+        asm_data = submit_res.data['assessment']
+        self.assertEqual(asm_data['status'], AssessmentStatus.COMPLETED)
+        scores = asm_data['prakriti_scores']
+        self.assertIn('pitta', scores.get('breakdown', {}))
+        self.assertGreater(scores['breakdown']['pitta'], scores['breakdown']['vata'])
+
+        # Total dosha percentages strictly sum to 100
+        total_dosha = scores['breakdown']['vata'] + scores['breakdown']['pitta'] + scores['breakdown']['kapha']
+        self.assertEqual(total_dosha, 100)
+
+        # Citations are classical
+        self.assertGreater(len(asm_data['rag_evidence']), 0)
+        self.assertIn('Saṃhitā', asm_data['rag_evidence'][0]['source'])
+
+        # Retrieval upon page refresh
+        latest_res = self.client.get('/api/patient/assessment/latest/')
+        self.assertEqual(latest_res.status_code, status.HTTP_200_OK)
+        self.assertTrue(latest_res.data['has_assessment'])
+        self.assertEqual(latest_res.data['assessment']['id'], asm_id)
+        self.assertEqual(latest_res.data['assessment']['prakriti_scores']['primary'], scores['primary'])
+
+        # Direct detail retrieval
+        detail_res = self.client.get(f'/api/patient/assessment/{asm_id}/')
+        self.assertEqual(detail_res.status_code, status.HTTP_200_OK)
+        self.assertEqual(detail_res.data['id'], asm_id)
+
+    def test_scenario_b_inference_failure_retention_and_safe_retry(self):
+        """
+        Scenario B (Failure Recovery): If inference fails, assessment is preserved (status IN_PROGRESS, 202).
+        A subsequent retry idempotently updates the same assessment without creating a duplicate.
+        """
+        from unittest.mock import patch
+        from clinical.services.ai_model_service import AyuRagAiModelService
+
+        self.client.force_authenticate(user=self.patient_2)
+        payload = {
+            'demographics': {'fullName': 'Patient Two', 'age': 45},
+            'prakriti_data': {'prakriti_q1': 'opt_1_1'},
+            'lifestyle_data': {},
+            'diet_data': {},
+            'symptoms_data': {}
+        }
+
+        # 1. Simulate inference failure during submission
+        with patch.object(AyuRagAiModelService, 'run_inference', side_effect=RuntimeError("AI Engine Timeout")):
+            submit_res = self.client.post('/api/patient/assessment/submit/', payload, format='json')
+
+        self.assertEqual(submit_res.status_code, status.HTTP_202_ACCEPTED)
+        self.assertEqual(submit_res.data['status'], 'INFERENCE_FAILED')
+        self.assertTrue(submit_res.data['can_retry'])
+        asm_id = submit_res.data['assessment_id']
+
+        # Assessment is retained in DB
+        asm = PatientAssessment.objects.get(id=asm_id)
+        self.assertEqual(asm.status, AssessmentStatus.IN_PROGRESS)
+        self.assertEqual(asm.ai_analysis.get('inference_status'), 'FAILED')
+
+        initial_count = PatientAssessment.objects.filter(patient=self.patient_2).count()
+
+        # 2. Safe idempotent retry
+        retry_res = self.client.post(f'/api/patient/assessment/{asm_id}/retry-analysis/')
+        self.assertEqual(retry_res.status_code, status.HTTP_200_OK)
+        self.assertEqual(retry_res.data['assessment_id'], asm_id)
+
+        # Assessment is now completed
+        asm.refresh_from_db()
+        self.assertEqual(asm.status, AssessmentStatus.COMPLETED)
+        self.assertIn('tridoshaProfile', asm.ai_analysis)
+
+        # Count did not increase (no duplicate created)
+        final_count = PatientAssessment.objects.filter(patient=self.patient_2).count()
+        self.assertEqual(initial_count, final_count)
+
+    def test_scenario_c_doctor_review_and_patient_notification(self):
+        """
+        Scenario C (Doctor Review): Doctor reviews assessment, completes review,
+        assessment becomes VALIDATED, and patient receives notification.
+        Reverting a COMPLETED review to PENDING is rejected.
+        """
+        self.client.force_authenticate(user=self.doctor)
+
+        # Create review in progress
+        res1 = self.client.post('/api/doctor/reviews/', {
+            'assessment_id': self.assessment_1.id,
+            'status': ReviewStatus.IN_REVIEW,
+            'summary': 'Clinical verification underway.'
+        }, format='json')
+        self.assertEqual(res1.status_code, status.HTTP_201_CREATED)
+        review_id = res1.data['id']
+
+        # Complete review
+        res2 = self.client.patch(f'/api/doctor/reviews/{review_id}/', {
+            'status': ReviewStatus.COMPLETED,
+            'summary': 'Constitutional protocol clinically validated and approved.'
+        }, format='json')
+        self.assertEqual(res2.status_code, status.HTTP_200_OK)
+
+        # Assessment status updated to VALIDATED
+        self.assessment_1.refresh_from_db()
+        self.assertEqual(self.assessment_1.status, AssessmentStatus.VALIDATED)
+
+        # Patient notification created
+        notif = Notification.objects.filter(
+            user=self.patient_1,
+            type='CLINICAL_REVIEW_COMPLETED'
+        ).first()
+        self.assertIsNotNone(notif)
+        self.assertIn('validated', notif.title.lower())
+
+        # Invalid transition: Reverting COMPLETED to PENDING is rejected
+        res3 = self.client.patch(f'/api/doctor/reviews/{review_id}/', {
+            'status': ReviewStatus.PENDING
+        }, format='json')
+        self.assertEqual(res3.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('Invalid state transition', res3.data['error'])
+
+    def test_scenario_d_cross_patient_detail_isolation(self):
+        """
+        Scenario D (Security): Patient 2 cannot read or retry Patient 1's assessment (403 Forbidden).
+        Doctor can view it.
+        """
+        self.client.force_authenticate(user=self.patient_2)
+
+        # Cannot read assessment 1
+        res_read = self.client.get(f'/api/patient/assessment/{self.assessment_1.id}/')
+        self.assertEqual(res_read.status_code, status.HTTP_403_FORBIDDEN)
+
+        # Cannot retry analysis on assessment 1
+        res_retry = self.client.post(f'/api/patient/assessment/{self.assessment_1.id}/retry-analysis/')
+        self.assertEqual(res_retry.status_code, status.HTTP_403_FORBIDDEN)
+
+        # Doctor has access
+        self.client.force_authenticate(user=self.doctor)
+        res_doc = self.client.get(f'/api/patient/assessment/{self.assessment_1.id}/')
+        self.assertEqual(res_doc.status_code, status.HTTP_200_OK)
+
+    def test_draft_persistence_does_not_trigger_doctor_review(self):
+        """
+        Draft assessments save in-progress state but do NOT create ClinicalReview or notify doctor.
+        """
+        self.client.force_authenticate(user=self.patient_2)
+        payload = {
+            'is_draft': True,
+            'demographics': {'fullName': 'Patient Two Draft', 'age': 45},
+            'prakriti_data': {'prakriti_q1': 'opt_1_1'}
+        }
+        res = self.client.post('/api/patient/assessment/submit/', payload, format='json')
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        asm_id = res.data['assessment_id']
+
+        asm = PatientAssessment.objects.get(id=asm_id)
+        self.assertEqual(asm.status, AssessmentStatus.IN_PROGRESS)
+
+        # No clinical review created for draft
+        self.assertFalse(ClinicalReview.objects.filter(assessment=asm).exists())
+
+        # No doctor notification created
+        self.assertFalse(Notification.objects.filter(related_object_id=asm.id, type='NEW_ASSESSMENT').exists())
+
+    def test_diet_plan_state_transition_validation(self):
+        """
+        Doctor cannot approve an already ACTIVE plan or reject an already ACTIVE plan.
+        """
+        self.client.force_authenticate(user=self.doctor)
+
+        plan = DietPlan.objects.create(
+            patient=self.patient_1,
+            doctor=self.doctor,
+            status=DietPlanStatus.ACTIVE,
+            title='Active Clinical Plan'
+        )
+
+        # Attempt to approve already active plan -> 400
+        res_approve = self.client.post(f'/api/doctor/diet-plans/{plan.id}/approve/')
+        self.assertEqual(res_approve.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('already active', res_approve.data['error'].lower())
+
+        # Attempt to reject already active plan -> 400
+        res_reject = self.client.post(f'/api/doctor/diet-plans/{plan.id}/reject/')
+        self.assertEqual(res_reject.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('cannot reject an active', res_reject.data['error'].lower())
