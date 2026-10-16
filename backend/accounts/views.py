@@ -112,6 +112,12 @@ class RegisterView(APIView):
         if len(password) < 8:
             return Response({'error': 'Password must be at least 8 characters long.'}, status=status.HTTP_400_BAD_REQUEST)
 
+        from django.core.exceptions import ValidationError as DjangoValidationError
+        try:
+            password_validation.validate_password(password)
+        except DjangoValidationError as val_err:
+            return Response({'error': ' '.join(val_err.messages)}, status=status.HTTP_400_BAD_REQUEST)
+
         if not username:
             username = email.split('@')[0]
 

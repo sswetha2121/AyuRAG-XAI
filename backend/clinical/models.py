@@ -31,7 +31,7 @@ class DietPlanGeneratedBy(models.TextChoices):
 
 class PatientAssessment(models.Model):
     patient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='assessments')
-    status = models.CharField(max_length=30, choices=AssessmentStatus.choices, default=AssessmentStatus.COMPLETED)
+    status = models.CharField(max_length=30, choices=AssessmentStatus.choices, default=AssessmentStatus.COMPLETED, db_index=True)
     
     # Baseline demographics snapshot
     demographics = models.JSONField(default=dict, blank=True)
@@ -67,7 +67,7 @@ class ClinicalReview(models.Model):
     doctor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='conducted_clinical_reviews')
     assessment = models.ForeignKey(PatientAssessment, on_delete=models.CASCADE, related_name='reviews', null=True, blank=True)
     
-    status = models.CharField(max_length=20, choices=ReviewStatus.choices, default=ReviewStatus.PENDING)
+    status = models.CharField(max_length=20, choices=ReviewStatus.choices, default=ReviewStatus.PENDING, db_index=True)
     summary = models.TextField(blank=True)
     observations = models.TextField(blank=True)
     recommendations = models.TextField(blank=True)
@@ -142,7 +142,8 @@ class DietPlan(models.Model):
     status = models.CharField(
         max_length=30,
         choices=DietPlanStatus.choices,
-        default=DietPlanStatus.DRAFT
+        default=DietPlanStatus.DRAFT,
+        db_index=True
     )
     
     # Structured Meals
@@ -200,7 +201,7 @@ class Notification(models.Model):
     message = models.TextField()
     related_object_type = models.CharField(max_length=100, blank=True)
     related_object_id = models.IntegerField(null=True, blank=True)
-    is_read = models.BooleanField(default=False)
+    is_read = models.BooleanField(default=False, db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -222,7 +223,7 @@ class AuditAction(models.TextChoices):
 
 class AuditLog(models.Model):
     actor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name='audit_actions')
-    action = models.CharField(max_length=100, choices=AuditAction.choices)
+    action = models.CharField(max_length=100, choices=AuditAction.choices, db_index=True)
     patient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='patient_audit_logs')
     object_type = models.CharField(max_length=100)
     object_id = models.CharField(max_length=100, blank=True)

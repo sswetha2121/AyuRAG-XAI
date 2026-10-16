@@ -360,7 +360,7 @@ class DoctorReportsView(APIView):
 
         return Response({
             'count': len(reports_data),
-            'generated_at': '2026-09-28',
+            'generated_at': timezone.now().strftime('%Y-%m-%d %H:%M:%S'),
             'reports': reports_data
         })
 
@@ -979,9 +979,9 @@ class PatientAssessmentSubmitView(APIView):
         with transaction.atomic():
             assessment.prakriti_scores = scores
             assessment.ai_analysis = analysis_payload
-            assessment.shap_explanations = inference_result.get('shapExplanations', [])
-            assessment.lime_explanations = inference_result.get('limeExplanations', [])
-            assessment.rag_evidence = inference_result.get('ragEvidence', [])
+            assessment.shap_explanations = inference_result.get('shapExplanations') or inference_result.get('xaiFeatures') or []
+            assessment.lime_explanations = inference_result.get('limeExplanations') or inference_result.get('limeFeatures') or []
+            assessment.rag_evidence = inference_result.get('ragEvidence') or inference_result.get('evidenceCitations') or rag_evidence or []
             assessment.recommendations = inference_result.get('recommendations', {})
             assessment.status = AssessmentStatus.COMPLETED
             assessment.save()
@@ -1115,9 +1115,9 @@ class PatientAssessmentRetryView(APIView):
         with transaction.atomic():
             assessment.prakriti_scores = scores
             assessment.ai_analysis = analysis_payload
-            assessment.shap_explanations = inference_result.get('shapExplanations', [])
-            assessment.lime_explanations = inference_result.get('limeExplanations', [])
-            assessment.rag_evidence = inference_result.get('ragEvidence', [])
+            assessment.shap_explanations = inference_result.get('shapExplanations') or inference_result.get('xaiFeatures') or []
+            assessment.lime_explanations = inference_result.get('limeExplanations') or inference_result.get('limeFeatures') or []
+            assessment.rag_evidence = inference_result.get('ragEvidence') or inference_result.get('evidenceCitations') or []
             assessment.recommendations = inference_result.get('recommendations', {})
             assessment.status = AssessmentStatus.COMPLETED
             assessment.save()

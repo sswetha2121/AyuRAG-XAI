@@ -1,24 +1,68 @@
 """
 Root and API status views for AyuRAG-XAI Backend.
+Includes safe, production-grade liveness and readiness health checks.
 """
 
+import os
+import logging
 from django.http import JsonResponse
+from django.db import connection
+from django.conf import settings
+
+logger = logging.getLogger(__name__)
+
+
+def health_live_view(request):
+    """
+    Liveness probe: verifies process execution.
+    Safe: does not leak sensitive information, database internals, or environment variables.
+    """
+    return JsonResponse({
+        "status": "live",
+        "service": "AyuRAG-XAI Clinical Decision Support Backend",
+        "environment": getattr(settings, 'ENVIRONMENT', 'production'),
+    }, status=200)
+
+
+def health_ready_view(request):
+    """
+    Readiness probe: verifies backend dependencies (database connectivity).
+    Safe: returns 200 on healthy connectivity and 503 on database failure without disclosing internals.
+    """
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1;")
+            cursor.fetchone()
+        return JsonResponse({
+            "status": "ready",
+            "service": "AyuRAG-XAI Clinical Decision Support Backend",
+            "database": "connected"
+        }, status=200)
+    except Exception as exc:
+        logger.error("Health readiness check failed: %s", str(exc))
+        return JsonResponse({
+            "status": "unavailable",
+            "service": "AyuRAG-XAI Clinical Decision Support Backend",
+            "database": "disconnected"
+        }, status=503)
 
 
 def root_status_view(request):
     """
-    Root endpoint for AyuRAG-XAI Backend (http://127.0.0.1:8000/).
-    Provides service status, frontend application link, and available API routes.
+    Root endpoint for AyuRAG-XAI Backend.
+    Provides service status, health endpoints, and available API routes.
     """
+    frontend_url = os.environ.get('FRONTEND_URL', 'http://localhost:5173')
     return JsonResponse({
         "status": "healthy",
         "service": "AyuRAG-XAI Clinical Decision Support Backend API",
         "version": "2.1.0",
-        "frontend_url": "http://localhost:5173",
-        "message": (
-            "AyuRAG-XAI backend API is running. "
-            "To access the patient & doctor user interface, visit http://localhost:5173."
-        ),
+        "frontend_url": frontend_url,
+        "message": "AyuRAG-XAI backend API is running.",
+        "health": {
+            "live": "/api/health/live/",
+            "ready": "/api/health/ready/"
+        },
         "endpoints": {
             "root": "/",
             "admin": "/admin/",
@@ -28,8 +72,7 @@ def root_status_view(request):
                 "login": "/api/auth/login/",
                 "doctor_login": "/api/auth/doctor-login/",
                 "register": "/api/auth/register/",
-                "logout": "/api/auth/logout/",
-                "demo_switch": "/api/auth/demo-switch/"
+                "logout": "/api/auth/logout/"
             },
             "clinical": {
                 "doctor_dashboard": "/api/doctor/dashboard/",
@@ -52,6 +95,8 @@ def api_index_view(request):
         "service": "AyuRAG-XAI REST API",
         "version": "2.1.0",
         "description": "Clinical Decision Support & Explainable Ayurvedic Intelligence API",
+        "health_live": "/api/health/live/",
+        "health_ready": "/api/health/ready/",
         "auth_routes": "/api/auth/",
         "doctor_routes": "/api/doctor/",
         "patient_routes": "/api/patient/",

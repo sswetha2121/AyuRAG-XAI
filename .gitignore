@@ -1,0 +1,60 @@
+# Python & Django
+*.py[cod]
+*$py.class
+__pycache__/
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# Database & Sensitive Local Data
+*.sqlite3
+backend/db.sqlite3
+db.sqlite3
+*.db
+
+# Environment & Secret files
+.env
+.env.local
+.env.*.local
+*.env
+!.env.example
+
+# Static & Media directories
+backend/staticfiles/
+backend/media/
+staticfiles/
+media/
+backend/backups/
+backups/
+
+# Node & Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE & OS
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+
+# Testing & Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+*.log

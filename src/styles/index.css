@@ -59,7 +59,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   color: var(--color-text-primary);
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
   letter-spacing: -0.02em;

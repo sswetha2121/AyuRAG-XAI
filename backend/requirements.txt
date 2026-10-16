@@ -1,0 +1,12 @@
+# AyuRAG-XAI Backend Dependencies
+# Pinned versions for reproducible development, testing, and production deployment.
+
+Django>=5.0.0,<7.0.0
+djangorestframework>=3.14.0,<4.0.0
+django-cors-headers>=4.3.0,<5.0.0
+python-dotenv>=1.0.0,<2.0.0
+asgiref>=3.7.0
+sqlparse>=0.5.0
+
+# Production WSGI Server (Linux/Container deployment)
+gunicorn>=22.0.0; sys_platform != 'win32'

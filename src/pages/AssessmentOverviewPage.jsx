@@ -145,7 +145,7 @@ export const AssessmentOverviewPage = ({ onTriggerToast }) => {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => navigate('/login')}
+                onClick={() => navigate('/signin')}
               >
                 <LogIn size={14} className="mr-xs" />
                 Sign In

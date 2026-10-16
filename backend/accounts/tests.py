@@ -94,3 +94,43 @@ class AuthenticationAndSecurityTests(TestCase):
         self.client.force_authenticate(user=self.doctor_user)
         response = self.client.get('/api/doctor/dashboard/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_registration_rejects_common_password(self):
+        """Common passwords (e.g., 'password123') fail Django password validators."""
+        response = self.client.post('/api/auth/register/', {
+            'username': 'weakuser',
+            'email': 'weakuser@test.com',
+            'password': 'password'
+        }, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('error', response.data)
+
+    def test_registration_always_assigns_patient_role(self):
+        """Registration ignores any client-supplied doctor role and strictly assigns PATIENT."""
+        response = self.client.post('/api/auth/register/', {
+            'username': 'sneakyuser',
+            'email': 'sneaky@test.com',
+            'password': 'StrongPassword2026!',
+            'role': 'DOCTOR'
+        }, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        user = User.objects.get(username='sneakyuser')
+        self.assertEqual(user.role, User.Role.PATIENT)
+
+    def test_health_live_endpoint(self):
+        """Liveness endpoint returns 200 and does not leak secrets."""
+        response = self.client.get('/api/health/live/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json().get('status'), 'live')
+
+    def test_health_ready_endpoint(self):
+        """Readiness endpoint returns 200 and confirms database connectivity."""
+        response = self.client.get('/api/health/ready/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json().get('status'), 'ready')
+        self.assertEqual(response.json().get('database'), 'connected')
+
+    def test_unauthenticated_cannot_access_me(self):
+        """Unauthenticated request to /api/auth/me/ returns 401 or 403."""
+        response = self.client.get('/api/auth/me/')
+        self.assertIn(response.status_code, [status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN])

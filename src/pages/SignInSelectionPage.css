@@ -1,0 +1,330 @@
+/* ==========================================================================
+   AyuRAG-XAI ROLE SELECTION SCREEN STYLES
+   Desktop: 3-column balanced cards
+   Tablet: 2-column or clean stacked
+   Mobile: 1-column touch-friendly
+   ========================================================================== */
+
+.ayur-role-page {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl) var(--space-md);
+}
+
+.ayur-role-container {
+  width: 100%;
+  max-width: 1060px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top Navigation Bar */
+.ayur-role-top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-xl);
+}
+
+.ayur-role-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  transition: all var(--transition-fast);
+}
+
+.ayur-role-back-link:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+.ayur-role-portal-tag {
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* Header Section */
+.ayur-role-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto var(--space-2xl) auto;
+}
+
+.ayur-role-emblem {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto var(--space-md) auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ayur-role-emblem svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ayur-role-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.025em;
+  margin-bottom: var(--space-xs);
+}
+
+.ayur-role-subtitle {
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+/* 3-Column Role Cards Grid */
+.ayur-role-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  align-items: stretch;
+  margin-bottom: var(--space-2xl);
+}
+
+.ayur-role-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: var(--shadow-subtle);
+  outline: none;
+}
+
+.ayur-role-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-secondary);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.ayur-role-card:focus-visible {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.ayur-role-card--featured {
+  border-color: rgba(22, 56, 44, 0.35);
+  box-shadow: 0 4px 16px rgba(22, 56, 44, 0.06);
+}
+
+.ayur-role-card--featured:hover {
+  border-color: var(--color-primary);
+}
+
+.ayur-role-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+
+.ayur-role-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(22, 56, 44, 0.12);
+  transition: background-color var(--transition-fast);
+}
+
+.ayur-role-card:hover .ayur-role-icon-box {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.ayur-role-badge {
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-secondary);
+  background-color: var(--color-secondary-light);
+  border: 1px solid rgba(91, 130, 102, 0.2);
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+}
+
+.ayur-role-card__body {
+  flex: 1;
+  margin-bottom: var(--space-xl);
+}
+
+.ayur-role-card__title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  line-height: var(--line-height-snug);
+  margin-bottom: var(--space-xs);
+}
+
+.ayur-role-card__desc {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.ayur-role-card__footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.ayur-role-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: var(--input-height);
+  padding: 0 var(--space-md);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  color: var(--color-primary);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.ayur-role-card:hover .ayur-role-action-btn {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.ayur-role-card--featured .ayur-role-action-btn {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.ayur-role-card--featured:hover .ayur-role-action-btn {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.ayur-role-arrow {
+  transition: transform var(--transition-fast);
+}
+
+.ayur-role-card:hover .ayur-role-arrow {
+  transform: translateX(4px);
+}
+
+.ayur-role-footnote {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* Bottom Registration & Security Box */
+.ayur-role-bottom-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.ayur-role-register-hint {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.ayur-role-register-link {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.ayur-role-register-link:hover {
+  color: var(--color-secondary);
+  text-decoration: underline;
+}
+
+.ayur-role-security-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-align: center;
+  max-width: 620px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 960px) {
+  .ayur-role-grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: var(--space-md);
+  }
+
+  .ayur-role-card {
+    padding: var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .ayur-role-page {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .ayur-role-top-nav {
+    margin-bottom: var(--space-md);
+  }
+
+  .ayur-role-header {
+    margin-bottom: var(--space-lg);
+  }
+
+  .ayur-role-register-hint {
+    flex-direction: column;
+    text-align: center;
+  }
+}

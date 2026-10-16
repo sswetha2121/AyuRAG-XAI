@@ -27,6 +27,7 @@ import { DoctorReportsPage } from './pages/DoctorReportsPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { DoctorLoginPage } from './pages/DoctorLoginPage';
+import { SignInSelectionPage } from './pages/SignInSelectionPage';
 import { LandingPage } from './pages/LandingPage';
 import { AssessmentOverviewPage } from './pages/AssessmentOverviewPage';
 
@@ -645,7 +646,17 @@ function MainApp() {
         element={<Navigate to="/assessment-overview" replace />}
       />
 
-      {/* 4. Patient Authentication - Separate dedicated Login and Register pages */}
+      {/* 4. Role Selection & Authentication Entry */}
+      <Route
+        path="/signin"
+        element={<SignInSelectionPage onTriggerToast={addToast} />}
+      />
+      <Route
+        path="/select-role"
+        element={<SignInSelectionPage onTriggerToast={addToast} />}
+      />
+
+      {/* 5. Patient Authentication - Separate dedicated Login and Register pages */}
       <Route
         path="/login"
         element={

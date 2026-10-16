@@ -61,11 +61,11 @@ export const LoginPage = ({ onLoginSuccess, onTriggerToast }) => {
   return (
     <div className="ayur-auth-page">
       <div className="ayur-auth-card">
-        {/* Back Link */}
+        {/* Top Navigation Bar with clear Route back to Role Selection & Home */}
         <div className="ayur-auth-top-bar">
-          <Link to="/" className="ayur-auth-back-link" title="Return to Home">
+          <Link to="/signin" className="ayur-auth-back-link" title="Change your sign-in role">
             <ArrowLeft size={16} />
-            <span>Home</span>
+            <span>Role Selection</span>
           </Link>
           <span className="ayur-auth-tag">PATIENT PORTAL</span>
         </div>
@@ -107,7 +107,7 @@ export const LoginPage = ({ onLoginSuccess, onTriggerToast }) => {
           <FormField label="Username or Email" htmlFor="auth-username" required>
             <div className="ayur-input-wrap">
               <span className="ayur-input-icon">
-                <User size={17} />
+                <User size={16} />
               </span>
               <input
                 id="auth-username"
@@ -128,7 +128,7 @@ export const LoginPage = ({ onLoginSuccess, onTriggerToast }) => {
           <FormField label="Password" htmlFor="auth-password" required>
             <div className="ayur-input-wrap">
               <span className="ayur-input-icon">
-                <Lock size={17} />
+                <Lock size={16} />
               </span>
               <input
                 id="auth-password"
@@ -161,10 +161,11 @@ export const LoginPage = ({ onLoginSuccess, onTriggerToast }) => {
             type="submit"
             fullWidth
             isLoading={isLoading}
+            disabled={isLoading}
             rightIcon={<ArrowRight size={16} />}
             className="mt-xs"
           >
-            Sign In to Patient Portal
+            Sign In as Patient
           </Button>
         </form>
 
@@ -172,7 +173,7 @@ export const LoginPage = ({ onLoginSuccess, onTriggerToast }) => {
         <div className="ayur-auth-switch">
           <span>New to AyuRAG-XAI?</span>
           <Link to="/signup" className="ayur-auth-switch-link">
-            Create an Account →
+            Create a Patient Account →
           </Link>
         </div>
 
@@ -191,7 +192,7 @@ export const LoginPage = ({ onLoginSuccess, onTriggerToast }) => {
         {/* Security Footer */}
         <div className="ayur-auth-footer">
           <ShieldCheck size={14} className="text-secondary shrink-0" />
-          <span>Patient data is isolated and protected under role-based authorization.</span>
+          <span>Patient records are confidential and isolated under role-based authorization.</span>
         </div>
       </div>
     </div>

@@ -173,9 +173,12 @@ class AyuRagAiModelService:
             },
             'xaiFeatures': shap_explanations,
             'limeFeatures': lime_explanations,
+            'shapExplanations': shap_explanations,
+            'limeExplanations': lime_explanations,
             'ruleAttributions': shap_explanations,
             'decisionRules': lime_explanations,
             'evidenceCitations': rag_citations,
+            'ragEvidence': rag_citations,
             'recommendations': recommendations,
             'dailyRoutineTimetable': timetable,
         }

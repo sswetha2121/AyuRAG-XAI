@@ -52,9 +52,9 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
       <div className="ayur-dlogin-card">
         {/* Top Back Navigation Link */}
         <div className="ayur-dlogin-top-bar">
-          <Link to="/" className="ayur-dlogin-back-link" title="Return to Home">
+          <Link to="/signin" className="ayur-dlogin-back-link" title="Return to Role Selection">
             <ArrowLeft size={16} />
-            <span>Home</span>
+            <span>Role Selection</span>
           </Link>
           <span className="ayur-dlogin-tag">DOCTOR PORTAL</span>
         </div>
@@ -66,7 +66,7 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
           </div>
           <h1 className="ayur-dlogin-title">Doctor Workspace Login</h1>
           <p className="ayur-dlogin-subtitle">
-            Secure clinical decision support portal for patient evaluation, symptom verification, and diet plan approval.
+            Secure clinical decision support portal for patient evaluation, symptom verification, and care plan authorization.
           </p>
         </div>
 
@@ -83,7 +83,7 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
           <FormField label="Physician Username or Email" htmlFor="doctor-username" required>
             <div className="ayur-dlogin-input-wrap">
               <span className="ayur-dlogin-input-icon">
-                <User size={17} />
+                <User size={16} />
               </span>
               <input
                 id="doctor-username"
@@ -104,7 +104,7 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
           <FormField label="Physician Password" htmlFor="doctor-password" required>
             <div className="ayur-dlogin-input-wrap">
               <span className="ayur-dlogin-input-icon">
-                <Lock size={17} />
+                <Lock size={16} />
               </span>
               <input
                 id="doctor-password"
@@ -137,6 +137,7 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
             type="submit"
             fullWidth
             isLoading={isLoading}
+            disabled={isLoading}
             rightIcon={<ArrowRight size={16} />}
             className="ayur-dlogin-submit-btn"
           >
@@ -156,7 +157,7 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
         <div className="ayur-dlogin-footer">
           <ShieldCheck size={14} className="text-secondary shrink-0" />
           <span>
-            Authorized physician credentials required. All clinical reviews, symptom verifications, and approved regimens are audit-logged.
+            Authorized clinical credentials required. All patient reviews, symptom verifications, and approved regimens are audit-logged.
           </span>
         </div>
       </div>
