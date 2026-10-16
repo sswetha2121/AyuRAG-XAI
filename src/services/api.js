@@ -102,6 +102,13 @@ export const api = {
     });
   },
 
+  async doctorRegister(doctorData) {
+    return fetchJson('/auth/doctor-register/', {
+      method: 'POST',
+      body: JSON.stringify(doctorData),
+    });
+  },
+
   async register(patientData) {
     return fetchJson('/auth/register/', {
       method: 'POST',

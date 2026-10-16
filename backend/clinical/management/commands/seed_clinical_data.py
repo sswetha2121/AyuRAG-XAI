@@ -34,7 +34,8 @@ class Command(BaseCommand):
                 'qualification': 'BAMS, MD (Ayurveda - Kayachikitsa)',
                 'specialization': 'Kayachikitsa (Internal Medicine) & Prakriti Diagnostics',
                 'clinical_license': 'AYUSH-DEL-2018-8492',
-                'experience_years': 14
+                'experience_years': 14,
+                'approval_status': DoctorProfile.ApprovalStatus.APPROVED,
             }
         )
 
@@ -59,7 +60,8 @@ class Command(BaseCommand):
                 'qualification': 'BAMS, Fellowship in Panchakarma (Kerala)',
                 'specialization': 'Panchakarma & Constitutional Medicine',
                 'clinical_license': 'AYUSH-KER-2015-3211',
-                'experience_years': 18
+                'experience_years': 18,
+                'approval_status': DoctorProfile.ApprovalStatus.APPROVED,
             }
         )
 
@@ -432,7 +434,7 @@ class Command(BaseCommand):
             initialize_verifications_for_assessment(user, asm, dr_sharma)
 
             # For Swetha Chowdary (swetha.chowdary), create verified fields, one corrected field, and an approved active diet plan
-            if user.username == 'swetha.chowdary':
+            if user.username == 'swetha chowdary':
                 # Correct Sleep Duration field to match prompt example
                 sleep_verif = PatientVerification.objects.filter(patient=user, assessment=asm, field_name='sleep_duration').first()
                 if sleep_verif:

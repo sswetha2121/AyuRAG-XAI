@@ -358,6 +358,75 @@
   color: var(--color-secondary);
 }
 
+/* Doctor Registration Link */
+.ayur-dlogin-register-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  padding: 10px 14px;
+  background: rgba(22, 56, 44, 0.04);
+  border: 1px solid rgba(22, 56, 44, 0.12);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.ayur-dlogin-register-link:hover {
+  background: rgba(22, 56, 44, 0.08);
+  border-color: var(--color-primary);
+}
+
+.ayur-dlink--highlight {
+  font-weight: 700;
+  color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ayur-dlink--highlight:hover {
+  color: var(--color-secondary);
+  text-decoration: underline;
+}
+
+/* Pending Alert */
+.ayur-dlogin-pending-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(217, 119, 6, 0.08);
+  border: 1px solid rgba(217, 119, 6, 0.28);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  color: #92400E;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  animation: fadeIn 0.2s ease;
+}
+
+.ayur-dlogin-dev-hint {
+  margin-top: 6px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px dashed rgba(217, 119, 6, 0.4);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+}
+
+.ayur-dlogin-code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.775rem;
+  font-weight: 700;
+  color: #78350F;
+  background: #FEF3C7;
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 2px;
+  word-break: break-all;
+}
+
 /* Footer disclaimer */
 .ayur-dlogin-footer {
   display: flex;

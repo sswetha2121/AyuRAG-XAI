@@ -151,6 +151,10 @@ export const SignInSelectionPage = ({ onTriggerToast }) => {
             <Link to="/signup" className="ayur-role-register-link">
               Create a Patient Account →
             </Link>
+            <span className="text-muted text-xs">or</span>
+            <Link to="/doctor-register" className="ayur-role-register-link">
+              Register as Doctor →
+            </Link>
           </div>
 
           <div className="ayur-role-security-note">

@@ -71,6 +71,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const doctorRegister = async (doctorData) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await api.doctorRegister(doctorData);
+      return response;
+    } catch (err) {
+      setError(err.message || 'Doctor registration failed.');
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const logout = async () => {
     try {
       await api.logout();
@@ -111,6 +125,7 @@ export const AuthProvider = ({ children }) => {
         login,
         doctorLogin,
         register,
+        doctorRegister,
         logout,
         switchDemoPersona,
         checkAuth,

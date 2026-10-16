@@ -4,7 +4,19 @@ from .models import User, DoctorProfile, PatientProfile
 class DoctorProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = DoctorProfile
-        fields = ['professional_name', 'qualification', 'specialization', 'clinical_license', 'experience_years', 'created_at']
+        fields = [
+            'professional_name',
+            'qualification',
+            'specialization',
+            'clinical_license',
+            'experience_years',
+            'clinic_institution',
+            'approval_status',
+            'approved_at',
+            'rejection_reason',
+            'created_at'
+        ]
+        read_only_fields = ['approval_status', 'approved_at', 'approved_by', 'rejection_reason', 'created_at']
 
 class PatientProfileSerializer(serializers.ModelSerializer):
     class Meta:

@@ -57,7 +57,8 @@ class ClinicalWorkflowsAndDataIsolationTests(TestCase):
         self.doctor_profile = DoctorProfile.objects.create(
             user=self.doctor,
             professional_name='Dr. Test',
-            qualification='MD Ayurveda'
+            qualification='MD Ayurveda',
+            approval_status=DoctorProfile.ApprovalStatus.APPROVED
         )
 
         # Existing assessment for Patient 1

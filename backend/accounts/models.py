@@ -15,21 +15,52 @@ class User(AbstractUser):
     def is_patient(self):
         return self.role == self.Role.PATIENT
 
+    def is_approved_doctor(self):
+        return (
+            self.role == self.Role.DOCTOR and
+            hasattr(self, 'doctor_profile') and
+            self.doctor_profile.is_approved()
+        )
+
     def __str__(self):
         return f"{self.username} [{self.role}]"
 
 
 class DoctorProfile(models.Model):
+    class ApprovalStatus(models.TextChoices):
+        PENDING = 'PENDING', 'Pending Approval'
+        APPROVED = 'APPROVED', 'Approved'
+        REJECTED = 'REJECTED', 'Rejected'
+
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='doctor_profile')
     professional_name = models.CharField(max_length=255)
     qualification = models.CharField(max_length=255, default='BAMS, MD (Ayurveda)')
     specialization = models.CharField(max_length=255, default='Kayachikitsa (Ayurvedic Internal Medicine)')
     clinical_license = models.CharField(max_length=100, default='AYUSH-DEL-2018-4421')
     experience_years = models.IntegerField(default=12)
+    clinic_institution = models.CharField(max_length=255, blank=True, default='')
+    approval_status = models.CharField(
+        max_length=20,
+        choices=ApprovalStatus.choices,
+        default=ApprovalStatus.PENDING,
+        db_index=True
+    )
+    approved_at = models.DateTimeField(null=True, blank=True)
+    approved_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='approved_doctors'
+    )
+    rejection_reason = models.TextField(blank=True, default='')
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def is_approved(self):
+        return self.approval_status == self.ApprovalStatus.APPROVED
+
     def __str__(self):
-        return f"{self.professional_name} ({self.specialization})"
+        return f"{self.professional_name} [{self.approval_status}] ({self.specialization})"
 
 
 class PatientProfile(models.Model):

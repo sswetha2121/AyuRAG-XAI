@@ -27,6 +27,7 @@ import { DoctorReportsPage } from './pages/DoctorReportsPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { DoctorLoginPage } from './pages/DoctorLoginPage';
+import { DoctorRegisterPage } from './pages/DoctorRegisterPage';
 import { SignInSelectionPage } from './pages/SignInSelectionPage';
 import { LandingPage } from './pages/LandingPage';
 import { AssessmentOverviewPage } from './pages/AssessmentOverviewPage';
@@ -688,7 +689,7 @@ function MainApp() {
         }
       />
 
-      {/* 5. Dedicated Doctor Clinical Portal Login */}
+      {/* 5. Dedicated Doctor Clinical Portal Login & Registration */}
       <Route
         path="/doctor-login"
         element={<DoctorLoginPage onTriggerToast={addToast} />}
@@ -696,6 +697,14 @@ function MainApp() {
       <Route
         path="/doctor/login"
         element={<DoctorLoginPage onTriggerToast={addToast} />}
+      />
+      <Route
+        path="/doctor-register"
+        element={<DoctorRegisterPage onTriggerToast={addToast} />}
+      />
+      <Route
+        path="/doctor/register"
+        element={<DoctorRegisterPage onTriggerToast={addToast} />}
       />
 
       {/* 6. Protected Doctor Clinical Dashboard */}

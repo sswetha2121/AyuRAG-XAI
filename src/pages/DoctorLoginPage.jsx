@@ -14,20 +14,24 @@ import {
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { FormField } from '../components/ui/FormField';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 export const DoctorLoginPage = ({ onTriggerToast }) => {
   const { doctorLogin, isLoading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const [username, setUsername] = useState('');
+  const initialUsername = location.state?.username || location.state?.email || '';
+  const [username, setUsername] = useState(initialUsername);
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [registrationNotice, setRegistrationNotice] = useState(Boolean(location.state?.fromRegistration));
 
   const handleDoctorSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
+    setRegistrationNotice(false);
 
     if (!username.trim() || !password) {
       setErrorMessage('Please enter your physician username and password.');
@@ -70,11 +74,52 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
           </p>
         </div>
 
-        {/* Error Alert */}
+        {/* Registration Notice Banner */}
+        {registrationNotice && !errorMessage && (
+          <div className="ayur-dlogin-pending-alert" role="status">
+            <AlertCircle size={18} className="shrink-0 mt-0.5 text-amber-700" />
+            <div className="flex flex-col gap-1 text-left w-full">
+              <span className="font-semibold text-amber-900">Registration Received</span>
+              <span className="text-xs text-amber-800">
+                Your credentials have been submitted and are awaiting administrative verification.
+              </span>
+              <div className="ayur-dlogin-dev-hint">
+                <span className="text-muted block text-xs">For local testing, approve this account via:</span>
+                <code className="ayur-dlogin-code">
+                  python manage.py approve_doctor {username || 'your-email'}
+                </code>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Error or Status Alert */}
         {errorMessage && (
-          <div className="ayur-dlogin-error" role="alert">
-            <AlertCircle size={18} className="shrink-0" />
-            <span>{errorMessage}</span>
+          <div
+            className={
+              errorMessage.toLowerCase().includes('awaiting administrative verification')
+                ? 'ayur-dlogin-pending-alert'
+                : 'ayur-dlogin-error'
+            }
+            role="alert"
+          >
+            <AlertCircle size={18} className="shrink-0 mt-0.5" />
+            <div className="flex flex-col gap-1 text-left w-full">
+              <span className="font-semibold">
+                {errorMessage.toLowerCase().includes('awaiting administrative verification')
+                  ? 'Verification Required'
+                  : 'Authentication Notice'}
+              </span>
+              <span>{errorMessage}</span>
+              {errorMessage.toLowerCase().includes('awaiting administrative verification') && (
+                <div className="ayur-dlogin-dev-hint">
+                  <span className="text-muted block text-xs">To approve this account for local testing:</span>
+                  <code className="ayur-dlogin-code">
+                    python manage.py approve_doctor {username.trim() || 'physician-email'}
+                  </code>
+                </div>
+              )}
+            </div>
           </div>
         )}
 
@@ -144,6 +189,14 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
             Sign In to Doctor Workspace
           </Button>
         </form>
+
+        {/* Doctor Registration Link */}
+        <div className="ayur-dlogin-register-link">
+          <span>New doctor?</span>
+          <Link to="/doctor-register" className="ayur-dlink ayur-dlink--highlight">
+            Register your account →
+          </Link>
+        </div>
 
         {/* Patient Redirection */}
         <div className="ayur-dlogin-patient-link">
