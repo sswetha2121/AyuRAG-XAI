@@ -99,6 +99,19 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database Configuration with Environment Support (SQLite / PostgreSQL)
 _db_engine = os.environ.get('DB_ENGINE')
+
+if IS_PRODUCTION:
+    if not _db_engine:
+        raise ImproperlyConfigured(
+            'Production environment (DJANGO_ENV=production) requires DB_ENGINE to be explicitly configured '
+            '(e.g. django.db.backends.postgresql). Silent fallback to SQLite is strictly forbidden in production.'
+        )
+    if 'sqlite' in _db_engine.lower() and os.environ.get('ALLOW_SQLITE_IN_PRODUCTION', 'False').lower() not in ('true', '1'):
+        raise ImproperlyConfigured(
+            f'SQLite database engine ({_db_engine}) is not permitted in production release. '
+            'Please configure PostgreSQL (django.db.backends.postgresql) with dedicated credentials.'
+        )
+
 if _db_engine:
     DATABASES = {
         'default': {

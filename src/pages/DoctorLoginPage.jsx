@@ -94,7 +94,7 @@ export const DoctorLoginPage = ({ onTriggerToast }) => {
                   setUsername(e.target.value);
                   if (errorMessage) setErrorMessage('');
                 }}
-                placeholder="e.g. dr.sharma"
+                placeholder="e.g. dr.swetha"
                 autoComplete="username"
                 required
               />

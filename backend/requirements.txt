@@ -8,5 +8,8 @@ python-dotenv>=1.0.0,<2.0.0
 asgiref>=3.7.0
 sqlparse>=0.5.0
 
+# Production Database Drivers (PostgreSQL)
+psycopg2-binary>=2.9.9
+
 # Production WSGI Server (Linux/Container deployment)
 gunicorn>=22.0.0; sys_platform != 'win32'

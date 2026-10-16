@@ -250,7 +250,7 @@ export const RegisterPage = ({ onLoginSuccess, onTriggerToast }) => {
                     className={`ayur-input ayur-input--has-icon ${fieldErrors.age ? 'ayur-input--error' : ''}`}
                     value={formData.age}
                     onChange={(e) => handleChange('age', e.target.value)}
-                    placeholder="Years (e.g. 28)"
+                    placeholder="Years (e.g. 21)"
                     required
                   />
                 </div>
