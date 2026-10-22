@@ -19,9 +19,19 @@ class DoctorProfileSerializer(serializers.ModelSerializer):
         read_only_fields = ['approval_status', 'approved_at', 'approved_by', 'rejection_reason', 'created_at']
 
 class PatientProfileSerializer(serializers.ModelSerializer):
+    patient_id = serializers.CharField(read_only=True)
+    assigned_doctor_name = serializers.SerializerMethodField()
+
     class Meta:
         model = PatientProfile
-        fields = ['full_name', 'age', 'gender', 'contact_phone', 'created_at']
+        fields = ['patient_id', 'full_name', 'age', 'gender', 'contact_phone', 'assigned_doctor', 'assigned_doctor_name', 'created_at']
+
+    def get_assigned_doctor_name(self, obj):
+        if obj.assigned_doctor:
+            if hasattr(obj.assigned_doctor, 'doctor_profile'):
+                return obj.assigned_doctor.doctor_profile.professional_name
+            return obj.assigned_doctor.get_full_name() or f"Dr. {obj.assigned_doctor.username}"
+        return None
 
 class UserSerializer(serializers.ModelSerializer):
     profile = serializers.SerializerMethodField()

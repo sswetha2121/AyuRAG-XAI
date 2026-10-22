@@ -8,6 +8,7 @@ import { Button } from '../ui/Button';
 import { ChevronRight, Home, Bell, CheckCircle2, AlertCircle, Clock, Check, User, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { api } from '../../services/api';
+import { DoctorProfileModal } from '../doctor/DoctorProfileModal';
 
 /**
  * AyuRAG-XAI Reusable Application Shell Layout
@@ -25,7 +26,9 @@ export const AppShell = ({
   mode = 'patient',
   user = null,
   onLogout,
+  onTriggerToast,
 }) => {
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(() => {
     try {
@@ -93,13 +96,21 @@ export const AppShell = ({
 
   const isDoctor = mode === 'doctor';
 
+  const handleSelectStep = (stepId) => {
+    if (stepId === 'doctor-profile') {
+      setProfileModalOpen(true);
+    } else {
+      onSelectStep?.(stepId);
+    }
+  };
+
   return (
     <div className="ayur-app-shell">
       {/* Sidebar Navigation */}
       <Sidebar
         mode={mode}
         activeStep={activeStep}
-        onSelectStep={onSelectStep}
+        onSelectStep={handleSelectStep}
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
         isCollapsed={isCollapsed}
@@ -110,6 +121,7 @@ export const AppShell = ({
         onOpenNotifications={() => setNotificationsOpen(true)}
         unreadNotificationCount={unreadCount}
       />
+
 
       {/* Main Layout Area */}
       <div className={`ayur-main-wrapper ${isCollapsed ? 'ayur-main-wrapper--collapsed' : ''}`}>
@@ -253,98 +265,105 @@ export const AppShell = ({
       </Modal>
 
       {/* Profile & Account Modal */}
-      <Modal
-        isOpen={profileModalOpen}
-        onClose={() => setProfileModalOpen(false)}
-        title={isDoctor ? 'Attending Physician Profile' : 'Patient Profile'}
-        subtitle="Account Details & Access Role"
-        size="sm"
-        footer={
-          <div className="flex items-center justify-between w-full">
-            <Button
-              variant="danger"
-              size="sm"
-              onClick={() => {
-                setProfileModalOpen(false);
-                onLogout?.();
-              }}
-            >
-              Sign Out
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setProfileModalOpen(false)}
-            >
-              Close
-            </Button>
-          </div>
-        }
-      >
-        <div className="flex flex-col gap-md py-xs">
-          <div className="flex items-center gap-md">
-            <div
-              style={{
-                width: 52,
-                height: 52,
-                borderRadius: '50%',
-                backgroundColor: 'var(--color-primary)',
-                color: '#FAF4E8',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 'bold',
-                fontSize: '18px'
-              }}
-            >
-              {isDoctor ? 'DR' : 'PT'}
-            </div>
-            <div>
-              <h3 className="text-base font-bold text-text-primary m-0">
-                {user?.name || (isDoctor ? 'Dr. Sharma, MD' : 'Active Patient')}
-              </h3>
-              <p className="text-xs text-muted m-0">
-                Username: @{user?.username || (isDoctor ? 'dr.sharma' : 'patient')}
-              </p>
-              <span
-                style={{
-                  display: 'inline-block',
-                  marginTop: '4px',
-                  padding: '2px 8px',
-                  borderRadius: '9999px',
-                  fontSize: '11px',
-                  fontWeight: 600,
-                  backgroundColor: 'var(--color-primary-light)',
-                  color: 'var(--color-primary)'
+      {isDoctor ? (
+        <DoctorProfileModal
+          isOpen={profileModalOpen}
+          onClose={() => setProfileModalOpen(false)}
+          onTriggerToast={onTriggerToast}
+        />
+      ) : (
+        <Modal
+          isOpen={profileModalOpen}
+          onClose={() => setProfileModalOpen(false)}
+          title="Patient Profile"
+          subtitle="Account Details & Access Role"
+          size="sm"
+          footer={
+            <div className="flex items-center justify-between w-full">
+              <Button
+                variant="danger"
+                size="sm"
+                onClick={() => {
+                  setProfileModalOpen(false);
+                  onLogout?.();
                 }}
               >
-                {isDoctor ? 'Ayurvedic Clinical Lead' : 'Registered Patient'}
-              </span>
+                Sign Out
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setProfileModalOpen(false)}
+              >
+                Close
+              </Button>
             </div>
-          </div>
+          }
+        >
+          <div className="flex flex-col gap-md py-xs">
+            <div className="flex items-center gap-md">
+              <div
+                style={{
+                  width: 52,
+                  height: 52,
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--color-primary)',
+                  color: '#FAF4E8',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 'bold',
+                  fontSize: '18px'
+                }}
+              >
+                PT
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-text-primary m-0">
+                  {user?.name || 'Active Patient'}
+                </h3>
+                <p className="text-xs text-muted m-0">
+                  Username: @{user?.username || 'patient'}
+                </p>
+                <span
+                  style={{
+                    display: 'inline-block',
+                    marginTop: '4px',
+                    padding: '2px 8px',
+                    borderRadius: '9999px',
+                    fontSize: '11px',
+                    fontWeight: 600,
+                    backgroundColor: 'var(--color-primary-light)',
+                    color: 'var(--color-primary)'
+                  }}
+                >
+                  Registered Patient
+                </span>
+              </div>
+            </div>
 
-          <div
-            style={{
-              padding: '12px',
-              borderRadius: '8px',
-              backgroundColor: 'var(--color-bg-subtle)',
-              border: '1px solid var(--color-border-subtle)',
-              fontSize: '13px',
-              lineHeight: 1.6
-            }}
-          >
-            <div className="flex items-center gap-xs text-secondary font-semibold mb-xs">
-              <ShieldCheck size={16} />
-              <span>Authorization & Security</span>
+            <div
+              style={{
+                padding: '12px',
+                borderRadius: '8px',
+                backgroundColor: 'var(--color-bg-subtle)',
+                border: '1px solid var(--color-border-subtle)',
+                fontSize: '13px',
+                lineHeight: 1.6
+              }}
+            >
+              <div className="flex items-center gap-xs text-secondary font-semibold mb-xs">
+                <ShieldCheck size={16} />
+                <span>Authorization & Security</span>
+              </div>
+              <p className="text-muted text-xs m-0">
+                Patient account with individual data isolation and doctor-reviewed wellness recommendations.
+              </p>
             </div>
-            <p className="text-muted text-xs m-0">
-              {isDoctor
-                ? 'Physician workspace authorized for intake evaluation, patient symptom verification, and care plan prescription.'
-                : 'Patient account with individual data isolation and doctor-reviewed wellness recommendations.'}
-            </p>
           </div>
-        </div>
-      </Modal>
+        </Modal>
+      )}
+
 
       {/* Global Toast Notification Container */}
       <ToastContainer toasts={toasts} onClose={onCloseToast} />

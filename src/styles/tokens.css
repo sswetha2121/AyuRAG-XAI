@@ -5,20 +5,20 @@
    ========================================================================== */
 
 :root {
-  /* --- Primary Color Palette (Deep Forest Green) --- */
-  --color-primary: #16382C;
-  --color-primary-hover: #0F271F;
-  --color-primary-active: #091913;
+  /* --- Primary Color Palette (Forest Green #123B2F) --- */
+  --color-primary: #123B2F;
+  --color-primary-hover: #0D2B22;
+  --color-primary-active: #091F18;
   --color-primary-light: #EBF2EE;
   --color-primary-subtle: #F2F7F4;
-  --color-primary-glow: rgba(22, 56, 44, 0.12);
+  --color-primary-glow: rgba(18, 59, 47, 0.14);
 
-  /* --- Secondary Color Palette (Sage Botanical) --- */
-  --color-secondary: #5B8266;
-  --color-secondary-hover: #496B54;
+  /* --- Secondary Color Palette (Sage #A8BDA7) --- */
+  --color-secondary: #A8BDA7;
+  --color-secondary-hover: #91A890;
   --color-secondary-light: #F0F5F2;
   --color-secondary-subtle: #F6FAF7;
-  --color-secondary-glow: rgba(91, 130, 102, 0.14);
+  --color-secondary-glow: rgba(168, 189, 167, 0.25);
 
   /* --- Accent Color Palette (Ayurvedic Gold / Warm Honey) --- */
   --color-accent: #C5A059;
@@ -28,17 +28,17 @@
   --color-accent-subtle: #FCF9F2;
   --color-accent-glow: rgba(197, 160, 89, 0.18);
 
-  /* --- Neutral & Surface System (Warm Ivory & Soft Cream) --- */
-  --color-bg: #FBF9F5;
-  --color-bg-alt: #F4F0E6;
-  --color-bg-subtle: #F7F5EE;
+  /* --- Neutral & Surface System (Warm Ivory #F8F6F0) --- */
+  --color-bg: #F8F6F0;
+  --color-bg-alt: #F0EDE4;
+  --color-bg-subtle: #FAF8F3;
   --color-surface: #FFFFFF;
   --color-surface-muted: #F8F6F0;
   --color-surface-elevated: #FFFFFF;
   --color-surface-active: #EFECE3;
 
-  /* --- Text & Typography Color Tokens --- */
-  --color-text-primary: #14201A;
+  /* --- Text & Typography Color Tokens (Charcoal #26332E) --- */
+  --color-text-primary: #26332E;
   --color-text-secondary: #3E4F47;
   --color-text-muted: #6B7B75;
   --color-text-placeholder: #9EABA5;

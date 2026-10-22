@@ -1,0 +1,27 @@
+{
+  "id": "CS-VI-01-RASAVIMANA",
+  "collection": "classical_compendia",
+  "title": "Charaka Saṃhitā: The Eight Factors of Dietetics (Aṣṭāvidha Āhāravidhi Viśeṣāyatana)",
+  "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+  "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=vi&ch=1",
+  "publication_version": "Charaka Saṃhitā, Vimānasthāna, Chapter 1, Śloka 21-25",
+  "license": "Public Domain",
+  "document_type": "Classical Nutritional Methodology",
+  "download_availability": "Publicly accessible via e-Caraka",
+  "relevance": "Provides behavioral eating rules (mindful eating, eating warm, fresh, unhurried meals) in personalized plans.",
+  "limitations": "Focuses on digestive psychology; must be accompanied by nutrient adequacy checks.",
+  "classical_verse": "Prakṛti-karaṇa-saṁyoga-rāśi-deśa-kāla-upayogasaṁsthā-upayoktāraḥ.",
+  "tags": [
+    "ashtavidha_aharavidhi",
+    "mindful_eating",
+    "dietary_rules",
+    "digestion",
+    "agni"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nCharaka Saṃhitā Vimānasthāna Chapter 1 outlines the eight indispensable parameters governing nutritional assimilation:\n1. Prakriti (Natural Quality of Food): Innate properties like lightness (Laghu) of mung beans or heaviness (Guru) of pork and black gram.\n2. Karana (Processing / Culinary Transformation): Water, fire, churn, and spicing alter food properties (e.g., paddy is heavy, but puffed rice / Laja is extremely light; curd is heavy, but churned buttermilk / Takra is light).\n3. Samyoga (Combination): Synergistic blending or harmful incompatibilities (e.g., milk and fish combined produce toxic channel obstruction).\n4. Rashi (Quantity): Quantitative portioning—Sarvagraha (total meal caloric mass) and Parigraha (measure of individual components).\n5. Desha (Habitat / Geographical Ecology): Regional climate and indigenous crops (e.g., arid desert lands require unctuous, cooling foods).\n6. Kala (Time & Chronobiology): Circadian hour, seasonal ritu, and biological age (e.g., eating only when the previous meal is fully digested - Jirne ashniyat).\n7. Upayoga Samstha (Dietary Usage Rules): Eat warm (Ushnam), unctuous (Snigdham), in proper measure (Matravat), after previous food is digested (Jirne), non-conflicting in potency (Viryaviruddham), in a pleasant place (Ishte deshe), neither too hurried (Natidrutam) nor too prolonged (Nativilambitam), without talking or laughing, with focused presence of mind (Tanmana bhunjita).\n8. Upayokta (Individual Consumer / Habituation): The consumer's constitutional adaptability (Oka-Satmya).\n"
+}

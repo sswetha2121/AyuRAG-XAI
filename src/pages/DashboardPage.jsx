@@ -16,6 +16,7 @@ import {
   PatientRemindersModal,
   PatientProgressTracker
 } from '../components/dashboard';
+import { PatientChatView } from '../components/patient/PatientChatView';
 import {
   Bell,
   Calendar,
@@ -97,7 +98,7 @@ export const DashboardPage = ({
 
   const agniPattern =
     analysisResult?.digestiveAgni?.state ||
-    'Viṣamāgni (Variable Digestive Fire)';
+    'Variable Digestive Function';
 
   const tridoshaProfile = analysisResult?.tridoshaProfile || (latestAssessment?.prakriti_scores ? {
     constitutionType: constitutionType,
@@ -233,6 +234,12 @@ export const DashboardPage = ({
             {activeTab === 'progress' && (
               <div className="ayur-dash-tab-pane">
                 <PatientProgressTracker onTriggerToast={onTriggerToast} />
+              </div>
+            )}
+
+            {activeTab === 'chat' && (
+              <div className="ayur-dash-tab-pane">
+                <PatientChatView onTriggerToast={onTriggerToast} />
               </div>
             )}
 

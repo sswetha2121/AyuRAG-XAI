@@ -88,6 +88,14 @@ export const api = {
     return fetchJson('/auth/me/');
   },
 
+  async updateProfile(profileData) {
+    return fetchJson('/auth/me/', {
+      method: 'PATCH',
+      body: JSON.stringify(profileData),
+    });
+  },
+
+
   async login(username, password) {
     return fetchJson('/auth/login/', {
       method: 'POST',
@@ -237,6 +245,13 @@ export const api = {
     return fetchJson(`/doctor/patients/${patientId}/audit-logs/`);
   },
 
+  async recordPatientAuditLog(patientId, { action, metadata = {} }) {
+    return fetchJson(`/doctor/patients/${patientId}/audit-logs/`, {
+      method: 'POST',
+      body: JSON.stringify({ action, metadata }),
+    });
+  },
+
   // Patient Isolated Diet Plan & Assessment
   async getPatientCurrentDiet() {
     return fetchJson('/patient/diet/current/');
@@ -263,6 +278,18 @@ export const api = {
 
   async getPatientLatestAssessment() {
     return fetchJson('/patient/assessment/latest/');
+  },
+
+  // Grounded Clinical Knowledge Base & RAG Query
+  async queryKnowledgeBase(question, prakriti = '', collection = null) {
+    return fetchJson('/clinical/rag/query/', {
+      method: 'POST',
+      body: JSON.stringify({ question, prakriti, collection }),
+    });
+  },
+
+  async getKnowledgeBaseStats() {
+    return fetchJson('/clinical/rag/stats/');
   },
 
   async getPatientAssessmentHistory() {
@@ -317,6 +344,96 @@ export const api = {
     return fetchJson('/patient/progress/');
   },
 
+  // Patient Diet Difficulty Reporting
+  async reportPatientDifficulty(payload) {
+    return fetchJson('/patient/diet/report-difficulty/', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  },
+
+  // Doctor Patient Assignment
+  async assignDoctorPatient(patientId, notes = '') {
+    return fetchJson(`/doctor/patients/${patientId}/assign/`, {
+      method: 'POST',
+      body: JSON.stringify({ notes }),
+    });
+  },
+
+  async unassignDoctorPatient(patientId) {
+    return fetchJson(`/doctor/patients/${patientId}/unassign/`, {
+      method: 'POST',
+    });
+  },
+
+  // Food Catalogue & Nutritional Recalculation
+  async getFoodCatalogue(params = {}) {
+    const query = new URLSearchParams();
+    if (params.category) query.set('category', params.category);
+    if (params.search) query.set('search', params.search);
+    if (params.dietary_preference) query.set('dietary_preference', params.dietary_preference);
+    const qs = query.toString();
+    return fetchJson(`/doctor/food-catalogue/${qs ? `?${qs}` : ''}`);
+  },
+
+  async getFoodSubstitutes(foodId) {
+    return fetchJson(`/doctor/food-substitutes/?food_id=${foodId}`);
+  },
+
+  async recalculateDietPlan(planId, payload) {
+    return fetchJson(`/doctor/diet-plans/${planId}/recalculate/`, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  },
+
+  async supersedeDietPlan(planId, reason = '') {
+    return fetchJson(`/doctor/diet-plans/${planId}/supersede/`, {
+      method: 'POST',
+      body: JSON.stringify({ reason }),
+    });
+  },
+
+  // Doctor Monitoring Dashboard & Patient Details
+  async getDoctorMonitoring(params = {}) {
+    const query = new URLSearchParams();
+    if (params.patient_id) query.set('patient_id', params.patient_id);
+    if (params.adherence_status) query.set('adherence_status', params.adherence_status);
+    if (params.has_difficulties !== undefined && params.has_difficulties !== '') {
+      query.set('has_difficulties', params.has_difficulties);
+    }
+    if (params.date) query.set('date', params.date);
+    const qs = query.toString();
+    return fetchJson(`/doctor/monitoring/${qs ? `?${qs}` : ''}`);
+  },
+
+  async getDoctorPatientMonitoring(patientId, days = 7) {
+    return fetchJson(`/doctor/monitoring/${patientId}/?days=${days}`);
+  },
+
+  async reviewDifficultyReport(reportId, doctorNotes = '') {
+    return fetchJson(`/doctor/monitoring/difficulty/${reportId}/review/`, {
+      method: 'PATCH',
+      body: JSON.stringify({ doctor_notes: doctorNotes }),
+    });
+  },
+
+  // Patient-Doctor Persistent Messaging
+  async getConversations() {
+    return fetchJson('/messages/conversations/');
+  },
+
+  async getConversationMessages(userId) {
+    return fetchJson(`/messages/${userId}/`);
+  },
+
+  async sendMessage(recipientId, body) {
+    return fetchJson('/messages/send/', {
+      method: 'POST',
+      body: JSON.stringify({ recipient_id: recipientId, body }),
+    });
+  },
+
   // Notifications
   async getNotifications() {
     return fetchJson('/notifications/');
@@ -334,5 +451,6 @@ export const api = {
     });
   },
 };
+
 
 

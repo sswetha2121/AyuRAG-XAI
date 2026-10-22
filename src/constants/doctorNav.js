@@ -1,18 +1,27 @@
 import {
   LayoutDashboard,
   Users,
+  Utensils,
   ClipboardCheck,
+  MessageSquare,
   FileBarChart,
   Bell,
   User,
-  Settings,
   LogOut,
   Stethoscope
 } from 'lucide-react';
 
 /**
  * Doctor Decision Support Workspace Navigation
- * Only displays routes and workflows actually implemented in the platform.
+ * Phase 8 Specification:
+ * - Overview
+ * - Patients
+ * - Diet Plans
+ * - Reviews
+ * - Messages
+ * - Reports
+ * - Notifications
+ * - Physician Profile
  */
 export const DOCTOR_NAV_ITEMS = [
   {
@@ -30,6 +39,13 @@ export const DOCTOR_NAV_ITEMS = [
     badge: null,
   },
   {
+    id: 'doctor-diet-plans',
+    label: 'Diet Plans',
+    sublabel: 'Generator & Active Protocols',
+    icon: Utensils,
+    badge: null,
+  },
+  {
     id: 'doctor-reviews',
     label: 'Reviews',
     sublabel: 'Clinical Validation Queue',
@@ -37,8 +53,15 @@ export const DOCTOR_NAV_ITEMS = [
     badge: null,
   },
   {
+    id: 'doctor-messages',
+    label: 'Messages',
+    sublabel: 'Patient Consultations',
+    icon: MessageSquare,
+    badge: null,
+  },
+  {
     id: 'doctor-reports',
-    label: 'Care Plans & Reports',
+    label: 'Reports',
     sublabel: 'Dossiers & Audit Registry',
     icon: FileBarChart,
     badge: null,

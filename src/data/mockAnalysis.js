@@ -64,21 +64,21 @@ export const generatePersonalizedAnalysis = (state = {}) => {
   const kaphaPct = 100 - (vataPct + pittaPct);
 
   // Dominant constitution type
-  let constitutionType = 'Vāta-Pitta';
-  let primaryDosha = 'Vāta';
-  let secondaryDosha = 'Pitta';
+  let constitutionType = 'Movement & Metabolism Imbalance';
+  let primaryDosha = 'Movement';
+  let secondaryDosha = 'Metabolism';
 
   if (vataPct >= pittaPct && vataPct >= kaphaPct) {
-    primaryDosha = 'Vāta';
-    secondaryDosha = pittaPct >= kaphaPct ? 'Pitta' : 'Kapha';
+    primaryDosha = 'Movement';
+    secondaryDosha = pittaPct >= kaphaPct ? 'Metabolism' : 'Structure';
   } else if (pittaPct >= vataPct && pittaPct >= kaphaPct) {
-    primaryDosha = 'Pitta';
-    secondaryDosha = vataPct >= kaphaPct ? 'Vāta' : 'Kapha';
+    primaryDosha = 'Metabolism';
+    secondaryDosha = vataPct >= kaphaPct ? 'Movement' : 'Structure';
   } else {
-    primaryDosha = 'Kapha';
-    secondaryDosha = vataPct >= pittaPct ? 'Vāta' : 'Pitta';
+    primaryDosha = 'Structure';
+    secondaryDosha = vataPct >= pittaPct ? 'Movement' : 'Metabolism';
   }
-  constitutionType = `${primaryDosha}-${secondaryDosha} (Dvidoṣaja)`;
+  constitutionType = `${primaryDosha} & ${secondaryDosha} Imbalance`;
 
   return {
     patientName: personalInfo.fullName || 'Assessment User',
@@ -97,10 +97,10 @@ export const generatePersonalizedAnalysis = (state = {}) => {
       vataPct,
       pittaPct,
       kaphaPct,
-      summaryText: `Your assessment profile indicates a predominant ${primaryDosha} baseline modulated by ${secondaryDosha} tendencies. In Ayurvedic terms, this constitution thrives on regular warmth, scheduled meal rhythms, and grounding mindfulness.`,
+      summaryText: `Your assessment profile indicates a predominant ${primaryDosha} baseline modulated by ${secondaryDosha} tendencies. This constitution thrives on regular warmth, scheduled meal rhythms, and grounding mindfulness.`,
       qualities: {
         vata: ['Quick cognitive pacing', 'Light musculoskeletal build', 'Sensitive to cold and erratic schedules'],
-        pitta: ['Sharp digestion (Pāchaka Agni)', 'Goal-driven focus', 'Warm core temperature'],
+        pitta: ['Sharp digestive metabolic rate', 'Goal-driven focus', 'Warm core temperature'],
         kapha: ['Solid physical endurance', 'Emotional steadiness', 'Calm natural temperament']
       }
     },
@@ -109,34 +109,34 @@ export const generatePersonalizedAnalysis = (state = {}) => {
     xaiFeatures: [
       {
         id: 'feat_meal_regularity',
-        name: 'Meal Timing Regularity (Kāla Bhojana)',
+        name: 'Meal Timing Regularity',
         category: 'Dietary',
         contributionPct: 22,
         direction: 'positive',
         impact: 'High',
-        explanation: 'Variable meal hours are the primary driver elevating Vāta in the digestive tract (Samāna Vāta).'
+        explanation: 'Variable meal hours are the primary driver elevating irregularity in the digestive tract and gastric motility.'
       },
       {
         id: 'feat_sleep_architecture',
-        name: 'Sleep Window & Waking Hour (Nidrā Krama)',
+        name: 'Sleep Window & Waking Schedule',
         category: 'Lifestyle',
         contributionPct: 18,
         direction: 'positive',
         impact: 'High',
-        explanation: 'Nightly sleep duration and waking consistency directly calibrate nervous system stabilization (Majja Dhatu).'
+        explanation: 'Nightly sleep duration and waking consistency directly calibrate nervous system stabilization and restorative recovery.'
       },
       {
         id: 'feat_work_posture',
-        name: 'Sedentary Screen Posture (Kārya Svarūpa)',
+        name: 'Sedentary Screen Posture & Ergonomics',
         category: 'Ergonomics',
         contributionPct: 15,
         direction: 'positive',
         impact: 'Moderate',
-        explanation: 'Prolonged sitting without micro-breaks causes Apāna Vāta stagnation and upper shoulder tension.'
+        explanation: 'Prolonged sitting without micro-breaks causes lower body circulation stagnation and upper shoulder tension.'
       },
       {
         id: 'feat_appetite_nature',
-        name: 'Digestive Fire Rhythm (Agni Svarūpa)',
+        name: 'Digestive Rhythm & Metabolism',
         category: 'Digestion',
         contributionPct: 14,
         direction: 'positive',
@@ -145,16 +145,16 @@ export const generatePersonalizedAnalysis = (state = {}) => {
       },
       {
         id: 'feat_stress_dynamics',
-        name: 'Cognitive Stress Pacing (Mānasa Vega)',
+        name: 'Cognitive Stress & Workload Pace',
         category: 'Mental Wellbeing',
         contributionPct: 12,
         direction: 'positive',
         impact: 'Moderate',
-        explanation: 'Mental urgency accelerates somatic Vāta, producing restlessness and digestive bloating.'
+        explanation: 'Mental urgency accelerates somatic nervous tension, producing restlessness and digestive bloating.'
       },
       {
         id: 'feat_hydration_profile',
-        name: 'Fluid Temperature & Intake (Jala Vidhi)',
+        name: 'Fluid Temperature & Daily Hydration',
         category: 'Habits',
         contributionPct: 10,
         direction: 'negative',
@@ -167,27 +167,27 @@ export const generatePersonalizedAnalysis = (state = {}) => {
     evidenceCitations: [
       {
         id: 'ev_1',
-        title: 'Charaka Samhita Sutrasthana — Chapter 5 (Mātrāśitīya)',
-        category: 'Classical Ahara & Agni',
-        classicalVerse: 'Kāla-bhojanaṁ svāsthyakarāṇām...',
-        insight: 'Eating at regular, predictable hours sustains balanced digestive fire (Sama Agni) and prevents toxic metabolic waste (Ama).',
+        title: 'Charaka Classical Treatise — Quantitative Nutrition',
+        category: 'Dietary Timing & Digestion',
+        classicalVerse: 'Regular meal timing sustains optimal digestive health and vital energy...',
+        insight: 'Eating at regular, predictable hours sustains balanced digestive function and prevents toxic metabolic waste accumulation.',
         referenceId: 'CS-SU-5.3-7',
         domain: 'Digestive Chronobiology'
       },
       {
         id: 'ev_2',
-        title: 'Ashtanga Hridaya Sutrasthana — Chapter 2 (Dinacharya Adhyāya)',
+        title: 'Ashtanga Classical Treatise — Daily Health Routines',
         category: 'Circadian Pacing',
-        classicalVerse: 'Brāhme muhūrte budhyeta svastho rakṣārtham āyuṣaḥ...',
-        insight: 'Waking in synchronization with natural dawn (Brahma Muhurta) calms mental agitation and purifies respiratory channels.',
+        classicalVerse: 'One who desires enduring health should wake at pre-dawn in natural harmony...',
+        insight: 'Waking in synchronization with natural dawn calms mental agitation and purifies respiratory channels.',
         referenceId: 'AH-SU-2.1',
         domain: 'Circadian Biology'
       },
       {
         id: 'ev_3',
-        title: 'Sushruta Samhita Sharirasthana — Chapter 4 (Garbha Vyākaraṇa)',
-        category: 'Prakriti Baseline',
-        classicalVerse: 'Prakṛtirnāma śarīra-svarūpam...',
+        title: 'Sushruta Classical Treatise — Constitutional Anatomy',
+        category: 'Constitutional Baseline',
+        classicalVerse: 'Constitution is the fundamental physiological baseline of the individual...',
         insight: 'The natural constitution represents an individual anatomical and physiological equilibrium established at conception.',
         referenceId: 'SS-SH-4.62',
         domain: 'Constitutional Genetics'
@@ -213,7 +213,7 @@ export const generatePersonalizedAnalysis = (state = {}) => {
         title: 'Establish a Fixed 3-Meal Circadian Schedule',
         what: 'Anchor your breakfast between 07:30–08:30, your primary lunch at 12:30–13:30, and your light dinner by 19:30.',
         why: 'Your assessment highlights meal irregularity as the largest contributing factor to abdominal bloating and energy crashes.',
-        basedOnWhat: 'Lifestyle Q1 (Erratic Schedule) + Diet Q1 (Meal Regularity) + Charaka Samhita CS-SU-5.3',
+        basedOnWhat: 'Lifestyle Q1 (Erratic Schedule) + Diet Q1 (Meal Regularity) + Classical Dietary Guidance',
         practicalTip: 'Aim to keep meal start times within a 30-minute window, even on busy weekdays.'
       },
       {
@@ -223,9 +223,9 @@ export const generatePersonalizedAnalysis = (state = {}) => {
         priority: 'High',
         title: 'Stabilize Digital Wind-Down at 22:00',
         what: 'Disconnect screens 45 minutes before sleep and prepare your sleep environment with warm ambient lighting.',
-        why: 'Restores melatonin secretion and mitigates elevated evening Pitta that delays sleep onset.',
+        why: 'Restores melatonin secretion and mitigates elevated evening metabolic heat that delays sleep onset.',
         basedOnWhat: 'Lifestyle Q2 (Sleep Timing) + Symptom Q (Sleep Onset Latency)',
-        practicalTip: 'Replace late-night phone browsing with 5 minutes of slow Nadi Shodhana breathwork.'
+        practicalTip: 'Replace late-night phone browsing with 5 minutes of slow alternate nostril breathing exercises.'
       },
       {
         id: 'rec_3',
@@ -234,7 +234,7 @@ export const generatePersonalizedAnalysis = (state = {}) => {
         priority: 'Moderate',
         title: 'Incorporate 5-Minute Postural Micro-Breaks',
         what: 'Stand up every 45–60 minutes during desk work; perform gentle spinal twists, shoulder rolls, and eye palming.',
-        why: 'Counteracts static musculoskeletal compression and prevents Apāna Vāta stagnation.',
+        why: 'Counteracts static musculoskeletal compression and prevents lower body energy and circulation stagnation.',
         basedOnWhat: 'Lifestyle Q6 (Desk Work Pattern) + Lifestyle Q7 (Screen Breaks)',
         practicalTip: 'Set a subtle hourly desk chime to remind yourself to look into the distance and stretch.'
       },
@@ -243,9 +243,9 @@ export const generatePersonalizedAnalysis = (state = {}) => {
         category: 'Digestive Habits',
         categoryKey: 'diet',
         priority: 'Moderate',
-        title: 'Sip Warm Water (Ushnodaka) Over Iced Beverages',
+        title: 'Sip Warm Water Over Iced Beverages',
         what: 'Replace refrigerated or iced beverages with plain warm water or light cumin-coriander herbal tea.',
-        why: 'Iced water constricts gastric vasculature and quenches the digestive fire (Agni).',
+        why: 'Iced water constricts gastric vasculature and dampens digestive function.',
         basedOnWhat: 'Diet Q6 (Temperature Preference) + Diet Q9 (Fluids with Meals)',
         practicalTip: 'Keep a thermal bottle with warm water at your workstation throughout the day.'
       },
@@ -256,7 +256,7 @@ export const generatePersonalizedAnalysis = (state = {}) => {
         priority: 'Moderate',
         title: 'Morning 10-Minute Grounding Routine',
         what: 'Dedicate the first 10 minutes after waking to quiet hydration, mindful breathing, and sunlight exposure before opening email.',
-        why: 'Pacifies morning Rajasic mental acceleration and stabilizes autonomic nervous balance.',
+        why: 'Pacifies morning mental acceleration and stabilizes autonomic nervous balance.',
         basedOnWhat: 'Lifestyle Q8 (Mental Stress Frequency) + Symptom Q (Restless Racing Mind)',
         practicalTip: 'Place your mobile phone outside the bedroom overnight to ensure screen-free morning grounding.'
       }

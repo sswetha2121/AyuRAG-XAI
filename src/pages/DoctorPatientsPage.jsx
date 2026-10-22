@@ -101,6 +101,9 @@ export const DoctorPatientsPage = ({
         onViewPatient={(patientId) => onNavigateToPatient?.(patientId)}
         onReviewPatient={handleOpenReview}
         onOpenAssessment={(patientId) => onNavigateToPatient?.(patientId)}
+        onOpenDietPlan={() => window.location.href = '/doctor/diet-plans'}
+        onRefreshCohort={fetchPatients}
+        onTriggerToast={onTriggerToast}
       />
 
       <DoctorReviewNotesModal

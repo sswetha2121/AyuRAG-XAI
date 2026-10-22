@@ -1,0 +1,27 @@
+{
+  "id": "API-AZADIRACHTA-INDICA",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Azadirachta indica (Nimba/Neem)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/azadirachta-indica",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. II, Monograph 53",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier bitter blood purifier, antimicrobial, and Pitta-Kapha pacifying leaf/bark.",
+  "limitations": "Prolonged high doses can aggravate Vata, cause emaciation, and exert mild anti-spermatogenic effects.",
+  "classical_verse": null,
+  "tags": [
+    "nimba",
+    "neem",
+    "azadirachta_indica",
+    "kushtha",
+    "blood_purifier",
+    "tikta_rasa"
+  ],
+  "dosha_affinity": [
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Azadirachta indica A. Juss. (Family: Meliaceae) - Leaf and Stem Bark.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Nimba, Ariṣṭa, Picumarda.\n   - Rasa: Tikta (bitter), Kashaya (astringent).\n   - Guna: Laghu (light), Ruksha (dry).\n   - Virya: Shita (cooling).\n   - Vipaka: Katu (pungent).\n   - Karma: Pitta-Kapha-hara, Vranashodhana (cleanses ulcers), Kushtaghna (alleviates dermatological disorders), Krimighna (anti-helminthic), Deepana.\n2. Therapeutic Indications:\n   Kushta (dermatoses, eczema, acne vulgaris), Prameha, Jwara, Kandu (pruritus), Vrana (infected wounds).\n3. Standard Therapeutic Dosage:\n   - Leaf Powder: 2 to 4 grams daily.\n   - Bark Decoction: 50 to 100 ml.\n4. Precautions & Contraindications:\n   - Emaciation, aggravated dry Vata conditions, male infertility seeking conception, and early pregnancy.\n"
+}

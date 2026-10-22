@@ -1,0 +1,225 @@
+/* DoctorDietPlansPage.css - Doctor Clinical Diet Management */
+
+.ayur-diet-plans-page {
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.ayur-diet-plans-header {
+  background-color: #FFFFFF;
+  border: 1px solid #E3DDD3;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(20, 32, 26, 0.04);
+}
+
+.ayur-doc-pill {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background-color: #EBF2EE;
+  color: #123B2F;
+}
+
+.ayur-doc-pill--ifct {
+  background-color: #FAF4E8;
+  color: #9A7733;
+}
+
+.ayur-diet-page-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: #26332E;
+  margin: 0 0 0.25rem 0;
+}
+
+.ayur-diet-page-desc {
+  font-size: 0.9375rem;
+  color: #6B7B75;
+  margin: 0;
+}
+
+/* Patient Selector Bar */
+.ayur-patient-selector-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E3DDD3;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+}
+
+.ayur-pt-pills-row {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.ayur-pt-selector-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid #ECE8E0;
+  border-radius: 10px;
+  background-color: #F8F6F0;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ayur-pt-selector-btn:hover {
+  background-color: #EBF2EE;
+  border-color: #A8BDA7;
+}
+
+.ayur-pt-selector-btn--active {
+  background-color: #FFFFFF;
+  border-color: #123B2F;
+  box-shadow: 0 2px 8px rgba(18, 59, 47, 0.12);
+}
+
+.ayur-pt-avatar-mini {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #123B2F;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ayur-pt-sel-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #26332E;
+}
+
+.ayur-pt-sel-meta {
+  font-size: 0.75rem;
+  color: #6B7B75;
+}
+
+.ayur-pt-sel-check {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #1D7A4F;
+  background-color: #EAF5EE;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* Generator Config Card */
+.ayur-generator-config-card {
+  background-color: #FFFFFF;
+  border: 1px solid #C5A059;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(197, 160, 89, 0.12);
+}
+
+.ayur-gen-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.ayur-gen-disclaimer {
+  background-color: #FAF4E8;
+  border: 1px solid #E5D5BA;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  color: #614611;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.ayur-gen-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ayur-gen-field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #26332E;
+  margin-bottom: 0.35rem;
+}
+
+.ayur-gen-select,
+.ayur-gen-input,
+.ayur-gen-textarea {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.875rem;
+  border: 1px solid #E3DDD3;
+  border-radius: 8px;
+  background-color: #F8F6F0;
+  color: #26332E;
+  font-family: 'Inter', sans-serif;
+}
+
+.ayur-gen-select:focus,
+.ayur-gen-input:focus,
+.ayur-gen-textarea:focus {
+  outline: none;
+  border-color: #123B2F;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(18, 59, 47, 0.12);
+}
+
+.ayur-allergen-chip {
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.775rem;
+  font-weight: 500;
+  background-color: #F8F6F0;
+  color: #3E4F47;
+  border: 1px solid #E3DDD3;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.15s ease;
+}
+
+.ayur-allergen-chip:hover {
+  background-color: #EBF2EE;
+  border-color: #A8BDA7;
+}
+
+.ayur-allergen-chip--checked {
+  background-color: #FAF0F0;
+  color: #A62828;
+  border-color: #E6A8A8;
+}
+
+.ayur-gen-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ECE8E0;
+}
+
+@media (max-width: 768px) {
+  .ayur-diet-plans-page {
+    padding: 1rem;
+  }
+}

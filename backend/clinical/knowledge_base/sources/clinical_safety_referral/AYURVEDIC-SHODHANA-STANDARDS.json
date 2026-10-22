@@ -1,0 +1,28 @@
+{
+  "id": "AYURVEDIC-SHODHANA-STANDARDS",
+  "collection": "clinical_safety_referral",
+  "title": "Ayurvedic Pharmacopoeia Standards for Sodhana (Purification / Detoxification Protocols)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/shodhana-protocols",
+  "publication_version": "Ayurvedic Formulary of India (AFI) & API Part-I Appendices",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Toxicological Processing & Safety Protocol",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Explains why unpurified poisonous herbs are strictly toxic and how classical processing detoxifies raw materials.",
+  "limitations": "Industrial manufacturing compliance requires lab verification of alkaloid/heavy-metal reduction.",
+  "classical_verse": null,
+  "tags": [
+    "shodhana",
+    "detoxification",
+    "vatsanabha",
+    "guggulu",
+    "safety_processing",
+    "pcimh"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nThe Ayurvedic Pharmacopoeia of India establishes mandatory Sodhana (detoxification) protocols for toxic or irritant plant and mineral substances:\n1. Definition & Objectives of Sodhana:\n   - Sodhana is not merely physical washing; it is a bio-chemical processing technique involving specific media (Godugdha / cow's milk, Gomutra, Triphala decoction) that removes toxic constituents, mitigates side effects, and enhances bioavailability.\n\n2. Mandatory Sodhana Botanicals:\n   - Vatsanabha (Aconitum chasmanthum): Highly toxic pseudoaconitine is converted to less toxic aconine through boiling in cow's milk or Triphala decoction for 3 hours (Dola Yantra).\n   - Kupilu (Strychnos nux-vomica): Seeds must be soaked in cow's milk and fried in ghee to reduce strychnine and brucine neurotoxicity.\n   - Guggulu (Commiphora mukul): Boiled in Triphala or Dashamoola decoction and filtered through cloth to remove insoluble foreign barks, grit, and harsh irritant volatile oils.\n\n3. Quality Standard Enforcement:\n   - No clinical prescription of Upavisha (semi-poisonous drugs) is permissible in raw unprocessed form. Modern HPLC/HPTLC testing must confirm reduction of target toxic alkaloids.\n"
+}

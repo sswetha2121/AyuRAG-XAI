@@ -1,0 +1,481 @@
+/* DoctorMonitoringView.css - Clinical Monitoring & Adherence Telemetry */
+
+.ayur-monitoring-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.ayur-mon-header {
+  background-color: #FFFFFF;
+  border: 1px solid #E3DDD3;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: gap-md;
+}
+
+.ayur-mon-pill {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background-color: #EBF2EE;
+  color: #123B2F;
+}
+
+.ayur-mon-pill--live {
+  background-color: #FAF4E8;
+  color: #9A7733;
+}
+
+.ayur-mon-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #26332E;
+  margin: 0 0 0.25rem 0;
+}
+
+.ayur-mon-desc {
+  font-size: 0.85rem;
+  color: #6B7B75;
+  margin: 0;
+}
+
+.ayur-mon-refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  background-color: #F8F6F0;
+  border: 1px solid #E3DDD3;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #123B2F;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ayur-mon-refresh-btn:hover:not(:disabled) {
+  background-color: #EBF2EE;
+  border-color: #123B2F;
+}
+
+.ayur-mon-disclaimer-card {
+  background-color: #FAF4E8;
+  border: 1px solid #E5D5BA;
+  border-radius: 10px;
+  padding: 0.85rem 1.25rem;
+  font-size: 0.8rem;
+  color: #614611;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  line-height: 1.5;
+}
+
+/* Metric Cards */
+.ayur-mon-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.ayur-mon-stat-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E3DDD3;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 1px 3px rgba(20, 32, 26, 0.04);
+}
+
+.ayur-mstat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.ayur-mstat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6B7B75;
+  text-transform: uppercase;
+}
+
+.ayur-mstat-val {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #26332E;
+  margin-bottom: 0.25rem;
+}
+
+.ayur-mstat-sub {
+  font-size: 0.775rem;
+  color: #6B7B75;
+}
+
+/* Filter Bar */
+.ayur-mon-filter-bar {
+  background-color: #FFFFFF;
+  border: 1px solid #E3DDD3;
+  border-radius: 10px;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.ayur-mfilter-chip {
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.775rem;
+  font-weight: 500;
+  background-color: #F8F6F0;
+  color: #3E4F47;
+  border: 1px solid #ECE8E0;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ayur-mfilter-chip:hover {
+  background-color: #EBF2EE;
+  color: #123B2F;
+}
+
+.ayur-mfilter-chip--active {
+  background-color: #123B2F;
+  color: #FFFFFF;
+  border-color: #123B2F;
+}
+
+/* Patient Monitoring Cards */
+.ayur-mon-patients-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ayur-mon-patient-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E3DDD3;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1px 4px rgba(20, 32, 26, 0.04);
+}
+
+.ayur-mpat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid #ECE8E0;
+}
+
+.ayur-mpat-header__left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.ayur-mpat-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #123B2F;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ayur-mpat-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #26332E;
+  margin: 0;
+}
+
+.ayur-mpat-id {
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: #6B7B75;
+  background-color: #F8F6F0;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  border: 1px solid #E3DDD3;
+}
+
+.ayur-mpat-constitution {
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: #123B2F;
+  background-color: #EBF2EE;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.ayur-mpat-meta {
+  font-size: 0.775rem;
+  color: #6B7B75;
+  margin-top: 2px;
+}
+
+.ayur-mpat-header__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ayur-adherence-badge-wrap {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.ayur-adherence-rate {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.ayur-mpat-plan-strip {
+  padding: 0.65rem 0;
+  border-bottom: 1px solid #ECE8E0;
+}
+
+.ayur-mplan-chip {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #155E3D;
+  background-color: #EAF5EE;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+/* Meals Grid */
+.ayur-mpat-meals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid #ECE8E0;
+}
+
+.ayur-mmeal-slot {
+  background-color: #FAF8F3;
+  border: 1px solid #ECE8E0;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ayur-mslot-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #6B7B75;
+  text-transform: uppercase;
+}
+
+.ayur-mslot-pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.ayur-mslot-pill--completed {
+  background-color: #EAF5EE;
+  color: #155E3D;
+}
+
+.ayur-mslot-pill--partially_completed {
+  background-color: #FAF4E8;
+  color: #9A7733;
+}
+
+.ayur-mslot-pill--skipped {
+  background-color: #FAF0F0;
+  color: #A62828;
+}
+
+.ayur-mslot-pill--pending {
+  background-color: #F0EDE4;
+  color: #6B7B75;
+}
+
+.ayur-mslot-reason {
+  font-size: 0.6875rem;
+  color: #A62828;
+  font-style: italic;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 7-Day Trend Section */
+.ayur-mpat-trend-section {
+  padding: 0.85rem 0;
+  border-bottom: 1px solid #ECE8E0;
+}
+
+.ayur-trend-bars-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+  height: 60px;
+}
+
+.ayur-trend-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.ayur-tbar-wrap {
+  flex: 1;
+  width: 100%;
+  max-width: 28px;
+  background-color: #ECE8E0;
+  border-radius: 4px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.ayur-tbar-fill {
+  width: 100%;
+  transition: height 0.3s ease;
+  border-radius: 4px;
+}
+
+.ayur-tbar-fill--green {
+  background-color: #1D7A4F;
+}
+
+.ayur-tbar-fill--amber {
+  background-color: #C5A059;
+}
+
+.ayur-tbar-day {
+  font-size: 0.675rem;
+  color: #6B7B75;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+/* Difficulties Card */
+.ayur-mpat-difficulties-card {
+  margin-top: 0.85rem;
+  background-color: #FFFDF9;
+  border: 1px solid #E5D5BA;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+}
+
+.ayur-diff-item {
+  padding: 0.65rem 0.85rem;
+  border-radius: 6px;
+  border: 1px solid #ECE8E0;
+  background-color: #FFFFFF;
+}
+
+.ayur-diff-item--unreviewed {
+  border-left: 3px solid #C5A059;
+}
+
+.ayur-diff-item--reviewed {
+  border-left: 3px solid #1D7A4F;
+  background-color: #F8FAF9;
+}
+
+.ayur-severity-badge {
+  font-size: 0.675rem;
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}
+
+.ayur-severity-badge--mild {
+  background-color: #FAF4E8;
+  color: #9A7733;
+}
+
+.ayur-severity-badge--moderate {
+  background-color: #FFF0E6;
+  color: #C25B10;
+}
+
+.ayur-severity-badge--severe {
+  background-color: #FAF0F0;
+  color: #A62828;
+}
+
+.ayur-diff-symptoms,
+.ayur-diff-notes {
+  font-size: 0.8rem;
+  color: #26332E;
+  margin: 0.25rem 0 0 0;
+}
+
+.ayur-diff-reviewed-stamp {
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: #155E3D;
+  margin-top: 0.35rem;
+}
+
+.ayur-diff-review-action {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.ayur-diff-note-input {
+  flex: 1;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8rem;
+  border: 1px solid #E3DDD3;
+  border-radius: 6px;
+  background-color: #F8F6F0;
+  font-family: 'Inter', sans-serif;
+}
+
+.ayur-diff-note-input:focus {
+  outline: none;
+  border-color: #123B2F;
+  background-color: #FFFFFF;
+}
+
+.ayur-mon-loading,
+.ayur-mon-empty {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: #6B7B75;
+  font-size: 0.875rem;
+  background-color: #FFFFFF;
+  border: 1px solid #E3DDD3;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}

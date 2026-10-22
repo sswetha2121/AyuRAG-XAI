@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './PatientMealTracker.css';
 import { api } from '../../services/api';
 import { PatientTodayScheduleCard } from './PatientTodayScheduleCard';
+import { PatientDifficultyModal } from '../patient/PatientDifficultyModal';
 import {
   Utensils,
   Clock,
@@ -15,7 +16,9 @@ import {
   Sparkles,
   ChevronRight,
   RotateCcw,
-  Bell
+  Bell,
+  AlertTriangle,
+  PieChart
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 
@@ -24,6 +27,10 @@ export const PatientMealTracker = ({ onTriggerToast, onOpenReminders }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdatingMeal, setIsUpdatingMeal] = useState(null);
   const [waterLoading, setWaterLoading] = useState(false);
+  const [difficultyModalOpen, setDifficultyModalOpen] = useState(false);
+  const [difficultyMealType, setDifficultyMealType] = useState('lunch');
+  const [activeSkipMeal, setActiveSkipMeal] = useState(null);
+  const [skipReasonInput, setSkipReasonInput] = useState('Lack of appetite (Aruchi)');
 
   const fetchSchedule = async () => {
     try {
@@ -38,20 +45,24 @@ export const PatientMealTracker = ({ onTriggerToast, onOpenReminders }) => {
     fetchSchedule();
   }, []);
 
-  const handleToggleMeal = async (mealType, newStatus) => {
+  const handleToggleMeal = async (mealType, newStatus, extra = {}) => {
     try {
       setIsUpdatingMeal(mealType);
       const res = await api.logPatientMeal({
         meal_type: mealType,
         status: newStatus,
+        portion_consumed: extra.portion_consumed || (newStatus === 'PARTIALLY_COMPLETED' ? 50 : newStatus === 'COMPLETED' ? 100 : 0),
+        skip_reason: extra.skip_reason || '',
+        symptom_notes: extra.symptom_notes || '',
       });
 
       onTriggerToast?.({
         type: newStatus === 'COMPLETED' ? 'success' : 'info',
         title: newStatus === 'COMPLETED' ? 'Meal Logged' : 'Status Updated',
-        message: res.message || `Meal status changed to ${newStatus.toLowerCase()}.`,
+        message: res.message || `Meal status changed to ${newStatus.replace('_', ' ').toLowerCase()}.`,
       });
 
+      setActiveSkipMeal(null);
       // Refresh schedule
       await fetchSchedule();
     } catch (err) {
@@ -259,21 +270,34 @@ export const PatientMealTracker = ({ onTriggerToast, onOpenReminders }) => {
       <div className="ayur-tracker-schedule-section">
         <div className="ayur-tracker-section-header">
           <div>
-            <h3 className="ayur-tracker-heading">Today's Meal Schedule</h3>
+            <h3 className="ayur-tracker-heading">Today's Meal Checklist</h3>
             <p className="ayur-tracker-subheading">
-              Track what to eat and mark meals as completed throughout your day
+              Track what to eat, mark completed or partial meals, and report difficulty directly to your physician
             </p>
           </div>
-          <div className="ayur-plan-origin-pill">
-            {is_doctor_approved ? (
-              <span className="text-success font-semibold flex items-center gap-xs">
-                <CheckCircle2 size={14} /> Doctor Approved Plan (v{plan_version})
-              </span>
-            ) : (
-              <span className="text-muted flex items-center gap-xs">
-                <Clock size={14} /> Clinical Review in Progress
-              </span>
-            )}
+          <div className="flex items-center gap-xs flex-wrap">
+            <button
+              type="button"
+              className="ayur-report-diff-btn"
+              onClick={() => {
+                setDifficultyMealType('lunch');
+                setDifficultyModalOpen(true);
+              }}
+            >
+              <AlertTriangle size={14} />
+              <span>Report Symptoms / Difficulty</span>
+            </button>
+            <div className="ayur-plan-origin-pill">
+              {is_doctor_approved ? (
+                <span className="text-success font-semibold flex items-center gap-xs">
+                  <CheckCircle2 size={14} /> Doctor Approved Plan (v{plan_version})
+                </span>
+              ) : (
+                <span className="text-muted flex items-center gap-xs">
+                  <Clock size={14} /> Clinical Review in Progress
+                </span>
+              )}
+            </div>
           </div>
         </div>
 
@@ -322,9 +346,10 @@ export const PatientMealTracker = ({ onTriggerToast, onOpenReminders }) => {
 
                   {meal.items && meal.items.length > 0 && (
                     <ul className="ayur-meal-items-bullet-list">
-                      {meal.items.map((it, idx) => (
-                        <li key={idx}>{it}</li>
-                      ))}
+                      {meal.items.map((it, idx) => {
+                        const itemLabel = typeof it === 'string' ? it : `${it?.name || it?.title || 'Item'}${it?.portion ? ` (${it.portion})` : (it?.portion_g ? ` (${it.portion_g}g)` : '')}`;
+                        return <li key={idx}>{itemLabel}</li>;
+                      })}
                     </ul>
                   )}
                 </div>
@@ -332,44 +357,139 @@ export const PatientMealTracker = ({ onTriggerToast, onOpenReminders }) => {
                 {/* Right Action Column */}
                 <div className="ayur-meal-action-col">
                   {isCompleted ? (
-                    <button
-                      type="button"
-                      className="ayur-meal-revert-btn"
-                      onClick={() => handleToggleMeal(meal.meal_type, 'PENDING')}
-                      disabled={isUpdating}
-                      title="Undo completed status"
-                    >
-                      <RotateCcw size={14} />
-                      <span>Undo</span>
-                    </button>
-                  ) : (
                     <div className="flex items-center gap-xs">
-                      <Button
-                        variant={isPending ? 'primary' : 'outline'}
-                        size="sm"
-                        onClick={() => handleToggleMeal(meal.meal_type, 'COMPLETED')}
-                        loading={isUpdating}
-                        leftIcon={<CheckCircle2 size={14} />}
-                      >
-                        Eat
-                      </Button>
+                      <span className="text-xs font-semibold text-success flex items-center gap-xs">
+                        <CheckCircle2 size={14} /> Done
+                      </span>
                       <button
                         type="button"
-                        className="ayur-meal-skip-btn"
-                        onClick={() => handleToggleMeal(meal.meal_type, isSkipped ? 'PENDING' : 'SKIPPED')}
+                        className="ayur-meal-revert-btn"
+                        onClick={() => handleToggleMeal(meal.meal_type, 'PENDING')}
                         disabled={isUpdating}
-                        title={isSkipped ? 'Undo skip' : 'Skip this meal'}
+                        title="Reset to not done"
                       >
-                        {isSkipped ? 'Undo' : 'Skip'}
+                        <RotateCcw size={13} />
+                        <span>Undo</span>
                       </button>
                     </div>
+                  ) : meal.status === 'PARTIALLY_COMPLETED' ? (
+                    <div className="flex items-center gap-xs">
+                      <span className="text-xs font-semibold text-accent flex items-center gap-xs">
+                        ◑ Half Consumed
+                      </span>
+                      <button
+                        type="button"
+                        className="ayur-meal-revert-btn"
+                        onClick={() => handleToggleMeal(meal.meal_type, 'PENDING')}
+                        disabled={isUpdating}
+                        title="Reset"
+                      >
+                        <RotateCcw size={13} />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col gap-xs items-end">
+                      <div className="flex items-center gap-xs">
+                        <Button
+                          variant="primary"
+                          size="xs"
+                          onClick={() => handleToggleMeal(meal.meal_type, 'COMPLETED')}
+                          loading={isUpdating}
+                          leftIcon={<CheckCircle2 size={13} />}
+                        >
+                          Completed
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="xs"
+                          onClick={() =>
+                            handleToggleMeal(meal.meal_type, 'PARTIALLY_COMPLETED', { portion_consumed: 50 })
+                          }
+                          loading={isUpdating}
+                        >
+                          Partial (50%)
+                        </Button>
+                        <button
+                          type="button"
+                          className="ayur-meal-skip-btn"
+                          onClick={() =>
+                            setActiveSkipMeal(activeSkipMeal === meal.meal_type ? null : meal.meal_type)
+                          }
+                          disabled={isUpdating}
+                          title={isSkipped ? 'Undo skip' : 'Skip meal'}
+                        >
+                          {isSkipped ? 'Undo' : 'Skip'}
+                        </button>
+                      </div>
+
+                      {/* Quick Skip Reason Dropdown if active */}
+                      {activeSkipMeal === meal.meal_type && (
+                        <div className="ayur-quick-skip-panel">
+                          <label className="text-micro font-semibold text-muted block mb-xs">
+                            Reason for skipping:
+                          </label>
+                          <select
+                            className="ayur-skip-select"
+                            value={skipReasonInput}
+                            onChange={(e) => setSkipReasonInput(e.target.value)}
+                          >
+                            <option value="Lack of appetite (Aruchi)">Lack of appetite (Aruchi)</option>
+                            <option value="Digestion discomfort / Nausea">Digestion discomfort / Nausea</option>
+                            <option value="Schedule conflict / Fasting">Schedule conflict / Fasting</option>
+                            <option value="Food items unavailable">Food items unavailable</option>
+                            <option value="Other / Non-compliant">Other reason</option>
+                          </select>
+                          <div className="flex gap-xs mt-xs justify-end">
+                            <button
+                              type="button"
+                              className="ayur-skip-confirm-btn"
+                              onClick={() =>
+                                handleToggleMeal(meal.meal_type, 'SKIPPED', {
+                                  skip_reason: skipReasonInput,
+                                })
+                              }
+                            >
+                              Confirm Skip
+                            </button>
+                            <button
+                              type="button"
+                              className="ayur-skip-cancel-btn"
+                              onClick={() => setActiveSkipMeal(null)}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   )}
+
+                  {/* Report difficulty link */}
+                  <button
+                    type="button"
+                    className="ayur-meal-report-link"
+                    onClick={() => {
+                      setDifficultyMealType(meal.meal_type);
+                      setDifficultyModalOpen(true);
+                    }}
+                  >
+                    Report Symptom / Reaction
+                  </button>
                 </div>
               </div>
             );
           })}
         </div>
       </div>
+
+      {/* Patient Difficulty Reporting Modal */}
+      <PatientDifficultyModal
+        isOpen={difficultyModalOpen}
+        onClose={() => setDifficultyModalOpen(false)}
+        defaultMealType={difficultyMealType}
+        onSuccess={() => fetchSchedule()}
+        onTriggerToast={onTriggerToast}
+      />
     </div>
   );
 };

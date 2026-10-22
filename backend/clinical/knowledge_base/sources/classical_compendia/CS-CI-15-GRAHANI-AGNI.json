@@ -1,0 +1,29 @@
+{
+  "id": "CS-CI-15-GRAHANI-AGNI",
+  "collection": "classical_compendia",
+  "title": "Charaka Saṃhitā: Pathophysiology of Agni, Ama, and Grahani Disorders",
+  "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+  "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=ci&ch=15",
+  "publication_version": "Charaka Saṃhitā, Cikitsāsthāna, Chapter 15, Ślokas 3-45",
+  "license": "Public Domain",
+  "document_type": "Classical Gastrointestinal Treatise",
+  "download_availability": "Publicly accessible via e-Caraka",
+  "relevance": "Direct clinical reference for Agni classification (Sama, Vishama, Tikshna, Manda) and digestive recommendations.",
+  "limitations": "Chronic malabsorption disorders and inflammatory bowel disease require modern gastroenterological endoscopy and testing.",
+  "classical_verse": "Ayuḥ varṇo balaṁ svāsthyaṁ utsāhopacayo prabhā. Ojastejo’gnayaḥ prāṇāścoktā deha-agni-hetukāḥ.",
+  "tags": [
+    "grahani",
+    "agni",
+    "ama",
+    "vishama_agni",
+    "tikshna_agni",
+    "manda_agni",
+    "takra"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nCharaka Saṃhitā Cikitsāsthāna Chapter 15 establishes the primacy of gastrointestinal fire (Jatharagni) in human vitality.\n1. The Four Functional States of Agni:\n   - Sama Agni (Balanced): Digestion occurs smoothly within 3-4 hours without gas, burning, or heaviness. Tridosha harmony exists.\n   - Vishama Agni (Irregular / Vata-dominated): Digestion is erratic—sometimes rapid, sometimes sluggish, frequently accompanied by distension, dry constipation, and colicky pain.\n   - Tikshna Agni (Hyperactive / Pitta-dominated): Digestion is excessively rapid, producing ravenous appetite, epigastric burning, acid reflux, throat parching, and loose motions.\n   - Manda Agni (Sluggish / Kapha-dominated): Digestion is heavy and slow; small amounts of food cause prolonged epigastric fullness, nausea, salivation, and lethargy.\n\n2. Pathogenesis of Ama (Endogenous Metabolic Toxin):\n   When Agni is impaired, the first circulating nutritional juice (Rasa Dhatu) remains unripened and fermented, known as Ama. Ama clogs biological channels (Srotas), leading to fatigue, heavy tongue coating, malodorous excretions, joint stiffness, and impaired immunity.\n"
+}

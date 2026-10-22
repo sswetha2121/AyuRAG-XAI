@@ -1,0 +1,27 @@
+{
+  "id": "API-TRIBULUS-TERRESTRIS",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Tribulus terrestris (Gokshura)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/tribulus-terrestris",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 16",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier nephroprotective, lithotriptic, and rejuvenating diuretic tonic.",
+  "limitations": "Caution in patients taking modern synthetic potassium-sparing diuretics to prevent hyperkalemia.",
+  "classical_verse": null,
+  "tags": [
+    "gokshura",
+    "tribulus_terrestris",
+    "mutrakrichra",
+    "diuretic",
+    "nephroprotective",
+    "vrishya"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Tribulus terrestris L. (Family: Zygophyllaceae) - Dried Fruit.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Gokṣura, Śvadaṁṣṭrā, Trikantaka, Chanadrudruma.\n   - Rasa: Madhura (sweet), Tikta (bitter).\n   - Guna: Guru (heavy), Snigdha (unctuous).\n   - Virya: Shita (cooling).\n   - Vipaka: Madhura (sweet).\n   - Karma: Vata-Pitta-hara, Mutrala (diuretic), Ashmarighna (dissolves calculi), Vrishya, Balya, Rasayana.\n2. Therapeutic Indications:\n   Mutrakrichra (dysuria / urinary tract infection), Ashmari (renal calculi), Prameha, Klaibya, Shotha.\n3. Standard Therapeutic Dosage:\n   - Fruit Powder: 3 to 6 grams.\n   - Decoction: 50 to 100 ml.\n4. Clinical Safety:\n   - Well-tolerated botanical; monitor fluid intake during therapeutic diuresis.\n"
+}

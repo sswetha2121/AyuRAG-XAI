@@ -1,0 +1,28 @@
+{
+  "id": "API-CORIANDRUM-SATIVUM",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Coriandrum sativum (Dhanyaka/Coriander)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/coriandrum-sativum",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 14",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier Pitta-pacifying digestive, thirst quencher, and cooling diuretic.",
+  "limitations": "Safe culinary spice; no documented toxicities at dietary levels.",
+  "classical_verse": null,
+  "tags": [
+    "dhanyaka",
+    "coriander",
+    "coriandrum_sativum",
+    "trishna",
+    "pitta_shamana",
+    "diuretic"
+  ],
+  "dosha_affinity": [
+    "Pitta",
+    "Vata",
+    "Kapha"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Coriandrum sativum L. (Family: Apiaceae) - Dried Fruit.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Dhānyaka, Kustumburu, Vitunnaka.\n   - Rasa: Kashaya (astringent), Tikta (bitter), Madhura (sweet), Katu (pungent).\n   - Guna: Laghu (light), Snigdha (unctuous).\n   - Virya: Ushna (mildly warm when dry) / Shita (cold infusion).\n   - Vipaka: Madhura (sweet).\n   - Karma: Tridoshahara (balances Pitta in particular), Deepana, Pachana, Trishnahara (allays thirst), Mutrala.\n2. Therapeutic Indications:\n   Amlapitta, Trishna, Daha (burning sensation), Mutrakrichra, Jwara.\n3. Standard Therapeutic Dosage:\n   - Powder: 3 to 6 grams.\n   - Dhanyaka Hima (Cold overnight infusion): 50 to 100 ml taken with rock sugar for burning sensations.\n"
+}

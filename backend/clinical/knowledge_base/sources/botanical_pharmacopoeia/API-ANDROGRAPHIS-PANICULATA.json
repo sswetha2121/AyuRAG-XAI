@@ -1,0 +1,27 @@
+{
+  "id": "API-ANDROGRAPHIS-PANICULATA",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Andrographis paniculata (Kalmegh/Bhunimba)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/andrographis-paniculata",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. II, Monograph 10",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier hepatoprotective, bitter febrifuge, and upper respiratory infection botanical.",
+  "limitations": "Very intense bitter taste; high doses can cause loss of appetite, nausea, or allergic rash.",
+  "classical_verse": null,
+  "tags": [
+    "kalmegh",
+    "bhunimba",
+    "andrographis_paniculata",
+    "hepatoprotective",
+    "bitter_tonic",
+    "jvara"
+  ],
+  "dosha_affinity": [
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Andrographis paniculata (Burm. f.) Nees (Family: Acanthaceae) - Aerial Parts.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Bhūnimba, Kālamegha, Yavatiktā.\n   - Rasa: Tikta (intensely bitter).\n   - Guna: Laghu (light), Ruksha (dry).\n   - Virya: Ushna (warm).\n   - Vipaka: Katu (pungent).\n   - Karma: Pitta-Kapha-hara, Yakrid-uttejaka (liver stimulant), Deepana, Pachana, Jvaraghna, Krimighna.\n2. Therapeutic Indications:\n   Yakrid-vikara (hepatic congestion, sluggish liver), Kamala (jaundice), Jwara (malarial and viral fevers), Agnimandya, Krimi.\n3. Standard Therapeutic Dosage:\n   - Powder: 1 to 3 grams.\n   - Decoction: 20 to 50 ml.\n4. Precautions:\n   - Pregnancy: Contraindicated due to documented abortifacient and anti-fertility effects in animal models.\n"
+}

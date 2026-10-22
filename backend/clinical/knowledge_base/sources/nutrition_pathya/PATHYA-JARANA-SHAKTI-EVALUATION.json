@@ -1,0 +1,27 @@
+{
+  "id": "PATHYA-JARANA-SHAKTI-EVALUATION",
+  "collection": "nutrition_pathya",
+  "title": "Clinical Evaluation of Digestive Capacity: Jarana Shakti and Abhyavaharana Shakti",
+  "publisher": "AyuRAG Clinical Knowledge Base / Charaka Saṃhitā Vimanasthana Ch 8",
+  "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=vi&ch=8",
+  "publication_version": "Clinical Methodology Standard",
+  "license": "Public Domain / Clinical Reference",
+  "document_type": "Clinical Metabolic Evaluation Guide",
+  "download_availability": "Publicly accessible via e-Caraka",
+  "relevance": "Explains how to determine meal intervals and food volume based on digestion speed.",
+  "limitations": "Subjective patient reporting; validated by tracking bowel consistency and energy levels.",
+  "classical_verse": "Abhyavaharaṇaśaktirjaranaśaktiriti parīkṣeta.",
+  "tags": [
+    "jarana_shakti",
+    "abhyavaharana_shakti",
+    "digestive_capacity",
+    "meal_spacing",
+    "metabolism"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nAyurvedic Clinical Method for Quantifying Patient Metabolic Capacity:\n1. Abhyavaharana Shakti (Ingestion Capacity):\n   - The volume and mass of food an individual can comfortably consume in a single sitting without nausea, thoracic fullness, or dyspnea.\n2. Jarana Shakti (Digestive & Assimilative Capacity):\n   - Evaluated by the time elapsed between meal ingestion and the emergence of authentic physiological hunger (Shuddha Udgara, Utsaha, Laghuta, Yathochita Malotsarga).\n   - If a standard meal requires >6 hours to digest, Jarana Shakti is low (Manda Agni); meal portion must be reduced by 30-50%.\n   - If a standard meal is digested in <2.5 hours with burning hunger, Jarana Shakti is hyperactive (Tikshna Agni); cooling unctuous meals are indicated.\n   - Normal physiological meal spacing is 3.5 to 4.5 hours.\n"
+}

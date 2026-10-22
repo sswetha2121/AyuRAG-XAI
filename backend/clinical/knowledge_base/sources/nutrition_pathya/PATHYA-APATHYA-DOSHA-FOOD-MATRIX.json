@@ -1,0 +1,28 @@
+{
+  "id": "PATHYA-APATHYA-DOSHA-FOOD-MATRIX",
+  "collection": "nutrition_pathya",
+  "title": "Clinical Pathya-Apathya Food Selection Matrix for Constitutional Dosha Imbalances",
+  "publisher": "AyuRAG Clinical Knowledge Curation / CCRAS and ICMR-NIN Cross-Validated Standards",
+  "source_url": "https://ayushportal.nic.in/pathya-apathya-matrix",
+  "publication_version": "Clinical Cross-Reference Standard v2.4, 2024",
+  "license": "CC-BY-SA 4.0 / Clinical Open Access Reference",
+  "document_type": "Clinical Food-Dosha Balancing Matrix",
+  "download_availability": "Publicly accessible via AYUSH Research Portal / AyuRAG Knowledge Base",
+  "relevance": "Provides exact food recommendations (Pathya) and foods to avoid (Apathya) for Vata, Pitta, and Kapha.",
+  "limitations": "Individual food tolerances (Satmya) and culinary food allergies supersede broad group classifications.",
+  "classical_verse": null,
+  "tags": [
+    "food_matrix",
+    "pathya",
+    "apathya",
+    "vata_diet",
+    "pitta_diet",
+    "kapha_diet"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nComprehensive Cross-Validated Food Selection Matrix Harmonizing Ayurvedic Gunas and ICMR-NIN Nutrient Categories:\n1. Vata-Pacifying Regimen (Warm, Unctuous, Grounding):\n   - Pathya (Favored): Warm cooked whole grains (wheat, oats, soaked basmati rice); warm mung bean soup; sweet root vegetables (carrots, beets, sweet potato); soaked almonds and walnuts; cow's ghee, sesame oil; warming carminative spices (ginger, cumin, ajwain, fennel, cardamom); warm spiced cow's milk.\n   - Apathya (Avoided): Raw salads, cold/iced beverages, raw sprouts, dry puffed crackers, popcorn, carbonated drinks, excess caffeine, dry leafy greens without fat, bitter gourds in excess.\n\n2. Pitta-Pacifying Regimen (Cooling, Mildly Sweet, Hydrating):\n   - Pathya (Favored): Barley, aged white rice, oats; green gram (Mudga), chickpeas in moderation; zucchini, cucumber, bottle gourd (Lauki), bitter gourd, pumpkin; sweet apples, ripe pomegranates, melons, sweet grapes; coconut water, cow's ghee; cooling spices (coriander, fennel, cardamom, mint).\n   - Apathya (Avoided): Extremely spicy curries, green and red chili, mustard, vinegar, deep-fried snacks, fermented alcohol, aged hard cheeses, excessive garlic, citrus fruits on empty stomach, salty fried crisps.\n\n3. Kapha-Pacifying Regimen (Light, Warm, Dry, Stimulating):\n   - Pathya (Favored): Whole millets (Ragi, Jowar, Bajra, Foxtail millet), barley; roasted legumes, mung beans, horse gram; leafy greens (spinach, fenugreek, mustard greens), cabbage, radish, drumstick; astringent fruits (pomegranate, green apple, amla); raw honey (unheated, in small amounts); pungent spices (dry ginger, black pepper, pippali, turmeric).\n   - Apathya (Avoided): Deep-fried oily foods, heavy dairy creams, excessive cheese, ice creams, cold sweetened yogurts, bakery pastries, bananas, oily red meats, cold water during meals, day-sleeping.\n"
+}

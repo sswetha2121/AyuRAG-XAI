@@ -1,0 +1,31 @@
+{
+  "id": "CS-SU-27-ANNAPANAVITHI",
+  "collection": "classical_compendia",
+  "title": "Charaka Saṃhitā: Comprehensive Dietetics & Nutritional Classification (Annapanavidhi)",
+  "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+  "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=su&ch=27",
+  "publication_version": "Charaka Saṃhitā, Sūtrasthāna, Chapter 27, Ślokas 3-10, 220-250",
+  "license": "Public Domain",
+  "document_type": "Classical Food Science Text",
+  "download_availability": "Publicly accessible via e-Caraka",
+  "relevance": "Underpins the nutritional recommendation engine for customized food lists.",
+  "limitations": "Requires integration with modern nutrient content metrics (calories, protein, glycemic index).",
+  "classical_verse": "Ahārasambhavaṁ vastu rogāścāhārasambhavāḥ. Hitāhitaviśeṣācca viśeṣaḥ sukhaduḥkhayoḥ.",
+  "tags": [
+    "annapanavidhi",
+    "food_groups",
+    "ahara",
+    "cereals",
+    "pulses",
+    "milk_products",
+    "hitahita",
+    "sukhadukha",
+    "charaka_samhita"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nCharaka Saṃhitā Sūtrasthāna Chapter 27 (Annapānavidhi) establishes the central dietary shloka:\nAhārasambhavaṁ vastu rogāścāhārasambhavāḥ. Hitāhitaviśeṣācca viśeṣaḥ sukhaduḥkhayoḥ.\n(The human body is the product of nutrition; diseases are also born of improper diet. Wholesome [Hita] food creates health, unwholesome [Ahita] causes affliction).\n1. Shuka Dhanya (Cereals): Shali (red rice, aged rice) is sweet, cooling, easily digestible, and pacifies all three doshas. Yava (barley) is dry, cold, and scrapes Kapha.\n2. Shami Dhanya (Pulses): Mudga (green gram) is the foremost wholesome legume, easy on digestion. Masha (black gram) is heavy, hot, unctuous, increases strength and semen, but strongly increases Kapha and Pitta.\n3. Shaka Varga (Vegetables): Most leafy vegetables are astringent, dry, and cold, requiring culinary preparation with unctuous fats (ghee/mustard oil) to avoid aggravating Vata.\n4. Phala Varga (Fruits): Draksha (raisins/grapes) is the foremost fruit, cooling, sweet, and soothing to Pitta-Vata. Dadima (pomegranate) balances Pitta and stimulates Agni.\n5. Jala Varga (Water): Cold boiled water (Shrita-Shita) is light, clears channels, and pacifies Pitta. Warm water (Ushnodaka) kindles Agni, digests toxins (Ama), and pacifies Vata-Kapha.\n6. Gorasa Varga (Dairy): Cow's milk is sweet, cooling, promotes Ojas, and rejuvenates. Takra (buttermilk spiced with roasted cumin and rock salt) is light, astringent-sour, kindles Agni, and cures Grahani and hemorrhoids.\n"
+}

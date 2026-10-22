@@ -1,0 +1,28 @@
+{
+  "id": "API-TERMINALIA-CHEBULA",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Terminalia chebula (Haritaki)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/terminalia-chebula",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 19",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier bowel regulator, gut detoxifier, and Triphala component.",
+  "limitations": "Contraindicated in severe dehydration, acute exhaustion, and pregnancy.",
+  "classical_verse": null,
+  "tags": [
+    "haritaki",
+    "terminalia_chebula",
+    "anulomana",
+    "laxative",
+    "gut_motility",
+    "triphala"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Terminalia chebula Retz. (Family: Combretaceae) - Dried Pericarp.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Harītakī, Abhayā, Pathyā, Cetakī.\n   - Rasa: Kashaya-pradhana (predominantly astringent, with sweet, sour, bitter, pungent; lacks salt).\n   - Guna: Laghu (light), Ruksha (dry).\n   - Virya: Ushna (mildly warm).\n   - Vipaka: Madhura (sweet).\n   - Karma: Tridoshahara (balances all doshas, especially Vata), Anulomana (gently directs Vayu downward, natural laxative), Deepani, Medhya, Rasayana.\n\n2. Therapeutic Indications:\n   Vibandha (constipation), Arsha (hemorrhoids), Udavarta (reverse peristalsis), Gulma (abdominal lumps), Shotha (edema), Aruchi (anorexia).\n\n3. Standard Therapeutic Dosage:\n   - Fruit Powder: 3 to 6 grams daily with warm water at bedtime.\n\n4. Contraindications:\n   - Highly dehydrated individuals, acute emaciation, excessive fasting, pregnancy, and acute exhaustion (Kshama/Shrama).\n"
+}

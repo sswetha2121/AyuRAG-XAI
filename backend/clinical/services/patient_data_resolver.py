@@ -52,34 +52,42 @@ def extract_patient_reported_value(assessment, field_name):
 
     demog = assessment.demographics or {}
     prak = assessment.prakriti_scores or {}
+    prak_data = assessment.prakriti_data or {}
     life = assessment.lifestyle_data or {}
     diet = assessment.diet_data or {}
     symp = assessment.symptoms_data or {}
 
+    if isinstance(symp, list):
+        chief = symp
+    elif isinstance(symp, dict):
+        chief = symp.get('chiefComplaints') or symp.get('selectedSymptoms', [])
+    else:
+        chief = []
+
     mapping = {
-        'fullName': demog.get('fullName'),
-        'age': demog.get('age'),
-        'gender': demog.get('gender'),
-        'height': demog.get('height'),
-        'weight': demog.get('weight'),
-        'climate': demog.get('climate'),
-        'location': demog.get('location'),
-        'primary_prakriti': prak.get('primary') or assessment.prakriti_data.get('primary'),
-        'vata_score': prak.get('vata'),
-        'pitta_score': prak.get('pitta'),
-        'kapha_score': prak.get('kapha'),
-        'sleep_duration': life.get('sleepDuration'),
-        'sleep_quality': life.get('sleepQuality'),
-        'activity_level': life.get('activityLevel'),
-        'stress_level': life.get('stressLevel'),
-        'circadian_alignment': life.get('circadianAlignment'),
-        'appetite_pattern': diet.get('appetitePattern'),
-        'meal_frequency': diet.get('mealFrequency'),
-        'hydration': diet.get('hydration'),
-        'predominant_taste': diet.get('predominantTaste'),
-        'chief_complaints': symp.get('chiefComplaints') or symp.get('selectedSymptoms', []),
-        'symptom_severity': symp.get('severity'),
-        'chronicity': symp.get('chronicity'),
+        'fullName': demog.get('fullName') if isinstance(demog, dict) else None,
+        'age': demog.get('age') if isinstance(demog, dict) else None,
+        'gender': demog.get('gender') if isinstance(demog, dict) else None,
+        'height': demog.get('height') if isinstance(demog, dict) else None,
+        'weight': demog.get('weight') if isinstance(demog, dict) else None,
+        'climate': demog.get('climate') if isinstance(demog, dict) else None,
+        'location': demog.get('location') if isinstance(demog, dict) else None,
+        'primary_prakriti': (prak.get('primary') if isinstance(prak, dict) else None) or (prak_data.get('primary') if isinstance(prak_data, dict) else 'Vāta-Pitta'),
+        'vata_score': prak.get('vata') if isinstance(prak, dict) else None,
+        'pitta_score': prak.get('pitta') if isinstance(prak, dict) else None,
+        'kapha_score': prak.get('kapha') if isinstance(prak, dict) else None,
+        'sleep_duration': life.get('sleepDuration') if isinstance(life, dict) else None,
+        'sleep_quality': life.get('sleepQuality') if isinstance(life, dict) else None,
+        'activity_level': life.get('activityLevel') if isinstance(life, dict) else None,
+        'stress_level': life.get('stressLevel') if isinstance(life, dict) else None,
+        'circadian_alignment': life.get('circadianAlignment') if isinstance(life, dict) else None,
+        'appetite_pattern': diet.get('appetitePattern') if isinstance(diet, dict) else None,
+        'meal_frequency': diet.get('mealFrequency') if isinstance(diet, dict) else None,
+        'hydration': diet.get('hydration') if isinstance(diet, dict) else None,
+        'predominant_taste': diet.get('predominantTaste') if isinstance(diet, dict) else None,
+        'chief_complaints': chief,
+        'symptom_severity': symp.get('severity') if isinstance(symp, dict) else None,
+        'chronicity': symp.get('chronicity') if isinstance(symp, dict) else None,
     }
     return mapping.get(field_name)
 

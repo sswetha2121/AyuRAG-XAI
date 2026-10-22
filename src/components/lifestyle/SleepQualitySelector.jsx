@@ -72,7 +72,7 @@ export const SleepQualitySelector = ({
         <div className="ayur-sleep-section-header">
           <div className="flex items-center gap-xs">
             <Sparkles size={16} className="text-accent" />
-            <h3 className="ayur-sleep-subtitle">2. Perceived Restorative Quality (Nidrā Guṇa)</h3>
+            <h3 className="ayur-sleep-subtitle">2. Perceived Restorative Quality</h3>
           </div>
           {selectedQuality && (
             <span className="ayur-sleep-current-tag">

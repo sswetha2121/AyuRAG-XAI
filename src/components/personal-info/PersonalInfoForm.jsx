@@ -183,7 +183,7 @@ export const PersonalInfoForm = ({
             value={formData.climateZone}
             onChange={(e) => onChange('climateZone', e.target.value)}
             options={CLIMATE_ZONES}
-            helperText="Matches classical Desha (Ānūpa, Jāṅgala, Sādhāraṇa)"
+            helperText="Select the environment that best matches your daily living conditions"
             disabled={disabled}
           />
         </div>

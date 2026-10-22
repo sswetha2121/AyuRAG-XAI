@@ -1,0 +1,204 @@
+/* PatientChatView.css - Patient-Doctor Direct Messaging Interface */
+
+.ayur-patient-chat-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E3DDD3;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  box-shadow: 0 2px 8px rgba(20, 32, 26, 0.05);
+}
+
+.ayur-pchat-header {
+  padding: 1rem 1.5rem;
+  background-color: #FAF8F3;
+  border-bottom: 1px solid #ECE8E0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ayur-pchat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #EBF2EE;
+  color: #123B2F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ayur-pchat-name {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #26332E;
+  margin: 0;
+}
+
+.ayur-pchat-status-pill {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #155E3D;
+  background-color: #EAF5EE;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.ayur-pchat-meta {
+  font-size: 0.775rem;
+  color: #6B7B75;
+  margin: 2px 0 0 0;
+}
+
+.ayur-pchat-sync-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  background-color: #FFFFFF;
+  border: 1px solid #E3DDD3;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #123B2F;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ayur-pchat-sync-btn:hover {
+  background-color: #EBF2EE;
+}
+
+.ayur-pchat-emergency-banner {
+  background-color: #FAF4E8;
+  border-bottom: 1px solid #E5D5BA;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.775rem;
+  color: #614611;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  line-height: 1.45;
+}
+
+.ayur-pchat-stream {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem 1.5rem;
+  background-color: #F8F6F0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.ayur-pchat-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.ayur-pmsg-row {
+  display: flex;
+  width: 100%;
+}
+
+.ayur-pmsg-row--patient {
+  justify-content: flex-end;
+}
+
+.ayur-pmsg-row--doctor {
+  justify-content: flex-start;
+}
+
+.ayur-pmsg-bubble {
+  max-width: 72%;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  box-shadow: 0 1px 3px rgba(20, 32, 26, 0.04);
+}
+
+.ayur-pmsg-row--patient .ayur-pmsg-bubble {
+  background-color: #123B2F;
+  color: #FFFFFF;
+  border-bottom-right-radius: 2px;
+}
+
+.ayur-pmsg-row--doctor .ayur-pmsg-bubble {
+  background-color: #FFFFFF;
+  color: #26332E;
+  border: 1px solid #E3DDD3;
+  border-bottom-left-radius: 2px;
+}
+
+.ayur-pmsg-meta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.ayur-pmsg-row--patient .ayur-pmsg-sender {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #A8BDA7;
+}
+
+.ayur-pmsg-row--doctor .ayur-pmsg-sender {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #123B2F;
+}
+
+.ayur-pmsg-time {
+  font-size: 0.675rem;
+  opacity: 0.75;
+}
+
+.ayur-pmsg-text {
+  font-size: 0.875rem;
+}
+
+.ayur-pmsg-status {
+  font-size: 0.65rem;
+  text-align: right;
+  margin-top: 2px;
+  color: #A8BDA7;
+}
+
+.ayur-pchat-input-bar {
+  padding: 0.85rem 1.5rem;
+  background-color: #FFFFFF;
+  border-top: 1px solid #ECE8E0;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.ayur-pchat-textarea {
+  flex: 1;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.875rem;
+  border: 1px solid #E3DDD3;
+  border-radius: 8px;
+  background-color: #F8F6F0;
+  color: #26332E;
+  font-family: 'Inter', sans-serif;
+  resize: none;
+}
+
+.ayur-pchat-textarea:focus {
+  outline: none;
+  border-color: #123B2F;
+  background-color: #FFFFFF;
+}

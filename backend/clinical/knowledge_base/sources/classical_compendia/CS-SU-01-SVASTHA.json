@@ -1,0 +1,28 @@
+{
+  "id": "CS-SU-01-SVASTHA",
+  "collection": "classical_compendia",
+  "title": "Charaka Saṃhitā: Definition of Svastha, Ayu, and Tridosha Equilibrium",
+  "publisher": "Classical Ayurvedic Compendium (National Institute of Indian Medical Heritage / Ministry of AYUSH)",
+  "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=su&ch=1",
+  "publication_version": "Charaka Saṃhitā, Sūtrasthāna, Chapter 1 (Dīrghañjīvitīya), Ślokas 41-43",
+  "license": "Public Domain (Classical Sanskrit Literature; Digitized via Government Open Access)",
+  "document_type": "Classical Canonical Verse & Exegesis",
+  "download_availability": "Publicly accessible via e-Caraka (NIIMH/AYUSH portal)",
+  "relevance": "Core definition of holistic health (Svastha), foundational Tridosha balance criteria, and Agni equilibrium.",
+  "limitations": "Philosophical foundation requiring contextual translation; not a substitute for modern clinical diagnostic lab metrics.",
+  "classical_verse": "Samadoṣaḥ samāgniśca samadhātu malakriyaḥ. Prasannātmendriyamanāḥ svastha ityabhidhīyate.",
+  "tags": [
+    "svastha",
+    "tridosha",
+    "agni",
+    "dhatu",
+    "ojas",
+    "constitutional_equilibrium"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nCharaka Saṃhitā Sūtrasthāna Chapter 1 (Dīrghañjīvitīya) establishes the foundational ontology of Ayurvedic medicine.\nKey Canonical Principles:\n1. Definition of Health (Svastha):\n   A healthy human state requires four simultaneous equilibria:\n   - Samadosha: Balanced functional state of Vata, Pitta, and Kapha.\n   - Samagni: Homogeneous digestive and metabolic fire.\n   - Samadhatu: Properly formed, balanced bodily tissues (Rasa, Rakta, Mamsa, Meda, Asthi, Majja, Shukra).\n   - Samamalakriya: Normal, unhindered excretion of bodily wastes (Purisha, Mutra, Sveda).\n   - Prasannatmindriyamanah: A cheerful, tranquil state of the sensory organs, mind, and inner self.\n\n2. Definition of Ayu (Longevity & Life):\n   Ayu is the continuous dynamic confluence of Sharira (physical body), Indriya (sensory apparatus), Sattva (psyche), and Atma (consciousness).\n   The science of Ayurveda classifies life into four dimensions:\n   - Hita Ayu (Wholesome life fostering social welfare)\n   - Ahita Ayu (Harmful, unwholesome life)\n   - Sukha Ayu (Healthy, disease-free, joyful existence)\n   - Dukkha Ayu (Suffering, diseased existence).\n\n3. Clinical Decision-Support Implications:\n   In AyuRAG-XAI, clinical assessments must not evaluate symptoms in isolation. Recommendations must jointly optimize physiological elimination (Mala), digestion (Agni), tissue replenishment (Dhatu), and mental tranquility (Sattva).\n"
+}

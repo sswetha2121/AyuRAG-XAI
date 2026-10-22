@@ -24,16 +24,16 @@ import { Badge, Button } from '../ui';
 export const DOSHAS_INFO = [
   {
     id: 'vata',
-    sanskritName: 'Vāta (वात)',
+    sanskritName: 'Movement Energy',
     englishName: 'Movement & Kinetic Principle',
     tagline: 'The Master Governor of all Motion & Nerve Signals',
     metaphor: 'Like the wind — light, cool, dry, quick, and always in motion',
-    elements: 'Air (Vāyu) + Space/Ether (Ākāśa)',
+    elements: 'Air + Space',
     themeColor: '#2563EB',
     colorClass: 'ayur-guide-dosha--vata',
     icon: Wind,
     plainEnglishDesc:
-      'Vata is the energy of movement. In your body, it powers every single action that moves: breathing into your lungs, your heartbeat pulsing through veins, nerve impulses traveling to your brain, and food moving through your digestive tract.',
+      'Movement energy powers every single action that moves: breathing into your lungs, your heartbeat pulsing through veins, nerve impulses traveling to your brain, and food moving through your digestive tract.',
     governsList: [
       'Breathing rate and lung expansion',
       'Heartbeats, circulation, and blood flow',
@@ -42,7 +42,7 @@ export const DOSHAS_INFO = [
       'Elimination and cellular waste removal'
     ],
     inBalance: {
-      title: 'When Vata is in Healthy Balance',
+      title: 'When Movement Energy is in Healthy Balance',
       traits: [
         'Vibrant energy, agility, and enthusiasm',
         'Quick grasp of new concepts and imaginative creativity',
@@ -52,7 +52,7 @@ export const DOSHAS_INFO = [
       ]
     },
     imbalance: {
-      title: 'Signs Vata is Out of Balance (Excess Vata)',
+      title: 'Signs Movement Energy is Out of Balance',
       symptoms: [
         'Dry skin, chapped lips, or brittle nails',
         'Erratic appetite, bloating, gas, or constipation',
@@ -70,32 +70,32 @@ export const DOSHAS_INFO = [
       {
         icon: Sun,
         title: 'Daily Rhythm',
-        desc: 'Stick to steady meal times and sleep by 10:00 PM. Vata thrives on consistent routines, calming breathwork (Pranayama), and warm baths.'
+        desc: 'Stick to steady meal times and sleep by 10:00 PM. Movement energy thrives on consistent routines, calming breathwork, and warm baths.'
       }
     ],
-    realLifeExample: 'If you are someone who thinks quickly, talks with excitement, naturally has a slender build, and feels uncomfortable in drafty air conditioning, your Vata principle is naturally prominent!'
+    realLifeExample: 'If you are someone who thinks quickly, talks with excitement, naturally has a slender build, and feels uncomfortable in drafty air conditioning, your movement energy is naturally prominent!'
   },
   {
     id: 'pitta',
-    sanskritName: 'Pitta (पित्त)',
+    sanskritName: 'Metabolic Energy',
     englishName: 'Metabolic & Transformation Principle',
     tagline: 'The Internal Furnace of Digestion, Heat & Intellect',
     metaphor: 'Like the sun and digestive fire — warm, sharp, bright, and transformative',
-    elements: 'Fire (Tejas) + Water (Jala)',
+    elements: 'Fire + Water',
     themeColor: '#EA580C',
     colorClass: 'ayur-guide-dosha--pitta',
     icon: Flame,
     plainEnglishDesc:
-      'Pitta is the energy of transformation and digestion. It controls how your body transforms fuel into energy — breaking down meals into nutrients, converting sunlight into vitamin D, and transforming complex information into sharp ideas.',
+      'Metabolic energy controls transformation and digestion. It manages how your body transforms fuel into energy — breaking down meals into nutrients, converting sunlight into energy, and transforming complex information into sharp ideas.',
     governsList: [
-      'Digestion (Agni) and nutrient absorption',
+      'Digestion and nutrient absorption',
       'Metabolic heat, body temperature, and sweating',
       'Liver and enzymatic function',
       'Vision, eye brightness, and visual acuity',
       'Intellect, focus, decision-making, and ambition'
     ],
     inBalance: {
-      title: 'When Pitta is in Healthy Balance',
+      title: 'When Metabolic Energy is in Healthy Balance',
       traits: [
         'Sharp intellect, clear articulate communication',
         'Strong, reliable digestion and hearty appetite',
@@ -105,7 +105,7 @@ export const DOSHAS_INFO = [
       ]
     },
     imbalance: {
-      title: 'Signs Pitta is Out of Balance (Excess Pitta)',
+      title: 'Signs Metabolic Energy is Out of Balance',
       symptoms: [
         'Heartburn, acidity, acid reflux, or sour stomach',
         'Skin irritation, red rashes, acne, or flushing',
@@ -123,32 +123,32 @@ export const DOSHAS_INFO = [
       {
         icon: Sun,
         title: 'Daily Rhythm',
-        desc: 'Avoid working through lunch. Take evening walks in moonlight or nature, practice cooling breathwork (Sheetali), and allow time for play without competition.'
+        desc: 'Avoid working through lunch. Take evening walks in moonlight or nature, practice cooling breathwork, and allow time for play without competition.'
       }
     ],
-    realLifeExample: 'If you have a medium athletic build, easily digest almost any meal, can get "hangry" if food is delayed, and love taking charge of projects, your Pitta principle is high!'
+    realLifeExample: 'If you have a medium athletic build, easily digest almost any meal, can get "hangry" if food is delayed, and love taking charge of projects, your metabolic energy is high!'
   },
   {
     id: 'kapha',
-    sanskritName: 'Kapha (कफ)',
+    sanskritName: 'Structural Energy',
     englishName: 'Structural & Cohesive Principle',
     tagline: 'The Sturdy Foundation of Strength, Stability & Immunity',
     metaphor: 'Like the fertile earth & soothing water — solid, lubricating, and peaceful',
-    elements: 'Water (Jala) + Earth (Pṛthvī)',
+    elements: 'Water + Earth',
     themeColor: '#059669',
     colorClass: 'ayur-guide-dosha--kapha',
     icon: Mountain,
     plainEnglishDesc:
-      'Kapha is the physical architect and protector of your body. It provides the physical substance: building muscle tissue, lubricating joints with synovial fluid, shielding organs with protective mucous membranes, and giving deep mental calm.',
+      'Structural energy is the physical architect and protector of your body. It provides the physical substance: building muscle tissue, lubricating joints with natural fluid, shielding organs with protective mucous membranes, and giving deep mental calm.',
     governsList: [
       'Skeletal structure, muscle mass, and bodily tissues',
       'Joint lubrication and smooth bodily movements',
       'Cellular hydration and natural fluid retention',
-      'Immune defense and physical resilience (Ojas)',
+      'Immune defense and physical resilience',
       'Emotional stability, empathy, patience, and memory'
     ],
     inBalance: {
-      title: 'When Kapha is in Healthy Balance',
+      title: 'When Structural Energy is in Healthy Balance',
       traits: [
         'Exceptional physical stamina and endurance',
         'Deep, restful, uninterrupted sleep',
@@ -158,7 +158,7 @@ export const DOSHAS_INFO = [
       ]
     },
     imbalance: {
-      title: 'Signs Kapha is Out of Balance (Excess Kapha)',
+      title: 'Signs Structural Energy is Out of Balance',
       symptoms: [
         'Sluggish digestion, feeling heavy or sleepy after meals',
         'Difficulty waking up in the morning or sleeping > 9 hours',
@@ -179,13 +179,13 @@ export const DOSHAS_INFO = [
         desc: 'Wake up early before sunrise (by 6:00 AM). Engage in vigorous daily cardio or brisk walking, and seek out new stimulating learning experiences.'
       }
     ],
-    realLifeExample: 'If you have a broad or sturdy frame, large peaceful eyes, don’t get easily rattled during a crisis, and love a good long sleep, your Kapha principle is naturally strong!'
+    realLifeExample: 'If you have a broad or sturdy frame, large peaceful eyes, don’t get easily rattled during a crisis, and love a good long sleep, your structural energy is naturally strong!'
   }
 ];
 
 export const DoshasPrinciplesGuide = ({
   mode = 'full', // 'full' or 'compact'
-  title = 'Understanding the 3 Doshas (Governing Principles)',
+  title = 'Understanding the 3 Constitutional Principles',
   subtitle = 'A simple, intuitive guide to the three biological forces that make up your physical constitution and mindset.',
   showAction = false,
   onStartAssessment
@@ -203,7 +203,7 @@ export const DoshasPrinciplesGuide = ({
         <div className="ayur-doshas-guide-header">
           <div className="ayur-guide-tag">
             <Sparkles size={14} className="text-accent" />
-            <span>AYURVEDIC FUNDAMENTALS EXPLAINED</span>
+            <span>HEALTH CONSTITUTION FUNDAMENTALS EXPLAINED</span>
           </div>
 
           <h2 className="ayur-guide-title">{title}</h2>
@@ -215,14 +215,14 @@ export const DoshasPrinciplesGuide = ({
               <BookOpen size={24} />
             </div>
             <div className="ayur-guide-concept-text">
-              <h4>What exactly is a "Dosha" or "Principle"?</h4>
+              <h4>What are the Three Constitutional Principles?</h4>
               <p>
-                In classical healthcare, the word <strong>Dosha</strong> refers to the <strong>three fundamental bio-energetic principles</strong> that exist in nature and within every human being: <strong>Vāta (Movement)</strong>, <strong>Pitta (Metabolism & Transformation)</strong>, and <strong>Kapha (Structure & Stability)</strong>.
+                In holistic healthcare, vitality is governed by <strong>three fundamental biological principles</strong>: <strong>Movement Energy</strong>, <strong>Metabolic Energy</strong>, and <strong>Structural Energy</strong>.
               </p>
               <div className="ayur-guide-concept-highlight">
                 <CheckCircle2 size={16} className="text-secondary flex-shrink-0" />
                 <span>
-                  <strong>The Key Rule:</strong> You are not just one single dosha! Every person has all three. Your unique combination established at birth is called your <strong>Prakriti</strong> (Baseline Constitution). Knowing your dominant dosha is the secret to choosing the right food, sleep habits, and exercise for your body.
+                  <strong>The Key Rule:</strong> You are not just one single energy! Every person has all three. Your unique combination established at birth is called your <strong>Body Constitution</strong> (Baseline Physiology). Knowing your dominant energy is the secret to choosing the right food, sleep habits, and exercise for your body.
                 </span>
               </div>
             </div>
@@ -236,7 +236,7 @@ export const DoshasPrinciplesGuide = ({
               onClick={() => setViewMode('cards')}
             >
               <Layers size={14} />
-              <span>Interactive Dosha Profiles</span>
+              <span>Interactive Energy Profiles</span>
             </button>
             <button
               type="button"
@@ -405,19 +405,19 @@ export const DoshasPrinciplesGuide = ({
                     <th className="th-vata">
                       <div className="flex items-center gap-2xs justify-center">
                         <Wind size={16} />
-                        <span>VĀTA (Movement)</span>
+                        <span>MOVEMENT (Air & Space)</span>
                       </div>
                     </th>
                     <th className="th-pitta">
                       <div className="flex items-center gap-2xs justify-center">
                         <Flame size={16} />
-                        <span>PITTA (Metabolism)</span>
+                        <span>METABOLISM (Fire & Water)</span>
                       </div>
                     </th>
                     <th className="th-kapha">
                       <div className="flex items-center gap-2xs justify-center">
                         <Mountain size={16} />
-                        <span>KAPHA (Structure)</span>
+                        <span>STRUCTURE (Earth & Water)</span>
                       </div>
                     </th>
                   </tr>
@@ -425,7 +425,7 @@ export const DoshasPrinciplesGuide = ({
                 <tbody>
                   <tr>
                     <td className="td-label">Natural Elements</td>
-                    <td>Air + Space (Ether)</td>
+                    <td>Air + Space</td>
                     <td>Fire + Water</td>
                     <td>Water + Earth</td>
                   </tr>
@@ -485,7 +485,7 @@ export const DoshasPrinciplesGuide = ({
           <div className="ayur-guide-xai-text">
             <h4>Why We Measure This in AyuRAG-XAI</h4>
             <p>
-              Your answers to our 10 constitutional questions reveal your precise personal ratio (e.g., 42% Vata, 36% Pitta, 22% Kapha). 
+              Your answers to our 10 constitutional questions reveal your precise personal ratio (e.g., 42% Movement, 36% Metabolism, 22% Structure). 
               Our Explainable AI (XAI) engine links these scores to classical clinical literature, enabling licensed physicians to recommend 
               custom daily routines, targeted kitchen spices, and circadian habits designed specifically for your individual biological rhythm.
             </p>

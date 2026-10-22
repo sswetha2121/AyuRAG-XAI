@@ -108,6 +108,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const updateProfile = async (profileData) => {
+    setIsLoading(true);
+    try {
+      const response = await api.updateProfile(profileData);
+      setUser(response.user);
+      return response.user;
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const isDoctor = user?.role === 'DOCTOR';
   const isPatient = user?.role === 'PATIENT';
   const isAuthenticated = Boolean(user);
@@ -129,8 +143,10 @@ export const AuthProvider = ({ children }) => {
         logout,
         switchDemoPersona,
         checkAuth,
+        updateProfile,
       }}
     >
+
       {children}
     </AuthContext.Provider>
   );

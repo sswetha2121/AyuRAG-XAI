@@ -24,6 +24,9 @@ import { DoctorPatientsPage } from './pages/DoctorPatientsPage';
 import { DoctorPatientProfilePage } from './pages/DoctorPatientProfilePage';
 import { DoctorReviewsPage } from './pages/DoctorReviewsPage';
 import { DoctorReportsPage } from './pages/DoctorReportsPage';
+import { DoctorNotificationsPage } from './pages/DoctorNotificationsPage';
+import { DoctorDietPlansPage } from './pages/DoctorDietPlansPage';
+import { DoctorMessagesPage } from './pages/DoctorMessagesPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { DoctorLoginPage } from './pages/DoctorLoginPage';
@@ -73,8 +76,11 @@ function DoctorWorkspaceShell({ onTriggerToast, toasts, removeToast }) {
   const getActiveStep = () => {
     if (path.includes('/doctor/patients/')) return 'doctor-patients';
     if (path.startsWith('/doctor/patients')) return 'doctor-patients';
+    if (path.startsWith('/doctor/diet-plans')) return 'doctor-diet-plans';
     if (path.startsWith('/doctor/reviews')) return 'doctor-reviews';
+    if (path.startsWith('/doctor/messages')) return 'doctor-messages';
     if (path.startsWith('/doctor/reports')) return 'doctor-reports';
+    if (path.startsWith('/doctor/notifications')) return 'doctor-notifications';
     return 'doctor-dashboard';
   };
 
@@ -93,6 +99,13 @@ function DoctorWorkspaceShell({ onTriggerToast, toasts, removeToast }) {
         breadcrumbs: ['Doctor Workspace', 'Patients Cohort'],
       };
     }
+    if (path.startsWith('/doctor/diet-plans')) {
+      return {
+        title: 'Personalized Clinical Diet Generation & Protocols',
+        subtitle: 'Deterministic nutritional modeling, IFCT 2017 calculations, and classical Ayurvedic RAG evidence',
+        breadcrumbs: ['Doctor Workspace', 'Diet Plans'],
+      };
+    }
     if (path.startsWith('/doctor/reviews')) {
       return {
         title: 'Clinical Review & Validation Queue',
@@ -100,11 +113,25 @@ function DoctorWorkspaceShell({ onTriggerToast, toasts, removeToast }) {
         breadcrumbs: ['Doctor Workspace', 'Clinical Reviews'],
       };
     }
+    if (path.startsWith('/doctor/messages')) {
+      return {
+        title: 'Patient–Doctor Clinical Consultation',
+        subtitle: 'Direct authenticated patient inquiries, progress guidance, and non-emergency communication',
+        breadcrumbs: ['Doctor Workspace', 'Messages'],
+      };
+    }
     if (path.startsWith('/doctor/reports')) {
       return {
         title: 'Clinical Assessment Reports & Audit Registry',
         subtitle: 'Standardized multi-domain Ayurvedic dossiers & physician signatures',
         breadcrumbs: ['Doctor Workspace', 'Reports & Audit'],
+      };
+    }
+    if (path.startsWith('/doctor/notifications')) {
+      return {
+        title: 'Clinical Notifications & Alerts',
+        subtitle: 'Review Reminders, Assessment Updates & Decision Support Notices',
+        breadcrumbs: ['Doctor Workspace', 'Notifications'],
       };
     }
     return {
@@ -124,11 +151,20 @@ function DoctorWorkspaceShell({ onTriggerToast, toasts, removeToast }) {
       case 'doctor-patients':
         navigate('/doctor/patients');
         break;
+      case 'doctor-diet-plans':
+        navigate('/doctor/diet-plans');
+        break;
       case 'doctor-reviews':
         navigate('/doctor/reviews');
         break;
+      case 'doctor-messages':
+        navigate('/doctor/messages');
+        break;
       case 'doctor-reports':
         navigate('/doctor/reports');
+        break;
+      case 'doctor-notifications':
+        navigate('/doctor/notifications');
         break;
       case 'doctor-profile':
         onTriggerToast?.({
@@ -168,7 +204,9 @@ function DoctorWorkspaceShell({ onTriggerToast, toasts, removeToast }) {
       progressPercent={100}
       user={user}
       onLogout={handleLogout}
+      onTriggerToast={onTriggerToast}
     >
+
       <Routes>
         <Route
           path="dashboard"
@@ -196,6 +234,10 @@ function DoctorWorkspaceShell({ onTriggerToast, toasts, removeToast }) {
           element={<DoctorPatientProfileWrapper onTriggerToast={onTriggerToast} />}
         />
         <Route
+          path="diet-plans"
+          element={<DoctorDietPlansPage onTriggerToast={onTriggerToast} />}
+        />
+        <Route
           path="reviews"
           element={
             <DoctorReviewsPage
@@ -205,11 +247,25 @@ function DoctorWorkspaceShell({ onTriggerToast, toasts, removeToast }) {
           }
         />
         <Route
+          path="messages"
+          element={<DoctorMessagesPage onTriggerToast={onTriggerToast} />}
+        />
+        <Route
           path="reports"
           element={
             <DoctorReportsPage
               onTriggerToast={onTriggerToast}
               onNavigateToPatient={(id) => navigate(`/doctor/patients/${id}`)}
+            />
+          }
+        />
+        <Route
+          path="notifications"
+          element={
+            <DoctorNotificationsPage
+              onNavigateToPatient={(id) => navigate(`/doctor/patients/${id}`)}
+              onNavigateToReviews={() => navigate('/doctor/reviews')}
+              onTriggerToast={onTriggerToast}
             />
           }
         />
@@ -340,7 +396,11 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
       setCurrentStep('dashboard');
       setDashboardTab(tab || 'overview');
       navigate('/dashboard');
-    } else if (['wellness-plan'].includes(stepId)) {
+    } else if (['wellness-plan', 'my-diet-plan'].includes(stepId)) {
+      setCurrentStep('dashboard');
+      setDashboardTab(tab || 'diet');
+      navigate('/dashboard');
+    } else if (['daily-checklist'].includes(stepId)) {
       setCurrentStep('dashboard');
       setDashboardTab(tab || 'schedule');
       navigate('/dashboard');
@@ -348,13 +408,17 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
       setCurrentStep('dashboard');
       setDashboardTab(tab || 'progress');
       navigate('/dashboard');
+    } else if (['chat-doctor', 'chat'].includes(stepId)) {
+      setCurrentStep('dashboard');
+      setDashboardTab(tab || 'chat');
+      navigate('/dashboard');
     } else if (stepId === 'my-assessment') {
       navigate('/assessment-overview');
     } else if (stepId === 'patient-profile') {
       onTriggerToast?.({
         type: 'info',
         title: 'Patient Profile',
-        message: `${user?.name || personalInfo?.fullName || 'Patient'} • Active Intake Profile`,
+        message: `${user?.name || personalInfo?.fullName || 'Patient'} • Active Intake Profile (ID: AYU-${String(user?.id || 1).padStart(4, '0')})`,
       });
     } else if (stepId === 'logout') {
       handleLogout();
@@ -391,10 +455,10 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
               vata: computed?.tridoshaProfile?.breakdown?.vata || 40,
               pitta: computed?.tridoshaProfile?.breakdown?.pitta || 35,
               kapha: computed?.tridoshaProfile?.breakdown?.kapha || 25,
-              primary: computed?.tridoshaProfile?.constitutionType || 'Vāta-Pitta',
+              primary: computed?.tridoshaProfile?.constitutionType || 'Movement & Metabolism',
             },
             ai_analysis: {
-              prediction: `${computed?.tridoshaProfile?.constitutionType || 'Vāta-Pitta'} Assessment`,
+              prediction: `${computed?.tridoshaProfile?.constitutionType || 'Movement & Metabolism'} Assessment`,
               confidence: computed?.aiMetrics?.confidence || 0.89,
               model_name: 'AyuRAG Clinical Multi-Task Classifier v2.1',
             },

@@ -1,0 +1,28 @@
+{
+  "id": "API-TINOSPORA-CORDIFOLIA",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Tinospora cordifolia (Guduchi/Giloy)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/tinospora-cordifolia",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 17",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Authoritative reference for immune modulation, fever management, and metabolic detoxification.",
+  "limitations": "Rare idiosyncratic hepatotoxicity reported with adulterated species (Tinospora crispa); authentic T. cordifolia verified.",
+  "classical_verse": null,
+  "tags": [
+    "guduchi",
+    "giloy",
+    "tinospora_cordifolia",
+    "immunomodulator",
+    "jvara",
+    "rasayana"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Tinospora cordifolia (Willd.) Miers (Family: Menispermaceae) - Stem.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Guḍūcī, Amṛtā, Chhinnaruhā, Vatsādanī.\n   - Rasa: Tikta (bitter), Kashaya (astringent).\n   - Guna: Laghu (light), Snigdha (unctuous).\n   - Virya: Ushna (mildly warm).\n   - Vipaka: Madhura (sweet).\n   - Karma: Tridoshashamaka (balances all three doshas), Deepani (kindles Agni), Medhya (cognitive enhancer), Rasayana (longevity promoter), Jvaraghna (anti-pyretic), Dahaprashamana (alleviates burning).\n\n2. Therapeutic Indications:\n   Jvara (pyrexia / chronic low-grade fever), Vatarakta (gouty arthritis), Prameha (glycemic dysregulation), Kamala (jaundice), Kasa-Shwasa (cough and dyspnea), Trishna (excessive thirst).\n\n3. Standard Therapeutic Dosage:\n   - Stem Powder: 3 to 6 grams.\n   - Guduchi Satva (Starch extract): 500 mg to 1 g.\n   - Kwatha: 50 to 100 ml.\n\n4. Clinical Safety & Monitoring:\n   - Excellent safety profile when using authentic botanical material.\n   - Autoimmune Conditions: Due to strong immunostimulating activity, monitor closely in active autoimmune flareups.\n   - Hypoglycemic Potential: Synergistic action with modern oral anti-diabetic agents; blood glucose monitoring advised.\n"
+}

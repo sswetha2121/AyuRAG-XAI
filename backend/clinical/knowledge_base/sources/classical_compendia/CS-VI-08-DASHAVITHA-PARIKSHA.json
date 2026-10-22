@@ -1,0 +1,28 @@
+{
+  "id": "CS-VI-08-DASHAVITHA-PARIKSHA",
+  "collection": "classical_compendia",
+  "title": "Charaka Saṃhitā: Tenfold Clinical Examination of the Patient (Daśavidha Parīkṣā)",
+  "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+  "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=vi&ch=8",
+  "publication_version": "Charaka Saṃhitā, Vimānasthāna, Chapter 8, Ślokas 94-110",
+  "license": "Public Domain",
+  "document_type": "Classical Diagnostic Methodology",
+  "download_availability": "Publicly accessible via e-Caraka",
+  "relevance": "The direct clinical foundation for AyuRAG-XAI's multi-factorial assessment model.",
+  "limitations": "Comprehensive clinical pariksha requires physical tactile and visual examination by a qualified physician.",
+  "classical_verse": "Kāryayoniḥ kāryam kāryaphalaṁ anubandho deśaḥ kālaḥ pravṛttirupāya iti.",
+  "tags": [
+    "dashavidha_pariksha",
+    "clinical_assessment",
+    "prakriti",
+    "vikriti",
+    "sara",
+    "satmya"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nCharaka Saṃhitā Vimānasthāna Chapter 8 defines the 10 dimensions for clinical patient evaluation:\n1. Prakriti (Constitutional habitus): Inherent genetic Tridosha ratio.\n2. Vikriti (Morbidity / Current pathological imbalance): Dosha, Dhatu, and Mala departure from baseline.\n3. Sara (Tissue excellence / Biological reserves): Qualitative integrity of 7 tissues (e.g., Asthi Sara indicates bone density; Majja Sara indicates nervous reserve).\n4. Samhanana (Compactness / Musculoskeletal symmetry): Firmness of bone-joint architecture.\n5. Pramana (Anthropometric proportions): Anatomical measurement ratios.\n6. Satmya (Habituation & Adaptability): Substances agreeable to the individual through long-standing exposure.\n7. Sattva (Mental temperament & Resilience): Pravara (strong psycho-emotional resilience), Madhya (moderate), or Avara (fragile mental resilience).\n8. Ahara Shakti (Nutritional capacity): Evaluated via Abhyavaharana Shakti (intake volume) and Jarana Shakti (digestive efficiency).\n9. Vyayama Shakti (Work & Physical endurance): Capacity to engage in physical labor or aerobic exertion.\n10. Vaya (Biological age): Balya (growth phase <16), Madhyama (productive maintenance 16-60), and Vardhakya (degenerative aging >60, Vata-dominated).\n"
+}

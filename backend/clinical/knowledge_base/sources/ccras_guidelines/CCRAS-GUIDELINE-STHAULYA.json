@@ -1,0 +1,27 @@
+{
+  "id": "CCRAS-GUIDELINE-STHAULYA",
+  "collection": "ccras_guidelines",
+  "title": "CCRAS Clinical Practice Guideline: Management of Sthaulya (Obesity & Dyslipidemia)",
+  "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+  "source_url": "https://ccras.nic.in/sites/default/files/viewpdf/Sthaulya%20Guideline.pdf",
+  "publication_version": "CCRAS Clinical Protocol Series, 2021",
+  "license": "Open Government Data (OGD) - India",
+  "document_type": "Clinical Practice Guideline",
+  "download_availability": "Publicly accessible via ccras.nic.in",
+  "relevance": "Authoritative dietary and lifestyle management for elevated BMI, visceral adiposity, and sluggish metabolism.",
+  "limitations": "Severe morbid obesity with sleep apnea or endocrine tumors (Cushing's) requires specialized endocrinological workup.",
+  "classical_verse": null,
+  "tags": [
+    "sthaulya",
+    "obesity",
+    "dyslipidemia",
+    "lekhana",
+    "medoroga",
+    "triphala_guggulu"
+  ],
+  "dosha_affinity": [
+    "Kapha",
+    "Vata"
+  ],
+  "content": "\nCCRAS Clinical Practice Guideline for the Management of Sthaulya (Obesity):\n1. Etiological Pathogenesis:\n   Overconsumption of heavy, sweet, cooling foods combined with lack of physical activity impairs Medodhatvagni, causing excessive accumulation of non-functional adipose tissue while deeper tissues (Asthi, Majja, Shukra) remain malnourished.\n2. Dietary Protocol (Lekhana Ahara):\n   - Whole grains: Roasted barley (Yava), pearl millet (Bajra), finger millet (Ragi), aged rice.\n   - Legumes: Green gram, horse gram (Kulattha), black chickpea.\n   - Honey and warm water: 1 teaspoon raw unheated honey in warm water on waking acts as a scraping agent (Lekhana).\n   - Strict exclusions: Deep fried foods, potatoes, sweets, cheese, day-sleeping (Divaswapna).\n3. Botanical Formulations:\n   Triphala Guggulu, Medohar Guggulu, and Takrarishta.\n"
+}

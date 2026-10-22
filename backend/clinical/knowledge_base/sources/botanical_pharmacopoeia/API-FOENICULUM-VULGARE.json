@@ -1,0 +1,27 @@
+{
+  "id": "API-FOENICULUM-VULGARE",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Foeniculum vulgare (Mishreya/Fennel)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/foeniculum-vulgare",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 38",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Mild cooling carminative, ideal for infant colic, Pitta indigestion, and postprandial freshening.",
+  "limitations": "Pure essential oil contains estragole and must not be ingested undiluted; whole seeds safe.",
+  "classical_verse": null,
+  "tags": [
+    "mishreya",
+    "fennel",
+    "foeniculum_vulgare",
+    "cooling_carminative",
+    "colic",
+    "pitta_friendly"
+  ],
+  "dosha_affinity": [
+    "Pitta",
+    "Vata"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Foeniculum vulgare Mill. (Family: Apiaceae) - Dried Fruit.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Miśreyā, Madhurikā, Śatapuṣpā (variety).\n   - Rasa: Madhura (sweet), Katu (pungent), Tikta (bitter).\n   - Guna: Laghu (light), Snigdha (unctuous).\n   - Virya: Shita (cooling) / mildly warm.\n   - Vipaka: Madhura (sweet).\n   - Karma: Vata-Pitta-shamaka, Deepana, Pachana, Anulomana, Netrahita (ophthalmic benefit), Hridya.\n2. Therapeutic Indications:\n   Aruchi (tastelessness), Agnimandya, Shula (colic), Chardi, Kasa.\n3. Standard Therapeutic Dosage:\n   - Seed Powder: 3 to 6 grams.\n   - Cold Infusion (Hima): 20 to 40 ml.\n"
+}

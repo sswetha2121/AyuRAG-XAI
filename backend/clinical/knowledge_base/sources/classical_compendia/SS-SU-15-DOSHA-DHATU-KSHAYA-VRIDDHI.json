@@ -1,0 +1,27 @@
+{
+  "id": "SS-SU-15-DOSHA-DHATU-KSHAYA-VRIDDHI",
+  "collection": "classical_compendia",
+  "title": "Suśruta Saṃhitā: Clinical Signs of Increase and Decrease of Doshas, Dhatus, and Malas",
+  "publisher": "Classical Ayurvedic Compendium (National Institute of Indian Medical Heritage / AYUSH)",
+  "source_url": "https://niimh.nic.in/ebooks/esusruta/?mod=read&sys=su&ch=15",
+  "publication_version": "Suśruta Saṃhitā, Sūtrasthāna, Chapter 15, Ślokas 1-32",
+  "license": "Public Domain",
+  "document_type": "Classical Surgical-Medical Compendium",
+  "download_availability": "Publicly accessible via e-Sushruta",
+  "relevance": "Provides objective clinical symptom indicators for dosha and tissue depletion or excess.",
+  "limitations": "Tissue depletion (Dhatu Kshaya) symptoms should be correlated with biochemical laboratory markers (e.g. CBC, ferritin).",
+  "classical_verse": "Doṣa-dhātu-mala-mūlaṁ hi śarīram.",
+  "tags": [
+    "sushruta",
+    "dhatu_kshaya",
+    "dosha_vriddhi",
+    "ojas",
+    "tissue_depletion"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nSuśruta Saṃhitā Sūtrasthāna Chapter 15 defines the physiological baseline and pathological signs of the structural components of the human body:\n1. Signs of Increased Doshas (Vriddhi Lakshana):\n   - Vata Vriddhi: Emaciation, blackish discoloration, cold cravings, tremors, abdominal distension, constipation, loss of sleep, and sensory weakness.\n   - Pitta Vriddhi: Yellowing of sclera, urine, skin, and feces; extreme burning sensation, night sweats, thirst, acid eructation, and brief fainting.\n   - Kapha Vriddhi: Heaviness of limbs, pallor, cold clamminess, respiratory wheeze/cough, excessive sleep, and lethargy.\n\n2. Signs of Decreased Doshas (Kshaya Lakshana):\n   - Vata Kshaya: Sluggish movements, diminished speech, sensory dullness, and signs of Kapha increase.\n   - Pitta Kshaya: Low body temperature, diminished digestive fire, loss of radiance.\n   - Kapha Kshaya: Dryness, internal burning sensation, joint looseness, persistent thirst, and insomnia.\n\n3. Ojas and Immune Vitality:\n   Ojas is the ultimate essence of the seven Dhatus, responsible for physical strength (Bala) and infection resistance (Vyadhikshamatva). Ojas depletion (Ojo-Kshaya) produces anxiety, constant fatigue, sensory hypersensitivity, and muscle wasting.\n"
+}

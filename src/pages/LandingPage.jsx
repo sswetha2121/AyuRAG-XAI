@@ -26,7 +26,7 @@ export const LandingPage = () => {
 
   const constitutionFactors = {
     movement: {
-      name: 'Movement Energy (Vāta)',
+      name: 'Movement Energy',
       principle: 'Governs circulation, nerve impulses, respiration, and cellular mobility.',
       traits: 'Active, creative, lighter frame, quick digestion that varies with stress.',
       foodsToFavor: 'Warm, cooked, grounding meals (soups, steamed root vegetables, whole oats, ghee).',
@@ -35,7 +35,7 @@ export const LandingPage = () => {
       icon: Wind,
     },
     metabolism: {
-      name: 'Metabolic Energy (Pitta)',
+      name: 'Metabolic Energy',
       principle: 'Governs digestion, nutrient absorption, body temperature, and cellular energy.',
       traits: 'Focused, energetic, athletic build, strong appetite, sensitive to excess heat.',
       foodsToFavor: 'Cooling, hydrating, naturally sweet foods (cucumbers, basmati rice, mild leafy greens, melons).',
@@ -44,7 +44,7 @@ export const LandingPage = () => {
       icon: Flame,
     },
     structure: {
-      name: 'Structure Energy (Kapha)',
+      name: 'Structural Energy',
       principle: 'Governs physical stamina, joint lubrication, immunity, and cellular structure.',
       traits: 'Calm, steady endurance, sturdy build, slower but regular digestion.',
       foodsToFavor: 'Light, warm, metabolism-stimulating grains (millets, quinoa, clear broths, fresh ginger).',
@@ -192,12 +192,12 @@ export const LandingPage = () => {
                 <div className="ayur-preview-block">
                   <div className="flex items-center justify-between mb-xs">
                     <span className="text-xs font-semibold text-text-primary">Constitution Type</span>
-                    <span className="ayur-dosha-badge">Vāta-Pitta (Movement & Metabolism)</span>
+                    <span className="ayur-dosha-badge">Movement & Metabolism Imbalance</span>
                   </div>
                   <div className="ayur-preview-bar">
-                    <div className="ayur-bar-seg vata" style={{ width: '42%' }}>Vāta 42%</div>
-                    <div className="ayur-bar-seg pitta" style={{ width: '36%' }}>Pitta 36%</div>
-                    <div className="ayur-bar-seg kapha" style={{ width: '22%' }}>Kapha 22%</div>
+                    <div className="ayur-bar-seg vata" style={{ width: '42%' }}>Movement 42%</div>
+                    <div className="ayur-bar-seg pitta" style={{ width: '36%' }}>Metabolism 36%</div>
+                    <div className="ayur-bar-seg kapha" style={{ width: '22%' }}>Structure 22%</div>
                   </div>
                 </div>
 
@@ -296,7 +296,7 @@ export const LandingPage = () => {
                 onClick={() => setActiveConstitutionTab('movement')}
               >
                 <Wind size={16} />
-                <span>Movement (Vāta)</span>
+                <span>Movement Energy</span>
               </button>
               <button
                 type="button"
@@ -304,7 +304,7 @@ export const LandingPage = () => {
                 onClick={() => setActiveConstitutionTab('metabolism')}
               >
                 <Flame size={16} />
-                <span>Metabolism (Pitta)</span>
+                <span>Metabolic Energy</span>
               </button>
               <button
                 type="button"
@@ -312,7 +312,7 @@ export const LandingPage = () => {
                 onClick={() => setActiveConstitutionTab('structure')}
               >
                 <Mountain size={16} />
-                <span>Structure (Kapha)</span>
+                <span>Structural Energy</span>
               </button>
             </div>
 

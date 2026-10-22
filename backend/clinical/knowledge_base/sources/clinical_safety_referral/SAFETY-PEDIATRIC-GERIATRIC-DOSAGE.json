@@ -1,0 +1,27 @@
+{
+  "id": "SAFETY-PEDIATRIC-GERIATRIC-DOSAGE",
+  "collection": "clinical_safety_referral",
+  "title": "Clinical Safety Guidance: Pediatric and Geriatric Dosage Modulation Rules",
+  "publisher": "AyuRAG Clinical Safety Board / Sharangadhara Samhita & Modern Pediatric Standards",
+  "source_url": "https://ayushportal.nic.in/dosage-modulation-guidelines",
+  "publication_version": "Clinical Dosage Standard v2.1, 2024",
+  "license": "CC-BY-SA 4.0 / Clinical Open Access",
+  "document_type": "Clinical Pharmacology Dosing Standard",
+  "download_availability": "Publicly accessible via AYUSH Research Portal",
+  "relevance": "Prevents overdosage toxicity in children (<16 years) and elderly patients (>65 years).",
+  "limitations": "Mathematical fraction rules provide initial estimates; organ clearance must be considered.",
+  "classical_verse": null,
+  "tags": [
+    "pediatric_dosage",
+    "geriatric_dosage",
+    "sharangadhara",
+    "dose_scaling",
+    "safety"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nDosage Scaling Rules for Vulnerable Demographic Groups in Ayurvedic Practice:\n1. Pediatric Dosage Rules (Sharangadhara Samhita & Clark's Rule Alignment):\n   - Age 1-2 years: 1/12th to 1/8th of adult dose.\n   - Age 3-5 years: 1/4th of adult dose.\n   - Age 6-12 years: 1/2 of adult dose.\n   - Age 13-16 years: 3/4th of adult dose.\n   - Infants (<1 year): Direct herbal churna administration is contraindicated; maternal milk mediation or mild honey-rubs (Prashana) only.\n2. Geriatric Dosage Rules (>65 years):\n   - Due to age-related decline in glomerular filtration rate (GFR) and hepatic CYP enzyme clearance, starting dose should be 50-70% of standard adult dose.\n   - Avoid aggressive purgatives (Virechana dravyas like Trivrit or Castor oil) which can precipitate sudden electrolyte depletion and postural hypotension in the elderly.\n"
+}

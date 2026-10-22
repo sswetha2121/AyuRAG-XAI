@@ -22,6 +22,7 @@ import { Button } from '../ui/Button';
 export const DoctorPatientVerification = ({
   patientId,
   onProfileUpdated,
+  onStatsUpdated,
   onTriggerToast,
 }) => {
   const [verifications, setVerifications] = useState([]);
@@ -40,10 +41,13 @@ export const DoctorPatientVerification = ({
       setIsLoading(true);
       const data = await api.getPatientVerifications(patientId);
       setVerifications(data.verifications || []);
-      setStats(data.stats || { total_fields: 0, verified: 0, corrected: 0, unverified: 0 });
+      const newStats = data.stats || { total_fields: 0, verified: 0, corrected: 0, unverified: 0 };
+      setStats(newStats);
+      onStatsUpdated?.(newStats);
       if (onProfileUpdated && data.effective_profile) {
         onProfileUpdated(data.effective_profile);
       }
+
     } catch (err) {
       onTriggerToast?.({
         type: 'error',

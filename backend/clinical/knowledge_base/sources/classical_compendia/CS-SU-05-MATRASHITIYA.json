@@ -1,0 +1,28 @@
+{
+  "id": "CS-SU-05-MATRASHITIYA",
+  "collection": "classical_compendia",
+  "title": "Charaka Saṃhitā: Daily Regimen (Dinacharya) & Dietary Measure (Matrashitiya)",
+  "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+  "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=su&ch=5",
+  "publication_version": "Charaka Saṃhitā, Sūtrasthāna, Chapter 5, Ślokas 1-20",
+  "license": "Public Domain",
+  "document_type": "Classical Clinical Regimen Monograph",
+  "download_availability": "Publicly accessible via e-Caraka",
+  "relevance": "Provides circadian daily scheduling, food portioning, and preventive hygienic practices.",
+  "limitations": "Individual adjustments required based on geographical location (Desha) and patient occupation.",
+  "classical_verse": "Mātrāśī syāt. Āhāramātrā punaragnerbalāpekṣiṇī.",
+  "tags": [
+    "dinacharya",
+    "matrashitiya",
+    "portion_size",
+    "agni",
+    "abhyanga",
+    "oral_hygiene"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nCharaka Saṃhitā Sūtrasthāna Chapter 5 (Mātrāśitīya) dictates the rules of daily living and dietetic portion determination.\nCore Regimen Details:\n1. Food Measure (Matra):\n   - Food must always be taken in measured quantities (Matrashi syat).\n   - The correct quantity depends strictly on the power of the individual's digestive fire (Agner balapekshini).\n   - Light foods (Laghu) such as shali rice, green gram (Mudga), and venison/chicken broth can be eaten until satisfaction without overloading.\n   - Heavy foods (Guru) like flour preparations (Pishtanna), sugarcane, and dairy must only be taken up to one-half or three-quarters of stomach capacity.\n\n2. Daily Circadian Cleansing (Dinacharya):\n   - Anjana (Collyrium for eyes): Cleanses Kapha secretions, preserves visual acuity.\n   - Dhumapana (Herbal smoke inhalation): Clears head and throat heaviness.\n   - Nasya (Nasal herb administration with sesame oil/Anu Taila): Prevents premature graying, hair fall, tension headaches, and facial palsy.\n   - Dantadhawana (Herbal tooth brushing with astringent, bitter, pungent twigs): Clears oral coating and stimulates salivary agni.\n   - Abhyanga (Regular oil massage): Pacifies aggravated Vata, improves sleep, preserves musculoskeletal tone, and retards premature aging.\n"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "CCRAS-GUIDELINE-ANIDRA",
+  "collection": "ccras_guidelines",
+  "title": "CCRAS Clinical Practice Guideline: Management of Anidra (Primary Insomnia)",
+  "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+  "source_url": "https://ccras.nic.in/sites/default/files/viewpdf/Anidra%20Guideline.pdf",
+  "publication_version": "CCRAS Clinical Protocol Series, 2020",
+  "license": "Open Government Data (OGD) - India",
+  "document_type": "Clinical Practice Guideline",
+  "download_availability": "Publicly accessible via ccras.nic.in",
+  "relevance": "Evidence-based non-pharmacological protocols for sleep disturbances, nighttime restlessness, and stress.",
+  "limitations": "Severe psychiatric depression, bipolar disorder, or obstructive sleep apnea require specialized medical review.",
+  "classical_verse": null,
+  "tags": [
+    "anidra",
+    "insomnia",
+    "sleep_hygiene",
+    "shirodhara",
+    "ashwagandha",
+    "vata_pitta"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta"
+  ],
+  "content": "\nCCRAS Clinical Protocol for the Management of Anidra (Insomnia):\n1. Pathophysiology:\n   Vata and Pitta vitiation coupled with diminished Kapha and Tamo Guna leads to hyper-arousal of sensory channels (Mano-vaha Srotas).\n2. Clinical Measures:\n   - Murdha Taila (Application of warm medicated oil to the scalp / Shiro Abhyanga): Pacifies Prana Vayu.\n   - Pada Abhyanga (Foot massage with warm sesame oil or Ksheerabala Taila before retiring): Clinically proven to lower sleep onset latency.\n   - Internal Botanical Support: Ashwagandha root powder (3g) with warm cow's milk and a pinch of nutmeg (Jatiphala) taken 45 minutes before bedtime.\n   - Sleep Hygiene: Fixed bed-times, avoidance of blue-light screen exposure after sunset, and avoidance of heavy or spicy dinners.\n"
+}

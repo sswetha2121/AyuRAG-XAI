@@ -1,0 +1,27 @@
+{
+  "id": "AYUSH-PHARMACOVIGILANCE-FRAMEWORK",
+  "collection": "clinical_safety_referral",
+  "title": "Ministry of AYUSH: National Pharmacovigilance Program for ASU&H Drugs & ADR Guidelines",
+  "publisher": "National Pharmacovigilance Coordination Centre (NPvCC), All India Institute of Ayurveda & Ministry of AYUSH",
+  "source_url": "https://ayushsuraksha.gov.in",
+  "publication_version": "National Pharmacovigilance Protocol, 2021 Update",
+  "license": "Open Government Data (OGD) - India / Public Clinical Safety Guidance",
+  "document_type": "National Drug Safety & Pharmacovigilance Standard",
+  "download_availability": "Publicly accessible via ayushsuraksha.gov.in",
+  "relevance": "Provides the safety foundation: natural does not automatically equal safe; mandates ADR monitoring.",
+  "limitations": "Post-market spontaneous reporting framework; under-reporting of mild ADRs is a documented global limitation.",
+  "classical_verse": null,
+  "tags": [
+    "pharmacovigilance",
+    "ayush_suraksha",
+    "adr_monitoring",
+    "drug_safety",
+    "herb_safety"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nThe National Pharmacovigilance Programme for Ayurvedic, Siddha, Unani, and Homoeopathic (ASU&H) drugs operates to guarantee patient safety:\n1. Dispelling Safety Misconceptions:\n   - The belief that 'all natural Ayurvedic remedies are inherently harmless without side effects' is medically false and clinically hazardous.\n   - Improper dosage, incorrect Prakriti indication, contaminated raw material, or failure to perform traditional detoxification (Sodhana) can lead to toxic adverse events.\n\n2. Structure of Safety Surveillance:\n   - Peripheral Pharmacovigilance Centres (PPvCs) and Intermediary Centres (IPvCs) forward verified adverse drug reaction (ADR) reports to the National Centre at AIIA.\n   - Tracks heavy metal safety, pesticide residues, microbial contamination, and adulteration with synthetic corticosteroids or NSAIDs.\n\n3. Clinical Decision-Support Imperative:\n   - Any digital Ayurvedic application must alert users to potential adverse effects, document known contraindications, and provide reporting mechanisms for unexpected reactions.\n"
+}

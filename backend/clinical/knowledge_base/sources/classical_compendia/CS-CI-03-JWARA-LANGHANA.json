@@ -1,0 +1,27 @@
+{
+  "id": "CS-CI-03-JWARA-LANGHANA",
+  "collection": "classical_compendia",
+  "title": "Charaka Saṃhitā: Management of Fever, Agni Restoration, and Langhana Therapy",
+  "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+  "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=ci&ch=3",
+  "publication_version": "Charaka Saṃhitā, Cikitsāsthāna, Chapter 3 (Jvaracikitsā), Ślokas 138-160",
+  "license": "Public Domain",
+  "document_type": "Classical Clinical Therapeutics Treatise",
+  "download_availability": "Publicly accessible via e-Caraka",
+  "relevance": "Provides protocols for managing acute digestive shutdown, metabolic fever, and therapeutic fasting.",
+  "limitations": "Severe bacterial sepsis, high persistent fever (>39°C), and pediatric febrile convulsions require immediate allopathic hospital admission.",
+  "classical_verse": "Jvarādau laṅghanaṁ proktaṁ jvaramadhyo ca pācanam.",
+  "tags": [
+    "jwara",
+    "langhana",
+    "shadanga_paniya",
+    "fever_management",
+    "ama_pachana"
+  ],
+  "dosha_affinity": [
+    "Pitta",
+    "Kapha",
+    "Vata"
+  ],
+  "content": "\nCharaka Saṃhitā Cikitsāsthāna Chapter 3 expounds the fundamental rule of febrile and metabolic illness:\n1. Langhana (Lightening / Digestive Rest):\n   At the onset of acute fever (Taruna Jwara), Langhana (therapeutic fasting or warm light liquid gruels) is primary because Jwara originates in the stomach (Amashaya) due to impaired Agni and circulating Ama.\n2. Shadanga Paniya (The Six-Herb Medicated Febrifuge Water):\n   Boiled water medicated with Musta (Cyperus rotundus), Parpataka (Fumaria indica), Ushira (Vetiveria zizanioides), Chandana (Santalum album), Udichya (Pavonia odorata), and Shunthi (Zingiber officinale). Cools fever, quenches morbid thirst, kindles digestive fire, and digests Ama.\n3. Contrast with Emaciated Vata States:\n   Langhana is contraindicated in dry emaciated Vata fever, tuberculosis (Kshaya), or chronic debility, where mild nourishing soups are required instead.\n"
+}

@@ -197,6 +197,21 @@
   font-family: var(--font-mono);
 }
 
+.ayur-demo-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FCD34D;
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-top: 2px;
+  width: fit-content;
+}
+
 .ayur-cell-sub {
   display: flex;
   flex-direction: column;
@@ -442,3 +457,90 @@
   color: var(--color-text-secondary);
   font-weight: var(--font-weight-medium);
 }
+
+/* --- Scope Filter Bar --- */
+.ayur-table-scope-bar {
+  display: flex;
+  gap: 8px;
+  padding: 12px 18px 0 18px;
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
+  overflow-x: auto;
+}
+
+.ayur-scope-btn {
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.ayur-scope-btn:hover {
+  color: var(--color-primary);
+}
+
+.ayur-scope-btn--active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* Care Assignment Pills */
+.ayur-assign-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.725rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ayur-assign-pill--me {
+  background-color: #EAF5EE;
+  color: #155E3D;
+  border: 1px solid #B7E2C9;
+}
+
+.ayur-assign-pill--other {
+  background-color: #F8F6F0;
+  color: #6B7B75;
+  border: 1px solid #E3DDD3;
+}
+
+.ayur-btn-assign-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: #123B2F;
+  background-color: #EBF2EE;
+  border: 1px solid #B7E2C9;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.ayur-btn-assign-mini:hover:not(:disabled) {
+  background-color: #D2E7DC;
+}
+
+.ayur-btn-action--diet {
+  background-color: #FAF4E8 !important;
+  color: #9A7733 !important;
+  border-color: #E5D5BA !important;
+}
+
+.ayur-btn-action--diet:hover {
+  background-color: #9A7733 !important;
+  color: #FFFFFF !important;
+}
+

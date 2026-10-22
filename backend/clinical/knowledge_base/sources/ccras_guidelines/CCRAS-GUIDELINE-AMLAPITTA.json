@@ -1,0 +1,26 @@
+{
+  "id": "CCRAS-GUIDELINE-AMLAPITTA",
+  "collection": "ccras_guidelines",
+  "title": "CCRAS Clinical Practice Guideline: Management of Amlapitta (Hyperacidity & GERD)",
+  "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+  "source_url": "https://ccras.nic.in/sites/default/files/viewpdf/Amlapitta%20Guideline.pdf",
+  "publication_version": "CCRAS Clinical Protocol Series, 2021",
+  "license": "Open Government Data (OGD) - India",
+  "document_type": "Clinical Practice Guideline",
+  "download_availability": "Publicly accessible via ccras.nic.in",
+  "relevance": "Provides non-pharmacological and herbal management for heartburn, gastric burning, and acid regurgitation.",
+  "limitations": "Gastric ulcer perforation or persistent hematemesis requires immediate emergency allopathic care.",
+  "classical_verse": null,
+  "tags": [
+    "amlapitta",
+    "hyperacidity",
+    "gerd",
+    "pitta_shamana",
+    "shatavari",
+    "yashtimadhu"
+  ],
+  "dosha_affinity": [
+    "Pitta"
+  ],
+  "content": "\nCCRAS Clinical Protocol for the Management of Amlapitta (Hyperacidity):\n1. Disease Characteristics:\n   - Aggravation of Pachaka Pitta wherein acidity (Amlata) and liquid quantity (Dravata) increase, leading to burning sensation in chest and throat (Hrit-Kantha Daha), acid eructation (Amlodgara), and nausea.\n2. Dietary Pathya:\n   - Old rice, barley, wheat, mung bean soup, cow's milk with ghee, raisins (Draksha), pomegranate (Dadima), tender coconut water, and pumpkin.\n3. Strict Dietary Exclusions (Apathya):\n   - Deep-fried foods, fermented doughs (Idli/Dosa), pungent spices (red chili, black mustard), pickles, vinegar, alcohol, tea, coffee, and smoking.\n4. Stress and Circadian Factors:\n   - Late-night eating, skipping meals, mental anger, and emotional distress directly trigger hyperchlorhydria and must be systematically mitigated.\n"
+}

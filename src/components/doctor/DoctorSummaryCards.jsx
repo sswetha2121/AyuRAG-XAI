@@ -1,116 +1,173 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './DoctorSummaryCards.css';
 import {
   Users,
   Clock,
-  CheckCircle2,
-  BrainCircuit,
-  CalendarClock,
-  ShieldAlert,
   Utensils,
-  FileCheck2,
-  Sparkles
+  MessageSquare,
+  ArrowRight,
+  TrendingUp,
+  AlertCircle
 } from 'lucide-react';
 
-export const DoctorSummaryCards = ({ metrics = {}, isLoading = false }) => {
+// Smooth numerical count-up component respecting prefers-reduced-motion
+const CountUp = ({ end, duration = 800 }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const target = typeof end === 'number' ? end : parseInt(end, 10);
+    if (isNaN(target)) {
+      setCount(end || 0);
+      return;
+    }
+
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setCount(target);
+      return;
+    }
+
+    let startTimestamp = null;
+    let animId = null;
+
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const easeProgress = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+      setCount(Math.floor(easeProgress * target));
+
+      if (progress < 1) {
+        animId = window.requestAnimationFrame(step);
+      } else {
+        setCount(target);
+      }
+    };
+
+    animId = window.requestAnimationFrame(step);
+
+    return () => {
+      if (animId) window.cancelAnimationFrame(animId);
+    };
+  }, [end, duration]);
+
+  return <>{count}</>;
+};
+
+export const DoctorSummaryCards = ({
+  metrics = {},
+  isLoading = false,
+  onNavigate
+}) => {
+  const pendingReviewsTotal =
+    (metrics.pending_clinical_reviews || 0) + (metrics.unverified_assessments || 0);
+
   const cards = [
     {
-      id: 'total_patients',
+      id: 'patient_count',
       title: 'Total Patients',
-      value: metrics.total_patients ?? 'Data unavailable',
-      subtitle: 'Registered clinical cohort',
+      value: metrics.total_patients ?? 0,
+      caption: `${metrics.my_assigned_patients || 0} under your direct care`,
+      badge: `${metrics.my_assigned_patients || 0} Assigned`,
+      badgeType: 'neutral',
       icon: Users,
-      color: 'forest',
-      badge: 'Active Cohort',
+      route: '/doctor/patients',
+      accentColor: 'forest',
+      actionLabel: 'View Roster'
     },
     {
       id: 'pending_reviews',
       title: 'Pending Reviews',
-      value: metrics.pending_clinical_reviews ?? 'Data unavailable',
-      subtitle: 'Awaiting clinical notes',
+      value: pendingReviewsTotal,
+      caption: `${metrics.pending_clinical_reviews || 0} reviews • ${metrics.unverified_assessments || 0} verifications`,
+      badge: pendingReviewsTotal > 0 ? 'Action Needed' : 'All Clear',
+      badgeType: pendingReviewsTotal > 0 ? 'warning' : 'success',
       icon: Clock,
-      color: 'gold',
-      badge: metrics.pending_clinical_reviews > 0 ? 'Review Needed' : 'Up to date',
-      highlight: metrics.pending_clinical_reviews > 0,
-    },
-    {
-      id: 'unverified_assessments',
-      title: 'Unverified Assessments',
-      value: metrics.unverified_assessments ?? 'Data unavailable',
-      subtitle: 'Patient reports pending check',
-      icon: ShieldAlert,
-      color: 'warm',
-      badge: metrics.unverified_assessments > 0 ? 'Verification Needed' : 'All Verified',
-      highlight: metrics.unverified_assessments > 0,
-    },
-    {
-      id: 'plans_awaiting_approval',
-      title: 'Plans Awaiting Approval',
-      value: metrics.plans_awaiting_approval ?? 'Data unavailable',
-      subtitle: 'Doctor sign-off pending',
-      icon: FileCheck2,
-      color: 'teal',
-      badge: metrics.plans_awaiting_approval > 0 ? 'Action Required' : '0 Pending',
-      highlight: metrics.plans_awaiting_approval > 0,
-    },
-    {
-      id: 'draft_diet_plans',
-      title: 'Draft Diet Plans',
-      value: metrics.draft_diet_plans ?? 'Data unavailable',
-      subtitle: 'In synthesis or editing',
-      icon: Utensils,
-      color: 'sage',
-      badge: 'Work in Progress',
+      route: '/doctor/reviews',
+      accentColor: 'gold',
+      actionLabel: 'Open Queue'
     },
     {
       id: 'active_diet_plans',
       title: 'Active Diet Plans',
-      value: metrics.active_diet_plans ?? 'Data unavailable',
-      subtitle: 'Live patient protocols',
-      icon: CheckCircle2,
-      color: 'forest',
-      badge: 'Doctor Approved',
+      value: metrics.active_diet_plans ?? 0,
+      caption: `${metrics.plans_awaiting_approval || 0} drafts awaiting approval`,
+      badge: 'Published & Active',
+      badgeType: 'success',
+      icon: Utensils,
+      route: '/doctor/diet-plans',
+      accentColor: 'sage',
+      actionLabel: 'Manage Regimens'
     },
     {
-      id: 'follow_ups_due',
-      title: 'Follow-ups Due',
-      value: metrics.follow_ups_due ?? 'Data unavailable',
-      subtitle: 'Within next 7–14 days',
-      icon: CalendarClock,
-      color: 'warm',
-      badge: 'Scheduled',
-    },
+      id: 'unread_messages',
+      title: 'Unread Messages',
+      value: metrics.unread_messages ?? 0,
+      caption: 'Direct clinical patient inquiries',
+      badge: (metrics.unread_messages || 0) > 0 ? `${metrics.unread_messages} New Inquiries` : 'Up to Date',
+      badgeType: (metrics.unread_messages || 0) > 0 ? 'alert' : 'neutral',
+      icon: MessageSquare,
+      route: '/doctor/messages',
+      accentColor: 'charcoal',
+      actionLabel: 'Open Messages'
+    }
   ];
 
+  const handleCardClick = (route) => {
+    if (onNavigate) {
+      onNavigate(route);
+    } else {
+      window.location.href = route;
+    }
+  };
+
   return (
-    <div className="ayur-summary-grid">
-      {cards.map((card) => {
+    <div className="ayur-summary-quad-grid">
+      {cards.map((card, idx) => {
         const Icon = card.icon;
         return (
           <div
             key={card.id}
-            className={`ayur-summary-card ayur-summary-card--${card.color} ${card.highlight ? 'ayur-summary-card--highlight' : ''}`}
+            className={`ayur-summary-card ayur-summary-card--${card.accentColor} ayur-animate-card`}
+            style={{ '--card-idx': idx }}
+            onClick={() => handleCardClick(card.route)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleCardClick(card.route);
+              }
+            }}
+            aria-label={`${card.title}: ${card.value}, ${card.caption}`}
           >
+            {/* Header: Title and Icon */}
             <div className="ayur-summary-card__header">
               <span className="ayur-summary-card__title">{card.title}</span>
               <div className="ayur-summary-card__icon-box">
-                <Icon size={19} />
+                <Icon size={18} />
               </div>
             </div>
 
+            {/* Body: Value and Caption */}
             <div className="ayur-summary-card__body">
               {isLoading ? (
-                <div className="ayur-summary-skeleton" />
+                <div className="ayur-summary-card__skeleton" />
               ) : (
                 <div className="ayur-summary-card__value">
-                  {card.value}
+                  <CountUp end={card.value} />
                 </div>
               )}
-              <span className="ayur-summary-card__subtitle">{card.subtitle}</span>
+              <p className="ayur-summary-card__caption">{card.caption}</p>
             </div>
 
+            {/* Footer: Badge and Action Indicator */}
             <div className="ayur-summary-card__footer">
-              <span className="ayur-summary-card__badge">{card.badge}</span>
+              <span className={`ayur-summary-card__badge ayur-badge--${card.badgeType}`}>
+                {card.badge}
+              </span>
+              <span className="ayur-summary-card__action">
+                <span>{card.actionLabel}</span>
+                <ArrowRight size={13} className="ayur-action-arrow" />
+              </span>
             </div>
           </div>
         );

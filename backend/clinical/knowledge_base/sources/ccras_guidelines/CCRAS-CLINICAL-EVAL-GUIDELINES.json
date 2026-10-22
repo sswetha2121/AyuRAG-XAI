@@ -1,0 +1,27 @@
+{
+  "id": "CCRAS-CLINICAL-EVAL-GUIDELINES",
+  "collection": "ccras_guidelines",
+  "title": "CCRAS: General Guidelines for Clinical Evaluation of Ayurvedic Interventions",
+  "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS), Ministry of AYUSH, Govt. of India",
+  "source_url": "https://ccras.nic.in/sites/default/files/viewpdf/General%20Guidelines%20for%20Clinical%20Evaluation%20of%20Ayurvedic%20Interventions.pdf",
+  "publication_version": "CCRAS Guideline Series, 2018 Edition",
+  "license": "Open Government Data (OGD) - India / Research and Academic Fair Use",
+  "document_type": "Official National Research Standard",
+  "download_availability": "Publicly accessible via ccras.nic.in document archive",
+  "relevance": "Provides the methodological benchmark for evaluating clinical Ayurvedic decision support and avoiding unscientific claims.",
+  "limitations": "Focuses on trial design protocols rather than automated software algorithms; adapted for clinical software validation.",
+  "classical_verse": null,
+  "tags": [
+    "ccras",
+    "clinical_trials",
+    "gcp_ayurveda",
+    "evidence_based",
+    "standardization"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nThe Central Council for Research in Ayurvedic Sciences (CCRAS) 'General Guidelines for Clinical Evaluation of Ayurvedic Interventions' establishes rigorous research criteria:\n1. Methodological Duality:\n   - Clinical evaluations must bridge traditional Ayurvedic diagnostic parameters (Prakriti, Vikriti, Agni, Dhatu Sara) with modern clinical outcome measures (biochemical markers, validated quality-of-life questionnaires).\n   - Interventions must document dosage form, standardization of raw materials, and batch consistency.\n\n2. Evidence Hierarchy & Claims Integrity:\n   - Traditional textual citation establishes historical plausibility, NOT automated proof of efficacy in contemporary clinical populations.\n   - Controlled clinical trials (RCTs), prospective cohort studies, and systematic reviews represent mandatory levels of validation for therapeutic assertions.\n   - Decision support software must clearly delineate classical consensus from modern clinical trial evidence.\n"
+}

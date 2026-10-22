@@ -1,0 +1,27 @@
+{
+  "id": "CCRAS-GCP-RESEARCH-ETHICS",
+  "collection": "ccras_guidelines",
+  "title": "CCRAS Good Clinical Practice (GCP) Guidelines for Ayurvedic Clinical Research",
+  "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+  "source_url": "https://ccras.nic.in/publications/gcp-ayurveda",
+  "publication_version": "CCRAS GCP Guideline, Second Edition",
+  "license": "Open Government Data (OGD) - India",
+  "document_type": "Clinical Ethics & Governance Standard",
+  "download_availability": "Publicly accessible via ccras.nic.in",
+  "relevance": "Governs data integrity, patient informed consent, and adverse event reporting in clinical systems.",
+  "limitations": "Institutional standard requiring local institutional ethics committee (IEC) oversight for human subjects.",
+  "classical_verse": null,
+  "tags": [
+    "ccras_gcp",
+    "clinical_ethics",
+    "patient_consent",
+    "data_integrity",
+    "adverse_events"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nCCRAS Good Clinical Practice (GCP) Guidelines for Ayurvedic Interventions:\n1. Ethical Principles:\n   - Patient autonomy, voluntary informed consent, and confidential handling of all clinical and constitutional records.\n   - Transparent documentation of research hypotheses and objective separation of validated outcomes from theoretical beliefs.\n2. Standardization of Formulations:\n   - All trial formulations must adhere strictly to the Ayurvedic Pharmacopoeia of India standards, with documented heavy metal limits (Lead <10ppm, Arsenic <3ppm, Cadmium <0.3ppm, Mercury <1ppm) and microbial safety thresholds.\n3. Adverse Event Recording:\n   - Immediate recording and reporting of any untoward medical occurrence, regardless of suspected causality with the Ayurvedic intervention.\n"
+}

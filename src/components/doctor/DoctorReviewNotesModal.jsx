@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './DoctorReviewNotesModal.css';
-import { X, CheckCircle, Clock, Stethoscope, AlertTriangle, Save } from 'lucide-react';
+import { X, CheckCircle, Clock, Stethoscope, AlertTriangle, Save, CheckCircle2, RotateCcw } from 'lucide-react';
 import { Button } from '../ui/Button';
 
 export const DoctorReviewNotesModal = ({
@@ -9,6 +9,7 @@ export const DoctorReviewNotesModal = ({
   review = {},
   patientName = '',
   assessmentId = null,
+  unverifiedCount = 0,
   onSaveReview,
   isSaving = false,
 }) => {
@@ -20,6 +21,11 @@ export const DoctorReviewNotesModal = ({
     status: 'IN_REVIEW',
   });
 
+  const [confirmedSignoff, setConfirmedSignoff] = useState(false);
+  const [validationError, setValidationError] = useState('');
+
+  const isAlreadyCompleted = review?.status === 'COMPLETED';
+
   useEffect(() => {
     if (review) {
       setFormData({
@@ -29,15 +35,33 @@ export const DoctorReviewNotesModal = ({
         follow_up_notes: review.follow_up_notes || '',
         status: review.status || 'IN_REVIEW',
       });
+      setConfirmedSignoff(review.status === 'COMPLETED');
+      setValidationError('');
     }
-  }, [review]);
+  }, [review, isOpen]);
 
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setValidationError('');
+
+    if (!formData.summary.trim()) {
+      setValidationError('Please provide a concise clinical review summary before saving.');
+      return;
+    }
+
+    if (formData.status === 'COMPLETED' && !confirmedSignoff) {
+      setValidationError('Please acknowledge the clinical sign-off confirmation below before completing this review.');
+      return;
+    }
+
     onSaveReview?.({
       ...formData,
+      summary: formData.summary.trim(),
+      observations: formData.observations.trim(),
+      recommendations: formData.recommendations.trim(),
+      follow_up_notes: formData.follow_up_notes.trim(),
       assessment_id: assessmentId,
     });
   };
@@ -59,7 +83,7 @@ export const DoctorReviewNotesModal = ({
             </div>
             <div>
               <h3 id="review-modal-title" className="ayur-modal-title">
-                Clinical Review & Physician Sign-Off
+                {isAlreadyCompleted ? 'Update / Reopen Clinical Review' : 'Clinical Review & Physician Sign-Off'}
               </h3>
               <span className="ayur-modal-subtitle">
                 Patient: <strong>{patientName || 'Patient Record'}</strong> • Assessment ID #{assessmentId}
@@ -87,25 +111,51 @@ export const DoctorReviewNotesModal = ({
             </p>
           </div>
 
+          {/* Validation Warning */}
+          {validationError && (
+            <div className="p-sm rounded-md bg-danger-subtle text-danger text-xs font-semibold border border-danger">
+              {validationError}
+            </div>
+          )}
+
           {/* Review Status Selector */}
           <div className="ayur-form-group">
             <label className="ayur-label">Clinical Workflow Status *</label>
             <div className="ayur-status-selector">
               {[
-                { value: 'PENDING', label: 'Pending Review', desc: 'Awaiting comprehensive inspection' },
-                { value: 'IN_REVIEW', label: 'In Review', desc: 'Active clinical evaluation in progress' },
-                { value: 'COMPLETED', label: 'Completed & Signed', desc: 'Validated by attending physician' },
+                {
+                  value: 'PENDING',
+                  label: 'Pending Review',
+                  desc: isAlreadyCompleted ? 'Locked: Completed reviews cannot revert to pending' : 'Awaiting comprehensive inspection',
+                  disabled: isAlreadyCompleted,
+                },
+                {
+                  value: 'IN_REVIEW',
+                  label: isAlreadyCompleted ? 'Reopen for Review (In Progress)' : 'In Review',
+                  desc: 'Active clinical evaluation & note editing in progress',
+                  disabled: false,
+                },
+                {
+                  value: 'COMPLETED',
+                  label: 'Completed & Signed',
+                  desc: 'Validated by attending physician with final sign-off',
+                  disabled: false,
+                },
               ].map((s) => (
                 <label
                   key={s.value}
-                  className={`ayur-status-option ${formData.status === s.value ? 'ayur-status-option--selected' : ''}`}
+                  className={`ayur-status-option ${formData.status === s.value ? 'ayur-status-option--selected' : ''} ${s.disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                   <input
                     type="radio"
                     name="status"
                     value={s.value}
+                    disabled={s.disabled}
                     checked={formData.status === s.value}
-                    onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                    onChange={(e) => {
+                      setFormData({ ...formData, status: e.target.value });
+                      setValidationError('');
+                    }}
                   />
                   <div>
                     <span className="ayur-status-option__title">{s.label}</span>
@@ -115,6 +165,29 @@ export const DoctorReviewNotesModal = ({
               ))}
             </div>
           </div>
+
+          {/* Warning if selecting COMPLETED but unverified fields exist */}
+          {formData.status === 'COMPLETED' && unverifiedCount > 0 && (
+            <div
+              style={{
+                padding: '10px 14px',
+                borderRadius: '6px',
+                backgroundColor: 'rgba(197, 160, 89, 0.12)',
+                border: '1px solid var(--color-accent)',
+                fontSize: '12px',
+                lineHeight: 1.5,
+              }}
+            >
+              <div className="flex items-center gap-xs font-semibold text-accent mb-2xs">
+                <AlertTriangle size={15} />
+                <span>Notice: {unverifiedCount} Unverified Field(s) Pending</span>
+              </div>
+              <p className="m-0 text-text-secondary text-xs">
+                This patient currently has {unverifiedCount} field(s) unverified in Clinical Verification (Tab 1).
+                It is strongly recommended to verify or correct all fields prior to final sign-off.
+              </p>
+            </div>
+          )}
 
           {/* Review Summary */}
           <div className="ayur-form-group">
@@ -127,7 +200,10 @@ export const DoctorReviewNotesModal = ({
               className="ayur-textarea"
               placeholder="Concise clinical assessment overview (e.g. Concordant with metabolic sluggishness inference...)"
               value={formData.summary}
-              onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
+              onChange={(e) => {
+                setFormData({ ...formData, summary: e.target.value });
+                setValidationError('');
+              }}
               required
             />
           </div>
@@ -177,6 +253,34 @@ export const DoctorReviewNotesModal = ({
             />
           </div>
 
+          {/* Confirmation Checkbox when marking COMPLETED */}
+          {formData.status === 'COMPLETED' && (
+            <div
+              style={{
+                padding: '12px',
+                borderRadius: '6px',
+                backgroundColor: 'var(--color-surface)',
+                border: '1px solid var(--color-border-subtle)',
+              }}
+            >
+              <label className="flex items-start gap-sm cursor-pointer m-0">
+                <input
+                  type="checkbox"
+                  style={{ marginTop: '3px' }}
+                  checked={confirmedSignoff}
+                  onChange={(e) => {
+                    setConfirmedSignoff(e.target.checked);
+                    setValidationError('');
+                  }}
+                />
+                <span className="text-xs text-text-primary leading-relaxed font-semibold">
+                  I confirm that clinical assessment findings and patient constitutional parameters have been examined,
+                  and I approve this case evaluation and personalized protocol.
+                </span>
+              </label>
+            </div>
+          )}
+
           {/* Footer Controls */}
           <div className="ayur-modal-footer">
             <Button variant="outline" type="button" onClick={onClose} disabled={isSaving}>
@@ -186,9 +290,11 @@ export const DoctorReviewNotesModal = ({
               variant="primary"
               type="submit"
               isLoading={isSaving}
-              leftIcon={<Save size={16} />}
+              leftIcon={formData.status === 'COMPLETED' ? <CheckCircle size={16} /> : <Save size={16} />}
             >
-              {formData.status === 'COMPLETED' ? 'Finalize & Sign Review' : 'Save Review Notes'}
+              {formData.status === 'COMPLETED'
+                ? (isAlreadyCompleted ? 'Update Signed Review' : 'Finalize & Sign Review')
+                : (isAlreadyCompleted ? 'Reopen for Review' : 'Save Review Notes')}
             </Button>
           </div>
         </form>

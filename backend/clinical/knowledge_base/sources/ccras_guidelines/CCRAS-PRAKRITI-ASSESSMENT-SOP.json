@@ -1,0 +1,27 @@
+{
+  "id": "CCRAS-PRAKRITI-ASSESSMENT-SOP",
+  "collection": "ccras_guidelines",
+  "title": "CCRAS: Standardized Technical Protocol for Deha Prakriti Assessment",
+  "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+  "source_url": "https://ccras.nic.in/content/prakriti-assessment-questionnaire",
+  "publication_version": "CCRAS Technical Protocol, Validated Assessment Tool",
+  "license": "Open Government Data (OGD) - India",
+  "document_type": "Standard Operating Procedure (SOP) & Questionnaire Matrix",
+  "download_availability": "Publicly accessible via ccras.nic.in",
+  "relevance": "Direct algorithmic reference for AyuRAG-XAI's Prakriti questionnaire scoring and constitutional classification.",
+  "limitations": "Self-reported questionnaires carry cognitive bias; doctor clinical verification remains necessary for definitive typing.",
+  "classical_verse": null,
+  "tags": [
+    "ccras_prakriti",
+    "questionnaire",
+    "constitutional_scoring",
+    "vata_pitta_kapha",
+    "validation"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nThe CCRAS Deha Prakriti Assessment Protocol standardizes constitutional determination through multi-domain clinical scoring:\n1. Core Assessment Domains:\n   - Anatomical / Morphological Features: Skeletal frame, body weight consistency, skin texture, hair characteristics, eye shape and color, teeth and nail quality.\n   - Physiological Traits: Appetite consistency, digestive velocity, bowel regularity and stool consistency, perspiration threshold, physical endurance, sleep depth and dream content.\n   - Psychological / Behavioral Attributes: Speed of comprehension and memory retention, stress response patterns (worry vs anger vs withdrawal), emotional reactivity, and communication tempo.\n\n2. Weighted Deterministic Scoring Matrix:\n   - Items are scored across independent Vata, Pitta, and Kapha scales.\n   - Single-dosha dominance is recognized when one dosha exceeds secondary doshas by >10% score differential.\n   - Dual-dosha types (Dwandwaja: Vata-Pitta, Pitta-Kapha, Vata-Kapha) represent the vast majority of real-world human constitutions.\n   - Equi-constitutional (Sama Prakriti) is rare and characterized by balanced resilience across all physiological challenges.\n"
+}

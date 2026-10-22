@@ -1,0 +1,28 @@
+{
+  "id": "HERB-DRUG-INTERACTION-MATRIX",
+  "collection": "clinical_safety_referral",
+  "title": "Clinical Herb-Drug Interaction Matrix: Key Ayurvedic Botanicals & Modern Pharmaceuticals",
+  "publisher": "AyuRAG Clinical Pharmacology Working Group / AYUSH Suraksha Pharmacovigilance Cross-Index",
+  "source_url": "https://ayushsuraksha.gov.in/herb-drug-interactions",
+  "publication_version": "Evidence-Based Herb-Drug Cross-Index, 2024 Edition",
+  "license": "Clinical Open Access Reference",
+  "document_type": "Pharmacological Interaction Reference",
+  "download_availability": "Publicly accessible via ayushsuraksha.gov.in",
+  "relevance": "Protects patients taking concurrent modern prescription medications from adverse herb-drug interactions.",
+  "limitations": "In vitro and animal cytochrome P450 modulation data require ongoing clinical confirmation in human trials.",
+  "classical_verse": null,
+  "tags": [
+    "herb_drug_interactions",
+    "cyp450",
+    "pharmacokinetics",
+    "anticoagulants",
+    "guggulu",
+    "ashwagandha"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nAyuRAG-XAI Evidence-Based Herb-Drug Interaction Registry:\n1. Commiphora mukul (Guggulu):\n   - Interacting Drugs: Warfarin, Aspirin, Clopidogrel, Heparin, Statins (Atorvastatin).\n   - Mechanism: Guggulsterones inhibit platelet aggregation and induce CYP3A4 metabolism.\n   - Risk: Increased hemorrhage risk with anticoagulants; potential reduction in bioavailability of co-administered CYP3A4 substrates.\n\n2. Withania somnifera (Ashwagandha):\n   - Interacting Drugs: Benzodiazepines (Diazepam, Alprazolam), Barbiturates, Levothyroxine, Immunosuppressants.\n   - Mechanism: Direct GABAergic receptor modulation; thyroid hormone (T3/T4) stimulation.\n   - Risk: Synergistic excessive sedation; risk of thyrotoxicosis if combined with exogenous thyroid hormones without dosage adjustment.\n\n3. Glycyrrhiza glabra (Yashtimadhu / Licorice):\n   - Interacting Drugs: Thiazide & Loop Diuretics (Furosemide), Digoxin, Antihypertensives (ACE inhibitors, ARBs).\n   - Mechanism: Inhibits renal 11-beta-HSD2, inducing potassium wasting and sodium retention.\n   - Risk: Severe hypokalemia, digitalis toxicity, and loss of blood pressure control.\n\n4. Curcuma longa (Haridra / Curcumin):\n   - Interacting Drugs: Anticoagulants, NSAIDs, Oral hypoglycemics.\n   - Mechanism: Mild anti-platelet aggregation; enhances peripheral insulin sensitivity.\n   - Risk: Potential additive bleeding risk; risk of hypoglycemia if combined with high-dose sulfonylureas.\n\n5. Allium sativum (Lashuna / Garlic):\n   - Interacting Drugs: Anticoagulants, Protease inhibitors (Saquinavir).\n   - Mechanism: Platelet cyclooxygenase inhibition and CYP3A4 induction.\n   - Risk: Increased peri-operative bleeding; must be discontinued at least 7-14 days prior to elective surgery.\n"
+}

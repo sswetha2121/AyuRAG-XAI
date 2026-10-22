@@ -1,0 +1,27 @@
+{
+  "id": "AH-SU-01-AYUSHKAMIYA",
+  "collection": "classical_compendia",
+  "title": "Aṣṭāṅga Hṛdayam: Core Foundations of Health & Tridosha Dynamics (Āyuṣkāmīya)",
+  "publisher": "Classical Ayurvedic Compendium (e-Ashtanga / NIIMH)",
+  "source_url": "https://niimh.nic.in/ebooks/eahridaya/?mod=read&sys=su&ch=1",
+  "publication_version": "Aṣṭāṅga Hṛdayam, Sūtrasthāna, Chapter 1, Ślokas 1-25",
+  "license": "Public Domain",
+  "document_type": "Classical Foundational Text",
+  "download_availability": "Publicly accessible via e-Ashtanga",
+  "relevance": "Defines the fundamental axioms of Ayurvedic treatment: like increases like, opposites cure.",
+  "limitations": "Axiomatic rules require personalized calibration based on metabolic rate and clinical contraindications.",
+  "classical_verse": "Vāyuḥ pittaṁ kaphaśceti trayo doṣāḥ samāsataḥ. Vikṛtā’vikṛtā dehaṁ ghnanti te vartayanti ca.",
+  "tags": [
+    "ashtanga_hridaya",
+    "tridosha",
+    "rasa",
+    "dhatu",
+    "samanya_vishesha"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nAṣṭāṅga Hṛdayam Sūtrasthāna Chapter 1 (by Acharya Vagbhata) distills the essence of Charaka and Sushruta into crisp clinical aphorisms:\n1. The Three Doshas:\n   - Vayu, Pitta, and Kapha are the three bodily regulatory humors.\n   - When in an unvitiated state (Avikrita), they sustain and preserve the body; when vitiated (Vikrita), they bring about disease and decay.\n   - Age distribution: Kapha dominates childhood, Pitta dominates middle age, and Vata dominates senior years (>60).\n   - Diurnal distribution: Kapha dominates morning/post-meal, Pitta dominates midday/mid-digestion, and Vata dominates evening/completion of digestion.\n\n2. The Principle of Homology and Opposition (Sāmānya-Viśeṣa Siddhānta):\n   - Habitual consumption of substances possessing identical qualities increases that specific dosha (Vṛddhiḥ samānaiḥ sarveṣām).\n   - Substances possessing contrary qualities reduce that dosha (Hhetuḥ viparītaiḥ).\n   - Six Rasas (Tastes): Madhura (sweet), Amla (sour), Lavana (salty), Katu (pungent), Tikta (bitter), and Kashaya (astringent).\n     - Sweet, sour, and salty pacify Vata.\n     - Astringent, sweet, and bitter pacify Pitta.\n     - Astringent, pungent, and bitter pacify Kapha.\n"
+}

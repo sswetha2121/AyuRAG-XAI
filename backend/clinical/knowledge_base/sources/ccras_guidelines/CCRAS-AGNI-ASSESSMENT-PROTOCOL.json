@@ -1,0 +1,27 @@
+{
+  "id": "CCRAS-AGNI-ASSESSMENT-PROTOCOL",
+  "collection": "ccras_guidelines",
+  "title": "CCRAS: Clinical Diagnostic Criteria for Digestive Fire (Agni) Evaluation",
+  "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+  "source_url": "https://ccras.nic.in/publications/clinical-diagnostic-manual-agni",
+  "publication_version": "CCRAS Clinical Diagnostic Manual",
+  "license": "Open Government Data (OGD) - India",
+  "document_type": "Clinical Diagnostic Criteria",
+  "download_availability": "Publicly accessible via ccras.nic.in",
+  "relevance": "Provides objective clinical diagnostic symptoms for determining patient Agni status in AyuRAG-XAI.",
+  "limitations": "Subjective symptom clusters; should be supported by dietary recall and stool frequency logging.",
+  "classical_verse": null,
+  "tags": [
+    "ccras_agni",
+    "jatharagni",
+    "digestive_power",
+    "ama_detection",
+    "clinical_scoring"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nThe CCRAS Agni Clinical Diagnostic Framework classifies metabolic capacity into four operational categories:\n1. Sama Agni:\n   - Regular, predictable hunger cycles occurring every 4-5 hours.\n   - Digestion completed within standard time (3-4 hours) without discomfort.\n   - Uncoated clean tongue, light clear breath, normal formed bowel movement once daily upon waking.\n2. Vishama Agni:\n   - Erratic appetite: ravenous on one day, completely absent on the next.\n   - Variable digestion with intermittent bloating, rumbling (Atopa), constipation, or hard scybalous stools.\n   - Direct manifestation of Vata vitiation in the gastrointestinal tract.\n3. Tikshna Agni:\n   - Excessive, voracious hunger; unable to bear slight meal delays without headache, irritability, or hypoglycemia.\n   - Burning in epigastrium, sour eructations, loose stools with yellowish hue.\n   - Direct manifestation of Pitta vitiation.\n4. Manda Agni:\n   - Lack of true hunger; feels bloated even when skipping meals.\n   - Salivation, sweet taste in mouth, white coated tongue, heaviness in abdomen, delayed stool evacuation.\n   - Direct manifestation of Kapha and Ama.\n"
+}

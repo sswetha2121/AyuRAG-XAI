@@ -9,7 +9,7 @@ export const LIFESTYLE_CATEGORIES = [
     id: 'routine',
     number: '01',
     name: 'Daily Routine',
-    sanskritName: 'Dinacharya',
+    sanskritName: 'Daily Routine',
     description: 'Circadian rhythm, wake-up schedule, and meal timing consistency.',
     icon: 'Sun'
   },
@@ -17,7 +17,7 @@ export const LIFESTYLE_CATEGORIES = [
     id: 'activity',
     number: '02',
     name: 'Physical Activity',
-    sanskritName: 'Vyāyāma',
+    sanskritName: 'Physical Activity',
     description: 'Baseline daily movement, workout styles, and physical exertion.',
     icon: 'Activity'
   },
@@ -25,7 +25,7 @@ export const LIFESTYLE_CATEGORIES = [
     id: 'sleep',
     number: '03',
     name: 'Sleep & Rest',
-    sanskritName: 'Nidrā',
+    sanskritName: 'Sleep & Rest',
     description: 'Sleep duration, restorative depth, and sleep environment quality.',
     icon: 'Moon'
   },
@@ -33,7 +33,7 @@ export const LIFESTYLE_CATEGORIES = [
     id: 'work',
     number: '04',
     name: 'Work / Study Patterns',
-    sanskritName: 'Karma & Indriya',
+    sanskritName: 'Work Patterns',
     description: 'Postural dynamics, screen exposure, and movement break frequency.',
     icon: 'Briefcase'
   },
@@ -41,7 +41,7 @@ export const LIFESTYLE_CATEGORIES = [
     id: 'stress',
     number: '05',
     name: 'Stress & Wellbeing',
-    sanskritName: 'Mānasa & Śānti',
+    sanskritName: 'Mental Wellbeing',
     description: 'Cognitive load, mental pace, and natural decompression methods.',
     icon: 'HeartPulse'
   },
@@ -49,7 +49,7 @@ export const LIFESTYLE_CATEGORIES = [
     id: 'habits',
     number: '06',
     name: 'Daily Habits & Hydration',
-    sanskritName: 'Abhyāsa & Jala',
+    sanskritName: 'Daily Habits',
     description: 'Fluid intake habits, water temperature, and everyday micro-routines.',
     icon: 'GlassWater'
   }
@@ -59,55 +59,55 @@ export const LIFESTYLE_SECTIONS = [
   {
     id: 'routine',
     title: 'Daily Routine',
-    sanskrit: 'Dinacharya',
+    sanskrit: 'Daily Schedule',
     description: 'Circadian rhythm stability, morning habits, and waking schedule.'
   },
   {
     id: 'sleep',
     title: 'Sleep & Rest',
-    sanskrit: 'Nidrā',
+    sanskrit: 'Sleep & Rest',
     description: 'Duration, sleep quality, nocturnal awakenings, and bedtime habits.'
   },
   {
     id: 'activity',
     title: 'Physical Activity',
-    sanskrit: 'Vyāyāma',
+    sanskrit: 'Physical Activity',
     description: 'Movement frequency, exercise intensity, and sedentary counterbalance.'
   },
   {
     id: 'work',
     title: 'Work & Study Environment',
-    sanskrit: 'Kārya',
+    sanskrit: 'Work Environment',
     description: 'Daily mental exertion, sitting posture, and work hours structure.'
   },
   {
     id: 'stress',
     title: 'Stress & Mental Balance',
-    sanskrit: 'Mānasika',
+    sanskrit: 'Mental Balance',
     description: 'Perceived stress levels, common triggers, and coping tendencies.'
   },
   {
     id: 'screens',
     title: 'Screen & Digital Exposure',
-    sanskrit: 'Indriya Saṅga',
+    sanskrit: 'Digital Exposure',
     description: 'Daily visual display exposure and evening wind-down boundaries.'
   },
   {
     id: 'habits',
     title: 'Daily Habits',
-    sanskrit: 'Sātmya',
+    sanskrit: 'Daily Habits',
     description: 'Beverage preferences, caffeine timing, and afternoon rest habits.'
   },
   {
     id: 'recovery',
     title: 'Rest & Restoration',
-    sanskrit: 'Viśrāma',
+    sanskrit: 'Rest & Restoration',
     description: 'Mental breaks, leisure engagement, and relaxation practices.'
   },
   {
     id: 'consistency',
     title: 'Rhythm Consistency',
-    sanskrit: 'Niyama',
+    sanskrit: 'Rhythm Consistency',
     description: 'Self-rated overall stability across weekdays and weekends.'
   }
 ];
@@ -118,11 +118,11 @@ export const LIFESTYLE_QUESTIONS = [
     id: 'lifestyle_q1_routine_consistency',
     category: 'Daily Routine',
     categoryId: 'routine',
-    sanskritTerm: 'Nitya Kāla Krama',
+    sanskritTerm: 'Schedule Consistency',
     type: 'frequency',
     question: 'How consistent is your daily schedule and meal timing?',
     description: 'Think about whether you wake, eat meals, and wind down around the same hours every day.',
-    hint: 'Regularity in meal times and wake hours stabilizes Agni (metabolic fire) and pacifies Vata.',
+    hint: 'Regularity in meal times and wake hours stabilizes digestive rhythm and calms nervous system variability.',
     options: [
       {
         id: 'opt_q1_rarely',
@@ -156,19 +156,19 @@ export const LIFESTYLE_QUESTIONS = [
     id: 'lifestyle_q2_sleep_wake_timing',
     category: 'Daily Routine',
     categoryId: 'routine',
-    sanskritTerm: 'Brāhma Muhūrta & Śayana',
+    sanskritTerm: 'Sleep & Wake Times',
     type: 'time-routine',
     question: 'What are your typical waking and bedtime hours?',
-    description: 'Ayurvedic Dinacharya emphasizes alignment with natural solar and circadian cycles.',
-    hint: 'Waking before or near sunrise aligns with energetic Vata time (02:00–06:00), promoting mental clarity.',
+    description: 'A healthy daily routine emphasizes alignment with natural solar and circadian cycles.',
+    hint: 'Waking before or near sunrise promotes morning mental clarity and alertness.',
     wakePresets: [
-      { id: 'wake_early', time: '05:00 - 06:00', label: 'Brahma Muhurta (Early Dawn)', period: 'morning' },
+      { id: 'wake_early', time: '05:00 - 06:00', label: 'Early Dawn (05:00 - 06:00)', period: 'morning' },
       { id: 'wake_standard', time: '06:00 - 07:00', label: 'Sunrise / Standard Morning', period: 'morning' },
       { id: 'wake_mid', time: '07:00 - 08:30', label: 'Mid-Morning Waking', period: 'day' },
       { id: 'wake_late', time: '08:30+', label: 'Late Morning Waking', period: 'day' }
     ],
     bedPresets: [
-      { id: 'bed_early', time: '21:30 - 22:30', label: 'Early Night (Kapha Period)', period: 'evening' },
+      { id: 'bed_early', time: '21:30 - 22:30', label: 'Early Evening (21:30 - 22:30)', period: 'evening' },
       { id: 'bed_standard', time: '22:30 - 23:30', label: 'Late Evening', period: 'night' },
       { id: 'bed_midnight', time: '23:30 - 01:00', label: 'Midnight / Post-Midnight', period: 'night' },
       { id: 'bed_late', time: '01:00+', label: 'Late Night / Night Owl', period: 'night' }
@@ -180,11 +180,11 @@ export const LIFESTYLE_QUESTIONS = [
     id: 'lifestyle_q3_activity_level',
     category: 'Physical Activity',
     categoryId: 'activity',
-    sanskritTerm: 'Vyāyāma Mātrā',
+    sanskritTerm: 'Exercise Quantity',
     type: 'visual-cards',
     question: 'How active are you on a typical day?',
     description: 'Think about your usual baseline rather than an unusually busy or restful day.',
-    hint: 'Vyayama should be practiced up to half of one’s capacity (Balardha) for optimal vitality.',
+    hint: 'Physical exercise should be practiced up to comfortable personal capacity for optimal vitality.',
     options: [
       {
         id: 'opt_act_sedentary',
@@ -226,19 +226,19 @@ export const LIFESTYLE_QUESTIONS = [
     id: 'lifestyle_q4_exercise_modalities',
     category: 'Physical Activity',
     categoryId: 'activity',
-    sanskritTerm: 'Vyāyāma Prakāra',
+    sanskritTerm: 'Movement Styles',
     type: 'multi-select-chips',
     question: 'Which activities or movement practices do you regularly engage in?',
     description: 'Select all modalities that are part of your regular weekly routine.',
-    hint: 'Different dosha types thrive with distinct forms of movement (e.g. Asanas for Vata, Strength for Kapha).',
+    hint: 'Different constitutional profiles thrive with distinct forms of movement (e.g. gentle stretching for mobility, resistance for stamina).',
     options: [
       { id: 'walk', label: 'Brisk Walking', category: 'cardio' },
-      { id: 'yoga', label: 'Yoga & Asanas', category: 'mind-body' },
+      { id: 'yoga', label: 'Yoga & Gentle Stretching', category: 'mind-body' },
       { id: 'gym', label: 'Gym & Strength Training', category: 'strength' },
       { id: 'running', label: 'Running / Jogging', category: 'cardio' },
       { id: 'swimming', label: 'Swimming', category: 'endurance' },
       { id: 'cycling', label: 'Cycling & Sports', category: 'cardio' },
-      { id: 'pranayama', label: 'Pranayama & Breathwork', category: 'mind-body' },
+      { id: 'pranayama', label: 'Breathwork & Deep Breathing', category: 'mind-body' },
       { id: 'pilates', label: 'Pilates / Core Fitness', category: 'strength' },
       { id: 'martial_arts', label: 'Martial Arts / Combat', category: 'agility' },
       { id: 'none', label: 'None at present', isExclusive: true }
@@ -250,11 +250,11 @@ export const LIFESTYLE_QUESTIONS = [
     id: 'lifestyle_q5_sleep_duration_quality',
     category: 'Sleep & Rest',
     categoryId: 'sleep',
-    sanskritTerm: 'Nidrā Guṇa & Parimāṇa',
+    sanskritTerm: 'Sleep Quality & Duration',
     type: 'sleep-duration-quality',
     question: 'How many hours do you usually sleep, and how restorative is it?',
-    description: 'Sleep is one of the three foundational pillars (Trayopastambha) of Ayurvedic vitality.',
-    hint: 'Sound sleep allows Ojas (immune essence) to replenish and dhatus (body tissues) to repair.',
+    description: 'Sleep is one of the foundational pillars of physical vitality.',
+    hint: 'Sound sleep allows natural immunity to replenish and body tissues to repair.',
     durationOptions: [
       { id: 'dur_lt5', value: '< 5', label: '< 5 hrs', subtext: 'Insufficient' },
       { id: 'dur_5_6', value: '5–6', label: '5–6 hrs', subtext: 'Short' },
@@ -275,11 +275,11 @@ export const LIFESTYLE_QUESTIONS = [
     id: 'lifestyle_q6_work_pattern',
     category: 'Work / Study Patterns',
     categoryId: 'work',
-    sanskritTerm: 'Kārya Svarūpa',
+    sanskritTerm: 'Work Environment',
     type: 'visual-cards',
     question: 'What best describes your primary daily work or study environment?',
     description: 'Helps evaluate structural postural load, ergonomic stress, and cognitive pacing.',
-    hint: 'Long static postures can aggravate Vata in the lumbar and joint regions.',
+    hint: 'Long static postures can cause musculoskeletal stiffness in the lumbar and joint regions.',
     options: [
       {
         id: 'opt_work_desk',
@@ -329,11 +329,11 @@ export const LIFESTYLE_QUESTIONS = [
     id: 'lifestyle_q7_screen_breaks',
     category: 'Work / Study Patterns',
     categoryId: 'work',
-    sanskritTerm: 'Indriya Viśrānti',
+    sanskritTerm: 'Movement Breaks',
     type: 'segmented-choice',
     question: 'How frequently do you take intentional breaks away from screens and sitting?',
-    description: 'Pauses to rest the eyes (Netra) and stretch limbs support micro-circulation and sensory balance.',
-    hint: 'Excess screen radiation increases Pitta in the eyes (Alochaka Pitta) and aggravates Vata.',
+    description: 'Pauses to rest the eyes and stretch limbs support micro-circulation and sensory balance.',
+    hint: 'Excess screen exposure increases eye strain and nervous fatigue.',
     options: [
       {
         id: 'opt_break_rarely',
@@ -367,11 +367,11 @@ export const LIFESTYLE_QUESTIONS = [
     id: 'lifestyle_q8_stress_frequency',
     category: 'Stress & Wellbeing',
     categoryId: 'stress',
-    sanskritTerm: 'Mānasa Tāpa & Vega',
+    sanskritTerm: 'Mental Stress Frequency',
     type: 'frequency',
     question: 'How often do you feel mentally rushed, overloaded, or stressed during a typical week?',
     description: 'Reflect on your typical cognitive pressure and emotional load without judgment.',
-    hint: 'Mental stress (Rajasik overload) dries out bodily tissues and disrupts digestive fire.',
+    hint: 'Mental stress and chronic cognitive overload can strain body tissues and disrupt digestion.',
     options: [
       {
         id: 'opt_stress_rarely',
@@ -405,11 +405,11 @@ export const LIFESTYLE_QUESTIONS = [
     id: 'lifestyle_q9_relaxation_methods',
     category: 'Stress & Wellbeing',
     categoryId: 'stress',
-    sanskritTerm: 'Śānti Upāya',
+    sanskritTerm: 'Restoration Practices',
     type: 'multi-select-chips',
     question: 'How do you typically unwind and restore mental clarity when feeling overloaded?',
     description: 'Select your primary restorative coping strategies.',
-    hint: 'Sattvic practices (nature, meditation, gentle music) calm the nervous system (Majja Dhatu).',
+    hint: 'Restorative practices (nature, meditation, gentle music) calm the nervous system.',
     options: [
       { id: 'meditation', label: 'Meditation & Breathwork', category: 'sattvic' },
       { id: 'nature', label: 'Nature & Outdoor Walks', category: 'sattvic' },
@@ -427,11 +427,11 @@ export const LIFESTYLE_QUESTIONS = [
     id: 'lifestyle_q10_hydration_habit',
     category: 'Daily Habits & Hydration',
     categoryId: 'habits',
-    sanskritTerm: 'Jala Pāna Vidhi',
+    sanskritTerm: 'Hydration Practices',
     type: 'visual-cards',
     question: 'What is your typical daily fluid intake and water temperature preference?',
-    description: 'In Ayurveda, water temperature and hydration rhythm directly influence Agni (digestive fire).',
-    hint: 'Warm or room-temperature water (Ushnodaka) kindles digestive fire without generating Ama (toxins).',
+    description: 'Water temperature and hydration rhythm directly influence digestive function.',
+    hint: 'Warm or room-temperature water supports comfortable digestion without creating sluggishness.',
     options: [
       {
         id: 'opt_hydra_cold',
@@ -439,7 +439,7 @@ export const LIFESTYLE_QUESTIONS = [
         label: 'Chilled / Iced Beverages',
         description: 'Prefer cold refrigerated water or iced drinks throughout the day',
         icon: 'IceCream',
-        badge: 'Cools Agni'
+        badge: 'Slows Digestion'
       },
       {
         id: 'opt_hydra_room',
@@ -455,7 +455,7 @@ export const LIFESTYLE_QUESTIONS = [
         label: 'Warm Water & Herbal Infusions (2+ Liters)',
         description: 'Regularly sip warm water, hot lemon water, or herbal teas between meals',
         icon: 'Coffee',
-        badge: 'Ignites Agni'
+        badge: 'Aids Digestion'
       },
       {
         id: 'opt_hydra_low',
@@ -480,7 +480,7 @@ export const LIFESTYLE_DETAILED_QUESTIONS = [
     description: 'Select the hour bracket that best describes your regular morning wake-up.',
     required: true,
     options: [
-      { id: 'before_6am', label: 'Before 6:00 AM', description: 'Early Brahma Muhurta / Vata dawn' },
+      { id: 'before_6am', label: 'Before 6:00 AM', description: 'Early morning / Dawn' },
       { id: '6am_7am', label: '6:00 AM – 7:00 AM', description: 'Sunup window / Balanced wakefulness' },
       { id: '7am_8am', label: '7:00 AM – 8:00 AM', description: 'Mid morning' },
       { id: 'after_8am', label: 'After 8:00 AM', description: 'Late morning rise' }
@@ -514,7 +514,7 @@ export const LIFESTYLE_DETAILED_QUESTIONS = [
     required: false,
     options: [
       { id: 'warm_water', label: 'Warm water or herbal tea' },
-      { id: 'tongue_cleaning', label: 'Tongue scraping / Oral hygiene' },
+      { id: 'tongue_cleaning', label: 'Oral hygiene & dental care' },
       { id: 'movement_stretch', label: 'Gentle stretching / Yoga' },
       { id: 'meditation', label: 'Meditation or quiet breathwork' },
       { id: 'direct_phone', label: 'Checking phone / notifications immediately' },
@@ -555,10 +555,10 @@ export const LIFESTYLE_DETAILED_QUESTIONS = [
     description: 'Your typical lights-out time on standard work/study days.',
     required: true,
     options: [
-      { id: 'before_10pm', label: 'Before 10:00 PM', description: 'Early Kapha window / Deep restoration' },
+      { id: 'before_10pm', label: 'Before 10:00 PM', description: 'Early evening / Deep restoration' },
       { id: '10pm_11pm', label: '10:00 PM – 11:00 PM', description: 'Optimal circadian wind-down' },
       { id: '11pm_12am', label: '11:00 PM – Midnight', description: 'Late wind-down' },
-      { id: 'after_12am', label: 'Past Midnight', description: 'Pitta nocturnal activity phase' }
+      { id: 'after_12am', label: 'Past Midnight', description: 'Late night activity phase' }
     ],
     tags: ['sleep', 'bedtime']
   },
@@ -618,7 +618,7 @@ export const LIFESTYLE_DETAILED_QUESTIONS = [
     category: 'Physical Activity',
     type: 'segmented-control',
     question: 'What is the typical intensity of your physical movement?',
-    description: 'Ayurveda generally recommends exercising up to half of one’s capacity (Ardha Shakti).',
+    description: 'Physical movement is recommended up to comfortable moderate capacity.',
     required: false,
     conditions: [
       { questionId: 'lifestyle_activity_freq', operator: 'notEquals', value: 'rarely' }
@@ -707,7 +707,7 @@ export const LIFESTYLE_DETAILED_QUESTIONS = [
     category: 'Stress & Mental Balance',
     type: 'single-select',
     question: 'How frequently do you feel mentally overwhelmed or rushed?',
-    description: 'Helps characterize Vāta/Pitta nervous system acceleration.',
+    description: 'Helps characterize nervous system acceleration and cognitive strain.',
     required: true,
     options: [
       { id: 'rarely', label: 'Rarely', description: 'Generally centered and at ease' },
@@ -764,7 +764,7 @@ export const LIFESTYLE_DETAILED_QUESTIONS = [
     category: 'Screen & Digital Exposure',
     type: 'yes-no',
     question: 'Do you routinely look at screens within 30–60 minutes of sleep?',
-    description: 'Night blue-spectrum exposure influences melatonin release and Pitta-ocular strain.',
+    description: 'Night screen exposure influences natural melatonin release and eye strain.',
     required: true,
     tags: ['screens', 'night']
   },
@@ -791,8 +791,8 @@ export const LIFESTYLE_DETAILED_QUESTIONS = [
     section: 'habits',
     category: 'Daily Habits',
     type: 'single-select',
-    question: 'Do you take daytime naps (Divāsvapna)?',
-    description: 'Classical Ayurveda observes that daytime naps can increase Kapha and heaviness, except in summer or high exertion.',
+    question: 'Do you take daytime naps?',
+    description: 'Daytime naps can increase sluggishness and heaviness, except during summer heat or high physical exertion.',
     required: true,
     options: [
       { id: 'never', label: 'Never / Rarely', description: 'Stay awake all day' },
@@ -809,7 +809,7 @@ export const LIFESTYLE_DETAILED_QUESTIONS = [
     category: 'Rest & Restoration',
     type: 'single-select',
     question: 'How regularly do you engage in intentional relaxation or mindfulness?',
-    description: 'E.g., nature walks, Pranayama, reading, creative hobbies, or restful solitude.',
+    description: 'E.g., nature walks, breathwork, reading, creative hobbies, or restful solitude.',
     required: true,
     options: [
       { id: 'regularly', label: 'Regularly (4+ days/week)', description: 'Dedicated daily or weekly renewal practice' },
@@ -826,7 +826,7 @@ export const LIFESTYLE_DETAILED_QUESTIONS = [
     category: 'Rhythm Consistency',
     type: 'scale',
     question: 'On a scale of 1 to 10, how consistent is your overall lifestyle rhythm?',
-    description: '1 = Unpredictable daily timing, 10 = Predictable, disciplined routine (Sātmya).',
+    description: '1 = Unpredictable daily timing, 10 = Predictable, disciplined routine.',
     required: true,
     min: 1,
     max: 10,

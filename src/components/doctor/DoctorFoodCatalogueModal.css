@@ -1,0 +1,549 @@
+/* DoctorFoodCatalogueModal.css - Clinical IFCT 2017 Food Catalogue */
+
+.ayur-food-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(18, 59, 47, 0.65);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  padding: 1rem;
+}
+
+.ayur-food-modal-card {
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 20px 48px rgba(18, 59, 47, 0.22);
+  width: 100%;
+  max-width: 1060px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #E3DDD3;
+  animation: fmodal-fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fmodal-fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.ayur-food-modal-header {
+  padding: 1.1rem 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ECE8E0;
+  background-color: #FAF8F3;
+  gap: 1rem;
+}
+
+.ayur-fmodal-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: #EBF2EE;
+  color: #123B2F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ayur-fmodal-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #26332E;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.ayur-fmodal-sub {
+  font-size: 0.8rem;
+  color: #6B7B75;
+  margin: 2px 0 0 0;
+  line-height: 1.3;
+}
+
+.ayur-fmodal-close-btn {
+  background: none;
+  border: 1px solid #ECE8E0;
+  color: #6B7B75;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.ayur-fmodal-close-btn:hover {
+  background-color: #ECE8E0;
+  color: #26332E;
+}
+
+.ayur-fmodal-provenance-banner {
+  background-color: #F3F8F5;
+  border-bottom: 1px solid #CFE6D8;
+  padding: 0.55rem 1.4rem;
+  font-size: 0.75rem;
+  color: #123B2F;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.ayur-fmodal-provenance-text {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.8rem;
+  line-height: 1.3;
+}
+
+.ayur-fmodal-filters {
+  padding: 0.85rem 1.4rem;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #ECE8E0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.ayur-fmodal-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.ayur-fmodal-search-form {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  position: relative;
+  flex: 1;
+}
+
+.ayur-fmodal-search-icon {
+  position: absolute;
+  left: 0.75rem;
+  color: #6B7B75;
+  pointer-events: none;
+}
+
+.ayur-fmodal-search-input {
+  flex: 1;
+  padding: 0.5rem 2rem 0.5rem 2.2rem;
+  font-size: 0.85rem;
+  border: 1px solid #E3DDD3;
+  border-radius: 6px;
+  background-color: #F8F6F0;
+  color: #26332E;
+  font-family: 'Inter', sans-serif;
+  height: 36px;
+  box-sizing: border-box;
+}
+
+.ayur-fmodal-search-input:focus {
+  outline: none;
+  border-color: #123B2F;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(18, 59, 47, 0.1);
+}
+
+.ayur-fmodal-clear-search {
+  position: absolute;
+  right: 5.5rem;
+  background: none;
+  border: none;
+  color: #8C9993;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.ayur-fmodal-clear-search:hover {
+  color: #26332E;
+}
+
+.ayur-fmodal-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 0.75rem;
+  height: 36px;
+  border: 1px solid #E3DDD3;
+  border-radius: 6px;
+  background-color: #F8F6F0;
+  color: #3E4F47;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.ayur-fmodal-reset-btn:hover {
+  background-color: #ECE8E0;
+  color: #123B2F;
+}
+
+.ayur-fmodal-categories-bar {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ayur-fcat-chip {
+  padding: 0.28rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: #F8F6F0;
+  color: #3E4F47;
+  border: 1px solid #E3DDD3;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1.2;
+}
+
+.ayur-fcat-chip:hover {
+  background-color: #EBF2EE;
+  color: #123B2F;
+  border-color: #B7D1C3;
+}
+
+.ayur-fcat-chip--active {
+  background-color: #123B2F;
+  color: #FFFFFF;
+  border-color: #123B2F;
+}
+
+.ayur-fcat-chip--active:hover {
+  background-color: #0D2921;
+  color: #FFFFFF;
+  border-color: #0D2921;
+}
+
+/* Substitutes Drawer */
+.ayur-fsubstitutes-panel {
+  background-color: #FAF4E8;
+  border-bottom: 1px solid #E5D5BA;
+  padding: 0.75rem 1.4rem;
+}
+
+.ayur-fsub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.5rem;
+}
+
+.ayur-fsub-item {
+  background-color: #FFFFFF;
+  border: 1px solid #E5D5BA;
+  border-radius: 6px;
+  padding: 0.55rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+/* Body and Table */
+.ayur-fmodal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+  background-color: #FFFFFF;
+  min-height: 280px;
+}
+
+.ayur-fmodal-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.ayur-fmodal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  text-align: left;
+}
+
+.ayur-fmodal-table th {
+  position: sticky;
+  top: 0;
+  background-color: #FAF8F3;
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  font-weight: 600;
+  color: #6B7B75;
+  border-bottom: 1px solid #E3DDD3;
+  font-size: 0.725rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  z-index: 10;
+}
+
+.ayur-fmodal-table td {
+  padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid #ECE8E0;
+  vertical-align: middle;
+}
+
+.ayur-ftr:hover {
+  background-color: #FAF8F3;
+}
+
+.ayur-ftd-main {
+  min-width: 180px;
+}
+
+.ayur-fitem-name {
+  font-weight: 600;
+  color: #26332E;
+  font-size: 0.85rem;
+  line-height: 1.25;
+}
+
+.ayur-fitem-reg {
+  font-size: 0.725rem;
+  color: #6B7B75;
+  font-style: italic;
+  margin-top: 1px;
+}
+
+.ayur-fitem-id {
+  font-size: 0.675rem;
+  color: #8C9993;
+  font-family: monospace;
+}
+
+.ayur-fbadge-verified {
+  display: inline-block;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  background-color: #EBF2EE;
+  color: #123B2F;
+}
+
+.ayur-fbadge-dev {
+  display: inline-block;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  background-color: #FFF3D6;
+  color: #8A5B00;
+  border: 1px solid #F0DA9B;
+}
+
+.ayur-fitem-cat-badge {
+  display: inline-block;
+  padding: 0.18rem 0.45rem;
+  border-radius: 4px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  background-color: #F3F1EC;
+  color: #4A5751;
+  text-transform: capitalize;
+}
+
+/* Portion Selector in Row */
+.ayur-portion-selector-box {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ayur-portion-pills {
+  display: flex;
+  gap: 2px;
+  margin-top: 3px;
+}
+
+.ayur-portion-pill {
+  padding: 1px 4px;
+  border: 1px solid #E3DDD3;
+  border-radius: 3px;
+  background: #FAF8F3;
+  font-size: 0.65rem;
+  color: #55665F;
+  cursor: pointer;
+  line-height: 1.1;
+  transition: all 0.1s ease;
+}
+
+.ayur-portion-pill:hover {
+  background: #EBF2EE;
+  color: #123B2F;
+}
+
+.ayur-portion-pill--active {
+  background: #123B2F;
+  color: #FFFFFF;
+  border-color: #123B2F;
+}
+
+/* Nutrient Pills */
+.ayur-fnut-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.ayur-fnut-pill {
+  padding: 0.12rem 0.38rem;
+  border-radius: 3px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ayur-fnut-pill--cal {
+  background-color: #FAF4E8;
+  color: #8C6A28;
+}
+
+.ayur-fnut-pill--pro {
+  background-color: #EAF5EE;
+  color: #125638;
+}
+
+.ayur-fnut-pill--carb {
+  background-color: #F0EDE4;
+  color: #3E4F47;
+}
+
+.ayur-fnut-pill--fat {
+  background-color: #FAF8F3;
+  color: #6B7B75;
+  border: 1px solid #ECE8E0;
+}
+
+.ayur-fnut-pill--fib {
+  background-color: #EBF2EE;
+  color: #123B2F;
+}
+
+.ayur-ftag-pill {
+  display: inline-block;
+  font-size: 0.65rem;
+  background-color: #F8F6F0;
+  color: #3E4F47;
+  padding: 0.08rem 0.3rem;
+  border-radius: 3px;
+  border: 1px solid #E3DDD3;
+}
+
+.ayur-fsub-btn {
+  background: none;
+  border: 1px solid #E3DDD3;
+  color: #6B7B75;
+  font-size: 0.725rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ayur-fsub-btn:hover {
+  background-color: #F8F6F0;
+  color: #123B2F;
+  border-color: #123B2F;
+}
+
+/* Footer */
+.ayur-fmodal-footer {
+  padding: 0.75rem 1.4rem;
+  border-top: 1px solid #ECE8E0;
+  background-color: #FAF8F3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ayur-fmodal-count-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.ayur-fmodal-sep {
+  color: #A8BDA7;
+}
+
+/* States */
+.ayur-fmodal-loading,
+.ayur-fmodal-empty,
+.ayur-fmodal-error {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: #6B7B75;
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.ayur-ferror-title {
+  font-weight: 700;
+  color: #A32D2D;
+  font-size: 0.95rem;
+}
+
+.ayur-ferror-text {
+  font-size: 0.8rem;
+  color: #6B7B75;
+  max-width: 400px;
+  margin: 0;
+}
+
+.ayur-spin {
+  animation: fmodal-spin 1s linear infinite;
+}
+
+@keyframes fmodal-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .ayur-food-modal-backdrop {
+    padding: 0.5rem;
+  }
+  .ayur-food-modal-card {
+    max-height: 96vh;
+    border-radius: 8px;
+  }
+  .ayur-food-modal-header,
+  .ayur-fmodal-filters,
+  .ayur-fmodal-footer {
+    padding: 0.65rem 0.9rem;
+  }
+  .ayur-fmodal-controls-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .ayur-fmodal-count-info {
+    font-size: 0.75rem;
+  }
+}

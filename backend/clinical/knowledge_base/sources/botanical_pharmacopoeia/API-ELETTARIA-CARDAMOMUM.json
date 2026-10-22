@@ -1,0 +1,28 @@
+{
+  "id": "API-ELETTARIA-CARDAMOMUM",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Elettaria cardamomum (Ela/Cardamom)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/elettaria-cardamomum",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 15",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Aromatic digestive, anti-emetic, and refreshing Pitta-Vata carminative.",
+  "limitations": "Safe aromatic spice; excessive amounts can be drying.",
+  "classical_verse": null,
+  "tags": [
+    "ela",
+    "cardamom",
+    "elettaria_cardamomum",
+    "chardi",
+    "anti_emetic",
+    "tridosha"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Elettaria cardamomum (L.) Maton (Family: Zingiberaceae) - Dried Seed.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Elā, Sūkṣmailā, Truti, Draviḍī.\n   - Rasa: Katu (pungent), Madhura (sweet).\n   - Guna: Laghu (light), Ruksha (dry).\n   - Virya: Shita (cooling).\n   - Vipaka: Madhura (sweet).\n   - Karma: Tridoshahara, Hridya, Rochana (improves taste), Deepana, Chardinigrahana (anti-emetic), Mukhadurgandhahara.\n2. Therapeutic Indications:\n   Chardi (nausea and vomiting), Kasa, Shwasa, Aruchi, Hikka, Mutrakrichra.\n3. Standard Therapeutic Dosage:\n   - Seed Powder: 250 mg to 1 gram.\n"
+}

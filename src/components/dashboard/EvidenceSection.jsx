@@ -93,17 +93,47 @@ export const EvidenceSection = ({
                     <span className="font-semibold text-caption text-muted">Knowledge Domain:</span>
                     <span className="text-small text-primary">{selectedCitation.domain}</span>
                   </div>
+                  {selectedCitation.publisher && (
+                    <div className="ayur-evidence-modal-row">
+                      <span className="font-semibold text-caption text-muted">Publisher & Authority:</span>
+                      <span className="text-small text-primary">{selectedCitation.publisher}</span>
+                    </div>
+                  )}
+                  {selectedCitation.license && (
+                    <div className="ayur-evidence-modal-row">
+                      <span className="font-semibold text-caption text-muted">License / Reuse Terms:</span>
+                      <span className="text-small text-muted">{selectedCitation.license}</span>
+                    </div>
+                  )}
+                  {selectedCitation.classicalVerse && (
+                    <div className="ayur-evidence-modal-row">
+                      <span className="font-semibold text-caption text-muted">Canonical Reference:</span>
+                      <p className="text-small text-primary italic font-serif">"{selectedCitation.classicalVerse}"</p>
+                    </div>
+                  )}
                   <div className="ayur-evidence-modal-row">
-                    <span className="font-semibold text-caption text-muted">Canonical Reference:</span>
-                    <p className="text-small text-primary italic font-serif">"{selectedCitation.classicalVerse}"</p>
+                    <span className="font-semibold text-caption text-muted">Clinical Evidence & Passage:</span>
+                    <p className="text-small text-secondary">{selectedCitation.passage || selectedCitation.insight || selectedCitation.translation}</p>
                   </div>
-                  <div className="ayur-evidence-modal-row">
-                    <span className="font-semibold text-caption text-muted">Clinical Translation & Rationale:</span>
-                    <p className="text-small text-secondary">{selectedCitation.insight}</p>
-                  </div>
+                  {selectedCitation.limitations && (
+                    <div className="ayur-evidence-modal-row">
+                      <span className="font-semibold text-caption text-muted">Known Clinical Limitations:</span>
+                      <p className="text-caption text-muted italic">{selectedCitation.limitations}</p>
+                    </div>
+                  )}
                 </div>
 
-                <div className="ayur-evidence-modal-footer">
+                <div className="ayur-evidence-modal-footer flex items-center justify-between">
+                  {selectedCitation.source_url ? (
+                    <a
+                      href={selectedCitation.source_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-caption text-accent flex items-center gap-xs font-semibold hover:underline"
+                    >
+                      <ExternalLink size={14} /> Open Official Source
+                    </a>
+                  ) : <span />}
                   <Button variant="primary" size="sm" onClick={() => setSelectedCitation(null)}>
                     Close Citation
                   </Button>

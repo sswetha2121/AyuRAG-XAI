@@ -1,0 +1,27 @@
+{
+  "id": "AH-SU-07-VIRUDDHAHARA",
+  "collection": "classical_compendia",
+  "title": "Aṣṭāṅga Hṛdayam: Incompatible Food Combinations & Toxic Synergies (Viruddhāhāra)",
+  "publisher": "Classical Ayurvedic Compendium (e-Ashtanga / NIIMH)",
+  "source_url": "https://niimh.nic.in/ebooks/eahridaya/?mod=read&sys=su&ch=7",
+  "publication_version": "Aṣṭāṅga Hṛdayam, Sūtrasthāna, Chapter 7, Ślokas 29-45",
+  "license": "Public Domain",
+  "document_type": "Classical Nutritional Pathology Guideline",
+  "download_availability": "Publicly accessible via e-Ashtanga",
+  "relevance": "Crucial for generating dietary contraindications and warning users against harmful food combinations.",
+  "limitations": "Mechanisms of toxicity reflect classical physiological perspectives; contemporary verification is documented for specific allergies and enzymatic mismatches.",
+  "classical_verse": "Viruddhaṁ api ca āhāraṁ vidyāt viṣavaduttamam.",
+  "tags": [
+    "viruddhahara",
+    "food_combinations",
+    "honey_ghee",
+    "milk_sour",
+    "chronic_toxins"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nAṣṭāṅga Hṛdayam Sūtrasthāna Chapter 7 identifies dietary combinations that act as slow cellular toxins (Gara Visha):\n1. Specific Incompatible Combinations:\n   - Milk and Sour Substances: Consuming cow's milk with citrus fruits, tamarind, or pickled items curdles milk proteins in an acidic environment, severely congesting lymphatic channels.\n   - Milk and Fish: Both are heavy and sweet in Vipaka, but fish has Ushna (hot) Virya while milk has Shita (cold) Virya. This conflicting potency vitiates blood (Rakta) and obstructs skin channels.\n   - Equal Quantities of Honey and Ghee: Honey and ghee taken together in identical equal weights are toxic (Samaghrita-Madhu). Unequal proportions (2:1 or 1:2) are wholesome.\n   - Heated Honey (Ushna Madhu): Exposing raw honey to cooking temperatures (>60°C) destroys natural enzymatic structures and turns it into sticky, insoluble Ama.\n   - Radish with Milk: Toxic to cutaneous metabolism.\n   - Night consumption of Curd (Dadhi): Curd is sour, unctuous, heavy, and channel-blocking (Abhishyandi); when taken at night it blocks micro-circulation and aggravates Pitta-Kapha.\n"
+}

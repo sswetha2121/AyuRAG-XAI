@@ -1,0 +1,28 @@
+{
+  "id": "API-CUMINUM-CYMINUM",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Cuminum cyminum (Jeeraka/Cumin)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/cuminum-cyminum",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 24",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier carminative spice for bloating, abdominal colic, and maternal digestive care.",
+  "limitations": "Safe culinary herb with virtually no toxicities; therapeutic dosages above 6g daily rarely necessary.",
+  "classical_verse": null,
+  "tags": [
+    "jeeraka",
+    "cumin",
+    "cuminum_cyminum",
+    "carminative",
+    "bloating",
+    "deepana"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Kapha",
+    "Pitta"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Cuminum cyminum L. (Family: Apiaceae) - Dried Fruit.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Jīraka, Śvetajīraka, Ajājī, Dīpya.\n   - Rasa: Katu (pungent), Tikta (bitter).\n   - Guna: Laghu (light), Ruksha (dry).\n   - Virya: Ushna (warm).\n   - Vipaka: Katu (pungent).\n   - Karma: Vata-Kapha-hara, Deepana, Pachana, Sangrahi (absorptive/bowel-binding), Medhya, Garbhashaya-shodhaka (uterine tonic postpartum).\n2. Therapeutic Indications:\n   Agnimandya, Atisara (diarrhea), Grahani, Adhmana (abdominal flatulence), Krimi.\n3. Standard Therapeutic Dosage:\n   - Fruit Powder: 3 to 6 grams daily with warm water or buttermilk.\n"
+}

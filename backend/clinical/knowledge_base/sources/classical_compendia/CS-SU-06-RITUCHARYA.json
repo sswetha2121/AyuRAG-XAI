@@ -1,0 +1,27 @@
+{
+  "id": "CS-SU-06-RITUCHARYA",
+  "collection": "classical_compendia",
+  "title": "Charaka Saṃhitā: Seasonal Regimens (Ritucharya) & Environmental Adaptation",
+  "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+  "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=su&ch=6",
+  "publication_version": "Charaka Saṃhitā, Sūtrasthāna, Chapter 6 (Tasyāśitīya), Ślokas 1-45",
+  "license": "Public Domain",
+  "document_type": "Classical Seasonal Guideline",
+  "download_availability": "Publicly accessible via e-Caraka",
+  "relevance": "Critical for seasonal diet adaptation and explaining how environmental transitions aggravate specific doshas.",
+  "limitations": "Classical 6-season division (Ritus) must be mapped to regional temperate or tropical zones.",
+  "classical_verse": "Tasyāśitīyādhikāre ṛtucaryā pravakṣyate. Ādānavisargakālau baladīpanakārakau.",
+  "tags": [
+    "ritucharya",
+    "seasonal_diet",
+    "visarga_kala",
+    "adana_kala",
+    "chaya_prakopa_prashama"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nCharaka Saṃhitā Sūtrasthāna Chapter 6 details the physiological impact of solstitial cycles (Ayana) and the 6 seasons (Ritus).\n1. The Two Solstitial Cycles:\n   - Adana Kala (Northern solstitial movement / Uttarayana): Encompasses Shishira (late winter), Vasanta (spring), and Grishma (summer). The sun and sharp winds deplete human bodily strength (Bala).\n   - Visarga Kala (Southern solstitial movement / Dakshinayana): Encompasses Varsha (monsoon), Sharad (autumn), and Hemanta (early winter). The moon exerts cooling nourishment, increasing bodily strength.\n\n2. Seasonal Dosha Dynamics:\n   - Vasanta (Spring): Kapha accumulated during winter liquefies under warm solar rays, damping Agni. Diet requires light, dry foods, barley (Yava), honey, and bitter greens. Heavy, sweet, unctuous foods and day-sleeping are strictly forbidden.\n   - Grishma (Summer): High heat causes mild Vata accumulation and body fluid depletion. Light, sweet, liquid foods, coconut water, ghee, and cool fruit juices pacify dehydration.\n   - Varsha (Monsoon): Agni is severely vitiated due to humidity and ground evaporation. Vata aggravates. Warm, freshly prepared meals with sour, salty tastes, ginger, and honey are indicated.\n   - Sharad (Autumn): Pitta accumulated during the rains undergoes violent aggravation under clear sunny skies. Sweet, bitter, astringent diets, ghee, and milk are indicated. Pungent, fermented, and spicy foods must be minimized.\n   - Hemanta & Shishira (Winter): Digestive power is highest. Wholesome, rich, unctuous meals (warm soups, sesame, nuts, whole grains) are well tolerated.\n"
+}

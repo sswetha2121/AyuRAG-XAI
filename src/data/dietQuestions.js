@@ -9,7 +9,7 @@ export const DIET_CATEGORIES = [
     id: 'meal_timing',
     number: '01',
     name: 'Meal Timing',
-    sanskritName: 'Ahara Kāla',
+    sanskritName: 'Daily Schedule',
     description: 'Daily meal schedule, timing consistency, and late-night habits.',
     icon: 'Clock'
   },
@@ -17,7 +17,7 @@ export const DIET_CATEGORIES = [
     id: 'appetite',
     number: '02',
     name: 'Appetite Rhythm',
-    sanskritName: 'Kṣudhā & Agni',
+    sanskritName: 'Hunger & Digestion',
     description: 'Natural hunger intensity, digestion speed, and metabolic consistency.',
     icon: 'Flame'
   },
@@ -25,7 +25,7 @@ export const DIET_CATEGORIES = [
     id: 'preferences',
     number: '03',
     name: 'Taste & Thermal Preferences',
-    sanskritName: 'Ṣaḍ Rasa & Uṣṇa',
+    sanskritName: 'Taste & Temperature',
     description: 'Primary taste inclinations, spices, and food temperature habits.',
     icon: 'Utensils'
   },
@@ -33,7 +33,7 @@ export const DIET_CATEGORIES = [
     id: 'pattern',
     number: '04',
     name: 'Dietary Pattern',
-    sanskritName: 'Ahara Varga',
+    sanskritName: 'Food Groups',
     description: 'Primary dietary style, food group balance, and plant-based ratios.',
     icon: 'Salad'
   },
@@ -41,7 +41,7 @@ export const DIET_CATEGORIES = [
     id: 'habits',
     number: '05',
     name: 'Eating Habits & Pacing',
-    sanskritName: 'Ahara Vidhi',
+    sanskritName: 'Mindful Eating',
     description: 'Mindfulness during eating, chewing speed, and screen distractions.',
     icon: 'Coffee'
   },
@@ -49,7 +49,7 @@ export const DIET_CATEGORIES = [
     id: 'hydration',
     number: '06',
     name: 'Hydration & Meal Fluids',
-    sanskritName: 'Jala Pāna Vidhi',
+    sanskritName: 'Hydration Habits',
     description: 'Water intake relative to meal timing and beverage temperatures.',
     icon: 'GlassWater'
   },
@@ -57,7 +57,7 @@ export const DIET_CATEGORIES = [
     id: 'digestive_context',
     number: '07',
     name: 'Digestive Context',
-    sanskritName: 'Koṣṭha & Pariṇāma',
+    sanskritName: 'Digestive Comfort',
     description: 'Post-meal lightness, transit comfort, and metabolic demonstration signals.',
     icon: 'HeartPulse'
   }
@@ -67,61 +67,61 @@ export const DIET_SECTIONS = [
   {
     id: 'timing',
     title: 'Meal Timing',
-    sanskrit: 'Kāla',
+    sanskrit: 'Daily Schedule',
     description: 'Circadian timing of meals and regularity across the day.'
   },
   {
     id: 'appetite',
     title: 'Appetite & Hunger',
-    sanskrit: 'Agni',
-    description: 'Digestive fire capacity, hunger signals, and between-meal cravings.'
+    sanskrit: 'Digestive Function',
+    description: 'Digestive capacity, hunger signals, and between-meal cravings.'
   },
   {
     id: 'pattern',
     title: 'Dietary Pattern',
-    sanskrit: 'Āhāra Prakāra',
+    sanskrit: 'Food Patterns',
     description: 'Primary nutritional framework and staple protein sources.'
   },
   {
     id: 'preferences',
     title: 'Taste Preferences',
-    sanskrit: 'Ṣaḍ Rasa',
+    sanskrit: 'Taste Preferences',
     description: 'Natural inclination toward sweet, salty, spicy, sour, bitter, or astringent tastes.'
   },
   {
     id: 'hydration',
     title: 'Hydration & Fluids',
-    sanskrit: 'Jala Pāna',
+    sanskrit: 'Water Intake',
     description: 'Daily water intake, fluid temperature, and beverage choices.'
   },
   {
     id: 'habits',
     title: 'Eating Behavior',
-    sanskrit: 'Āhāra Vidhi',
+    sanskrit: 'Mindful Eating',
     description: 'Chewing speed, meal environment, late-night habits, and skipped meals.'
   },
   {
     id: 'digestive',
     title: 'Digestive Experience',
-    sanskrit: 'Pācana',
+    sanskrit: 'Digestive Comfort',
     description: 'Reported post-meal comfort, bloating, lightness, and transit regularity.'
   },
   {
     id: 'environment',
     title: 'Meal Environment',
-    sanskrit: 'Deśa & Bhāva',
+    sanskrit: 'Dining Environment',
     description: 'Emotional calm, screen presence, and dining atmosphere.'
   },
   {
     id: 'freshness',
     title: 'Food Freshness & Quality',
-    sanskrit: 'Prāṇa & Guṇa',
+    sanskrit: 'Fresh Whole Foods',
     description: 'Freshly cooked home meals versus reheated or packaged foods.'
   },
   {
     id: 'seasonal',
     title: 'Seasonal Adaptation',
-    sanskrit: 'Ṛtucaryā Āhāra',
+    sanskrit: 'Seasonal Adaptation',
     description: 'Tendency to naturally shift diet according to seasonal weather.'
   }
 ];
@@ -132,11 +132,11 @@ export const DIET_QUESTIONS = [
     id: 'diet_q1_meal_regularity',
     category: 'Meal Timing',
     categoryId: 'meal_timing',
-    sanskritTerm: 'Kāla Bhojana',
+    sanskritTerm: 'Daily Schedule',
     type: 'frequency',
     question: 'How consistent are your daily meal timings?',
     description: 'Reflect on whether breakfast, lunch, and dinner occur at predictable times each day.',
-    hint: 'Consistent meal hours stabilize Samana Vata and kindle steady Pachaka Pitta (digestive enzymes).',
+    hint: 'Consistent meal hours stabilize bodily rhythms and support steady digestive enzyme release.',
     options: [
       {
         id: 'opt_diet_reg_rarely',
@@ -170,10 +170,10 @@ export const DIET_QUESTIONS = [
     id: 'diet_q2_meal_timings',
     category: 'Meal Timing',
     categoryId: 'meal_timing',
-    sanskritTerm: 'Bhojana Kāla Pacing',
+    sanskritTerm: 'Meal Pacing',
     type: 'visual-cards',
     question: 'When is your largest and most substantial meal of the day?',
-    description: 'In Ayurveda, the digestive fire (Agni) peaks at solar noon (Pitta time 12:00–14:00).',
+    description: 'Digestive function naturally peaks around solar midday (12:00–14:00).',
     hint: 'Aligning your heaviest food intake with peak solar hours maximizes metabolic transformation.',
     options: [
       {
@@ -182,7 +182,7 @@ export const DIET_QUESTIONS = [
         label: 'Midday Lunch (12:00 – 14:00)',
         description: 'Substantial, balanced lunch when digestive fire is naturally strongest',
         icon: 'Sun',
-        badge: 'Classical Alignment'
+        badge: 'Optimal Midday'
       },
       {
         id: 'opt_meal_evening',
@@ -190,7 +190,7 @@ export const DIET_QUESTIONS = [
         label: 'Late Evening Dinner (20:00+)',
         description: 'Main heavy meal after work or study, often close to bedtime',
         icon: 'Moon',
-        badge: 'Kapha Pacing'
+        badge: 'Late Night'
       },
       {
         id: 'opt_meal_breakfast',
@@ -206,53 +206,53 @@ export const DIET_QUESTIONS = [
         label: 'Frequent Snacking / Small Meals',
         description: 'Multiple light meals or continuous snacks rather than one main meal',
         icon: 'Coffee',
-        badge: 'Fragmented Agni'
+        badge: 'Fragmented Schedule'
       }
     ]
   },
 
-  // 3. Natural Appetite Nature (Agni)
+  // 3. Natural Appetite Nature
   {
     id: 'diet_q3_appetite_nature',
     category: 'Appetite Rhythm',
     categoryId: 'appetite',
-    sanskritTerm: 'Agni Lakṣaṇa',
+    sanskritTerm: 'Digestive Function',
     type: 'visual-cards',
     question: 'How would you characterize your natural hunger and appetite rhythm?',
     description: 'Demonstration assessment signal reflecting your baseline digestive capacity.',
-    hint: 'Sama Agni represents balanced digestion, Tikshna is sharp/fast, Vishama is erratic, Manda is slow.',
+    hint: 'Balanced digestion is steady, fast digestion is sharp and intense, variable is erratic, and sluggish feels heavy.',
     options: [
       {
         id: 'opt_agni_balanced',
         value: 'sama-agni',
-        label: 'Steady & Predictable (Sama Agni)',
+        label: 'Steady & Predictable',
         description: 'Healthy hunger every 4–5 hours; digests easily without discomfort',
         icon: 'Flame',
-        badge: 'Balanced Agni'
+        badge: 'Balanced Digestion'
       },
       {
         id: 'opt_agni_intense',
         value: 'tikshna-agni',
-        label: 'Sharp & Intense (Tīkṣṇa Agni)',
+        label: 'Sharp & Intense',
         description: 'Can eat large amounts; gets irritable or acidic if food is delayed',
         icon: 'Zap',
-        badge: 'Pitta Dominant'
+        badge: 'Fast Digestion'
       },
       {
         id: 'opt_agni_variable',
         value: 'vishama-agni',
-        label: 'Variable & Unpredictable (Viṣama Agni)',
+        label: 'Variable & Unpredictable',
         description: 'Sometimes starving, sometimes has zero appetite; easily bloated',
         icon: 'Wind',
-        badge: 'Vata Dominant'
+        badge: 'Variable Digestion'
       },
       {
         id: 'opt_agni_sluggish',
         value: 'manda-agni',
-        label: 'Slow & Sluggish (Manda Agni)',
+        label: 'Slow & Sluggish',
         description: 'Rarely feels ravenous; feels heavy for hours after a modest meal',
         icon: 'Mountain',
-        badge: 'Kapha Dominant'
+        badge: 'Sluggish Digestion'
       }
     ]
   },
@@ -303,23 +303,23 @@ export const DIET_QUESTIONS = [
     ]
   },
 
-  // 5. Taste / Rasa Preferences (Multi-select)
+  // 5. Taste Preferences (Multi-select)
   {
     id: 'diet_q5_taste_preferences',
     category: 'Taste & Thermal Preferences',
     categoryId: 'preferences',
-    sanskritTerm: 'Ṣaḍ Rasa Sātmyatā',
+    sanskritTerm: 'Taste Preferences',
     type: 'multi-select-chips',
     question: 'Which taste profiles do you naturally crave or enjoy most frequently?',
-    description: 'Select up to 3 predominant tastes (Rasa) in your everyday meals.',
-    hint: 'The six tastes (Sweet, Sour, Salty, Pungent, Bitter, Astringent) influence doshic balance.',
+    description: 'Select up to 3 predominant tastes in your everyday meals.',
+    hint: 'The six tastes (Sweet, Sour, Salty, Pungent, Bitter, Astringent) influence metabolic balance.',
     options: [
-      { id: 'sweet', label: 'Sweet (Madhura - Grains, Fruits, Dairy)', category: 'rasa' },
-      { id: 'sour', label: 'Sour (Amla - Citrus, Ferments, Yogurt)', category: 'rasa' },
-      { id: 'salty', label: 'Salty (Lavaṇa - Mineral Salt, Savory)', category: 'rasa' },
-      { id: 'pungent', label: 'Pungent / Spicy (Kaṭu - Peppers, Ginger, Mustard)', category: 'rasa' },
-      { id: 'bitter', label: 'Bitter (Tikta - Greens, Dark Chocolate, Turmeric)', category: 'rasa' },
-      { id: 'astringent', label: 'Astringent (Kaṣāya - Beans, Pomegranate, Green Tea)', category: 'rasa' },
+      { id: 'sweet', label: 'Sweet (Grains, Fruits, Dairy)', category: 'rasa' },
+      { id: 'sour', label: 'Sour (Citrus, Ferments, Yogurt)', category: 'rasa' },
+      { id: 'salty', label: 'Salty (Mineral Salt, Savory)', category: 'rasa' },
+      { id: 'pungent', label: 'Pungent / Spicy (Peppers, Ginger, Mustard)', category: 'rasa' },
+      { id: 'bitter', label: 'Bitter (Greens, Dark Chocolate, Turmeric)', category: 'rasa' },
+      { id: 'astringent', label: 'Astringent (Beans, Pomegranate, Green Tea)', category: 'rasa' },
       { id: 'balanced_rasa', label: 'Balanced mix of all six tastes', isExclusive: true }
     ]
   },
@@ -329,11 +329,11 @@ export const DIET_QUESTIONS = [
     id: 'diet_q6_food_temperature',
     category: 'Taste & Thermal Preferences',
     categoryId: 'preferences',
-    sanskritTerm: 'Uṣṇa & Śīta Guṇa',
+    sanskritTerm: 'Thermal Preference',
     type: 'visual-cards',
     question: 'What is your natural preference regarding food temperature and preparation?',
     description: 'Warm, cooked foods support enzymatic digestion and reduce digestive strain.',
-    hint: 'Warm foods (Ushna) sustain gastric fire, while excess cold/raw foods can dampen Agni.',
+    hint: 'Warm foods sustain digestive fire, while excess cold/raw foods can slow digestion.',
     options: [
       {
         id: 'opt_temp_warm',
@@ -341,7 +341,7 @@ export const DIET_QUESTIONS = [
         label: 'Warm & Freshly Cooked Meals',
         description: 'Prefer steaming soups, warm curries, cooked grains, and warm teas',
         icon: 'Flame',
-        badge: 'Kindles Agni'
+        badge: 'Aids Digestion'
       },
       {
         id: 'opt_temp_room',
@@ -367,10 +367,10 @@ export const DIET_QUESTIONS = [
     id: 'diet_q7_eating_speed',
     category: 'Eating Habits & Pacing',
     categoryId: 'habits',
-    sanskritTerm: 'Bhojana Vegam',
+    sanskritTerm: 'Chewing Speed',
     type: 'segmented-choice',
     question: 'How quickly do you usually finish a main meal?',
-    description: 'Eating too quickly prevents adequate salivary amylase mixing; eating too slowly delays digestion.',
+    description: 'Eating too quickly prevents adequate salivary enzyme mixing; eating too slowly delays digestion.',
     hint: 'Optimal meal duration is around 15–20 minutes with thorough chewing in a peaceful posture.',
     options: [
       {
@@ -394,16 +394,16 @@ export const DIET_QUESTIONS = [
     ]
   },
 
-  // 8. Distracted Eating (Tanmana Bhunjita)
+  // 8. Distracted Eating
   {
     id: 'diet_q8_distracted_eating',
     category: 'Eating Habits & Pacing',
     categoryId: 'habits',
-    sanskritTerm: 'Tanmanā Bhuñjīta',
+    sanskritTerm: 'Mindful Eating',
     type: 'frequency',
     question: 'How often do you watch screens, work, or scroll your phone while eating?',
-    description: 'Classical Ayurveda advises mindful sensory presence (Tanmanā) during meals for optimal assimilation.',
-    hint: 'Sensory distraction impairs autonomic parasympathetic digestion signals.',
+    description: 'Optimal nourishment involves mindful sensory presence during meals for complete assimilation.',
+    hint: 'Sensory distraction impairs natural digestion signals.',
     options: [
       {
         id: 'opt_dist_rarely',
@@ -437,11 +437,11 @@ export const DIET_QUESTIONS = [
     id: 'diet_q9_fluid_with_meals',
     category: 'Hydration & Meal Fluids',
     categoryId: 'hydration',
-    sanskritTerm: 'Anupāna Vidhi',
+    sanskritTerm: 'Meal Fluid Habits',
     type: 'visual-cards',
     question: 'What is your typical beverage habit during and immediately after meals?',
-    description: 'Proper fluid pairing (Anupana) lubricates digestion without diluting digestive juices.',
-    hint: 'Sipping small amounts of warm water during meals aids digestion, whereas large cold drinks quench Agni.',
+    description: 'Proper fluid pairing lubricates digestion without diluting digestive juices.',
+    hint: 'Sipping small amounts of warm water during meals aids digestion, whereas large cold drinks slow digestion.',
     options: [
       {
         id: 'opt_anupana_sip_warm',
@@ -449,7 +449,7 @@ export const DIET_QUESTIONS = [
         label: 'Small Sips of Warm Water / Tea',
         description: 'Sip half a glass of warm water or digestive tea during the meal',
         icon: 'Coffee',
-        badge: 'Classical Anupana'
+        badge: 'Balanced Fluid'
       },
       {
         id: 'opt_anupana_cold_large',
@@ -457,7 +457,7 @@ export const DIET_QUESTIONS = [
         label: 'Large Glasses of Chilled Drinks',
         description: 'Drink large cold glasses of water, soda, or iced beverage during/after food',
         icon: 'GlassWater',
-        badge: 'Dampens Agni'
+        badge: 'Slows Digestion'
       },
       {
         id: 'opt_anupana_after',
@@ -470,24 +470,24 @@ export const DIET_QUESTIONS = [
       {
         id: 'opt_anupana_dairy',
         value: 'buttermilk-lassi',
-        label: 'Digestive Buttermilk (Takra) / Herbal Tea',
+        label: 'Digestive Spiced Buttermilk / Herbal Tea',
         description: 'Enjoy probiotic spiced buttermilk or cumin-coriander herbal infusion',
         icon: 'Sparkles',
-        badge: 'Agni Enhancer'
+        badge: 'Digestive Aid'
       }
     ]
   },
 
-  // 10. Post-Meal Digestive Comfort (Koshta Context)
+  // 10. Post-Meal Digestive Comfort
   {
     id: 'diet_q10_digestive_comfort',
     category: 'Digestive Context',
     categoryId: 'digestive_context',
-    sanskritTerm: 'Jīrṇa Lakṣaṇa',
+    sanskritTerm: 'Digestive Comfort',
     type: 'visual-cards',
     question: 'How does your stomach and energy generally feel 1 to 2 hours after a typical meal?',
     description: 'Demonstration assessment signal reflecting metabolic comfort and food assimilation.',
-    hint: 'Post-meal lightness and renewed alertness signify complete and wholesome digestion (Sama Pachana).',
+    hint: 'Post-meal lightness and renewed alertness signify complete and wholesome digestion.',
     options: [
       {
         id: 'opt_comf_light',
@@ -503,7 +503,7 @@ export const DIET_QUESTIONS = [
         label: 'Bloated, Distended, or Gassy',
         description: 'Prone to abdominal tightness, air buildup, or dry transit after eating',
         icon: 'Wind',
-        badge: 'Vata Signal'
+        badge: 'Air & Gas Signal'
       },
       {
         id: 'opt_comf_acidic',
@@ -511,7 +511,7 @@ export const DIET_QUESTIONS = [
         label: 'Warm, Acidic, or Occasional Heartburn',
         description: 'Prone to acid surge, burning sensation in upper chest, or excess thirst',
         icon: 'Flame',
-        badge: 'Pitta Signal'
+        badge: 'Heat & Acidity Signal'
       },
       {
         id: 'opt_comf_sluggish',
@@ -519,7 +519,7 @@ export const DIET_QUESTIONS = [
         label: 'Heavy, Drowsy, or Mental Fog',
         description: 'Experiences post-meal crash, intense need to nap, or lingering fullness',
         icon: 'Mountain',
-        badge: 'Kapha Signal'
+        badge: 'Sluggishness Signal'
       }
     ]
   }
@@ -549,11 +549,11 @@ export const DIET_DETAILED_QUESTIONS = [
     category: 'Meal Timing',
     type: 'single-select',
     question: 'Which is your largest and most substantial meal of the day?',
-    description: 'Ayurveda advises that midday lunch corresponds with peak Pitta and digestive strength.',
+    description: 'Midday lunch corresponds with peak digestive strength.',
     required: true,
     options: [
       { id: 'breakfast', label: 'Breakfast', description: 'Substantial morning meal, lighter thereafter' },
-      { id: 'midday_lunch', label: 'Midday Lunch (12:00 – 2:00 PM)', description: 'Peak circadian Agni window' },
+      { id: 'midday_lunch', label: 'Midday Lunch (12:00 – 2:00 PM)', description: 'Peak midday digestive window' },
       { id: 'dinner', label: 'Evening Dinner', description: 'Largest meal eaten after the workday ends' },
       { id: 'equal_grazing', label: 'Continuous Grazing / Equal portions', description: 'Multiple smaller snacks throughout the day' }
     ],
@@ -602,13 +602,13 @@ export const DIET_DETAILED_QUESTIONS = [
     category: 'Appetite & Hunger',
     type: 'single-select',
     question: 'How would you describe your natural hunger and appetite pattern?',
-    description: 'Helps evaluate classical Agni types (Tikshna, Manda, Vishama, or Sama).',
+    description: 'Helps evaluate digestive fire capacity (sharp, sluggish, variable, or balanced).',
     required: true,
     options: [
-      { id: 'regular_sharp', label: 'Sharp & Predictable (Tīkṣṇāgni tendency)', description: 'Strong hunger at fixed times; irritable if meal is delayed' },
-      { id: 'moderate_steady', label: 'Balanced & Steady (Samāgni)', description: 'Pleasant appetite that is satisfied easily without heaviness' },
-      { id: 'variable_erratic', label: 'Variable & Erratic (Viṣamāgni tendency)', description: 'Very hungry one day, completely uninterested the next' },
-      { id: 'sluggish_low', label: 'Low or Sluggish (Mandāgni tendency)', description: 'Rarely feel sharp hunger; easily feels full or heavy after small bites' }
+      { id: 'regular_sharp', label: 'Sharp & Predictable', description: 'Strong hunger at fixed times; irritable if meal is delayed' },
+      { id: 'moderate_steady', label: 'Balanced & Steady', description: 'Pleasant appetite that is satisfied easily without heaviness' },
+      { id: 'variable_erratic', label: 'Variable & Erratic', description: 'Very hungry one day, completely uninterested the next' },
+      { id: 'sluggish_low', label: 'Low or Sluggish', description: 'Rarely feel sharp hunger; easily feels full or heavy after small bites' }
     ],
     tags: ['agni', 'appetite']
   },
@@ -618,7 +618,7 @@ export const DIET_DETAILED_QUESTIONS = [
     category: 'Appetite & Hunger',
     type: 'single-select',
     question: 'Do you routinely skip meals during the week?',
-    description: 'Skipping meals when hungry can provoke Vāta and Pitta.',
+    description: 'Skipping meals when hungry can provoke digestive discomfort and metabolic irritation.',
     required: true,
     options: [
       { id: 'rarely', label: 'Rarely / Never', description: 'Eat at predictable daily times' },
@@ -658,9 +658,9 @@ export const DIET_DETAILED_QUESTIONS = [
       { questionId: 'diet_pattern', operator: 'includes', value: 'veg' }
     ],
     options: [
-      { id: 'lentils_dal', label: 'Moong / Dal / Lentils' },
+      { id: 'lentils_dal', label: 'Mung Bean / Dal / Lentils' },
       { id: 'paneer_dairy', label: 'Paneer / Cottage cheese' },
-      { id: 'legumes_chana', label: 'Chickpeas / Rajma / Beans' },
+      { id: 'legumes_chana', label: 'Chickpeas / Kidney Beans / Lentils' },
       { id: 'tofu_soy', label: 'Tofu / Soy products' },
       { id: 'nuts_seeds', label: 'Almonds / Walnuts / Seeds' },
       { id: 'protein_shakes', label: 'Plant protein powders' }
@@ -668,23 +668,23 @@ export const DIET_DETAILED_QUESTIONS = [
     tags: ['diet', 'protein']
   },
 
-  // SECTION 4: FOOD PREFERENCES (RASA)
+  // SECTION 4: FOOD PREFERENCES
   {
     id: 'diet_craved_tastes',
     section: 'preferences',
     category: 'Taste Preferences',
     type: 'multi-select',
-    question: 'Which tastes (Rasas) are you naturally drawn to craving most often?',
+    question: 'Which tastes are you naturally drawn to craving most often?',
     description: 'Select up to 3 tastes that most satisfy your palate.',
     required: true,
     maxSelections: 3,
     options: [
-      { id: 'sweet', label: 'Sweet (Madhura)', description: 'Grains, root vegetables, dairy, natural sweets' },
-      { id: 'spicy', label: 'Pungent / Spicy (Kaṭu)', description: 'Chili, ginger, black pepper, pungent spices' },
-      { id: 'salty', label: 'Salty (Lavaṇa)', description: 'Sea salt, savory roasted snacks, chips' },
-      { id: 'sour', label: 'Sour (Amla)', description: 'Citrus, yogurt, tamarind, fermented foods' },
-      { id: 'bitter', label: 'Bitter (Tikta)', description: 'Leafy greens, dark coffee, turmeric, bitter gourd' },
-      { id: 'astringent', label: 'Astringent (Kaṣāya)', description: 'Pomegranate, beans, lentils, green tea' }
+      { id: 'sweet', label: 'Sweet', description: 'Grains, root vegetables, dairy, natural sweets' },
+      { id: 'spicy', label: 'Pungent / Spicy', description: 'Chili, ginger, black pepper, pungent spices' },
+      { id: 'salty', label: 'Salty', description: 'Sea salt, savory roasted snacks, chips' },
+      { id: 'sour', label: 'Sour', description: 'Citrus, yogurt, tamarind, fermented foods' },
+      { id: 'bitter', label: 'Bitter', description: 'Leafy greens, dark coffee, turmeric, bitter gourd' },
+      { id: 'astringent', label: 'Astringent', description: 'Pomegranate, beans, lentils, green tea' }
     ],
     tags: ['rasa', 'tastes']
   },
@@ -713,7 +713,7 @@ export const DIET_DETAILED_QUESTIONS = [
     category: 'Hydration & Fluids',
     type: 'chips',
     question: 'When you are thirsty, what do you usually reach for instead of plain water?',
-    description: 'Helps evaluate fluid quality and Pitta/Kapha triggers.',
+    description: 'Helps evaluate fluid quality and metabolic triggers.',
     required: false,
     conditions: [
       { questionId: 'diet_water_intake', operator: 'equals', value: 'less_1_liter' }
@@ -732,7 +732,7 @@ export const DIET_DETAILED_QUESTIONS = [
     category: 'Hydration & Fluids',
     type: 'segmented-control',
     question: 'What temperature of drinking water do you instinctively prefer?',
-    description: 'Ayurveda notes that ice-cold water diminishes gastric digestive fire (Agni).',
+    description: 'Ice-cold water diminishes gastric digestive capacity.',
     required: true,
     options: [
       { id: 'ice_cold', label: 'Ice cold / Chilled' },
@@ -792,7 +792,7 @@ export const DIET_DETAILED_QUESTIONS = [
     category: 'Digestive Experience',
     type: 'frequency',
     question: 'How frequently do you feel abdominal bloating or distension after meals?',
-    description: 'Common indicator of impaired Vāta movement in the GI tract (Apāna Vāta).',
+    description: 'Common indicator of irregular gastrointestinal transit and air buildup.',
     required: false,
     conditions: [
       { questionId: 'diet_digestive_discomfort', operator: 'equals', value: 'yes' }
@@ -811,7 +811,7 @@ export const DIET_DETAILED_QUESTIONS = [
     category: 'Digestive Experience',
     type: 'segmented-control',
     question: 'Do you feel heavy, sluggish, or foggy for hours after eating?',
-    description: 'Classical sign of slow digestion or Ama accumulation.',
+    description: 'Sign of slow digestion and metabolic buildup.',
     required: false,
     conditions: [
       { questionId: 'diet_digestive_discomfort', operator: 'equals', value: 'yes' }
@@ -828,8 +828,8 @@ export const DIET_DETAILED_QUESTIONS = [
     section: 'digestive',
     category: 'Digestive Experience',
     type: 'segmented-control',
-    question: 'Do you experience heartburn or sour regurgitation (Amlapitta tendency)?',
-    description: 'Reflects elevated Pitta heat in the digestive tract.',
+    question: 'Do you experience heartburn or sour acid regurgitation?',
+    description: 'Reflects elevated heat and acidity in the digestive tract.',
     required: false,
     conditions: [
       { questionId: 'diet_digestive_discomfort', operator: 'equals', value: 'yes' }
@@ -846,7 +846,7 @@ export const DIET_DETAILED_QUESTIONS = [
     section: 'digestive',
     category: 'Digestive Experience',
     type: 'single-select',
-    question: 'How regular is your morning bowel elimination (Koṣṭha tendency)?',
+    question: 'How regular is your morning bowel elimination?',
     description: 'Provides critical context on metabolic transit time and colon health.',
     required: false,
     conditions: [
@@ -854,8 +854,8 @@ export const DIET_DETAILED_QUESTIONS = [
     ],
     options: [
       { id: 'regular_once_daily', label: 'Regular & Complete (Daily upon waking)', description: 'Effortless morning evacuation' },
-      { id: 'sluggish_infrequent', label: 'Sluggish / Dry (Tendency to skip days)', description: 'Hard, dry, or irregular transit (Krura Kostha)' },
-      { id: 'loose_frequent', label: 'Frequent / Soft (2+ times daily)', description: 'Quick transit, loose stools (Mrudu Kostha)' }
+      { id: 'sluggish_infrequent', label: 'Sluggish / Dry (Tendency to skip days)', description: 'Hard, dry, or irregular transit' },
+      { id: 'loose_frequent', label: 'Frequent / Soft (2+ times daily)', description: 'Quick transit, loose stools' }
     ],
     tags: ['digestive', 'elimination']
   },
@@ -884,7 +884,7 @@ export const DIET_DETAILED_QUESTIONS = [
     category: 'Food Freshness & Quality',
     type: 'segmented-control',
     question: 'How much of your daily food is freshly cooked from whole ingredients?',
-    description: 'Ayurveda prioritizes high Prāṇa food cooked within hours of consumption.',
+    description: 'Prioritizes fresh vibrant food cooked within hours of consumption.',
     required: true,
     options: [
       { id: 'mostly_fresh', label: 'Mostly Fresh (>80% home cooked)' },
@@ -900,7 +900,7 @@ export const DIET_DETAILED_QUESTIONS = [
     section: 'seasonal',
     category: 'Seasonal Adaptation',
     type: 'yes-no',
-    question: 'Do you naturally adapt your food choices with seasonal weather changes (Ṛtucaryā)?',
+    question: 'Do you naturally adapt your food choices with seasonal weather changes?',
     description: 'E.g., warming soups and spices in winter; cooling melons and salads in summer.',
     required: true,
     tags: ['seasonal', 'ritucharya']

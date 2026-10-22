@@ -1,0 +1,26 @@
+{
+  "id": "API-ASPARAGUS-RACEMOSUS",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Asparagus racemosus (Shatavari)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/asparagus-racemosus",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. IV, Monograph 35",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier reproductive tonic, gastric mucosal protector, and cooling Pitta-Vata balancer.",
+  "limitations": "Caution in estrogen-receptor positive hormone-sensitive neoplasms; monitor in severe fluid retention.",
+  "classical_verse": null,
+  "tags": [
+    "shatavari",
+    "asparagus_racemosus",
+    "pitta_shamana",
+    "mucosal_protection",
+    "female_vitality"
+  ],
+  "dosha_affinity": [
+    "Pitta",
+    "Vata"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Asparagus racemosus Willd. (Family: Asparagaceae) - Tuberous Root.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Śatāvarī, Bahusutā, Nārāyaṇī, Vari.\n   - Rasa: Madhura (sweet), Tikta (bitter).\n   - Guna: Guru (heavy), Snigdha (unctuous).\n   - Virya: Shita (cooling).\n   - Vipaka: Madhura (sweet).\n   - Karma: Pitta-Vata-hara, Stanyajanana (galactagogue), Shukrala, Balya, Medhya, Rasayana, Chakshushya.\n\n2. Therapeutic Indications:\n   Amlapitta (peptic ulceration / hyperacidity), Raktapitta (bleeding disorders), Kshaya (tissue wasting), Stanya-kshaya (diminished lactation), Menopausal hot flashes.\n\n3. Standard Therapeutic Dosage:\n   - Tuber Powder: 3 to 6 grams with milk or warm water.\n   - Decoction: 50 to 100 ml.\n\n4. Contraindications & Cautions:\n   - Heavy Kapha congestion, acute pulmonary edema, and sluggish lymphatic states.\n   - Potential phytoestrogenic activity: consult oncologist in hormone-receptor positive malignancies.\n"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "API-PIPER-LONGUM",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Piper longum (Pippali/Long Pepper)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/piper-longum",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. IV, Monograph 28",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier respiratory rejuvenator (Pranavaha Srotas Rasayana) and digestive stimulant.",
+  "limitations": "Classical caveat: prolonged continuous usage of Pippali without milk/honey can irritate Pitta.",
+  "classical_verse": null,
+  "tags": [
+    "pippali",
+    "piper_longum",
+    "respiratory_rasayana",
+    "vardhamana_pippali",
+    "deepana"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Kapha"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Piper longum L. (Family: Piperaceae) - Dried Fruit.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Pippalī, Māgadhī, Kaṇā, Vaidehī.\n   - Rasa: Katu (pungent).\n   - Guna: Laghu (light), Snigdha (unctuous) [Unctuous compared to black pepper].\n   - Virya: Anushna-shita (mildly warm / not severely hot).\n   - Vipaka: Madhura (sweet) [Sweet post-digestive effect provides Rasayana qualities].\n   - Karma: Kapha-Vata-hara, Deepani, Vrishya, Rasayani, Kasashwasahara, Plihodara-shamana (splenic tonic).\n2. Therapeutic Indications:\n   Kasa, Shwasa, Jwara, Agnimandya, Pliharoga (splenomegaly), Gulma.\n3. Standard Therapeutic Dosage:\n   - Powder: 500 mg to 1.5 grams with honey or warm milk.\n"
+}

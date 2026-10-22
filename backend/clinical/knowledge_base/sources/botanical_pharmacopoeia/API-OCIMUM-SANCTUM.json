@@ -1,0 +1,27 @@
+{
+  "id": "API-OCIMUM-SANCTUM",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Ocimum sanctum (Tulsi)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/ocimum-sanctum",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. II, Monograph 67",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier respiratory adaptogen, antimicrobial, and Kapha-Vata balancing herb.",
+  "limitations": "Mild anti-fertility effects demonstrated in high-dose animal models; use in moderation during conception efforts.",
+  "classical_verse": null,
+  "tags": [
+    "tulsi",
+    "ocimum_sanctum",
+    "holy_basil",
+    "respiratory",
+    "kapha_vata",
+    "antimicrobial"
+  ],
+  "dosha_affinity": [
+    "Kapha",
+    "Vata"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Ocimum tenuiflorum L. syn. Ocimum sanctum L. (Family: Lamiaceae) - Leaf.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Tulasī, Surasā, Bahumanjarī, Suradundubhi.\n   - Rasa: Katu (pungent), Tikta (bitter).\n   - Guna: Laghu (light), Ruksha (dry), Tikshna (sharp).\n   - Virya: Ushna (warm).\n   - Vipaka: Katu (pungent).\n   - Karma: Kapha-Vata-hara, Deepana, Hridya, Kasahara (alleviates cough), Shwasahara (relieves asthma), Vishaghna (anti-toxic), Krimighna (anti-parasitic).\n\n2. Therapeutic Indications:\n   Kasa (cough), Shwasa (bronchial asthma), Pratishyaya (coryza / allergic rhinitis), Krimi (parasitic infestation), Hikka (hiccups).\n\n3. Standard Therapeutic Dosage:\n   - Leaf Powder: 2 to 3 grams.\n   - Fresh Juice (Swarasa): 5 to 10 ml.\n\n4. Safety & Precautions:\n   - May enhance the effect of anticoagulant and hypoglycemic drugs; monitor prothrombin time.\n"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "CLINICAL-EMERGENCY-REFERRAL-PROTOCOL",
+  "collection": "clinical_safety_referral",
+  "title": "Clinical Red-Flag Symptoms & Immediate Allopathic Emergency Referral Escalation Protocol",
+  "publisher": "AyuRAG Clinical Safety Board / Integrated Critical Care Guidelines",
+  "source_url": "https://ayushportal.nic.in/clinical-safety-escalation",
+  "publication_version": "Clinical Decision Support Safety Standard v3.1, 2024",
+  "license": "CC-BY-NC-ND 4.0 / Public Clinical Safety Protocol",
+  "document_type": "Emergency Triage & Clinical Escalation Protocol",
+  "download_availability": "Publicly accessible via AyuRAG Knowledge Portal",
+  "relevance": "Essential clinical safety guardrail: immediately flags life-threatening red-flag symptoms for urgent emergency referral.",
+  "limitations": "Algorithmic screening protocol; cannot replace physical bedside emergency triage by a licensed physician.",
+  "classical_verse": null,
+  "tags": [
+    "red_flags",
+    "emergency_referral",
+    "clinical_escalation",
+    "safety_guardrails",
+    "triage"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nThe AyuRAG-XAI Emergency Clinical Escalation Protocol defines absolute red-flag symptoms requiring immediate emergency allopathic care:\n1. Cardiovascular Red Flags:\n   - Acute crushing substernal chest pain radiating to left arm, neck, or jaw.\n   - Sudden severe dyspnea, syncope, or diaphoresis accompanied by irregular tachycardia.\n   - Action: Immediate emergency medical dispatch (ICU/Emergency Department). Ayurvedic consultation strictly deferred.\n\n2. Neurological Red Flags:\n   - Sudden unilateral facial drop, arm weakness, or slurred speech (FAST criteria).\n   - Worst headache of life (thunderclap onset), sudden loss of vision, or altered consciousness.\n   - Action: Acute stroke / subarachnoid hemorrhage protocol. Immediate neuro-imaging required.\n\n3. Gastrointestinal & Abdominal Red Flags:\n   - Acute rigid abdomen with rebound tenderness (suspected hollow viscus perforation / acute appendicitis).\n   - Frank hematemesis (vomiting blood), melena (black tarry stools), or massive rectal bleeding.\n   - High persistent fever (>39°C / 102.2°F) unresponsive to antipyretics with rigors and altered sensorium.\n\n4. Legal & Clinical Boundary:\n   - AyuRAG-XAI is designed strictly for chronic wellness optimization and educational decision support.\n   - Under NO circumstance should acute life-threatening emergencies or acute infectious crises be managed with dietary or herbal recommendations alone.\n"
+}

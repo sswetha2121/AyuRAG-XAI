@@ -33,6 +33,89 @@ class MeView(APIView):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
 
+    def patch(self, request):
+        user = request.user
+        data = request.data
+
+        # If user is DOCTOR, update DoctorProfile
+        if user.role == User.Role.DOCTOR and hasattr(user, 'doctor_profile'):
+            profile = user.doctor_profile
+            if 'professional_name' in data:
+                prof_name = str(data['professional_name']).strip()
+                if not prof_name:
+                    return Response({'error': 'Professional name is required.'}, status=status.HTTP_400_BAD_REQUEST)
+                if len(prof_name) < 3:
+                    return Response({'error': 'Professional name must be at least 3 characters.'}, status=status.HTTP_400_BAD_REQUEST)
+                profile.professional_name = prof_name
+
+            if 'qualification' in data:
+                qual = str(data['qualification']).strip()
+                if not qual:
+                    return Response({'error': 'Clinical qualification is required.'}, status=status.HTTP_400_BAD_REQUEST)
+                profile.qualification = qual
+
+            if 'specialization' in data:
+                spec = str(data['specialization']).strip()
+                if not spec:
+                    return Response({'error': 'Clinical specialization is required.'}, status=status.HTTP_400_BAD_REQUEST)
+                profile.specialization = spec
+
+            if 'clinical_license' in data:
+                lic = str(data['clinical_license']).strip()
+                if not lic:
+                    return Response({'error': 'Clinical license / AYUSH registration is required.'}, status=status.HTTP_400_BAD_REQUEST)
+                profile.clinical_license = lic
+
+            if 'clinic_institution' in data:
+                profile.clinic_institution = str(data['clinic_institution']).strip()
+
+            if 'experience_years' in data and data['experience_years'] is not None:
+                try:
+                    exp = int(data['experience_years'])
+                    if exp < 0 or exp > 70:
+                        return Response({'error': 'Experience years must be between 0 and 70.'}, status=status.HTTP_400_BAD_REQUEST)
+                    profile.experience_years = exp
+                except (ValueError, TypeError):
+                    return Response({'error': 'Experience years must be a valid number.'}, status=status.HTTP_400_BAD_REQUEST)
+
+            profile.save()
+
+        # If user is PATIENT, update PatientProfile
+        elif hasattr(user, 'patient_profile'):
+            profile = user.patient_profile
+            if 'full_name' in data:
+                full_name = str(data['full_name']).strip()
+                if not full_name:
+                    return Response({'error': 'Full name is required.'}, status=status.HTTP_400_BAD_REQUEST)
+                profile.full_name = full_name
+
+            if 'age' in data and data['age'] is not None:
+                try:
+                    age = int(data['age'])
+                    if age < 0 or age > 130:
+                        return Response({'error': 'Age must be between 0 and 130.'}, status=status.HTTP_400_BAD_REQUEST)
+                    profile.age = age
+                except (ValueError, TypeError):
+                    return Response({'error': 'Age must be a valid number.'}, status=status.HTTP_400_BAD_REQUEST)
+
+            if 'gender' in data:
+                profile.gender = str(data['gender']).strip()
+
+            if 'contact_phone' in data:
+                profile.contact_phone = str(data['contact_phone']).strip()
+
+            profile.save()
+
+        serializer = UserSerializer(user)
+        return Response({
+            'message': 'Profile details updated successfully.',
+            'user': serializer.data
+        }, status=status.HTTP_200_OK)
+
+    def put(self, request):
+        return self.patch(request)
+
+
 
 class LoginView(APIView):
     permission_classes = [permissions.AllowAny]

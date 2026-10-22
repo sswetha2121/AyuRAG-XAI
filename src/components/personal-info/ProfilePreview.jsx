@@ -127,10 +127,10 @@ export const ProfilePreview = ({ formData, className = '' }) => {
           <div className="ayur-preview-metric">
             <div className="ayur-metric-header">
               <Compass size={13} className="text-muted" />
-              <span>Climate (Desha)</span>
+              <span>Climate</span>
             </div>
             <span className="ayur-metric-val ayur-metric-val--active">
-              {climateMap[climateZone] || 'Sādhāraṇa'}
+              {climateMap[climateZone] || 'Moderate Climate'}
             </span>
           </div>
 
@@ -158,18 +158,18 @@ export const ProfilePreview = ({ formData, className = '' }) => {
             showValue={false}
           />
           <span className="ayur-preview-progress-sub">
-            {fieldPercentage === 100 ? '✓ Ready to continue to Prakriti Assessment' : `${5 - completedFieldsCount} required fields remaining`}
+            {fieldPercentage === 100 ? '✓ Ready to continue to Body Constitution Assessment' : `${5 - completedFieldsCount} required fields remaining`}
           </span>
         </div>
 
-        {/* Classical Ayurvedic Clinical Insight Note */}
+        {/* Clinical Insight Note */}
         <div className="ayur-preview-insight">
           <div className="flex items-center gap-xs text-secondary font-semibold text-caption mb-2xs">
             <ShieldCheck size={14} />
-            <span>Classical Ayurvedic Principle</span>
+            <span>Clinical Principle</span>
           </div>
           <p className="ayur-preview-insight__text">
-            According to <em>Charaka Samhitā (Sutrasthana 1.55)</em>, individual baseline physical metrics (<em>Sharira Pramana</em>) and environmental climate (<em>Desha</em>) determine physiological resilience (<em>Bala</em>) before identifying biological dosha constitutional tendencies.
+            Baseline physical measurements and environmental climate determine physiological resilience and baseline metabolic tendencies.
           </p>
         </div>
       </Card>

@@ -1,0 +1,30 @@
+{
+  "id": "AH-SU-08-MATRASHITIYA-PORTION",
+  "collection": "classical_compendia",
+  "title": "Aṣṭāṅga Hṛdayam: Stomach Volumetric Division for Optimal Digestion",
+  "publisher": "Classical Ayurvedic Compendium (e-Ashtanga / NIIMH)",
+  "source_url": "https://niimh.nic.in/ebooks/eahridaya/?mod=read&sys=su&ch=8",
+  "publication_version": "Aṣṭāṅga Hṛdayam, Sūtrasthāna, Chapter 8, Ślokas 1-4",
+  "license": "Public Domain",
+  "document_type": "Classical Gastrointestinal Guideline",
+  "download_availability": "Publicly accessible via e-Ashtanga",
+  "relevance": "Direct guideline for meal portioning and preventing postprandial bloating or indigestion.",
+  "limitations": "Provides qualitative volume estimation; must be paired with individualized caloric requirements.",
+  "classical_verse": "Mātrāśī syāt; āhāra-mātrā punar-agner-balāpekṣiṇī. Kūkṣerbhāgadvayaṁ śaktaiḥ pūrayedannasammataiḥ.",
+  "tags": [
+    "portion_control",
+    "stomach_capacity",
+    "agni",
+    "indigestion",
+    "bloating",
+    "ashtanga_hridaya",
+    "ashtanga",
+    "gastric_capacity"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nAṣṭāṅga Hṛdayam Sūtrasthāna Chapter 8 sets out the universal rule of gastric capacity:\n1. Gastric Volumetric Allocation:\n   - The stomach capacity (Kukshi) must mentally be partitioned into four quarters:\n     - Two quarters (50%) should be filled with solid wholesome food.\n     - One quarter (25%) should be filled with liquid nourishment (warm soups, buttermilk, water).\n     - One quarter (25%) must remain completely empty to accommodate the dynamic movement of the Tridoshas (Prana, Samana, and Apana Vayu).\n\n2. Consequences of Overeating (Atimatra Ashana):\n   Filling the stomach to 100% capacity crushes gastrointestinal fire, generating gaseous distension, acidic belching, lethargy, and food stagnation (Alasaka / Visuchika).\n"
+}

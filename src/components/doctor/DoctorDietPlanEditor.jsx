@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './DoctorDietPlanEditor.css';
 import { api } from '../../services/api';
+import { DoctorFoodCatalogueModal } from './DoctorFoodCatalogueModal';
 import {
   Utensils,
   Sparkles,
@@ -23,7 +24,8 @@ import {
   Info,
   Flame,
   Droplets,
-  HeartPulse
+  HeartPulse,
+  Archive
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 
@@ -40,8 +42,13 @@ export const DoctorDietPlanEditor = ({
   const [isGenerating, setIsGenerating] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isApproving, setIsApproving] = useState(false);
+  const [isRecalculating, setIsRecalculating] = useState(false);
+  const [isSuperseding, setIsSuperseding] = useState(false);
+  const [catalogueModalOpen, setCatalogueModalOpen] = useState(false);
+  const [catalogueTargetMeal, setCatalogueTargetMeal] = useState('breakfast');
   const [showApproveModal, setShowApproveModal] = useState(false);
   const [activeTab, setActiveTab] = useState('meals'); // 'meals' | 'guidelines' | 'rag' | 'notes' | 'history'
+
 
   const fetchPlans = async () => {
     try {
@@ -135,12 +142,12 @@ export const DoctorDietPlanEditor = ({
     try {
       setIsApproving(true);
       const res = await api.approveDietPlan(planForm.id, {
-        notes: planForm.doctor_notes || 'Approved and activated by attending physician.',
+        notes: planForm.doctor_notes || 'Approved and published by attending physician.',
       });
       onTriggerToast?.({
         type: 'success',
-        title: 'Diet Plan Activated!',
-        message: `Plan v${res.diet_plan?.version} is now ACTIVE. Patient has been notified.`,
+        title: 'Diet Plan Published!',
+        message: `Plan v${res.diet_plan?.version} is now PUBLISHED and ACTIVE for the patient.`,
       });
       setShowApproveModal(false);
       await fetchPlans();
@@ -148,12 +155,96 @@ export const DoctorDietPlanEditor = ({
       onTriggerToast?.({
         type: 'error',
         title: 'Approval Failed',
-        message: err.message || 'Could not approve and activate diet plan.',
+        message: err.message || 'Could not approve and publish diet plan.',
       });
     } finally {
       setIsApproving(false);
     }
   };
+
+  const handleRecalculateNutrients = async () => {
+    if (!planForm?.id) return;
+    try {
+      setIsRecalculating(true);
+      const res = await api.recalculateDietPlan(planForm.id, planForm);
+      setPlanForm((prev) => ({
+        ...prev,
+        nutritional_totals: res.nutritional_totals || prev.nutritional_totals,
+      }));
+      onTriggerToast?.({
+        type: 'success',
+        title: 'Nutritional Totals Recalculated',
+        message: 'Accurately calculated daily calories & macros using verified IFCT 2017 portion data.',
+      });
+    } catch (err) {
+      onTriggerToast?.({
+        type: 'error',
+        title: 'Recalculation Failed',
+        message: err.message || 'Could not recalculate nutritional totals.',
+      });
+    } finally {
+      setIsRecalculating(false);
+    }
+  };
+
+  const handleSelectFoodFromCatalogue = (food, targetMeal) => {
+    if (!planForm) return;
+    const mealData = planForm[targetMeal] || {};
+    const currentItems = mealData.items || [];
+    const portionStr = food.standard_portion_desc || `${food.portion_grams}g`;
+    const nut = food.nutrients_per_portion || {};
+    const itemText = `${food.name} (${portionStr}) - ${nut.calories_kcal || 0} kcal, ${nut.protein_g || 0}g protein`;
+
+    const updatedPlan = {
+      ...planForm,
+      [targetMeal]: {
+        ...mealData,
+        items: [...currentItems, itemText],
+      },
+    };
+    setPlanForm(updatedPlan);
+
+    onTriggerToast?.({
+      type: 'info',
+      title: 'Item Added from Catalogue',
+      message: `Added "${food.name}" to ${targetMeal}. Recalculating totals...`,
+    });
+
+    // Auto-trigger deterministic recalculation with updated plan
+    api.recalculateDietPlan(planForm.id, updatedPlan)
+      .then((res) => {
+        if (res?.nutritional_totals) {
+          setPlanForm((prev) => ({
+            ...prev,
+            nutritional_totals: res.nutritional_totals,
+          }));
+        }
+      })
+      .catch(() => {});
+  };
+
+  const handleSupersedePlan = async () => {
+    if (!planForm?.id) return;
+    try {
+      setIsSuperseding(true);
+      await api.supersedeDietPlan(planForm.id, 'Superseded by attending physician');
+      onTriggerToast?.({
+        type: 'info',
+        title: 'Plan Superseded',
+        message: `Plan v${planForm.version} is now marked as SUPERSEDED.`,
+      });
+      await fetchPlans();
+    } catch (err) {
+      onTriggerToast?.({
+        type: 'error',
+        title: 'Error',
+        message: err.message || 'Could not supersede plan.',
+      });
+    } finally {
+      setIsSuperseding(false);
+    }
+  };
+
 
   // Meal item editor helpers
   const handleMealChange = (mealKey, field, val) => {
@@ -196,13 +287,26 @@ export const DoctorDietPlanEditor = ({
   const handleRemoveMealItem = (mealKey, itemIndex) => {
     setPlanForm((prev) => {
       const items = (prev[mealKey]?.items || []).filter((_, i) => i !== itemIndex);
-      return {
+      const updated = {
         ...prev,
         [mealKey]: {
           ...(prev[mealKey] || {}),
           items,
         },
       };
+      if (prev?.id) {
+        api.recalculateDietPlan(prev.id, updated)
+          .then((res) => {
+            if (res?.nutritional_totals) {
+              setPlanForm((curr) => ({
+                ...curr,
+                nutritional_totals: res.nutritional_totals,
+              }));
+            }
+          })
+          .catch(() => {});
+      }
+      return updated;
     });
   };
 
@@ -239,11 +343,11 @@ export const DoctorDietPlanEditor = ({
   }
 
   const mealSlots = [
-    { key: 'breakfast', label: 'Prātaḥ-āśā (Breakfast)', icon: Flame },
-    { key: 'mid_morning', label: 'Madhya-āśā (Mid-Morning)', icon: Droplets },
-    { key: 'lunch', label: 'Madhyāhna-bhojana (Lunch - Main Meal)', icon: Utensils },
-    { key: 'evening', label: 'Sāyaṁ-āśā (Evening Snack & Herbals)', icon: HeartPulse },
-    { key: 'dinner', label: 'Rātri-bhojana (Dinner - Light Pathya)', icon: Clock },
+    { key: 'breakfast', label: 'Breakfast', icon: Flame },
+    { key: 'mid_morning', label: 'Mid-Morning', icon: Droplets },
+    { key: 'lunch', label: 'Lunch', icon: Utensils },
+    { key: 'evening', label: 'Evening Snack', icon: HeartPulse },
+    { key: 'dinner', label: 'Dinner', icon: Clock },
   ];
 
   return (
@@ -297,22 +401,44 @@ export const DoctorDietPlanEditor = ({
               <Button
                 variant="outline"
                 size="sm"
+                onClick={handleRecalculateNutrients}
+                disabled={isRecalculating}
+                leftIcon={<RotateCcw size={15} className={isRecalculating ? 'ayur-spin' : ''} />}
+              >
+                {isRecalculating ? 'Recalculating...' : 'Recalculate Nutrition'}
+              </Button>
+
+              <Button
+                variant="outline"
+                size="sm"
                 onClick={handleSaveDraft}
-                disabled={isSaving || planForm.status === 'ARCHIVED'}
+                disabled={isSaving || planForm.status === 'ARCHIVED' || planForm.status === 'SUPERSEDED'}
                 leftIcon={<Save size={16} />}
               >
                 {isSaving ? 'Saving...' : 'Save Modifications'}
               </Button>
 
-              <Button
-                variant="primary"
-                size="sm"
-                onClick={() => setShowApproveModal(true)}
-                disabled={isApproving || planForm.status === 'ACTIVE'}
-                leftIcon={<ShieldCheck size={16} />}
-              >
-                {planForm.status === 'ACTIVE' ? 'Currently Active' : 'Approve & Activate'}
-              </Button>
+              {(planForm.status === 'ACTIVE' || planForm.status === 'PUBLISHED') ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleSupersedePlan}
+                  disabled={isSuperseding}
+                  leftIcon={<Archive size={16} />}
+                >
+                  {isSuperseding ? 'Archiving...' : 'Supersede / Replace Plan'}
+                </Button>
+              ) : (
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={() => setShowApproveModal(true)}
+                  disabled={isApproving}
+                  leftIcon={<ShieldCheck size={16} />}
+                >
+                  Approve & Publish Plan
+                </Button>
+              )}
             </>
           )}
         </div>
@@ -353,11 +479,17 @@ export const DoctorDietPlanEditor = ({
                   value={planForm.title || ''}
                   onChange={(e) => setPlanForm({ ...planForm, title: e.target.value })}
                 />
-                <span className={`ayur-status-chip ayur-status-chip--${planForm.status.toLowerCase()}`}>
-                  {planForm.status}
+                <span className={`ayur-status-chip ayur-status-chip--${(planForm.status || 'draft').toLowerCase()}`}>
+                  {(planForm.status === 'ACTIVE' || planForm.status === 'PUBLISHED')
+                    ? '● PUBLISHED (ACTIVE)'
+                    : planForm.status === 'PENDING_REVIEW'
+                    ? 'PENDING REVIEW'
+                    : planForm.status === 'SUPERSEDED'
+                    ? 'SUPERSEDED'
+                    : 'DRAFT'}
                 </span>
                 <span className="ayur-prov-chip">
-                  PROVENANCE: {planForm.generated_by}
+                  PROVENANCE: {planForm.generated_by || 'AI CLINICAL SYNTHESIZER'}
                 </span>
               </div>
 
@@ -388,11 +520,74 @@ export const DoctorDietPlanEditor = ({
                   type="text"
                   value={planForm.objective || ''}
                   onChange={(e) => setPlanForm({ ...planForm, objective: e.target.value })}
-                  placeholder="e.g. Pacify aggravated Vata, kindle Vishama Agni, hydrate Rasa dhatu"
+                  placeholder="e.g. Pacify movement energy imbalance, restore balanced digestion, nourish cellular fluids"
                 />
               </div>
             </div>
           </div>
+
+          {/* Real-Time Deterministic Nutritional Summary Card (IFCT 2017) */}
+          {planForm.nutritional_totals && (
+            <div className="ayur-diet-nutrition-summary-card">
+              <div className="flex items-center justify-between flex-wrap gap-xs mb-xs">
+                <div className="flex items-center gap-xs">
+                  <Flame size={16} className="text-accent" />
+                  <span className="font-semibold text-sm">Deterministic Nutritional Breakdown</span>
+                </div>
+                <div className="flex items-center gap-xs">
+                  <span className="ayur-nutrition-provenance-chip">
+                    Verified IFCT 2017 Values • Deterministic Arithmetic
+                  </span>
+                  <button
+                    type="button"
+                    className="ayur-recalc-mini-btn"
+                    onClick={handleRecalculateNutrients}
+                    disabled={isRecalculating}
+                    title="Recalculate from all meal items"
+                  >
+                    <RotateCcw size={12} className={isRecalculating ? 'ayur-spin' : ''} />
+                    <span>Recalculate Totals</span>
+                  </button>
+                </div>
+              </div>
+              <div className="ayur-nutrition-macro-grid">
+                <div className="ayur-nmacro-item">
+                  <span className="ayur-nmacro-label">Total Calories</span>
+                  <span className="ayur-nmacro-val">{planForm.nutritional_totals.calories_kcal || 0} kcal</span>
+                </div>
+                <div className="ayur-nmacro-item">
+                  <span className="ayur-nmacro-label">Protein</span>
+                  <span className="ayur-nmacro-val">{planForm.nutritional_totals.protein_g || 0} g</span>
+                </div>
+                <div className="ayur-nmacro-item">
+                  <span className="ayur-nmacro-label">Carbohydrates</span>
+                  <span className="ayur-nmacro-val">{planForm.nutritional_totals.carbohydrates_g || 0} g</span>
+                </div>
+                <div className="ayur-nmacro-item">
+                  <span className="ayur-nmacro-label">Total Fat</span>
+                  <span className="ayur-nmacro-val">{planForm.nutritional_totals.fat_g || 0} g</span>
+                </div>
+                <div className="ayur-nmacro-item">
+                  <span className="ayur-nmacro-label">Dietary Fiber</span>
+                  <span className="ayur-nmacro-val">
+                    {planForm.nutritional_totals.dietary_fiber_g || planForm.nutritional_totals.fiber_g || 0} g
+                  </span>
+                </div>
+                {planForm.nutritional_totals.iron_mg !== undefined && (
+                  <div className="ayur-nmacro-item">
+                    <span className="ayur-nmacro-label">Iron</span>
+                    <span className="ayur-nmacro-val">{planForm.nutritional_totals.iron_mg} mg</span>
+                  </div>
+                )}
+                {planForm.nutritional_totals.calcium_mg !== undefined && (
+                  <div className="ayur-nmacro-item">
+                    <span className="ayur-nmacro-label">Calcium</span>
+                    <span className="ayur-nmacro-val">{planForm.nutritional_totals.calcium_mg} mg</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* Navigation Sub-Tabs */}
           <div className="ayur-diet-subtabs">
@@ -469,7 +664,7 @@ export const DoctorDietPlanEditor = ({
                         className="ayur-input-sm"
                         value={mealData.title || ''}
                         onChange={(e) => handleMealChange(slot.key, 'title', e.target.value)}
-                        placeholder="e.g. Spiced Moong Khichdi..."
+                        placeholder="e.g. Spiced Mung Bean Soup..."
                       />
                     </div>
 
@@ -493,14 +688,27 @@ export const DoctorDietPlanEditor = ({
                           </button>
                         </div>
                       ))}
-                      <button
-                        type="button"
-                        className="ayur-add-item-btn"
-                        onClick={() => handleAddMealItem(slot.key)}
-                      >
-                        <Plus size={14} />
-                        <span>Add Dietary Item</span>
-                      </button>
+                      <div className="flex items-center gap-xs mt-xs flex-wrap">
+                        <button
+                          type="button"
+                          className="ayur-add-item-btn"
+                          onClick={() => handleAddMealItem(slot.key)}
+                        >
+                          <Plus size={13} />
+                          <span>Add Item</span>
+                        </button>
+                        <button
+                          type="button"
+                          className="ayur-add-item-btn ayur-add-item-btn--catalogue"
+                          onClick={() => {
+                            setCatalogueTargetMeal(slot.key);
+                            setCatalogueModalOpen(true);
+                          }}
+                        >
+                          <Utensils size={13} />
+                          <span>+ Add from IFCT Catalogue</span>
+                        </button>
+                      </div>
                     </div>
 
                     <div className="ayur-meal-properties">
@@ -515,13 +723,13 @@ export const DoctorDietPlanEditor = ({
                         />
                       </div>
                       <div className="ayur-mprop-item">
-                        <span className="ayur-mprop-label">Ayurvedic Properties (Guna/Virya):</span>
+                        <span className="ayur-mprop-label">Properties and Effects:</span>
                         <input
                           type="text"
                           className="ayur-input-xs"
                           value={mealData.ayurvedic_properties || ''}
                           onChange={(e) => handleMealChange(slot.key, 'ayurvedic_properties', e.target.value)}
-                          placeholder="e.g. Snigdha, Laghu, Deepana"
+                          placeholder="e.g. Warming, Light, Digestive Stimulant"
                         />
                       </div>
                     </div>
@@ -674,9 +882,9 @@ export const DoctorDietPlanEditor = ({
               <div className="ayur-rag-intro">
                 <BookOpen size={20} className="text-secondary" />
                 <div>
-                  <h4 className="font-serif font-bold text-primary">Authentic Classical Citations (RAG Retrieval)</h4>
+                  <h4 className="font-serif font-bold text-primary">Classical Clinical Evidence (RAG Retrieval)</h4>
                   <p className="text-sm text-muted">
-                    Verified classical principles retrieved from primary Ayurvedic compendia (Charaka, Sushruta, Ashtanga Hridaya) matching the verified patient constitution and symptomatology.
+                    Verified clinical principles retrieved from primary medical compendia matching the verified patient constitution and symptoms.
                   </p>
                 </div>
               </div>
@@ -690,16 +898,12 @@ export const DoctorDietPlanEditor = ({
                         <span className="ayur-rag-score">Relevance: {(ref.relevance_score * 100).toFixed(0)}%</span>
                       )}
                     </div>
-                    {ref.retrieved_text && (
-                      <p className="ayur-rag-sanskrit">{ref.retrieved_text}</p>
-                    )}
-                    {ref.translation && (
+                    {ref.translation ? (
                       <p className="ayur-rag-translation">
-                        <strong>Translation:</strong> {ref.translation}
+                        <strong>Clinical Guidance:</strong> {ref.translation}
                       </p>
-                    )}
-                    {ref.passage && !ref.retrieved_text && (
-                      <p className="ayur-rag-passage">{ref.passage}</p>
+                    ) : (
+                      <p className="ayur-rag-passage">{ref.retrieved_text || ref.passage}</p>
                     )}
                   </div>
                 ))}
@@ -822,6 +1026,26 @@ export const DoctorDietPlanEditor = ({
           </div>
         </div>
       )}
+
+      {/* Food Catalogue Modal */}
+      <DoctorFoodCatalogueModal
+        isOpen={catalogueModalOpen}
+        onClose={() => setCatalogueModalOpen(false)}
+        targetMeal={catalogueTargetMeal}
+        targetMealLabel={
+          catalogueTargetMeal === 'breakfast'
+            ? 'Breakfast'
+            : catalogueTargetMeal === 'lunch'
+            ? 'Lunch'
+            : catalogueTargetMeal === 'dinner'
+            ? 'Dinner'
+            : catalogueTargetMeal === 'mid_morning'
+            ? 'Mid-Morning Snack'
+            : 'Evening Snack'
+        }
+        onSelectFoodItem={handleSelectFoodFromCatalogue}
+        onTriggerToast={onTriggerToast}
+      />
     </div>
   );
 };

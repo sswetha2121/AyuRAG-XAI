@@ -1,0 +1,27 @@
+{
+  "id": "API-ZINGIBER-OFFICINALE",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Zingiber officinale (Shunthi/Ginger)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/zingiber-officinale",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 62",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Universal digestive stimulant (Vishvabheshaja), carminative, and Ama-digestant.",
+  "limitations": "Excessive intake can provoke burning in active ulcerative gastritis or acute bleeding hemorrhoids.",
+  "classical_verse": null,
+  "tags": [
+    "shunthi",
+    "ginger",
+    "zingiber_officinale",
+    "deepana",
+    "pachana",
+    "ama_pachana"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Kapha"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Zingiber officinale Roscoe (Family: Zingiberaceae) - Dried Rhizome.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Śuṇṭhī, Nāgara, Viśvabheṣaja, Katubhadra.\n   - Rasa: Katu (pungent).\n   - Guna: Laghu (light), Snigdha (unctuous) [Dry ginger is unctuous, unlike fresh ginger which is dry].\n   - Virya: Ushna (warm).\n   - Vipaka: Madhura (sweet) [Unique sweet post-digestive effect prevents long-term Pitta vitiation].\n   - Karma: Deepana (stimulates digestive fire), Pachana (digests Ama), Vata-Kapha-prashamana, Hridya (cardiac tonic), Grahi (bowel binding in diarrhea).\n\n2. Therapeutic Indications:\n   Agnimandya (digestive failure), Adhmana (flatulence / tympanites), Shula (abdominal colic), Amavata (rheumatoid conditions), Chardi (nausea/vomiting), Shwasa-Kasa (respiratory congestion).\n\n3. Standard Therapeutic Dosage:\n   - Dried Rhizome Powder: 1 to 2 grams daily.\n\n4. Precautions & Contraindications:\n   - Bleeding disorders, active gastric ulcers, high fever with severe dehydration.\n"
+}

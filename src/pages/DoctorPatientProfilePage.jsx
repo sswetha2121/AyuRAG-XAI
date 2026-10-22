@@ -5,6 +5,7 @@ import { DoctorReviewNotesModal } from '../components/doctor/DoctorReviewNotesMo
 import { DoctorPatientVerification } from '../components/doctor/DoctorPatientVerification';
 import { DoctorDietPlanEditor } from '../components/doctor/DoctorDietPlanEditor';
 import { DoctorPatientAuditTrail } from '../components/doctor/DoctorPatientAuditTrail';
+import { DoctorPatientBaseline } from '../components/doctor/DoctorPatientBaseline';
 import { api } from '../services/api';
 import {
   User,
@@ -34,6 +35,7 @@ export const DoctorPatientProfilePage = ({
 }) => {
   const [patientData, setPatientData] = useState(null);
   const [effectiveProfile, setEffectiveProfile] = useState(null);
+  const [verificationStats, setVerificationStats] = useState({ total_fields: 0, verified: 0, corrected: 0, unverified: 0 });
   const [activeWorkflowTab, setActiveWorkflowTab] = useState('verification'); // 'verification' | 'diet' | 'xai' | 'assessment' | 'audit'
   const [isLoading, setIsLoading] = useState(true);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
@@ -44,6 +46,15 @@ export const DoctorPatientProfilePage = ({
       setIsLoading(true);
       const data = await api.getDoctorPatientDetail(patientId);
       setPatientData(data);
+      // Record clinical case access
+      api.recordPatientAuditLog(patientId, {
+        action: 'CASE_ACCESSED',
+        metadata: {
+          view: 'clinical_profile',
+          is_demo: data?.is_demo !== false,
+          patient_name: data?.patient_name
+        }
+      }).catch(() => {});
     } catch (err) {
       onTriggerToast?.({
         type: 'error',
@@ -111,7 +122,7 @@ export const DoctorPatientProfilePage = ({
     );
   }
 
-  const pScores = patientData.prakriti_scores || { vata: 40, pitta: 35, kapha: 25, primary: 'Vāta-Pitta' };
+  const pScores = patientData.prakriti_scores || { vata: 40, pitta: 35, kapha: 25, primary: 'Movement & Metabolism' };
   const latestReview = patientData.reviews?.[0];
 
   return (
@@ -149,6 +160,9 @@ export const DoctorPatientProfilePage = ({
             <div className="flex items-center gap-sm mb-xs">
               <h1 className="ayur-patient-hero__name">{patientData.patient_name}</h1>
               <span className="ayur-patient-id-badge">ID: AYU-{String(patientData.id).padStart(4, '0')}</span>
+              {patientData.is_demo !== false && (
+                <span className="ayur-demo-badge">DEMO PATIENT</span>
+              )}
             </div>
             <p className="ayur-patient-hero__meta">
               <span>{patientData.patient_age} Years</span> • <span>{patientData.patient_gender}</span> •{' '}
@@ -272,6 +286,7 @@ export const DoctorPatientProfilePage = ({
         <DoctorPatientVerification
           patientId={patientId}
           onProfileUpdated={setEffectiveProfile}
+          onStatsUpdated={setVerificationStats}
           onTriggerToast={onTriggerToast}
         />
       )}
@@ -310,133 +325,11 @@ export const DoctorPatientProfilePage = ({
 
       {/* Tab 4: Baseline Assessment Data */}
       {activeWorkflowTab === 'assessment' && (
-        <div className="ayur-assessment-tab-wrapper">
-          {/* Prakriti Baseline Section */}
-          <div className="ayur-clinical-section">
-            <div className="ayur-clinical-section__header">
-              <div className="flex items-center gap-xs">
-                <Activity size={18} className="text-secondary" />
-                <h3 className="ayur-clinical-section__title">Body Constitution Assessment</h3>
-              </div>
-              <span className="ayur-prakriti-chip">{pScores.primary || 'Movement-Metabolism Dominant'}</span>
-            </div>
-
-            <div className="ayur-prakriti-bars-grid">
-              <div className="ayur-dosha-bar-card">
-                <div className="flex items-center justify-between mb-xs">
-                  <span className="ayur-dosha-name">Movement (Air + Space)</span>
-                  <span className="ayur-dosha-score">{pScores.vata || 40}%</span>
-                </div>
-                <div className="ayur-dosha-track">
-                  <div className="ayur-dosha-fill ayur-dosha-fill--vata" style={{ width: `${pScores.vata || 40}%` }} />
-                </div>
-                <span className="ayur-dosha-desc">Governs mobility, circulation, nervous signals</span>
-              </div>
-
-              <div className="ayur-dosha-bar-card">
-                <div className="flex items-center justify-between mb-xs">
-                  <span className="ayur-dosha-name">Metabolism (Fire + Water)</span>
-                  <span className="ayur-dosha-score">{pScores.pitta || 35}%</span>
-                </div>
-                <div className="ayur-dosha-track">
-                  <div className="ayur-dosha-fill ayur-dosha-fill--pitta" style={{ width: `${pScores.pitta || 35}%` }} />
-                </div>
-                <span className="ayur-dosha-desc">Governs digestion, enzymatic activity, body heat</span>
-              </div>
-
-              <div className="ayur-dosha-bar-card">
-                <div className="flex items-center justify-between mb-xs">
-                  <span className="ayur-dosha-name">Structure (Earth + Water)</span>
-                  <span className="ayur-dosha-score">{pScores.kapha || 25}%</span>
-                </div>
-                <div className="ayur-dosha-track">
-                  <div className="ayur-dosha-fill ayur-dosha-fill--kapha" style={{ width: `${pScores.kapha || 25}%` }} />
-                </div>
-                <span className="ayur-dosha-desc">Governs physical stability, lubrication, stamina</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Lifestyle, Diet & Symptoms 3-Column Grid */}
-          <div className="ayur-clinical-grid-3">
-            {/* Lifestyle */}
-            <div className="ayur-clinical-card">
-              <div className="ayur-clinical-card__header">
-                <Moon size={16} className="text-secondary" />
-                <h4 className="ayur-clinical-card__title">Lifestyle & Daily Routine</h4>
-              </div>
-              <ul className="ayur-clinical-list">
-                <li>
-                  <span>Sleep Duration:</span>
-                  <strong>{patientData.lifestyle_data?.sleepDuration || '6-7 hours'}</strong>
-                </li>
-                <li>
-                  <span>Sleep Quality:</span>
-                  <strong>{patientData.lifestyle_data?.sleepQuality || 'Interrupted / Latency'}</strong>
-                </li>
-                <li>
-                  <span>Activity Level:</span>
-                  <strong>{patientData.lifestyle_data?.activityLevel || 'Moderate'}</strong>
-                </li>
-                <li>
-                  <span>Stress Level:</span>
-                  <strong>{patientData.lifestyle_data?.stressLevel || 'High (Chinta)'}</strong>
-                </li>
-                <li>
-                  <span>Circadian Pacing:</span>
-                  <strong>{patientData.lifestyle_data?.circadianAlignment || 'Irregular schedule'}</strong>
-                </li>
-              </ul>
-            </div>
-
-            {/* Diet */}
-            <div className="ayur-clinical-card">
-              <div className="ayur-clinical-card__header">
-                <Utensils size={16} className="text-secondary" />
-                <h4 className="ayur-clinical-card__title">Dietary Patterns & Digestion</h4>
-              </div>
-              <ul className="ayur-clinical-list">
-                <li>
-                  <span>Appetite (Digestion):</span>
-                  <strong>{patientData.diet_data?.appetitePattern || 'Irregular (Variable Digestion)'}</strong>
-                </li>
-                <li>
-                  <span>Meal Frequency:</span>
-                  <strong>{patientData.diet_data?.mealFrequency || '2-3 meals daily'}</strong>
-                </li>
-                <li>
-                  <span>Hydration:</span>
-                  <strong>{patientData.diet_data?.hydration || '1.8L Daily'}</strong>
-                </li>
-                <li>
-                  <span>Dominant Tastes:</span>
-                  <strong>{patientData.diet_data?.predominantTaste || 'Pungent, Bitter'}</strong>
-                </li>
-              </ul>
-            </div>
-
-            {/* Symptoms */}
-            <div className="ayur-clinical-card">
-              <div className="ayur-clinical-card__header">
-                <HeartPulse size={16} className="text-secondary" />
-                <h4 className="ayur-clinical-card__title">Symptoms & Clinical Context</h4>
-              </div>
-              <div className="ayur-symptoms-list">
-                {(patientData.symptoms_data?.chiefComplaints || ['Digestive sluggishness', 'Disturbed sleep', 'Abdominal bloating']).map(
-                  (sym, idx) => (
-                    <div key={idx} className="ayur-symptom-item">
-                      <span className="ayur-symptom-item__name">{sym}</span>
-                    </div>
-                  )
-                )}
-              </div>
-              <div className="ayur-symptom-meta">
-                <span>Severity: <strong>{patientData.symptoms_data?.severity || 'Moderate'}</strong></span>
-                <span>Chronicity: <strong>{patientData.symptoms_data?.chronicity || '3 to 6 months'}</strong></span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <DoctorPatientBaseline
+          patientData={patientData}
+          patientId={patientId}
+          onSwitchToVerification={() => setActiveWorkflowTab('verification')}
+        />
       )}
 
       {/* Tab 5: Clinical Audit Trail */}
@@ -451,6 +344,7 @@ export const DoctorPatientProfilePage = ({
         review={latestReview || {}}
         patientName={patientData.patient_name}
         assessmentId={patientData.id}
+        unverifiedCount={verificationStats.unverified}
         onSaveReview={handleSaveReview}
         isSaving={isSavingReview}
       />

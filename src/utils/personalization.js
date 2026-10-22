@@ -263,10 +263,10 @@ export function getLifestyleMicrocopy({ prakritiAnswers = {}, personalInfo = {} 
     bannerSubtitle,
     contextualNote,
     sectionGuidance: {
-      routine: "Your daily rhythm is the foundation of Dinacharya (classical Ayurvedic circadian discipline).",
-      sleep: "Sleep duration and depth offer key insight into nervous system recovery (Nidra).",
-      activity: "Physical exercise (Vyayama) supports metabolic Agni and tissue vitality.",
-      stress: "Cognitive load and stress patterns interact directly with mind-body balance (Manas)."
+      routine: "Your daily rhythm is the foundation of a consistent daily routine and circadian health.",
+      sleep: "Sleep duration and depth offer key insight into nervous system recovery and restorative health.",
+      activity: "Physical exercise supports digestive metabolism and tissue vitality.",
+      stress: "Cognitive load and stress patterns interact directly with emotional and physical wellbeing."
     }
   };
 }
@@ -280,7 +280,7 @@ export function getDietMicrocopy({ prakritiAnswers = {}, lifestyleAnswers = {}, 
   const bedConsistency = lifestyleAnswers['lifestyle_bedtime_consistency'];
   const stressLevel = Number(lifestyleAnswers['lifestyle_perceived_stress'] || 0);
 
-  let bannerSubtitle = "Let's explore your meal rhythms, digestive capacity (Agni), and nutritional habits.";
+  let bannerSubtitle = "Let's explore your meal rhythms, digestive function, and nutritional habits.";
   let contextualHint = null;
 
   if (bedConsistency === 'irregular' || bedConsistency === 'variable') {
@@ -292,7 +292,7 @@ export function getDietMicrocopy({ prakritiAnswers = {}, lifestyleAnswers = {}, 
   }
 
   return {
-    bannerTitle: "Dietary Assessment & Agni Rhythm",
+    bannerTitle: "Dietary Assessment & Digestive Rhythm",
     bannerSubtitle,
     contextualHint,
     digestiveNotice: "All digestive questions collect your reported experience for nutritional personalization. These questions are non-diagnostic."

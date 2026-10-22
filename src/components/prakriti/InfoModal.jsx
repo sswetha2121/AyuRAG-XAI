@@ -35,7 +35,7 @@ export const InfoModal = ({ isOpen, onClose }) => {
             </div>
             <div>
               <h3 id="prakriti-modal-title" className="ayur-modal-title">
-                The 3 Doshas (Principles) Explained
+                The 3 Constitutional Energies Explained
               </h3>
               <span className="text-caption text-muted">A Beginner's Quick Reference</span>
             </div>
@@ -52,10 +52,10 @@ export const InfoModal = ({ isOpen, onClose }) => {
 
         <div className="ayur-modal-content">
           <p className="text-body mb-sm">
-            In Ayurvedic medicine, a <strong>"Dosha"</strong> is a fundamental bio-energetic principle that governs your body and mind. Just like nature is made of elements (Air, Space, Fire, Water, Earth), your body operates through three dynamic forces:
+            In holistic healthcare, vitality is governed by three fundamental biological forces that shape body and mind. Just like nature is made of basic elements (Air, Space, Fire, Water, Earth), your body operates through three dynamic energies:
           </p>
 
-          {/* Quick Dosha Selection Bar in Modal */}
+          {/* Quick Energy Selection Bar in Modal */}
           <div className="flex items-center gap-xs mb-md" style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '8px' }}>
             <button
               type="button"
@@ -67,7 +67,7 @@ export const InfoModal = ({ isOpen, onClose }) => {
               onClick={() => setActiveTab('vata')}
             >
               <Wind size={14} />
-              <span>Vāta (Movement)</span>
+              <span>Movement (Air & Space)</span>
             </button>
             <button
               type="button"
@@ -79,7 +79,7 @@ export const InfoModal = ({ isOpen, onClose }) => {
               onClick={() => setActiveTab('pitta')}
             >
               <Flame size={14} />
-              <span>Pitta (Metabolism)</span>
+              <span>Metabolism (Fire & Water)</span>
             </button>
             <button
               type="button"
@@ -91,14 +91,14 @@ export const InfoModal = ({ isOpen, onClose }) => {
               onClick={() => setActiveTab('kapha')}
             >
               <Mountain size={14} />
-              <span>Kapha (Structure)</span>
+              <span>Structure (Earth & Water)</span>
             </button>
           </div>
 
           {activeTab === 'vata' && (
             <div className="ayur-modal-section">
               <div className="flex items-center justify-between mb-xs">
-                <h4 className="font-semibold text-primary">1. Vāta Dosha • Kinetic Principle</h4>
+                <h4 className="font-semibold text-primary">1. Movement Energy • Kinetic Principle</h4>
                 <span className="text-caption text-muted font-medium">Air + Space Elements</span>
               </div>
               <p className="text-small text-muted mb-xs">
@@ -122,7 +122,7 @@ export const InfoModal = ({ isOpen, onClose }) => {
           {activeTab === 'pitta' && (
             <div className="ayur-modal-section">
               <div className="flex items-center justify-between mb-xs">
-                <h4 className="font-semibold text-accent">2. Pitta Dosha • Transformation Principle</h4>
+                <h4 className="font-semibold text-accent">2. Metabolic Energy • Transformation Principle</h4>
                 <span className="text-caption text-muted font-medium">Fire + Water Elements</span>
               </div>
               <p className="text-small text-muted mb-xs">
@@ -146,7 +146,7 @@ export const InfoModal = ({ isOpen, onClose }) => {
           {activeTab === 'kapha' && (
             <div className="ayur-modal-section">
               <div className="flex items-center justify-between mb-xs">
-                <h4 className="font-semibold text-secondary">3. Kapha Dosha • Structural Principle</h4>
+                <h4 className="font-semibold text-secondary">3. Structural Energy • Structural Principle</h4>
                 <span className="text-caption text-muted font-medium">Water + Earth Elements</span>
               </div>
               <p className="text-small text-muted mb-xs">
@@ -170,10 +170,10 @@ export const InfoModal = ({ isOpen, onClose }) => {
           <div className="ayur-modal-highlight mt-md">
             <div className="flex items-center gap-xs text-primary font-semibold text-small mb-2xs">
               <ShieldCheck size={16} />
-              <span>Everyone Has All Three Doshas</span>
+              <span>Everyone Has All Three Energies</span>
             </div>
             <p className="text-caption text-secondary">
-              You are never just 100% one dosha. Most individuals have a dominant dosha and a secondary dosha (e.g., Vāta-Pitta). AyuRAG-XAI analyzes your answers across all 10 questions to determine your specific biological ratio with explainable AI proof.
+              You are never just 100% one energy factor. Most individuals have a dominant energy and a secondary energy (for example, Movement and Metabolism). AyuRAG-XAI analyzes your answers across all 10 questions to determine your specific biological ratio with explainable AI proof.
             </p>
           </div>
         </div>

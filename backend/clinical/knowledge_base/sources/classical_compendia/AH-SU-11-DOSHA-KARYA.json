@@ -1,0 +1,27 @@
+{
+  "id": "AH-SU-11-DOSHA-KARYA",
+  "collection": "classical_compendia",
+  "title": "Aṣṭāṅga Hṛdayam: Physiological Functions of Balanced Doshas and Tissues",
+  "publisher": "Classical Ayurvedic Compendium (e-Ashtanga / NIIMH)",
+  "source_url": "https://niimh.nic.in/ebooks/eahridaya/?mod=read&sys=su&ch=11",
+  "publication_version": "Aṣṭāṅga Hṛdayam, Sūtrasthāna, Chapter 11, Ślokas 1-20",
+  "license": "Public Domain",
+  "document_type": "Classical Human Physiology Treatise",
+  "download_availability": "Publicly accessible via e-Ashtanga",
+  "relevance": "Provides the normal physiological benchmark against which patient symptoms are compared.",
+  "limitations": "Qualitative functional observations; must be correlated with contemporary vital signs and organ function tests.",
+  "classical_verse": "Utsāhocchvāsa-niḥśvāsa-ceṣṭā-dhātugatiḥ samā. Samo’gnirvātasya karma.",
+  "tags": [
+    "dosha_karya",
+    "normal_physiology",
+    "vata_functions",
+    "pitta_functions",
+    "kapha_functions"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nAṣṭāṅga Hṛdayam Sūtrasthāna Chapter 11 describes the normal physiological actions of the Three Doshas:\n1. Normal Functions of Vata:\n   Enthusiasm (Utsaha), inspiration and expiration (Ucchwasa-Nishwasa), physical motor activity (Cheshta), equilibrium of tissue metabolism (Dhatu Gati Sama), and prompt excretion of bodily wastes.\n2. Normal Functions of Pitta:\n   Digestion (Darshana / Pachana), maintenance of normal body temperature (Tanu-Ushma), visual perception, appetite and thirst generation (Kshut-Trid), radiance and complexion (Prabha), courage (Medha), and mental discernment.\n3. Normal Functions of Kapha:\n   Structural cohesion and joint stability (Sandhi-Bandha), lubrication (Sneha), unctuousness, stability of body mass (Sthairya), tolerance and patience (Kshama), and retention capacity.\n"
+}

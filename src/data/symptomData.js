@@ -6,14 +6,14 @@
 
 export const SYMPTOM_CATEGORIES = [
   { id: 'all', label: 'All Symptoms', icon: 'Sparkles' },
-  { id: 'digestive', label: 'Digestive & Metabolism', sanskrit: 'Agni & Koṣṭha', icon: 'Flame' },
-  { id: 'sleep', label: 'Sleep & Circadian', sanskrit: 'Nidrā & Kāla', icon: 'Moon' },
-  { id: 'energy', label: 'Energy & Vitality', sanskrit: 'Bala & Ojas', icon: 'Zap' },
-  { id: 'skin', label: 'Skin & Complexion', sanskrit: 'Tvak & Keśa', icon: 'Sparkles' },
-  { id: 'respiratory', label: 'Respiratory & Sinus', sanskrit: 'Prāṇavaha', icon: 'Wind' },
-  { id: 'musculoskeletal', label: 'Joints & Muscle Tension', sanskrit: 'Sandhi & Māṁsa', icon: 'Activity' },
-  { id: 'mental', label: 'Mental Pace & Stress', sanskrit: 'Mānasa & Śānti', icon: 'HeartPulse' },
-  { id: 'general', label: 'General Wellbeing', sanskrit: 'Sāmānya Svāsthya', icon: 'Compass' }
+  { id: 'digestive', label: 'Digestive & Metabolism', sanskrit: 'Digestive Function', icon: 'Flame' },
+  { id: 'sleep', label: 'Sleep & Circadian', sanskrit: 'Sleep Patterns', icon: 'Moon' },
+  { id: 'energy', label: 'Energy & Vitality', sanskrit: 'Physical Vitality', icon: 'Zap' },
+  { id: 'skin', label: 'Skin & Complexion', sanskrit: 'Skin & Complexion', icon: 'Sparkles' },
+  { id: 'respiratory', label: 'Respiratory & Sinus', sanskrit: 'Respiratory System', icon: 'Wind' },
+  { id: 'musculoskeletal', label: 'Joints & Muscle Tension', sanskrit: 'Musculoskeletal', icon: 'Activity' },
+  { id: 'mental', label: 'Mental Pace & Stress', sanskrit: 'Mental Balance', icon: 'HeartPulse' },
+  { id: 'general', label: 'General Wellbeing', sanskrit: 'General Health', icon: 'Compass' }
 ];
 
 export const SYMPTOM_CATALOG = [
@@ -22,7 +22,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_bloating',
     name: 'Abdominal Bloating / Distension',
     category: 'digestive',
-    sanskritName: 'Ādhmāna',
+    sanskritName: 'Abdominal Fullness',
     description: 'Feeling tight, full of air or gas after meals',
     keywords: ['bloating', 'gas', 'distension', 'stomach', 'digestion']
   },
@@ -30,7 +30,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_acidity',
     name: 'Acid Reflux / Heartburn',
     category: 'digestive',
-    sanskritName: 'Amlapitta',
+    sanskritName: 'Acid Acidity',
     description: 'Warm burning sensation in throat or upper chest',
     keywords: ['acidity', 'heartburn', 'reflux', 'gerd', 'sour']
   },
@@ -38,7 +38,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_constipation',
     name: 'Sluggish / Dry Bowel Transit',
     category: 'digestive',
-    sanskritName: 'Vibandha',
+    sanskritName: 'Slow Transit',
     description: 'Hard stools, infrequent elimination, or incomplete feeling',
     keywords: ['constipation', 'dry', 'sluggish', 'bowel', 'transit']
   },
@@ -46,7 +46,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_loose_stools',
     name: 'Loose Stools / Fast Transit',
     category: 'digestive',
-    sanskritName: 'Atisāra Tendency',
+    sanskritName: 'Rapid Transit',
     description: 'Frequent or loose bowel movements shortly after eating',
     keywords: ['loose', 'diarrhea', 'fast', 'urgency', 'stomach']
   },
@@ -54,7 +54,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_irregular_appetite',
     name: 'Erratic / Unpredictable Hunger',
     category: 'digestive',
-    sanskritName: 'Viṣamāgni',
+    sanskritName: 'Variable Appetite',
     description: 'Fluctuating hunger levels with sudden loss or sudden surges',
     keywords: ['appetite', 'hunger', 'irregular', 'skipping', 'fasting']
   },
@@ -64,7 +64,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_sleep_onset',
     name: 'Difficulty Falling Asleep',
     category: 'sleep',
-    sanskritName: 'Anidrā (Onset)',
+    sanskritName: 'Sleep Latency',
     description: 'Tossing and turning with a racing mind for over 30 minutes',
     keywords: ['sleep', 'insomnia', 'falling asleep', 'night', 'bedtime']
   },
@@ -72,7 +72,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_sleep_interrupted',
     name: 'Frequent Mid-Night Waking',
     category: 'sleep',
-    sanskritName: 'Khaṇḍita Nidrā',
+    sanskritName: 'Interrupted Sleep',
     description: 'Waking up around 02:00–04:00 AM and struggling to fall back asleep',
     keywords: ['waking', 'broken sleep', 'night', 'interrupted', 'nightmare']
   },
@@ -80,7 +80,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_morning_grogginess',
     name: 'Morning Grogginess / Heavy Waking',
     category: 'sleep',
-    sanskritName: 'Tandrā',
+    sanskritName: 'Morning Sluggishness',
     description: 'Feeling unrefreshed, sluggish, and heavy upon waking in the morning',
     keywords: ['grogginess', 'tired morning', 'fatigue', 'sluggish', 'drowsy']
   },
@@ -88,7 +88,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_daytime_lethargy',
     name: 'Daytime Sleepiness / Afternoon Slump',
     category: 'sleep',
-    sanskritName: 'Alasya',
+    sanskritName: 'Daytime Fatigue',
     description: 'Sudden drop in alertness and heavy eyelids between 14:00 and 16:00',
     keywords: ['afternoon crash', 'drowsy', 'sleepy', 'slump', 'nap']
   },
@@ -98,7 +98,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_chronic_fatigue',
     name: 'Low Physical Stamina / Early Fatigue',
     category: 'energy',
-    sanskritName: 'Klama & Balakṣaya',
+    sanskritName: 'Physical Fatigue',
     description: 'Expending energy quickly with prolonged recovery time needed',
     keywords: ['fatigue', 'tired', 'stamina', 'energy', 'exhaustion']
   },
@@ -106,7 +106,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_brain_fog',
     name: 'Mental Fog / Concentration Difficulty',
     category: 'energy',
-    sanskritName: 'Mano Māndya',
+    sanskritName: 'Concentration Strain',
     description: 'Difficulty sustaining focus, slower recall, or mental haze',
     keywords: ['brain fog', 'focus', 'memory', 'concentration', 'clarity']
   },
@@ -114,7 +114,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_dizziness_lightheaded',
     name: 'Occasional Lightheadedness on Standing',
     category: 'energy',
-    sanskritName: 'Bhrama',
+    sanskritName: 'Postural Dizziness',
     description: 'Brief dizziness when standing up quickly or after skipping food',
     keywords: ['dizzy', 'lightheaded', 'postural', 'faint']
   },
@@ -124,7 +124,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_dry_skin',
     name: 'Dry, Flaky or Rough Skin',
     category: 'skin',
-    sanskritName: 'Rūkṣa Tvak',
+    sanskritName: 'Dry Skin Pattern',
     description: 'Skin prone to chapping, dullness, or cold-weather irritation',
     keywords: ['dry skin', 'flaky', 'rough', 'itchy', 'cracked']
   },
@@ -132,7 +132,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_acne_redness',
     name: 'Inflammatory Skin Breakouts / Redness',
     category: 'skin',
-    sanskritName: 'Yauvana Piḍakā',
+    sanskritName: 'Inflammatory Skin',
     description: 'Warm, sensitive skin with reddish flare-ups or acne',
     keywords: ['acne', 'redness', 'pimples', 'rash', 'inflammation', 'heat']
   },
@@ -140,7 +140,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_hair_thinning',
     name: 'Excess Hair Shedding / Scalp Dryness',
     category: 'skin',
-    sanskritName: 'Khālitya',
+    sanskritName: 'Hair Shedding',
     description: 'Noticeable hair loss, brittle strands, or flaky scalp',
     keywords: ['hair loss', 'shedding', 'scalp', 'dandruff', 'hair fall']
   },
@@ -150,7 +150,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_sinus_congestion',
     name: 'Morning Nasal / Sinus Congestion',
     category: 'respiratory',
-    sanskritName: 'Pratiśyāya',
+    sanskritName: 'Sinus Congestion',
     description: 'Stuffiness, mucus buildup, or pressure around eyes/forehead',
     keywords: ['sinus', 'congestion', 'nose', 'phlegm', 'allergy']
   },
@@ -158,7 +158,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_throat_dryness',
     name: 'Throat Dryness / Irritation',
     category: 'respiratory',
-    sanskritName: 'Kaṇṭha Śoṣa',
+    sanskritName: 'Throat Irritation',
     description: 'Dry, scratchy throat especially upon waking or in air conditioning',
     keywords: ['throat', 'dry throat', 'cough', 'scratchy']
   },
@@ -168,7 +168,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_joint_stiffness',
     name: 'Morning Joint Stiffness / Cracking Joints',
     category: 'musculoskeletal',
-    sanskritName: 'Sandhi Stabdhata',
+    sanskritName: 'Joint Stiffness',
     description: 'Joints feel tight or creaky for the first 15–30 minutes after waking',
     keywords: ['joints', 'stiffness', 'cracking', 'knees', 'fingers']
   },
@@ -176,7 +176,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_back_neck_strain',
     name: 'Neck, Shoulder & Lower Back Tension',
     category: 'musculoskeletal',
-    sanskritName: 'Grīvā & Kaṭi Graha',
+    sanskritName: 'Postural Strain',
     description: 'Postural tightness from extended desk sitting and laptop work',
     keywords: ['neck', 'back', 'shoulders', 'posture', 'desk', 'pain']
   },
@@ -186,7 +186,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_restless_worry',
     name: 'Nervous Restlessness / Racing Thoughts',
     category: 'mental',
-    sanskritName: 'Citta Cañcalatā',
+    sanskritName: 'Mental Restlessness',
     description: 'Difficulty relaxing, constant mental checklists, or worry',
     keywords: ['anxiety', 'worry', 'restless', 'racing mind', 'overthinking']
   },
@@ -194,7 +194,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_irritability_urgency',
     name: 'Time Pressure & Quick Irritability',
     category: 'mental',
-    sanskritName: 'Krodha & Tvarā',
+    sanskritName: 'Emotional Tension',
     description: 'Low tolerance for delays, feeling rushed, quick to frustration',
     keywords: ['irritability', 'anger', 'rushed', 'impatient', 'stress']
   },
@@ -204,7 +204,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_cold_intolerance',
     name: 'Cold Hands, Feet & Temperature Sensitivity',
     category: 'general',
-    sanskritName: 'Śīta Asahatva',
+    sanskritName: 'Cold Sensitivity',
     description: 'Easily chilled; needs layers even in moderate temperatures',
     keywords: ['cold', 'hands', 'feet', 'circulation', 'chilled']
   },
@@ -212,7 +212,7 @@ export const SYMPTOM_CATALOG = [
     id: 'sym_heat_intolerance',
     name: 'Heat Intolerance & Excess Sweating',
     category: 'general',
-    sanskritName: 'Uṣṇa Asahatva',
+    sanskritName: 'Heat Sensitivity',
     description: 'Easily overheated, sweat profusely, intolerant of humid heat',
     keywords: ['heat', 'sweat', 'hot', 'sun', 'flushed']
   }

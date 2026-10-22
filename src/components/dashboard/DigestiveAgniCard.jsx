@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, Badge } from
 import { Flame, Sparkles, ShieldCheck, HeartPulse, GlassWater } from 'lucide-react';
 
 export const DigestiveAgniCard = ({
-  agniPattern = 'Viṣamāgni (Variable Digestive Fire)',
+  agniPattern = 'Variable Digestive Function',
   className = ''
 }) => {
   return (
@@ -17,7 +17,7 @@ export const DigestiveAgniCard = ({
                 Metabolic Intelligence
               </Badge>
               <Badge color="primary" variant="subtle" size="sm">
-                Digestive Metabolism
+                Digestive Function
               </Badge>
             </div>
             <span className="ayur-demo-badge">Metabolic Signal</span>

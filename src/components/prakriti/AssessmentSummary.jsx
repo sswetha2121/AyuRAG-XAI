@@ -78,41 +78,41 @@ export const AssessmentSummary = ({
           {/* Dosha Distribution Demonstration */}
           <div className="ayur-summary-dosha-section">
             <div className="flex items-center justify-between mb-xs">
-              <span className="ayur-summary-dosha-title">Tridosha Balance Distribution</span>
+              <span className="ayur-summary-dosha-title">Body Energies Balance Distribution</span>
               <span className="ayur-demo-badge">Live Calibrating</span>
             </div>
 
             <div className="ayur-dosha-bars">
-              {/* Vata */}
+              {/* Movement */}
               <div className="ayur-dosha-bar-item">
                 <div className="flex items-center justify-between text-caption">
                   <div className="flex items-center gap-xs">
                     <Wind size={13} className="text-secondary" />
-                    <span className="font-medium">Vāta (Movement)</span>
+                    <span className="font-medium">Movement Energy</span>
                   </div>
                   <span className="font-mono font-semibold">{vataPct}%</span>
                 </div>
                 <ProgressBar value={vataPct} color="primary" size="sm" />
               </div>
 
-              {/* Pitta */}
+              {/* Metabolism */}
               <div className="ayur-dosha-bar-item">
                 <div className="flex items-center justify-between text-caption">
                   <div className="flex items-center gap-xs">
                     <Flame size={13} className="text-accent" />
-                    <span className="font-medium">Pitta (Metabolism)</span>
+                    <span className="font-medium">Metabolic Energy</span>
                   </div>
                   <span className="font-mono font-semibold">{pittaPct}%</span>
                 </div>
                 <ProgressBar value={pittaPct} color="accent" size="sm" />
               </div>
 
-              {/* Kapha */}
+              {/* Structure */}
               <div className="ayur-dosha-bar-item">
                 <div className="flex items-center justify-between text-caption">
                   <div className="flex items-center gap-xs">
                     <Mountain size={13} className="text-primary" />
-                    <span className="font-medium">Kapha (Structure)</span>
+                    <span className="font-medium">Structural Energy</span>
                   </div>
                   <span className="font-mono font-semibold">{kaphaPct}%</span>
                 </div>
@@ -128,7 +128,7 @@ export const AssessmentSummary = ({
                 style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
               >
                 <HelpCircle size={12} />
-                <span>New to this? Read 3 Doshas Guide →</span>
+                <span>New to this? Read 3 Body Energies Guide →</span>
               </button>
             )}
           </div>
@@ -137,10 +137,10 @@ export const AssessmentSummary = ({
           <div className="ayur-summary-insight">
             <div className="flex items-center gap-xs text-secondary font-semibold text-micro mb-2xs">
               <ShieldCheck size={13} />
-              <span>Classical Reference</span>
+              <span>Clinical Baseline</span>
             </div>
             <p className="text-micro text-muted">
-              <em>"Śarīra prakṛtistu śukra-śoṇita-prakṛtibhī..."</em> — Prakriti is established at conception and reflects natural anatomical, physiological and mental equilibrium (Ashtanga Hridaya Sutrasthana 1.7).
+              Body constitution is established at conception and reflects natural anatomical, physiological, and metabolic equilibrium throughout life.
             </p>
           </div>
         </CardContent>

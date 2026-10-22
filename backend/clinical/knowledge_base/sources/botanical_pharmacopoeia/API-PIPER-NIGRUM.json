@@ -1,0 +1,27 @@
+{
+  "id": "API-PIPER-NIGRUM",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Piper nigrum (Maricha/Black Pepper)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/piper-nigrum",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. III, Monograph 17",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Key bioavailability enhancer (piperine), respiratory mucolytic, and Trikatu component.",
+  "limitations": "Pungent and hot; excessive consumption aggravates Pitta and produces gastric burning.",
+  "classical_verse": null,
+  "tags": [
+    "maricha",
+    "black_pepper",
+    "piper_nigrum",
+    "trikatu",
+    "bioenhancer",
+    "kapha_shamana"
+  ],
+  "dosha_affinity": [
+    "Kapha",
+    "Vata"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Piper nigrum L. (Family: Piperaceae) - Dried Fruit.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Marica, Śyāma, Vellaja, Katuka.\n   - Rasa: Katu (pungent).\n   - Guna: Laghu (light), Tikshna (sharp), Ruksha (dry).\n   - Virya: Ushna (warm).\n   - Vipaka: Katu (pungent).\n   - Karma: Kapha-Vata-hara, Deepana, Chedana (scrapes mucus from respiratory channels), Srotoshodhaka (channel clearing), Yogavahi (bioavailability promoter).\n2. Therapeutic Indications:\n   Shwasa (asthma), Kasa (cough), Agnimandya, Krimi, Grahani.\n3. Standard Therapeutic Dosage:\n   - Powder: 250 mg to 1 gram.\n4. Synergistic Role:\n   Contains piperine, which inhibits hepatic and intestinal glucuronidation, dramatically increasing systemic absorption of other nutrients (e.g. curcumin, withanolides).\n"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "SAFETY-PREGNANCY-LACTATION",
+  "collection": "clinical_safety_referral",
+  "title": "Clinical Safety Guidance: Botanical Contraindications in Pregnancy and Lactation",
+  "publisher": "Ministry of AYUSH & CCRAS Mother and Child Health Guidelines",
+  "source_url": "https://ayushportal.nic.in/pregnancy-botanical-safety",
+  "publication_version": "AYUSH Clinical Safety Monograph, 2022",
+  "license": "Open Government Data (OGD) - India",
+  "document_type": "Clinical Reproductive Safety Guideline",
+  "download_availability": "Publicly accessible via ayushportal.nic.in",
+  "relevance": "Strict safety filtering to exclude abortifacient, emmenagogue, or uterine stimulant herbs in pregnant users.",
+  "limitations": "Ethical constraints preclude randomized trials in pregnant women; cautious avoidance principle strictly applied.",
+  "classical_verse": null,
+  "tags": [
+    "pregnancy_safety",
+    "lactation",
+    "garbhashaya_sankochaka",
+    "contraindications",
+    "teratogenicity"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nMaternal Safety Protocols for Ayurvedic Formulations and Botanicals:\n1. Absolute Contraindications in Pregnancy (Garbhashaya Sankochaka / Uterine Stimulants):\n   - Guggulu (Commiphora mukul): Potential emmenagogue activity.\n   - Aloe vera (Kumari latex): Anthraquinone laxatives induce pelvic congestion and uterine contractions.\n   - Fenugreek (Methi) in medicinal extract doses: Oxytocic potential documented in high concentrations.\n   - Vatsanabha (Aconitum chasmanthum), Kupilu (Strychnos nux-vomica), and Bhallataka (Semecarpus anacardium): Toxic alkaloids with high teratogenic risk.\n   - Strong Purgatives (Tikshna Virechana dravyas like Trivrit, Danti, and Jayapala): Strictly contraindicated.\n\n2. Herbs Requiring Caution or Dose Modulation:\n   - Ashwagandha (Withania somnifera): Mild uterine stimulant potential at high pharmacological doses; culinary spicing tolerated.\n   - Licorice (Glycyrrhiza glabra): High doses associated with preterm birth risks due to mineralocorticoid shifts.\n\n3. Wholesome Botanicals in Pregnancy (Garbhapala / Under Professional Supervision):\n   - Cow's ghee, Shatavari (in moderate nourishment doses), Draksha (sweet raisins), Amalaki, and Cardamom.\n"
+}

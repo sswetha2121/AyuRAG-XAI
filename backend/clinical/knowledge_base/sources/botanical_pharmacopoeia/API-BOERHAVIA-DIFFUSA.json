@@ -1,0 +1,27 @@
+{
+  "id": "API-BOERHAVIA-DIFFUSA",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Boerhavia diffusa (Punarnava)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/boerhavia-diffusa",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 47",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier anti-edematous, diuretic, and hepatoprotective whole plant.",
+  "limitations": "In end-stage renal disease (ESRD) requiring dialysis, fluid volume and potassium must be managed under nephrology care.",
+  "classical_verse": null,
+  "tags": [
+    "punarnava",
+    "boerhavia_diffusa",
+    "shotha",
+    "edema",
+    "kidney_support",
+    "liver_tonic"
+  ],
+  "dosha_affinity": [
+    "Kapha",
+    "Vata"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Boerhavia diffusa L. (Family: Nyctaginaceae) - Whole Plant / Root.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Punarnavā, Śophaghnī, Rakta-punarnavā, Kaṭhillaka.\n   - Rasa: Madhura (sweet), Tikta (bitter), Kashaya (astringent).\n   - Guna: Laghu (light), Ruksha (dry).\n   - Virya: Ushna (mildly warm).\n   - Vipaka: Madhura (sweet).\n   - Karma: Tridoshashamaka (balances Kapha-Vata especially), Shothahara (relieves edema), Mutrala, Rasayana, Deepana.\n2. Therapeutic Indications:\n   Shotha (generalized edema, anasarca), Pandu (anemia), Yakrid-vikara (hepatic disorders), Mutrakrichra, Hridroga (cardiac edema).\n3. Standard Therapeutic Dosage:\n   - Root / Plant Powder: 3 to 6 grams.\n   - Decoction: 50 to 100 ml.\n"
+}

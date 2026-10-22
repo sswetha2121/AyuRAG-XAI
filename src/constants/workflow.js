@@ -8,40 +8,42 @@ import {
   LayoutDashboard,
   Bell,
   LogOut,
-  Layers
+  Layers,
+  MessageSquare
 } from 'lucide-react';
 
 /**
  * AyuRAG-XAI Patient Portal Primary Navigation
- * As specified in Phase 2 Requirements:
- * - Overview
- * - My Assessment
- * - My Wellness Plan
+ * Phase 8 Specification:
+ * - My Dashboard
+ * - My Diet Plan
+ * - Daily Checklist
  * - Progress
- * - Notifications
- * - Profile and account actions
+ * - Chat with Doctor
+ * - My Profile
  */
 export const PATIENT_PORTAL_NAV_ITEMS = [
   {
     id: 'dashboard-overview',
-    label: 'Overview',
+    label: 'My Dashboard',
     sublabel: 'Status & Next Actions',
     icon: LayoutDashboard,
     route: '/dashboard',
     tab: 'overview'
   },
   {
-    id: 'my-assessment',
-    label: 'My Assessment',
-    sublabel: 'Take or Review Intake',
-    icon: Activity,
-    route: '/assessment-overview',
+    id: 'my-diet-plan',
+    label: 'My Diet Plan',
+    sublabel: 'Doctor-Approved Protocol',
+    icon: Utensils,
+    route: '/dashboard',
+    tab: 'diet'
   },
   {
-    id: 'wellness-plan',
-    label: 'My Wellness Plan',
-    sublabel: 'Daily Schedule & Diet',
-    icon: Utensils,
+    id: 'daily-checklist',
+    label: 'Daily Checklist',
+    sublabel: 'Meal Schedule & Adherence',
+    icon: ClipboardCheck,
     route: '/dashboard',
     tab: 'schedule'
   },
@@ -54,18 +56,19 @@ export const PATIENT_PORTAL_NAV_ITEMS = [
     tab: 'progress'
   },
   {
-    id: 'patient-notifications',
-    label: 'Notifications',
-    sublabel: 'Reminders & Clinical Alerts',
-    icon: Bell,
-    badge: null
-  }
+    id: 'chat-doctor',
+    label: 'Chat with Doctor',
+    sublabel: 'Direct Consultation',
+    icon: MessageSquare,
+    route: '/dashboard',
+    tab: 'chat'
+  },
 ];
 
 export const PATIENT_UTILITY_ITEMS = [
   {
     id: 'patient-profile',
-    label: 'Profile & Account',
+    label: 'My Profile',
     icon: User,
   },
   {

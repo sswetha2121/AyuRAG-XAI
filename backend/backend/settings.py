@@ -39,7 +39,7 @@ _allowed_hosts_env = os.environ.get('DJANGO_ALLOWED_HOSTS')
 if _allowed_hosts_env:
     ALLOWED_HOSTS = [h.strip() for h in _allowed_hosts_env.split(',') if h.strip()]
 elif DEBUG:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'testserver']
 else:
     raise ImproperlyConfigured('DJANGO_ALLOWED_HOSTS environment variable must be set when DEBUG is False.')
 

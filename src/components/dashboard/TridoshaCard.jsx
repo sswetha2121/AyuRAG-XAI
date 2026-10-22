@@ -8,9 +8,9 @@ export const TridoshaCard = ({
   className = ''
 }) => {
   const {
-    constitutionType = 'Vāta-Pitta (Dvidoṣaja)',
-    primaryDosha = 'Vāta',
-    secondaryDosha = 'Pitta',
+    constitutionType = 'Movement & Metabolism Imbalance',
+    primaryDosha = 'Movement',
+    secondaryDosha = 'Metabolism',
     vataPct = 45,
     pittaPct = 35,
     kaphaPct = 20,

@@ -39,7 +39,7 @@ export const TimeRoutineSelector = ({
               <Sunrise size={16} />
             </div>
             <div className="ayur-rhythm-meta">
-              <span className="ayur-rhythm-label">Morning (Brahma)</span>
+              <span className="ayur-rhythm-label">Early Morning</span>
               <span className="ayur-rhythm-time">04:30 – 07:00</span>
             </div>
           </div>
@@ -49,7 +49,7 @@ export const TimeRoutineSelector = ({
               <Sun size={16} />
             </div>
             <div className="ayur-rhythm-meta">
-              <span className="ayur-rhythm-label">Active Day (Pitta)</span>
+              <span className="ayur-rhythm-label">Active Midday</span>
               <span className="ayur-rhythm-time">10:00 – 14:00</span>
             </div>
           </div>
@@ -59,7 +59,7 @@ export const TimeRoutineSelector = ({
               <Sunset size={16} />
             </div>
             <div className="ayur-rhythm-meta">
-              <span className="ayur-rhythm-label">Evening (Sandhya)</span>
+              <span className="ayur-rhythm-label">Evening Wind-Down</span>
               <span className="ayur-rhythm-time">18:00 – 21:30</span>
             </div>
           </div>
@@ -69,7 +69,7 @@ export const TimeRoutineSelector = ({
               <Moon size={16} />
             </div>
             <div className="ayur-rhythm-meta">
-              <span className="ayur-rhythm-label">Deep Night (Nidra)</span>
+              <span className="ayur-rhythm-label">Deep Night Rest</span>
               <span className="ayur-rhythm-time">22:00 – 06:00</span>
             </div>
           </div>

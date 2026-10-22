@@ -97,7 +97,7 @@ export const DoctorReportsPage = ({
           <input
             type="text"
             className="ayur-search-input"
-            placeholder="Search by patient, prakriti, or AI prediction..."
+            placeholder="Search by patient, constitution, or AI prediction..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />

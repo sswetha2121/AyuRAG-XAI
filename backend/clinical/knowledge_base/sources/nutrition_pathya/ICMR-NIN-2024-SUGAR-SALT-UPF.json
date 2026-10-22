@@ -1,0 +1,28 @@
+{
+  "id": "ICMR-NIN-2024-SUGAR-SALT-UPF",
+  "collection": "nutrition_pathya",
+  "title": "ICMR-NIN 2024: Quantitative Thresholds for Sugar, Salt, and Ultra-Processed Foods",
+  "publisher": "National Institute of Nutrition (ICMR-NIN)",
+  "source_url": "https://www.nin.res.in/dietaryguidelines/sugar-salt-upf.html",
+  "publication_version": "ICMR-NIN Technical Bulletin 2024",
+  "license": "Public Health Guidance (ICMR-NIN)",
+  "document_type": "Evidence-Based Clinical Nutrition Limit Matrix",
+  "download_availability": "Publicly accessible via nin.res.in",
+  "relevance": "Provides exact numerical thresholds for dietary sugar, sodium, and ultra-processed food restrictions.",
+  "limitations": "Clinical adjustments needed for athletes with heavy sweat losses or chronic kidney disease patients.",
+  "classical_verse": null,
+  "tags": [
+    "sugar_limits",
+    "salt_limits",
+    "upf",
+    "ultra_processed",
+    "icmr_nin_2024",
+    "hypertension_prevention"
+  ],
+  "dosha_affinity": [
+    "Kapha",
+    "Pitta",
+    "Vata"
+  ],
+  "content": "\nICMR-NIN 2024 Quantitative Intake Thresholds for Metabolic and Cardiovascular Health:\n1. Free and Added Sugars:\n   - Maximum Limit: <5% of total daily caloric intake (approximately 20 to 25 grams or 4-5 teaspoons per day for a standard 2000 kcal diet).\n   - Eliminates added sucrose, high-fructose corn syrup, and sweetened bottled beverages.\n2. Sodium & Table Salt:\n   - Maximum Limit: <5 grams of table salt (NaCl) per day, corresponding to <2000 mg of sodium daily.\n   - Avoid monosodium glutamate (MSG), canned soups, packaged salty namkeens, and chips.\n3. Ultra-Processed Foods (UPFs):\n   - Defined under the NOVA classification: Formulations of ingredients manufactured by industrial processes containing emulsifiers, colorants, flavor enhancers, and hydrogenated oils.\n   - UPFs are clinically proven to induce insulin resistance, systemic micro-inflammation, and alter gut microbiome integrity.\n"
+}

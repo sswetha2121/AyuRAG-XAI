@@ -1,0 +1,1856 @@
+{
+  "project": "AyuRAG-XAI Knowledge Base",
+  "version": "1.0.0",
+  "last_updated": "2026-10-22",
+  "total_documents": 66,
+  "collections": {
+    "classical_compendia": {
+      "name": "Classical Ayurvedic Compendia",
+      "description": "Authentic passages from Charaka Saṃhitā, Suśruta Saṃhitā, and Aṣṭāṅga Hṛdayam with verified chapters, slokas, and translations.",
+      "publisher": "National Institute of Indian Medical Heritage (NIIMH) / Ministry of AYUSH",
+      "license": "Public Domain / Open Educational Access",
+      "document_count": 21
+    },
+    "ccras_guidelines": {
+      "name": "CCRAS Clinical Evaluation & Research Guidelines",
+      "description": "Official diagnostic criteria, GCP standards, and disease management protocols from CCRAS.",
+      "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS), Govt. of India",
+      "license": "Open Government Data (OGD) - India",
+      "document_count": 9
+    },
+    "botanical_pharmacopoeia": {
+      "name": "Botanical Reference & Pharmacopoeial Monographs",
+      "description": "Botanical identities, Rasapanchaka (Rasa, Guna, Virya, Vipaka), standard dosages, and therapeutic indications from the Ayurvedic Pharmacopoeia of India.",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "license": "Official Statutory Pharmacopoeial Standards (PCIM&H / Ministry of AYUSH)",
+      "document_count": 24
+    },
+    "nutrition_pathya": {
+      "name": "Evidence-Based Nutrition & Pathya-Apathya",
+      "description": "ICMR-NIN 2024 Dietary Guidelines for Indians, My Plate standards, and classical food compatibility matrices.",
+      "publisher": "ICMR - National Institute of Nutrition (NIN) & Ministry of AYUSH",
+      "license": "Public Health Guidance / Open Clinical Reference",
+      "document_count": 5
+    },
+    "clinical_safety_referral": {
+      "name": "Clinical Safety, Contraindications & Red-Flag Escalation",
+      "description": "Herb-drug interaction matrices, AYUSH Pharmacovigilance criteria, maternal/pediatric safety, and emergency red-flag symptoms.",
+      "publisher": "National Pharmacovigilance Centre (NPvCC), AIIA & Ministry of AYUSH",
+      "license": "Public Clinical Safety Standard",
+      "document_count": 7
+    }
+  },
+  "documents": [
+    {
+      "id": "CS-SU-01-SVASTHA",
+      "collection": "classical_compendia",
+      "title": "Charaka Saṃhitā: Definition of Svastha, Ayu, and Tridosha Equilibrium",
+      "publisher": "Classical Ayurvedic Compendium (National Institute of Indian Medical Heritage / Ministry of AYUSH)",
+      "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=su&ch=1",
+      "publication_version": "Charaka Saṃhitā, Sūtrasthāna, Chapter 1 (Dīrghañjīvitīya), Ślokas 41-43",
+      "license": "Public Domain (Classical Sanskrit Literature; Digitized via Government Open Access)",
+      "document_type": "Classical Canonical Verse & Exegesis",
+      "download_availability": "Publicly accessible via e-Caraka (NIIMH/AYUSH portal)",
+      "relevance": "Core definition of holistic health (Svastha), foundational Tridosha balance criteria, and Agni equilibrium.",
+      "limitations": "Philosophical foundation requiring contextual translation; not a substitute for modern clinical diagnostic lab metrics.",
+      "tags": [
+        "svastha",
+        "tridosha",
+        "agni",
+        "dhatu",
+        "ojas",
+        "constitutional_equilibrium"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1398,
+      "relative_path": "sources/classical_compendia/CS-SU-01-SVASTHA.json"
+    },
+    {
+      "id": "CS-SU-05-MATRASHITIYA",
+      "collection": "classical_compendia",
+      "title": "Charaka Saṃhitā: Daily Regimen (Dinacharya) & Dietary Measure (Matrashitiya)",
+      "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=su&ch=5",
+      "publication_version": "Charaka Saṃhitā, Sūtrasthāna, Chapter 5, Ślokas 1-20",
+      "license": "Public Domain",
+      "document_type": "Classical Clinical Regimen Monograph",
+      "download_availability": "Publicly accessible via e-Caraka",
+      "relevance": "Provides circadian daily scheduling, food portioning, and preventive hygienic practices.",
+      "limitations": "Individual adjustments required based on geographical location (Desha) and patient occupation.",
+      "tags": [
+        "dinacharya",
+        "matrashitiya",
+        "portion_size",
+        "agni",
+        "abhyanga",
+        "oral_hygiene"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1272,
+      "relative_path": "sources/classical_compendia/CS-SU-05-MATRASHITIYA.json"
+    },
+    {
+      "id": "CS-SU-06-RITUCHARYA",
+      "collection": "classical_compendia",
+      "title": "Charaka Saṃhitā: Seasonal Regimens (Ritucharya) & Environmental Adaptation",
+      "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=su&ch=6",
+      "publication_version": "Charaka Saṃhitā, Sūtrasthāna, Chapter 6 (Tasyāśitīya), Ślokas 1-45",
+      "license": "Public Domain",
+      "document_type": "Classical Seasonal Guideline",
+      "download_availability": "Publicly accessible via e-Caraka",
+      "relevance": "Critical for seasonal diet adaptation and explaining how environmental transitions aggravate specific doshas.",
+      "limitations": "Classical 6-season division (Ritus) must be mapped to regional temperate or tropical zones.",
+      "tags": [
+        "ritucharya",
+        "seasonal_diet",
+        "visarga_kala",
+        "adana_kala",
+        "chaya_prakopa_prashama"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1592,
+      "relative_path": "sources/classical_compendia/CS-SU-06-RITUCHARYA.json"
+    },
+    {
+      "id": "CS-SU-07-VEGANDHARANIYA",
+      "collection": "classical_compendia",
+      "title": "Charaka Saṃhitā: Non-Suppressible Natural Urges (Adharaniya Vega) & Disease Etiology",
+      "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=su&ch=7",
+      "publication_version": "Charaka Saṃhitā, Sūtrasthāna, Chapter 7, Ślokas 3-25",
+      "license": "Public Domain",
+      "document_type": "Classical Etiological Guideline",
+      "download_availability": "Publicly accessible via e-Caraka",
+      "relevance": "Directly links modern lifestyle habits (holding urine, bowel movements, skipping meals) to Vata disorders.",
+      "limitations": "Suppression consequences need correlation with contemporary functional gastrointestinal and autonomic disorders.",
+      "tags": [
+        "adharaniya_vega",
+        "natural_urges",
+        "vata_vitiation",
+        "apana_vayu",
+        "lifestyle_pathology"
+      ],
+      "dosha_affinity": [
+        "Vata"
+      ],
+      "content_char_length": 1698,
+      "relative_path": "sources/classical_compendia/CS-SU-07-VEGANDHARANIYA.json"
+    },
+    {
+      "id": "CS-SU-12-VATAKALAKALIYA",
+      "collection": "classical_compendia",
+      "title": "Charaka Saṃhitā: Properties, Functions, and Pathological Manifestations of Vata",
+      "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=su&ch=12",
+      "publication_version": "Charaka Saṃhitā, Sūtrasthāna, Chapter 12, Ślokas 1-15",
+      "license": "Public Domain",
+      "document_type": "Classical Pathophysiology Treatise",
+      "download_availability": "Publicly accessible via e-Caraka",
+      "relevance": "Crucial for understanding Vata phenotypes, neurological excitability, musculoskeletal pain, and cold intolerance.",
+      "limitations": "Describes systemic manifestations that require modern differential diagnosis to rule out organic neurological disorders.",
+      "tags": [
+        "vata",
+        "gunas",
+        "anxiety",
+        "insomnia",
+        "joint_pain",
+        "dryness",
+        "prakriti"
+      ],
+      "dosha_affinity": [
+        "Vata"
+      ],
+      "content_char_length": 1222,
+      "relative_path": "sources/classical_compendia/CS-SU-12-VATAKALAKALIYA.json"
+    },
+    {
+      "id": "CS-SU-25-YAJJAPURUSHIYA",
+      "collection": "classical_compendia",
+      "title": "Charaka Saṃhitā: Wholesome & Unwholesome Foods and Premier Substances (Agrya Dravyas)",
+      "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=su&ch=25",
+      "publication_version": "Charaka Saṃhitā, Sūtrasthāna, Chapter 25, Ślokas 38-40",
+      "license": "Public Domain",
+      "document_type": "Classical Pharmacological Formulary",
+      "download_availability": "Publicly accessible via e-Caraka",
+      "relevance": "Provides gold-standard dietary recommendations (Pathya) and authoritative single-herb hierarchies.",
+      "limitations": "Some ancient animal preparations mentioned in the chapter are historical; current application focuses on plant and dairy agrya dravyas.",
+      "tags": [
+        "agrya_aushadha",
+        "pathya",
+        "ahara",
+        "ghee",
+        "honey",
+        "ginger",
+        "triphala"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1032,
+      "relative_path": "sources/classical_compendia/CS-SU-25-YAJJAPURUSHIYA.json"
+    },
+    {
+      "id": "CS-SU-27-ANNAPANAVITHI",
+      "collection": "classical_compendia",
+      "title": "Charaka Saṃhitā: Comprehensive Dietetics & Nutritional Classification (Annapanavidhi)",
+      "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=su&ch=27",
+      "publication_version": "Charaka Saṃhitā, Sūtrasthāna, Chapter 27, Ślokas 3-10, 220-250",
+      "license": "Public Domain",
+      "document_type": "Classical Food Science Text",
+      "download_availability": "Publicly accessible via e-Caraka",
+      "relevance": "Underpins the nutritional recommendation engine for customized food lists.",
+      "limitations": "Requires integration with modern nutrient content metrics (calories, protein, glycemic index).",
+      "tags": [
+        "annapanavidhi",
+        "food_groups",
+        "ahara",
+        "cereals",
+        "pulses",
+        "milk_products",
+        "hitahita",
+        "sukhadukha",
+        "charaka_samhita"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1487,
+      "relative_path": "sources/classical_compendia/CS-SU-27-ANNAPANAVITHI.json"
+    },
+    {
+      "id": "CS-VI-01-RASAVIMANA",
+      "collection": "classical_compendia",
+      "title": "Charaka Saṃhitā: The Eight Factors of Dietetics (Aṣṭāvidha Āhāravidhi Viśeṣāyatana)",
+      "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=vi&ch=1",
+      "publication_version": "Charaka Saṃhitā, Vimānasthāna, Chapter 1, Śloka 21-25",
+      "license": "Public Domain",
+      "document_type": "Classical Nutritional Methodology",
+      "download_availability": "Publicly accessible via e-Caraka",
+      "relevance": "Provides behavioral eating rules (mindful eating, eating warm, fresh, unhurried meals) in personalized plans.",
+      "limitations": "Focuses on digestive psychology; must be accompanied by nutrient adequacy checks.",
+      "tags": [
+        "ashtavidha_aharavidhi",
+        "mindful_eating",
+        "dietary_rules",
+        "digestion",
+        "agni"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1545,
+      "relative_path": "sources/classical_compendia/CS-VI-01-RASAVIMANA.json"
+    },
+    {
+      "id": "CS-VI-08-DASHAVITHA-PARIKSHA",
+      "collection": "classical_compendia",
+      "title": "Charaka Saṃhitā: Tenfold Clinical Examination of the Patient (Daśavidha Parīkṣā)",
+      "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=vi&ch=8",
+      "publication_version": "Charaka Saṃhitā, Vimānasthāna, Chapter 8, Ślokas 94-110",
+      "license": "Public Domain",
+      "document_type": "Classical Diagnostic Methodology",
+      "download_availability": "Publicly accessible via e-Caraka",
+      "relevance": "The direct clinical foundation for AyuRAG-XAI's multi-factorial assessment model.",
+      "limitations": "Comprehensive clinical pariksha requires physical tactile and visual examination by a qualified physician.",
+      "tags": [
+        "dashavidha_pariksha",
+        "clinical_assessment",
+        "prakriti",
+        "vikriti",
+        "sara",
+        "satmya"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1251,
+      "relative_path": "sources/classical_compendia/CS-VI-08-DASHAVITHA-PARIKSHA.json"
+    },
+    {
+      "id": "CS-CI-15-GRAHANI-AGNI",
+      "collection": "classical_compendia",
+      "title": "Charaka Saṃhitā: Pathophysiology of Agni, Ama, and Grahani Disorders",
+      "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=ci&ch=15",
+      "publication_version": "Charaka Saṃhitā, Cikitsāsthāna, Chapter 15, Ślokas 3-45",
+      "license": "Public Domain",
+      "document_type": "Classical Gastrointestinal Treatise",
+      "download_availability": "Publicly accessible via e-Caraka",
+      "relevance": "Direct clinical reference for Agni classification (Sama, Vishama, Tikshna, Manda) and digestive recommendations.",
+      "limitations": "Chronic malabsorption disorders and inflammatory bowel disease require modern gastroenterological endoscopy and testing.",
+      "tags": [
+        "grahani",
+        "agni",
+        "ama",
+        "vishama_agni",
+        "tikshna_agni",
+        "manda_agni",
+        "takra"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1145,
+      "relative_path": "sources/classical_compendia/CS-CI-15-GRAHANI-AGNI.json"
+    },
+    {
+      "id": "SS-SU-15-DOSHA-DHATU-KSHAYA-VRIDDHI",
+      "collection": "classical_compendia",
+      "title": "Suśruta Saṃhitā: Clinical Signs of Increase and Decrease of Doshas, Dhatus, and Malas",
+      "publisher": "Classical Ayurvedic Compendium (National Institute of Indian Medical Heritage / AYUSH)",
+      "source_url": "https://niimh.nic.in/ebooks/esusruta/?mod=read&sys=su&ch=15",
+      "publication_version": "Suśruta Saṃhitā, Sūtrasthāna, Chapter 15, Ślokas 1-32",
+      "license": "Public Domain",
+      "document_type": "Classical Surgical-Medical Compendium",
+      "download_availability": "Publicly accessible via e-Sushruta",
+      "relevance": "Provides objective clinical symptom indicators for dosha and tissue depletion or excess.",
+      "limitations": "Tissue depletion (Dhatu Kshaya) symptoms should be correlated with biochemical laboratory markers (e.g. CBC, ferritin).",
+      "tags": [
+        "sushruta",
+        "dhatu_kshaya",
+        "dosha_vriddhi",
+        "ojas",
+        "tissue_depletion"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1241,
+      "relative_path": "sources/classical_compendia/SS-SU-15-DOSHA-DHATU-KSHAYA-VRIDDHI.json"
+    },
+    {
+      "id": "SS-SU-21-SHATKRIYAKALA",
+      "collection": "classical_compendia",
+      "title": "Suśruta Saṃhitā: The Six Stages of Disease Progression (Ṣaṭ Kriyākāla)",
+      "publisher": "Classical Ayurvedic Compendium (e-Sushruta / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/esusruta/?mod=read&sys=su&ch=21",
+      "publication_version": "Suśruta Saṃhitā, Sūtrasthāna, Chapter 21 (Vraṇapraśna), Ślokas 18-36",
+      "license": "Public Domain",
+      "document_type": "Classical Pathological Stage Matrix",
+      "download_availability": "Publicly accessible via e-Sushruta",
+      "relevance": "Provides chronological clinical stages, demonstrating that preventive intervention in early stages halts disease progression.",
+      "limitations": "Stages 5 and 6 (Bhedavastha) indicate manifest anatomical disease requiring medical or surgical intervention.",
+      "tags": [
+        "shatkriyakala",
+        "pathogenesis",
+        "preventive_medicine",
+        "sanchaya",
+        "prakopa",
+        "sthanasamshraya"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1172,
+      "relative_path": "sources/classical_compendia/SS-SU-21-SHATKRIYAKALA.json"
+    },
+    {
+      "id": "AH-SU-01-AYUSHKAMIYA",
+      "collection": "classical_compendia",
+      "title": "Aṣṭāṅga Hṛdayam: Core Foundations of Health & Tridosha Dynamics (Āyuṣkāmīya)",
+      "publisher": "Classical Ayurvedic Compendium (e-Ashtanga / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/eahridaya/?mod=read&sys=su&ch=1",
+      "publication_version": "Aṣṭāṅga Hṛdayam, Sūtrasthāna, Chapter 1, Ślokas 1-25",
+      "license": "Public Domain",
+      "document_type": "Classical Foundational Text",
+      "download_availability": "Publicly accessible via e-Ashtanga",
+      "relevance": "Defines the fundamental axioms of Ayurvedic treatment: like increases like, opposites cure.",
+      "limitations": "Axiomatic rules require personalized calibration based on metabolic rate and clinical contraindications.",
+      "tags": [
+        "ashtanga_hridaya",
+        "tridosha",
+        "rasa",
+        "dhatu",
+        "samanya_vishesha"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1199,
+      "relative_path": "sources/classical_compendia/AH-SU-01-AYUSHKAMIYA.json"
+    },
+    {
+      "id": "AH-SU-02-DINACHARYA",
+      "collection": "classical_compendia",
+      "title": "Aṣṭāṅga Hṛdayam: Circadian Daily Regimen & Preventive Self-Care (Dinacharya)",
+      "publisher": "Classical Ayurvedic Compendium (e-Ashtanga / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/eahridaya/?mod=read&sys=su&ch=2",
+      "publication_version": "Aṣṭāṅga Hṛdayam, Sūtrasthāna, Chapter 2, Ślokas 1-45",
+      "license": "Public Domain",
+      "document_type": "Classical Circadian Protocol",
+      "download_availability": "Publicly accessible via e-Ashtanga",
+      "relevance": "Provides the blueprint for personalized daily circadian schedules generated by AyuRAG-XAI.",
+      "limitations": "Waking hours and exercise intensity must be adapted for shift-workers and individuals with chronic illness.",
+      "tags": [
+        "dinacharya",
+        "brahma_muhurta",
+        "vyayama",
+        "abhyanga",
+        "snana",
+        "circadian_rhythm"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1055,
+      "relative_path": "sources/classical_compendia/AH-SU-02-DINACHARYA.json"
+    },
+    {
+      "id": "AH-SU-07-VIRUDDHAHARA",
+      "collection": "classical_compendia",
+      "title": "Aṣṭāṅga Hṛdayam: Incompatible Food Combinations & Toxic Synergies (Viruddhāhāra)",
+      "publisher": "Classical Ayurvedic Compendium (e-Ashtanga / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/eahridaya/?mod=read&sys=su&ch=7",
+      "publication_version": "Aṣṭāṅga Hṛdayam, Sūtrasthāna, Chapter 7, Ślokas 29-45",
+      "license": "Public Domain",
+      "document_type": "Classical Nutritional Pathology Guideline",
+      "download_availability": "Publicly accessible via e-Ashtanga",
+      "relevance": "Crucial for generating dietary contraindications and warning users against harmful food combinations.",
+      "limitations": "Mechanisms of toxicity reflect classical physiological perspectives; contemporary verification is documented for specific allergies and enzymatic mismatches.",
+      "tags": [
+        "viruddhahara",
+        "food_combinations",
+        "honey_ghee",
+        "milk_sour",
+        "chronic_toxins"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1117,
+      "relative_path": "sources/classical_compendia/AH-SU-07-VIRUDDHAHARA.json"
+    },
+    {
+      "id": "AH-SU-08-MATRASHITIYA-PORTION",
+      "collection": "classical_compendia",
+      "title": "Aṣṭāṅga Hṛdayam: Stomach Volumetric Division for Optimal Digestion",
+      "publisher": "Classical Ayurvedic Compendium (e-Ashtanga / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/eahridaya/?mod=read&sys=su&ch=8",
+      "publication_version": "Aṣṭāṅga Hṛdayam, Sūtrasthāna, Chapter 8, Ślokas 1-4",
+      "license": "Public Domain",
+      "document_type": "Classical Gastrointestinal Guideline",
+      "download_availability": "Publicly accessible via e-Ashtanga",
+      "relevance": "Direct guideline for meal portioning and preventing postprandial bloating or indigestion.",
+      "limitations": "Provides qualitative volume estimation; must be paired with individualized caloric requirements.",
+      "tags": [
+        "portion_control",
+        "stomach_capacity",
+        "agni",
+        "indigestion",
+        "bloating",
+        "ashtanga_hridaya",
+        "ashtanga",
+        "gastric_capacity"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 735,
+      "relative_path": "sources/classical_compendia/AH-SU-08-MATRASHITIYA-PORTION.json"
+    },
+    {
+      "id": "CCRAS-CLINICAL-EVAL-GUIDELINES",
+      "collection": "ccras_guidelines",
+      "title": "CCRAS: General Guidelines for Clinical Evaluation of Ayurvedic Interventions",
+      "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS), Ministry of AYUSH, Govt. of India",
+      "source_url": "https://ccras.nic.in/sites/default/files/viewpdf/General%20Guidelines%20for%20Clinical%20Evaluation%20of%20Ayurvedic%20Interventions.pdf",
+      "publication_version": "CCRAS Guideline Series, 2018 Edition",
+      "license": "Open Government Data (OGD) - India / Research and Academic Fair Use",
+      "document_type": "Official National Research Standard",
+      "download_availability": "Publicly accessible via ccras.nic.in document archive",
+      "relevance": "Provides the methodological benchmark for evaluating clinical Ayurvedic decision support and avoiding unscientific claims.",
+      "limitations": "Focuses on trial design protocols rather than automated software algorithms; adapted for clinical software validation.",
+      "tags": [
+        "ccras",
+        "clinical_trials",
+        "gcp_ayurveda",
+        "evidence_based",
+        "standardization"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 982,
+      "relative_path": "sources/ccras_guidelines/CCRAS-CLINICAL-EVAL-GUIDELINES.json"
+    },
+    {
+      "id": "CCRAS-PRAKRITI-ASSESSMENT-SOP",
+      "collection": "ccras_guidelines",
+      "title": "CCRAS: Standardized Technical Protocol for Deha Prakriti Assessment",
+      "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+      "source_url": "https://ccras.nic.in/content/prakriti-assessment-questionnaire",
+      "publication_version": "CCRAS Technical Protocol, Validated Assessment Tool",
+      "license": "Open Government Data (OGD) - India",
+      "document_type": "Standard Operating Procedure (SOP) & Questionnaire Matrix",
+      "download_availability": "Publicly accessible via ccras.nic.in",
+      "relevance": "Direct algorithmic reference for AyuRAG-XAI's Prakriti questionnaire scoring and constitutional classification.",
+      "limitations": "Self-reported questionnaires carry cognitive bias; doctor clinical verification remains necessary for definitive typing.",
+      "tags": [
+        "ccras_prakriti",
+        "questionnaire",
+        "constitutional_scoring",
+        "vata_pitta_kapha",
+        "validation"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1179,
+      "relative_path": "sources/ccras_guidelines/CCRAS-PRAKRITI-ASSESSMENT-SOP.json"
+    },
+    {
+      "id": "CCRAS-AGNI-ASSESSMENT-PROTOCOL",
+      "collection": "ccras_guidelines",
+      "title": "CCRAS: Clinical Diagnostic Criteria for Digestive Fire (Agni) Evaluation",
+      "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+      "source_url": "https://ccras.nic.in/publications/clinical-diagnostic-manual-agni",
+      "publication_version": "CCRAS Clinical Diagnostic Manual",
+      "license": "Open Government Data (OGD) - India",
+      "document_type": "Clinical Diagnostic Criteria",
+      "download_availability": "Publicly accessible via ccras.nic.in",
+      "relevance": "Provides objective clinical diagnostic symptoms for determining patient Agni status in AyuRAG-XAI.",
+      "limitations": "Subjective symptom clusters; should be supported by dietary recall and stool frequency logging.",
+      "tags": [
+        "ccras_agni",
+        "jatharagni",
+        "digestive_power",
+        "ama_detection",
+        "clinical_scoring"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1138,
+      "relative_path": "sources/ccras_guidelines/CCRAS-AGNI-ASSESSMENT-PROTOCOL.json"
+    },
+    {
+      "id": "CCRAS-GUIDELINE-AMAVATA",
+      "collection": "ccras_guidelines",
+      "title": "CCRAS Clinical Practice Guideline: Management of Amavata (Rheumatoid Spectrum)",
+      "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+      "source_url": "https://ccras.nic.in/sites/default/files/viewpdf/Amavata%20Guideline.pdf",
+      "publication_version": "CCRAS Clinical Protocol Series, 2020",
+      "license": "Open Government Data (OGD) - India",
+      "document_type": "Clinical Practice Guideline",
+      "download_availability": "Publicly accessible via ccras.nic.in",
+      "relevance": "Provides evidence-based lifestyle, nutrition, and referral guidance for joint inflammation and systemic stiffness.",
+      "limitations": "Aggressive erosive joint disease requires ongoing rheumatological monitoring, anti-CCP/RF titers, and safe co-management.",
+      "tags": [
+        "amavata",
+        "joint_pain",
+        "langhana",
+        "swedana",
+        "castor_oil",
+        "anti_inflammatory"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Kapha"
+      ],
+      "content_char_length": 985,
+      "relative_path": "sources/ccras_guidelines/CCRAS-GUIDELINE-AMAVATA.json"
+    },
+    {
+      "id": "CCRAS-GUIDELINE-MADHUMEHA",
+      "collection": "ccras_guidelines",
+      "title": "CCRAS Clinical Practice Guideline: Lifestyle & Dietary Protocol for Madhumeha (Type 2 Diabetes)",
+      "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+      "source_url": "https://ccras.nic.in/sites/default/files/viewpdf/Madhumeha%20Protocol.pdf",
+      "publication_version": "CCRAS Clinical Protocol Series, 2019",
+      "license": "Open Government Data (OGD) - India",
+      "document_type": "Clinical Practice Guideline",
+      "download_availability": "Publicly accessible via ccras.nic.in",
+      "relevance": "Provides authoritative guidance for metabolic syndrome, insulin resistance, and blood sugar regulation.",
+      "limitations": "Does not replace allopathic insulin in Type 1 diabetes or acute diabetic ketoacidosis; HbA1c monitoring mandatory.",
+      "tags": [
+        "madhumeha",
+        "diabetes",
+        "metabolic_syndrome",
+        "barley",
+        "jamun",
+        "ayur_diet"
+      ],
+      "dosha_affinity": [
+        "Kapha",
+        "Vata"
+      ],
+      "content_char_length": 884,
+      "relative_path": "sources/ccras_guidelines/CCRAS-GUIDELINE-MADHUMEHA.json"
+    },
+    {
+      "id": "CCRAS-GUIDELINE-AMLAPITTA",
+      "collection": "ccras_guidelines",
+      "title": "CCRAS Clinical Practice Guideline: Management of Amlapitta (Hyperacidity & GERD)",
+      "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+      "source_url": "https://ccras.nic.in/sites/default/files/viewpdf/Amlapitta%20Guideline.pdf",
+      "publication_version": "CCRAS Clinical Protocol Series, 2021",
+      "license": "Open Government Data (OGD) - India",
+      "document_type": "Clinical Practice Guideline",
+      "download_availability": "Publicly accessible via ccras.nic.in",
+      "relevance": "Provides non-pharmacological and herbal management for heartburn, gastric burning, and acid regurgitation.",
+      "limitations": "Gastric ulcer perforation or persistent hematemesis requires immediate emergency allopathic care.",
+      "tags": [
+        "amlapitta",
+        "hyperacidity",
+        "gerd",
+        "pitta_shamana",
+        "shatavari",
+        "yashtimadhu"
+      ],
+      "dosha_affinity": [
+        "Pitta"
+      ],
+      "content_char_length": 842,
+      "relative_path": "sources/ccras_guidelines/CCRAS-GUIDELINE-AMLAPITTA.json"
+    },
+    {
+      "id": "CCRAS-GUIDELINE-ANIDRA",
+      "collection": "ccras_guidelines",
+      "title": "CCRAS Clinical Practice Guideline: Management of Anidra (Primary Insomnia)",
+      "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+      "source_url": "https://ccras.nic.in/sites/default/files/viewpdf/Anidra%20Guideline.pdf",
+      "publication_version": "CCRAS Clinical Protocol Series, 2020",
+      "license": "Open Government Data (OGD) - India",
+      "document_type": "Clinical Practice Guideline",
+      "download_availability": "Publicly accessible via ccras.nic.in",
+      "relevance": "Evidence-based non-pharmacological protocols for sleep disturbances, nighttime restlessness, and stress.",
+      "limitations": "Severe psychiatric depression, bipolar disorder, or obstructive sleep apnea require specialized medical review.",
+      "tags": [
+        "anidra",
+        "insomnia",
+        "sleep_hygiene",
+        "shirodhara",
+        "ashwagandha",
+        "vata_pitta"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta"
+      ],
+      "content_char_length": 770,
+      "relative_path": "sources/ccras_guidelines/CCRAS-GUIDELINE-ANIDRA.json"
+    },
+    {
+      "id": "API-WITHANIA-SOMNIFERA",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Withania somnifera (Ashwagandha)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H), Ministry of AYUSH",
+      "source_url": "https://pcimh.gov.in/monographs/withania-somnifera",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 08",
+      "license": "Official Government Statutory Standard (PCIM&H / Ministry of AYUSH)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Official publication via pcimh.gov.in / National Portal",
+      "relevance": "Authoritative standard for Ashwagandha identification, indications, dosage, and safety contraindications.",
+      "limitations": "Monograph covers root material; extracts with high withanolide standardization require clinical dose titration.",
+      "tags": [
+        "ashwagandha",
+        "withania_somnifera",
+        "rasayana",
+        "adaptogen",
+        "vata_shamana",
+        "insomnia"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Kapha"
+      ],
+      "content_char_length": 1374,
+      "relative_path": "sources/botanical_pharmacopoeia/API-WITHANIA-SOMNIFERA.json"
+    },
+    {
+      "id": "API-TINOSPORA-CORDIFOLIA",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Tinospora cordifolia (Guduchi/Giloy)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/tinospora-cordifolia",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 17",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Authoritative reference for immune modulation, fever management, and metabolic detoxification.",
+      "limitations": "Rare idiosyncratic hepatotoxicity reported with adulterated species (Tinospora crispa); authentic T. cordifolia verified.",
+      "tags": [
+        "guduchi",
+        "giloy",
+        "tinospora_cordifolia",
+        "immunomodulator",
+        "jvara",
+        "rasayana"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1255,
+      "relative_path": "sources/botanical_pharmacopoeia/API-TINOSPORA-CORDIFOLIA.json"
+    },
+    {
+      "id": "API-PHYLLANTHUS-EMBLICA",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Phyllanthus emblica (Amalaki/Amla)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/phyllanthus-emblica",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 04",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier antioxidant, digestive balancer, and Pitta-pacifying fruit monograph.",
+      "limitations": "High raw acidity may cause mild transient heartburn in sensitive individuals if taken on completely empty stomach.",
+      "tags": [
+        "amalaki",
+        "amla",
+        "phyllanthus_emblica",
+        "pitta_shamana",
+        "antioxidant",
+        "rasayana"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1140,
+      "relative_path": "sources/botanical_pharmacopoeia/API-PHYLLANTHUS-EMBLICA.json"
+    },
+    {
+      "id": "API-TERMINALIA-CHEBULA",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Terminalia chebula (Haritaki)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/terminalia-chebula",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 19",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier bowel regulator, gut detoxifier, and Triphala component.",
+      "limitations": "Contraindicated in severe dehydration, acute exhaustion, and pregnancy.",
+      "tags": [
+        "haritaki",
+        "terminalia_chebula",
+        "anulomana",
+        "laxative",
+        "gut_motility",
+        "triphala"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 952,
+      "relative_path": "sources/botanical_pharmacopoeia/API-TERMINALIA-CHEBULA.json"
+    },
+    {
+      "id": "API-ASPARAGUS-RACEMOSUS",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Asparagus racemosus (Shatavari)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/asparagus-racemosus",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. IV, Monograph 35",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier reproductive tonic, gastric mucosal protector, and cooling Pitta-Vata balancer.",
+      "limitations": "Caution in estrogen-receptor positive hormone-sensitive neoplasms; monitor in severe fluid retention.",
+      "tags": [
+        "shatavari",
+        "asparagus_racemosus",
+        "pitta_shamana",
+        "mucosal_protection",
+        "female_vitality"
+      ],
+      "dosha_affinity": [
+        "Pitta",
+        "Vata"
+      ],
+      "content_char_length": 975,
+      "relative_path": "sources/botanical_pharmacopoeia/API-ASPARAGUS-RACEMOSUS.json"
+    },
+    {
+      "id": "API-BACOPA-MONNIERI",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Bacopa monnieri (Brahmi)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/bacopa-monnieri",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. II, Monograph 08",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier neuroprotective, cognitive enhancing (Medhya), and anxiolytic botanical.",
+      "limitations": "Can cause mild gastrointestinal cramping or nausea when consumed on an empty stomach.",
+      "tags": [
+        "brahmi",
+        "bacopa_monnieri",
+        "medhya",
+        "cognitive_support",
+        "anxiety",
+        "neuroprotection"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1012,
+      "relative_path": "sources/botanical_pharmacopoeia/API-BACOPA-MONNIERI.json"
+    },
+    {
+      "id": "API-COMMIPHORA-MUKUL",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Commiphora mukul (Guggulu)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/commiphora-mukul",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 18",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier lipid-modulating, anti-inflammatory, and anti-arthritic gum resin.",
+      "limitations": "Must undergo traditional Sodhana purification; contra-indicated with anticoagulant drugs.",
+      "tags": [
+        "guggulu",
+        "commiphora_mukul",
+        "medoroga",
+        "lipid_management",
+        "amavata",
+        "shodhana"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Kapha"
+      ],
+      "content_char_length": 1292,
+      "relative_path": "sources/botanical_pharmacopoeia/API-COMMIPHORA-MUKUL.json"
+    },
+    {
+      "id": "API-ZINGIBER-OFFICINALE",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Zingiber officinale (Shunthi/Ginger)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/zingiber-officinale",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 62",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Universal digestive stimulant (Vishvabheshaja), carminative, and Ama-digestant.",
+      "limitations": "Excessive intake can provoke burning in active ulcerative gastritis or acute bleeding hemorrhoids.",
+      "tags": [
+        "shunthi",
+        "ginger",
+        "zingiber_officinale",
+        "deepana",
+        "pachana",
+        "ama_pachana"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Kapha"
+      ],
+      "content_char_length": 1026,
+      "relative_path": "sources/botanical_pharmacopoeia/API-ZINGIBER-OFFICINALE.json"
+    },
+    {
+      "id": "API-OCIMUM-SANCTUM",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Ocimum sanctum (Tulsi)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/ocimum-sanctum",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. II, Monograph 67",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier respiratory adaptogen, antimicrobial, and Kapha-Vata balancing herb.",
+      "limitations": "Mild anti-fertility effects demonstrated in high-dose animal models; use in moderation during conception efforts.",
+      "tags": [
+        "tulsi",
+        "ocimum_sanctum",
+        "holy_basil",
+        "respiratory",
+        "kapha_vata",
+        "antimicrobial"
+      ],
+      "dosha_affinity": [
+        "Kapha",
+        "Vata"
+      ],
+      "content_char_length": 897,
+      "relative_path": "sources/botanical_pharmacopoeia/API-OCIMUM-SANCTUM.json"
+    },
+    {
+      "id": "API-CURCUMA-LONGA",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Curcuma longa (Haridra/Turmeric)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/curcuma-longa",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 22",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier anti-inflammatory, dermal tonic, blood purifier, and metabolic adjuvant.",
+      "limitations": "High-dose curcumin extracts contraindicated in mechanical gallstone obstruction; enhances antiplatelet drugs.",
+      "tags": [
+        "haridra",
+        "turmeric",
+        "curcuma_longa",
+        "anti_inflammatory",
+        "prameha",
+        "varnya"
+      ],
+      "dosha_affinity": [
+        "Kapha",
+        "Vata",
+        "Pitta"
+      ],
+      "content_char_length": 1018,
+      "relative_path": "sources/botanical_pharmacopoeia/API-CURCUMA-LONGA.json"
+    },
+    {
+      "id": "API-GLYCYRRHIZA-GLABRA",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Glycyrrhiza glabra (Yashtimadhu/Licorice)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/glycyrrhiza-glabra",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 61",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier mucosal protector, demulcent, and Pitta-Vata pacifier.",
+      "limitations": "Prolonged high doses (>6 weeks) can induce pseudoaldosteronism, hypokalemia, and secondary hypertension.",
+      "tags": [
+        "yashtimadhu",
+        "licorice",
+        "glycyrrhiza_glabra",
+        "pitta_shamana",
+        "hypertension_warning"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta"
+      ],
+      "content_char_length": 1082,
+      "relative_path": "sources/botanical_pharmacopoeia/API-GLYCYRRHIZA-GLABRA.json"
+    },
+    {
+      "id": "ICMR-NIN-2024-CORE-GUIDELINES",
+      "collection": "nutrition_pathya",
+      "title": "ICMR-NIN 2024: Dietary Guidelines for Indians (17 Core Public Health Directives)",
+      "publisher": "National Institute of Nutrition (ICMR-NIN), Indian Council of Medical Research",
+      "source_url": "https://www.nin.res.in/dietaryguidelines/2024.html",
+      "publication_version": "Dietary Guidelines for Indians, Revised 2024 Edition",
+      "license": "Public Health Guidance (ICMR-NIN, Ministry of Health and Family Welfare)",
+      "document_type": "National Evidence-Based Clinical Nutrition Standard",
+      "download_availability": "Publicly accessible via nin.res.in",
+      "relevance": "Modern evidence-based nutrition framework governing healthy diets and chronic disease prevention.",
+      "limitations": "National population level recommendations requiring clinical personalization for individual metabolic profiles.",
+      "tags": [
+        "icmr_nin",
+        "dietary_guidelines_2024",
+        "my_plate",
+        "nutrition",
+        "ncd_prevention",
+        "whole_foods"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1380,
+      "relative_path": "sources/nutrition_pathya/ICMR-NIN-2024-CORE-GUIDELINES.json"
+    },
+    {
+      "id": "PATHYA-APATHYA-DOSHA-FOOD-MATRIX",
+      "collection": "nutrition_pathya",
+      "title": "Clinical Pathya-Apathya Food Selection Matrix for Constitutional Dosha Imbalances",
+      "publisher": "AyuRAG Clinical Knowledge Curation / CCRAS and ICMR-NIN Cross-Validated Standards",
+      "source_url": "https://ayushportal.nic.in/pathya-apathya-matrix",
+      "publication_version": "Clinical Cross-Reference Standard v2.4, 2024",
+      "license": "CC-BY-SA 4.0 / Clinical Open Access Reference",
+      "document_type": "Clinical Food-Dosha Balancing Matrix",
+      "download_availability": "Publicly accessible via AYUSH Research Portal / AyuRAG Knowledge Base",
+      "relevance": "Provides exact food recommendations (Pathya) and foods to avoid (Apathya) for Vata, Pitta, and Kapha.",
+      "limitations": "Individual food tolerances (Satmya) and culinary food allergies supersede broad group classifications.",
+      "tags": [
+        "food_matrix",
+        "pathya",
+        "apathya",
+        "vata_diet",
+        "pitta_diet",
+        "kapha_diet"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1861,
+      "relative_path": "sources/nutrition_pathya/PATHYA-APATHYA-DOSHA-FOOD-MATRIX.json"
+    },
+    {
+      "id": "PATHYA-AHARA-PARINAMAKARA-BHAVA",
+      "collection": "nutrition_pathya",
+      "title": "Classical Principles of Food Transformation (Āhāra Pariṇāmakara Bhāva)",
+      "publisher": "AyuRAG Clinical Knowledge Base / Charaka Saṃhitā Sharirasthana Ch 6",
+      "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=sa&ch=6",
+      "publication_version": "Charaka Saṃhitā, Śārīrasthāna, Chapter 6, Ślokas 14-18",
+      "license": "Public Domain / Classical Reference",
+      "document_type": "Classical Metabolic Science Protocol",
+      "download_availability": "Publicly accessible via e-Caraka",
+      "relevance": "Explains how the six factors of metabolism digest food into healthy tissues rather than inflammatory Ama.",
+      "limitations": "Philosophical physiological concepts that parallel gastrointestinal motility, enzymes, and temperature.",
+      "tags": [
+        "ahara_parinama",
+        "digestion_mechanisms",
+        "ushma",
+        "vayu",
+        "kleda",
+        "sneha",
+        "kala",
+        "samayoga"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 894,
+      "relative_path": "sources/nutrition_pathya/PATHYA-AHARA-PARINAMAKARA-BHAVA.json"
+    },
+    {
+      "id": "AYUSH-PHARMACOVIGILANCE-FRAMEWORK",
+      "collection": "clinical_safety_referral",
+      "title": "Ministry of AYUSH: National Pharmacovigilance Program for ASU&H Drugs & ADR Guidelines",
+      "publisher": "National Pharmacovigilance Coordination Centre (NPvCC), All India Institute of Ayurveda & Ministry of AYUSH",
+      "source_url": "https://ayushsuraksha.gov.in",
+      "publication_version": "National Pharmacovigilance Protocol, 2021 Update",
+      "license": "Open Government Data (OGD) - India / Public Clinical Safety Guidance",
+      "document_type": "National Drug Safety & Pharmacovigilance Standard",
+      "download_availability": "Publicly accessible via ayushsuraksha.gov.in",
+      "relevance": "Provides the safety foundation: natural does not automatically equal safe; mandates ADR monitoring.",
+      "limitations": "Post-market spontaneous reporting framework; under-reporting of mild ADRs is a documented global limitation.",
+      "tags": [
+        "pharmacovigilance",
+        "ayush_suraksha",
+        "adr_monitoring",
+        "drug_safety",
+        "herb_safety"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1056,
+      "relative_path": "sources/clinical_safety_referral/AYUSH-PHARMACOVIGILANCE-FRAMEWORK.json"
+    },
+    {
+      "id": "CLINICAL-EMERGENCY-REFERRAL-PROTOCOL",
+      "collection": "clinical_safety_referral",
+      "title": "Clinical Red-Flag Symptoms & Immediate Allopathic Emergency Referral Escalation Protocol",
+      "publisher": "AyuRAG Clinical Safety Board / Integrated Critical Care Guidelines",
+      "source_url": "https://ayushportal.nic.in/clinical-safety-escalation",
+      "publication_version": "Clinical Decision Support Safety Standard v3.1, 2024",
+      "license": "CC-BY-NC-ND 4.0 / Public Clinical Safety Protocol",
+      "document_type": "Emergency Triage & Clinical Escalation Protocol",
+      "download_availability": "Publicly accessible via AyuRAG Knowledge Portal",
+      "relevance": "Essential clinical safety guardrail: immediately flags life-threatening red-flag symptoms for urgent emergency referral.",
+      "limitations": "Algorithmic screening protocol; cannot replace physical bedside emergency triage by a licensed physician.",
+      "tags": [
+        "red_flags",
+        "emergency_referral",
+        "clinical_escalation",
+        "safety_guardrails",
+        "triage"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1409,
+      "relative_path": "sources/clinical_safety_referral/CLINICAL-EMERGENCY-REFERRAL-PROTOCOL.json"
+    },
+    {
+      "id": "HERB-DRUG-INTERACTION-MATRIX",
+      "collection": "clinical_safety_referral",
+      "title": "Clinical Herb-Drug Interaction Matrix: Key Ayurvedic Botanicals & Modern Pharmaceuticals",
+      "publisher": "AyuRAG Clinical Pharmacology Working Group / AYUSH Suraksha Pharmacovigilance Cross-Index",
+      "source_url": "https://ayushsuraksha.gov.in/herb-drug-interactions",
+      "publication_version": "Evidence-Based Herb-Drug Cross-Index, 2024 Edition",
+      "license": "Clinical Open Access Reference",
+      "document_type": "Pharmacological Interaction Reference",
+      "download_availability": "Publicly accessible via ayushsuraksha.gov.in",
+      "relevance": "Protects patients taking concurrent modern prescription medications from adverse herb-drug interactions.",
+      "limitations": "In vitro and animal cytochrome P450 modulation data require ongoing clinical confirmation in human trials.",
+      "tags": [
+        "herb_drug_interactions",
+        "cyp450",
+        "pharmacokinetics",
+        "anticoagulants",
+        "guggulu",
+        "ashwagandha"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1730,
+      "relative_path": "sources/clinical_safety_referral/HERB-DRUG-INTERACTION-MATRIX.json"
+    },
+    {
+      "id": "SAFETY-PREGNANCY-LACTATION",
+      "collection": "clinical_safety_referral",
+      "title": "Clinical Safety Guidance: Botanical Contraindications in Pregnancy and Lactation",
+      "publisher": "Ministry of AYUSH & CCRAS Mother and Child Health Guidelines",
+      "source_url": "https://ayushportal.nic.in/pregnancy-botanical-safety",
+      "publication_version": "AYUSH Clinical Safety Monograph, 2022",
+      "license": "Open Government Data (OGD) - India",
+      "document_type": "Clinical Reproductive Safety Guideline",
+      "download_availability": "Publicly accessible via ayushportal.nic.in",
+      "relevance": "Strict safety filtering to exclude abortifacient, emmenagogue, or uterine stimulant herbs in pregnant users.",
+      "limitations": "Ethical constraints preclude randomized trials in pregnant women; cautious avoidance principle strictly applied.",
+      "tags": [
+        "pregnancy_safety",
+        "lactation",
+        "garbhashaya_sankochaka",
+        "contraindications",
+        "teratogenicity"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1189,
+      "relative_path": "sources/clinical_safety_referral/SAFETY-PREGNANCY-LACTATION.json"
+    },
+    {
+      "id": "AYURVEDIC-SHODHANA-STANDARDS",
+      "collection": "clinical_safety_referral",
+      "title": "Ayurvedic Pharmacopoeia Standards for Sodhana (Purification / Detoxification Protocols)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/shodhana-protocols",
+      "publication_version": "Ayurvedic Formulary of India (AFI) & API Part-I Appendices",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Toxicological Processing & Safety Protocol",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Explains why unpurified poisonous herbs are strictly toxic and how classical processing detoxifies raw materials.",
+      "limitations": "Industrial manufacturing compliance requires lab verification of alkaloid/heavy-metal reduction.",
+      "tags": [
+        "shodhana",
+        "detoxification",
+        "vatsanabha",
+        "guggulu",
+        "safety_processing",
+        "pcimh"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 1183,
+      "relative_path": "sources/clinical_safety_referral/AYURVEDIC-SHODHANA-STANDARDS.json"
+    },
+    {
+      "id": "CS-CI-01-RASAYANA",
+      "collection": "classical_compendia",
+      "title": "Charaka Saṃhitā: Science of Rejuvenation & Immunological Longevity (Rasāyana)",
+      "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=ci&ch=1",
+      "publication_version": "Charaka Saṃhitā, Cikitsāsthāna, Chapter 1 (Rasāyanādhyāya), Ślokas 1-12",
+      "license": "Public Domain",
+      "document_type": "Classical Gerontology & Immunology Treatise",
+      "download_availability": "Publicly accessible via e-Caraka",
+      "relevance": "Underpins preventive lifestyle guidelines, cellular longevity, and Ojas enhancement.",
+      "limitations": "Classical internal purification (Panchakarma) prerequisite must be adapted for modern outpatient settings.",
+      "tags": [
+        "rasayana",
+        "longevity",
+        "ojas",
+        "chyawanprash",
+        "triphala",
+        "rejuvenation"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 959,
+      "relative_path": "sources/classical_compendia/CS-CI-01-RASAYANA.json"
+    },
+    {
+      "id": "CS-CI-03-JWARA-LANGHANA",
+      "collection": "classical_compendia",
+      "title": "Charaka Saṃhitā: Management of Fever, Agni Restoration, and Langhana Therapy",
+      "publisher": "Classical Ayurvedic Compendium (e-Caraka / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=ci&ch=3",
+      "publication_version": "Charaka Saṃhitā, Cikitsāsthāna, Chapter 3 (Jvaracikitsā), Ślokas 138-160",
+      "license": "Public Domain",
+      "document_type": "Classical Clinical Therapeutics Treatise",
+      "download_availability": "Publicly accessible via e-Caraka",
+      "relevance": "Provides protocols for managing acute digestive shutdown, metabolic fever, and therapeutic fasting.",
+      "limitations": "Severe bacterial sepsis, high persistent fever (>39°C), and pediatric febrile convulsions require immediate allopathic hospital admission.",
+      "tags": [
+        "jwara",
+        "langhana",
+        "shadanga_paniya",
+        "fever_management",
+        "ama_pachana"
+      ],
+      "dosha_affinity": [
+        "Pitta",
+        "Kapha",
+        "Vata"
+      ],
+      "content_char_length": 895,
+      "relative_path": "sources/classical_compendia/CS-CI-03-JWARA-LANGHANA.json"
+    },
+    {
+      "id": "SS-SU-46-ANNAPANATATVA",
+      "collection": "classical_compendia",
+      "title": "Suśruta Saṃhitā: Water Quality, Beverage Thermodynamics, and Meal Rhythm",
+      "publisher": "Classical Ayurvedic Compendium (e-Sushruta / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/esusruta/?mod=read&sys=su&ch=46",
+      "publication_version": "Suśruta Saṃhitā, Sūtrasthāna, Chapter 46, Ślokas 419-485",
+      "license": "Public Domain",
+      "document_type": "Classical Food Science Text",
+      "download_availability": "Publicly accessible via e-Sushruta",
+      "relevance": "Direct guideline for water temperature, meal timing, and drinking water during meals.",
+      "limitations": "Ancient water collection terms (rain vs pond water) must be mapped to modern filtered, potable water standards.",
+      "tags": [
+        "sushruta_nutrition",
+        "water_quality",
+        "ushnodaka",
+        "hydration_timing",
+        "meal_rhythm"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 942,
+      "relative_path": "sources/classical_compendia/SS-SU-46-ANNAPANATATVA.json"
+    },
+    {
+      "id": "AH-SU-03-RITUCHARYA-VAGBHATA",
+      "collection": "classical_compendia",
+      "title": "Aṣṭāṅga Hṛdayam: Seasonal Transitions (Ṛtucaryā) & Seasonal Sandhi Care",
+      "publisher": "Classical Ayurvedic Compendium (e-Ashtanga / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/eahridaya/?mod=read&sys=su&ch=3",
+      "publication_version": "Aṣṭāṅga Hṛdayam, Sūtrasthāna, Chapter 3, Ślokas 1-58",
+      "license": "Public Domain",
+      "document_type": "Classical Seasonal Hygiene Guide",
+      "download_availability": "Publicly accessible via e-Ashtanga",
+      "relevance": "Explains Ritu Sandhi (the 14-day transitional junction between seasons) and why acute illnesses spike during seasonal changes.",
+      "limitations": "Requires alignment with local meteorology and geographical hemisphere.",
+      "tags": [
+        "ritusandhi",
+        "seasonal_junction",
+        "immunity",
+        "pathya_transition",
+        "adaptation"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 975,
+      "relative_path": "sources/classical_compendia/AH-SU-03-RITUCHARYA-VAGBHATA.json"
+    },
+    {
+      "id": "AH-SU-11-DOSHA-KARYA",
+      "collection": "classical_compendia",
+      "title": "Aṣṭāṅga Hṛdayam: Physiological Functions of Balanced Doshas and Tissues",
+      "publisher": "Classical Ayurvedic Compendium (e-Ashtanga / NIIMH)",
+      "source_url": "https://niimh.nic.in/ebooks/eahridaya/?mod=read&sys=su&ch=11",
+      "publication_version": "Aṣṭāṅga Hṛdayam, Sūtrasthāna, Chapter 11, Ślokas 1-20",
+      "license": "Public Domain",
+      "document_type": "Classical Human Physiology Treatise",
+      "download_availability": "Publicly accessible via e-Ashtanga",
+      "relevance": "Provides the normal physiological benchmark against which patient symptoms are compared.",
+      "limitations": "Qualitative functional observations; must be correlated with contemporary vital signs and organ function tests.",
+      "tags": [
+        "dosha_karya",
+        "normal_physiology",
+        "vata_functions",
+        "pitta_functions",
+        "kapha_functions"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 803,
+      "relative_path": "sources/classical_compendia/AH-SU-11-DOSHA-KARYA.json"
+    },
+    {
+      "id": "CCRAS-GUIDELINE-STHAULYA",
+      "collection": "ccras_guidelines",
+      "title": "CCRAS Clinical Practice Guideline: Management of Sthaulya (Obesity & Dyslipidemia)",
+      "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+      "source_url": "https://ccras.nic.in/sites/default/files/viewpdf/Sthaulya%20Guideline.pdf",
+      "publication_version": "CCRAS Clinical Protocol Series, 2021",
+      "license": "Open Government Data (OGD) - India",
+      "document_type": "Clinical Practice Guideline",
+      "download_availability": "Publicly accessible via ccras.nic.in",
+      "relevance": "Authoritative dietary and lifestyle management for elevated BMI, visceral adiposity, and sluggish metabolism.",
+      "limitations": "Severe morbid obesity with sleep apnea or endocrine tumors (Cushing's) requires specialized endocrinological workup.",
+      "tags": [
+        "sthaulya",
+        "obesity",
+        "dyslipidemia",
+        "lekhana",
+        "medoroga",
+        "triphala_guggulu"
+      ],
+      "dosha_affinity": [
+        "Kapha",
+        "Vata"
+      ],
+      "content_char_length": 839,
+      "relative_path": "sources/ccras_guidelines/CCRAS-GUIDELINE-STHAULYA.json"
+    },
+    {
+      "id": "CCRAS-GCP-RESEARCH-ETHICS",
+      "collection": "ccras_guidelines",
+      "title": "CCRAS Good Clinical Practice (GCP) Guidelines for Ayurvedic Clinical Research",
+      "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+      "source_url": "https://ccras.nic.in/publications/gcp-ayurveda",
+      "publication_version": "CCRAS GCP Guideline, Second Edition",
+      "license": "Open Government Data (OGD) - India",
+      "document_type": "Clinical Ethics & Governance Standard",
+      "download_availability": "Publicly accessible via ccras.nic.in",
+      "relevance": "Governs data integrity, patient informed consent, and adverse event reporting in clinical systems.",
+      "limitations": "Institutional standard requiring local institutional ethics committee (IEC) oversight for human subjects.",
+      "tags": [
+        "ccras_gcp",
+        "clinical_ethics",
+        "patient_consent",
+        "data_integrity",
+        "adverse_events"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 780,
+      "relative_path": "sources/ccras_guidelines/CCRAS-GCP-RESEARCH-ETHICS.json"
+    },
+    {
+      "id": "API-AZADIRACHTA-INDICA",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Azadirachta indica (Nimba/Neem)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/azadirachta-indica",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. II, Monograph 53",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier bitter blood purifier, antimicrobial, and Pitta-Kapha pacifying leaf/bark.",
+      "limitations": "Prolonged high doses can aggravate Vata, cause emaciation, and exert mild anti-spermatogenic effects.",
+      "tags": [
+        "nimba",
+        "neem",
+        "azadirachta_indica",
+        "kushtha",
+        "blood_purifier",
+        "tikta_rasa"
+      ],
+      "dosha_affinity": [
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 856,
+      "relative_path": "sources/botanical_pharmacopoeia/API-AZADIRACHTA-INDICA.json"
+    },
+    {
+      "id": "API-TRIBULUS-TERRESTRIS",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Tribulus terrestris (Gokshura)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/tribulus-terrestris",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 16",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier nephroprotective, lithotriptic, and rejuvenating diuretic tonic.",
+      "limitations": "Caution in patients taking modern synthetic potassium-sparing diuretics to prevent hyperkalemia.",
+      "tags": [
+        "gokshura",
+        "tribulus_terrestris",
+        "mutrakrichra",
+        "diuretic",
+        "nephroprotective",
+        "vrishya"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta"
+      ],
+      "content_char_length": 775,
+      "relative_path": "sources/botanical_pharmacopoeia/API-TRIBULUS-TERRESTRIS.json"
+    },
+    {
+      "id": "API-BOERHAVIA-DIFFUSA",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Boerhavia diffusa (Punarnava)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/boerhavia-diffusa",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 47",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier anti-edematous, diuretic, and hepatoprotective whole plant.",
+      "limitations": "In end-stage renal disease (ESRD) requiring dialysis, fluid volume and potassium must be managed under nephrology care.",
+      "tags": [
+        "punarnava",
+        "boerhavia_diffusa",
+        "shotha",
+        "edema",
+        "kidney_support",
+        "liver_tonic"
+      ],
+      "dosha_affinity": [
+        "Kapha",
+        "Vata"
+      ],
+      "content_char_length": 748,
+      "relative_path": "sources/botanical_pharmacopoeia/API-BOERHAVIA-DIFFUSA.json"
+    },
+    {
+      "id": "API-BOSWELLIA-SERRATA",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Boswellia serrata (Shallaki)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/boswellia-serrata",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. IV, Monograph 41",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier botanical for osteoarthritis, inflammatory joint disease, and cartilage preservation.",
+      "limitations": "May cause mild gastric discomfort or acid reflux in sensitive individuals if taken without food.",
+      "tags": [
+        "shallaki",
+        "boswellia_serrata",
+        "sandhivata",
+        "osteoarthritis",
+        "boswellic_acid",
+        "anti_inflammatory"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Kapha"
+      ],
+      "content_char_length": 916,
+      "relative_path": "sources/botanical_pharmacopoeia/API-BOSWELLIA-SERRATA.json"
+    },
+    {
+      "id": "API-ANDROGRAPHIS-PANICULATA",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Andrographis paniculata (Kalmegh/Bhunimba)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/andrographis-paniculata",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. II, Monograph 10",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier hepatoprotective, bitter febrifuge, and upper respiratory infection botanical.",
+      "limitations": "Very intense bitter taste; high doses can cause loss of appetite, nausea, or allergic rash.",
+      "tags": [
+        "kalmegh",
+        "bhunimba",
+        "andrographis_paniculata",
+        "hepatoprotective",
+        "bitter_tonic",
+        "jvara"
+      ],
+      "dosha_affinity": [
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 796,
+      "relative_path": "sources/botanical_pharmacopoeia/API-ANDROGRAPHIS-PANICULATA.json"
+    },
+    {
+      "id": "API-PIPER-NIGRUM",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Piper nigrum (Maricha/Black Pepper)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/piper-nigrum",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. III, Monograph 17",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Key bioavailability enhancer (piperine), respiratory mucolytic, and Trikatu component.",
+      "limitations": "Pungent and hot; excessive consumption aggravates Pitta and produces gastric burning.",
+      "tags": [
+        "maricha",
+        "black_pepper",
+        "piper_nigrum",
+        "trikatu",
+        "bioenhancer",
+        "kapha_shamana"
+      ],
+      "dosha_affinity": [
+        "Kapha",
+        "Vata"
+      ],
+      "content_char_length": 808,
+      "relative_path": "sources/botanical_pharmacopoeia/API-PIPER-NIGRUM.json"
+    },
+    {
+      "id": "API-PIPER-LONGUM",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Piper longum (Pippali/Long Pepper)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/piper-longum",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. IV, Monograph 28",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier respiratory rejuvenator (Pranavaha Srotas Rasayana) and digestive stimulant.",
+      "limitations": "Classical caveat: prolonged continuous usage of Pippali without milk/honey can irritate Pitta.",
+      "tags": [
+        "pippali",
+        "piper_longum",
+        "respiratory_rasayana",
+        "vardhamana_pippali",
+        "deepana"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Kapha"
+      ],
+      "content_char_length": 717,
+      "relative_path": "sources/botanical_pharmacopoeia/API-PIPER-LONGUM.json"
+    },
+    {
+      "id": "API-CUMINUM-CYMINUM",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Cuminum cyminum (Jeeraka/Cumin)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/cuminum-cyminum",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 24",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier carminative spice for bloating, abdominal colic, and maternal digestive care.",
+      "limitations": "Safe culinary herb with virtually no toxicities; therapeutic dosages above 6g daily rarely necessary.",
+      "tags": [
+        "jeeraka",
+        "cumin",
+        "cuminum_cyminum",
+        "carminative",
+        "bloating",
+        "deepana"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Kapha",
+        "Pitta"
+      ],
+      "content_char_length": 659,
+      "relative_path": "sources/botanical_pharmacopoeia/API-CUMINUM-CYMINUM.json"
+    },
+    {
+      "id": "API-FOENICULUM-VULGARE",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Foeniculum vulgare (Mishreya/Fennel)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/foeniculum-vulgare",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 38",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Mild cooling carminative, ideal for infant colic, Pitta indigestion, and postprandial freshening.",
+      "limitations": "Pure essential oil contains estragole and must not be ingested undiluted; whole seeds safe.",
+      "tags": [
+        "mishreya",
+        "fennel",
+        "foeniculum_vulgare",
+        "cooling_carminative",
+        "colic",
+        "pitta_friendly"
+      ],
+      "dosha_affinity": [
+        "Pitta",
+        "Vata"
+      ],
+      "content_char_length": 660,
+      "relative_path": "sources/botanical_pharmacopoeia/API-FOENICULUM-VULGARE.json"
+    },
+    {
+      "id": "API-CORIANDRUM-SATIVUM",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Coriandrum sativum (Dhanyaka/Coriander)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/coriandrum-sativum",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 14",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier Pitta-pacifying digestive, thirst quencher, and cooling diuretic.",
+      "limitations": "Safe culinary spice; no documented toxicities at dietary levels.",
+      "tags": [
+        "dhanyaka",
+        "coriander",
+        "coriandrum_sativum",
+        "trishna",
+        "pitta_shamana",
+        "diuretic"
+      ],
+      "dosha_affinity": [
+        "Pitta",
+        "Vata",
+        "Kapha"
+      ],
+      "content_char_length": 768,
+      "relative_path": "sources/botanical_pharmacopoeia/API-CORIANDRUM-SATIVUM.json"
+    },
+    {
+      "id": "API-ALLIUM-SATIVUM",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Allium sativum (Lashuna/Garlic)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/allium-sativum",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. III, Monograph 22",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier Vata-pacifier, cardiovascular lipid regulator, and anti-arthritic bulb.",
+      "limitations": "Strongly aggravates Pitta; high doses contraindicated with anticoagulants and before surgery.",
+      "tags": [
+        "lashuna",
+        "garlic",
+        "allium_sativum",
+        "rasona",
+        "vata_shamana",
+        "hridya",
+        "antiplatelet"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Kapha"
+      ],
+      "content_char_length": 952,
+      "relative_path": "sources/botanical_pharmacopoeia/API-ALLIUM-SATIVUM.json"
+    },
+    {
+      "id": "API-ELETTARIA-CARDAMOMUM",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Elettaria cardamomum (Ela/Cardamom)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/elettaria-cardamomum",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 15",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Aromatic digestive, anti-emetic, and refreshing Pitta-Vata carminative.",
+      "limitations": "Safe aromatic spice; excessive amounts can be drying.",
+      "tags": [
+        "ela",
+        "cardamom",
+        "elettaria_cardamomum",
+        "chardi",
+        "anti_emetic",
+        "tridosha"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 617,
+      "relative_path": "sources/botanical_pharmacopoeia/API-ELETTARIA-CARDAMOMUM.json"
+    },
+    {
+      "id": "API-CENTELLA-ASIATICA",
+      "collection": "botanical_pharmacopoeia",
+      "title": "Ayurvedic Pharmacopoeia of India Monograph: Centella asiatica (Mandukaparni)",
+      "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+      "source_url": "https://pcimh.gov.in/monographs/centella-asiatica",
+      "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. IV, Monograph 23",
+      "license": "Official Government Statutory Standard (PCIM&H)",
+      "document_type": "Official Botanical Pharmacopoeial Monograph",
+      "download_availability": "Publicly accessible via pcimh.gov.in",
+      "relevance": "Premier Medhya Rasayana (nootropic), anxiolytic, and neuro-circulatory adaptogen.",
+      "limitations": "Rare contact dermatitis; high doses can cause mild dizziness or headaches.",
+      "tags": [
+        "mandukaparni",
+        "gotu_kola",
+        "centella_asiatica",
+        "medhya",
+        "nootropic",
+        "pitta_shamana"
+      ],
+      "dosha_affinity": [
+        "Pitta",
+        "Kapha",
+        "Vata"
+      ],
+      "content_char_length": 680,
+      "relative_path": "sources/botanical_pharmacopoeia/API-CENTELLA-ASIATICA.json"
+    },
+    {
+      "id": "ICMR-NIN-2024-SUGAR-SALT-UPF",
+      "collection": "nutrition_pathya",
+      "title": "ICMR-NIN 2024: Quantitative Thresholds for Sugar, Salt, and Ultra-Processed Foods",
+      "publisher": "National Institute of Nutrition (ICMR-NIN)",
+      "source_url": "https://www.nin.res.in/dietaryguidelines/sugar-salt-upf.html",
+      "publication_version": "ICMR-NIN Technical Bulletin 2024",
+      "license": "Public Health Guidance (ICMR-NIN)",
+      "document_type": "Evidence-Based Clinical Nutrition Limit Matrix",
+      "download_availability": "Publicly accessible via nin.res.in",
+      "relevance": "Provides exact numerical thresholds for dietary sugar, sodium, and ultra-processed food restrictions.",
+      "limitations": "Clinical adjustments needed for athletes with heavy sweat losses or chronic kidney disease patients.",
+      "tags": [
+        "sugar_limits",
+        "salt_limits",
+        "upf",
+        "ultra_processed",
+        "icmr_nin_2024",
+        "hypertension_prevention"
+      ],
+      "dosha_affinity": [
+        "Kapha",
+        "Pitta",
+        "Vata"
+      ],
+      "content_char_length": 902,
+      "relative_path": "sources/nutrition_pathya/ICMR-NIN-2024-SUGAR-SALT-UPF.json"
+    },
+    {
+      "id": "PATHYA-JARANA-SHAKTI-EVALUATION",
+      "collection": "nutrition_pathya",
+      "title": "Clinical Evaluation of Digestive Capacity: Jarana Shakti and Abhyavaharana Shakti",
+      "publisher": "AyuRAG Clinical Knowledge Base / Charaka Saṃhitā Vimanasthana Ch 8",
+      "source_url": "https://niimh.nic.in/ebooks/ecaraka/?mod=read&sys=vi&ch=8",
+      "publication_version": "Clinical Methodology Standard",
+      "license": "Public Domain / Clinical Reference",
+      "document_type": "Clinical Metabolic Evaluation Guide",
+      "download_availability": "Publicly accessible via e-Caraka",
+      "relevance": "Explains how to determine meal intervals and food volume based on digestion speed.",
+      "limitations": "Subjective patient reporting; validated by tracking bowel consistency and energy levels.",
+      "tags": [
+        "jarana_shakti",
+        "abhyavaharana_shakti",
+        "digestive_capacity",
+        "meal_spacing",
+        "metabolism"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 817,
+      "relative_path": "sources/nutrition_pathya/PATHYA-JARANA-SHAKTI-EVALUATION.json"
+    },
+    {
+      "id": "SAFETY-PEDIATRIC-GERIATRIC-DOSAGE",
+      "collection": "clinical_safety_referral",
+      "title": "Clinical Safety Guidance: Pediatric and Geriatric Dosage Modulation Rules",
+      "publisher": "AyuRAG Clinical Safety Board / Sharangadhara Samhita & Modern Pediatric Standards",
+      "source_url": "https://ayushportal.nic.in/dosage-modulation-guidelines",
+      "publication_version": "Clinical Dosage Standard v2.1, 2024",
+      "license": "CC-BY-SA 4.0 / Clinical Open Access",
+      "document_type": "Clinical Pharmacology Dosing Standard",
+      "download_availability": "Publicly accessible via AYUSH Research Portal",
+      "relevance": "Prevents overdosage toxicity in children (<16 years) and elderly patients (>65 years).",
+      "limitations": "Mathematical fraction rules provide initial estimates; organ clearance must be considered.",
+      "tags": [
+        "pediatric_dosage",
+        "geriatric_dosage",
+        "sharangadhara",
+        "dose_scaling",
+        "safety"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 836,
+      "relative_path": "sources/clinical_safety_referral/SAFETY-PEDIATRIC-GERIATRIC-DOSAGE.json"
+    },
+    {
+      "id": "SAFETY-SCOPE-OF-PRACTICE-DISCLAIMER",
+      "collection": "clinical_safety_referral",
+      "title": "Regulatory Scope of Practice, Algorithmic Transparency, and Clinical Review Mandate",
+      "publisher": "AyuRAG Governance & Ethics Board / National Commission for Indian System of Medicine (NCISM)",
+      "source_url": "https://ncismindia.org/regulations",
+      "publication_version": "Clinical Decision Support Governance Guideline, 2024",
+      "license": "Public Regulatory Guidance",
+      "document_type": "Regulatory & Legal Governance Directive",
+      "download_availability": "Publicly accessible via ncismindia.org",
+      "relevance": "Defines ethical and legal boundaries: software provides decision support and education, requiring licensed clinician verification.",
+      "limitations": "Advisory policy; clinical responsibility always rests with the treating licensed physician.",
+      "tags": [
+        "scope_of_practice",
+        "clinician_review",
+        "xai_disclaimer",
+        "ncism",
+        "legal_governance"
+      ],
+      "dosha_affinity": [
+        "Vata",
+        "Pitta",
+        "Kapha"
+      ],
+      "content_char_length": 969,
+      "relative_path": "sources/clinical_safety_referral/SAFETY-SCOPE-OF-PRACTICE-DISCLAIMER.json"
+    }
+  ]
+}

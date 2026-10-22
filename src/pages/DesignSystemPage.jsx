@@ -117,10 +117,10 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
   const [toggle2, setToggle2] = useState(false);
   const [toggle3, setToggle3] = useState(true);
   
-  const [inputText, setInputText] = useState('Pitta-Vata imbalance assessment');
-  const [inputSearch, setInputSearch] = useState('Ashwagandha Rasayana');
+  const [inputText, setInputText] = useState('Metabolic and movement imbalance assessment');
+  const [inputSearch, setInputSearch] = useState('Botanical Restorative Formulation');
   const [selectDosha, setSelectDosha] = useState('pitta');
-  const [textareaNotes, setTextareaNotes] = useState('Patient reports mild digestive sluggishness (Manda Agni) after evening meals and disturbed sleep patterns.');
+  const [textareaNotes, setTextareaNotes] = useState('Patient reports mild digestive sluggishness after evening meals and disturbed sleep patterns.');
   
   const [chk1, setChk1] = useState(true);
   const [chk2, setChk2] = useState(false);
@@ -156,10 +156,10 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
 
   const stepperSteps = [
     { number: '01', title: 'Personal Info', subtitle: 'Vitals & Demographics' },
-    { number: '02', title: 'Prakriti', subtitle: 'Constitution (V-P-K)' },
-    { number: '03', title: 'Lifestyle', subtitle: 'Dinacharya habits' },
-    { number: '04', title: 'Dietary', subtitle: 'Ahara analysis' },
-    { number: '05', title: 'Symptoms', subtitle: 'Vikriti markers' },
+    { number: '02', title: 'Constitution', subtitle: 'Body Energy Factors' },
+    { number: '03', title: 'Lifestyle', subtitle: 'Daily Routine Habits' },
+    { number: '04', title: 'Dietary', subtitle: 'Nutritional Intake' },
+    { number: '05', title: 'Symptoms', subtitle: 'Health Context Markers' },
     { number: '06', title: 'Review', subtitle: 'Clinical verification' },
     { number: '07', title: 'Dashboard', subtitle: 'RAG + XAI Decision' }
   ];
@@ -326,7 +326,7 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
               <span className="ds-type-name">Heading 2 (H2)</span>
               <span className="ds-type-spec">24px / Bold / -0.02em</span>
             </div>
-            <div className="text-h2">Tridosha Balance & Agni Evaluation</div>
+            <div className="text-h2">Constitutional Balance & Digestive Evaluation</div>
           </div>
 
           <div className="ds-type-row">
@@ -343,7 +343,7 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
               <span className="ds-type-spec">17px / Regular / 1.65</span>
             </div>
             <div className="text-body-lg">
-              Ayurveda emphasizes individual constitution (Prakriti) and current metabolic state (Agni) to guide bespoke therapeutic interventions and lifestyle regimens.
+              Individual constitution and current digestive function guide bespoke therapeutic interventions and lifestyle regimens.
             </div>
           </div>
 
@@ -353,7 +353,7 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
               <span className="ds-type-spec">15px / Regular / 1.5</span>
             </div>
             <div className="text-body">
-              The retrieval pipeline accesses canonical Ayurvedic samhitās (Charaka, Sushruta, Ashtanga Hridaya) to ground all clinical recommendations with verified traditional sources.
+              The retrieval pipeline accesses canonical medical treatises (Charaka, Sushruta, Ashtanga Hridaya) to ground all clinical recommendations with verified traditional sources.
             </div>
           </div>
 
@@ -363,7 +363,7 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
               <span className="ds-type-spec">13px / Uppercase & 12px / Muted</span>
             </div>
             <div className="flex flex-col gap-xs">
-              <span className="text-label">Dosha Profile Metric • Vata Imbalance</span>
+              <span className="text-label">Constitutional Profile Metric • Movement Imbalance</span>
               <span className="text-caption">Model confidence score calibrated via cross-validation against CCRAS gold standards.</span>
             </div>
           </div>
@@ -529,8 +529,8 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
 
                 <Input
                   isSearch
-                  label="Ayurvedic Herb & Knowledge Search"
-                  placeholder="Search herbs, classical formulations, samhitā..."
+                  label="Clinical Herb & Knowledge Search"
+                  placeholder="Search herbs, classical formulations, medical texts..."
                   value={inputSearch}
                   onChange={(e) => setInputSearch(e.target.value)}
                   onClear={() => setInputSearch('')}
@@ -542,13 +542,13 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
                   type="number"
                   placeholder="e.g. 34"
                   defaultValue="34"
-                  helperText="Demographic baseline for Agni scoring"
+                  helperText="Demographic baseline for digestive function scoring"
                 />
 
                 <Input
                   label="Validation Error State Example"
-                  defaultValue="Invalid Dosha metric"
-                  errorMessage="Dosha score must sum to 100% across Vata, Pitta, and Kapha."
+                  defaultValue="Invalid constitutional metric"
+                  errorMessage="Constitutional score must sum to 100% across Movement, Metabolism, and Structure."
                   error
                 />
 
@@ -570,29 +570,29 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
             <CardContent>
               <div className="flex flex-col gap-md">
                 <Select
-                  label="Dominant Prakriti Category"
+                  label="Dominant Constitutional Category"
                   value={selectDosha}
                   onChange={(e) => setSelectDosha(e.target.value)}
                   options={[
-                    { value: 'vata', label: 'Vata Dominant (Air + Ether)' },
-                    { value: 'pitta', label: 'Pitta Dominant (Fire + Water)' },
-                    { value: 'kapha', label: 'Kapha Dominant (Water + Earth)' },
-                    { value: 'vata-pitta', label: 'Vata-Pitta Dual Constitution' },
-                    { value: 'pitta-kapha', label: 'Pitta-Kapha Dual Constitution' },
-                    { value: 'sama', label: 'Sama Prakriti (Tridoshic Balanced)' }
+                    { value: 'vata', label: 'Movement Dominant (Air + Space)' },
+                    { value: 'pitta', label: 'Metabolism Dominant (Fire + Water)' },
+                    { value: 'kapha', label: 'Structure Dominant (Water + Earth)' },
+                    { value: 'vata-pitta', label: 'Movement & Metabolism Dual Constitution' },
+                    { value: 'pitta-kapha', label: 'Metabolism & Structure Dual Constitution' },
+                    { value: 'sama', label: 'Tri-Energy Balanced Constitution' }
                   ]}
-                  helperText="Standardized Prakriti diagnostic category"
+                  helperText="Standardized constitutional diagnostic category"
                   required
                 />
 
                 <Select
-                  label="Digestive Capacity (Agni State)"
-                  placeholder="Select Agni state..."
+                  label="Digestive Capacity"
+                  placeholder="Select digestive state..."
                   options={[
-                    { value: 'sama', label: 'Sama Agni (Balanced Metabolism)' },
-                    { value: 'vishama', label: 'Vishama Agni (Irregular / Vata)' },
-                    { value: 'tikshna', label: 'Tikshna Agni (Hyperactive / Pitta)' },
-                    { value: 'manda', label: 'Manda Agni (Sluggish / Kapha)' }
+                    { value: 'sama', label: 'Balanced Digestion' },
+                    { value: 'vishama', label: 'Variable / Irregular Digestion' },
+                    { value: 'tikshna', label: 'Hyperactive / Fast Digestion' },
+                    { value: 'manda', label: 'Sluggish / Slow Digestion' }
                   ]}
                   helperText="Crucial for dietary recommendation engine"
                 />
@@ -650,7 +650,7 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
                 />
                 <Toggle
                   label="Classical Citation Links"
-                  description="Reference Charaka Samhitā verses"
+                  description="Reference Charaka classical treatise verses"
                   checked={toggle3}
                   onChange={setToggle3}
                 />
@@ -673,13 +673,13 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
             <CardContent>
               <div className="flex flex-col gap-md">
                 <Checkbox
-                  label="Include Seasonal Ritu Sandhi Factors"
+                  label="Include Seasonal Transition Factors"
                   description="Adjust recommendations for transition seasons"
                   checked={chk1}
                   onChange={(e) => setChk1(e.target.checked)}
                 />
                 <Checkbox
-                  label="Strict Ahara Compatibility (Viruddha Ahara)"
+                  label="Food Combination Compatibility"
                   description="Flag incompatible food combinations"
                   checked={chk2}
                   onChange={(e) => setChk2(e.target.checked)}
@@ -718,17 +718,17 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
                 >
                   <Radio
                     value="vata-pitta"
-                    label="Vata-Pitta Imbalance"
-                    description="Dryness, anxiety, hyperacidity"
+                    label="Movement & Metabolism Imbalance"
+                    description="Dryness, restlessness, acidity"
                   />
                   <Radio
                     value="pitta-kapha"
-                    label="Pitta-Kapha Imbalance"
+                    label="Metabolism & Structure Imbalance"
                     description="Inflammation, sluggishness, congestion"
                   />
                   <Radio
                     value="kapha-vata"
-                    label="Kapha-Vata Imbalance"
+                    label="Structure & Movement Imbalance"
                     description="Heaviness, circulation issues"
                   />
                 </RadioGroup>
@@ -772,14 +772,14 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <Badge color="primary" variant="subtle">Standard</Badge>
-                <span className="text-caption">Samhitā 1.2</span>
+                <span className="text-caption">Classical Source 1.2</span>
               </div>
-              <CardTitle>Ahara (Dietary) Protocol</CardTitle>
-              <CardDescription>Canonical nutritional guidelines based on Agni</CardDescription>
+              <CardTitle>Dietary Protocol</CardTitle>
+              <CardDescription>Canonical nutritional guidelines based on digestive function</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-body">
-                Warm, freshly cooked meals with appropriate spices (cumin, coriander, fennel) support balanced digestive fire without provoking Pitta.
+                Warm, freshly cooked meals with appropriate spices (cumin, coriander, fennel) support balanced digestive function without provoking excess metabolic heat.
               </p>
             </CardContent>
             <CardFooter>
@@ -797,12 +797,12 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
                 <Badge color="secondary" variant="subtle">Interactive</Badge>
                 <Eye size={16} className="text-muted" />
               </div>
-              <CardTitle>Vihara (Lifestyle) Regimen</CardTitle>
+              <CardTitle>Lifestyle Regimen</CardTitle>
               <CardDescription>Hover to test subtle elevation & lift</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-body">
-                Early morning awakening (Brahma Muhurta), gentle Abhyanga oil massage, and mindful pranayama to pacify aggravated Vata dosha.
+                Early morning awakening, gentle warm oil body massage, and mindful breathing exercises to pacify aggravated movement energy.
               </p>
             </CardContent>
             <CardFooter>
@@ -823,12 +823,12 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
             <CardContent>
               <div className="flex flex-col gap-xs">
                 <div className="flex justify-between text-small">
-                  <span>Prakriti Vata Proportion</span>
+                  <span>Movement Energy Proportion</span>
                   <span className="text-accent font-semibold">+0.42 SHAP</span>
                 </div>
                 <ProgressBar value={84} color="accent" size="sm" />
                 <div className="flex justify-between text-small">
-                  <span>Manda Agni Severity</span>
+                  <span>Sluggish Digestion Severity</span>
                   <span className="text-accent font-semibold">+0.28 SHAP</span>
                 </div>
                 <ProgressBar value={56} color="accent" size="sm" />
@@ -1109,26 +1109,26 @@ export const DesignSystemPage = ({ onTriggerToast }) => {
         <div className="flex flex-col gap-md">
           <Alert
             variant="success"
-            title="Prakriti Classification Grounded"
+            title="Constitutional Classification Grounded"
             dismissible
           >
-            The patient's dual Prakriti (Pitta-Vata) was verified with 94.2% agreement across classical symptom clusters.
+            The patient's dual constitution (Metabolism & Movement) was verified with 94.2% agreement across classical symptom clusters.
           </Alert>
 
           <Alert
             variant="warning"
-            title="Dosha Aggravation Warning"
+            title="Constitutional Imbalance Warning"
             dismissible
           >
-            Severe Pitta symptoms detected. Spicy, acidic foods (Katu, Amla) must be strictly avoided during Sharad Ritu.
+            Severe metabolic heat symptoms detected. Spicy, acidic foods must be strictly avoided during autumn seasonal transitions.
           </Alert>
 
           <Alert
             variant="error"
-            title="Incompatible Food Combination Flagged (Viruddha Ahara)"
+            title="Incompatible Food Combination Flagged"
             dismissible
           >
-            Milk combined with sour fruits creates toxic byproduct (Ama) according to Charaka Samhitā Sutrasthana 26.
+            Milk combined with sour fruits creates digestive residue according to Charaka classical treatise Sutrasthana 26.
           </Alert>
 
           <Alert

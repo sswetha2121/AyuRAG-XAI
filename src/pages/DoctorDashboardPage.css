@@ -1,21 +1,34 @@
-/* Doctor Dashboard Page Styles */
+/* DoctorDashboardPage.css - Doctor Clinical Overview Redesign */
+
 .ayur-doctor-dashboard {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
 }
 
+/* 1. Clinical Header / Hero */
 .ayur-doc-header {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: var(--space-xl);
+  padding: var(--space-lg) var(--space-xl);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-lg);
-  box-shadow: 0 1px 3px rgba(22, 56, 44, 0.03);
+  gap: var(--space-md);
+  box-shadow: 0 1px 3px rgba(18, 59, 47, 0.04);
   flex-wrap: wrap;
+  position: relative;
+}
+
+.ayur-doc-header__left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 280px;
 }
 
 .ayur-doc-status-indicator {
@@ -25,60 +38,88 @@
   background-color: var(--color-success);
   display: inline-block;
   box-shadow: 0 0 0 2px rgba(29, 122, 79, 0.2);
+  animation: ayur-breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes ayur-breathe {
+  0%, 100% {
+    box-shadow: 0 0 0 2px rgba(29, 122, 79, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(29, 122, 79, 0.35);
+  }
 }
 
 .ayur-doc-subtitle {
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-semibold);
+  font-size: 0.72rem;
+  font-weight: 700;
   color: var(--color-secondary);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
 
+.ayur-ai-live-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  background: rgba(197, 160, 89, 0.12);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  color: #8C6A24;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
 .ayur-doc-greeting {
-  font-size: 1.75rem;
-  font-weight: var(--font-weight-bold);
+  font-family: var(--font-heading);
+  font-size: 1.65rem;
+  font-weight: 800;
   color: var(--color-primary);
-  letter-spacing: -0.02em;
-  margin: 0 0 6px 0;
+  letter-spacing: -0.025em;
+  margin: 2px 0 4px 0;
+  line-height: 1.2;
 }
 
 .ayur-doc-meta {
-  font-size: var(--font-size-caption);
+  font-size: 0.78rem;
   color: var(--color-text-muted);
   margin: 0;
+  line-height: 1.35;
 }
 
 .ayur-doc-header__right {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  flex-wrap: wrap;
 }
 
 .ayur-doc-date-badge {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
+  padding: 7px 12px;
   border-radius: var(--radius-pill);
   background: var(--color-surface-muted);
-  border: 1px solid var(--color-border-subtle);
-  font-size: var(--font-size-caption);
+  border: 1px solid var(--color-border);
+  font-size: 0.75rem;
   color: var(--color-text-secondary);
-  font-weight: var(--font-weight-medium);
+  font-weight: 600;
 }
 
 .ayur-doc-refresh-btn {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
+  padding: 7px 14px;
   border-radius: var(--radius-pill);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   color: var(--color-text-secondary);
-  font-size: var(--font-size-caption);
-  font-weight: var(--font-weight-medium);
+  font-size: 0.75rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all var(--transition-fast);
 }
@@ -89,16 +130,67 @@
   border-color: var(--color-border-strong);
 }
 
-/* Action Callout */
+.ayur-spin {
+  animation: ayur-spin 0.8s linear infinite;
+}
+
+@keyframes ayur-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 2. Subtab Segmented Switch */
+.ayur-subtab-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 4px;
+  box-shadow: 0 1px 2px rgba(18, 59, 47, 0.03);
+  width: fit-content;
+}
+
+.ayur-subtab-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.ayur-subtab-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.ayur-subtab-btn--active {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(18, 59, 47, 0.18);
+}
+
+.ayur-subtab-btn--active:hover {
+  color: #FFFFFF;
+}
+
+/* 3. Urgent Action Callout Banner */
 .ayur-action-callout {
-  background: linear-gradient(90deg, rgba(197, 160, 89, 0.12) 0%, rgba(255, 255, 255, 0.8) 100%);
-  border: 1px solid rgba(197, 160, 89, 0.4);
+  background: linear-gradient(90deg, rgba(197, 160, 89, 0.12) 0%, rgba(255, 255, 255, 0.95) 100%);
+  border: 1px solid rgba(197, 160, 89, 0.45);
   border-radius: var(--radius-lg);
   padding: var(--space-md) var(--space-lg);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
+  box-shadow: 0 2px 8px rgba(197, 160, 89, 0.08);
   flex-wrap: wrap;
 }
 
@@ -109,10 +201,10 @@
 }
 
 .ayur-action-callout__icon {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: var(--radius-md);
-  background: rgba(197, 160, 89, 0.2);
+  background: rgba(197, 160, 89, 0.22);
   color: #8C6A24;
   display: flex;
   align-items: center;
@@ -121,36 +213,54 @@
 }
 
 .ayur-action-callout__title {
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-bold);
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
   color: var(--color-primary);
   margin: 0 0 2px 0;
 }
 
 .ayur-action-callout__desc {
-  font-size: var(--font-size-caption);
+  font-size: 0.75rem;
   color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* Section Header Typography */
+.ayur-section-header {
+  margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ayur-section-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 2px 0;
+  letter-spacing: -0.015em;
+}
+
+.ayur-section-desc {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
   margin: 0;
 }
 
-.ayur-spin {
-  animation: ayur-spin 0.8s linear infinite;
-}
-
-@keyframes ayur-spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Workflow Action Queues */
+/* 4. Action Queues Section */
 .ayur-workflow-queues-section {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
 }
 
 .ayur-wqueues-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-md);
 }
 
@@ -158,76 +268,174 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
-  box-shadow: var(--shadow-sm);
+  justify-content: space-between;
+  min-height: 220px;
+  box-shadow: 0 1px 3px rgba(18, 59, 47, 0.03);
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.ayur-wqueue-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-border-strong);
+  box-shadow: 0 6px 18px rgba(18, 59, 47, 0.06);
 }
 
 .ayur-wqueue-card__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-xs);
   padding-bottom: var(--space-xs);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(18, 59, 47, 0.06);
+  margin-bottom: var(--space-xs);
+}
+
+.ayur-wqueue-title {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.2;
 }
 
 .ayur-wqueue-badge {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: rgba(234, 88, 12, 0.12);
-  color: #c2410c;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+}
+
+.ayur-wqueue-badge--warning {
+  background: rgba(197, 160, 89, 0.16);
+  color: #8C6A24;
+}
+
+.ayur-wqueue-badge--accent {
+  background: rgba(18, 59, 47, 0.08);
+  color: var(--color-primary);
 }
 
 .ayur-wqueue-badge--success {
-  background: rgba(46, 125, 50, 0.12);
-  color: #2e7d32;
+  background: rgba(29, 122, 79, 0.1);
+  color: #155E3D;
 }
 
 .ayur-wqueue-list {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  min-height: 120px;
+  flex: 1;
+  justify-content: flex-start;
 }
 
 .ayur-wqueue-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 10px;
-  background: rgba(0, 0, 0, 0.02);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
   gap: var(--space-xs);
+  padding: 7px 10px;
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.ayur-wqueue-item:hover {
+  background: #FFFFFF;
+  border-color: var(--color-border);
 }
 
 .ayur-witem-left {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  min-width: 0;
 }
 
 .ayur-witem-name {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ayur-witem-sub {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ayur-wqueue-empty {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--color-text-muted);
   font-style: italic;
-  margin: auto;
   text-align: center;
-  padding: var(--space-md);
+  margin: auto;
+  padding: var(--space-md) 0;
 }
 
+/* 5. Patient Cohort Registry Section */
+.ayur-registry-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* Responsive Scaling */
+@media (max-width: 1024px) {
+  .ayur-wqueues-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .ayur-doc-header {
+    padding: var(--space-md);
+  }
+  .ayur-doc-greeting {
+    font-size: 1.4rem;
+  }
+  .ayur-wqueues-grid {
+    grid-template-columns: 1fr;
+  }
+  .ayur-action-callout {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .ayur-doc-header__right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .ayur-subtab-bar {
+    width: 100%;
+    flex-direction: column;
+    border-radius: var(--radius-md);
+  }
+  .ayur-subtab-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ayur-doc-status-indicator {
+    animation: none;
+  }
+  .ayur-wqueue-card:hover,
+  .ayur-doc-refresh-btn,
+  .ayur-subtab-btn {
+    transition: none;
+    transform: none;
+  }
+}

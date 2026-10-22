@@ -124,7 +124,7 @@ export function calculateLifestyleIndicators(answers = {}) {
   return [
     {
       id: 'sleep',
-      label: 'Sleep Rhythm (Nidra)',
+      label: 'Sleep Rhythm',
       value: sleepScore,
       status: sleepStatus,
       domain: 'Sleep',
@@ -132,7 +132,7 @@ export function calculateLifestyleIndicators(answers = {}) {
     },
     {
       id: 'activity',
-      label: 'Physical Activity (Vyayama)',
+      label: 'Physical Activity',
       value: activityScore,
       status: activityStatus,
       domain: 'Activity',
@@ -140,7 +140,7 @@ export function calculateLifestyleIndicators(answers = {}) {
     },
     {
       id: 'routine',
-      label: 'Routine Consistency (Dinacharya)',
+      label: 'Routine Consistency',
       value: routineScore,
       status: routineStatus,
       domain: 'Rhythm',
@@ -148,7 +148,7 @@ export function calculateLifestyleIndicators(answers = {}) {
     },
     {
       id: 'stress',
-      label: 'Stress Balance (Manas)',
+      label: 'Stress Balance',
       value: stressBalanceScore,
       status: stressStatus,
       domain: 'Stress',
@@ -192,9 +192,9 @@ export function calculateDietIndicators(answers = {}) {
 
   agniScore = Math.max(15, Math.min(95, agniScore));
 
-  let agniStatus = 'Variable Agni';
-  if (agniScore >= 75) agniStatus = 'Balanced Rhythm (Sama Agni)';
-  else if (agniScore <= 45) agniStatus = 'Sensitive / Irregular';
+  let agniStatus = 'Variable Digestion';
+  if (agniScore >= 75) agniStatus = 'Balanced Digestive Rhythm';
+  else if (agniScore <= 45) agniStatus = 'Sensitive / Irregular Digestion';
 
   // 2. Meal Timing Regularity (0-100)
   let mealTimingScore = 50;
@@ -258,10 +258,10 @@ export function calculateDietIndicators(answers = {}) {
   return [
     {
       id: 'agni',
-      label: 'Digestive Rhythm (Agni)',
+      label: 'Digestive Function',
       value: agniScore,
       status: agniStatus,
-      domain: 'Agni',
+      domain: 'Digestion',
       description: 'Appetite sharpness, post-meal lightness, and transit ease'
     },
     {
@@ -269,12 +269,12 @@ export function calculateDietIndicators(answers = {}) {
       label: 'Meal Timing Regularity',
       value: mealTimingScore,
       status: mealStatus,
-      domain: 'Ahara',
+      domain: 'Dietary',
       description: 'Pacing of breakfast, lunch, and dinner with circadian alignment'
     },
     {
       id: 'hydration',
-      label: 'Hydration Harmony (Jala)',
+      label: 'Hydration Harmony',
       value: hydrationScore,
       status: hydrationStatus,
       domain: 'Hydration',
@@ -285,7 +285,7 @@ export function calculateDietIndicators(answers = {}) {
       label: 'Mindful Eating Environment',
       value: mindfulScore,
       status: mindfulStatus,
-      domain: 'Ahara Guṇa',
+      domain: 'Nutrition',
       description: 'Undivided focus, eating speed, and meal schedule stability'
     }
   ];

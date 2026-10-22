@@ -1,0 +1,27 @@
+{
+  "id": "API-WITHANIA-SOMNIFERA",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Withania somnifera (Ashwagandha)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H), Ministry of AYUSH",
+  "source_url": "https://pcimh.gov.in/monographs/withania-somnifera",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 08",
+  "license": "Official Government Statutory Standard (PCIM&H / Ministry of AYUSH)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Official publication via pcimh.gov.in / National Portal",
+  "relevance": "Authoritative standard for Ashwagandha identification, indications, dosage, and safety contraindications.",
+  "limitations": "Monograph covers root material; extracts with high withanolide standardization require clinical dose titration.",
+  "classical_verse": null,
+  "tags": [
+    "ashwagandha",
+    "withania_somnifera",
+    "rasayana",
+    "adaptogen",
+    "vata_shamana",
+    "insomnia"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Kapha"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Withania somnifera (L.) Dunal (Family: Solanaceae) - Root.\n1. Ayurvedic Nomenclature & Attributes:\n   - Sanskrit Name: Aśvagandhā, Hayagandhā, Varāhadātri.\n   - Rasa (Taste): Tikta (bitter), Kashaya (astringent), Madhura (sweet).\n   - Guna (Quality): Laghu (light), Snigdha (unctuous).\n   - Virya (Potency): Ushna (warm).\n   - Vipaka (Post-digestive effect): Madhura (sweet).\n   - Karma: Balya (strength-promoting), Rasayana (rejuvenator), Vata-Kaphashamaka, Nidrajanana (sleep-inducing), Vrishya (aphrodisiac).\n\n2. Classical Indications:\n   Kshaya (emaciation), Daurbalya (generalized weakness), Vata Vyadhi (neuromuscular disorders), Shotha (inflammation), Klaibya (loss of vitality).\n\n3. Standard Therapeutic Dosage:\n   - Root Churna (Powder): 3 to 6 grams daily in divided doses, with milk, ghee, or warm water.\n   - Kwatha (Decoction): 50 to 100 ml.\n\n4. Known Contraindications & Safety:\n   - Pregnancy: Contraindicated in high doses due to potential emmenagogue / uterine stimulant effects.\n   - Hyperthyroidism: May elevate serum T3 and T4 levels; caution in patients taking levothyroxine.\n   - Sedative Interaction: Potentiates barbiturates, benzodiazepines, and alcohol via GABAergic modulation.\n   - Severe Pitta states: Due to warm potency, high doses without milk/ghee may cause mild gastric burning in severe Pitta phenotypes.\n"
+}

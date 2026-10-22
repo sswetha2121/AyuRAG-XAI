@@ -1,0 +1,28 @@
+{
+  "id": "API-BACOPA-MONNIERI",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Bacopa monnieri (Brahmi)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/bacopa-monnieri",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. II, Monograph 08",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier neuroprotective, cognitive enhancing (Medhya), and anxiolytic botanical.",
+  "limitations": "Can cause mild gastrointestinal cramping or nausea when consumed on an empty stomach.",
+  "classical_verse": null,
+  "tags": [
+    "brahmi",
+    "bacopa_monnieri",
+    "medhya",
+    "cognitive_support",
+    "anxiety",
+    "neuroprotection"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Bacopa monnieri (L.) Wettst. (Family: Plantaginaceae) - Whole Plant.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Brāhmī, Sarasvatī, Kapotavaṅkā.\n   - Rasa: Tikta (bitter), Kashaya (astringent).\n   - Guna: Laghu (light).\n   - Virya: Shita (cooling).\n   - Vipaka: Madhura (sweet).\n   - Karma: Medhya (improves memory, retention, and cognition), Ayushya, Hridya (cardiac tonic), Vata-Pitta-shamana, Unmadahara (calms mental agitation).\n\n2. Therapeutic Indications:\n   Smriti Daurbalya (memory impairment), Manovikara (anxiety and cognitive stress), Apasmara (convulsive disorders), Kasa, Kushta.\n\n3. Standard Therapeutic Dosage:\n   - Whole Plant Powder: 2 to 4 grams.\n   - Fresh Juice (Swarasa): 10 to 20 ml.\n   - Medicated Ghee (Brahmi Ghrita): 5 to 10 grams.\n\n4. Safety & Interactions:\n   - Mild cholinergic activity: May increase thyroid hormone levels and enhance the effect of phenothiazines.\n   - Recommended to take with meals or with ghee to minimize mild GI irritation.\n"
+}

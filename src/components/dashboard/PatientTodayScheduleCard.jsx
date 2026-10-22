@@ -185,9 +185,10 @@ export const PatientTodayScheduleCard = ({
               {currentNextMeal.label || 'Lunch (Main Meal)'} • {currentNextMeal.scheduled_time || '01:30 PM'}
             </h3>
             <p className="ayur-hcard-meal-text">
-              {currentNextMeal.meal_name ||
-                (currentNextMeal.items && currentNextMeal.items.join(', ')) ||
-                'Yellow Lentils, Steamed Basmati Rice, Squash & Probiotic Yogurt'}
+              {typeof currentNextMeal.meal_name === 'string'
+                ? currentNextMeal.meal_name
+                : (currentNextMeal.items && currentNextMeal.items.map(it => typeof it === 'string' ? it : it?.name || 'Item').join(', ')) ||
+                  'Yellow Lentils, Steamed Basmati Rice, Squash & Probiotic Yogurt'}
             </p>
           </div>
         </div>
@@ -200,6 +201,7 @@ export const PatientTodayScheduleCard = ({
           const isActive = !isDone && currentNextMeal?.meal_type === meal.meal_type;
           const isPending = !isDone && !isActive;
           const isLoading = loadingMealType === meal.meal_type;
+          const mealTitle = typeof meal.meal_name === 'string' ? meal.meal_name : meal.meal_name?.name || 'Meal';
 
           return (
             <div
@@ -218,7 +220,7 @@ export const PatientTodayScheduleCard = ({
                 <span
                   className={`text-xs ${isActive ? 'font-semibold text-primary' : isDone ? 'text-text-primary' : 'text-muted'}`}
                 >
-                  {meal.scheduled_time} • {meal.meal_name}
+                  {meal.scheduled_time} • {mealTitle}
                 </span>
               </div>
 

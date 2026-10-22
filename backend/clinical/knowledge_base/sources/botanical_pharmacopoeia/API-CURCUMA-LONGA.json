@@ -1,0 +1,28 @@
+{
+  "id": "API-CURCUMA-LONGA",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Curcuma longa (Haridra/Turmeric)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/curcuma-longa",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 22",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier anti-inflammatory, dermal tonic, blood purifier, and metabolic adjuvant.",
+  "limitations": "High-dose curcumin extracts contraindicated in mechanical gallstone obstruction; enhances antiplatelet drugs.",
+  "classical_verse": null,
+  "tags": [
+    "haridra",
+    "turmeric",
+    "curcuma_longa",
+    "anti_inflammatory",
+    "prameha",
+    "varnya"
+  ],
+  "dosha_affinity": [
+    "Kapha",
+    "Vata",
+    "Pitta"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Curcuma longa L. (Family: Zingiberaceae) - Rhizome.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Haridrā, Niśā, Kāncanī, Rajanī, Varṇinī.\n   - Rasa: Tikta (bitter), Katu (pungent).\n   - Guna: Ruksha (dry), Laghu (light).\n   - Virya: Ushna (warm).\n   - Vipaka: Katu (pungent).\n   - Karma: Tridoshahara (balances Kapha and Pitta predominantly, also Vata in moderation), Varnya (improves complexion), Vishaghna, Lekhana, Pramehahara.\n\n2. Therapeutic Indications:\n   Prameha (diabetes and metabolic syndrome), Pradara, Kushta (dermatological conditions), Shotha (edema), Pandu (anemia), Vrana (wounds).\n\n3. Standard Therapeutic Dosage:\n   - Rhizome Powder: 1 to 3 grams daily.\n   - Fresh Juice: 10 to 20 ml.\n\n4. Clinical Contraindications:\n   - Mechanical Biliary Duct Obstruction: Stimulates gallbladder contractions; contraindicated in symptomatic obstructive cholelithiasis.\n   - Antiplatelet Co-administration: High-dose concentrated curcumin potentiates anti-thrombotic medication.\n"
+}

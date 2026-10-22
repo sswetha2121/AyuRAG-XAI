@@ -1,0 +1,27 @@
+{
+  "id": "CCRAS-GUIDELINE-AMAVATA",
+  "collection": "ccras_guidelines",
+  "title": "CCRAS Clinical Practice Guideline: Management of Amavata (Rheumatoid Spectrum)",
+  "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+  "source_url": "https://ccras.nic.in/sites/default/files/viewpdf/Amavata%20Guideline.pdf",
+  "publication_version": "CCRAS Clinical Protocol Series, 2020",
+  "license": "Open Government Data (OGD) - India",
+  "document_type": "Clinical Practice Guideline",
+  "download_availability": "Publicly accessible via ccras.nic.in",
+  "relevance": "Provides evidence-based lifestyle, nutrition, and referral guidance for joint inflammation and systemic stiffness.",
+  "limitations": "Aggressive erosive joint disease requires ongoing rheumatological monitoring, anti-CCP/RF titers, and safe co-management.",
+  "classical_verse": null,
+  "tags": [
+    "amavata",
+    "joint_pain",
+    "langhana",
+    "swedana",
+    "castor_oil",
+    "anti_inflammatory"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Kapha"
+  ],
+  "content": "\nCCRAS Clinical Practice Guideline for the Management of Amavata:\n1. Disease Concept:\n   - Characterized by concurrent vitiation of Vata and systemic circulation of Ama, producing inflammatory polyarthritis, severe morning stiffness, migratory joint pain, and loss of appetite.\n2. Recommended Therapeutic Line (Chikitsa Sutra):\n   - Langhana (Therapeutic fasting / light liquid diet): Clears circulating Ama and restores Agni.\n   - Swedana (Dry heat fomentation / Valuka Sweda): Relieves joint edema and stiffness; moist oily heat is contraindicated in acute Ama states.\n   - Tikta-Katu Deepana Dravyas: Administration of Shunthi (dry ginger), Pippali, and Guggulu to digest toxins.\n   - Virechana (Controlled purgation with Castor Oil / Eranda Taila): Eliminates Ama-Vata from the colon.\n3. Dietary Pathya: Warm barley water, horse gram soup (Kulatta), garlic, ginger, and drumstick.\n4. Apathya (To Avoid): Curd, fish, black gram, jaggery, cold water, day sleep, and suppressing urges.\n"
+}

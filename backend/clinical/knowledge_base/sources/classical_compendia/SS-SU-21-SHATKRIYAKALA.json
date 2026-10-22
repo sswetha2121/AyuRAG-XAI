@@ -1,0 +1,28 @@
+{
+  "id": "SS-SU-21-SHATKRIYAKALA",
+  "collection": "classical_compendia",
+  "title": "Suśruta Saṃhitā: The Six Stages of Disease Progression (Ṣaṭ Kriyākāla)",
+  "publisher": "Classical Ayurvedic Compendium (e-Sushruta / NIIMH)",
+  "source_url": "https://niimh.nic.in/ebooks/esusruta/?mod=read&sys=su&ch=21",
+  "publication_version": "Suśruta Saṃhitā, Sūtrasthāna, Chapter 21 (Vraṇapraśna), Ślokas 18-36",
+  "license": "Public Domain",
+  "document_type": "Classical Pathological Stage Matrix",
+  "download_availability": "Publicly accessible via e-Sushruta",
+  "relevance": "Provides chronological clinical stages, demonstrating that preventive intervention in early stages halts disease progression.",
+  "limitations": "Stages 5 and 6 (Bhedavastha) indicate manifest anatomical disease requiring medical or surgical intervention.",
+  "classical_verse": "Sañcayaṁ ca prakopaṁ ca prasaraṁ sthānasaṁśrayam. Vyaktiṁ bhedaṁ ca yo vetti doṣāṇāṁ sa bhavedbhiṣak.",
+  "tags": [
+    "shatkriyakala",
+    "pathogenesis",
+    "preventive_medicine",
+    "sanchaya",
+    "prakopa",
+    "sthanasamshraya"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nSuśruta Saṃhitā Sūtrasthāna Chapter 21 outlines the six progressive stages of pathogenesis (Ṣaṭ Kriyākāla):\n1. Sañcaya (Accumulation): Doshas accumulate in their primary anatomical sites (Vata in colon, Pitta in small intestine, Kapha in stomach), producing mild aversion to like qualities and craving for opposites.\n2. Prakopa (Provocation / Excitement): Doshas overflow their anatomical receptacles, generating distinct discomfort (e.g. Vata causing colicky gas, Pitta causing acid burning, Kapha causing nausea).\n3. Prasara (Dissemination / Spread): Doshas overflow and circulate through the systemic channels (Srotas), comparable to fermenting wine overflowing a vessel.\n4. Sthānasaṁśraya (Localization / Channel Lodgment): Circulating doshas lodge at areas of pre-existing channel weakness (Khavaigunya). Premonitory symptoms (Purvaroopa) manifest.\n5. Vyakti (Manifestation): Classical textbook symptoms of the disease become fully perceptible (Rupa).\n6. Bheda (Complication / Chronicity / Structural Damage): Tissue necrosis, ulceration, or chronic refractory pathology develops. Early intervention in stages 1-3 halts progression without irreversible tissue damage.\n"
+}

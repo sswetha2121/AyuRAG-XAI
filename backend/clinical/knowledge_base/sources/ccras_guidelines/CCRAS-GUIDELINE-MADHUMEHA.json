@@ -1,0 +1,27 @@
+{
+  "id": "CCRAS-GUIDELINE-MADHUMEHA",
+  "collection": "ccras_guidelines",
+  "title": "CCRAS Clinical Practice Guideline: Lifestyle & Dietary Protocol for Madhumeha (Type 2 Diabetes)",
+  "publisher": "Central Council for Research in Ayurvedic Sciences (CCRAS)",
+  "source_url": "https://ccras.nic.in/sites/default/files/viewpdf/Madhumeha%20Protocol.pdf",
+  "publication_version": "CCRAS Clinical Protocol Series, 2019",
+  "license": "Open Government Data (OGD) - India",
+  "document_type": "Clinical Practice Guideline",
+  "download_availability": "Publicly accessible via ccras.nic.in",
+  "relevance": "Provides authoritative guidance for metabolic syndrome, insulin resistance, and blood sugar regulation.",
+  "limitations": "Does not replace allopathic insulin in Type 1 diabetes or acute diabetic ketoacidosis; HbA1c monitoring mandatory.",
+  "classical_verse": null,
+  "tags": [
+    "madhumeha",
+    "diabetes",
+    "metabolic_syndrome",
+    "barley",
+    "jamun",
+    "ayur_diet"
+  ],
+  "dosha_affinity": [
+    "Kapha",
+    "Vata"
+  ],
+  "content": "\nCCRAS Clinical Protocol for Madhumeha (Metabolic and Glycemic Regulation):\n1. Etiological Factors:\n   Sedentary habits (Asyasukha), excessive sleep (Swapnasukha), overconsumption of dairy, new harvest grains, and sweet refined sugars.\n2. Dietary Principles (Pathya Ahara):\n   - Staple Grains: Barley (Yava), aged brown rice, millets (Ragi, Jowar, Bajra).\n   - Legumes: Green gram (Mudga), roasted Bengal gram, horse gram (Kulattha).\n   - Vegetables: Bitter gourd (Karela), pointed gourd (Patola), fenugreek leaves (Methi), drumstick.\n   - Fruits: Jamun (Syzygium cumini), Indian gooseberry (Amalaki), wood apple (Kaphitha).\n3. Botanical Interventions:\n   Amalaki powder with Haridra (Nisha-Amalaki combination), Vijaysar kashaya, and Gudmar (Gymnema sylvestre).\n4. Physical Exercise: Daily brisk walking (5–10 km equivalent) is highlighted as an indispensable therapeutic requirement.\n"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "SS-SU-46-ANNAPANATATVA",
+  "collection": "classical_compendia",
+  "title": "Suśruta Saṃhitā: Water Quality, Beverage Thermodynamics, and Meal Rhythm",
+  "publisher": "Classical Ayurvedic Compendium (e-Sushruta / NIIMH)",
+  "source_url": "https://niimh.nic.in/ebooks/esusruta/?mod=read&sys=su&ch=46",
+  "publication_version": "Suśruta Saṃhitā, Sūtrasthāna, Chapter 46, Ślokas 419-485",
+  "license": "Public Domain",
+  "document_type": "Classical Food Science Text",
+  "download_availability": "Publicly accessible via e-Sushruta",
+  "relevance": "Direct guideline for water temperature, meal timing, and drinking water during meals.",
+  "limitations": "Ancient water collection terms (rain vs pond water) must be mapped to modern filtered, potable water standards.",
+  "classical_verse": "Prakṛti-sātmya-deśa-kāla-bala-pramāṇa-agni-avasthā-anu-vartī bhoktavyam.",
+  "tags": [
+    "sushruta_nutrition",
+    "water_quality",
+    "ushnodaka",
+    "hydration_timing",
+    "meal_rhythm"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nSuśruta Saṃhitā Sūtrasthāna Chapter 46 provides detailed rules on water ingestion and meal pacing:\n1. Hydration Timing Around Meals:\n   - Drinking water immediately before meals dampens Agni, weakens gastric juices, and causes emaciation or indigestion.\n   - Drinking water immediately after meals produces excessive coldness and Kapha accumulation, leading to obesity and lethargy.\n   - Sipping small amounts of warm water during meals (Samashana) moistens the food bolus, facilitates enzymatic mixing, and aids digestion.\n2. Properties of Boiled Warm Water (Ushnodaka):\n   Water boiled and reduced by half or one-quarter is light, pacifies all three doshas, kindles Agni, clears urinary passages, and eliminates Ama.\n3. Individual Calibration:\n   Food intake must strictly harmonize with individual constitution (Prakriti), habituation (Satmya), climate (Desha), season (Kala), strength (Bala), quantity (Matra), and metabolic state (Agni).\n"
+}

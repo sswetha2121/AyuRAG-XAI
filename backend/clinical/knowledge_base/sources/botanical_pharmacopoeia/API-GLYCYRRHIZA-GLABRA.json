@@ -1,0 +1,26 @@
+{
+  "id": "API-GLYCYRRHIZA-GLABRA",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Glycyrrhiza glabra (Yashtimadhu/Licorice)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/glycyrrhiza-glabra",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 61",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier mucosal protector, demulcent, and Pitta-Vata pacifier.",
+  "limitations": "Prolonged high doses (>6 weeks) can induce pseudoaldosteronism, hypokalemia, and secondary hypertension.",
+  "classical_verse": null,
+  "tags": [
+    "yashtimadhu",
+    "licorice",
+    "glycyrrhiza_glabra",
+    "pitta_shamana",
+    "hypertension_warning"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Glycyrrhiza glabra L. (Family: Fabaceae) - Dried Root and Stolon.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Yaṣṭīmadhu, Madhuka, Klītaka.\n   - Rasa: Madhura (sweet).\n   - Guna: Guru (heavy), Snigdha (unctuous).\n   - Virya: Shita (cooling).\n   - Vipaka: Madhura (sweet).\n   - Karma: Vata-Pitta-hara, Chakshushya, Vrishya, Kanthya (throat demulcent), Sandhaniya (heals tissue ulcerations), Medhya.\n\n2. Therapeutic Indications:\n   Amlapitta (hyperacidity and gastric erosion), Kasa-Svarabheda (hoarseness and cough), Raktapitta (bleeding disorders), Kshaya, Vrana.\n\n3. Standard Therapeutic Dosage:\n   - Root Powder: 2 to 4 grams.\n\n4. Critical Safety Warning (Pseudoaldosteronism):\n   - Glycyrrhizin inhibits 11-beta-hydroxysteroid dehydrogenase type 2, permitting cortisol to bind renal mineralocorticoid receptors.\n   - Long-term high doses lead to sodium and fluid retention, potassium wasting, cardiac arrhythmias, and hypertension.\n   - Strictly contraindicated in uncontrolled hypertension, congestive heart failure, and renal insufficiency.\n"
+}

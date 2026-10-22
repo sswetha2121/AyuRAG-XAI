@@ -1,0 +1,27 @@
+{
+  "id": "AH-SU-03-RITUCHARYA-VAGBHATA",
+  "collection": "classical_compendia",
+  "title": "Aṣṭāṅga Hṛdayam: Seasonal Transitions (Ṛtucaryā) & Seasonal Sandhi Care",
+  "publisher": "Classical Ayurvedic Compendium (e-Ashtanga / NIIMH)",
+  "source_url": "https://niimh.nic.in/ebooks/eahridaya/?mod=read&sys=su&ch=3",
+  "publication_version": "Aṣṭāṅga Hṛdayam, Sūtrasthāna, Chapter 3, Ślokas 1-58",
+  "license": "Public Domain",
+  "document_type": "Classical Seasonal Hygiene Guide",
+  "download_availability": "Publicly accessible via e-Ashtanga",
+  "relevance": "Explains Ritu Sandhi (the 14-day transitional junction between seasons) and why acute illnesses spike during seasonal changes.",
+  "limitations": "Requires alignment with local meteorology and geographical hemisphere.",
+  "classical_verse": "Ṛtvoraṅtyādi-saptāhau ṛtusandhiriti smṛtaḥ. Tatra pūrvo vidhistyājyaḥ sevaniyaḥ aparo kramāt.",
+  "tags": [
+    "ritusandhi",
+    "seasonal_junction",
+    "immunity",
+    "pathya_transition",
+    "adaptation"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nAṣṭāṅga Hṛdayam Sūtrasthāna Chapter 3 delineates the seasonal transition protocol (Ṛtusandhi):\n1. Ritu Sandhi (Seasonal Interphase):\n   - The last 7 days of the departing season and the first 7 days of the incoming season constitute Ritu Sandhi (a 14-day critical junction).\n   - During this period, the dietary regimen of the previous season must be gradually relinquished (Pada-Krama), and the practices of the incoming season gradually adopted.\n   - Abrupt discontinuation of old habits or abrupt adoption of new regimens produces Asatmya-ja Roga (diseases of incompatibility and allergic flareups).\n2. Seasonal Cleansing Principles:\n   - Vasanta (Spring): Elimination of accumulated Kapha via Vamana (therapeutic emesis) or light dry fasting.\n   - Sharad (Autumn): Elimination of accumulated Pitta via Virechana (purgation) and consuming bitter ghee (Tikta Ghrita).\n   - Varsha (Monsoon): Pacification of aggravated Vata via Basti (medicated enema) and warm spiced diets.\n"
+}

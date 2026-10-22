@@ -8,14 +8,16 @@ import {
   Clock,
   BookOpen,
   Utensils,
-  TrendingUp
+  TrendingUp,
+  MessageSquare
 } from 'lucide-react';
 
 export const DASHBOARD_TABS = [
   { id: 'overview', label: 'Dashboard Overview', icon: LayoutDashboard },
-  { id: 'schedule', label: "Today's Meal Schedule", icon: Utensils },
-  { id: 'diet', label: 'My Approved Diet Plan', icon: Sparkles },
+  { id: 'diet', label: 'My Diet Plan', icon: Sparkles },
+  { id: 'schedule', label: 'Daily Checklist', icon: Utensils },
   { id: 'progress', label: 'Progress Tracking', icon: TrendingUp },
+  { id: 'chat', label: 'Chat with Doctor', icon: MessageSquare },
   { id: 'constitution', label: 'Body Constitution', icon: Activity },
   { id: 'routine', label: 'Daily Timetable', icon: Clock },
   { id: 'evidence', label: 'Evidence & Guidelines', icon: BookOpen }

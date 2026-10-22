@@ -69,7 +69,19 @@ class PatientProfile(models.Model):
     age = models.IntegerField(null=True, blank=True)
     gender = models.CharField(max_length=50, blank=True)
     contact_phone = models.CharField(max_length=30, blank=True)
+    assigned_doctor = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='assigned_patient_profiles'
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def patient_id(self):
+        return f"AYU-{self.user.id:04d}"
+
     def __str__(self):
-        return f"{self.full_name} (Age: {self.age})"
+        return f"{self.full_name} [{self.patient_id}] (Age: {self.age})"
+

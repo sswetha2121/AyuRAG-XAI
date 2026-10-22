@@ -1,0 +1,27 @@
+{
+  "id": "API-BOSWELLIA-SERRATA",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Boswellia serrata (Shallaki)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/boswellia-serrata",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. IV, Monograph 41",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier botanical for osteoarthritis, inflammatory joint disease, and cartilage preservation.",
+  "limitations": "May cause mild gastric discomfort or acid reflux in sensitive individuals if taken without food.",
+  "classical_verse": null,
+  "tags": [
+    "shallaki",
+    "boswellia_serrata",
+    "sandhivata",
+    "osteoarthritis",
+    "boswellic_acid",
+    "anti_inflammatory"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Kapha"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Boswellia serrata Roxb. ex Colebr. (Family: Burseraceae) - Gum Resin.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Śallakī, Kunduru, Gajabhakṣyā, Suvahā.\n   - Rasa: Tikta (bitter), Kashaya (astringent), Madhura (sweet).\n   - Guna: Laghu (light), Ruksha (dry).\n   - Virya: Ushna (warm).\n   - Vipaka: Katu (pungent).\n   - Karma: Vata-Kapha-hara, Sandhaniya, Shothahara (anti-inflammatory), Vedanasthapana (analgesic).\n2. Therapeutic Indications:\n   Sandhivata (osteoarthritis), Amavata (rheumatoid arthritis), Grahani, Asthi-sandhi-shula (joint pain), Atisara.\n3. Standard Therapeutic Dosage:\n   - Purified Oleo-Gum Resin: 1 to 3 grams daily with warm water or milk.\n4. Modern Mechanism:\n   Contains 3-O-acetyl-11-keto-beta-boswellic acid (AKBA), a specific non-redox inhibitor of 5-lipoxygenase (5-LOX), decreasing inflammatory leukotrienes without damaging gastric cyclooxygenase.\n"
+}

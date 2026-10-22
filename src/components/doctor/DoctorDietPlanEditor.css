@@ -724,3 +724,106 @@
   justify-content: flex-end;
   gap: var(--space-sm);
 }
+
+/* --- Deterministic Nutritional Summary Card (IFCT 2017) --- */
+.ayur-diet-nutrition-summary-card {
+  background-color: #FAF8F3;
+  border: 1px solid #E3DDD3;
+  border-radius: 10px;
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.ayur-nutrition-provenance-chip {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #123B2F;
+  background-color: #EBF2EE;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.ayur-recalc-mini-btn {
+  background: none;
+  border: 1px solid #C5A059;
+  color: #9A7733;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.725rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.15s ease;
+}
+
+.ayur-recalc-mini-btn:hover {
+  background-color: #FAF4E8;
+  color: #614611;
+}
+
+.ayur-nutrition-macro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.ayur-nmacro-item {
+  background-color: #FFFFFF;
+  border: 1px solid #ECE8E0;
+  border-radius: 6px;
+  padding: 0.45rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ayur-nmacro-label {
+  font-size: 0.675rem;
+  font-weight: 600;
+  color: #6B7B75;
+  text-transform: uppercase;
+}
+
+.ayur-nmacro-val {
+  font-size: 0.925rem;
+  font-weight: 700;
+  color: #123B2F;
+  font-family: 'Manrope', sans-serif;
+}
+
+.ayur-add-item-btn--catalogue {
+  background-color: #EBF2EE !important;
+  color: #123B2F !important;
+  border: 1px solid #B7E2C9 !important;
+}
+
+.ayur-add-item-btn--catalogue:hover {
+  background-color: #D2E7DC !important;
+}
+
+/* Status Chips */
+.ayur-status-chip--superseded {
+  background-color: #ECE8E0;
+  color: #6B7B75;
+}
+
+.ayur-status-chip--pending {
+  background-color: #E8F0FE;
+  color: #1967D2;
+}
+
+.ayur-status-chip--draft {
+  background-color: #FAF4E8;
+  color: #9A7733;
+}
+
+.ayur-status-chip--active,
+.ayur-status-chip--published {
+  background-color: #EAF5EE;
+  color: #155E3D;
+  font-weight: 700;
+}
+

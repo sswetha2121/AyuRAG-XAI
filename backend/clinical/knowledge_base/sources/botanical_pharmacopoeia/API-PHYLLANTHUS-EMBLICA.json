@@ -1,0 +1,28 @@
+{
+  "id": "API-PHYLLANTHUS-EMBLICA",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Phyllanthus emblica (Amalaki/Amla)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/phyllanthus-emblica",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. I, Monograph 04",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier antioxidant, digestive balancer, and Pitta-pacifying fruit monograph.",
+  "limitations": "High raw acidity may cause mild transient heartburn in sensitive individuals if taken on completely empty stomach.",
+  "classical_verse": null,
+  "tags": [
+    "amalaki",
+    "amla",
+    "phyllanthus_emblica",
+    "pitta_shamana",
+    "antioxidant",
+    "rasayana"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Pitta",
+    "Kapha"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Phyllanthus emblica L. syn. Emblica officinalis Gaertn. (Family: Phyllanthaceae) - Dried Fruit.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Āmalakī, Dhātrīphala, Vayasthā, Amṛtaphala.\n   - Rasa: Panca Rasa (possesses 5 tastes: Sour, Sweet, Bitter, Pungent, Astringent; lacks only Saline taste). Amla (sour) is predominant, Kashaya (astringent) is secondary.\n   - Guna: Laghu (light), Ruksha (dry).\n   - Virya: Shita (cooling).\n   - Vipaka: Madhura (sweet).\n   - Karma: Tridoshaprashamana (especially premier for pacifying Pitta), Rasayana, Chakshushya (preserves visual acuity), Vrishya, Deepana.\n\n2. Therapeutic Indications:\n   Raktapitta (bleeding diathesis), Amlapitta (hyperacidity), Prameha (metabolic disorders), Daha (burning sensations), Kasa (cough), Shosha (wasting).\n\n3. Standard Therapeutic Dosage:\n   - Dried Fruit Powder: 3 to 6 grams.\n   - Fresh Juice (Swarasa): 10 to 20 ml.\n\n4. Safety & Contraindications:\n   - Safe for long-term daily dietary consumption.\n   - Due to cooling Virya, in acute cold, cough, and aggravated Vata without Pitta, administer with honey, ginger, or warm water.\n"
+}

@@ -1,0 +1,208 @@
+/* PatientDifficultyModal.css - Symptom and Diet Difficulty Reporting */
+
+.ayur-diff-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(18, 59, 47, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.ayur-diff-modal-card {
+  background-color: #FFFFFF;
+  border-radius: 14px;
+  box-shadow: 0 20px 45px rgba(18, 59, 47, 0.2);
+  width: 100%;
+  max-width: 620px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #E3DDD3;
+}
+
+.ayur-diff-modal-header {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ECE8E0;
+  background-color: #FAF8F3;
+}
+
+.ayur-diff-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: #FAF4E8;
+  color: #9A7733;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ayur-diff-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #26332E;
+  margin: 0;
+}
+
+.ayur-diff-sub {
+  font-size: 0.8rem;
+  color: #6B7B75;
+  margin: 2px 0 0 0;
+}
+
+.ayur-diff-close-btn {
+  background: none;
+  border: none;
+  color: #6B7B75;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.ayur-diff-close-btn:hover {
+  background-color: #ECE8E0;
+  color: #26332E;
+}
+
+.ayur-diff-form {
+  padding: 1.25rem 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ayur-diff-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.ayur-diff-field label,
+.ayur-diff-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #26332E;
+  margin-bottom: 0.35rem;
+}
+
+.ayur-diff-select,
+.ayur-diff-input,
+.ayur-diff-textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  border: 1px solid #E3DDD3;
+  border-radius: 8px;
+  background-color: #F8F6F0;
+  color: #26332E;
+  font-family: 'Inter', sans-serif;
+}
+
+.ayur-diff-select:focus,
+.ayur-diff-input:focus,
+.ayur-diff-textarea:focus {
+  outline: none;
+  border-color: #123B2F;
+  background-color: #FFFFFF;
+}
+
+.ayur-sev-btn {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid #E3DDD3;
+  background-color: #F8F6F0;
+  color: #6B7B75;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ayur-sev-btn--mild.ayur-sev-btn--active {
+  background-color: #FAF4E8;
+  color: #9A7733;
+  border-color: #C5A059;
+}
+
+.ayur-sev-btn--moderate.ayur-sev-btn--active {
+  background-color: #FFF0E6;
+  color: #C25B10;
+  border-color: #E68A4A;
+}
+
+.ayur-sev-btn--severe.ayur-sev-btn--active {
+  background-color: #FAF0F0;
+  color: #A62828;
+  border-color: #E6A8A8;
+}
+
+.ayur-symptoms-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.ayur-sym-chip {
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid #E3DDD3;
+  background-color: #F8F6F0;
+  color: #3E4F47;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.15s ease;
+}
+
+.ayur-sym-chip:hover {
+  background-color: #EBF2EE;
+  border-color: #A8BDA7;
+}
+
+.ayur-sym-chip--selected {
+  background-color: #123B2F;
+  color: #FFFFFF;
+  border-color: #123B2F;
+}
+
+.ayur-diff-notice {
+  background-color: #FAF4E8;
+  border: 1px solid #E5D5BA;
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.75rem;
+  color: #614611;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.ayur-diff-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #ECE8E0;
+}
+
+@media (max-width: 600px) {
+  .ayur-diff-row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -164,12 +164,21 @@ export const PatientActiveDietCard = () => {
                 )}
 
                 <ul className="ayur-pmeal-items-list">
-                  {items.map((it, idx) => (
-                    <li key={idx}>
-                      <span className="ayur-pbullet">•</span>
-                      <span>{it}</span>
-                    </li>
-                  ))}
+                  {items.map((it, idx) => {
+                    const itemLabel = typeof it === 'string' ? it : `${it?.name || it?.title || 'Item'}${it?.portion ? ` (${it.portion})` : (it?.portion_g ? ` (${it.portion_g}g)` : '')}`;
+                    const calories = typeof it === 'object' && it?.calories ? `${it.calories} kcal` : null;
+                    return (
+                      <li key={idx} className="flex items-center justify-between gap-xs py-1">
+                        <div className="flex items-center gap-xs">
+                          <span className="ayur-pbullet">•</span>
+                          <span>{itemLabel}</span>
+                        </div>
+                        {calories && (
+                          <span className="text-xs font-mono text-secondary">{calories}</span>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
 
                 {(m.data?.calories_approx || m.data?.digestive_properties || m.data?.ayurvedic_properties) && (
@@ -178,7 +187,13 @@ export const PatientActiveDietCard = () => {
                       <span className="ayur-pcalorie-tag">{m.data.calories_approx}</span>
                     )}
                     {(m.data.digestive_properties || m.data.ayurvedic_properties) && (
-                      <span className="ayur-pproperties-tag">{m.data.digestive_properties || m.data.ayurvedic_properties}</span>
+                      <span className="ayur-pproperties-tag">
+                        {typeof (m.data.digestive_properties || m.data.ayurvedic_properties) === 'string'
+                          ? (m.data.digestive_properties || m.data.ayurvedic_properties)
+                          : Object.entries(m.data.digestive_properties || m.data.ayurvedic_properties || {})
+                              .map(([k, v]) => `${k}: ${v}`)
+                              .join(', ')}
+                      </span>
                     )}
                   </div>
                 )}
@@ -198,7 +213,7 @@ export const PatientActiveDietCard = () => {
             </h4>
             <ul className="ayur-pguide-list">
               {(plan.foods_to_include || []).map((food, idx) => (
-                <li key={idx}>{food}</li>
+                <li key={idx}>{typeof food === 'string' ? food : food?.name || JSON.stringify(food)}</li>
               ))}
             </ul>
           </div>
@@ -210,7 +225,7 @@ export const PatientActiveDietCard = () => {
             </h4>
             <ul className="ayur-pguide-list">
               {(plan.foods_to_avoid || []).map((food, idx) => (
-                <li key={idx}>{food}</li>
+                <li key={idx}>{typeof food === 'string' ? food : food?.name || JSON.stringify(food)}</li>
               ))}
             </ul>
           </div>
@@ -227,7 +242,7 @@ export const PatientActiveDietCard = () => {
             </h4>
             <ul className="ayur-pguide-list">
               {(plan.lifestyle_notes || []).map((note, idx) => (
-                <li key={idx}>{note}</li>
+                <li key={idx}>{typeof note === 'string' ? note : note?.text || note?.title || JSON.stringify(note)}</li>
               ))}
             </ul>
           </div>
@@ -239,7 +254,7 @@ export const PatientActiveDietCard = () => {
             </h4>
             <ul className="ayur-pguide-list">
               {(plan.precautions || []).map((prec, idx) => (
-                <li key={idx}>{prec}</li>
+                <li key={idx}>{typeof prec === 'string' ? prec : prec?.text || prec?.title || JSON.stringify(prec)}</li>
               ))}
             </ul>
           </div>

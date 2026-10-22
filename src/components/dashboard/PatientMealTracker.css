@@ -468,3 +468,81 @@
     justify-content: flex-start;
   }
 }
+
+/* Report Difficulty Button */
+.ayur-report-diff-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background-color: #FAF4E8;
+  border: 1px solid #E5D5BA;
+  border-radius: var(--radius-sm);
+  color: #9A7733;
+  font-size: 0.775rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ayur-report-diff-btn:hover {
+  background-color: #F5E9D3;
+  color: #614611;
+}
+
+.ayur-meal-report-link {
+  background: none;
+  border: none;
+  color: #9A7733;
+  font-size: 0.7rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 2px 0;
+  margin-top: 4px;
+}
+
+.ayur-meal-report-link:hover {
+  color: #614611;
+}
+
+/* Quick Skip Panel */
+.ayur-quick-skip-panel {
+  background-color: #FAF8F3;
+  border: 1px solid #E3DDD3;
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  margin-top: 6px;
+  width: 220px;
+}
+
+.ayur-skip-select {
+  width: 100%;
+  padding: 4px 6px;
+  font-size: 0.75rem;
+  border: 1px solid #E3DDD3;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  color: var(--color-text-primary);
+}
+
+.ayur-skip-confirm-btn {
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background-color: #FAF0F0;
+  color: #A62828;
+  border: 1px solid #E6A8A8;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ayur-skip-cancel-btn {
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  background: none;
+  border: 1px solid #E3DDD3;
+  border-radius: 4px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+

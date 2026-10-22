@@ -131,10 +131,10 @@ export const PrakritiAssessmentPage = ({ onContinueToNextPhase, onBackToPrevious
               type="button"
               className="ayur-help-btn"
               onClick={() => setShowInfoModal(true)}
-              aria-label="3 Doshas (Principles) Guide"
+              aria-label="Body Energies & Principles Guide"
             >
               <HelpCircle size={14} />
-              <span>3 Doshas Guide & Principles</span>
+              <span>Body Energies Guide</span>
             </button>
           </div>
 

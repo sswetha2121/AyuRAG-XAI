@@ -1,0 +1,28 @@
+{
+  "id": "API-ALLIUM-SATIVUM",
+  "collection": "botanical_pharmacopoeia",
+  "title": "Ayurvedic Pharmacopoeia of India Monograph: Allium sativum (Lashuna/Garlic)",
+  "publisher": "Pharmacopoeia Commission for Indian Medicine & Homoeopathy (PCIM&H)",
+  "source_url": "https://pcimh.gov.in/monographs/allium-sativum",
+  "publication_version": "The Ayurvedic Pharmacopoeia of India, Part-I, Vol. III, Monograph 22",
+  "license": "Official Government Statutory Standard (PCIM&H)",
+  "document_type": "Official Botanical Pharmacopoeial Monograph",
+  "download_availability": "Publicly accessible via pcimh.gov.in",
+  "relevance": "Premier Vata-pacifier, cardiovascular lipid regulator, and anti-arthritic bulb.",
+  "limitations": "Strongly aggravates Pitta; high doses contraindicated with anticoagulants and before surgery.",
+  "classical_verse": null,
+  "tags": [
+    "lashuna",
+    "garlic",
+    "allium_sativum",
+    "rasona",
+    "vata_shamana",
+    "hridya",
+    "antiplatelet"
+  ],
+  "dosha_affinity": [
+    "Vata",
+    "Kapha"
+  ],
+  "content": "\nOfficial Pharmacopoeial Monograph: Allium sativum L. (Family: Amaryllidaceae) - Bulb.\n1. Ayurvedic Attributes:\n   - Sanskrit Names: Laśuna, Rasona, Mahauṣadha, Ugragandha.\n   - Rasa: Possesses 5 tastes (Madhura, Lavana, Katu, Tikta, Kashaya; lacks only Amla/sour taste). Pungent is predominant.\n   - Guna: Snigdha (unctuous), Guru (heavy), Tikshna (sharp).\n   - Virya: Ushna (very warm).\n   - Vipaka: Katu (pungent).\n   - Karma: Vata-Kapha-hara (premier single food for pacifying Vata), Hridya (cardiotonic), Medohara, Deepana, Rasayana, Asthisandhaniya (heals fractures).\n2. Therapeutic Indications:\n   Vata-Vyadhi (sciatica, hemiplegia, neurological pain), Hridroga (coronary artery disease), Gulma, Krimi, Shula.\n3. Standard Therapeutic Dosage:\n   - Fresh Bulb Paste: 1 to 3 grams daily with milk or food.\n4. Critical Contraindications:\n   - Pitta-predominant conditions, bleeding disorders, gastritis, concurrent anticoagulation (Warfarin/Aspirin).\n"
+}
