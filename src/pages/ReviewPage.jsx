@@ -12,6 +12,7 @@ import { ArrowLeft, ArrowRight, Sparkles, Brain, CheckCircle2 } from 'lucide-rea
 export const ReviewPage = ({
   onEditStep,
   onGenerateAnalysis,
+  isGeneratingAnalysis = false,
   onTriggerToast
 }) => {
   const {
@@ -47,6 +48,7 @@ export const ReviewPage = ({
   const readinessPct = Math.round((completedCount / 5) * 100);
 
   const handleTriggerAnalysis = () => {
+    if (isGeneratingAnalysis) return;
     if (!reviewConsent) {
       onTriggerToast?.({
         type: 'warning',
@@ -219,11 +221,11 @@ export const ReviewPage = ({
               variant="primary"
               size="lg"
               rightIcon={<Sparkles size={18} />}
-              disabled={!reviewConsent || readinessPct < 60}
+              disabled={!reviewConsent || readinessPct < 60 || isGeneratingAnalysis}
               onClick={handleTriggerAnalysis}
               className="ayur-review-analyze-btn"
             >
-              Generate Personalized Analysis →
+              {isGeneratingAnalysis ? 'Running AI Inference...' : 'Generate Personalized Analysis →'}
             </Button>
           </div>
         </div>

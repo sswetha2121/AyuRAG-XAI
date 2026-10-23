@@ -428,11 +428,14 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
   };
 
   const handleStartAnalysisGeneration = async () => {
+    if (isGeneratingAnalysis && inferenceStatus === 'loading') {
+      return;
+    }
     setIsGeneratingAnalysis(true);
     try {
       const computed = await triggerAnalysisGeneration();
 
-      if (user) {
+      if (user && user.role === 'PATIENT') {
         try {
           const submitRes = await api.submitPatientAssessment({
             assessment_id: submittedAssessmentId || undefined,
@@ -482,6 +485,12 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
             message: submitErr.message || 'Analysis preview generated, but saving to patient chart failed. You can retry from your dashboard.',
           });
         }
+      } else if (user && user.role === 'DOCTOR') {
+        onTriggerToast?.({
+          type: 'info',
+          title: 'Physician Simulation Mode',
+          message: 'Clinical AI inference generated successfully in Physician Preview mode.',
+        });
       } else {
         onTriggerToast?.({
           type: 'info',
@@ -638,6 +647,7 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
         <ReviewPage
           onEditStep={(stepId) => setCurrentStep(stepId)}
           onGenerateAnalysis={handleStartAnalysisGeneration}
+          isGeneratingAnalysis={isGeneratingAnalysis}
           onTriggerToast={onTriggerToast}
         />
       ) : currentStep === 'dashboard' ? (

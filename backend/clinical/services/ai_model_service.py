@@ -606,14 +606,157 @@ class AyuRagAiModelService:
 
     @classmethod
     def _build_daily_timetable(cls, constitution_type: str) -> List[Dict[str, Any]]:
-        return [
-            {'time': '06:30 AM', 'activity': 'Circadian Waking & Warm Water with Cumin', 'category': 'Morning Cleansing'},
-            {'time': '07:15 AM', 'activity': 'Gentle Movement & Restorative Breathing', 'category': 'Vitality (Prāna)'},
-            {'time': '08:00 AM', 'activity': 'Warm Nourishing Breakfast (Oats / Porridge)', 'category': 'Meal Schedule'},
-            {'time': '11:00 AM', 'activity': 'Mid-Morning Hydration (Lukewarm Herbal Infusion)', 'category': 'Hydration'},
-            {'time': '01:30 PM', 'activity': 'Main Lunch Meal (Lentil Bowl, Rice & Vegetables)', 'category': 'Meal Schedule'},
-            {'time': '04:30 PM', 'activity': 'Evening Herbal Tea & Roasted Fox Nuts', 'category': 'Refreshment'},
-            {'time': '08:00 PM', 'activity': 'Light Evening Dinner (Clear Vegetable Soup & Flatbread)', 'category': 'Meal Schedule'},
-            {'time': '10:00 PM', 'activity': 'Digital Wind-Down & Warm Spiced Milk', 'category': 'Recovery'},
-            {'time': '10:30 PM', 'activity': 'Restful Night Sleep (Nidrā)', 'category': 'Rest'},
-        ]
+        c_type = (constitution_type or '').lower()
+        if 'pitta' in c_type and 'vata' not in c_type:
+            return [
+                {
+                    'phase': 'Morning Awakening & Cooling Hydration',
+                    'timeWindow': '06:00 – 08:30 (Morning Solar Transition)',
+                    'icon': 'Sunrise',
+                    'focus': 'Metabolic Cooling & Mindful Focus',
+                    'steps': [
+                        'Wake near 06:00 AM; drink lukewarm water with mint or coriander seeds',
+                        'Gentle morning stroll in shaded greenery; avoid hot mid-morning sun',
+                        'Sweet cooling breakfast: soaked oatmeal, sweet pears, or tender coconut water',
+                        'Calming Sheetali pranayama for 10 minutes'
+                    ]
+                },
+                {
+                    'phase': 'Midday Digestion Peak',
+                    'timeWindow': '12:00 – 14:00 (Pitta Metabolic Window)',
+                    'icon': 'Sun',
+                    'focus': 'Optimal Digestion & Substantial Nourishment',
+                    'steps': [
+                        'Eat principal meal of the day; include steamed basmati, mung dal, and ghee',
+                        'Favor sweet, bitter, and astringent vegetables (zucchini, cucumber, leafy greens)',
+                        'Sip room-temperature cumin-coriander water; avoid hot chilies and alcohol',
+                        'Quiet 10-minute seated pause before returning to mental work'
+                    ]
+                },
+                {
+                    'phase': 'Evening Decompression',
+                    'timeWindow': '17:30 – 20:00 (Cooling Twilight Window)',
+                    'icon': 'Sunset',
+                    'focus': 'Stress Dissolution & Gentle Pacing',
+                    'steps': [
+                        'Conclude intense problem-solving tasks before twilight',
+                        'Light dinner: mild vegetable soup with whole wheat roti by 07:30 PM',
+                        'Evening walk under open moonlight or cool breeze',
+                        'Warm foot wash and gentle contemplation'
+                    ]
+                },
+                {
+                    'phase': 'Night Restoration & Sleep',
+                    'timeWindow': '21:30 – 22:30 (Deep Nidrā Phase)',
+                    'icon': 'Moon',
+                    'focus': 'Cellular Healing & Nervous System Recovery',
+                    'steps': [
+                        'Disconnect digital monitors and bright LED lights by 21:45',
+                        'Warm cardamom-spiced milk or chamomile infusion',
+                        'Slow abdominal breathing to quiet internal mental heat',
+                        'Restful sleep initiation before 22:30'
+                    ]
+                }
+            ]
+        elif 'kapha' in c_type and 'vata' not in c_type:
+            return [
+                {
+                    'phase': 'Brisk Morning Awakening',
+                    'timeWindow': '05:30 – 08:00 (Metabolic Kindling Window)',
+                    'icon': 'Sunrise',
+                    'focus': 'Agni Stimulation & Sluggishness Dissolution',
+                    'steps': [
+                        'Rise vigorously before sunrise (05:30 – 06:00 AM); avoid lingering in bed',
+                        'Drink 2 glasses of warm water with fresh ginger and half-lemon',
+                        'Vigorous 30-minute aerobic exercise, Surya Namaskar, or brisk uphill walk',
+                        'Light, dry, and warm breakfast: roasted millets or barley porridge with cinnamon'
+                    ]
+                },
+                {
+                    'phase': 'Midday Nourishment',
+                    'timeWindow': '12:00 – 13:30 (Peak Digestive Window)',
+                    'icon': 'Sun',
+                    'focus': 'Nutritious Fueling without Heaviness',
+                    'steps': [
+                        'Eat a well-spiced, fiber-rich lunch with black pepper, mustard seeds, and turmeric',
+                        'Include roasted chickpeas, steamed greens, and spiced lentil soup',
+                        'Strictly avoid cold refrigerated desserts, cheese, and ice water',
+                        'Brisk 100-step stroll; strictly no daytime napping (Diva Svapna)'
+                    ]
+                },
+                {
+                    'phase': 'Active Evening Transition',
+                    'timeWindow': '17:30 – 19:30 (Circadian Stimulus)',
+                    'icon': 'Sunset',
+                    'focus': 'Metabolic Momentum & Minimal Dinner',
+                    'steps': [
+                        'Engage in physical movement or creative hobbies before dark',
+                        'Very light, warm dinner: clear vegetable broth or roasted chana by 07:00 PM',
+                        'Warm digestive ginger-tulsi tea',
+                        'Avoid heavy post-dinner snacking or dairy'
+                    ]
+                },
+                {
+                    'phase': 'Night Rest & Regeneration',
+                    'timeWindow': '22:00 – 22:45 (Natural Circadian Rest)',
+                    'icon': 'Moon',
+                    'focus': 'Restorative Rest without Lethargy',
+                    'steps': [
+                        'Limit bedroom heating; maintain cool, fresh room ventilation',
+                        'Brief dry skin brushing or calming breathing practice',
+                        'In bed by 22:30; target 7–7.5 hours of uninterrupted sleep'
+                    ]
+                }
+            ]
+        else:
+            # Vata / Vata-Pitta / Tridosha baseline
+            return [
+                {
+                    'phase': 'Gentle Morning Grounding',
+                    'timeWindow': '06:00 – 08:30 (Morning Prāna Window)',
+                    'icon': 'Sunrise',
+                    'focus': 'Nervous System Calming & Hydration',
+                    'steps': [
+                        'Wake peacefully near 06:30 AM; drink 2 cups of warm water with cumin seeds',
+                        'Oral hygiene: tongue scraping and warm sesame oil swishing (Gandūsha)',
+                        '15–20 minutes of restorative stretching, joint rotations, and diaphragmatic breathwork',
+                        'Warm, unctuous breakfast: spiced oatmeal, warm rice flakes, or stewed cinnamon apples'
+                    ]
+                },
+                {
+                    'phase': 'Midday Peak Digestion',
+                    'timeWindow': '12:00 – 13:30 (Primary Ahara Window)',
+                    'icon': 'Sun',
+                    'focus': 'Substantial Nourishment & Digestive Fueling',
+                    'steps': [
+                        'Eat principal warm lunch meal at a calm, unhurried pace without screens',
+                        'Combine steamed grains, yellow split lentils, well-cooked vegetables, and ghee',
+                        'Sip warm CCF tea (cumin-coriander-fennel); strictly avoid iced water',
+                        'Take a calm 10-minute seated rest before resuming afternoon tasks'
+                    ]
+                },
+                {
+                    'phase': 'Evening Calming & Nourishment',
+                    'timeWindow': '17:30 – 20:00 (Twilight Vata Pacification)',
+                    'icon': 'Sunset',
+                    'focus': 'Grounding Transition & Early Light Dinner',
+                    'steps': [
+                        'Transition away from rapid multitasking; take 5 minutes of restorative breathing',
+                        'Light, soothing dinner: warm vegetable soup with soft flatbread at least 2.5h before sleep',
+                        'Avoid raw salads, cold drinks, or dry crunchy crackers at night',
+                        'Relax in softened, warm-toned lighting'
+                    ]
+                },
+                {
+                    'phase': 'Night Rest & Deep Recovery',
+                    'timeWindow': '21:30 – 22:30 (Nidrā & Tissue Repair)',
+                    'icon': 'Moon',
+                    'focus': 'Deep Nervous System Restoration & Sound Sleep',
+                    'steps': [
+                        'Power down mobile devices and digital displays by 21:45',
+                        'Warm foot massage (Pādābhyanga) with warm sesame oil to ground Vata',
+                        'Warm spiced milk or herbal chamomile infusion',
+                        'Asleep before 22:30 to maximize cellular revitalization'
+                    ]
+                }
+            ]

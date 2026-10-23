@@ -1,8 +1,11 @@
+import logging
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from django.db import transaction
+
+logger = logging.getLogger(__name__)
 from django.db.models import Q
 from django.utils import timezone
 from datetime import datetime, timedelta
@@ -1565,13 +1568,52 @@ class ClinicalAiInferenceView(APIView):
     """
     permission_classes = []
 
+    def get(self, request):
+        """Health and readiness probe for the clinical AI decision support engine."""
+        return Response({
+            'status': 'ready',
+            'service': 'AyuRAG Explainable Clinical AI Decision Support Engine',
+            'version': '2.1.0',
+            'supported_methods': ['GET', 'POST'],
+            'endpoint': '/api/clinical/ai/infer/'
+        }, status=status.HTTP_200_OK)
+
     def post(self, request):
+        if not isinstance(request.data, dict):
+            return Response(
+                {
+                    'error': 'Invalid request payload. Expected a JSON object.',
+                    'detail': 'The assessment data must be submitted as a JSON dictionary.',
+                    'status': 'error',
+                    'code': 'INVALID_PAYLOAD'
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        logger.info("Executing Clinical AI Inference for questionnaire assessment payload.")
         try:
             result = AyuRagAiModelService.run_inference(request.data)
+            if not result or not isinstance(result, dict) or 'tridoshaProfile' not in result:
+                logger.error("AI Model Service returned incomplete or empty constitutional result.")
+                return Response(
+                    {
+                        'error': 'AI Model Inference produced an incomplete constitutional profile.',
+                        'detail': 'The clinical decision support engine could not derive complete Tridosha or Agni states.',
+                        'status': 'error',
+                        'code': 'INCOMPLETE_INFERENCE'
+                    },
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
             return Response(result, status=status.HTTP_200_OK)
         except Exception as e:
+            logger.exception(f"Clinical AI Inference error: {str(e)}")
             return Response(
-                {'error': f'AI Model Inference failed: {str(e)}'},
+                {
+                    'error': 'Clinical decision support inference failed.',
+                    'detail': f'AI Model Inference failed: {str(e)}',
+                    'status': 'error',
+                    'code': 'INFERENCE_FAILED'
+                },
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 

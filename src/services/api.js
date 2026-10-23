@@ -44,9 +44,14 @@ async function fetchJson(endpoint, options = {}) {
     }
   }
 
+  // Set timeout controller (35 seconds for complex clinical RAG / AI inference)
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), options.timeout || 35000);
+
   const config = {
     ...options,
     headers,
+    signal: options.signal || controller.signal,
     credentials: 'include', // Sends Django session cookies
   };
 
@@ -54,9 +59,17 @@ async function fetchJson(endpoint, options = {}) {
   try {
     response = await fetch(`${BASE_URL}${endpoint}`, config);
   } catch (netErr) {
-    const error = new Error('Cannot connect to backend server. Please ensure the Django API server is running on port 8000.');
+    clearTimeout(timeoutId);
+    if (netErr.name === 'AbortError') {
+      const error = new Error('Clinical backend request timed out. The AI inference service took too long to respond.');
+      error.status = 504;
+      throw error;
+    }
+    const error = new Error('Cannot connect to backend server. Please verify the Django API server is active and running on port 8000.');
     error.status = 503;
     throw error;
+  } finally {
+    clearTimeout(timeoutId);
   }
 
   if (response.status === 401 || response.status === 403) {
@@ -68,11 +81,18 @@ async function fetchJson(endpoint, options = {}) {
   }
 
   if (!response.ok) {
-    const errorData = await response.json().catch(() => ({
-      detail: response.status >= 500
-        ? 'Backend service error. Please verify the Django server is active.'
-        : `HTTP error ${response.status}`
-    }));
+    const errorData = await response.json().catch(() => {
+      if (response.status === 502 || response.status === 503 || response.status === 504) {
+        return { detail: 'Backend service unavailable (gateway error). Please verify the Django server is running at http://127.0.0.1:8000.' };
+      }
+      if (response.status === 404) {
+        return { detail: `Endpoint not found: ${endpoint}. Please verify API routing.` };
+      }
+      if (response.status >= 500) {
+        return { detail: 'Backend service error. Please verify the Django server is active and reachable.' };
+      }
+      return { detail: `Request failed with HTTP status ${response.status}.` };
+    });
     const error = new Error(extractErrorMessage(errorData, `HTTP error ${response.status}`));
     error.status = response.status;
     error.data = errorData;

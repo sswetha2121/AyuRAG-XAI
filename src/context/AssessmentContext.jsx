@@ -366,7 +366,13 @@ export const AssessmentProvider = ({ children }) => {
 
     try {
       const aiResponse = await api.runAiInference(payload);
-      if (aiResponse && aiResponse.tridoshaProfile) {
+      if (
+        aiResponse &&
+        typeof aiResponse === 'object' &&
+        aiResponse.tridoshaProfile &&
+        aiResponse.tridoshaProfile.constitutionType &&
+        aiResponse.tridoshaProfile.breakdown
+      ) {
         aiResponse.isDemo = false;
         setAnalysisResult(aiResponse);
         setIsDemoAnalysis(false);
@@ -375,7 +381,10 @@ export const AssessmentProvider = ({ children }) => {
         markStepCompleted('review');
         return aiResponse;
       }
-      throw new Error('AI inference response did not return a valid constitutional profile.');
+      if (aiResponse?.error) {
+        throw new Error(aiResponse.error);
+      }
+      throw new Error('Clinical decision support engine returned an incomplete constitutional profile.');
     } catch (err) {
       const errorMsg = err.message || 'AI inference request failed. Please ensure the clinical backend server is running.';
       setInferenceStatus('failure');
