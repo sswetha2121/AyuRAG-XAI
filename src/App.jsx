@@ -34,6 +34,7 @@ import { DoctorRegisterPage } from './pages/DoctorRegisterPage';
 import { SignInSelectionPage } from './pages/SignInSelectionPage';
 import { LandingPage } from './pages/LandingPage';
 import { AssessmentOverviewPage } from './pages/AssessmentOverviewPage';
+import { AssessmentResultsPage } from './pages/AssessmentResultsPage';
 
 // Protected Route Guard for Doctor
 function DoctorProtectedRoute({ children, onTriggerToast }) {
@@ -60,6 +61,36 @@ function DoctorProtectedRoute({ children, onTriggerToast }) {
       message: 'Doctor portal is restricted to authorized clinical staff. Redirected to your patient dashboard.',
     });
     return <Navigate to="/dashboard" replace />;
+  }
+
+  return children;
+}
+
+// Protected Route Guard for Patient
+function PatientProtectedRoute({ children, onTriggerToast }) {
+  const { user, role, isAuthenticated, isLoading } = useAuth();
+  const location = useLocation();
+
+  if (isLoading) {
+    return (
+      <div className="ayur-loading-screen">
+        <div className="ayur-spinner-mini" />
+        <span>Verifying patient authorization...</span>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  if (role === 'DOCTOR') {
+    onTriggerToast?.({
+      type: 'info',
+      title: 'Doctor Portal Active',
+      message: 'You are signed in with a physician account. Redirecting to Doctor Workspace.',
+    });
+    return <Navigate to="/doctor/dashboard" replace />;
   }
 
   return children;
@@ -319,8 +350,20 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
       setCurrentStep(initialStep);
     } else if (location.pathname === '/dashboard') {
       setCurrentStep('dashboard');
+    } else if (location.pathname.startsWith('/assessment/results')) {
+      setCurrentStep('results');
+    } else if (location.pathname.startsWith('/assessment/')) {
+      const stepFromUrl = location.pathname.split('/')[2];
+      const validSteps = ['personal-info', 'prakriti', 'lifestyle', 'diet', 'symptoms', 'review', 'results', 'dashboard'];
+      if (stepFromUrl && validSteps.includes(stepFromUrl)) {
+        setCurrentStep(stepFromUrl);
+      }
+    } else if (location.pathname === '/assessment') {
+      if (currentStep === 'dashboard' || !currentStep) {
+        setCurrentStep('personal-info');
+      }
     }
-  }, [initialStep, location.pathname, setCurrentStep]);
+  }, [initialStep, location.pathname, setCurrentStep, currentStep]);
 
   // Header Title & Subtitle Mapping
   const getHeaderInfo = () => {
@@ -367,6 +410,12 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
           subtitle: 'Pre-Inference Multi-Domain Data Verification & Patient Consent',
           breadcrumbs: ['Assessment Pipeline', '06 Review & Verification'],
         };
+      case 'results':
+        return {
+          title: 'AI Assessment Results & Attribution',
+          subtitle: 'Prakriti Constitutional Scoring, Agni Metabolism, SHAP/LIME Factors & Classical RAG Evidence',
+          breadcrumbs: ['Assessment Pipeline', '07 AI Clinical Results'],
+        };
       case 'dashboard':
         return {
           title: 'Patient Diet & Wellness Dashboard',
@@ -375,9 +424,9 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
         };
       default:
         return {
-          title: 'AyuRAG-XAI Personalized Health Platform',
-          subtitle: 'Personalized Nutrition & Wellness Platform',
-          breadcrumbs: ['Patient Portal', currentStep],
+          title: 'Step 01: Personal Information',
+          subtitle: 'Baseline Demographics & Physiological Measurements',
+          breadcrumbs: ['Assessment Pipeline', '01 Personal Information'],
         };
     }
   };
@@ -385,7 +434,7 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
   const { title, subtitle, breadcrumbs } = getHeaderInfo();
 
   const progressPercent =
-    currentStep === 'design-system' || currentStep === 'dashboard'
+    currentStep === 'design-system' || currentStep === 'dashboard' || currentStep === 'results'
       ? 100
       : completedSteps.length > 0
       ? Math.round((completedSteps.length / 6) * 100)
@@ -412,8 +461,11 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
       setCurrentStep('dashboard');
       setDashboardTab(tab || 'chat');
       navigate('/dashboard');
-    } else if (stepId === 'my-assessment') {
+    } else if (stepId === 'my-assessment' || stepId === 'assessment-overview') {
       navigate('/assessment-overview');
+    } else if (stepId === 'results' || stepId === 'assessment-results') {
+      setCurrentStep('results');
+      navigate('/assessment/results');
     } else if (stepId === 'patient-profile') {
       onTriggerToast?.({
         type: 'info',
@@ -424,6 +476,7 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
       handleLogout();
     } else {
       setCurrentStep(stepId);
+      navigate(`/assessment/${stepId}`);
     }
   };
 
@@ -501,13 +554,15 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
 
       setTimeout(() => {
         setIsGeneratingAnalysis(false);
-        setCurrentStep('dashboard');
+        setCurrentStep('results');
+        navigate('/assessment/results');
       }, 500);
     } catch (err) {
       console.error('Inference pipeline error:', err);
+      setIsGeneratingAnalysis(false);
       onTriggerToast?.({
         type: 'danger',
-        title: 'Inference Failed',
+        title: 'Inference Request Failed',
         message: err.message || 'Clinical decision support backend could not complete analysis.',
       });
     }
@@ -645,20 +700,46 @@ function PatientAssessmentShell({ onTriggerToast, toasts, removeToast, initialSt
         />
       ) : currentStep === 'review' ? (
         <ReviewPage
-          onEditStep={(stepId) => setCurrentStep(stepId)}
+          onEditStep={(stepId) => {
+            setCurrentStep(stepId);
+            navigate(`/assessment/${stepId}`);
+          }}
           onGenerateAnalysis={handleStartAnalysisGeneration}
           isGeneratingAnalysis={isGeneratingAnalysis}
           onTriggerToast={onTriggerToast}
+        />
+      ) : currentStep === 'results' ? (
+        <AssessmentResultsPage
+          onTriggerToast={onTriggerToast}
+          onReevaluate={() => {
+            setCurrentStep('personal-info');
+            navigate('/assessment/personal-info');
+          }}
         />
       ) : currentStep === 'dashboard' ? (
         <DashboardPage
           activeTab={dashboardTab}
           onTabChange={setDashboardTab}
-          onStartAssessment={() => setCurrentStep('personal-info')}
-          onReevaluate={() => setCurrentStep('review')}
+          onStartAssessment={() => {
+            setCurrentStep('personal-info');
+            navigate('/assessment/personal-info');
+          }}
+          onReevaluate={() => {
+            setCurrentStep('review');
+            navigate('/assessment/review');
+          }}
           onTriggerToast={onTriggerToast}
         />
-      ) : null}
+      ) : (
+        /* Resilient Fallback: Never display an empty ivory screen */
+        <PersonalInfoPage
+          onContinue={() => {
+            setCurrentStep('prakriti');
+            navigate('/assessment/prakriti');
+          }}
+          onTriggerToast={onTriggerToast}
+        />
+      )}
     </AppShell>
   );
 }
@@ -692,12 +773,14 @@ function MainApp() {
       <Route
         path="/dashboard"
         element={
-          <PatientAssessmentShell
-            onTriggerToast={addToast}
-            toasts={toasts}
-            removeToast={removeToast}
-            initialStep="dashboard"
-          />
+          <PatientProtectedRoute onTriggerToast={addToast}>
+            <PatientAssessmentShell
+              onTriggerToast={addToast}
+              toasts={toasts}
+              removeToast={removeToast}
+              initialStep="dashboard"
+            />
+          </PatientProtectedRoute>
         }
       />
 
@@ -705,6 +788,48 @@ function MainApp() {
       <Route
         path="/assessment-overview"
         element={<AssessmentOverviewPage onTriggerToast={addToast} />}
+      />
+      <Route
+        path="/assessment/results/:id"
+        element={
+          <PatientAssessmentShell
+            onTriggerToast={addToast}
+            toasts={toasts}
+            removeToast={removeToast}
+            initialStep="results"
+          />
+        }
+      />
+      <Route
+        path="/assessment/results"
+        element={
+          <PatientAssessmentShell
+            onTriggerToast={addToast}
+            toasts={toasts}
+            removeToast={removeToast}
+            initialStep="results"
+          />
+        }
+      />
+      <Route
+        path="/assessment/:stepId"
+        element={
+          <PatientAssessmentShell
+            onTriggerToast={addToast}
+            toasts={toasts}
+            removeToast={removeToast}
+          />
+        }
+      />
+      <Route
+        path="/assessment"
+        element={
+          <PatientAssessmentShell
+            onTriggerToast={addToast}
+            toasts={toasts}
+            removeToast={removeToast}
+          />
+        }
       />
       <Route
         path="/assessment/*"

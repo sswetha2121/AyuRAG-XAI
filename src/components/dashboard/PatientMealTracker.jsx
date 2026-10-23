@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './PatientMealTracker.css';
 import { api } from '../../services/api';
-import { PatientTodayScheduleCard } from './PatientTodayScheduleCard';
 import { PatientDifficultyModal } from '../patient/PatientDifficultyModal';
 import {
   Utensils,
@@ -14,30 +13,51 @@ import {
   Flame,
   HeartPulse,
   Sparkles,
-  ChevronRight,
   RotateCcw,
   Bell,
   AlertTriangle,
-  PieChart
+  ChevronDown,
+  RefreshCw,
+  Plus,
+  HelpCircle
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 
-export const PatientMealTracker = ({ onTriggerToast, onOpenReminders }) => {
+export const PatientMealTracker = ({
+  onTriggerToast,
+  onOpenReminders,
+  onMealStatusChanged
+}) => {
   const [scheduleData, setScheduleData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(null);
   const [isUpdatingMeal, setIsUpdatingMeal] = useState(null);
   const [waterLoading, setWaterLoading] = useState(false);
   const [difficultyModalOpen, setDifficultyModalOpen] = useState(false);
-  const [difficultyMealType, setDifficultyMealType] = useState('lunch');
-  const [activeSkipMeal, setActiveSkipMeal] = useState(null);
-  const [skipReasonInput, setSkipReasonInput] = useState('Lack of appetite (Aruchi)');
+  const [difficultyMealType, setDifficultyMealType] = useState('LUNCH');
+  const [expandedSkipMeal, setExpandedSkipMeal] = useState(null);
+  const [selectedSkipReason, setSelectedSkipReason] = useState('Lack of appetite (Aruchi)');
+
+  const skipReasonOptions = [
+    'Lack of appetite (Aruchi)',
+    'Full from previous meal',
+    'Heaviness or indigestion',
+    'Travelling / Not accessible',
+    'Symptom flare-up / Discomfort',
+    'Clinician advised modification'
+  ];
 
   const fetchSchedule = async () => {
     try {
+      setIsLoading(true);
+      setFetchError(null);
       const data = await api.getPatientMealSchedule();
       setScheduleData(data);
     } catch (err) {
-      console.log('Error fetching meal schedule:', err);
+      console.error('Error fetching meal schedule:', err);
+      setFetchError(err.message || 'Could not retrieve today\'s meal schedule from server.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -46,30 +66,70 @@ export const PatientMealTracker = ({ onTriggerToast, onOpenReminders }) => {
   }, []);
 
   const handleToggleMeal = async (mealType, newStatus, extra = {}) => {
+    if (isUpdatingMeal) return;
+
+    // Save previous state for rollback
+    const previousSchedule = scheduleData;
+
     try {
       setIsUpdatingMeal(mealType);
+
+      // Optimistically update the UI
+      setScheduleData((prev) => {
+        if (!prev) return prev;
+        const updatedMeals = (prev.meals || []).map((m) => {
+          if (m.meal_type === mealType) {
+            return {
+              ...m,
+              status: newStatus,
+              skip_reason: extra.skip_reason || (newStatus === 'SKIPPED' ? selectedSkipReason : ''),
+              portion_consumed: extra.portion_consumed || (newStatus === 'PARTIALLY_COMPLETED' ? '50%' : newStatus === 'COMPLETED' ? '100%' : '0%')
+            };
+          }
+          return m;
+        });
+
+        const completedCount = updatedMeals.filter((m) => m.status === 'COMPLETED').length;
+        const partialCount = updatedMeals.filter((m) => m.status === 'PARTIALLY_COMPLETED').length;
+        const totalCount = updatedMeals.length;
+        const newAdherence = totalCount > 0 ? Math.round(((completedCount + 0.5 * partialCount) / totalCount) * 100) : 0;
+
+        return {
+          ...prev,
+          meals: updatedMeals,
+          progress: {
+            ...prev.progress,
+            meals_completed: completedCount,
+            meals_partially_completed: partialCount,
+            adherence_rate: newAdherence,
+          }
+        };
+      });
+
       const res = await api.logPatientMeal({
         meal_type: mealType,
         status: newStatus,
-        portion_consumed: extra.portion_consumed || (newStatus === 'PARTIALLY_COMPLETED' ? 50 : newStatus === 'COMPLETED' ? 100 : 0),
-        skip_reason: extra.skip_reason || '',
+        portion_consumed: extra.portion_consumed || (newStatus === 'PARTIALLY_COMPLETED' ? '50%' : newStatus === 'COMPLETED' ? '100%' : '0%'),
+        skip_reason: extra.skip_reason || (newStatus === 'SKIPPED' ? selectedSkipReason : ''),
         symptom_notes: extra.symptom_notes || '',
       });
 
       onTriggerToast?.({
-        type: newStatus === 'COMPLETED' ? 'success' : 'info',
-        title: newStatus === 'COMPLETED' ? 'Meal Logged' : 'Status Updated',
-        message: res.message || `Meal status changed to ${newStatus.replace('_', ' ').toLowerCase()}.`,
+        type: newStatus === 'COMPLETED' ? 'success' : newStatus === 'SKIPPED' ? 'warning' : 'info',
+        title: newStatus === 'COMPLETED' ? 'Meal Logged' : newStatus === 'SKIPPED' ? 'Meal Skipped' : 'Status Updated',
+        message: res.message || `Meal ${mealType} updated to ${newStatus.replace('_', ' ').toLowerCase()}.`,
       });
 
-      setActiveSkipMeal(null);
-      // Refresh schedule
-      await fetchSchedule();
+      setExpandedSkipMeal(null);
+      // Notify parent to refresh any linked metrics
+      onMealStatusChanged?.();
     } catch (err) {
+      // Rollback on failure
+      setScheduleData(previousSchedule);
       onTriggerToast?.({
         type: 'error',
         title: 'Update Failed',
-        message: err.message || 'Could not update meal status.',
+        message: err.message || 'Could not update meal status on server. Please check your network.',
       });
     } finally {
       setIsUpdatingMeal(null);
@@ -93,13 +153,14 @@ export const PatientMealTracker = ({ onTriggerToast, onOpenReminders }) => {
       onTriggerToast?.({
         type: 'success',
         title: 'Water Logged',
-        message: `Added ${amountMl} ml of water. Total today: ${res.water_intake_ml} ml.`,
+        message: `Added ${amountMl} ml. Today's total: ${res.water_intake_ml} ml.`,
       });
+      onMealStatusChanged?.();
     } catch (err) {
       onTriggerToast?.({
         type: 'error',
-        title: 'Error',
-        message: err.message || 'Could not log water.',
+        title: 'Logging Error',
+        message: err.message || 'Could not log water intake.',
       });
     } finally {
       setWaterLoading(false);
@@ -120,8 +181,18 @@ export const PatientMealTracker = ({ onTriggerToast, onOpenReminders }) => {
           },
         };
       });
+      onTriggerToast?.({
+        type: 'info',
+        title: 'Hydration Reset',
+        message: 'Today\'s water intake counter has been reset.',
+      });
+      onMealStatusChanged?.();
     } catch (err) {
-      // ignore
+      onTriggerToast?.({
+        type: 'error',
+        title: 'Reset Failed',
+        message: err.message || 'Could not reset water intake.',
+      });
     } finally {
       setWaterLoading(false);
     }
@@ -129,72 +200,44 @@ export const PatientMealTracker = ({ onTriggerToast, onOpenReminders }) => {
 
   if (isLoading) {
     return (
-      <div className="ayur-tracker-loading">
-        <div className="ayur-spinner-mini" />
-        <span>Loading today's personalized meal schedule & reminders...</span>
+      <div className="ayur-tracker-skeleton-card" aria-busy="true" aria-live="polite">
+        <div className="ayur-skeleton-pulse ayur-skel-title" />
+        <div className="ayur-skeleton-pulse ayur-skel-banner" />
+        <div className="ayur-skeleton-pulse ayur-skel-row" />
+        <div className="ayur-skeleton-pulse ayur-skel-row" />
+        <div className="ayur-skeleton-pulse ayur-skel-row" />
+        <p className="ayur-skeleton-text">Loading today's personalized meal regimen from clinical records...</p>
       </div>
     );
   }
 
-  const defaultScheduleData = {
-    date: new Date().toISOString().split('T')[0],
-    is_doctor_approved: true,
-    plan_title: 'Personalized Nutrition & Diet Intake Regimen',
-    plan_version: '1.2',
-    progress: {
-      meals_completed: 2,
-      meals_planned: 5,
-      adherence_rate: 40,
-      water_intake_ml: 1250,
-      water_goal_ml: 2500,
-    },
-    meals: [
-      {
-        id: 1,
-        meal_type: 'BREAKFAST',
-        label: 'Breakfast',
-        scheduled_time: '08:00 AM',
-        meal_name: 'Warm Whole Grain Porridge & Stewed Fruit',
-        items: ['Warm oatmeal with almond milk', 'Stewed sweet apple with peeled almonds'],
-        status: 'COMPLETED',
-      },
-      {
-        id: 2,
-        meal_type: 'LUNCH',
-        label: 'Lunch (Main Meal)',
-        scheduled_time: '01:30 PM',
-        meal_name: 'Wholesome Lentil Platter & Steamed Basmati Rice',
-        items: ['Yellow Lentils, Steamed Basmati Rice', 'Steamed Squash & Probiotic Yogurt'],
-        status: 'PENDING',
-      },
-      {
-        id: 3,
-        meal_type: 'DINNER',
-        label: 'Dinner',
-        scheduled_time: '08:00 PM',
-        meal_name: 'Light Vegetable Soup & Warm Flatbread',
-        items: ['Mild spiced pumpkin soup', 'Soft whole wheat flatbread'],
-        status: 'PENDING',
-      },
-    ],
-  };
+  if (fetchError && !scheduleData) {
+    return (
+      <div className="ayur-tracker-error-card" role="alert">
+        <AlertCircle size={32} className="text-danger" />
+        <div className="ayur-error-content">
+          <h4 className="ayur-error-title">Unable to Load Meal Schedule</h4>
+          <p className="ayur-error-desc">{fetchError}</p>
+        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={fetchSchedule}
+          leftIcon={<RefreshCw size={14} />}
+        >
+          Retry Connection
+        </Button>
+      </div>
+    );
+  }
 
-  const activeData = scheduleData || defaultScheduleData;
+  const meals = scheduleData?.meals || [];
+  const nextMeal = scheduleData?.next_meal || meals.find((m) => m.status === 'PENDING') || meals[0];
+  const progress = scheduleData?.progress || {};
+  const isDoctorApproved = scheduleData?.is_doctor_approved;
+  const approvedByName = scheduleData?.approved_by_name || 'Dr. Sharma';
+  const planVersion = scheduleData?.plan_version || '1.0';
 
-  const {
-    date,
-    meals = activeData.meals || [],
-    next_meal,
-    progress = activeData.progress || {},
-    is_doctor_approved = activeData.is_doctor_approved,
-    approved_by_name,
-    plan_title = activeData.plan_title,
-    plan_version = activeData.plan_version,
-  } = activeData;
-
-  const totalMeals = meals.length;
-  const completedMeals = progress.meals_completed || 0;
-  const adherencePercent = progress.adherence_rate || (totalMeals > 0 ? Math.round((completedMeals / totalMeals) * 100) : 0);
   const waterIntake = progress.water_intake_ml || 0;
   const waterGoal = progress.water_goal_ml || 2500;
   const waterPercent = Math.min(100, Math.round((waterIntake / waterGoal) * 100));
@@ -209,272 +252,344 @@ export const PatientMealTracker = ({ onTriggerToast, onOpenReminders }) => {
 
   return (
     <div className="ayur-meal-tracker">
-      {/* 1. Exact Today's Schedule Tracking Card */}
-      <PatientTodayScheduleCard
-        onTriggerToast={onTriggerToast}
-        onOpenReminders={onOpenReminders}
-      />
+      {/* 1. Next Scheduled Meal Spotlight Card */}
+      {nextMeal && (
+        <div className="ayur-next-meal-spotlight">
+          <div className="ayur-next-meal-spotlight__main">
+            <div className="ayur-next-meal-badge-row">
+              <span className="ayur-next-indicator-pill">
+                <span className="ayur-pulse-dot" />
+                UPCOMING SCHEDULED MEAL
+              </span>
+              <span className="ayur-next-time-tag">
+                <Clock size={13} />
+                {nextMeal.scheduled_time || 'Next in Schedule'}
+              </span>
+            </div>
 
-      {/* 2. Hydration & Water Intake Tracker */}
-      <div className="ayur-tracker-metrics-grid">
-        <div className="ayur-metric-card ayur-metric-card--full">
-          <div className="ayur-metric-card__header">
-            <div className="flex items-center gap-xs">
-              <Droplets size={16} className="text-secondary" />
-              <span className="ayur-metric-title">Daily Hydration Intake</span>
-            </div>
-            <span className="ayur-metric-badge">{waterIntake} / {waterGoal} ml ({waterPercent}%)</span>
+            <h3 className="ayur-next-meal-title">
+              {nextMeal.label || nextMeal.meal_type}: {nextMeal.meal_name}
+            </h3>
+
+            {nextMeal.items && nextMeal.items.length > 0 && (
+              <div className="ayur-next-meal-items-chips">
+                {nextMeal.items.map((it, idx) => {
+                  const label = typeof it === 'string' ? it : `${it?.name || it?.title || 'Item'}${it?.portion ? ` (${it.portion})` : ''}`;
+                  return (
+                    <span key={idx} className="ayur-item-chip">
+                      {label}
+                    </span>
+                  );
+                })}
+              </div>
+            )}
           </div>
-          <div className="ayur-metric-progress-wrap">
-            <div className="ayur-metric-progress-bar ayur-water-progress-bar">
-              <div
-                className="ayur-water-progress-fill"
-                style={{ width: `${waterPercent}%` }}
-              />
+
+          <div className="ayur-next-meal-spotlight__cta">
+            {nextMeal.status === 'COMPLETED' ? (
+              <div className="ayur-status-pill status-completed">
+                <CheckCircle2 size={16} />
+                <span>Marked as Eaten</span>
+              </div>
+            ) : nextMeal.status === 'SKIPPED' ? (
+              <div className="ayur-status-pill status-skipped">
+                <XCircle size={16} />
+                <span>Skipped</span>
+              </div>
+            ) : (
+              <Button
+                variant="primary"
+                size="md"
+                disabled={isUpdatingMeal === nextMeal.meal_type}
+                onClick={() => handleToggleMeal(nextMeal.meal_type, 'COMPLETED')}
+                leftIcon={isUpdatingMeal === nextMeal.meal_type ? <RefreshCw size={15} className="ayur-spin" /> : <CheckCircle2 size={16} />}
+              >
+                {isUpdatingMeal === nextMeal.meal_type ? 'Saving...' : 'Mark Meal Eaten (100%)'}
+              </Button>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* 2. Hydration & Daily Water Counter */}
+      <div className="ayur-hydration-card">
+        <div className="ayur-hydration-header">
+          <div className="flex items-center gap-xs">
+            <div className="ayur-hydration-icon-wrap">
+              <Droplets size={18} className="text-secondary" />
             </div>
-            <div className="ayur-water-actions">
-              <button
-                type="button"
-                className="ayur-water-add-btn"
-                onClick={() => handleAddWater(250)}
-                disabled={waterLoading}
-              >
-                +250 ml (1 Cup)
-              </button>
-              <button
-                type="button"
-                className="ayur-water-add-btn"
-                onClick={() => handleAddWater(500)}
-                disabled={waterLoading}
-              >
-                +500 ml (Bottle)
-              </button>
-              {waterIntake > 0 && (
-                <button
-                  type="button"
-                  className="ayur-water-reset-btn"
-                  onClick={handleResetWater}
-                  disabled={waterLoading}
-                  title="Reset today's water"
-                >
-                  <RotateCcw size={12} />
-                </button>
-              )}
+            <div>
+              <h4 className="ayur-hydration-title">Daily Hydration Protocol</h4>
+              <p className="ayur-hydration-sub">Warm water intake balances digestion and enhances Agni metabolic fire.</p>
             </div>
           </div>
+          <div className="ayur-hydration-metric">
+            <strong>{waterIntake} ml</strong>
+            <span>/ {waterGoal} ml ({waterPercent}%)</span>
+          </div>
+        </div>
+
+        <div className="ayur-hydration-progress-track">
+          <div
+            className="ayur-hydration-progress-fill"
+            style={{ width: `${waterPercent}%` }}
+            role="progressbar"
+            aria-valuenow={waterIntake}
+            aria-valuemin="0"
+            aria-valuemax={waterGoal}
+          />
+        </div>
+
+        <div className="ayur-hydration-actions-row">
+          <button
+            type="button"
+            className="ayur-water-quick-btn"
+            disabled={waterLoading}
+            onClick={() => handleAddWater(250)}
+          >
+            <Plus size={13} />
+            <span>+250 ml (1 Warm Cup)</span>
+          </button>
+          <button
+            type="button"
+            className="ayur-water-quick-btn"
+            disabled={waterLoading}
+            onClick={() => handleAddWater(500)}
+          >
+            <Plus size={13} />
+            <span>+500 ml (Bottle)</span>
+          </button>
+          {waterIntake > 0 && (
+            <button
+              type="button"
+              className="ayur-water-reset-btn"
+              disabled={waterLoading}
+              onClick={handleResetWater}
+              title="Reset today's water counter"
+              aria-label="Reset water intake"
+            >
+              <RotateCcw size={13} />
+              <span>Reset</span>
+            </button>
+          )}
         </div>
       </div>
 
-
-      {/* 3. Detailed Today's Meal Timeline */}
-      <div className="ayur-tracker-schedule-section">
-        <div className="ayur-tracker-section-header">
+      {/* 3. Detailed Today's Meal Checklist (5 Scheduled Meals) */}
+      <div className="ayur-checklist-card">
+        <div className="ayur-checklist-header">
           <div>
-            <h3 className="ayur-tracker-heading">Today's Meal Checklist</h3>
-            <p className="ayur-tracker-subheading">
-              Track what to eat, mark completed or partial meals, and report difficulty directly to your physician
+            <div className="flex items-center gap-xs">
+              <Utensils size={18} className="text-primary" />
+              <h3 className="ayur-checklist-title">Today's Meal Checklist</h3>
+            </div>
+            <p className="ayur-checklist-sub">
+              Mark completion after meals. All records persist to your chart for physician monitoring.
             </p>
           </div>
-          <div className="flex items-center gap-xs flex-wrap">
+
+          <div className="ayur-checklist-header-actions">
             <button
               type="button"
-              className="ayur-report-diff-btn"
+              className="ayur-checklist-report-btn"
               onClick={() => {
-                setDifficultyMealType('lunch');
+                setDifficultyMealType('LUNCH');
                 setDifficultyModalOpen(true);
               }}
             >
               <AlertTriangle size={14} />
-              <span>Report Symptoms / Difficulty</span>
+              <span>Report Discomfort / Symptoms</span>
             </button>
-            <div className="ayur-plan-origin-pill">
-              {is_doctor_approved ? (
-                <span className="text-success font-semibold flex items-center gap-xs">
-                  <CheckCircle2 size={14} /> Doctor Approved Plan (v{plan_version})
-                </span>
-              ) : (
-                <span className="text-muted flex items-center gap-xs">
-                  <Clock size={14} /> Clinical Review in Progress
-                </span>
-              )}
-            </div>
+
+            {onOpenReminders && (
+              <button
+                type="button"
+                className="ayur-checklist-remind-btn"
+                onClick={onOpenReminders}
+                title="Manage meal notification times"
+              >
+                <Bell size={14} />
+                <span>Reminders</span>
+              </button>
+            )}
           </div>
         </div>
 
-        <div className="ayur-tracker-meals-list">
+        {/* Doctor Verification Ribbon */}
+        <div className="ayur-doctor-ribbon">
+          <span className="ayur-ribbon-tag">
+            <CheckCircle2 size={13} className="text-success" />
+            {isDoctorApproved ? `Clinician Approved Regimen (v${planVersion})` : 'Pending Clinical Verification'}
+          </span>
+          <span className="ayur-ribbon-doc">
+            Attending Lead: <strong>{approvedByName}</strong>
+          </span>
+        </div>
+
+        {/* Meals Timeline */}
+        <div className="ayur-timeline-list" role="list">
           {meals.map((meal) => {
             const Icon = mealIcons[meal.meal_type] || Utensils;
             const isCompleted = meal.status === 'COMPLETED';
+            const isPartial = meal.status === 'PARTIALLY_COMPLETED';
             const isSkipped = meal.status === 'SKIPPED';
-            const isPending = meal.status === 'PENDING';
+            const isPending = meal.status === 'PENDING' || meal.status === 'NOT_DONE';
             const isUpdating = isUpdatingMeal === meal.meal_type;
+            const isSkipOpen = expandedSkipMeal === meal.meal_type;
 
             return (
               <div
                 key={meal.id || meal.meal_type}
-                className={`ayur-meal-timeline-card ${isCompleted ? 'ayur-meal--completed' : ''} ${isSkipped ? 'ayur-meal--skipped' : ''}`}
+                className={`ayur-timeline-card ${isCompleted ? 'card--completed' : ''} ${isPartial ? 'card--partial' : ''} ${isSkipped ? 'card--skipped' : ''}`}
+                role="listitem"
               >
-                {/* Left Time Column */}
-                <div className="ayur-meal-time-col">
-                  <div className="ayur-meal-time-badge">
-                    <Icon size={16} />
+                {/* Time & Icon Column */}
+                <div className="ayur-timeline-meta">
+                  <div className={`ayur-timeline-icon-wrap ${isCompleted ? 'icon--completed' : ''}`}>
+                    <Icon size={18} />
                   </div>
-                  <span className="ayur-meal-scheduled-time">{meal.scheduled_time}</span>
-                  <span className="ayur-meal-type-label">{meal.label}</span>
+                  <span className="ayur-timeline-time">{meal.scheduled_time || 'Scheduled'}</span>
+                  <span className="ayur-timeline-label">{meal.label || meal.meal_type}</span>
                 </div>
 
-                {/* Center Content Column */}
-                <div className="ayur-meal-content-col">
-                  <div className="flex items-center gap-sm flex-wrap">
-                    <h4 className="ayur-meal-card-title">{meal.meal_name}</h4>
+                {/* Content Column */}
+                <div className="ayur-timeline-content">
+                  <div className="ayur-timeline-title-row">
+                    <h4 className="ayur-timeline-meal-name">{meal.meal_name}</h4>
                     {isCompleted && (
-                      <span className="ayur-meal-status-pill status-completed">
-                        <CheckCircle2 size={13} /> Completed
+                      <span className="ayur-badge-status badge-success">
+                        <CheckCircle2 size={13} /> Eaten (100%)
+                      </span>
+                    )}
+                    {isPartial && (
+                      <span className="ayur-badge-status badge-partial">
+                        <Clock size={13} /> Partial (50%)
                       </span>
                     )}
                     {isSkipped && (
-                      <span className="ayur-meal-status-pill status-skipped">
-                        <XCircle size={13} /> Skipped
+                      <span className="ayur-badge-status badge-skipped">
+                        <XCircle size={13} /> Skipped {meal.skip_reason ? `(${meal.skip_reason})` : ''}
                       </span>
                     )}
                     {isPending && (
-                      <span className="ayur-meal-status-pill status-pending">
+                      <span className="ayur-badge-status badge-pending">
                         <Clock size={13} /> Scheduled
                       </span>
                     )}
                   </div>
 
+                  {/* Food items & Portion Breakdown */}
                   {meal.items && meal.items.length > 0 && (
-                    <ul className="ayur-meal-items-bullet-list">
+                    <ul className="ayur-timeline-items-list">
                       {meal.items.map((it, idx) => {
-                        const itemLabel = typeof it === 'string' ? it : `${it?.name || it?.title || 'Item'}${it?.portion ? ` (${it.portion})` : (it?.portion_g ? ` (${it.portion_g}g)` : '')}`;
-                        return <li key={idx}>{itemLabel}</li>;
+                        const itemText = typeof it === 'string' ? it : `${it?.name || it?.title || 'Food item'}${it?.portion ? ` • ${it.portion}` : ''}`;
+                        return (
+                          <li key={idx} className="ayur-timeline-item-bullet">
+                            <span className="bullet-dot">•</span>
+                            <span>{itemText}</span>
+                          </li>
+                        );
                       })}
                     </ul>
                   )}
-                </div>
 
-                {/* Right Action Column */}
-                <div className="ayur-meal-action-col">
-                  {isCompleted ? (
-                    <div className="flex items-center gap-xs">
-                      <span className="text-xs font-semibold text-success flex items-center gap-xs">
-                        <CheckCircle2 size={14} /> Done
-                      </span>
+                  {/* Action Controls per Meal */}
+                  <div className="ayur-timeline-actions">
+                    <button
+                      type="button"
+                      className={`ayur-action-btn ayur-btn-done ${isCompleted ? 'btn-active' : ''}`}
+                      disabled={isUpdating}
+                      onClick={() => handleToggleMeal(meal.meal_type, 'COMPLETED')}
+                      title="Mark meal 100% completed"
+                    >
+                      <CheckCircle2 size={14} />
+                      <span>{isCompleted ? 'Eaten ✓' : 'Mark Eaten'}</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      className={`ayur-action-btn ayur-btn-partial ${isPartial ? 'btn-active' : ''}`}
+                      disabled={isUpdating}
+                      onClick={() => handleToggleMeal(meal.meal_type, 'PARTIALLY_COMPLETED', { portion_consumed: '50%' })}
+                      title="Mark meal partially consumed (50%)"
+                    >
+                      <span>½ Partial (50%)</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      className={`ayur-action-btn ayur-btn-skip ${isSkipped ? 'btn-active' : ''}`}
+                      disabled={isUpdating}
+                      onClick={() => setExpandedSkipMeal(isSkipOpen ? null : meal.meal_type)}
+                      title="Report meal as skipped"
+                    >
+                      <XCircle size={14} />
+                      <span>{isSkipped ? 'Skipped' : 'Skip Meal'}</span>
+                      <ChevronDown size={13} className={`ayur-caret ${isSkipOpen ? 'caret-up' : ''}`} />
+                    </button>
+
+                    {(isCompleted || isPartial || isSkipped) && (
                       <button
                         type="button"
-                        className="ayur-meal-revert-btn"
-                        onClick={() => handleToggleMeal(meal.meal_type, 'PENDING')}
+                        className="ayur-action-btn ayur-btn-reset"
                         disabled={isUpdating}
-                        title="Reset to not done"
-                      >
-                        <RotateCcw size={13} />
-                        <span>Undo</span>
-                      </button>
-                    </div>
-                  ) : meal.status === 'PARTIALLY_COMPLETED' ? (
-                    <div className="flex items-center gap-xs">
-                      <span className="text-xs font-semibold text-accent flex items-center gap-xs">
-                        ◑ Half Consumed
-                      </span>
-                      <button
-                        type="button"
-                        className="ayur-meal-revert-btn"
                         onClick={() => handleToggleMeal(meal.meal_type, 'PENDING')}
-                        disabled={isUpdating}
-                        title="Reset"
+                        title="Reset this meal back to scheduled"
                       >
-                        <RotateCcw size={13} />
+                        <RotateCcw size={12} />
+                        <span>Reset</span>
                       </button>
-                    </div>
-                  ) : (
-                    <div className="flex flex-col gap-xs items-end">
-                      <div className="flex items-center gap-xs">
+                    )}
+
+                    <button
+                      type="button"
+                      className="ayur-action-btn ayur-btn-discomfort"
+                      onClick={() => {
+                        setDifficultyMealType(meal.meal_type);
+                        setDifficultyModalOpen(true);
+                      }}
+                      title="Report digestive discomfort or food issue with this meal"
+                    >
+                      <AlertTriangle size={12} />
+                      <span>Report Discomfort</span>
+                    </button>
+                  </div>
+
+                  {/* Inline Skip Reason Selector */}
+                  {isSkipOpen && (
+                    <div className="ayur-skip-reason-box">
+                      <span className="ayur-skip-reason-label">Select reason for skipping {meal.label}:</span>
+                      <div className="ayur-skip-chips">
+                        {skipReasonOptions.map((reason, rIdx) => (
+                          <button
+                            key={rIdx}
+                            type="button"
+                            className={`ayur-skip-chip ${selectedSkipReason === reason ? 'chip-selected' : ''}`}
+                            onClick={() => setSelectedSkipReason(reason)}
+                          >
+                            {reason}
+                          </button>
+                        ))}
+                      </div>
+                      <div className="ayur-skip-confirm-row">
                         <Button
-                          variant="primary"
-                          size="xs"
-                          onClick={() => handleToggleMeal(meal.meal_type, 'COMPLETED')}
-                          loading={isUpdating}
-                          leftIcon={<CheckCircle2 size={13} />}
+                          variant="secondary"
+                          size="sm"
+                          disabled={isUpdating}
+                          onClick={() => handleToggleMeal(meal.meal_type, 'SKIPPED', { skip_reason: selectedSkipReason })}
                         >
-                          Completed
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="xs"
-                          onClick={() =>
-                            handleToggleMeal(meal.meal_type, 'PARTIALLY_COMPLETED', { portion_consumed: 50 })
-                          }
-                          loading={isUpdating}
-                        >
-                          Partial (50%)
+                          Confirm Skip Record
                         </Button>
                         <button
                           type="button"
-                          className="ayur-meal-skip-btn"
-                          onClick={() =>
-                            setActiveSkipMeal(activeSkipMeal === meal.meal_type ? null : meal.meal_type)
-                          }
-                          disabled={isUpdating}
-                          title={isSkipped ? 'Undo skip' : 'Skip meal'}
+                          className="ayur-skip-cancel-link"
+                          onClick={() => setExpandedSkipMeal(null)}
                         >
-                          {isSkipped ? 'Undo' : 'Skip'}
+                          Cancel
                         </button>
                       </div>
-
-                      {/* Quick Skip Reason Dropdown if active */}
-                      {activeSkipMeal === meal.meal_type && (
-                        <div className="ayur-quick-skip-panel">
-                          <label className="text-micro font-semibold text-muted block mb-xs">
-                            Reason for skipping:
-                          </label>
-                          <select
-                            className="ayur-skip-select"
-                            value={skipReasonInput}
-                            onChange={(e) => setSkipReasonInput(e.target.value)}
-                          >
-                            <option value="Lack of appetite (Aruchi)">Lack of appetite (Aruchi)</option>
-                            <option value="Digestion discomfort / Nausea">Digestion discomfort / Nausea</option>
-                            <option value="Schedule conflict / Fasting">Schedule conflict / Fasting</option>
-                            <option value="Food items unavailable">Food items unavailable</option>
-                            <option value="Other / Non-compliant">Other reason</option>
-                          </select>
-                          <div className="flex gap-xs mt-xs justify-end">
-                            <button
-                              type="button"
-                              className="ayur-skip-confirm-btn"
-                              onClick={() =>
-                                handleToggleMeal(meal.meal_type, 'SKIPPED', {
-                                  skip_reason: skipReasonInput,
-                                })
-                              }
-                            >
-                              Confirm Skip
-                            </button>
-                            <button
-                              type="button"
-                              className="ayur-skip-cancel-btn"
-                              onClick={() => setActiveSkipMeal(null)}
-                            >
-                              Cancel
-                            </button>
-                          </div>
-                        </div>
-                      )}
                     </div>
                   )}
-
-                  {/* Report difficulty link */}
-                  <button
-                    type="button"
-                    className="ayur-meal-report-link"
-                    onClick={() => {
-                      setDifficultyMealType(meal.meal_type);
-                      setDifficultyModalOpen(true);
-                    }}
-                  >
-                    Report Symptom / Reaction
-                  </button>
                 </div>
               </div>
             );
@@ -482,12 +597,15 @@ export const PatientMealTracker = ({ onTriggerToast, onOpenReminders }) => {
         </div>
       </div>
 
-      {/* Patient Difficulty Reporting Modal */}
+      {/* 4. Patient Difficulty / Symptom Report Modal */}
       <PatientDifficultyModal
         isOpen={difficultyModalOpen}
         onClose={() => setDifficultyModalOpen(false)}
         defaultMealType={difficultyMealType}
-        onSuccess={() => fetchSchedule()}
+        onSuccess={() => {
+          fetchSchedule();
+          onMealStatusChanged?.();
+        }}
         onTriggerToast={onTriggerToast}
       />
     </div>

@@ -140,8 +140,8 @@ class AuthenticationAndSecurityTests(TestCase):
     def test_doctor_registration_success_pending_approval(self):
         """Valid doctor registration creates DOCTOR account with PENDING approval and does not auto-login."""
         payload = {
-            'fullName': 'Dr. Swetha Rao',
-            'email': 'swetha.rao@ayurhospital.org',
+            'fullName': 'Dr. Swetha',
+            'email': 'swethachowdary@ayurhospital.org',
             'clinicalLicense': 'AYUSH-KA-2026-9812',
             'specialization': 'Kayachikitsa (Internal Medicine)',
             'qualification': 'BAMS, MD (Ayurveda)',
@@ -163,7 +163,7 @@ class AuthenticationAndSecurityTests(TestCase):
         self.assertTrue(user.check_password('SecurePhysicianPass2026!'))
 
         profile = user.doctor_profile
-        self.assertEqual(profile.professional_name, 'Dr. Swetha Rao')
+        self.assertEqual(profile.professional_name, 'Dr. Swetha')
         self.assertEqual(profile.clinical_license, 'AYUSH-KA-2026-9812')
         self.assertEqual(profile.approval_status, DoctorProfile.ApprovalStatus.PENDING)
         self.assertFalse(profile.is_approved())

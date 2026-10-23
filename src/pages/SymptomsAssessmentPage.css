@@ -12,7 +12,7 @@
   min-width: 0;
   box-sizing: border-box;
 }
-
+ 
 /* Global Pipeline Track */
 .ayur-sym-global-pipeline {
   background-color: var(--color-surface);

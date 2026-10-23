@@ -41,13 +41,15 @@ export const DoctorPatientProfilePage = ({
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [isSavingReview, setIsSavingReview] = useState(false);
 
+  const cleanedId = String(patientId || '').replace(/^AYU-0*/i, '') || patientId;
+
   const fetchPatientDetail = async () => {
     try {
       setIsLoading(true);
-      const data = await api.getDoctorPatientDetail(patientId);
+      const data = await api.getDoctorPatientDetail(cleanedId);
       setPatientData(data);
       // Record clinical case access
-      api.recordPatientAuditLog(patientId, {
+      api.recordPatientAuditLog(cleanedId, {
         action: 'CASE_ACCESSED',
         metadata: {
           view: 'clinical_profile',
@@ -284,7 +286,7 @@ export const DoctorPatientProfilePage = ({
       {/* Tab 1: Clinical Verification Console */}
       {activeWorkflowTab === 'verification' && (
         <DoctorPatientVerification
-          patientId={patientId}
+          patientId={cleanedId}
           onProfileUpdated={setEffectiveProfile}
           onStatsUpdated={setVerificationStats}
           onTriggerToast={onTriggerToast}
@@ -294,7 +296,7 @@ export const DoctorPatientProfilePage = ({
       {/* Tab 2: Diet Plan Generation & Clinical Editor */}
       {activeWorkflowTab === 'diet' && (
         <DoctorDietPlanEditor
-          patientId={patientId}
+          patientId={cleanedId}
           patientData={patientData}
           effectiveProfile={effectiveProfile}
           onTriggerToast={onTriggerToast}
@@ -327,14 +329,14 @@ export const DoctorPatientProfilePage = ({
       {activeWorkflowTab === 'assessment' && (
         <DoctorPatientBaseline
           patientData={patientData}
-          patientId={patientId}
+          patientId={cleanedId}
           onSwitchToVerification={() => setActiveWorkflowTab('verification')}
         />
       )}
 
       {/* Tab 5: Clinical Audit Trail */}
       {activeWorkflowTab === 'audit' && (
-        <DoctorPatientAuditTrail patientId={patientId} />
+        <DoctorPatientAuditTrail patientId={cleanedId} />
       )}
 
       {/* Review Notes Modal */}

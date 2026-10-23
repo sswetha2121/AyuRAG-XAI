@@ -642,7 +642,7 @@ CCRAS Clinical Practice Guideline for the Management of Amavata:
 CCRAS Clinical Protocol for Madhumeha (Metabolic and Glycemic Regulation):
 1. Etiological Factors:
    Sedentary habits (Asyasukha), excessive sleep (Swapnasukha), overconsumption of dairy, new harvest grains, and sweet refined sugars.
-2. Dietary Principles (Pathya Ahara):
+2. Dietary Principles :
    - Staple Grains: Barley (Yava), aged brown rice, millets (Ragi, Jowar, Bajra).
    - Legumes: Green gram (Mudga), roasted Bengal gram, horse gram (Kulattha).
    - Vegetables: Bitter gourd (Karela), pointed gourd (Patola), fenugreek leaves (Methi), drumstick.

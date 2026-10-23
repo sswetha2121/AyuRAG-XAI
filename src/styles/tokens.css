@@ -5,9 +5,18 @@
    ========================================================================== */
 
 :root {
+  /* --- Strict Brand Identity Palette --- */
+  --color-forest-green: #123B2F;
+  --color-deep-green: #0D2921;
+  --color-sage: #A8BDA7;
+  --color-warm-ivory: #F8F6F0;
+  --color-sand: #E8DDC9;
+  --color-charcoal: #26332E;
+  --color-muted-gold: #C5A45D;
+
   /* --- Primary Color Palette (Forest Green #123B2F) --- */
   --color-primary: #123B2F;
-  --color-primary-hover: #0D2B22;
+  --color-primary-hover: #0D2921;
   --color-primary-active: #091F18;
   --color-primary-light: #EBF2EE;
   --color-primary-subtle: #F2F7F4;

@@ -1,62 +1,89 @@
-/* DashboardPage.css - AI Decision Support & Patient Health Portal */
+/* DashboardPage.css - Premium Nature-Inspired Healthcare Patient Dashboard */
 
 .ayur-dashboard-page {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
-  max-width: var(--container-max-width);
+  gap: 24px;
+  max-width: var(--container-max-width, 1320px);
   margin: 0 auto;
   width: 100%;
 }
 
+/* 1. Header Banner */
 .ayur-dash-welcome-banner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: var(--space-md);
-  padding: 24px 28px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-card);
+  gap: 20px;
+  padding: 26px 32px;
+  background: linear-gradient(135deg, rgba(248, 246, 240, 0.95) 0%, rgba(232, 221, 201, 0.45) 100%), #FFFFFF;
+  border: 1px solid rgba(18, 59, 47, 0.14);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(18, 59, 47, 0.05);
   flex-wrap: wrap;
 }
 
 .ayur-dash-welcome-left {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   flex: 1;
   min-width: 280px;
 }
 
-.ayur-dash-date-chip {
+.ayur-dash-meta-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ayur-dash-date-chip,
+.ayur-dash-chart-chip,
+.ayur-dash-protocol-chip {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.775rem;
+  gap: 5px;
+  font-size: 0.75rem;
   font-weight: 700;
-  color: var(--color-secondary);
-  background: rgba(91, 130, 102, 0.12);
   padding: 3px 10px;
-  border-radius: var(--radius-pill);
+  border-radius: 9999px;
   width: fit-content;
 }
 
+.ayur-dash-date-chip {
+  color: #5B8266;
+  background: rgba(91, 130, 102, 0.12);
+  border: 1px solid rgba(91, 130, 102, 0.2);
+}
+
+.ayur-dash-chart-chip {
+  color: #123B2F;
+  background: rgba(18, 59, 47, 0.06);
+  border: 1px solid rgba(18, 59, 47, 0.12);
+}
+
+.ayur-dash-protocol-chip {
+  color: #15803D;
+  background: rgba(21, 128, 61, 0.1);
+  border: 1px solid rgba(21, 128, 61, 0.2);
+}
+
 .ayur-dash-welcome-title {
-  font-family: var(--font-sans);
-  font-size: 1.55rem;
+  font-family: 'Manrope', Georgia, serif;
+  font-size: 1.65rem;
   font-weight: 800;
-  color: var(--color-primary);
+  color: #123B2F;
   margin: 0;
   letter-spacing: -0.02em;
 }
 
 .ayur-dash-welcome-subtitle {
-  font-size: 0.9rem;
-  color: var(--color-text-secondary);
+  font-size: 0.92rem;
+  color: #4A5568;
   margin: 0;
-  line-height: 1.45;
+  line-height: 1.5;
+  max-width: 760px;
 }
 
 .ayur-dash-welcome-actions {
@@ -64,40 +91,504 @@
   align-items: center;
   gap: 12px;
   flex-shrink: 0;
+  flex-wrap: wrap;
 }
 
-.ayur-demo-banner {
-  background-color: var(--color-warning-light);
-  border: 1px solid var(--color-warning-border);
-  border-radius: var(--radius-md);
-  padding: 12px 16px;
+/* Recoverable warning strip */
+.ayur-dash-warning-strip {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  color: var(--color-warning-text);
-  font-size: var(--font-size-small);
+  padding: 10px 16px;
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-radius: 10px;
+  color: #92400E;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
 }
 
-.ayur-dash-tab-content {
+.ayur-strip-retry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #FEF3C7;
+  border: 1px solid #FCD34D;
+  border-radius: 6px;
+  padding: 4px 10px;
+  color: #78350F;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* 2. Top 4 Metrics Strip */
+.ayur-dash-metrics-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
   width: 100%;
 }
 
-.ayur-dash-overview-stack {
+.ayur-dash-metric-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(18, 59, 47, 0.12);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 2px 10px rgba(18, 59, 47, 0.03);
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ayur-dash-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(18, 59, 47, 0.08);
+  border-color: #5B8266;
+}
+
+.ayur-dmc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ayur-dmc-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.ayur-dmc-icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-constitution {
+  background: rgba(91, 130, 102, 0.15);
+  color: #123B2F;
+}
+
+.icon-doctor {
+  background: rgba(22, 101, 52, 0.15);
+  color: #15803D;
+}
+
+.icon-diet {
+  background: rgba(197, 164, 93, 0.18);
+  color: #8C6D23;
+}
+
+.icon-progress {
+  background: rgba(18, 59, 47, 0.1);
+  color: #123B2F;
+}
+
+.ayur-dmc-value {
+  font-family: 'Manrope', Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #123B2F;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ayur-dmc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  color: #5B8266;
+  margin-top: 2px;
+}
+
+.ayur-dmc-arrow {
+  color: #A0AEC0;
+  transition: transform 0.15s ease;
+}
+
+.ayur-dash-metric-card:hover .ayur-dmc-arrow {
+  transform: translateX(3px);
+  color: #123B2F;
+}
+
+/* 3. Main Command Center: 2 Columns */
+.ayur-dash-overview-view {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.ayur-dash-command-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.ayur-dash-col-primary {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.ayur-dash-col-secondary {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+/* Sidebar Widgets */
+.ayur-sidebar-widget {
+  background: #FFFFFF;
+  border: 1px solid rgba(18, 59, 47, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(18, 59, 47, 0.04);
+  overflow: hidden;
+}
+
+.ayur-widget-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #F1ECE1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ayur-widget-title {
+  font-family: 'Manrope', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #123B2F;
+  margin: 0;
+}
+
+.ayur-widget-status-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.status-completed {
+  background: rgba(29, 122, 79, 0.1);
+  color: #1D7A4F;
+  border: 1px solid rgba(29, 122, 79, 0.25);
+}
+
+.status-approved {
+  background: rgba(22, 101, 52, 0.12);
+  color: #15803D;
+  border: 1px solid rgba(22, 101, 52, 0.25);
+}
+
+.status-pending {
+  background: #FFFBEB;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.ayur-streak-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #92400E;
+  background: #FEF3C7;
+  padding: 3px 9px;
+  border-radius: 9999px;
+}
+
+.ayur-online-indicator {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #15803D;
+  background: #DCFCE7;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+.ayur-widget-body {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Dosha bars inside summary widget */
+.ayur-profile-dosha-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ayur-dosha-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+}
+
+.dosha-name {
+  width: 120px;
+  color: #4A5568;
+  font-weight: 600;
+}
+
+.dosha-track {
+  flex: 1;
+  height: 8px;
+  background: #F8F6F0;
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 1px solid rgba(18, 59, 47, 0.08);
+}
+
+.dosha-fill {
+  height: 100%;
+  border-radius: 9999px;
+}
+
+.fill-vata { background: #3B82F6; }
+.fill-pitta { background: #EF4444; }
+.fill-kapha { background: #10B981; }
+
+.dosha-pct {
+  width: 32px;
+  text-align: right;
+  font-weight: 700;
+  color: #123B2F;
+}
+
+.ayur-widget-meta-row {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid #F1ECE1;
+  font-size: 0.82rem;
+  gap: 12px;
+}
+
+.wmeta-label {
+  color: #718096;
+  margin-right: 4px;
+}
+
+.wmeta-val {
+  color: #123B2F;
+}
+
+/* Active Diet Highlights */
+.ayur-plan-summary-title {
+  font-family: 'Manrope', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #123B2F;
+  margin: 0;
+}
+
+.ayur-plan-doctor-quote {
+  margin: 0;
+  padding: 8px 12px;
+  background: #F8F6F0;
+  border-left: 3px solid #C5A45D;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: #4A5568;
+  line-height: 1.45;
+}
+
+.ayur-guideline-mini-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.guideline-mini-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.guideline-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip-favor {
+  font-size: 0.75rem;
+  color: #15803D;
+  background: #DCFCE7;
+  border: 1px solid #BBF7D0;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.chip-avoid {
+  font-size: 0.75rem;
+  color: #B91C1C;
+  background: #FEE2E2;
+  border: 1px solid #FECACA;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.ayur-plan-empty-notice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 12px;
+}
+
+.ayur-plan-empty-title {
+  margin: 4px 0 2px 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #123B2F;
+}
+
+.ayur-plan-empty-desc {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #718096;
+  line-height: 1.4;
+}
+
+/* Mini Adherence Bar Chart */
+.ayur-mini-chart-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 90px;
+  padding: 10px 0;
+  border-bottom: 1px solid #F1ECE1;
+}
+
+.ayur-mini-bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+}
+
+.ayur-mini-bar-track {
+  flex: 1;
+  width: 12px;
+  background: #F8F6F0;
+  border-radius: 9999px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.ayur-mini-bar-fill {
+  width: 100%;
+  background: linear-gradient(180deg, #5B8266 0%, #123B2F 100%);
+  border-radius: 9999px;
+  transition: height 0.4s ease;
+}
+
+.ayur-mini-bar-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #718096;
+}
+
+/* Doctor Widget Mini Profile */
+.ayur-doc-profile-mini {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ayur-doc-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(18, 59, 47, 0.1);
+  color: #123B2F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ayur-doc-name {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #123B2F;
+}
+
+.ayur-doc-role {
+  font-size: 0.76rem;
+  color: #5B8266;
+}
+
+.ayur-doc-advice-prompt {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #4A5568;
+  line-height: 1.45;
+}
+
+/* 4. Tab Panes */
+.ayur-dash-tab-content {
+  width: 100%;
 }
 
 .ayur-dash-tab-pane {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
+  gap: 24px;
   animation: fadeIn 200ms ease-out;
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .ayur-dash-tab-pane,
+  .ayur-dmc-arrow,
+  .ayur-dash-metric-card,
+  .ayur-mini-bar-fill {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* 5. Responsive Design */
+@media (max-width: 1100px) {
+  .ayur-dash-metrics-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ayur-dash-command-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
@@ -110,5 +601,16 @@
   .ayur-dash-welcome-actions {
     width: 100%;
     justify-content: flex-start;
+  }
+
+  .ayur-dash-metrics-strip {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ayur-dash-welcome-title {
+    font-size: 1.35rem;
   }
 }

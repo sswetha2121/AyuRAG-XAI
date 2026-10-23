@@ -9,13 +9,15 @@ import {
   Bell,
   LogOut,
   Layers,
-  MessageSquare
+  MessageSquare,
+  Sparkles
 } from 'lucide-react';
 
 /**
  * AyuRAG-XAI Patient Portal Primary Navigation
  * Phase 8 Specification:
  * - My Dashboard
+ * - Assessment Results
  * - My Diet Plan
  * - Daily Checklist
  * - Progress
@@ -30,6 +32,13 @@ export const PATIENT_PORTAL_NAV_ITEMS = [
     icon: LayoutDashboard,
     route: '/dashboard',
     tab: 'overview'
+  },
+  {
+    id: 'results',
+    label: 'Assessment Results',
+    sublabel: 'Prakriti & AI Attribution',
+    icon: Sparkles,
+    route: '/assessment/results',
   },
   {
     id: 'my-diet-plan',

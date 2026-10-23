@@ -1,548 +1,787 @@
-/* PatientMealTracker.css - Daily Meal Tracking, What to Eat, Timelines & Water */
+/* PatientMealTracker.css - Nature-Inspired Interactive Meal Tracking & Hydration */
 
 .ayur-meal-tracker {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
+  gap: 20px;
   width: 100%;
 }
 
-.ayur-tracker-loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: var(--space-2xl);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  color: var(--color-text-secondary);
-  font-size: 0.9rem;
-}
-
-.ayur-tracker-empty {
+/* Skeleton Loading State */
+.ayur-tracker-skeleton-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: var(--space-2xl);
-  background: var(--color-surface);
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius-lg);
-  color: var(--color-text-muted);
+  gap: 14px;
+  padding: 24px;
+  background: var(--color-surface, #FFFFFF);
+  border: 1px solid var(--color-border, #E8DDC9);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(18, 59, 47, 0.04);
+}
+
+.ayur-skeleton-pulse {
+  background: linear-gradient(90deg, #F8F6F0 25%, #E8DDC9 50%, #F8F6F0 75%);
+  background-size: 200% 100%;
+  animation: skeletonPulse 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeletonPulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.ayur-skel-title {
+  height: 24px;
+  width: 45%;
+}
+
+.ayur-skel-banner {
+  height: 80px;
+  width: 100%;
+}
+
+.ayur-skel-row {
+  height: 60px;
+  width: 100%;
+}
+
+.ayur-skeleton-text {
+  font-size: 0.85rem;
+  color: var(--color-text-muted, #718096);
+  font-style: italic;
+  margin: 6px 0 0 0;
   text-align: center;
 }
 
-/* 1. Next Meal Spotlight Banner */
-.ayur-next-meal-banner {
+/* Error Card */
+.ayur-tracker-error-card {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: var(--space-md);
-  padding: 22px 26px;
-  background: linear-gradient(135deg, rgba(22, 56, 44, 0.05) 0%, rgba(91, 130, 102, 0.08) 100%), var(--color-surface);
-  border: 1.5px solid rgba(22, 56, 44, 0.18);
-  border-left: 5px solid var(--color-primary);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 8px 24px rgba(22, 56, 44, 0.06);
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: #FFF5F5;
+  border: 1px solid #FEB2B2;
+  border-radius: 14px;
   flex-wrap: wrap;
 }
 
-.ayur-next-meal-left {
+.ayur-error-content {
+  flex: 1;
+  min-width: 220px;
+}
+
+.ayur-error-title {
+  margin: 0 0 4px 0;
+  color: #C53030;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.ayur-error-desc {
+  margin: 0;
+  color: #742A2A;
+  font-size: 0.85rem;
+}
+
+/* 1. Next Meal Spotlight Card */
+.ayur-next-meal-spotlight {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 24px;
+  background: linear-gradient(135deg, rgba(18, 59, 47, 0.05) 0%, rgba(168, 189, 167, 0.12) 100%), #FFFFFF;
+  border: 1px solid rgba(18, 59, 47, 0.18);
+  border-left: 5px solid #123B2F;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(18, 59, 47, 0.05);
+  flex-wrap: wrap;
+}
+
+.ayur-next-meal-spotlight__main {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   flex: 1;
   min-width: 280px;
 }
 
-.ayur-next-meal-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.725rem;
-  font-weight: 800;
-  letter-spacing: 0.8px;
-  color: var(--color-primary);
-  background: rgba(22, 56, 44, 0.08);
-  padding: 3px 8px;
-  border-radius: var(--radius-pill);
-  width: fit-content;
-}
-
-.ayur-next-meal-title {
-  font-family: var(--font-sans);
-  font-size: 1.35rem;
-  font-weight: 800;
-  color: var(--color-primary);
-  margin: 0;
-}
-
-.ayur-next-meal-desc {
-  font-size: 0.9rem;
-  color: var(--color-text-secondary);
-  margin: 0;
-  line-height: 1.4;
-}
-
-.ayur-next-meal-desc strong {
-  color: var(--color-primary);
-}
-
-.ayur-next-meal-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 4px;
-}
-
-.ayur-next-item-chip {
-  font-size: 0.8rem;
-  color: var(--color-text-secondary);
-  background: rgba(22, 56, 44, 0.04);
-  border: 1px solid rgba(22, 56, 44, 0.1);
-  padding: 2px 8px;
-  border-radius: var(--radius-sm);
-}
-
-.ayur-next-meal-actions {
+.ayur-next-meal-badge-row {
   display: flex;
   align-items: center;
   gap: 10px;
-  flex-shrink: 0;
-}
-
-.ayur-meal-completed-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  background: rgba(29, 122, 79, 0.12);
-  border: 1px solid rgba(29, 122, 79, 0.3);
-  border-radius: var(--radius-md);
-  color: var(--color-success);
-  font-weight: 700;
-  font-size: 0.875rem;
-}
-
-.ayur-tracker-reminder-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  color: var(--color-text-secondary);
-  font-size: 0.825rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.ayur-tracker-reminder-btn:hover {
-  background: rgba(22, 56, 44, 0.06);
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
-
-/* 2. Metrics Grid */
-.ayur-tracker-metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-md);
-}
-
-.ayur-metric-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 18px 20px;
-  box-shadow: var(--shadow-card);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.ayur-metric-card__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.ayur-metric-title {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--color-primary);
-}
-
-.ayur-metric-badge {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-secondary);
-  background: rgba(91, 130, 102, 0.12);
-  padding: 2px 8px;
-  border-radius: var(--radius-pill);
-}
-
-.ayur-metric-progress-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.ayur-metric-progress-bar {
-  width: 100%;
-  height: 10px;
-  background: rgba(22, 56, 44, 0.08);
-  border-radius: var(--radius-pill);
-  overflow: hidden;
-  position: relative;
-}
-
-.ayur-metric-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--color-secondary), var(--color-primary));
-  border-radius: var(--radius-pill);
-  transition: width 0.4s ease;
-}
-
-.ayur-water-progress-bar {
-  background: rgba(36, 110, 185, 0.1);
-}
-
-.ayur-water-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #3B82F6, #1D4ED8);
-  border-radius: var(--radius-pill);
-  transition: width 0.4s ease;
-}
-
-.ayur-water-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.ayur-water-add-btn {
-  padding: 5px 12px;
-  font-size: 0.775rem;
-  font-weight: 700;
-  color: #1E40AF;
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.25);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.ayur-water-add-btn:hover:not(:disabled) {
-  background: rgba(59, 130, 246, 0.18);
-  border-color: #3B82F6;
-}
-
-.ayur-water-reset-btn {
-  padding: 6px 8px;
-  background: transparent;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  color: var(--color-text-muted);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ayur-water-reset-btn:hover:not(:disabled) {
-  background: rgba(220, 38, 38, 0.08);
-  color: #DC2626;
-  border-color: #DC2626;
-}
-
-/* 3. Detailed Meal Timeline Section */
-.ayur-tracker-schedule-section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.ayur-tracker-section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
   flex-wrap: wrap;
-  gap: 8px;
 }
 
-.ayur-tracker-heading {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--color-primary);
-  margin: 0;
-}
-
-.ayur-tracker-subheading {
-  font-size: 0.85rem;
-  color: var(--color-text-secondary);
-  margin: 2px 0 0 0;
-}
-
-.ayur-plan-origin-pill {
-  font-size: 0.8rem;
-  padding: 4px 10px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
-}
-
-.ayur-tracker-meals-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.ayur-meal-timeline-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  background: var(--color-surface);
-  border: 1.5px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 16px 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-  transition: all 0.2s ease;
-}
-
-.ayur-meal-timeline-card:hover {
-  border-color: rgba(22, 56, 44, 0.3);
-  box-shadow: var(--shadow-card);
-}
-
-.ayur-meal-timeline-card.ayur-meal--completed {
-  border-left: 4px solid var(--color-success);
-  background: linear-gradient(90deg, rgba(29, 122, 79, 0.03) 0%, var(--color-surface) 100%);
-}
-
-.ayur-meal-timeline-card.ayur-meal--skipped {
-  opacity: 0.65;
-  background: rgba(0, 0, 0, 0.01);
-}
-
-.ayur-meal-time-col {
-  display: flex;
-  flex-direction: column;
+.ayur-next-indicator-pill {
+  display: inline-flex;
   align-items: center;
-  width: 90px;
-  flex-shrink: 0;
-  gap: 2px;
-  text-align: center;
-}
-
-.ayur-meal-time-badge {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: rgba(22, 56, 44, 0.08);
-  color: var(--color-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 4px;
-}
-
-.ayur-meal-scheduled-time {
-  font-size: 0.875rem;
+  gap: 6px;
+  font-size: 0.72rem;
   font-weight: 800;
-  color: var(--color-primary);
-  line-height: 1.2;
-}
-
-.ayur-meal-type-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
+  letter-spacing: 0.8px;
+  color: #123B2F;
+  background: rgba(18, 59, 47, 0.08);
+  padding: 3px 10px;
+  border-radius: 9999px;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
 }
 
-.ayur-meal-content-col {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: 1;
-  min-width: 0;
+.ayur-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #123B2F;
+  box-shadow: 0 0 0 0 rgba(18, 59, 47, 0.7);
+  animation: pulseDot 2s infinite;
 }
 
-.ayur-meal-card-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  margin: 0;
+@keyframes pulseDot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(18, 59, 47, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(18, 59, 47, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(18, 59, 47, 0); }
 }
 
-.ayur-meal-status-pill {
+.ayur-next-time-tag {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 0.725rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  padding: 2px 7px;
-  border-radius: var(--radius-sm);
+  color: #5B8266;
 }
 
-.ayur-meal-status-pill.status-completed {
-  background: rgba(29, 122, 79, 0.12);
-  color: var(--color-success);
-}
-
-.ayur-meal-status-pill.status-skipped {
-  background: rgba(100, 116, 139, 0.12);
-  color: #64748B;
-}
-
-.ayur-meal-status-pill.status-pending {
-  background: rgba(192, 125, 30, 0.12);
-  color: var(--color-warning);
-}
-
-.ayur-meal-items-bullet-list {
-  list-style: disc;
-  padding-left: 18px;
+.ayur-next-meal-title {
+  font-family: 'Manrope', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #123B2F;
   margin: 0;
-  font-size: 0.85rem;
-  color: var(--color-text-secondary);
-  line-height: 1.45;
+  letter-spacing: -0.01em;
 }
 
-.ayur-meal-action-col {
-  flex-shrink: 0;
+.ayur-next-meal-items-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ayur-item-chip {
+  font-size: 0.78rem;
+  color: #26332E;
+  background: rgba(18, 59, 47, 0.05);
+  border: 1px solid rgba(18, 59, 47, 0.12);
+  padding: 3px 9px;
+  border-radius: 6px;
+}
+
+.ayur-next-meal-spotlight__cta {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
-.ayur-meal-revert-btn,
-.ayur-meal-skip-btn {
+/* 2. Hydration Protocol Card */
+.ayur-hydration-card {
+  padding: 20px 24px;
+  background: #FFFFFF;
+  border: 1px solid rgba(18, 59, 47, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(18, 59, 47, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ayur-hydration-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ayur-hydration-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(91, 130, 102, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ayur-hydration-title {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #123B2F;
+}
+
+.ayur-hydration-sub {
+  margin: 2px 0 0 0;
+  font-size: 0.8rem;
+  color: #5B8266;
+}
+
+.ayur-hydration-metric {
+  text-align: right;
+  font-size: 0.95rem;
+}
+
+.ayur-hydration-metric strong {
+  color: #123B2F;
+  font-weight: 800;
+}
+
+.ayur-hydration-metric span {
+  color: #718096;
+  font-size: 0.82rem;
+  margin-left: 4px;
+}
+
+.ayur-hydration-progress-track {
+  width: 100%;
+  height: 10px;
+  background: #F8F6F0;
+  border: 1px solid rgba(18, 59, 47, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.ayur-hydration-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #5B8266 0%, #123B2F 100%);
+  border-radius: 9999px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ayur-hydration-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ayur-water-quick-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(18, 59, 47, 0.05);
+  border: 1px solid rgba(18, 59, 47, 0.15);
+  border-radius: 8px;
+  color: #123B2F;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.ayur-water-quick-btn:hover:not(:disabled) {
+  background: rgba(18, 59, 47, 0.12);
+  border-color: #123B2F;
+}
+
+.ayur-water-quick-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ayur-water-reset-btn {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   padding: 6px 10px;
   background: transparent;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  font-size: 0.775rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  color: #A0AEC0;
+  font-size: 0.78rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  margin-left: auto;
+  transition: all 0.18s ease;
 }
 
-.ayur-meal-revert-btn:hover {
-  background: rgba(22, 56, 44, 0.06);
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+.ayur-water-reset-btn:hover:not(:disabled) {
+  color: #E53E3E;
+  border-color: #FEB2B2;
 }
 
-.ayur-meal-skip-btn:hover {
-  background: rgba(0, 0, 0, 0.04);
-  color: var(--color-text-secondary);
+/* 3. Detailed Meal Checklist */
+.ayur-checklist-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(18, 59, 47, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(18, 59, 47, 0.04);
+  overflow: hidden;
 }
 
-/* Responsive */
-@media (max-width: 640px) {
-  .ayur-meal-timeline-card {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .ayur-meal-time-col {
-    flex-direction: row;
-    width: 100%;
-    justify-content: flex-start;
-    gap: 10px;
-  }
-
-  .ayur-next-meal-actions {
-    width: 100%;
-    justify-content: flex-start;
-  }
+.ayur-checklist-header {
+  padding: 22px 24px 16px 24px;
+  border-bottom: 1px solid #F1ECE1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-/* Report Difficulty Button */
-.ayur-report-diff-btn {
+.ayur-checklist-title {
+  margin: 0;
+  font-family: 'Manrope', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #123B2F;
+}
+
+.ayur-checklist-sub {
+  margin: 4px 0 0 0;
+  font-size: 0.85rem;
+  color: #5B8266;
+}
+
+.ayur-checklist-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ayur-checklist-report-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
-  background-color: #FAF4E8;
-  border: 1px solid #E5D5BA;
-  border-radius: var(--radius-sm);
-  color: #9A7733;
+  padding: 7px 12px;
+  background: #FFFBF0;
+  border: 1px solid #E2D3B3;
+  border-radius: 8px;
+  color: #8C6D23;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.ayur-checklist-report-btn:hover {
+  background: #FEF3C7;
+  border-color: #C5A45D;
+}
+
+.ayur-checklist-remind-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  background: #F8F6F0;
+  border: 1px solid rgba(18, 59, 47, 0.15);
+  border-radius: 8px;
+  color: #123B2F;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.ayur-checklist-remind-btn:hover {
+  background: #E8DDC9;
+}
+
+.ayur-doctor-ribbon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 24px;
+  background: rgba(18, 59, 47, 0.03);
+  border-bottom: 1px solid #F1ECE1;
+  font-size: 0.78rem;
+  color: #5B8266;
+  flex-wrap: wrap;
+}
+
+.ayur-ribbon-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.ayur-ribbon-doc strong {
+  color: #123B2F;
+}
+
+/* Meals Timeline */
+.ayur-timeline-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ayur-timeline-card {
+  display: flex;
+  gap: 20px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #F4EFE6;
+  transition: background-color 0.2s ease;
+}
+
+.ayur-timeline-card:last-child {
+  border-bottom: none;
+}
+
+.ayur-timeline-card:hover {
+  background-color: #FCFBF8;
+}
+
+.ayur-timeline-card.card--completed {
+  background-color: rgba(29, 122, 79, 0.03);
+}
+
+.ayur-timeline-card.card--partial {
+  background-color: rgba(91, 130, 102, 0.03);
+}
+
+.ayur-timeline-card.card--skipped {
+  background-color: rgba(197, 164, 93, 0.04);
+}
+
+/* Timeline Meta (Left column) */
+.ayur-timeline-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90px;
+  flex-shrink: 0;
+  text-align: center;
+  gap: 4px;
+}
+
+.ayur-timeline-icon-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #F8F6F0;
+  border: 1px solid rgba(18, 59, 47, 0.12);
+  color: #123B2F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.ayur-timeline-icon-wrap.icon--completed {
+  background: #123B2F;
+  color: #FFFFFF;
+  border-color: #123B2F;
+}
+
+.ayur-timeline-time {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #123B2F;
+}
+
+.ayur-timeline-label {
+  font-size: 0.72rem;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* Timeline Content (Right column) */
+.ayur-timeline-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ayur-timeline-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ayur-timeline-meal-name {
+  font-family: 'Manrope', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #123B2F;
+  margin: 0;
+}
+
+/* Status Badges */
+.ayur-badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.badge-success {
+  background: rgba(29, 122, 79, 0.12);
+  color: #1D7A4F;
+  border: 1px solid rgba(29, 122, 79, 0.25);
+}
+
+.badge-partial {
+  background: rgba(91, 130, 102, 0.14);
+  color: #123B2F;
+  border: 1px solid rgba(91, 130, 102, 0.3);
+}
+
+.badge-skipped {
+  background: rgba(197, 164, 93, 0.15);
+  color: #8C6D23;
+  border: 1px solid rgba(197, 164, 93, 0.3);
+}
+
+.badge-pending {
+  background: #F1ECE1;
+  color: #718096;
+  border: 1px solid #E2DBCB;
+}
+
+/* Items List */
+.ayur-timeline-items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ayur-timeline-item-bullet {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 0.835rem;
+  color: #26332E;
+  line-height: 1.4;
+}
+
+.bullet-dot {
+  color: #5B8266;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+/* Action Buttons per Meal */
+.ayur-timeline-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.ayur-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 7px;
   font-size: 0.775rem;
   font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  border: 1px solid transparent;
+}
+
+.ayur-action-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.ayur-btn-done {
+  background: #F0FDF4;
+  border-color: #BBF7D0;
+  color: #15803D;
+}
+
+.ayur-btn-done:hover:not(:disabled) {
+  background: #DCFCE7;
+  border-color: #86EFAC;
+}
+
+.ayur-btn-done.btn-active {
+  background: #15803D;
+  border-color: #15803D;
+  color: #FFFFFF;
+}
+
+.ayur-btn-partial {
+  background: #F0FDF4;
+  border-color: rgba(91, 130, 102, 0.3);
+  color: #123B2F;
+}
+
+.ayur-btn-partial:hover:not(:disabled) {
+  background: #E8F5E9;
+}
+
+.ayur-btn-partial.btn-active {
+  background: #123B2F;
+  color: #FFFFFF;
+  border-color: #123B2F;
+}
+
+.ayur-btn-skip {
+  background: #FFFBEB;
+  border-color: #FDE68A;
+  color: #B45309;
+}
+
+.ayur-btn-skip:hover:not(:disabled) {
+  background: #FEF3C7;
+}
+
+.ayur-btn-skip.btn-active {
+  background: #B45309;
+  color: #FFFFFF;
+  border-color: #B45309;
+}
+
+.ayur-btn-reset {
+  background: transparent;
+  border-color: #E2E8F0;
+  color: #718096;
+}
+
+.ayur-btn-reset:hover:not(:disabled) {
+  background: #EDF2F7;
+  color: #2D3748;
+}
+
+.ayur-btn-discomfort {
+  background: transparent;
+  border: 1px dashed #CBD5E0;
+  color: #718096;
+  margin-left: auto;
+}
+
+.ayur-btn-discomfort:hover {
+  background: #FFF5F5;
+  border-color: #FEB2B2;
+  color: #C53030;
+}
+
+.ayur-caret {
+  transition: transform 0.2s ease;
+}
+
+.caret-up {
+  transform: rotate(180deg);
+}
+
+/* Inline Skip Reason Selector */
+.ayur-skip-reason-box {
+  margin-top: 10px;
+  padding: 12px 14px;
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeInDown 0.2s ease-out;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ayur-skip-reason-label {
+  font-size: 0.775rem;
+  font-weight: 700;
+  color: #92400E;
+}
+
+.ayur-skip-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ayur-skip-chip {
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #FFFFFF;
+  border: 1px solid #FCD34D;
+  color: #78350F;
+  font-size: 0.75rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
-.ayur-report-diff-btn:hover {
-  background-color: #F5E9D3;
-  color: #614611;
+.ayur-skip-chip:hover {
+  background: #FEF3C7;
 }
 
-.ayur-meal-report-link {
-  background: none;
-  border: none;
-  color: #9A7733;
-  font-size: 0.7rem;
-  text-decoration: underline;
-  cursor: pointer;
-  padding: 2px 0;
+.ayur-skip-chip.chip-selected {
+  background: #B45309;
+  color: #FFFFFF;
+  border-color: #B45309;
+  font-weight: 700;
+}
+
+.ayur-skip-confirm-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-top: 4px;
 }
 
-.ayur-meal-report-link:hover {
-  color: #614611;
-}
-
-/* Quick Skip Panel */
-.ayur-quick-skip-panel {
-  background-color: #FAF8F3;
-  border: 1px solid #E3DDD3;
-  border-radius: var(--radius-sm);
-  padding: 8px 10px;
-  margin-top: 6px;
-  width: 220px;
-}
-
-.ayur-skip-select {
-  width: 100%;
-  padding: 4px 6px;
-  font-size: 0.75rem;
-  border: 1px solid #E3DDD3;
-  border-radius: 4px;
-  background-color: #FFFFFF;
-  color: var(--color-text-primary);
-}
-
-.ayur-skip-confirm-btn {
-  padding: 3px 8px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  background-color: #FAF0F0;
-  color: #A62828;
-  border: 1px solid #E6A8A8;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.ayur-skip-cancel-btn {
-  padding: 3px 8px;
-  font-size: 0.7rem;
+.ayur-skip-cancel-link {
   background: none;
-  border: 1px solid #E3DDD3;
-  border-radius: 4px;
-  color: var(--color-text-muted);
+  border: none;
+  color: #718096;
+  font-size: 0.78rem;
   cursor: pointer;
+  text-decoration: underline;
 }
 
+/* Spinner helper */
+.ayur-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .ayur-next-meal-spotlight {
+    padding: 16px;
+  }
+
+  .ayur-timeline-card {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .ayur-timeline-meta {
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    text-align: left;
+    gap: 10px;
+  }
+
+  .ayur-btn-discomfort {
+    margin-left: 0;
+  }
+}

@@ -91,35 +91,48 @@ export const Sidebar = ({
         aria-label="Application Navigation"
       >
         {/* Brand Area */}
-        <div
-          className="ayur-sidebar__brand cursor-pointer"
-          onClick={() => navigate('/')}
-          title="Return to AyuRAG-XAI Home"
-        >
-          <div className="ayur-brand-emblem" title="AyuRAG-XAI">
-            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="36" height="36" rx="9" fill="#16382C" />
-              <rect x="1.5" y="1.5" width="33" height="33" rx="7.5" stroke="#C5A059" strokeOpacity="0.45" />
-              <path
-                d="M18 6C13 9 9 14.5 9 21C9 25.5 12.5 29 18 29C23.5 29 27 25.5 27 21C27 14.5 23 9 18 6Z"
-                fill="#5B8266"
-                fillOpacity="0.45"
-              />
-              <path d="M18 9V26" stroke="#C5A059" strokeWidth="1.6" strokeLinecap="round" />
-              <circle cx="14" cy="16" r="1.5" fill="#C5A059" />
-              <circle cx="22" cy="15" r="1.5" fill="#C5A059" />
-              <circle cx="18" cy="9" r="2" fill="#FAF4E8" />
-            </svg>
-          </div>
-
-          <div className="ayur-brand-info">
-            <div className="ayur-brand-title">
-              <span>AyuRAG</span>
-              <span className="ayur-brand-title__xai">XAI</span>
+        <div className="ayur-sidebar__brand">
+          <div
+            className="ayur-sidebar__brand-link cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/');
+            }}
+            title="Return to AyuRAG-XAI Home"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                navigate('/');
+              }
+            }}
+          >
+            <div className="ayur-brand-emblem" title="AyuRAG-XAI">
+              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="36" height="36" rx="9" fill="#16382C" />
+                <rect x="1.5" y="1.5" width="33" height="33" rx="7.5" stroke="#C5A059" strokeOpacity="0.45" />
+                <path
+                  d="M18 6C13 9 9 14.5 9 21C9 25.5 12.5 29 18 29C23.5 29 27 25.5 27 21C27 14.5 23 9 18 6Z"
+                  fill="#5B8266"
+                  fillOpacity="0.45"
+                />
+                <path d="M18 9V26" stroke="#C5A059" strokeWidth="1.6" strokeLinecap="round" />
+                <circle cx="14" cy="16" r="1.5" fill="#C5A059" />
+                <circle cx="22" cy="15" r="1.5" fill="#C5A059" />
+                <circle cx="18" cy="9" r="2" fill="#FAF4E8" />
+              </svg>
             </div>
-            <span className="ayur-brand-tagline">
-              {isDoctor ? 'Clinical Workspace' : 'Personalized Wellness'}
-            </span>
+
+            <div className="ayur-brand-info">
+              <div className="ayur-brand-title">
+                <span>AyuRAG</span>
+                <span className="ayur-brand-title__xai">XAI</span>
+              </div>
+              <span className="ayur-brand-tagline">
+                {isDoctor ? 'Clinical Workspace' : 'Personalized Wellness'}
+              </span>
+            </div>
           </div>
 
           {/* Desktop Sidebar Collapse / Expand Toggle Button */}
@@ -127,8 +140,13 @@ export const Sidebar = ({
             <button
               type="button"
               className="ayur-sidebar__collapse-btn"
-              onClick={onToggleCollapse}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onToggleCollapse();
+              }}
               aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+              aria-expanded={!isCollapsed}
               title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             >
               {isCollapsed ? <ChevronRight size={17} /> : <ChevronLeft size={17} />}
@@ -139,7 +157,11 @@ export const Sidebar = ({
             <button
               type="button"
               className="ayur-sidebar__close-btn"
-              onClick={onClose}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onClose();
+              }}
               aria-label="Close navigation"
             >
               <X size={20} />

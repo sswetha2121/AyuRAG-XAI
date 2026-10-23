@@ -308,7 +308,7 @@ export const DoshasPrinciplesGuide = ({
               <div className="ayur-panel-plain-english">
                 <div className="flex items-center gap-xs text-primary font-semibold text-small mb-2xs">
                   <HelpCircle size={16} />
-                  <span>In Plain English: What is this principle?</span>
+                  <span>What is this principle?</span>
                 </div>
                 <p>{currentDosha.plainEnglishDesc}</p>
               </div>
