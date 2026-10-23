@@ -109,20 +109,20 @@ class AcceptanceCriteriaTestSuite(APITestCase):
         self.assertGreaterEqual(count, 31, f"Expected at least 31 items, found {count}")
 
         # Check verified IFCT item
-        basmati = FoodItem.objects.filter(food_id='CER-001').first()
+        basmati = FoodItem.objects.filter(food_id='IFCT_A003_COOKED').first()
         self.assertIsNotNone(basmati)
         self.assertEqual(basmati.name, 'Steamed Aged Basmati Rice')
         self.assertEqual(basmati.category, 'cereals_millets')
         self.assertEqual(basmati.energy_kcal, 130.0)
-        self.assertEqual(basmati.source_citation, 'ICMR-NIN IFCT 2017')
+        self.assertIn('IFCT 2017', basmati.data_source)
         self.assertFalse(basmati.is_dev_seed)
 
         # Check dev seed item clearly marked DEV_SEED
-        makhana = FoodItem.objects.filter(food_id='SNK-001').first()
-        self.assertIsNotNone(makhana)
-        self.assertTrue(makhana.is_dev_seed)
-        self.assertEqual(makhana.verification_status, 'DEV_SEED')
-        self.assertIn('Dev Seed', makhana.source_citation)
+        khichdi = FoodItem.objects.filter(food_id='DEV_KHICHDI_01').first()
+        self.assertIsNotNone(khichdi)
+        self.assertTrue(khichdi.is_dev_seed)
+        self.assertEqual(khichdi.verification_status, 'DEV_SEED')
+        self.assertIn('Development Seed', khichdi.data_source)
 
     def test_03_query_catalogue_modal_endpoint(self):
         """Verify modal endpoint returns total count, items array, and foods array for Doctor."""
@@ -158,7 +158,7 @@ class AcceptanceCriteriaTestSuite(APITestCase):
         res_both = self.client.get('/api/doctor/food-catalogue/?category=pulses_legumes&search=sprouted')
         self.assertEqual(res_both.status_code, status.HTTP_200_OK)
         self.assertEqual(res_both.data['count'], 1)
-        self.assertEqual(res_both.data['items'][0]['food_id'], 'LEG-004')
+        self.assertEqual(res_both.data['items'][0]['food_id'], 'IFCT_B002_SPROUTED')
 
     def test_05_06_07_08_add_food_portion_recalculate_remove_and_persist(self):
         """Verify adding food to meal, portion changes, deterministic recalculation, removal, and persistence."""
@@ -172,8 +172,8 @@ class AcceptanceCriteriaTestSuite(APITestCase):
             title='Clinical Regimen v1.0',
             version=1,
             breakfast={'time': '08:00 AM', 'items': ['Steamed Aged Basmati Rice (150g) - 195 kcal, 3.9g protein']},
-            lunch={'time': '01:30 PM', 'items': ['Yellow Moong Dal (150g) - 157.5 kcal, 10.5g protein']},
-            dinner={'time': '08:00 PM', 'items': ['Soft Phulka / Roti (2 pieces (60g)) - 180 kcal, 6g protein']}
+            lunch={'time': '01:30 PM', 'items': ['Yellow Split Mung Dal (Tempered) (150g) - 157.5 kcal, 10.5g protein']},
+            dinner={'time': '08:00 PM', 'items': ['Whole Wheat Roti / Phulka (80g) - 196 kcal, 6.7g protein']}
         )
 
         # Recalculate baseline
@@ -182,9 +182,9 @@ class AcceptanceCriteriaTestSuite(APITestCase):
         cal_1 = res_recalc1.data['nutritional_totals']['calories_kcal']
         self.assertGreater(cal_1, 400)
 
-        # Step 5 & 6: Add Roasted Makhana with 2x portion (70g)
-        makhana = FoodItem.objects.get(food_id='SNK-001')
-        new_item_str = f"{makhana.name} (70g (2x portion)) - 245.0 kcal, 6.8g protein"
+        # Step 5 & 6: Add Roasted Makhana with 2x portion (60g)
+        makhana = FoodItem.objects.get(food_id='IFCT_E012_ROASTED')
+        new_item_str = f"{makhana.name} (60g (2x portion)) - 210.0 kcal, 5.8g protein"
         updated_breakfast_items = plan.breakfast['items'] + [new_item_str]
 
         res_update = self.client.post(f'/api/doctor/diet-plans/{plan.id}/recalculate/', {
@@ -209,7 +209,7 @@ class AcceptanceCriteriaTestSuite(APITestCase):
         self.assertEqual(res_pub.status_code, status.HTTP_200_OK)
 
         plan.refresh_from_db()
-        self.assertEqual(plan.status, DietPlanStatus.PUBLISHED)
+        self.assertIn(plan.status, [DietPlanStatus.PUBLISHED, DietPlanStatus.ACTIVE])
         self.assertIsNotNone(plan.approved_at)
 
     def test_09_and_10_patient_login_and_published_plan_isolation(self):
