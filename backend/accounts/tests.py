@@ -141,7 +141,7 @@ class AuthenticationAndSecurityTests(TestCase):
         """Valid doctor registration creates DOCTOR account with PENDING approval and does not auto-login."""
         payload = {
             'fullName': 'Dr. Swetha',
-            'email': 'swethachowdary@ayurhospital.org',
+            'email': 'swetha.rao@ayurhospital.org',
             'clinicalLicense': 'AYUSH-KA-2026-9812',
             'specialization': 'Kayachikitsa (Internal Medicine)',
             'qualification': 'BAMS, MD (Ayurveda)',

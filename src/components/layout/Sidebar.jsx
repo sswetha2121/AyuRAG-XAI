@@ -96,15 +96,17 @@ export const Sidebar = ({
             className="ayur-sidebar__brand-link cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
-              navigate('/');
+              e.stopPropagation();
+              navigate(isDoctor ? '/doctor/dashboard' : (user ? '/dashboard' : '/'));
             }}
-            title="Return to AyuRAG-XAI Home"
+            title={isDoctor ? 'Doctor Workspace' : (user ? 'Patient Portal' : 'Return to AyuRAG-XAI Home')}
             role="button"
             tabIndex={0}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                navigate('/');
+                e.stopPropagation();
+                navigate(isDoctor ? '/doctor/dashboard' : (user ? '/dashboard' : '/'));
               }
             }}
           >

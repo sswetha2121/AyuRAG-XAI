@@ -49,7 +49,11 @@ export const Header = ({
           <button
             type="button"
             className="ayur-header__collapse-btn"
-            onClick={onToggleCollapse}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onToggleCollapse?.();
+            }}
             aria-label={isCollapsed ? 'Expand navigation sidebar' : 'Collapse navigation sidebar'}
             title={isCollapsed ? 'Expand navigation sidebar' : 'Collapse navigation sidebar'}
           >

@@ -53,30 +53,30 @@ export const DailyRoutineTimetable = ({
     return [
       {
         phase: 'Morning Routine & Awakening',
-        timeWindow: '06:00 – 09:00 AM (Prāna Phase)',
+        timeWindow: '06:00 – 09:00 AM (Morning Energy Phase)',
         icon: 'Sunrise',
-        focus: 'Gentle Awakening & Metabolic Kindling (Agni Dīpana)',
+        focus: 'Gentle Awakening & Digestive Activation',
         steps: morning.length > 0 ? morning : ['Wake with sunrise, drink warm water with cumin', 'Gentle movement and respiratory exercise']
       },
       {
         phase: 'Midday Peak Metabolism',
-        timeWindow: '11:30 AM – 02:00 PM (Pitta Phase)',
+        timeWindow: '11:30 AM – 02:00 PM (Peak Digestion Phase)',
         icon: 'Sun',
         focus: 'Optimal Digestion & Primary Nourishment',
         steps: midday.length > 0 ? midday : ['Main nutritious warm lunch', 'Sip warm herbal water; avoid cold drinks']
       },
       {
         phase: 'Evening Decompression',
-        timeWindow: '05:00 – 08:30 PM (Vata Phase)',
+        timeWindow: '05:00 – 08:30 PM (Evening Wind-Down Phase)',
         icon: 'Sunset',
         focus: 'Calming Pacing & Light Evening Nourishment',
         steps: evening.length > 0 ? evening : ['Light, easily digestible warm dinner', 'Quiet contemplative wind-down']
       },
       {
         phase: 'Night Rest & Cellular Recovery',
-        timeWindow: '10:00 – 10:30 PM (Kapha Nidrā Phase)',
+        timeWindow: '10:00 – 10:30 PM (Restful Sleep Phase)',
         icon: 'Moon',
-        focus: 'Cellular Repair & Deep Restful Sleep (Nidrā)',
+        focus: 'Cellular Repair & Deep Restful Sleep',
         steps: night.length > 0 ? night : ['Screen disconnect 45 minutes before sleep', 'Grounding breathing exercises and peaceful rest']
       }
     ];

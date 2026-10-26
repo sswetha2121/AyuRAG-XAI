@@ -149,7 +149,7 @@ export const PrakritiAssessmentPage = ({ onContinueToNextPhase, onBackToPrevious
         </h1>
 
         <p className="ayur-prakriti-header__desc">
-          Answer a few questions about your natural characteristics and everyday tendencies. Your responses will help build your personalized Ayurvedic profile.
+          Answer a few questions about your natural characteristics and everyday tendencies. Your responses will help build your personalized health profile.
         </p>
       </div>
 
@@ -237,7 +237,7 @@ export const PrakritiAssessmentPage = ({ onContinueToNextPhase, onBackToPrevious
                   disabled={!selectedOptionId}
                   onClick={handleNext}
                 >
-                  {currentIndex === PRAKRITI_QUESTIONS.length - 1 ? 'Complete Prakriti Assessment' : 'Continue'}
+                  {currentIndex === PRAKRITI_QUESTIONS.length - 1 ? 'Complete Body Assessment' : 'Continue'}
                 </Button>
               </div>
             </div>

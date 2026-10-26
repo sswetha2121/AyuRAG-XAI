@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './DashboardPage.css';
 import { useAssessment } from '../context/AssessmentContext';
 import { useAuth } from '../context/AuthContext';
@@ -48,6 +49,7 @@ export const DashboardPage = ({
   onReevaluate,
   onTriggerToast
 }) => {
+  const navigate = useNavigate();
   const { analysisResult, loadDemoPreset, personalInfo } = useAssessment();
   const { user } = useAuth();
 
@@ -424,21 +426,21 @@ export const DashboardPage = ({
                   <div className="ayur-widget-body">
                     <div className="ayur-profile-dosha-bars">
                       <div className="ayur-dosha-row">
-                        <span className="dosha-name">Vāta (Movement)</span>
+                        <span className="dosha-name">Movement Pattern</span>
                         <div className="dosha-track">
                           <div className="dosha-fill fill-vata" style={{ width: `${constitutionScores.vata}%` }} />
                         </div>
                         <span className="dosha-pct">{constitutionScores.vata}%</span>
                       </div>
                       <div className="ayur-dosha-row">
-                        <span className="dosha-name">Pitta (Metabolism)</span>
+                        <span className="dosha-name">Metabolism Pattern</span>
                         <div className="dosha-track">
                           <div className="dosha-fill fill-pitta" style={{ width: `${constitutionScores.pitta}%` }} />
                         </div>
                         <span className="dosha-pct">{constitutionScores.pitta}%</span>
                       </div>
                       <div className="ayur-dosha-row">
-                        <span className="dosha-name">Kapha (Structure)</span>
+                        <span className="dosha-name">Structure Pattern</span>
                         <div className="dosha-track">
                           <div className="dosha-fill fill-kapha" style={{ width: `${constitutionScores.kapha}%` }} />
                         </div>
@@ -448,7 +450,7 @@ export const DashboardPage = ({
 
                     <div className="ayur-widget-meta-row">
                       <div className="ayur-wmeta-item">
-                        <span className="wmeta-label">Digestive Agni:</span>
+                        <span className="wmeta-label">Digestive State:</span>
                         <strong className="wmeta-val">{digestiveAgniState}</strong>
                       </div>
                       <div className="ayur-wmeta-item">
@@ -465,7 +467,7 @@ export const DashboardPage = ({
                       variant="outline"
                       size="sm"
                       className="w-full mt-2"
-                      onClick={() => window.location.href = '/assessment/results'}
+                      onClick={() => navigate('/assessment/results')}
                       leftIcon={<ExternalLink size={14} />}
                     >
                       View Full Clinical Assessment Dossier

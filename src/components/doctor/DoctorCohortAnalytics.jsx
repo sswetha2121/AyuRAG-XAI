@@ -17,14 +17,14 @@ export const DoctorCohortAnalytics = ({
   metrics = {},
   isLoading = false
 }) => {
-  // Aggregate real Prakriti distribution from actual recent_patients
+  // Aggregate real distribution from actual recent_patients
   const prakritiStats = useMemo(() => {
     if (!patients || patients.length === 0) {
       return {
-        vata: { count: 0, pct: 0, label: 'Vāta Dominant', color: '#8FA396' },
-        pitta: { count: 0, pct: 0, label: 'Pitta Dominant', color: '#C5A059' },
-        kapha: { count: 0, pct: 0, label: 'Kapha Dominant', color: '#123B2F' },
-        dual: { count: 0, pct: 0, label: 'Dual / Balanced', color: '#52796F' },
+        vata: { count: 0, pct: 0, label: 'Movement Pattern', color: '#8FA396' },
+        pitta: { count: 0, pct: 0, label: 'Metabolism Pattern', color: '#C5A059' },
+        kapha: { count: 0, pct: 0, label: 'Structure Pattern', color: '#123B2F' },
+        dual: { count: 0, pct: 0, label: 'Combined / Balanced', color: '#52796F' },
         total: 0
       };
     }
@@ -60,25 +60,25 @@ export const DoctorCohortAnalytics = ({
       vata: {
         count: vataCount,
         pct: total ? Math.round((vataCount / total) * 100) : 0,
-        label: 'Vāta Dominant',
+        label: 'Movement Pattern',
         color: '#8FA396'
       },
       pitta: {
         count: pittaCount,
         pct: total ? Math.round((pittaCount / total) * 100) : 0,
-        label: 'Pitta Dominant',
+        label: 'Metabolism Pattern',
         color: '#C5A059'
       },
       kapha: {
         count: kaphaCount,
         pct: total ? Math.round((kaphaCount / total) * 100) : 0,
-        label: 'Kapha Dominant',
+        label: 'Structure Pattern',
         color: '#123B2F'
       },
       dual: {
         count: dualCount,
         pct: total ? Math.round((dualCount / total) * 100) : 0,
-        label: 'Dual / Tridoshic',
+        label: 'Combined / Balanced',
         color: '#52796F'
       },
       total
@@ -141,7 +141,7 @@ export const DoctorCohortAnalytics = ({
             </div>
             <div>
               <h3 className="ayur-analytics-card__title">Cohort Constitutional Profiles</h3>
-              <p className="ayur-analytics-card__subtitle">Prakriti distribution across {prakritiStats.total} evaluated patients</p>
+              <p className="ayur-analytics-card__subtitle">Body constitution distribution across {prakritiStats.total} evaluated patients</p>
             </div>
           </div>
           <span className="ayur-ai-grounded-pill">

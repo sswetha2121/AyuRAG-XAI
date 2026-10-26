@@ -200,12 +200,12 @@ export const AssessmentResultsPage = ({ onTriggerToast, onReevaluate }) => {
   const modelName = aiAnalysis.model_name || aiAnalysis.aiMetrics?.model_name || 'AyuRAG Explainable Decision Support Engine v2.1';
   
   const digestiveAgni = aiAnalysis.digestiveAgni || assessmentRecord.digestiveAgni || {
-    state: 'Vishama Agni (Variable Digestion)',
-    description: 'Fluctuating digestive fire prone to irregular hunger and occasional post-meal bloating.',
+    state: 'Variable & Sensitive Digestion',
+    description: 'Fluctuating digestive rhythm prone to irregular hunger and occasional post-meal discomfort.',
     protocols: [
       'Eat freshly cooked, warm meals at fixed circadian times daily',
-      'Sip warm ginger-infused water between meals to kindle metabolic fire',
-      'Leave one-third of stomach capacity empty to facilitate gastric circulation'
+      'Sip warm ginger-infused water between meals to support metabolic digestion',
+      'Leave one-third of stomach capacity empty to facilitate digestive comfort'
     ]
   };
 
@@ -284,7 +284,7 @@ export const AssessmentResultsPage = ({ onTriggerToast, onReevaluate }) => {
             <span className="ayur-dossier-value">{patientAge} yrs • {patientGender}</span>
           </div>
           <div className="ayur-dossier-item">
-            <span className="ayur-dossier-label">Primary Dosha</span>
+            <span className="ayur-dossier-label">Primary Health Pattern</span>
             <span className="ayur-dossier-value">{constitutionType}</span>
           </div>
           <div className="ayur-dossier-item">
@@ -313,14 +313,14 @@ export const AssessmentResultsPage = ({ onTriggerToast, onReevaluate }) => {
         </div>
       </div>
 
-      {/* 3. Dual Grid: Tridosha Energy Distribution & Agni Metabolism */}
+      {/* 3. Dual Grid: Body Pattern Distribution & Digestive Health */}
       <div className="ayur-results-dual-grid">
-        {/* Card A: Tridosha Bio-Energy Distribution */}
+        {/* Card A: Body Pattern Distribution */}
         <div className="ayur-res-card ayur-res-card--highlight">
           <div className="flex items-center justify-between mb-sm">
             <div className="flex items-center gap-xs">
               <Wind size={18} style={{ color: '#123B2F' }} />
-              <h2 className="ayur-section-title" style={{ fontSize: '1.2rem' }}>Tridosha Distribution</h2>
+              <h2 className="ayur-section-title" style={{ fontSize: '1.2rem' }}>Body Pattern Distribution</h2>
             </div>
             <Badge color="primary" variant="subtle" size="sm">Point-Weighted</Badge>
           </div>
@@ -330,13 +330,13 @@ export const AssessmentResultsPage = ({ onTriggerToast, onReevaluate }) => {
           </p>
 
           <div className="ayur-dosha-breakdown-list">
-            {/* Vata */}
+            {/* Movement */}
             <div className="ayur-dosha-item">
               <div className="ayur-dosha-item-header">
                 <div className="ayur-dosha-name-box">
                   <div className="ayur-dosha-circle ayur-dosha-circle--vata" />
-                  <span className="ayur-dosha-label">Vāta (Movement & Space)</span>
-                  <span className="ayur-dosha-sublabel">• Air + Ether</span>
+                  <span className="ayur-dosha-label">Movement (Air & Space)</span>
+                  <span className="ayur-dosha-sublabel">• Kinetic Energy</span>
                 </div>
                 <span className="ayur-dosha-percent">{vataPct}%</span>
               </div>
@@ -346,29 +346,29 @@ export const AssessmentResultsPage = ({ onTriggerToast, onReevaluate }) => {
               <span className="ayur-dosha-qualities">Governs neuromuscular communication, respiration, nervous system responsiveness, and bodily mobility.</span>
             </div>
 
-            {/* Pitta */}
+            {/* Metabolism */}
             <div className="ayur-dosha-item">
               <div className="ayur-dosha-item-header">
                 <div className="ayur-dosha-name-box">
                   <div className="ayur-dosha-circle ayur-dosha-circle--pitta" />
-                  <span className="ayur-dosha-label">Pitta (Transformation & Fire)</span>
-                  <span className="ayur-dosha-sublabel">• Fire + Water</span>
+                  <span className="ayur-dosha-label">Metabolism (Fire & Water)</span>
+                  <span className="ayur-dosha-sublabel">• Thermal Energy</span>
                 </div>
                 <span className="ayur-dosha-percent">{pittaPct}%</span>
               </div>
               <div className="ayur-dosha-progress-track">
                 <div className="ayur-dosha-progress-fill ayur-dosha-progress-fill--pitta" style={{ width: `${pittaPct}%` }} />
               </div>
-              <span className="ayur-dosha-qualities">Governs metabolic enzymes, cellular transformation, digestive fire (Agni), and mental clarity.</span>
+              <span className="ayur-dosha-qualities">Governs metabolic enzymes, cellular transformation, digestive strength, and mental clarity.</span>
             </div>
 
-            {/* Kapha */}
+            {/* Structure */}
             <div className="ayur-dosha-item">
               <div className="ayur-dosha-item-header">
                 <div className="ayur-dosha-name-box">
                   <div className="ayur-dosha-circle ayur-dosha-circle--kapha" />
-                  <span className="ayur-dosha-label">Kapha (Structure & Stability)</span>
-                  <span className="ayur-dosha-sublabel">• Earth + Water</span>
+                  <span className="ayur-dosha-label">Structure (Earth & Water)</span>
+                  <span className="ayur-dosha-sublabel">• Cohesive Energy</span>
                 </div>
                 <span className="ayur-dosha-percent">{kaphaPct}%</span>
               </div>
@@ -380,23 +380,23 @@ export const AssessmentResultsPage = ({ onTriggerToast, onReevaluate }) => {
           </div>
         </div>
 
-        {/* Card B: Digestive Agni & Metabolism */}
+        {/* Card B: Digestive & Metabolic Health */}
         <div className="ayur-res-card ayur-res-card--accent">
           <div className="flex items-center justify-between mb-sm">
             <div className="flex items-center gap-xs">
               <Flame size={18} style={{ color: '#C5A059' }} />
-              <h2 className="ayur-section-title" style={{ fontSize: '1.2rem' }}>Digestive Metabolism (Agni)</h2>
+              <h2 className="ayur-section-title" style={{ fontSize: '1.2rem' }}>Digestive & Metabolic Health</h2>
             </div>
             <Badge color="accent" variant="subtle" size="sm">Metabolic State</Badge>
           </div>
 
           <p className="ayur-section-subtitle mb-md">
-            In Ayurvedic medicine, digestive capacity (Agni) determines assimilation efficiency and systemic wellness.
+            In Ayurvedic medicine, digestive capacity determines assimilation efficiency and systemic wellness.
           </p>
 
           <div className="ayur-agni-badge-large">
             <Flame size={20} />
-            <span>{digestiveAgni.state || 'Vishama Agni (Variable Digestion)'}</span>
+            <span>{digestiveAgni.state || 'Variable & Sensitive Digestion'}</span>
           </div>
 
           <p className="ayur-agni-description">
@@ -464,7 +464,7 @@ export const AssessmentResultsPage = ({ onTriggerToast, onReevaluate }) => {
             <div>
               <h2 className="ayur-section-title">
                 <Clock size={20} style={{ color: '#123B2F' }} />
-                Circadian Dinacharya Timetable
+                Daily Circadian Routine Timetable
               </h2>
               <p className="ayur-section-subtitle">
                 Optimal daily timing for meals, mental activity, exercise, and restorative sleep calibrated to your bio-energetic rhythms.

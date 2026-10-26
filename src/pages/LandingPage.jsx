@@ -100,9 +100,9 @@ export const LandingPage = () => {
   const constitutionFactors = {
     movement: {
       id: 'movement',
-      sanskrit: 'Vata Dosha',
+      sanskrit: 'Movement Pattern',
       name: 'Movement & Kinetic Energy',
-      element: 'Air & Ether (Vayu & Akasha)',
+      element: 'Air & Space',
       principle: 'Governs circulation, nerve impulse conduction, respiratory rhythms, and cellular motility.',
       traits: 'Agile, creative, lighter build, quick digestion that fluctuates with environmental stress.',
       pathya: 'Warm, moist, grounding meals: slow-cooked stews, root vegetables, warm oats, sesame, and ghee.',
@@ -112,9 +112,9 @@ export const LandingPage = () => {
     },
     metabolism: {
       id: 'metabolism',
-      sanskrit: 'Pitta Dosha',
+      sanskrit: 'Metabolism Pattern',
       name: 'Metabolic & Thermal Energy',
-      element: 'Fire & Water (Tejas & Jala)',
+      element: 'Fire & Water',
       principle: 'Governs biochemical transformation, enzymatic digestion, cellular thermoregulation, and nutrient absorption.',
       traits: 'Focused, sharp cognition, medium athletic frame, robust appetite, sensitivity to heat.',
       pathya: 'Cooling, hydrating, naturally sweet foods: basmati rice, cucumbers, ghee, leafy greens, and coconut.',
@@ -124,9 +124,9 @@ export const LandingPage = () => {
     },
     structure: {
       id: 'structure',
-      sanskrit: 'Kapha Dosha',
+      sanskrit: 'Structure Pattern',
       name: 'Structural & Cohesive Energy',
-      element: 'Earth & Water (Prithvi & Jala)',
+      element: 'Earth & Water',
       principle: 'Governs physical stamina, musculoskeletal architecture, joint lubrication, and immune resilience.',
       traits: 'Calm, steady endurance, sturdy skeletal frame, slower yet steady digestive capacity.',
       pathya: 'Light, warm, metabolism-stimulating meals: millets, quinoa, clear herbal broths, black pepper, and ginger.',
@@ -142,12 +142,12 @@ export const LandingPage = () => {
   const epistemicLayers = {
     samhita: {
       title: 'Canonical Classical Epistemology',
-      subtitle: 'Ayurvedic Samhitas (Sanskrit Treatises)',
+      subtitle: 'Classical Medical Treatises',
       tag: 'Traditional Grounding',
       icon: BookOpen,
       badgeColor: '#123B2F',
       description:
-        'Foundational constitutional definitions, Tridosha interactions, and food-pairing principles (Viruddha Ahara) are indexed directly from authentic classical compendia without generative drift.',
+        'Foundational constitutional definitions, balance interactions, and food-pairing principles are indexed directly from authentic classical compendia without generative drift.',
       sources: [
         'Charaka Samhita (Sutrasthana, Vimanasthana)',
         'Sushruta Samhita (Sharirasthana)',
@@ -451,7 +451,7 @@ export const LandingPage = () => {
             <div className="ayur-hero-text">
               <div className="ayur-hero-badge">
                 <ShieldCheck size={14} className="ayur-hero-badge__icon" />
-                <span>Clinical Decision Support • Grounded Sanskrit RAG</span>
+                <span>Clinical Decision Support • Grounded Clinical Knowledge Base</span>
               </div>
 
               <h1 id="hero-heading" className="ayur-hero-title">
@@ -460,8 +460,8 @@ export const LandingPage = () => {
               </h1>
 
               <p className="ayur-hero-description">
-                Discover your Prakriti constitutional baseline through structured clinical intake.
-                Empowered by authentic classical Samhita retrieval, transparent factor attribution,
+                Discover your baseline body constitution through structured clinical intake.
+                Empowered by authentic classical retrieval, transparent factor attribution,
                 and licensed physician oversight.
               </p>
 
@@ -493,7 +493,7 @@ export const LandingPage = () => {
               <div className="ayur-hero-anchors">
                 <div className="ayur-anchor-item">
                   <CheckCircle2 size={15} className="ayur-anchor-check" />
-                  <span>Multi-domain constitutional intake (Prakriti, Agni & Routine)</span>
+                  <span>Multi-domain constitutional intake (Body Profile, Digestion & Routine)</span>
                 </div>
                 <div className="ayur-anchor-item">
                   <CheckCircle2 size={15} className="ayur-anchor-check" />
@@ -602,7 +602,7 @@ export const LandingPage = () => {
                       <div className="ayur-xai-factor-list">
                         <div className="ayur-xai-factor">
                           <div className="factor-header">
-                            <span className="factor-name">Meal Regularity & Digestion (Agni)</span>
+                            <span className="factor-name">Meal Regularity & Digestive Health</span>
                             <span className="factor-val text-vata">+38% attribution</span>
                           </div>
                           <div className="factor-progress">
@@ -679,14 +679,14 @@ export const LandingPage = () => {
                 <BookOpen size={24} />
               </div>
               <span className="pillar-step-num">Pillar 01</span>
-              <h3 className="pillar-title">Classical Ayurvedic Taxonomy</h3>
+              <h3 className="pillar-title">Foundational Wellness Taxonomy</h3>
               <p className="pillar-desc">
-                Rooted in authentic Sanskrit compendia (Charaka, Sushruta, and Vagbhata). Evaluates individual
-                baseline constitution (Prakriti), current metabolic tendency, and digestive strength (Agni) without
+                Rooted in authentic classical compendia (Charaka, Sushruta, and Vagbhata). Evaluates individual
+                baseline constitution, current metabolic tendency, and digestive strength without
                 simplistic reductionism.
               </p>
               <div className="pillar-footer">
-                <span className="pillar-pill">Tridosha & Agni Systems</span>
+                <span className="pillar-pill">Body Constitution & Digestive Health</span>
               </div>
             </div>
 
@@ -837,8 +837,8 @@ export const LandingPage = () => {
                   <span className="sequence-time-pill"><CheckCircle2 size={12} /> Active Regimen</span>
                 </div>
                 <p className="sequence-body">
-                  Adopt a tailored daily routine (Dinacharya) featuring chronobiological meal timing, food compatibility
-                  rules (Ahara Vidhi), and seasonal adjustments.
+                  Adopt a tailored daily routine featuring chronobiological meal timing, food compatibility
+                  rules, and seasonal adjustments.
                 </p>
               </div>
             </div>
@@ -847,7 +847,7 @@ export const LandingPage = () => {
       </section>
 
       {/* ====================================================================
-          PHYSIOLOGICAL CONSTITUTION EXPLORER (Interactive Tridosha Deep-Dive)
+          PHYSIOLOGICAL CONSTITUTION EXPLORER (Interactive Deep-Dive)
           ==================================================================== */}
       <section className="ayur-landing-section ayur-dosha-section reveal-on-scroll" id="body-factors" aria-labelledby="dosha-heading">
         <div className="ayur-container">
@@ -857,7 +857,7 @@ export const LandingPage = () => {
               The Three Functional Constitutional Energies
             </h2>
             <p className="ayur-landing-section-subtitle">
-              Ayurvedic physiology categorizes metabolic and physical functions into three Tridoshas.
+              Physiological profiling categorizes metabolic and physical functions into three primary constitutional energies.
               Understanding your unique proportion allows precision in diet and lifestyle.
             </p>
           </div>
@@ -873,7 +873,7 @@ export const LandingPage = () => {
                 onClick={() => setActiveConstitutionTab('movement')}
               >
                 <Wind size={16} />
-                <span>Movement (Vata)</span>
+                <span>Movement Pattern</span>
               </button>
               <button
                 type="button"
@@ -883,7 +883,7 @@ export const LandingPage = () => {
                 onClick={() => setActiveConstitutionTab('metabolism')}
               >
                 <Flame size={16} />
-                <span>Metabolism (Pitta)</span>
+                <span>Metabolism Pattern</span>
               </button>
               <button
                 type="button"
@@ -893,7 +893,7 @@ export const LandingPage = () => {
                 onClick={() => setActiveConstitutionTab('structure')}
               >
                 <Mountain size={16} />
-                <span>Structure (Kapha)</span>
+                <span>Structure Pattern</span>
               </button>
             </div>
 
@@ -903,7 +903,7 @@ export const LandingPage = () => {
                 <div className="ayur-factor-icon-wrap" style={{ color: activeFactor.color }}>
                   <FactorIcon size={34} />
                 </div>
-                <div className="ayur-factor-sanskrit">{activeFactor.sanskrit}</div>
+                <div className="ayur-factor-sanskrit">{activeFactor.name}</div>
                 <h3 className="ayur-factor-panel__title">{activeFactor.name}</h3>
                 <span className="ayur-factor-elements">Elements: {activeFactor.element}</span>
                 <p className="ayur-factor-principle">{activeFactor.principle}</p>
@@ -960,7 +960,7 @@ export const LandingPage = () => {
               </div>
               <h3 className="cap-title">Personalized Assessment</h3>
               <p className="cap-description">
-                Evaluates physical morphology, digestive fire (Agni), circadian routines, and symptomatic concerns to
+                Evaluates physical morphology, digestive health, circadian routines, and symptomatic concerns to
                 compute accurate constitutional distributions.
               </p>
               <div className="cap-footer">

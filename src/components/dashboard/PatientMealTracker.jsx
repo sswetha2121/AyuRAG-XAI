@@ -36,10 +36,10 @@ export const PatientMealTracker = ({
   const [difficultyModalOpen, setDifficultyModalOpen] = useState(false);
   const [difficultyMealType, setDifficultyMealType] = useState('LUNCH');
   const [expandedSkipMeal, setExpandedSkipMeal] = useState(null);
-  const [selectedSkipReason, setSelectedSkipReason] = useState('Lack of appetite (Aruchi)');
+  const [selectedSkipReason, setSelectedSkipReason] = useState('Lack of appetite');
 
   const skipReasonOptions = [
-    'Lack of appetite (Aruchi)',
+    'Lack of appetite',
     'Full from previous meal',
     'Heaviness or indigestion',
     'Travelling / Not accessible',

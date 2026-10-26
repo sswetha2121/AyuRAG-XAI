@@ -61,11 +61,11 @@ async function fetchJson(endpoint, options = {}) {
   } catch (netErr) {
     clearTimeout(timeoutId);
     if (netErr.name === 'AbortError') {
-      const error = new Error('Clinical backend request timed out. The AI inference service took too long to respond.');
+      const error = new Error('The request timed out. Please try again.');
       error.status = 504;
       throw error;
     }
-    const error = new Error('Cannot connect to backend server. Please verify the Django API server is active and running on port 8000.');
+    const error = new Error('Cannot connect to the service. Please check your network connection and try again.');
     error.status = 503;
     throw error;
   } finally {
@@ -74,7 +74,7 @@ async function fetchJson(endpoint, options = {}) {
 
   if (response.status === 401 || response.status === 403) {
     const errorData = await response.json().catch(() => ({ detail: 'Authentication error' }));
-    const error = new Error(extractErrorMessage(errorData, response.status === 401 ? 'Authentication required' : 'Access denied'));
+    const error = new Error(extractErrorMessage(errorData, response.status === 401 ? 'Please sign in to continue.' : 'You do not have permission to access this.'));
     error.status = response.status;
     error.data = errorData;
     throw error;
@@ -83,17 +83,17 @@ async function fetchJson(endpoint, options = {}) {
   if (!response.ok) {
     const errorData = await response.json().catch(() => {
       if (response.status === 502 || response.status === 503 || response.status === 504) {
-        return { detail: 'Backend service unavailable (gateway error). Please verify the Django server is running at http://127.0.0.1:8000.' };
+        return { detail: 'Service is temporarily unavailable. Please try again shortly.' };
       }
       if (response.status === 404) {
-        return { detail: `Endpoint not found: ${endpoint}. Please verify API routing.` };
+        return { detail: 'The requested information could not be found. Please try again.' };
       }
       if (response.status >= 500) {
-        return { detail: 'Backend service error. Please verify the Django server is active and reachable.' };
+        return { detail: 'We encountered an error processing your request. Please try again shortly.' };
       }
-      return { detail: `Request failed with HTTP status ${response.status}.` };
+      return { detail: `Request could not be completed (${response.status}).` };
     });
-    const error = new Error(extractErrorMessage(errorData, `HTTP error ${response.status}`));
+    const error = new Error(extractErrorMessage(errorData, `Request failed (${response.status})`));
     error.status = response.status;
     error.data = errorData;
     throw error;

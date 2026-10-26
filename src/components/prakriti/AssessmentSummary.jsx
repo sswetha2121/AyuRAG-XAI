@@ -60,7 +60,7 @@ export const AssessmentSummary = ({
           {/* Progress Box */}
           <div className="ayur-summary-metric-box">
             <div className="flex items-center justify-between text-caption mb-xs">
-              <span className="font-semibold text-primary">Prakriti Questions</span>
+              <span className="font-semibold text-primary">Body Constitution Questions</span>
               <span className="font-mono font-bold text-accent">{answeredCount} / {totalQuestions} ({percentage}%)</span>
             </div>
             <ProgressBar

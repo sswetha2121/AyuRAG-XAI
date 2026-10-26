@@ -33,8 +33,8 @@ export const PatientDifficultyModal = ({
     'Acid Reflux / Heartburn',
     'Heavy Feeling in Stomach',
     'Nausea / Discomfort',
-    'Loss of Appetite (Aruchi)',
-    'Sluggish Digestion (Mandagni)',
+    'Loss of Appetite',
+    'Sluggish Digestion',
     'Cramping / Discomfort',
     'Headache / Drowsiness',
   ];

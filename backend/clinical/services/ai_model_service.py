@@ -309,29 +309,29 @@ class AyuRagAiModelService:
 
         if 'opt_4_2' in q4 or 'opt_5_2' in q5 or any('hyperacidity' in s or 'burning' in s for s in selected_symps):
             return {
-                'state': 'Tīkṣṇāgni (Hyper-Metabolic Fire)',
-                'dosha_link': 'Pitta Predominance',
+                'state': 'Fast & Sharp Digestion',
+                'dosha_link': 'Metabolism & Energy Pattern',
                 'description': 'High metabolic velocity, intense hunger, and rapid digestion with sensitivity to pungent, sour, and acidic foods.',
                 'guidance': 'Favor sweet, bitter, and cooling foods. Avoid skipping meals or taking very pungent spices.',
             }
         elif 'opt_4_3' in q4 or 'opt_5_3' in q5 or any('sluggish' in s or 'heaviness' in s for s in selected_symps):
             return {
-                'state': 'Mandāgni (Sluggish Digestive Fire)',
-                'dosha_link': 'Kapha Predominance',
+                'state': 'Slow & Sluggish Digestion',
+                'dosha_link': 'Structure & Physical Pattern',
                 'description': 'Slow metabolic breakdown, post-meal heaviness, prolonged fullness, and tendency to fluid retention.',
                 'guidance': 'Favor warm, light, spiced foods with ginger and black pepper. Avoid heavy oily or cold items.',
             }
         elif 'opt_4_1' in q4 or 'opt_5_1' in q5 or any('gas' in s or 'bloating' in s for s in selected_symps):
             return {
-                'state': 'Vishamāgni (Variable Digestive Fire)',
-                'dosha_link': 'Vāta Predominance',
+                'state': 'Variable & Sensitive Digestion',
+                'dosha_link': 'Movement & Variability Pattern',
                 'description': 'Fluctuating appetite and unpredictable digestion, prone to bloating, gas, and irregular elimination when stressed.',
                 'guidance': 'Maintain strict regular meal timings. Favor warm, moist, unctuous cooked meals with mild cumin and clarified butter.',
             }
         else:
             return {
-                'state': 'Samāgni (Balanced Digestive Fire)',
-                'dosha_link': 'Tridoshic Harmony',
+                'state': 'Balanced & Steady Digestion',
+                'dosha_link': 'Balanced Health Harmony',
                 'description': 'Optimal metabolic transformation without discomfort, timely hunger, and steady natural energy.',
                 'guidance': 'Sustain current routine with wholesome seasonal nutrition and mindful meal intervals.',
             }
@@ -618,12 +618,12 @@ class AyuRagAiModelService:
                         'Wake near 06:00 AM; drink lukewarm water with mint or coriander seeds',
                         'Gentle morning stroll in shaded greenery; avoid hot mid-morning sun',
                         'Sweet cooling breakfast: soaked oatmeal, sweet pears, or tender coconut water',
-                        'Calming Sheetali pranayama for 10 minutes'
+                        'Calming cooling breathing exercises for 10 minutes'
                     ]
                 },
                 {
                     'phase': 'Midday Digestion Peak',
-                    'timeWindow': '12:00 – 14:00 (Pitta Metabolic Window)',
+                    'timeWindow': '12:00 – 14:00 (Peak Metabolism Window)',
                     'icon': 'Sun',
                     'focus': 'Optimal Digestion & Substantial Nourishment',
                     'steps': [
@@ -647,7 +647,7 @@ class AyuRagAiModelService:
                 },
                 {
                     'phase': 'Night Restoration & Sleep',
-                    'timeWindow': '21:30 – 22:30 (Deep Nidrā Phase)',
+                    'timeWindow': '21:30 – 22:30 (Deep Rest Phase)',
                     'icon': 'Moon',
                     'focus': 'Cellular Healing & Nervous System Recovery',
                     'steps': [
@@ -662,13 +662,13 @@ class AyuRagAiModelService:
             return [
                 {
                     'phase': 'Brisk Morning Awakening',
-                    'timeWindow': '05:30 – 08:00 (Metabolic Kindling Window)',
+                    'timeWindow': '05:30 – 08:00 (Metabolic Activation Window)',
                     'icon': 'Sunrise',
-                    'focus': 'Agni Stimulation & Sluggishness Dissolution',
+                    'focus': 'Digestive Stimulation & Energy Renewal',
                     'steps': [
                         'Rise vigorously before sunrise (05:30 – 06:00 AM); avoid lingering in bed',
                         'Drink 2 glasses of warm water with fresh ginger and half-lemon',
-                        'Vigorous 30-minute aerobic exercise, Surya Namaskar, or brisk uphill walk',
+                        'Vigorous 30-minute aerobic exercise, morning stretches, or brisk uphill walk',
                         'Light, dry, and warm breakfast: roasted millets or barley porridge with cinnamon'
                     ]
                 },
@@ -681,7 +681,7 @@ class AyuRagAiModelService:
                         'Eat a well-spiced, fiber-rich lunch with black pepper, mustard seeds, and turmeric',
                         'Include roasted chickpeas, steamed greens, and spiced lentil soup',
                         'Strictly avoid cold refrigerated desserts, cheese, and ice water',
-                        'Brisk 100-step stroll; strictly no daytime napping (Diva Svapna)'
+                        'Brisk 100-step stroll; avoid daytime napping'
                     ]
                 },
                 {
@@ -713,19 +713,19 @@ class AyuRagAiModelService:
             return [
                 {
                     'phase': 'Gentle Morning Grounding',
-                    'timeWindow': '06:00 – 08:30 (Morning Prāna Window)',
+                    'timeWindow': '06:00 – 08:30 (Morning Vitality Window)',
                     'icon': 'Sunrise',
                     'focus': 'Nervous System Calming & Hydration',
                     'steps': [
                         'Wake peacefully near 06:30 AM; drink 2 cups of warm water with cumin seeds',
-                        'Oral hygiene: tongue scraping and warm sesame oil swishing (Gandūsha)',
+                        'Oral hygiene: tongue scraping and warm sesame oil swishing',
                         '15–20 minutes of restorative stretching, joint rotations, and diaphragmatic breathwork',
                         'Warm, unctuous breakfast: spiced oatmeal, warm rice flakes, or stewed cinnamon apples'
                     ]
                 },
                 {
                     'phase': 'Midday Peak Digestion',
-                    'timeWindow': '12:00 – 13:30 (Primary Ahara Window)',
+                    'timeWindow': '12:00 – 13:30 (Primary Meal Window)',
                     'icon': 'Sun',
                     'focus': 'Substantial Nourishment & Digestive Fueling',
                     'steps': [
@@ -737,7 +737,7 @@ class AyuRagAiModelService:
                 },
                 {
                     'phase': 'Evening Calming & Nourishment',
-                    'timeWindow': '17:30 – 20:00 (Twilight Vata Pacification)',
+                    'timeWindow': '17:30 – 20:00 (Evening Wind-Down Window)',
                     'icon': 'Sunset',
                     'focus': 'Grounding Transition & Early Light Dinner',
                     'steps': [
@@ -749,12 +749,12 @@ class AyuRagAiModelService:
                 },
                 {
                     'phase': 'Night Rest & Deep Recovery',
-                    'timeWindow': '21:30 – 22:30 (Nidrā & Tissue Repair)',
+                    'timeWindow': '21:30 – 22:30 (Deep Rest & Cellular Recovery)',
                     'icon': 'Moon',
                     'focus': 'Deep Nervous System Restoration & Sound Sleep',
                     'steps': [
                         'Power down mobile devices and digital displays by 21:45',
-                        'Warm foot massage (Pādābhyanga) with warm sesame oil to ground Vata',
+                        'Warm foot massage with warm sesame oil for deep grounding',
                         'Warm spiced milk or herbal chamomile infusion',
                         'Asleep before 22:30 to maximize cellular revitalization'
                     ]

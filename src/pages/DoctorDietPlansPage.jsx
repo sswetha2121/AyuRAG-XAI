@@ -38,7 +38,7 @@ export const DoctorDietPlansPage = ({ onTriggerToast }) => {
   const [excludedAllergens, setExcludedAllergens] = useState([]);
   const [calorieTarget, setCalorieTarget] = useState('1800');
   const [clinicalTargetNotes, setClinicalTargetNotes] = useState(
-    'Promote metabolic equilibrium, nourish digestive agni, prioritize easily digestible warm preparations'
+    'Promote metabolic equilibrium, support healthy digestion, prioritize easily digestible warm preparations'
   );
 
   const allergenOptions = [
@@ -251,7 +251,7 @@ export const DoctorDietPlansPage = ({ onTriggerToast }) => {
           <div className="ayur-gen-disclaimer">
             <AlertCircle size={16} className="text-accent flex-shrink-0" />
             <span>
-              <strong>Clinical Guardrails:</strong> Prakriti constitution is one contextual baseline input,
+              <strong>Clinical Guardrails:</strong> Body constitution is one contextual baseline input,
               not the sole determinant of nutritional requirements. Calculated totals are derived deterministically
               from IFCT 2017 portion data. Generated plans do not claim to treat, cure, or diagnose illness.
             </span>

@@ -108,6 +108,9 @@
   justify-content: center;
   flex-shrink: 0;
   margin-left: auto;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
 }
 
 .ayur-sidebar__collapse-btn:hover {
@@ -551,7 +554,9 @@
 
   .ayur-sidebar--collapsed .ayur-sidebar__brand-link {
     justify-content: center;
-    width: 100%;
+    width: auto;
+    position: relative;
+    z-index: 5;
   }
 
   .ayur-sidebar--collapsed .ayur-brand-info {

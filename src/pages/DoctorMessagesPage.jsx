@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './DoctorMessagesPage.css';
 import { api } from '../services/api';
 import {
@@ -16,6 +17,7 @@ import {
 import { Button } from '../components/ui/Button';
 
 export const DoctorMessagesPage = ({ onTriggerToast }) => {
+  const navigate = useNavigate();
   const [conversations, setConversations] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -266,14 +268,14 @@ export const DoctorMessagesPage = ({ onTriggerToast }) => {
                   <Button
                     variant="outline"
                     size="xs"
-                    onClick={() => (window.location.href = `/doctor/patients/${selectedUser.user_id}`)}
+                    onClick={() => navigate(`/doctor/patients/${selectedUser.user_id}`)}
                   >
                     View Chart
                   </Button>
                   <Button
                     variant="primary"
                     size="xs"
-                    onClick={() => (window.location.href = '/doctor/diet-plans')}
+                    onClick={() => navigate('/doctor/diet-plans')}
                   >
                     Diet Plan
                   </Button>
